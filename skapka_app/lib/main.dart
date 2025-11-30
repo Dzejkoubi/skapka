@@ -1,18 +1,54 @@
+import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:provider/provider.dart';
+import 'package:skapka_app/app/router/router.dart';
 import 'package:skapka_app/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
+import 'package:skapka_app/providers/user_provider.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
-void main() {
-  runApp(const MainApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+
+  await dotenv.load(fileName: ".env");
+  await Supabase.initialize(
+    url: dotenv.env['SUPABASE_URL']!,
+    anonKey: dotenv.env['SUPABASE_PUBLISHABLE_KEY']!,
+  );
+  runApp(MainApp());
 }
 
 class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+  MainApp({super.key});
+
+  final _appRouter = AppRouter();
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        body: Center(child: Text(AppLocalizations.of(context)!.language)),
+    return MultiProvider(
+      providers: [ChangeNotifierProvider(create: (context) => UserProvider())],
+
+      child: MaterialApp.router(
+        debugShowCheckedModeBanner: kDebugMode
+            ? true
+            : false, // Show debug banner only in debug mode
+        title: 'Skapka',
+
+        routerConfig: _appRouter.config(),
+
+        localizationsDelegates: const [
+          AppLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+
+        supportedLocales: AppLocalizations.supportedLocales,
+        locale: const Locale('cs'),
       ),
     );
   }

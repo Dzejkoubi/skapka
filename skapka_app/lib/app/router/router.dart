@@ -1,7 +1,5 @@
 import 'package:auto_route/auto_route.dart';
-
 import 'package:skapka_app/app/router/router.gr.dart';
-
 // To generate the router file, run:
 // flutter pub run build_runner build
 // or for continuous generation:
@@ -14,7 +12,7 @@ class AppRouter extends RootStackRouter {
 
   @override
   List<AutoRoute> get routes => [
-    // Define your app routes here
+    AutoRoute(page: WelcomeRoute.page, initial: true),
   ];
 
   @override

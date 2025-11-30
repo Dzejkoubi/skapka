@@ -10,4 +10,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get language => 'English';
+
+  @override
+  String get welcome_screen_title => 'Welcome to\nSkapka';
+
+  @override
+  String get welcome_screen_login_button_text => 'Log in';
+
+  @override
+  String get welcome_screen_register_button_text => 'Register';
+
+  @override
+  String get welcome_screen_songbook_button_text => 'Songbook';
 }

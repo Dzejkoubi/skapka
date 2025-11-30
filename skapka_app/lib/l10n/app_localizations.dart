@@ -103,6 +103,30 @@ abstract class AppLocalizations {
   /// In cs, this message translates to:
   /// **'Čeština'**
   String get language;
+
+  /// No description provided for @welcome_screen_title.
+  ///
+  /// In cs, this message translates to:
+  /// **'Vítejte ve\nSkapce'**
+  String get welcome_screen_title;
+
+  /// No description provided for @welcome_screen_login_button_text.
+  ///
+  /// In cs, this message translates to:
+  /// **'Přihlásit se'**
+  String get welcome_screen_login_button_text;
+
+  /// No description provided for @welcome_screen_register_button_text.
+  ///
+  /// In cs, this message translates to:
+  /// **'Registrovat se'**
+  String get welcome_screen_register_button_text;
+
+  /// No description provided for @welcome_screen_songbook_button_text.
+  ///
+  /// In cs, this message translates to:
+  /// **'Zpěvník'**
+  String get welcome_screen_songbook_button_text;
 }
 
 class _AppLocalizationsDelegate

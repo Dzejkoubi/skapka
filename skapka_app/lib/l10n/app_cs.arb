@@ -1,4 +1,9 @@
 {
     "@@locale": "cs",
-    "language": "Čeština"
+    "language": "Čeština",
+    
+    "welcome_screen_title": "Vítejte ve\nSkapce",
+    "welcome_screen_login_button_text": "Přihlásit se",
+    "welcome_screen_register_button_text": "Registrovat se",
+    "welcome_screen_songbook_button_text": "Zpěvník"
 }

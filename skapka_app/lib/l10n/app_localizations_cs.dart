@@ -10,4 +10,16 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get language => 'Čeština';
+
+  @override
+  String get welcome_screen_title => 'Vítejte ve\nSkapce';
+
+  @override
+  String get welcome_screen_login_button_text => 'Přihlásit se';
+
+  @override
+  String get welcome_screen_register_button_text => 'Registrovat se';
+
+  @override
+  String get welcome_screen_songbook_button_text => 'Zpěvník';
 }

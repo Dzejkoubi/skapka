@@ -1,0 +1,59 @@
+name: skapka_app
+description: "A new Flutter project."
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: ^3.8.1
+
+dependencies:
+  auto_route: ^10.1.0+1
+  dotenv: ^4.2.0
+  flutter:
+    sdk: flutter
+  provider: ^6.1.5+1
+  supabase_flutter: ^2.10.3
+  gaimon: ^1.4.1
+  flutter_localizations:
+    sdk: flutter
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+  auto_route_generator: ^10.2.3
+  flutter_launcher_icons: ^0.12.0
+
+flutter_icons:
+  image_path: "assets/app_icons/icon_light.png"
+  android: true
+  ios: true
+  remove_alpha_ios: true
+
+flutter:
+  uses-material-design: true
+  generate: true
+  assets:
+    - assets/images/
+    - assets/icons/
+    - assets/app_icon/
+    - .env
+  fonts:
+    - family: TheMixC5-4
+      fonts:
+        - asset: assets/fonts/TheMixC5-4/TheMixC5-4_SemiLight.otf
+          weight: 300
+          style: normal
+        - asset:  assets/fonts/TheMixC5-4/TheMixC5-4_SemiLightIta.otf
+          weight: 300
+          style: italic
+        - asset:  assets/fonts/TheMixC5-4/TheMixC5-4_Bold.otf
+          weight: 700
+          style: normal
+        - asset:  assets/fonts/TheMixC5-4/TheMixC5-4_BoldItalic.otf
+          weight: 700
+          style: italic
+    - family: Nunito
+      fonts:
+        - asset: assets/fonts/Nunito-VariableFont_wght.ttf

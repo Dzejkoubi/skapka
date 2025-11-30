@@ -19,6 +19,7 @@ dependencies:
   flutter_dotenv: ^6.0.0
   flutter_svg: ^2.2.3
   icons_launcher: ^3.0.3
+  device_preview: ^1.3.1
 
 
 dev_dependencies:
@@ -54,12 +55,13 @@ flutter:
   uses-material-design: true
   generate: true
   assets:
-    - assets/images/
+    - assets/images/logos/
+    - assets/images/app_icon/
     - assets/icons/
     - assets/app_icon/
     - .env
   fonts:
-    - family: TheMixC5-4
+    - family: TheMixC5
       fonts:
         - asset: assets/fonts/TheMixC5-4/TheMixC5-4_SemiLight.otf
           weight: 300

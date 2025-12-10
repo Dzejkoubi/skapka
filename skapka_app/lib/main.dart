@@ -1,9 +1,11 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:skapka_app/app/router/router.dart';
+import 'package:skapka_app/app/theme/app_color_theme.dart';
 import 'package:skapka_app/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:skapka_app/providers/user_provider.dart';
@@ -19,11 +21,16 @@ void main() async {
     url: dotenv.env['SUPABASE_URL']!,
     anonKey: dotenv.env['SUPABASE_PUBLISHABLE_KEY']!,
   );
-  runApp(MainApp());
+  runApp(
+    DevicePreview(
+      enabled: !kReleaseMode,
+      builder: (context) => App(), // Wrap your app
+    ),
+  );
 }
 
-class MainApp extends StatelessWidget {
-  MainApp({super.key});
+class App extends StatelessWidget {
+  App({super.key});
 
   final _appRouter = AppRouter();
 
@@ -39,6 +46,13 @@ class MainApp extends StatelessWidget {
         title: 'Skapka',
 
         routerConfig: _appRouter.config(),
+
+        // Add builder to sync theme with AppColorTheme
+        builder: (context, child) {
+          // Sync the theme whenever the app rebuilds
+          AppColorTheme.updateTheme(Theme.of(context).brightness);
+          return child ?? const SizedBox.shrink();
+        },
 
         localizationsDelegates: const [
           AppLocalizations.delegate,

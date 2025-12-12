@@ -6,13 +6,18 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:skapka_app/app/router/router.dart';
 import 'package:skapka_app/app/theme/app_color_theme.dart';
-import 'package:skapka_app/l10n/app_localizations.dart';
+import 'package:skapka_app/app/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:skapka_app/providers/user_provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  SystemChrome.setEnabledSystemUIMode(
+    SystemUiMode.manual,
+    overlays: [SystemUiOverlay.bottom, SystemUiOverlay.top],
+  );
 
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
@@ -23,7 +28,7 @@ void main() async {
   );
   runApp(
     DevicePreview(
-      enabled: !kReleaseMode,
+      enabled: kReleaseMode,
       builder: (context) => App(), // Wrap your app
     ),
   );

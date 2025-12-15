@@ -39,6 +39,7 @@ flutter:
     - assets/images/logos/
     - assets/images/app_icon/
     - assets/icons/
+    - assets/icons/tabler_icons/
     - assets/app_icon/
     - .env
   fonts:

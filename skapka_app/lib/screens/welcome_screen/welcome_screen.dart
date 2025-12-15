@@ -17,14 +17,17 @@ class WelcomeScreen extends StatelessWidget {
         backgroundColor: context.colors.background.light,
         body: Column(
           children: [
-            SizedBox(height: 64),
+            SizedBox(height: 128),
             SizedBox(
-              height: 64,
+              height: 256,
               child: SvgPicture.asset(
                 'assets/images/logos/scout_logo_white_without_text.svg',
               ),
             ),
-            Text(AppLocalizations.of(context)!.welcome_screen_title),
+            Text(
+              AppLocalizations.of(context)!.welcome_screen_title,
+              style: AppTextTheme.displayLarge,
+            ),
             Expanded(child: Container()),
             // Buttons
             Container(

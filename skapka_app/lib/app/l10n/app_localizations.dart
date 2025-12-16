@@ -107,7 +107,7 @@ abstract class AppLocalizations {
   /// No description provided for @welcome_screen_title.
   ///
   /// In cs, this message translates to:
-  /// **'Vítejte ve\nSkapce'**
+  /// **'Vítej ve\nSkapce'**
   String get welcome_screen_title;
 
   /// No description provided for @welcome_screen_login_button_text.
@@ -137,7 +137,7 @@ abstract class AppLocalizations {
   /// No description provided for @login_screen_email_hint.
   ///
   /// In cs, this message translates to:
-  /// **'E-mailová adresa'**
+  /// **'E-mail'**
   String get login_screen_email_hint;
 
   /// No description provided for @login_screen_password_hint.
@@ -157,6 +157,36 @@ abstract class AppLocalizations {
   /// In cs, this message translates to:
   /// **'Přihlásit se'**
   String get login_screen_login_button_text;
+
+  /// No description provided for @login_screen_login_error_password_empty.
+  ///
+  /// In cs, this message translates to:
+  /// **'Nezapomeň na heslo.'**
+  String get login_screen_login_error_password_empty;
+
+  /// No description provided for @login_screen_login_error_password_too_short.
+  ///
+  /// In cs, this message translates to:
+  /// **'Heslo musí mít alespoň 8 znaků.'**
+  String get login_screen_login_error_password_too_short;
+
+  /// No description provided for @login_screen_login_error_invalid_credentials.
+  ///
+  /// In cs, this message translates to:
+  /// **'Neplatné přihlašovací údaje.'**
+  String get login_screen_login_error_invalid_credentials;
+
+  /// No description provided for @login_screen_login_error_email_empty.
+  ///
+  /// In cs, this message translates to:
+  /// **'Nezapomněl/a si na email?'**
+  String get login_screen_login_error_email_empty;
+
+  /// No description provided for @login_screen_login_error_email_invalid.
+  ///
+  /// In cs, this message translates to:
+  /// **'Pozor, takhle přece nevypadá e-mail.'**
+  String get login_screen_login_error_email_invalid;
 
   /// No description provided for @register_screen_title.
   ///

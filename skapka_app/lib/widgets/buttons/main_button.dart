@@ -96,28 +96,16 @@ class MainButton extends StatefulWidget {
 
 class _MainButtonState extends State<MainButton> {
   late ButtonState _currentState;
-  late MainButtonTheme _theme;
 
   @override
   void initState() {
     super.initState();
     _currentState = widget.state;
-    _theme = MainButtonTheme(
-      styleType: widget.style,
-      styleVariant: widget.variant,
-    );
   }
 
   @override
   void didUpdateWidget(MainButton oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (oldWidget.style != widget.style ||
-        oldWidget.variant != widget.variant) {
-      _theme = MainButtonTheme(
-        styleType: widget.style,
-        styleVariant: widget.variant,
-      );
-    }
     if (oldWidget.state != widget.state) {
       _currentState = widget.state;
     }
@@ -156,6 +144,13 @@ class _MainButtonState extends State<MainButton> {
 
   @override
   Widget build(BuildContext context) {
+    // Create theme with context for dynamic colors
+    final theme = MainButtonTheme(
+      styleType: widget.style,
+      styleVariant: widget.variant,
+      context: context,
+    );
+
     // Icon-only buttons get smaller padding
     final isIconOnly = widget.type == ButtonType.icon;
     final horizontalPadding = isIconOnly
@@ -166,7 +161,7 @@ class _MainButtonState extends State<MainButton> {
     final buttonContainer = AnimatedOpacity(
       duration: const Duration(milliseconds: 150),
       curve: Curves.easeInOut,
-      opacity: _theme.getOpacity(_currentState),
+      opacity: theme.getOpacity(_currentState),
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 150),
         curve: Curves.easeInOut,
@@ -176,19 +171,16 @@ class _MainButtonState extends State<MainButton> {
           vertical: verticalPadding,
         ),
         decoration: BoxDecoration(
-          color: _theme.hasBackground(_currentState)
-              ? _theme.getBackgroundColor(_currentState)
+          color: theme.hasBackground(_currentState)
+              ? theme.getBackgroundColor(_currentState)
               : Colors.transparent,
-          border: _theme.hasBorder(_currentState)
-              ? Border.all(
-                  color: _theme.getBorderColor(_currentState),
-                  width: 1,
-                )
+          border: theme.hasBorder(_currentState)
+              ? Border.all(color: theme.getBorderColor(_currentState), width: 1)
               : null,
           borderRadius: BorderRadius.circular(AppRadius.small),
-          boxShadow: _theme.getBoxShadow(_currentState),
+          boxShadow: theme.getBoxShadow(_currentState),
         ),
-        child: _buildButtonContent(),
+        child: _buildButtonContent(theme),
       ),
     );
 
@@ -201,8 +193,8 @@ class _MainButtonState extends State<MainButton> {
     );
   }
 
-  Widget _buildButtonContent() {
-    final textColor = _theme.getTextColor(_currentState);
+  Widget _buildButtonContent(MainButtonTheme theme) {
+    final textColor = theme.getTextColor(_currentState);
 
     switch (widget.type) {
       case ButtonType.text:
@@ -210,7 +202,7 @@ class _MainButtonState extends State<MainButton> {
           child: AnimatedDefaultTextStyle(
             duration: const Duration(milliseconds: 150),
             curve: Curves.easeInOut,
-            style: AppTextTheme.cta.copyWith(color: textColor),
+            style: AppTextTheme.cta(context).copyWith(color: textColor),
             child: Text(widget.text),
           ),
         );
@@ -265,7 +257,7 @@ class _MainButtonState extends State<MainButton> {
             AnimatedDefaultTextStyle(
               duration: const Duration(milliseconds: 150),
               curve: Curves.easeInOut,
-              style: AppTextTheme.cta.copyWith(color: textColor),
+              style: AppTextTheme.cta(context).copyWith(color: textColor),
               child: Text(widget.text),
             ),
           ],

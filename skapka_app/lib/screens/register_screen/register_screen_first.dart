@@ -9,7 +9,6 @@ import 'package:skapka_app/app/theme/app_text_theme.dart';
 import 'package:skapka_app/app/theme/main_button_theme.dart';
 import 'package:skapka_app/widgets/appbar/appbar.dart';
 import 'package:skapka_app/widgets/buttons/main_button.dart';
-import 'package:skapka_app/widgets/wrappers/screen_wrapper.dart';
 
 @RoutePage()
 class RegisterScreenFirst extends StatelessWidget {
@@ -17,7 +16,7 @@ class RegisterScreenFirst extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScreenWrapper(
+    return SafeArea(
       child: Scaffold(
         backgroundColor: context.colors.primary.light,
         body: Column(
@@ -36,7 +35,7 @@ class RegisterScreenFirst extends StatelessWidget {
                 SvgPicture.asset('assets/images/shapes/shape-2.svg'),
                 Text(
                   AppLocalizations.of(context)!.register_screen_title,
-                  style: AppTextTheme.displayLarge,
+                  style: AppTextTheme.displayLarge(context),
                 ),
               ],
             ),

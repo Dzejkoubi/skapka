@@ -34,7 +34,7 @@ class Appbar extends StatelessWidget {
                 width: AppSizes.iconSizeMedium,
                 height: AppSizes.iconSizeMedium,
                 colorFilter: ColorFilter.mode(
-                  AppColorTheme.text.normalLight,
+                  context.colors.text.normalLight,
                   BlendMode.srcIn,
                 ),
               ),
@@ -44,9 +44,9 @@ class Appbar extends StatelessWidget {
           if (showScreenName)
             Text(
               screenName!,
-              style: AppTextTheme.displayMedium.copyWith(
-                color: AppColorTheme.text.normalLight,
-              ),
+              style: AppTextTheme.displayMedium(
+                context,
+              ).copyWith(color: context.colors.text.normalLight),
             )
           else
             const SizedBox.shrink(),
@@ -60,7 +60,7 @@ class Appbar extends StatelessWidget {
                 width: AppSizes.iconSizeMedium,
                 height: AppSizes.iconSizeMedium,
                 colorFilter: ColorFilter.mode(
-                  AppColorTheme.text.normalLight,
+                  context.colors.text.normalLight,
                   BlendMode.srcIn,
                 ),
               ),

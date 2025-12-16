@@ -49,7 +49,7 @@ enum ButtonState { released, pressed, disabled }
 abstract class MainButtonStyleTypeConfig {
   bool hasBackground(ButtonState state);
   bool hasBorder(ButtonState state);
-  List<BoxShadow>? getBoxShadow(ButtonState state);
+  List<BoxShadow>? getBoxShadow(ButtonState state, BuildContext context);
   double opacity(ButtonState state);
 
   // Factory constructor - creates the right style class based on enum
@@ -69,10 +69,26 @@ abstract class MainButtonStyleTypeConfig {
 // This determines the COLORS based on the variant and style type
 abstract class MainButtonStyleVariantConfig {
   // Get colors based on button type (filled needs different text color)
-  Color getBackgroundColor(ButtonState state, ButtonStyleTypes styleType);
-  Color getBorderColor(ButtonState state, ButtonStyleTypes styleType);
-  Color getTextColor(ButtonState state, ButtonStyleTypes styleType);
-  Color getIconColor(ButtonState state, ButtonStyleTypes styleType);
+  Color getBackgroundColor(
+    ButtonState state,
+    ButtonStyleTypes styleType,
+    BuildContext context,
+  );
+  Color getBorderColor(
+    ButtonState state,
+    ButtonStyleTypes styleType,
+    BuildContext context,
+  );
+  Color getTextColor(
+    ButtonState state,
+    ButtonStyleTypes styleType,
+    BuildContext context,
+  );
+  Color getIconColor(
+    ButtonState state,
+    ButtonStyleTypes styleType,
+    BuildContext context,
+  );
 
   // Factory constructor - creates the right variant class based on enum
   factory MainButtonStyleVariantConfig(ButtonStylesVariants styleVariant) {
@@ -101,10 +117,10 @@ class FilledButtonStyleConfig implements MainButtonStyleTypeConfig {
   bool hasBorder(ButtonState state) => false;
 
   @override
-  List<BoxShadow>? getBoxShadow(ButtonState state) {
+  List<BoxShadow>? getBoxShadow(ButtonState state, BuildContext context) {
     if (state == ButtonState.disabled) return null;
-    if (state == ButtonState.pressed) return [AppShadow.innerXSmall];
-    return [AppShadow.outerXSmall];
+    if (state == ButtonState.pressed) return [AppShadow.innerXSmall(context)];
+    return [AppShadow.outerXSmall(context)];
   }
 
   @override
@@ -122,7 +138,8 @@ class OutlinedButtonStyleConfig implements MainButtonStyleTypeConfig {
   bool hasBorder(ButtonState state) => true;
 
   @override
-  List<BoxShadow>? getBoxShadow(ButtonState state) => null;
+  List<BoxShadow>? getBoxShadow(ButtonState state, BuildContext context) =>
+      null;
 
   @override
   double opacity(ButtonState state) {
@@ -139,7 +156,8 @@ class TextButtonStyleConfig implements MainButtonStyleTypeConfig {
   bool hasBorder(ButtonState state) => false;
 
   @override
-  List<BoxShadow>? getBoxShadow(ButtonState state) => null;
+  List<BoxShadow>? getBoxShadow(ButtonState state, BuildContext context) =>
+      null;
   @override
   double opacity(ButtonState state) {
     if (state == ButtonState.disabled) return 50.0;
@@ -153,159 +171,223 @@ class TextButtonStyleConfig implements MainButtonStyleTypeConfig {
 
 class NormalButtonStyleVariantConfig implements MainButtonStyleVariantConfig {
   @override
-  Color getBackgroundColor(ButtonState state, ButtonStyleTypes styleType) {
+  Color getBackgroundColor(
+    ButtonState state,
+    ButtonStyleTypes styleType,
+    BuildContext context,
+  ) {
     if (state == ButtonState.disabled) {
-      return AppColorTheme.background.bgMediumDark;
+      return context.colors.background.bgMediumDark;
     }
-    if (state == ButtonState.pressed) return AppColorTheme.primary.dark;
-    return AppColorTheme.primary.light; // released
+    if (state == ButtonState.pressed) return context.colors.primary.dark;
+    return context.colors.primary.light; // released
   }
 
   @override
-  Color getBorderColor(ButtonState state, ButtonStyleTypes styleType) {
+  Color getBorderColor(
+    ButtonState state,
+    ButtonStyleTypes styleType,
+    BuildContext context,
+  ) {
     if (state == ButtonState.disabled) {
-      return AppColorTheme.background.medium;
+      return context.colors.background.medium;
     }
-    if (state == ButtonState.pressed) return AppColorTheme.primary.dark;
-    return AppColorTheme.primary.light;
+    if (state == ButtonState.pressed) return context.colors.primary.dark;
+    return context.colors.primary.light;
   }
 
   @override
-  Color getTextColor(ButtonState state, ButtonStyleTypes styleType) {
+  Color getTextColor(
+    ButtonState state,
+    ButtonStyleTypes styleType,
+    BuildContext context,
+  ) {
     // Filled buttons have white text, others have colored text
     if (styleType == ButtonStyleTypes.filled) {
       return state == ButtonState.disabled
-          ? AppColorTheme.text.muted
-          : AppColorTheme.text.normalLight;
+          ? context.colors.text.muted
+          : context.colors.text.normalLight;
     } else {
       // Outlined and text buttons
-      if (state == ButtonState.disabled) return AppColorTheme.text.muted;
-      if (state == ButtonState.pressed) return AppColorTheme.primary.dark;
-      return AppColorTheme.primary.light;
+      if (state == ButtonState.disabled) return context.colors.text.muted;
+      if (state == ButtonState.pressed) return context.colors.primary.dark;
+      return context.colors.primary.light;
     }
   }
 
   @override
-  Color getIconColor(ButtonState state, ButtonStyleTypes styleType) {
+  Color getIconColor(
+    ButtonState state,
+    ButtonStyleTypes styleType,
+    BuildContext context,
+  ) {
     // Same logic as text color
-    return getTextColor(state, styleType);
+    return getTextColor(state, styleType, context);
   }
 }
 
 class WhiteButtonStyleVariantConfig implements MainButtonStyleVariantConfig {
   @override
-  Color getBackgroundColor(ButtonState state, ButtonStyleTypes styleType) {
+  Color getBackgroundColor(
+    ButtonState state,
+    ButtonStyleTypes styleType,
+    BuildContext context,
+  ) {
     if (state == ButtonState.disabled) {
-      return AppColorTheme.background.bgMediumDark;
+      return context.colors.background.bgMediumDark;
     }
-    if (state == ButtonState.pressed) return AppColorTheme.text.mutedLight;
-    return AppColorTheme.text.normalLight;
+    if (state == ButtonState.pressed) return context.colors.text.mutedLight;
+    return context.colors.text.normalLight;
   }
 
   @override
-  Color getBorderColor(ButtonState state, ButtonStyleTypes styleType) {
+  Color getBorderColor(
+    ButtonState state,
+    ButtonStyleTypes styleType,
+    BuildContext context,
+  ) {
     if (state == ButtonState.disabled) {
-      return AppColorTheme.text.mutedLight;
+      return context.colors.text.mutedLight;
     }
-    if (state == ButtonState.pressed) return AppColorTheme.text.mutedLight;
-    return AppColorTheme.background.lightX;
+    if (state == ButtonState.pressed) return context.colors.text.mutedLight;
+    return context.colors.background.lightX;
   }
 
   @override
-  Color getTextColor(ButtonState state, ButtonStyleTypes styleType) {
+  Color getTextColor(
+    ButtonState state,
+    ButtonStyleTypes styleType,
+    BuildContext context,
+  ) {
     if (styleType == ButtonStyleTypes.filled) {
       // Filled white button has dark text
       return state == ButtonState.disabled
-          ? AppColorTheme.text.muted
-          : AppColorTheme.primary.light;
+          ? context.colors.text.muted
+          : context.colors.primary.light;
     } else {
       // Outlined and text white buttons
-      if (state == ButtonState.disabled) return AppColorTheme.text.mutedLight;
-      if (state == ButtonState.pressed) return AppColorTheme.text.mutedLight;
-      return AppColorTheme.text.normalLight;
+      if (state == ButtonState.disabled) return context.colors.text.mutedLight;
+      if (state == ButtonState.pressed) return context.colors.text.mutedLight;
+      return context.colors.text.normalLight;
     }
   }
 
   @override
-  Color getIconColor(ButtonState state, ButtonStyleTypes styleType) {
-    return getTextColor(state, styleType);
+  Color getIconColor(
+    ButtonState state,
+    ButtonStyleTypes styleType,
+    BuildContext context,
+  ) {
+    return getTextColor(state, styleType, context);
   }
 }
 
 class SuccessButtonStyleVariantConfig implements MainButtonStyleVariantConfig {
   @override
-  Color getBackgroundColor(ButtonState state, ButtonStyleTypes styleType) {
+  Color getBackgroundColor(
+    ButtonState state,
+    ButtonStyleTypes styleType,
+    BuildContext context,
+  ) {
     if (state == ButtonState.disabled) {
-      return AppColorTheme.background.bgMediumDark;
+      return context.colors.background.bgMediumDark;
     }
-    if (state == ButtonState.pressed) return AppColorTheme.success.dark;
-    return AppColorTheme.success.normal;
+    if (state == ButtonState.pressed) return context.colors.success.dark;
+    return context.colors.success.normal;
   }
 
   @override
-  Color getBorderColor(ButtonState state, ButtonStyleTypes styleType) {
+  Color getBorderColor(
+    ButtonState state,
+    ButtonStyleTypes styleType,
+    BuildContext context,
+  ) {
     if (state == ButtonState.disabled) {
-      return AppColorTheme.background.bgMediumDark;
+      return context.colors.background.bgMediumDark;
     }
-    if (state == ButtonState.pressed) return AppColorTheme.success.dark;
-    return AppColorTheme.success.normal;
+    if (state == ButtonState.pressed) return context.colors.success.dark;
+    return context.colors.success.normal;
   }
 
   @override
-  Color getTextColor(ButtonState state, ButtonStyleTypes styleType) {
+  Color getTextColor(
+    ButtonState state,
+    ButtonStyleTypes styleType,
+    BuildContext context,
+  ) {
     if (styleType == ButtonStyleTypes.filled) {
       return state == ButtonState.disabled
-          ? AppColorTheme.text.muted
-          : AppColorTheme.text.normalLight;
+          ? context.colors.text.muted
+          : context.colors.text.normalLight;
     } else {
-      if (state == ButtonState.disabled) return AppColorTheme.text.muted;
-      if (state == ButtonState.pressed) return AppColorTheme.success.dark;
-      return AppColorTheme.success.normal;
+      if (state == ButtonState.disabled) return context.colors.text.muted;
+      if (state == ButtonState.pressed) return context.colors.success.dark;
+      return context.colors.success.normal;
     }
   }
 
   @override
-  Color getIconColor(ButtonState state, ButtonStyleTypes styleType) {
-    return getTextColor(state, styleType);
+  Color getIconColor(
+    ButtonState state,
+    ButtonStyleTypes styleType,
+    BuildContext context,
+  ) {
+    return getTextColor(state, styleType, context);
   }
 }
 
 class DestructiveButtonStyleVariantConfig
     implements MainButtonStyleVariantConfig {
   @override
-  Color getBackgroundColor(ButtonState state, ButtonStyleTypes styleType) {
+  Color getBackgroundColor(
+    ButtonState state,
+    ButtonStyleTypes styleType,
+    BuildContext context,
+  ) {
     if (state == ButtonState.disabled) {
-      return AppColorTheme.background.bgMediumDark;
+      return context.colors.background.bgMediumDark;
     }
-    if (state == ButtonState.pressed) return AppColorTheme.error.dark;
-    return AppColorTheme.error.normal;
+    if (state == ButtonState.pressed) return context.colors.error.dark;
+    return context.colors.error.normal;
   }
 
   @override
-  Color getBorderColor(ButtonState state, ButtonStyleTypes styleType) {
+  Color getBorderColor(
+    ButtonState state,
+    ButtonStyleTypes styleType,
+    BuildContext context,
+  ) {
     if (state == ButtonState.disabled) {
-      return AppColorTheme.background.bgMediumDark;
+      return context.colors.background.bgMediumDark;
     }
-    if (state == ButtonState.pressed) return AppColorTheme.error.dark;
-    return AppColorTheme.error.normal;
+    if (state == ButtonState.pressed) return context.colors.error.dark;
+    return context.colors.error.normal;
   }
 
   @override
-  Color getTextColor(ButtonState state, ButtonStyleTypes styleType) {
+  Color getTextColor(
+    ButtonState state,
+    ButtonStyleTypes styleType,
+    BuildContext context,
+  ) {
     if (styleType == ButtonStyleTypes.filled) {
       return state == ButtonState.disabled
-          ? AppColorTheme.text.muted
-          : AppColorTheme.text.normalLight;
+          ? context.colors.text.muted
+          : context.colors.text.normalLight;
     } else {
-      if (state == ButtonState.disabled) return AppColorTheme.text.muted;
-      if (state == ButtonState.pressed) return AppColorTheme.error.dark;
-      return AppColorTheme.error.normal;
+      if (state == ButtonState.disabled) return context.colors.text.muted;
+      if (state == ButtonState.pressed) return context.colors.error.dark;
+      return context.colors.error.normal;
     }
   }
 
   @override
-  Color getIconColor(ButtonState state, ButtonStyleTypes styleType) {
-    return getTextColor(state, styleType);
+  Color getIconColor(
+    ButtonState state,
+    ButtonStyleTypes styleType,
+    BuildContext context,
+  ) {
+    return getTextColor(state, styleType, context);
   }
 }
 
@@ -316,11 +398,16 @@ class DestructiveButtonStyleVariantConfig
 class MainButtonTheme {
   final ButtonStyleTypes styleType;
   final ButtonStylesVariants styleVariant;
+  final BuildContext context;
 
   late final MainButtonStyleTypeConfig _typeConfig;
   late final MainButtonStyleVariantConfig _variantConfig;
 
-  MainButtonTheme({required this.styleType, required this.styleVariant}) {
+  MainButtonTheme({
+    required this.styleType,
+    required this.styleVariant,
+    required this.context,
+  }) {
     _typeConfig = MainButtonStyleTypeConfig(styleType);
     _variantConfig = MainButtonStyleVariantConfig(styleVariant);
   }
@@ -329,19 +416,19 @@ class MainButtonTheme {
   bool hasBackground(ButtonState state) => _typeConfig.hasBackground(state);
   bool hasBorder(ButtonState state) => _typeConfig.hasBorder(state);
   List<BoxShadow>? getBoxShadow(ButtonState state) =>
-      _typeConfig.getBoxShadow(state);
+      _typeConfig.getBoxShadow(state, context);
   double getOpacity(ButtonState state) => _typeConfig.opacity(state) / 100.0;
 
-  // Color methods (from variant config)
+  // Color methods (from variant config) - now using context
   Color getBackgroundColor(ButtonState state) =>
-      _variantConfig.getBackgroundColor(state, styleType);
+      _variantConfig.getBackgroundColor(state, styleType, context);
 
   Color getBorderColor(ButtonState state) =>
-      _variantConfig.getBorderColor(state, styleType);
+      _variantConfig.getBorderColor(state, styleType, context);
 
   Color getTextColor(ButtonState state) =>
-      _variantConfig.getTextColor(state, styleType);
+      _variantConfig.getTextColor(state, styleType, context);
 
   Color getIconColor(ButtonState state) =>
-      _variantConfig.getIconColor(state, styleType);
+      _variantConfig.getIconColor(state, styleType, context);
 }

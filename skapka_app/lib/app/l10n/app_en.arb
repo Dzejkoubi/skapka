@@ -12,6 +12,11 @@
     "login_screen_password_hint": "Password",
     "login_screen_forgot_password_text": "Forgot password?",
     "login_screen_login_button_text": "Log in",
+    "login_screen_login_error_password_empty": "Did you forget your password?",
+    "login_screen_login_error_password_too_short": "Password must be at least 8 characters.",
+    "login_screen_login_error_invalid_credentials": "Invalid login credentials.",
+    "login_screen_login_error_email_empty": "Did you forget your email?",
+    "login_screen_login_error_email_invalid": "Oops, that doesn't look like a valid email.",
 
     "register_screen_title": "Register",
     "register_screen_1_name_hint": "Name",

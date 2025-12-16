@@ -8,6 +8,7 @@ import 'package:skapka_app/app/router/router.dart';
 import 'package:skapka_app/app/theme/app_color_theme.dart';
 import 'package:skapka_app/app/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
+import 'package:skapka_app/providers/login_provider.dart';
 import 'package:skapka_app/providers/user_provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 

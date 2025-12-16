@@ -12,7 +12,7 @@ class AppLocalizationsCs extends AppLocalizations {
   String get language => 'Čeština';
 
   @override
-  String get welcome_screen_title => 'Vítejte ve\nSkapce';
+  String get welcome_screen_title => 'Vítej ve\nSkapce';
 
   @override
   String get welcome_screen_login_button_text => 'Přihlásit se';
@@ -27,7 +27,7 @@ class AppLocalizationsCs extends AppLocalizations {
   String get login_screen_title => 'Přihlášení';
 
   @override
-  String get login_screen_email_hint => 'E-mailová adresa';
+  String get login_screen_email_hint => 'E-mail';
 
   @override
   String get login_screen_password_hint => 'Heslo';
@@ -37,6 +37,25 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get login_screen_login_button_text => 'Přihlásit se';
+
+  @override
+  String get login_screen_login_error_password_empty => 'Nezapomeň na heslo.';
+
+  @override
+  String get login_screen_login_error_password_too_short =>
+      'Heslo musí mít alespoň 8 znaků.';
+
+  @override
+  String get login_screen_login_error_invalid_credentials =>
+      'Neplatné přihlašovací údaje.';
+
+  @override
+  String get login_screen_login_error_email_empty =>
+      'Nezapomněl/a si na email?';
+
+  @override
+  String get login_screen_login_error_email_invalid =>
+      'Pozor, takhle přece nevypadá e-mail.';
 
   @override
   String get register_screen_title => 'Registrace';

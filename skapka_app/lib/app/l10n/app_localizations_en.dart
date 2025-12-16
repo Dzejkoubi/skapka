@@ -39,6 +39,26 @@ class AppLocalizationsEn extends AppLocalizations {
   String get login_screen_login_button_text => 'Log in';
 
   @override
+  String get login_screen_login_error_password_empty =>
+      'Did you forget your password?';
+
+  @override
+  String get login_screen_login_error_password_too_short =>
+      'Password must be at least 8 characters.';
+
+  @override
+  String get login_screen_login_error_invalid_credentials =>
+      'Invalid login credentials.';
+
+  @override
+  String get login_screen_login_error_email_empty =>
+      'Did you forget your email?';
+
+  @override
+  String get login_screen_login_error_email_invalid =>
+      'Oops, that doesn\'t look like a valid email.';
+
+  @override
   String get register_screen_title => 'Register';
 
   @override

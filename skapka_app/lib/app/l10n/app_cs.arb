@@ -2,16 +2,22 @@
     "@@locale": "cs",
     "language": "Čeština",
     
-    "welcome_screen_title": "Vítejte ve\nSkapce",
+    "welcome_screen_title": "Vítej ve\nSkapce",
     "welcome_screen_login_button_text": "Přihlásit se",
     "welcome_screen_register_button_text": "Registrovat se",
     "welcome_screen_songbook_button_text": "Zpěvník",
 
     "login_screen_title": "Přihlášení",
-    "login_screen_email_hint": "E-mailová adresa",
+    "login_screen_email_hint": "E-mail",
     "login_screen_password_hint": "Heslo",
     "login_screen_forgot_password_text": "Zapomněl si heslo?",
     "login_screen_login_button_text": "Přihlásit se",
+    "login_screen_login_error_password_empty": "Nezapomeň na heslo.",
+    "login_screen_login_error_password_too_short": "Heslo musí mít alespoň 8 znaků.",
+    "login_screen_login_error_invalid_credentials": "Neplatné přihlašovací údaje.",
+    "login_screen_login_error_email_empty": "Nezapomněl/a si na email?",
+    "login_screen_login_error_email_invalid": "Pozor, takhle přece nevypadá e-mail.",
+    
 
     "register_screen_title": "Registrace",
     "register_screen_1_name_hint": "Jméno",

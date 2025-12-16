@@ -8,7 +8,6 @@ import 'package:skapka_app/app/theme/app_text_theme.dart';
 import 'package:skapka_app/app/l10n/app_localizations.dart';
 import 'package:skapka_app/app/theme/main_button_theme.dart';
 import 'package:skapka_app/widgets/buttons/main_button.dart';
-import 'package:skapka_app/widgets/wrappers/screen_wrapper.dart';
 
 @RoutePage()
 class WelcomeScreen extends StatelessWidget {
@@ -16,7 +15,7 @@ class WelcomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScreenWrapper(
+    return SafeArea(
       child: Scaffold(
         backgroundColor: context.colors.primary.light,
         body: Column(
@@ -31,9 +30,9 @@ class WelcomeScreen extends StatelessWidget {
             Text(
               textAlign: TextAlign.center,
               AppLocalizations.of(context)!.welcome_screen_title,
-              style: AppTextTheme.displayLarge.copyWith(
-                color: context.colors.text.normalLight,
-              ),
+              style: AppTextTheme.displayLarge(
+                context,
+              ).copyWith(color: context.colors.text.normalLight),
             ),
             Expanded(child: Container()),
             // Buttons

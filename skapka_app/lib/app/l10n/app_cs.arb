@@ -5,5 +5,20 @@
     "welcome_screen_title": "Vítejte ve\nSkapce",
     "welcome_screen_login_button_text": "Přihlásit se",
     "welcome_screen_register_button_text": "Registrovat se",
-    "welcome_screen_songbook_button_text": "Zpěvník"
+    "welcome_screen_songbook_button_text": "Zpěvník",
+
+    "login_screen_title": "Přihlášení",
+    "login_screen_email_hint": "E-mailová adresa",
+    "login_screen_password_hint": "Heslo",
+    "login_screen_forgot_password_text": "Zapomněl si heslo?",
+    "login_screen_login_button_text": "Přihlásit se",
+
+    "register_screen_title": "Registrace",
+    "register_screen_1_name_hint": "Jméno",
+    "register_screen_1_surname_hint": "Příjmení",
+    "register_screen_1_email_hint": "E-mailová adresa",
+    "register_screen_1_next_button_text": "Další",
+    "register_screen_2_password_hint": "Heslo",
+    "register_screen_2_confirm_password_hint": "Potvrď heslo",
+    "register_screen_2_register_button_text": "Registrovat"
 }

@@ -22,5 +22,8 @@ class AppSpacing {
   static const double xxLarge = 48;
 
   /// 64.0
+  static const double huge = 64;
+
+  /// 64.0
   static const double bottomSpace = 64;
 }

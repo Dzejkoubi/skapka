@@ -11,8 +11,8 @@ import 'package:skapka_app/widgets/buttons/main_button.dart';
 import 'package:skapka_app/widgets/wrappers/screen_wrapper.dart';
 
 @RoutePage()
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+class RegisterScreenSecond extends StatelessWidget {
+  const RegisterScreenSecond({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -32,22 +32,23 @@ class LoginScreen extends StatelessWidget {
             Stack(
               alignment: Alignment.center,
               children: [
-                SvgPicture.asset('assets/images/shapes/shape-1.svg'),
+                SvgPicture.asset('assets/images/shapes/shape-2.svg'),
                 Text(
-                  AppLocalizations.of(context)!.login_screen_title,
+                  AppLocalizations.of(context)!.register_screen_title,
                   style: AppTextTheme.displayLarge,
                 ),
               ],
             ),
+            // Empty space to push content down so the register button is in the same position as on the welcome screen
             Expanded(child: Container()),
+            SizedBox(height: AppSpacing.medium),
+            SizedBox(height: AppSpacing.huge),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: AppSpacing.large),
-              child: Column(
-                children: [
-                  TextField(),
-                  SizedBox(height: AppSpacing.medium),
-                  TextField(),
-                ],
+              child: Flex(
+                direction: Axis.vertical,
+                spacing: AppSpacing.medium,
+                children: [TextField(), TextField()],
               ),
             ),
             SizedBox(height: AppSpacing.xxLarge),
@@ -57,16 +58,14 @@ class LoginScreen extends StatelessWidget {
                 variant: ButtonStylesVariants.white,
                 text: AppLocalizations.of(
                   context,
-                )!.login_screen_login_button_text,
+                )!.register_screen_2_register_button_text,
                 onPressed: () {
-                  // TODO: Implement login logic
+                  // TODO: Implement register logic
                 },
               ),
             ),
-
             // Height spacer so the button is in the same height as on the welcome screen
             Expanded(child: Container()),
-            SizedBox(height: AppSpacing.xxLarge),
           ],
         ),
       ),

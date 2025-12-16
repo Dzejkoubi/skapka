@@ -127,6 +127,84 @@ abstract class AppLocalizations {
   /// In cs, this message translates to:
   /// **'Zpěvník'**
   String get welcome_screen_songbook_button_text;
+
+  /// No description provided for @login_screen_title.
+  ///
+  /// In cs, this message translates to:
+  /// **'Přihlášení'**
+  String get login_screen_title;
+
+  /// No description provided for @login_screen_email_hint.
+  ///
+  /// In cs, this message translates to:
+  /// **'E-mailová adresa'**
+  String get login_screen_email_hint;
+
+  /// No description provided for @login_screen_password_hint.
+  ///
+  /// In cs, this message translates to:
+  /// **'Heslo'**
+  String get login_screen_password_hint;
+
+  /// No description provided for @login_screen_forgot_password_text.
+  ///
+  /// In cs, this message translates to:
+  /// **'Zapomněl si heslo?'**
+  String get login_screen_forgot_password_text;
+
+  /// No description provided for @login_screen_login_button_text.
+  ///
+  /// In cs, this message translates to:
+  /// **'Přihlásit se'**
+  String get login_screen_login_button_text;
+
+  /// No description provided for @register_screen_title.
+  ///
+  /// In cs, this message translates to:
+  /// **'Registrace'**
+  String get register_screen_title;
+
+  /// No description provided for @register_screen_1_name_hint.
+  ///
+  /// In cs, this message translates to:
+  /// **'Jméno'**
+  String get register_screen_1_name_hint;
+
+  /// No description provided for @register_screen_1_surname_hint.
+  ///
+  /// In cs, this message translates to:
+  /// **'Příjmení'**
+  String get register_screen_1_surname_hint;
+
+  /// No description provided for @register_screen_1_email_hint.
+  ///
+  /// In cs, this message translates to:
+  /// **'E-mailová adresa'**
+  String get register_screen_1_email_hint;
+
+  /// No description provided for @register_screen_1_next_button_text.
+  ///
+  /// In cs, this message translates to:
+  /// **'Další'**
+  String get register_screen_1_next_button_text;
+
+  /// No description provided for @register_screen_2_password_hint.
+  ///
+  /// In cs, this message translates to:
+  /// **'Heslo'**
+  String get register_screen_2_password_hint;
+
+  /// No description provided for @register_screen_2_confirm_password_hint.
+  ///
+  /// In cs, this message translates to:
+  /// **'Potvrď heslo'**
+  String get register_screen_2_confirm_password_hint;
+
+  /// No description provided for @register_screen_2_register_button_text.
+  ///
+  /// In cs, this message translates to:
+  /// **'Registrovat'**
+  String get register_screen_2_register_button_text;
 }
 
 class _AppLocalizationsDelegate

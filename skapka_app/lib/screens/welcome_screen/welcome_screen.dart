@@ -1,13 +1,14 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:skapka_app/app/router/router.gr.dart';
 import 'package:skapka_app/app/theme/app_color_theme.dart';
 import 'package:skapka_app/app/theme/app_spacing.dart';
 import 'package:skapka_app/app/theme/app_text_theme.dart';
 import 'package:skapka_app/app/l10n/app_localizations.dart';
 import 'package:skapka_app/app/theme/main_button_theme.dart';
 import 'package:skapka_app/widgets/buttons/main_button.dart';
-import 'package:skapka_app/widgets/screen_wrapper.dart';
+import 'package:skapka_app/widgets/wrappers/screen_wrapper.dart';
 
 @RoutePage()
 class WelcomeScreen extends StatelessWidget {
@@ -37,7 +38,7 @@ class WelcomeScreen extends StatelessWidget {
             Expanded(child: Container()),
             // Buttons
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 64),
+              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.huge),
               child: Flex(
                 direction: Axis.vertical,
                 spacing: AppSpacing.small,
@@ -46,7 +47,7 @@ class WelcomeScreen extends StatelessWidget {
                     type: ButtonType.text,
                     variant: ButtonStylesVariants.white,
                     onPressed: () {
-                      print('login button pressed');
+                      context.router.push(const LoginRoute());
                     },
                     text: AppLocalizations.of(
                       context,
@@ -59,7 +60,7 @@ class WelcomeScreen extends StatelessWidget {
                       context,
                     )!.welcome_screen_register_button_text,
                     onPressed: () {
-                      print('register button pressed');
+                      context.router.push(const RegisterRouteFirst());
                     },
                   ),
                   MainButton.text(

@@ -2,8 +2,11 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:skapka_app/app/theme/app_color_theme.dart';
+import 'package:skapka_app/app/theme/app_spacing.dart';
 import 'package:skapka_app/app/theme/app_text_theme.dart';
 import 'package:skapka_app/app/l10n/app_localizations.dart';
+import 'package:skapka_app/app/theme/main_button_theme.dart';
+import 'package:skapka_app/widgets/buttons/main_button.dart';
 import 'package:skapka_app/widgets/screen_wrapper.dart';
 
 @RoutePage()
@@ -14,10 +17,10 @@ class WelcomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenWrapper(
       child: Scaffold(
-        backgroundColor: context.colors.background.light,
+        backgroundColor: context.colors.primary.light,
         body: Column(
           children: [
-            SizedBox(height: 128),
+            SizedBox(height: AppSpacing.bottomSpace),
             SizedBox(
               height: 256,
               child: SvgPicture.asset(
@@ -25,59 +28,54 @@ class WelcomeScreen extends StatelessWidget {
               ),
             ),
             Text(
+              textAlign: TextAlign.center,
               AppLocalizations.of(context)!.welcome_screen_title,
-              style: AppTextTheme.displayLarge,
+              style: AppTextTheme.displayLarge.copyWith(
+                color: context.colors.text.normalLight,
+              ),
             ),
             Expanded(child: Container()),
             // Buttons
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 32),
+              padding: const EdgeInsets.symmetric(horizontal: 64),
               child: Flex(
                 direction: Axis.vertical,
-                spacing: 8, // TODO: change to a variable
+                spacing: AppSpacing.small,
                 children: [
-                  ElevatedButton(
-                    style: ButtonStyle(
-                      backgroundColor: WidgetStateProperty.all(
-                        context.colors.primary.dark,
-                      ),
-                    ),
+                  MainButton.filled(
+                    type: ButtonType.text,
+                    variant: ButtonStylesVariants.white,
                     onPressed: () {
                       print('login button pressed');
                     },
-                    child: Text(
-                      AppLocalizations.of(
-                        context,
-                      )!.welcome_screen_login_button_text,
-                      style: AppTextTheme.cta,
-                    ),
+                    text: AppLocalizations.of(
+                      context,
+                    )!.welcome_screen_login_button_text,
                   ),
-                  ElevatedButton(
+                  MainButton.outlined(
+                    type: ButtonType.text,
+                    variant: ButtonStylesVariants.white,
+                    text: AppLocalizations.of(
+                      context,
+                    )!.welcome_screen_register_button_text,
                     onPressed: () {
                       print('register button pressed');
                     },
-                    child: Text(
-                      AppLocalizations.of(
-                        context,
-                      )!.welcome_screen_register_button_text,
-                      style: AppTextTheme.cta,
-                    ),
                   ),
-                  ElevatedButton(
+                  MainButton.text(
+                    type: ButtonType.text,
+                    variant: ButtonStylesVariants.white,
+                    text: AppLocalizations.of(
+                      context,
+                    )!.welcome_screen_songbook_button_text,
                     onPressed: () {
                       print('songbook button pressed');
                     },
-                    child: Text(
-                      AppLocalizations.of(
-                        context,
-                      )!.welcome_screen_songbook_button_text,
-                      style: AppTextTheme.displayLarge,
-                    ),
                   ),
                 ],
               ),
             ),
-            SizedBox(height: 128),
+            SizedBox(height: AppSpacing.bottomSpace),
           ],
         ),
       ),

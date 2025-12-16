@@ -12,8 +12,9 @@ class AppRouter extends RootStackRouter {
 
   @override
   List<AutoRoute> get routes => [
-    AutoRoute(page: WelcomeRoute.page, initial: false),
-    AutoRoute(page: ButtonThemeShowcaseRoute.page, initial: true),
+    AutoRoute(page: WelcomeRoute.page, initial: true),
+    AutoRoute(page: ButtonThemeShowcaseRoute.page),
+    AutoRoute(page: LoginRoute.page),
   ];
 
   @override

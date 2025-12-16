@@ -67,10 +67,31 @@ class AppLocalizationsCs extends AppLocalizations {
   String get register_screen_1_surname_hint => 'Příjmení';
 
   @override
-  String get register_screen_1_email_hint => 'E-mailová adresa';
+  String get register_screen_1_email_hint => 'E-mail';
 
   @override
   String get register_screen_1_next_button_text => 'Další';
+
+  @override
+  String get register_screen_1_error_invalid_name =>
+      'Jméno může obsahovat jen písmena a pomlčky.';
+
+  @override
+  String get register_screen_1_error_empty_name => 'Nemáš snad jméno?';
+
+  @override
+  String get register_screen_1_error_invalid_surname =>
+      'Příjmení může obsahovat jen písmena a pomlčky.';
+
+  @override
+  String get register_screen_1_error_empty_surname => 'A co příjmení?';
+
+  @override
+  String get register_screen_1_error_email_empty => 'Nezapomněl/a si na email?';
+
+  @override
+  String get register_screen_1_error_email_invalid =>
+      'Pozor, takhle přece nevypadá e-mail.';
 
   @override
   String get register_screen_2_password_hint => 'Heslo';
@@ -80,4 +101,8 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get register_screen_2_register_button_text => 'Registrovat';
+
+  @override
+  String get register_screen_2_error_passwords_do_not_match =>
+      'Hesla se neshodují.';
 }

@@ -22,9 +22,17 @@
     "register_screen_title": "Registrace",
     "register_screen_1_name_hint": "Jméno",
     "register_screen_1_surname_hint": "Příjmení",
-    "register_screen_1_email_hint": "E-mailová adresa",
+    "register_screen_1_email_hint": "E-mail",
     "register_screen_1_next_button_text": "Další",
+    "register_screen_1_error_invalid_name": "Jméno může obsahovat jen písmena a pomlčky.",
+    "register_screen_1_error_empty_name": "Nemáš snad jméno?",
+    "register_screen_1_error_invalid_surname": "Příjmení může obsahovat jen písmena a pomlčky.",
+    "register_screen_1_error_empty_surname": "A co příjmení?",
+    "register_screen_1_error_email_empty": "Nezapomněl/a si na email?",
+    "register_screen_1_error_email_invalid": "Pozor, takhle přece nevypadá e-mail.",
     "register_screen_2_password_hint": "Heslo",
     "register_screen_2_confirm_password_hint": "Potvrď heslo",
-    "register_screen_2_register_button_text": "Registrovat"
+    "register_screen_2_register_button_text": "Registrovat",
+    "register_screen_2_error_passwords_do_not_match": "Hesla se neshodují."
+
 }

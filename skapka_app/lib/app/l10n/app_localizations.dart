@@ -209,7 +209,7 @@ abstract class AppLocalizations {
   /// No description provided for @register_screen_1_email_hint.
   ///
   /// In cs, this message translates to:
-  /// **'E-mailová adresa'**
+  /// **'E-mail'**
   String get register_screen_1_email_hint;
 
   /// No description provided for @register_screen_1_next_button_text.
@@ -217,6 +217,42 @@ abstract class AppLocalizations {
   /// In cs, this message translates to:
   /// **'Další'**
   String get register_screen_1_next_button_text;
+
+  /// No description provided for @register_screen_1_error_invalid_name.
+  ///
+  /// In cs, this message translates to:
+  /// **'Jméno může obsahovat jen písmena a pomlčky.'**
+  String get register_screen_1_error_invalid_name;
+
+  /// No description provided for @register_screen_1_error_empty_name.
+  ///
+  /// In cs, this message translates to:
+  /// **'Nemáš snad jméno?'**
+  String get register_screen_1_error_empty_name;
+
+  /// No description provided for @register_screen_1_error_invalid_surname.
+  ///
+  /// In cs, this message translates to:
+  /// **'Příjmení může obsahovat jen písmena a pomlčky.'**
+  String get register_screen_1_error_invalid_surname;
+
+  /// No description provided for @register_screen_1_error_empty_surname.
+  ///
+  /// In cs, this message translates to:
+  /// **'A co příjmení?'**
+  String get register_screen_1_error_empty_surname;
+
+  /// No description provided for @register_screen_1_error_email_empty.
+  ///
+  /// In cs, this message translates to:
+  /// **'Nezapomněl/a si na email?'**
+  String get register_screen_1_error_email_empty;
+
+  /// No description provided for @register_screen_1_error_email_invalid.
+  ///
+  /// In cs, this message translates to:
+  /// **'Pozor, takhle přece nevypadá e-mail.'**
+  String get register_screen_1_error_email_invalid;
 
   /// No description provided for @register_screen_2_password_hint.
   ///
@@ -235,6 +271,12 @@ abstract class AppLocalizations {
   /// In cs, this message translates to:
   /// **'Registrovat'**
   String get register_screen_2_register_button_text;
+
+  /// No description provided for @register_screen_2_error_passwords_do_not_match.
+  ///
+  /// In cs, this message translates to:
+  /// **'Hesla se neshodují.'**
+  String get register_screen_2_error_passwords_do_not_match;
 }
 
 class _AppLocalizationsDelegate

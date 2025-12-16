@@ -74,6 +74,29 @@ class AppLocalizationsEn extends AppLocalizations {
   String get register_screen_1_next_button_text => 'Next';
 
   @override
+  String get register_screen_1_error_invalid_name =>
+      'Name can only contain letters and hyphens.';
+
+  @override
+  String get register_screen_1_error_empty_name => 'Don\'t you have a name?';
+
+  @override
+  String get register_screen_1_error_invalid_surname =>
+      'Surname can only contain letters and hyphens.';
+
+  @override
+  String get register_screen_1_error_empty_surname =>
+      'What about your surname?';
+
+  @override
+  String get register_screen_1_error_email_empty =>
+      'Did you forget your email?';
+
+  @override
+  String get register_screen_1_error_email_invalid =>
+      'Oops, that doesn\'t look like a valid email.';
+
+  @override
   String get register_screen_2_password_hint => 'Password';
 
   @override
@@ -81,4 +104,8 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get register_screen_2_register_button_text => 'Register';
+
+  @override
+  String get register_screen_2_error_passwords_do_not_match =>
+      'Passwords do not match.';
 }

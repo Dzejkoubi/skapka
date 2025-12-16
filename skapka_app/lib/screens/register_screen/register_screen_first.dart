@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:skapka_app/app/l10n/app_localizations.dart';
-import 'package:skapka_app/app/l10n/app_localizations_cs.dart';
 import 'package:skapka_app/app/router/router.gr.dart';
 import 'package:skapka_app/app/theme/app_color_theme.dart';
 import 'package:skapka_app/app/theme/app_spacing.dart';
@@ -25,7 +24,6 @@ class RegisterScreenFirst extends StatefulWidget {
 }
 
 class _RegisterScreenFirstState extends State<RegisterScreenFirst> {
-  final RegisterProvider _registerProvider = RegisterProvider();
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _surnameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
@@ -46,10 +44,12 @@ class _RegisterScreenFirstState extends State<RegisterScreenFirst> {
     });
 
     if (_nameError == null && _surnameError == null && _emailError == null) {
-      _registerProvider.updateName(_nameController.text);
-      _registerProvider.updateSurname(_surnameController.text);
-      _registerProvider.updateEmail(_emailController.text);
-      context.router.push(const LoginRoute());
+      final RegisterProvider registerProvider = context
+          .read<RegisterProvider>();
+      registerProvider.updateName(_nameController.text);
+      registerProvider.updateSurname(_surnameController.text);
+      registerProvider.updateEmail(_emailController.text);
+      context.router.push(const RegisterRouteSecond());
     }
   }
 

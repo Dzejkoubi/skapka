@@ -8,8 +8,9 @@ import 'package:skapka_app/app/router/router.dart';
 import 'package:skapka_app/app/theme/app_color_theme.dart';
 import 'package:skapka_app/app/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
+import 'package:skapka_app/providers/dependents_provider.dart';
 import 'package:skapka_app/providers/register_provider.dart';
-import 'package:skapka_app/providers/user_provider.dart';
+import 'package:skapka_app/providers/account_provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 void main() async {
@@ -44,8 +45,9 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => UserProvider()),
+        ChangeNotifierProvider(create: (context) => AccountProvider()),
         ChangeNotifierProvider(create: (context) => RegisterProvider()),
+        ChangeNotifierProvider(create: (context) => DependentsProvider()),
       ],
 
       child: MaterialApp.router(

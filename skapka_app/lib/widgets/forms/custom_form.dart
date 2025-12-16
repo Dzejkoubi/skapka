@@ -61,6 +61,9 @@ class _CustomFormState extends State<CustomForm> {
           obscureText: widget.obscureText,
           keyboardType: widget.keyboardType,
           autofillHints: widget.autofillHints,
+          cursorColor: hasError
+              ? context.colors.error.normal
+              : context.colors.primary.dark,
           maxLength: widget.characterLimit,
           style: _getTextStyle(isDisabled),
           decoration: InputDecoration(
@@ -71,6 +74,7 @@ class _CustomFormState extends State<CustomForm> {
             labelText: widget.labelText,
             labelStyle: _getLabelStyle(isDisabled, _isFocused, hasError),
             floatingLabelStyle: _getFloatingLabelStyle(_isFocused, hasError),
+            floatingLabelBehavior: FloatingLabelBehavior.auto,
             suffixIcon: _buildSuffixIcon(),
             counterText: '',
             filled: true,
@@ -79,6 +83,7 @@ class _CustomFormState extends State<CustomForm> {
             errorStyle: AppTextTheme.bodySmall(
               context,
             ).copyWith(color: context.colors.error.normal),
+            hintFadeDuration: Duration(milliseconds: 150),
             // State 1: Enabled but empty (not active/filled)
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(AppRadius.medium),
@@ -174,7 +179,10 @@ class _CustomFormState extends State<CustomForm> {
       labelColor = context.colors.text.muted;
     }
 
-    return AppTextTheme.bodySmall(context).copyWith(color: labelColor);
+    return AppTextTheme.bodySmall(context).copyWith(
+      color: labelColor,
+      backgroundColor: context.colors.background.mediumLight,
+    );
   }
 
   _buildSuffixIcon() {

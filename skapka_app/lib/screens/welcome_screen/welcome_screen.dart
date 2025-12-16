@@ -15,10 +15,10 @@ class WelcomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: context.colors.primary.light,
-        body: Column(
+    return Scaffold(
+      backgroundColor: context.colors.primary.light,
+      body: SafeArea(
+        child: Column(
           children: [
             SizedBox(height: AppSpacing.bottomSpace),
             SizedBox(

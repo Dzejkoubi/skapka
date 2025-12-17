@@ -108,4 +108,22 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get register_screen_2_error_passwords_do_not_match =>
       'Passwords do not match.';
+
+  @override
+  String get account_not_approved_screen_title => 'Account not yet approved';
+
+  @override
+  String get account_not_approved_screen_text =>
+      'An administrator must approve your account before you can log in. Once they do, you will receive an email.';
+
+  @override
+  String get account_not_approved_screen_notify_administrator_button_text =>
+      'Notify administrator';
+
+  @override
+  String get account_not_approved_screen_logout_button_text => 'Log out';
+
+  @override
+  String get account_not_approved_screen_delete_account_button_text =>
+      'Delete account';
 }

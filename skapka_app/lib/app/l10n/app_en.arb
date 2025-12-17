@@ -32,5 +32,11 @@
     "register_screen_2_password_hint": "Password",
     "register_screen_2_confirm_password_hint": "Confirm password",
     "register_screen_2_register_button_text": "Register",
-    "register_screen_2_error_passwords_do_not_match": "Passwords do not match."
+    "register_screen_2_error_passwords_do_not_match": "Passwords do not match.",
+
+    "account_not_approved_screen_title": "Account not yet approved",
+    "account_not_approved_screen_text": "An administrator must approve your account before you can log in. Once they do, you will receive an email.",
+    "account_not_approved_screen_notify_administrator_button_text": "Notify administrator",
+    "account_not_approved_screen_logout_button_text": "Log out",
+    "account_not_approved_screen_delete_account_button_text": "Delete account"
 }

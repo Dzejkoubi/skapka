@@ -105,4 +105,22 @@ class AppLocalizationsCs extends AppLocalizations {
   @override
   String get register_screen_2_error_passwords_do_not_match =>
       'Hesla se neshodují.';
+
+  @override
+  String get account_not_approved_screen_title => 'Účet ještě nebyl schválen';
+
+  @override
+  String get account_not_approved_screen_text =>
+      'Administrátor musí tvůj účet nejdřív schválit, než se budeš moct přihlásit. Jakmile to udělá, přijde ti e-mail.';
+
+  @override
+  String get account_not_approved_screen_notify_administrator_button_text =>
+      'Upozornit administrátora';
+
+  @override
+  String get account_not_approved_screen_logout_button_text => 'Odhlásit se';
+
+  @override
+  String get account_not_approved_screen_delete_account_button_text =>
+      'Smazat účet';
 }

@@ -277,6 +277,36 @@ abstract class AppLocalizations {
   /// In cs, this message translates to:
   /// **'Hesla se neshodují.'**
   String get register_screen_2_error_passwords_do_not_match;
+
+  /// No description provided for @account_not_approved_screen_title.
+  ///
+  /// In cs, this message translates to:
+  /// **'Účet ještě nebyl schválen'**
+  String get account_not_approved_screen_title;
+
+  /// No description provided for @account_not_approved_screen_text.
+  ///
+  /// In cs, this message translates to:
+  /// **'Administrátor musí tvůj účet nejdřív schválit, než se budeš moct přihlásit. Jakmile to udělá, přijde ti e-mail.'**
+  String get account_not_approved_screen_text;
+
+  /// No description provided for @account_not_approved_screen_notify_administrator_button_text.
+  ///
+  /// In cs, this message translates to:
+  /// **'Upozornit administrátora'**
+  String get account_not_approved_screen_notify_administrator_button_text;
+
+  /// No description provided for @account_not_approved_screen_logout_button_text.
+  ///
+  /// In cs, this message translates to:
+  /// **'Odhlásit se'**
+  String get account_not_approved_screen_logout_button_text;
+
+  /// No description provided for @account_not_approved_screen_delete_account_button_text.
+  ///
+  /// In cs, this message translates to:
+  /// **'Smazat účet'**
+  String get account_not_approved_screen_delete_account_button_text;
 }
 
 class _AppLocalizationsDelegate

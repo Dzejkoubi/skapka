@@ -63,7 +63,7 @@ class WelcomeScreen extends StatelessWidget {
                         context,
                       )!.welcome_screen_register_button_text,
                       onPressed: () {
-                        context.router.push(const RegisterRouteFirst());
+                        context.router.push(const AccountNotApprovedRoute());
                       },
                     ),
                     MainButton.text(

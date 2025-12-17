@@ -24,4 +24,8 @@ class AppRadius {
 
   /// 360.0
   static const double full = 360;
+
+  // Border smoothing values
+  /// 0.6
+  static const double smoothNormal = 0.6;
 }

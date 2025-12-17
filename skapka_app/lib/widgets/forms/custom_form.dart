@@ -1,3 +1,4 @@
+import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:skapka_app/app/theme/app_color_theme.dart';
@@ -19,6 +20,7 @@ class CustomForm extends StatefulWidget {
   final List<String>? autofillHints;
   final int? characterLimit;
   final String? errorText;
+  final double cornerSmoothing;
   const CustomForm({
     super.key,
     this.isActive = true,
@@ -33,6 +35,7 @@ class CustomForm extends StatefulWidget {
     this.autofillHints,
     this.characterLimit,
     this.errorText,
+    this.cornerSmoothing = AppRadius.smoothNormal,
   });
 
   @override
@@ -86,7 +89,10 @@ class _CustomFormState extends State<CustomForm> {
             hintFadeDuration: Duration(milliseconds: 150),
             // State 1: Enabled but empty (not active/filled)
             enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(AppRadius.medium),
+              borderRadius: SmoothBorderRadius(
+                cornerRadius: AppRadius.medium,
+                cornerSmoothing: widget.cornerSmoothing,
+              ),
               borderSide: BorderSide(
                 color: hasError
                     ? context.colors.error.normal
@@ -96,7 +102,10 @@ class _CustomFormState extends State<CustomForm> {
             ),
             // State 3: Selected/Focused (keyboard up, writing inside)
             focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(AppRadius.medium),
+              borderRadius: SmoothBorderRadius(
+                cornerRadius: AppRadius.medium,
+                cornerSmoothing: widget.cornerSmoothing,
+              ),
               borderSide: BorderSide(
                 color: hasError
                     ? context.colors.error.normal
@@ -106,7 +115,10 @@ class _CustomFormState extends State<CustomForm> {
             ),
             // State 5: Disabled (cannot write)
             disabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(AppRadius.medium),
+              borderRadius: SmoothBorderRadius(
+                cornerRadius: AppRadius.medium,
+                cornerSmoothing: widget.cornerSmoothing,
+              ),
               borderSide: BorderSide(
                 color: context.colors.background.bgMediumDark,
                 width: 1,
@@ -114,7 +126,10 @@ class _CustomFormState extends State<CustomForm> {
             ),
             // State 4: Error (not focused)
             errorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(AppRadius.medium),
+              borderRadius: SmoothBorderRadius(
+                cornerRadius: AppRadius.medium,
+                cornerSmoothing: widget.cornerSmoothing,
+              ),
               borderSide: BorderSide(
                 color: context.colors.error.normal,
                 width: 1,
@@ -122,7 +137,10 @@ class _CustomFormState extends State<CustomForm> {
             ),
             // State 4: Error (focused)
             focusedErrorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(AppRadius.medium),
+              borderRadius: SmoothBorderRadius(
+                cornerRadius: AppRadius.medium,
+                cornerSmoothing: widget.cornerSmoothing,
+              ),
               borderSide: BorderSide(
                 color: context.colors.error.normal,
                 width: 2,

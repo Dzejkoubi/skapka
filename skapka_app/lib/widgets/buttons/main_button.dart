@@ -1,3 +1,4 @@
+import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gaimon/gaimon.dart';
@@ -170,15 +171,23 @@ class _MainButtonState extends State<MainButton> {
           horizontal: horizontalPadding,
           vertical: verticalPadding,
         ),
-        decoration: BoxDecoration(
+        decoration: ShapeDecoration(
           color: theme.hasBackground(_currentState)
               ? theme.getBackgroundColor(_currentState)
               : Colors.transparent,
-          border: theme.hasBorder(_currentState)
-              ? Border.all(color: theme.getBorderColor(_currentState), width: 1)
-              : null,
-          borderRadius: BorderRadius.circular(AppRadius.small),
-          boxShadow: theme.getBoxShadow(_currentState),
+          shape: SmoothRectangleBorder(
+            side: theme.hasBorder(_currentState)
+                ? BorderSide(
+                    color: theme.getBorderColor(_currentState),
+                    width: 1,
+                  )
+                : BorderSide.none,
+            borderRadius: SmoothBorderRadius(
+              cornerRadius: AppRadius.small,
+              cornerSmoothing: AppRadius.smoothNormal,
+            ),
+          ),
+          shadows: theme.getBoxShadow(_currentState),
         ),
         child: _buildButtonContent(theme),
       ),

@@ -2,6 +2,7 @@ import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:skapka_app/app/theme/app_color_theme.dart';
+import 'package:skapka_app/app/theme/app_gradients.dart';
 import 'package:skapka_app/app/theme/app_radius.dart';
 import 'package:skapka_app/app/theme/app_sizes.dart';
 import 'package:skapka_app/app/theme/app_spacing.dart';
@@ -40,10 +41,10 @@ class LargeDialog extends StatelessWidget {
       insetPadding: const EdgeInsets.symmetric(horizontal: AppSpacing.xLarge),
       child: Stack(
         children: [
-          // Bottom container - border color (larger)
+          // Bottom container - border gradient (larger)
           Container(
             decoration: ShapeDecoration(
-              color: config.borderColor,
+              gradient: config.borderGradient,
               shape: SmoothRectangleBorder(
                 borderRadius: SmoothBorderRadius(
                   cornerRadius: AppRadius.xLarge,
@@ -141,7 +142,7 @@ class LargeDialog extends StatelessWidget {
     switch (type) {
       case LargeDialogType.basic:
         return _DialogConfig(
-          borderColor: context.colors.secondary.normal,
+          borderGradient: AppGradients.secondaryPrimaryGradient(context),
           backgroundColor: context.colors.secondary.normal,
           contentColor: context.colors.text.normalLight,
           buttonVariant: ButtonStylesVariants.white,
@@ -149,7 +150,7 @@ class LargeDialog extends StatelessWidget {
         );
       case LargeDialogType.positive:
         return _DialogConfig(
-          borderColor: context.colors.success.normal,
+          borderGradient: AppGradients.successGradient(context),
           backgroundColor: context.colors.background.light,
           contentColor: context.colors.text.normal,
           buttonVariant: ButtonStylesVariants.success,
@@ -157,7 +158,7 @@ class LargeDialog extends StatelessWidget {
         );
       case LargeDialogType.negative:
         return _DialogConfig(
-          borderColor: context.colors.error.normal,
+          borderGradient: AppGradients.errorGradient(context),
           backgroundColor: context.colors.background.light,
           contentColor: context.colors.text.normal,
           buttonVariant: ButtonStylesVariants.destructive,
@@ -168,14 +169,14 @@ class LargeDialog extends StatelessWidget {
 }
 
 class _DialogConfig {
-  final Color borderColor;
+  final Gradient borderGradient;
   final Color backgroundColor;
   final Color contentColor;
   final String? svgIconPath;
   final ButtonStylesVariants buttonVariant;
 
   _DialogConfig({
-    required this.borderColor,
+    required this.borderGradient,
     required this.backgroundColor,
     required this.contentColor,
     required this.svgIconPath,

@@ -50,7 +50,7 @@ class WelcomeScreen extends StatelessWidget {
                       type: ButtonType.text,
                       variant: ButtonStylesVariants.white,
                       onPressed: () {
-                        context.router.push(const LargeDialogShowcaseRoute());
+                        context.router.push(const LoginRoute());
                       },
                       text: AppLocalizations.of(
                         context,

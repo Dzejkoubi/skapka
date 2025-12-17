@@ -26,7 +26,7 @@ class WelcomeScreen extends StatelessWidget {
               SizedBox(
                 height: 256,
                 child: SvgPicture.asset(
-                  'assets/images/logos/scout_logo_white_without_text.svg',
+                  'assets/images/logos/scout-logo-white-without-text.svg',
                 ),
               ),
               Text(
@@ -50,7 +50,7 @@ class WelcomeScreen extends StatelessWidget {
                       type: ButtonType.text,
                       variant: ButtonStylesVariants.white,
                       onPressed: () {
-                        context.router.push(const LoginRoute());
+                        context.router.push(const LargeDialogShowcaseRoute());
                       },
                       text: AppLocalizations.of(
                         context,

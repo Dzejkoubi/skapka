@@ -7,7 +7,6 @@ import 'package:skapka_app/app/theme/app_color_theme.dart';
 import 'package:skapka_app/app/theme/app_spacing.dart';
 import 'package:skapka_app/app/theme/app_text_theme.dart';
 import 'package:skapka_app/app/theme/main_button_theme.dart';
-import 'package:skapka_app/screens/theme_showcase_screens/squircle_showcase.dart';
 import 'package:skapka_app/utils/email_format_validator.dart';
 import 'package:skapka_app/utils/password_validator.dart';
 import 'package:skapka_app/widgets/appbar/appbar.dart';

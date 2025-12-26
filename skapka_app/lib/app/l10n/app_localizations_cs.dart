@@ -123,4 +123,15 @@ class AppLocalizationsCs extends AppLocalizations {
   @override
   String get account_not_approved_screen_delete_account_button_text =>
       'Smazat účet';
+
+  @override
+  String get events_screen_title => 'Výpravy';
+
+  @override
+  String events_screen_no_events_text(String version, Object username) {
+    return '$username aktuálně nemá žádnou aktivní výpravu.';
+  }
+
+  @override
+  String get events_screen_fab_create_event_text => 'Vytvořit';
 }

@@ -22,6 +22,7 @@ class Appbar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
+      color: context.colors.primary.light,
       padding: const EdgeInsets.symmetric(horizontal: AppSpacing.medium),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -307,6 +307,24 @@ abstract class AppLocalizations {
   /// In cs, this message translates to:
   /// **'Smazat účet'**
   String get account_not_approved_screen_delete_account_button_text;
+
+  /// No description provided for @events_screen_title.
+  ///
+  /// In cs, this message translates to:
+  /// **'Výpravy'**
+  String get events_screen_title;
+
+  /// No description provided for @events_screen_no_events_text.
+  ///
+  /// In cs, this message translates to:
+  /// **'{username} aktuálně nemá žádnou aktivní výpravu.'**
+  String events_screen_no_events_text(String version, Object username);
+
+  /// No description provided for @events_screen_fab_create_event_text.
+  ///
+  /// In cs, this message translates to:
+  /// **'Vytvořit'**
+  String get events_screen_fab_create_event_text;
 }
 
 class _AppLocalizationsDelegate

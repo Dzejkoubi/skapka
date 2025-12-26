@@ -126,4 +126,15 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get account_not_approved_screen_delete_account_button_text =>
       'Delete account';
+
+  @override
+  String get events_screen_title => 'Events';
+
+  @override
+  String events_screen_no_events_text(String version, Object username) {
+    return '$username currently has no active events.';
+  }
+
+  @override
+  String get events_screen_fab_create_event_text => 'Create';
 }

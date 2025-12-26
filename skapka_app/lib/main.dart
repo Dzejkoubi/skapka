@@ -8,6 +8,7 @@ import 'package:skapka_app/app/router/router.dart';
 import 'package:skapka_app/app/theme/app_color_theme.dart';
 import 'package:skapka_app/app/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
+import 'package:skapka_app/providers/auth_provider.dart';
 import 'package:skapka_app/providers/dependents_provider.dart';
 import 'package:skapka_app/providers/register_provider.dart';
 import 'package:skapka_app/providers/account_provider.dart';
@@ -48,32 +49,39 @@ class App extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => AccountProvider()),
         ChangeNotifierProvider(create: (context) => RegisterProvider()),
         ChangeNotifierProvider(create: (context) => DependentsProvider()),
+        ChangeNotifierProvider(create: (context) => AuthProvider()),
       ],
 
-      child: MaterialApp.router(
-        debugShowCheckedModeBanner: kDebugMode
-            ? true
-            : false, // Show debug banner only in debug mode
-        title: 'Skapka',
+      child: Builder(
+        builder: (context) {
+          return MaterialApp.router(
+            debugShowCheckedModeBanner: kDebugMode
+                ? true
+                : false, // Show debug banner only in debug mode
+            title: 'Skapka',
 
-        routerConfig: _appRouter.config(),
+            routerConfig: _appRouter.config(
+              reevaluateListenable: context.read<AuthProvider>(),
+            ),
 
-        // Add builder to sync theme with AppColorTheme
-        builder: (context, child) {
-          // Sync the theme whenever the app rebuilds
-          AppColorTheme.updateTheme(Theme.of(context).brightness);
-          return child ?? const SizedBox.shrink();
+            // Add builder to sync theme with AppColorTheme
+            builder: (context, child) {
+              // Sync the theme whenever the app rebuilds
+              AppColorTheme.updateTheme(Theme.of(context).brightness);
+              return child ?? const SizedBox.shrink();
+            },
+
+            localizationsDelegates: const [
+              AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+
+            supportedLocales: AppLocalizations.supportedLocales,
+            locale: const Locale('cs'),
+          );
         },
-
-        localizationsDelegates: const [
-          AppLocalizations.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-
-        supportedLocales: AppLocalizations.supportedLocales,
-        locale: const Locale('cs'),
       ),
     );
   }

@@ -39,6 +39,17 @@
     "account_not_approved_screen_text": "Administrátor musí tvůj účet nejdřív schválit, než se budeš moct přihlásit. Jakmile to udělá, přijde ti e-mail.",
     "account_not_approved_screen_notify_administrator_button_text": "Upozornit administrátora",
     "account_not_approved_screen_logout_button_text": "Odhlásit se",
-    "account_not_approved_screen_delete_account_button_text": "Smazat účet"
+    "account_not_approved_screen_delete_account_button_text": "Smazat účet",
+
+    "events_screen_title": "Výpravy",
+    "events_screen_no_events_text": "{username} aktuálně nemá žádnou aktivní výpravu.",
+    "@events_screen_no_events_text": {
+        "placeholders": {
+            "version": {
+                "type": "String"
+            }
+        }
+    },
+    "events_screen_fab_create_event_text": "Vytvořit"
 
 }

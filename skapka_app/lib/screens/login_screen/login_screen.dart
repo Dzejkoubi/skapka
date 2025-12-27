@@ -85,6 +85,7 @@ class _LoginScreenState extends State<LoginScreen> {
               children: [
                 SizedBox(height: AppSpacing.large),
                 Appbar(
+                  backChevronCanPop: !_isLoading,
                   showBackChevron: true,
                   showScreenName: false,
                   showSettingsIcon: false,

@@ -20,7 +20,7 @@ class AccountNotApprovedScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const notifyAdministratorButtonEnabled = true;
+    const notifyAdministratorButtonEnabled = false;
     AuthService authService = AuthService();
     AuthProvider authProvider = context.read<AuthProvider>();
 

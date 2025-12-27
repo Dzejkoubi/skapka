@@ -7,6 +7,7 @@ import 'package:skapka_app/app/theme/app_text_theme.dart';
 
 class Appbar extends StatelessWidget {
   final bool showBackChevron;
+  final bool backChevronCanPop;
   final bool showScreenName;
   final bool showSettingsIcon;
   final String? screenName;
@@ -14,6 +15,7 @@ class Appbar extends StatelessWidget {
     required this.showBackChevron,
     required this.showScreenName,
     required this.showSettingsIcon,
+    this.backChevronCanPop = true,
     this.screenName = 'screenName',
     super.key,
   });
@@ -29,7 +31,11 @@ class Appbar extends StatelessWidget {
         children: [
           if (showBackChevron)
             GestureDetector(
-              onTap: () => Navigator.of(context).pop(),
+              onTap: () {
+                if (backChevronCanPop && Navigator.of(context).canPop()) {
+                  Navigator.of(context).pop();
+                }
+              },
               child: SvgPicture.asset(
                 'assets/icons/chevron-left.svg',
                 width: AppSizes.iconSizeMedium,

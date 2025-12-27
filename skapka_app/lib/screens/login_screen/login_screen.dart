@@ -1,12 +1,14 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 import 'package:skapka_app/app/l10n/app_localizations.dart';
-import 'package:skapka_app/app/router/router.gr.dart';
 import 'package:skapka_app/app/theme/app_color_theme.dart';
 import 'package:skapka_app/app/theme/app_spacing.dart';
 import 'package:skapka_app/app/theme/app_text_theme.dart';
 import 'package:skapka_app/app/theme/main_button_theme.dart';
+import 'package:skapka_app/providers/auth_provider.dart';
+import 'package:skapka_app/services/auth_service.dart';
 import 'package:skapka_app/utils/email_format_validator.dart';
 import 'package:skapka_app/utils/password_validator.dart';
 import 'package:skapka_app/widgets/appbar/appbar.dart';
@@ -29,6 +31,9 @@ class _LoginScreenState extends State<LoginScreen> {
   String? _passwordError;
   bool _isLoading = false;
 
+  AuthService authService = AuthService();
+  late final AuthProvider authProvider = context.read<AuthProvider>();
+
   @override
   void initState() {
     super.initState();
@@ -43,7 +48,7 @@ class _LoginScreenState extends State<LoginScreen> {
     super.dispose();
   }
 
-  void _handleLogin() {
+  void _handleLogin() async {
     setState(() {
       _emailError = validateEmail(_emailController.text, context: context);
       _passwordError = validatePassword(
@@ -56,9 +61,15 @@ class _LoginScreenState extends State<LoginScreen> {
       setState(() {
         _isLoading = true;
       });
-      // TODO: Implement actual login logic
-      print('Login with: ${_emailController.text}');
-      context.router.push(const SquircleShowcaseRoute());
+      try {
+        await authService.signIn(
+          email: _emailController.text,
+          password: _passwordController.text,
+        );
+        authProvider.login();
+      } catch (e) {
+        print(e.toString());
+      }
     }
   }
 

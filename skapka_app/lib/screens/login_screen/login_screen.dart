@@ -68,7 +68,6 @@ class _LoginScreenState extends State<LoginScreen> {
           email: _emailController.text,
           password: _passwordController.text,
         );
-        authProvider.signIn();
 
         if (mounted) {
           BottomDialog.show(
@@ -79,6 +78,8 @@ class _LoginScreenState extends State<LoginScreen> {
             )!.login_screen_login_success,
           );
         }
+
+        authProvider.signIn();
       } on AuthException catch (e) {
         if (mounted) {
           BottomDialog.show(

@@ -104,9 +104,7 @@ class AccountNotApprovedScreen extends StatelessWidget {
                         onPrimaryPressed: () async {
                           try {
                             await authService.signOut();
-                            authProvider.signOut();
                             if (context.mounted) {
-                              Navigator.of(context).pop();
                               BottomDialog.show(
                                 context,
                                 type: BottomDialogType.positive,
@@ -114,7 +112,9 @@ class AccountNotApprovedScreen extends StatelessWidget {
                                   context,
                                 )!.account_not_approved_screen_logout_success,
                               );
+                              Navigator.of(context).pop();
                             }
+                            authProvider.signOut();
                           } catch (e) {
                             if (context.mounted) {
                               BottomDialog.show(
@@ -167,9 +167,7 @@ class AccountNotApprovedScreen extends StatelessWidget {
                         onPrimaryPressed: () async {
                           try {
                             await authService.deleteAccount();
-                            authProvider.signOut();
                             if (context.mounted) {
-                              Navigator.of(context).pop();
                               BottomDialog.show(
                                 context,
                                 type: BottomDialogType.positive,
@@ -177,7 +175,9 @@ class AccountNotApprovedScreen extends StatelessWidget {
                                   context,
                                 )!.account_not_approved_screen_delete_success,
                               );
+                              Navigator.of(context).pop();
                             }
+                            authProvider.signOut();
                           } catch (e) {
                             if (context.mounted) {
                               BottomDialog.show(

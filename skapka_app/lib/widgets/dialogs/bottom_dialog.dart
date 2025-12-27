@@ -19,9 +19,14 @@ class BottomDialog {
   }) {
     final config = _getDialogConfig(context, type);
 
+    // Use the root navigator's context to ensure the toast persists across navigations and can be dismissed even if the original screen is gone.
+    final rootContext = Navigator.of(context, rootNavigator: true).context;
+
     DelightToastBar? toast;
 
     toast = DelightToastBar(
+      autoDismiss: true,
+      snackbarDuration: const Duration(seconds: 8),
       builder: (context) => Container(
         margin: const EdgeInsets.symmetric(horizontal: AppSpacing.large),
         decoration: ShapeDecoration(
@@ -79,7 +84,7 @@ class BottomDialog {
       ),
     );
 
-    toast.show(context);
+    toast.show(rootContext);
   }
 
   static _DialogConfig _getDialogConfig(

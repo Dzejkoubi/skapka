@@ -59,6 +59,13 @@ class AppLocalizationsEn extends AppLocalizations {
       'Oops, that doesn\'t look like a valid email.';
 
   @override
+  String get login_screen_login_success => 'Login successful!';
+
+  @override
+  String get login_screen_login_error_generic =>
+      'Something went wrong. Please try again.';
+
+  @override
   String get register_screen_title => 'Register';
 
   @override
@@ -140,6 +147,14 @@ class AppLocalizationsEn extends AppLocalizations {
       'Notifications can only be sent once every 24 hours. Please try again later.';
 
   @override
+  String get account_not_approved_screen_notify_success =>
+      'Administrator has been notified.';
+
+  @override
+  String get account_not_approved_screen_notify_error =>
+      'Failed to notify administrator. Please try again later.';
+
+  @override
   String get account_not_approved_screen_logout_button_text => 'Log out';
 
   @override
@@ -152,6 +167,14 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get account_not_approved_screen_logout_dialog_primary_button_text =>
       'Log out';
+
+  @override
+  String get account_not_approved_screen_logout_success =>
+      'Logged out successfully.';
+
+  @override
+  String get account_not_approved_screen_logout_error =>
+      'Failed to log out. Please try again.';
 
   @override
   String get account_not_approved_screen_delete_account_button_text =>
@@ -169,6 +192,14 @@ class AppLocalizationsEn extends AppLocalizations {
   String
   get account_not_approved_screen_delete_account_dialog_primary_button_text =>
       'Delete account';
+
+  @override
+  String get account_not_approved_screen_delete_success =>
+      'Your account has been deleted.';
+
+  @override
+  String get account_not_approved_screen_delete_error =>
+      'Failed to delete account. Please try again later.';
 
   @override
   String get events_screen_title => 'Events';
@@ -189,4 +220,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get cancel => 'Cancel';
+
+  @override
+  String get loading => 'Loading...';
 }

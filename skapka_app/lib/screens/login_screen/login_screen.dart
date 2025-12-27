@@ -13,8 +13,10 @@ import 'package:skapka_app/utils/email_format_validator.dart';
 import 'package:skapka_app/utils/password_validator.dart';
 import 'package:skapka_app/widgets/appbar/appbar.dart';
 import 'package:skapka_app/widgets/buttons/main_button.dart';
+import 'package:skapka_app/widgets/dialogs/bottom_dialog.dart';
 import 'package:skapka_app/widgets/forms/custom_form.dart';
 import 'package:skapka_app/widgets/wrappers/scrollable_on_keyboard_screen_wrapper.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 @RoutePage()
 class LoginScreen extends StatefulWidget {
@@ -67,8 +69,46 @@ class _LoginScreenState extends State<LoginScreen> {
           password: _passwordController.text,
         );
         authProvider.signIn();
+
+        if (mounted) {
+          BottomDialog.show(
+            context,
+            type: BottomDialogType.positive,
+            description: AppLocalizations.of(
+              context,
+            )!.login_screen_login_success,
+          );
+        }
+      } on AuthException catch (e) {
+        if (mounted) {
+          BottomDialog.show(
+            context,
+            type: BottomDialogType.negative,
+            description: e.message.contains('Invalid login credentials')
+                ? AppLocalizations.of(
+                    context,
+                  )!.login_screen_login_error_invalid_credentials
+                : AppLocalizations.of(
+                    context,
+                  )!.login_screen_login_error_generic,
+          );
+        }
       } catch (e) {
-        print(e.toString());
+        if (mounted) {
+          BottomDialog.show(
+            context,
+            type: BottomDialogType.negative,
+            description: AppLocalizations.of(
+              context,
+            )!.login_screen_login_error_generic,
+          );
+        }
+      } finally {
+        if (mounted) {
+          setState(() {
+            _isLoading = false;
+          });
+        }
       }
     }
   }
@@ -152,9 +192,11 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   child: MainButton.filled(
                     variant: ButtonStylesVariants.white,
-                    text: AppLocalizations.of(
-                      context,
-                    )!.login_screen_login_button_text,
+                    text: _isLoading
+                        ? AppLocalizations.of(context)!.loading
+                        : AppLocalizations.of(
+                            context,
+                          )!.login_screen_login_button_text,
                     onPressed: _handleLogin,
                   ),
                 ),

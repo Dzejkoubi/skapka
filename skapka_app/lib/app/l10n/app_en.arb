@@ -17,6 +17,8 @@
     "login_screen_login_error_invalid_credentials": "Invalid login credentials.",
     "login_screen_login_error_email_empty": "Did you forget your email?",
     "login_screen_login_error_email_invalid": "Oops, that doesn't look like a valid email.",
+    "login_screen_login_success": "Login successful!",
+    "login_screen_login_error_generic": "Something went wrong. Please try again.",
 
     "register_screen_title": "Register",
     "register_screen_1_name_hint": "Name",
@@ -41,16 +43,22 @@
     "account_not_approved_screen_notify_administrator_dialog_description": "This step will notify the administrator by email. It can be sent once a day.",
     "account_not_approved_screen_notify_administrator_dialog_primary_button_text": "Send notification",
     "account_not_approved_screen_notify_administrator_button_error_dialog": "Notifications can only be sent once every 24 hours. Please try again later.",
+    "account_not_approved_screen_notify_success": "Administrator has been notified.",
+    "account_not_approved_screen_notify_error": "Failed to notify administrator. Please try again later.",
     
     "account_not_approved_screen_logout_button_text": "Log out",
     "account_not_approved_screen_logout_dialog_title": "Log out",
     "account_not_approved_screen_logout_dialog_description": "Are you sure you want to log out of your account?",
     "account_not_approved_screen_logout_dialog_primary_button_text": "Log out",
+    "account_not_approved_screen_logout_success": "Logged out successfully.",
+    "account_not_approved_screen_logout_error": "Failed to log out. Please try again.",
 
     "account_not_approved_screen_delete_account_button_text": "Delete account",
     "account_not_approved_screen_delete_account_dialog_title": "Delete account",
     "account_not_approved_screen_delete_account_dialog_description": "Are you sure you want to delete your account? This action cannot be undone.",
     "account_not_approved_screen_delete_account_dialog_primary_button_text": "Delete account",
+    "account_not_approved_screen_delete_success": "Your account has been deleted.",
+    "account_not_approved_screen_delete_error": "Failed to delete account. Please try again later.",
 
     "events_screen_title": "Events",
     "events_screen_no_events_text": "{username} currently has no active events.",
@@ -65,5 +73,6 @@
 
     "yes": "Yes",
     "no": "No",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "loading": "Loading..."
 }

@@ -101,10 +101,31 @@ class AccountNotApprovedScreen extends StatelessWidget {
                         primaryButtonText: AppLocalizations.of(
                           context,
                         )!.account_not_approved_screen_logout_dialog_primary_button_text,
-                        onPrimaryPressed: () {
-                          authService.signOut();
-                          authProvider.signOut();
-                          Navigator.of(context).pop();
+                        onPrimaryPressed: () async {
+                          try {
+                            await authService.signOut();
+                            authProvider.signOut();
+                            if (context.mounted) {
+                              Navigator.of(context).pop();
+                              BottomDialog.show(
+                                context,
+                                type: BottomDialogType.positive,
+                                description: AppLocalizations.of(
+                                  context,
+                                )!.account_not_approved_screen_logout_success,
+                              );
+                            }
+                          } catch (e) {
+                            if (context.mounted) {
+                              BottomDialog.show(
+                                context,
+                                type: BottomDialogType.negative,
+                                description: AppLocalizations.of(
+                                  context,
+                                )!.account_not_approved_screen_logout_error,
+                              );
+                            }
+                          }
                         },
                         secondaryButtonText: AppLocalizations.of(
                           context,
@@ -143,8 +164,31 @@ class AccountNotApprovedScreen extends StatelessWidget {
                         primaryButtonText: AppLocalizations.of(
                           context,
                         )!.account_not_approved_screen_delete_account_dialog_primary_button_text,
-                        onPrimaryPressed: () {
-                          print('Delete account button pressed');
+                        onPrimaryPressed: () async {
+                          try {
+                            await authService.deleteAccount();
+                            authProvider.signOut();
+                            if (context.mounted) {
+                              Navigator.of(context).pop();
+                              BottomDialog.show(
+                                context,
+                                type: BottomDialogType.positive,
+                                description: AppLocalizations.of(
+                                  context,
+                                )!.account_not_approved_screen_delete_success,
+                              );
+                            }
+                          } catch (e) {
+                            if (context.mounted) {
+                              BottomDialog.show(
+                                context,
+                                type: BottomDialogType.negative,
+                                description: AppLocalizations.of(
+                                  context,
+                                )!.account_not_approved_screen_delete_error,
+                              );
+                            }
+                          }
                         },
                         secondaryButtonText: AppLocalizations.of(
                           context,

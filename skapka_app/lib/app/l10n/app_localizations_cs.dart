@@ -58,6 +58,13 @@ class AppLocalizationsCs extends AppLocalizations {
       'Pozor, takhle přece nevypadá e-mail.';
 
   @override
+  String get login_screen_login_success => 'Přihlášení proběhlo úspěšně!';
+
+  @override
+  String get login_screen_login_error_generic =>
+      'Něco se nepovedlo. Zkus to prosím znovu.';
+
+  @override
   String get register_screen_title => 'Registrace';
 
   @override
@@ -137,6 +144,14 @@ class AppLocalizationsCs extends AppLocalizations {
       'Upozornění lze poslat jen jednou za 24 hodin. Zkus to později.';
 
   @override
+  String get account_not_approved_screen_notify_success =>
+      'Administrátor byl upozorněn.';
+
+  @override
+  String get account_not_approved_screen_notify_error =>
+      'Nepodařilo se upozornit administrátora. Zkus to prosím později.';
+
+  @override
   String get account_not_approved_screen_logout_button_text => 'Odhlásit se';
 
   @override
@@ -149,6 +164,14 @@ class AppLocalizationsCs extends AppLocalizations {
   @override
   String get account_not_approved_screen_logout_dialog_primary_button_text =>
       'Odhlásit se';
+
+  @override
+  String get account_not_approved_screen_logout_success =>
+      'Odhlášení proběhlo úspěšně.';
+
+  @override
+  String get account_not_approved_screen_logout_error =>
+      'Odhlášení se nezdařilo. Zkus to prosím znovu.';
 
   @override
   String get account_not_approved_screen_delete_account_button_text =>
@@ -166,6 +189,14 @@ class AppLocalizationsCs extends AppLocalizations {
   String
   get account_not_approved_screen_delete_account_dialog_primary_button_text =>
       'Smazat účet';
+
+  @override
+  String get account_not_approved_screen_delete_success =>
+      'Tvůj účet byl smazán.';
+
+  @override
+  String get account_not_approved_screen_delete_error =>
+      'Smazání účtu se nezdařilo. Zkus to prosím později.';
 
   @override
   String get events_screen_title => 'Výpravy';
@@ -186,4 +217,7 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get cancel => 'Zrušit';
+
+  @override
+  String get loading => 'Načítání...';
 }

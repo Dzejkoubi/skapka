@@ -188,6 +188,18 @@ abstract class AppLocalizations {
   /// **'Pozor, takhle přece nevypadá e-mail.'**
   String get login_screen_login_error_email_invalid;
 
+  /// No description provided for @login_screen_login_success.
+  ///
+  /// In cs, this message translates to:
+  /// **'Přihlášení proběhlo úspěšně!'**
+  String get login_screen_login_success;
+
+  /// No description provided for @login_screen_login_error_generic.
+  ///
+  /// In cs, this message translates to:
+  /// **'Něco se nepovedlo. Zkus to prosím znovu.'**
+  String get login_screen_login_error_generic;
+
   /// No description provided for @register_screen_title.
   ///
   /// In cs, this message translates to:
@@ -323,6 +335,18 @@ abstract class AppLocalizations {
   String
   get account_not_approved_screen_notify_administrator_button_error_dialog;
 
+  /// No description provided for @account_not_approved_screen_notify_success.
+  ///
+  /// In cs, this message translates to:
+  /// **'Administrátor byl upozorněn.'**
+  String get account_not_approved_screen_notify_success;
+
+  /// No description provided for @account_not_approved_screen_notify_error.
+  ///
+  /// In cs, this message translates to:
+  /// **'Nepodařilo se upozornit administrátora. Zkus to prosím později.'**
+  String get account_not_approved_screen_notify_error;
+
   /// No description provided for @account_not_approved_screen_logout_button_text.
   ///
   /// In cs, this message translates to:
@@ -346,6 +370,18 @@ abstract class AppLocalizations {
   /// In cs, this message translates to:
   /// **'Odhlásit se'**
   String get account_not_approved_screen_logout_dialog_primary_button_text;
+
+  /// No description provided for @account_not_approved_screen_logout_success.
+  ///
+  /// In cs, this message translates to:
+  /// **'Odhlášení proběhlo úspěšně.'**
+  String get account_not_approved_screen_logout_success;
+
+  /// No description provided for @account_not_approved_screen_logout_error.
+  ///
+  /// In cs, this message translates to:
+  /// **'Odhlášení se nezdařilo. Zkus to prosím znovu.'**
+  String get account_not_approved_screen_logout_error;
 
   /// No description provided for @account_not_approved_screen_delete_account_button_text.
   ///
@@ -371,6 +407,18 @@ abstract class AppLocalizations {
   /// **'Smazat účet'**
   String
   get account_not_approved_screen_delete_account_dialog_primary_button_text;
+
+  /// No description provided for @account_not_approved_screen_delete_success.
+  ///
+  /// In cs, this message translates to:
+  /// **'Tvůj účet byl smazán.'**
+  String get account_not_approved_screen_delete_success;
+
+  /// No description provided for @account_not_approved_screen_delete_error.
+  ///
+  /// In cs, this message translates to:
+  /// **'Smazání účtu se nezdařilo. Zkus to prosím později.'**
+  String get account_not_approved_screen_delete_error;
 
   /// No description provided for @events_screen_title.
   ///
@@ -407,6 +455,12 @@ abstract class AppLocalizations {
   /// In cs, this message translates to:
   /// **'Zrušit'**
   String get cancel;
+
+  /// No description provided for @loading.
+  ///
+  /// In cs, this message translates to:
+  /// **'Načítání...'**
+  String get loading;
 }
 
 class _AppLocalizationsDelegate

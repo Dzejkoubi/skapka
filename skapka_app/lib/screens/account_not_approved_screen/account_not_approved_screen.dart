@@ -97,7 +97,6 @@ class AccountNotApprovedScreen extends StatelessWidget {
                               type: BottomDialogType.negative,
                               description:
                                   'Upozornění lze poslat jen jednou za 24 hodin.',
-                              duration: const Duration(seconds: 4),
                             );
                           },
                           text: AppLocalizations.of(

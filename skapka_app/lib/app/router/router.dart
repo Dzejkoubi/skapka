@@ -1,5 +1,5 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:skapka_app/app/router/auth_guard.dart';
+import 'package:skapka_app/app/router/guards/auth_guard.dart';
 import 'package:skapka_app/app/router/router.gr.dart';
 // To generate the router file, run:
 // flutter pub run build_runner build

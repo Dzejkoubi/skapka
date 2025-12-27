@@ -20,6 +20,7 @@ class LargeDialog extends StatelessWidget {
   final String? secondaryButtonText;
   final VoidCallback? onPrimaryPressed;
   final VoidCallback? onSecondaryPressed;
+  final bool? canPop;
 
   const LargeDialog({
     super.key,
@@ -30,110 +31,132 @@ class LargeDialog extends StatelessWidget {
     this.secondaryButtonText,
     this.onPrimaryPressed,
     this.onSecondaryPressed,
+    this.canPop = true,
   });
 
   @override
   Widget build(BuildContext context) {
     final config = _getDialogConfig(context);
 
-    return Dialog(
-      backgroundColor: Colors.transparent,
-      insetPadding: const EdgeInsets.symmetric(horizontal: AppSpacing.xLarge),
-      child: Stack(
-        children: [
-          // Bottom container - border gradient (larger)
-          Container(
-            decoration: ShapeDecoration(
-              gradient: config.borderGradient,
-              shape: SmoothRectangleBorder(
-                borderRadius: SmoothBorderRadius(
-                  cornerRadius: AppRadius.xLarge,
-                  cornerSmoothing: AppRadius.smoothNormal,
-                ),
-              ),
-            ),
-            padding: const EdgeInsets.all(2), // Border width
-            child: Container(
-              // Top container - background color (smaller, creates border effect)
+    return PopScope(
+      canPop: canPop ?? true,
+      child: Dialog(
+        backgroundColor: Colors.transparent,
+        insetPadding: const EdgeInsets.symmetric(horizontal: AppSpacing.xLarge),
+        child: Stack(
+          children: [
+            // Bottom container - border gradient (larger)
+            Container(
               decoration: ShapeDecoration(
-                color: config.backgroundColor,
+                gradient: config.borderGradient,
                 shape: SmoothRectangleBorder(
                   borderRadius: SmoothBorderRadius(
-                    cornerRadius: AppRadius.xLarge - 2,
+                    cornerRadius: AppRadius.xLarge,
                     cornerSmoothing: AppRadius.smoothNormal,
                   ),
                 ),
               ),
-              padding: const EdgeInsets.all(AppSpacing.large),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  // Icon
-                  if (type != LargeDialogType.basic)
-                    SizedBox(
-                      width: 80,
-                      height: 80,
-                      child: Stack(
-                        alignment: Alignment.center,
-                        children: [
-                          SvgPicture.asset(config.svgIconPath!),
-                          SvgPicture.asset(
-                            type == LargeDialogType.positive
-                                ? 'assets/icons/check.svg'
-                                : 'assets/icons/x.svg',
-                            width: AppSizes.iconSizeXLarge,
-                            height: AppSizes.iconSizeXLarge,
-                            colorFilter: ColorFilter.mode(
-                              config.contentColor,
-                              BlendMode.srcIn,
-                            ),
-                          ),
-                        ],
-                      ),
+              padding: const EdgeInsets.all(2), // Border width
+              child: Container(
+                // Top container - background color (smaller, creates border effect)
+                decoration: ShapeDecoration(
+                  color: config.backgroundColor,
+                  shape: SmoothRectangleBorder(
+                    borderRadius: SmoothBorderRadius(
+                      cornerRadius: AppRadius.xLarge - 2,
+                      cornerSmoothing: AppRadius.smoothNormal,
                     ),
-                  const SizedBox(height: AppSpacing.large),
-
-                  // Title
-                  Text(
-                    title,
-                    style: AppTextTheme.titleMedium(
-                      context,
-                    ).copyWith(color: config.contentColor),
-                    textAlign: TextAlign.center,
                   ),
-                  const SizedBox(height: AppSpacing.small),
+                ),
+                padding: const EdgeInsets.all(AppSpacing.large),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    // Icon
+                    if (type != LargeDialogType.basic)
+                      SizedBox(
+                        width: 80,
+                        height: 80,
+                        child: Stack(
+                          alignment: Alignment.center,
+                          children: [
+                            SvgPicture.asset(config.svgIconPath!),
+                            SvgPicture.asset(
+                              type == LargeDialogType.positive
+                                  ? 'assets/icons/check.svg'
+                                  : 'assets/icons/x.svg',
+                              width: AppSizes.iconSizeXLarge,
+                              height: AppSizes.iconSizeXLarge,
+                              colorFilter: ColorFilter.mode(
+                                config.contentColor,
+                                BlendMode.srcIn,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    const SizedBox(height: AppSpacing.large),
 
-                  // Description
-                  Text(
-                    description,
-                    style: AppTextTheme.bodySmall(
-                      context,
-                    ).copyWith(color: config.contentColor),
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(height: AppSpacing.large),
-
-                  // Secondary button text (if exists)
-                  if (secondaryButtonText != null) ...[
-                    MainButton.text(
-                      text: secondaryButtonText!,
-                      onPressed: onSecondaryPressed,
-                      variant: config.buttonVariant,
+                    // Title
+                    Text(
+                      title,
+                      style: AppTextTheme.titleMedium(
+                        context,
+                      ).copyWith(color: config.contentColor),
+                      textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: AppSpacing.small),
-                  ],
 
-                  // Primary button
-                  MainButton.filled(
-                    text: primaryButtonText,
-                    onPressed: onPrimaryPressed,
-                    variant: config.buttonVariant,
-                  ),
-                ],
+                    // Description
+                    Text(
+                      description,
+                      style: AppTextTheme.bodySmall(
+                        context,
+                      ).copyWith(color: config.contentColor),
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: AppSpacing.large),
+
+                    // Secondary button text (if exists)
+                    if (secondaryButtonText != null) ...[
+                      MainButton.text(
+                        text: secondaryButtonText!,
+                        onPressed: onSecondaryPressed,
+                        variant: config.buttonVariant,
+                      ),
+                      const SizedBox(height: AppSpacing.small),
+                    ],
+
+                    // Primary button
+                    MainButton.filled(
+                      text: primaryButtonText,
+                      onPressed: onPrimaryPressed,
+                      variant: config.buttonVariant,
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+
+            if (canPop == true)
+              Positioned(
+                top: 16.0,
+                right: 16.0,
+                child: GestureDetector(
+                  onTap: () => Navigator.of(context).pop(),
+                  child: SvgPicture.asset(
+                    'assets/icons/x.svg',
+                    width: 24,
+                    height: 24,
+                    colorFilter: ColorFilter.mode(
+                      config.contentColor,
+                      BlendMode.srcIn,
+                    ),
+                  ),
+                ),
+              ),
+          ],
+        ),
       ),
     );
   }

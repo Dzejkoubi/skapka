@@ -138,7 +138,7 @@ class _MainButtonState extends State<MainButton> {
   }
 
   void _handleTap() {
-    if (widget.onPressed != null) {
+    if (_currentState != ButtonState.disabled && widget.onPressed != null) {
       widget.onPressed!();
     }
   }

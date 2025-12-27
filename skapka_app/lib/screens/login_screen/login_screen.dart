@@ -66,7 +66,7 @@ class _LoginScreenState extends State<LoginScreen> {
           email: _emailController.text,
           password: _passwordController.text,
         );
-        authProvider.login();
+        authProvider.signIn();
       } catch (e) {
         print(e.toString());
       }

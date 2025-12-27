@@ -2,19 +2,19 @@ import 'package:auto_route/auto_route.dart';
 import 'package:skapka_app/app/router/router.gr.dart';
 import 'package:skapka_app/services/auth_service.dart';
 
-class AuthGuard extends AutoRouteGuard {
+class AccountApprovalGuard extends AutoRouteGuard {
   @override
-  void onNavigation(NavigationResolver resolver, StackRouter router) {
+  void onNavigation(NavigationResolver resolver, StackRouter router) async {
     // Check if the user has an active session
     final authService = AuthService();
-    final session = authService.currentSession;
+    final isLoggedIn = await authService.isLoggedAccountConfirmed();
 
-    if (session != null) {
+    if (isLoggedIn == true) {
       // User is authenticated, proceed to the requested route
       resolver.next(true);
     } else {
-      // User is NOT authenticated, redirect to Welcome screen
-      resolver.redirectUntil(const WelcomeRoute());
+      // User is NOT approved, redirect to AccountNotApproved screen
+      resolver.redirectUntil(const AccountNotApprovedRoute());
     }
   }
 }

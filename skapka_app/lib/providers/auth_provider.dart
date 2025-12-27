@@ -5,12 +5,12 @@ class AuthProvider extends ChangeNotifier {
 
   bool get isLoggedIn => _isLoggedIn;
 
-  void login() {
+  void signIn() {
     _isLoggedIn = true;
     notifyListeners();
   }
 
-  void logout() {
+  void signOut() {
     _isLoggedIn = false;
     notifyListeners();
   }

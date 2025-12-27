@@ -36,7 +36,7 @@ class EventsScreen extends StatelessWidget {
               text: 'Example Button',
               onPressed: () async {
                 await authService.signOut();
-                authProvider.logout();
+                authProvider.signOut();
               },
             ),
           ],

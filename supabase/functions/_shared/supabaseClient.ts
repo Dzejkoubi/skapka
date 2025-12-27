@@ -2,7 +2,7 @@ import { createClient } from "npm:@supabase/supabase-js@2";
 
 export const getSupabaseClient = (req?: Request) => {
   const supabaseUrl = Deno.env.get("SUPABASE_URL") ?? "";
-  const supabaseAnonKey = Deno.env.get("SUPABASE_PUBLISHABLE_KEY") ?? "";
+  const supabaseAnonKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "";
 
   const options = req
     ? {
@@ -17,7 +17,7 @@ export const getSupabaseClient = (req?: Request) => {
 
 export const getSupabaseAdminClient = () => {
   const supabaseUrl = Deno.env.get("SUPABASE_URL") ?? "";
-  const supabaseServiceRoleKey = Deno.env.get("SUPABASE_SECRET_KEY") ??
+  const supabaseServiceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ??
     "";
 
   return createClient(supabaseUrl, supabaseServiceRoleKey);

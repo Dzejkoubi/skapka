@@ -19,7 +19,7 @@ Deno.serve(async (req) => {
 
     const { data, error } = await supabase.from("accounts").select(
       "is_approved",
-    ).eq("id", account_id).single();
+    ).eq("account_id", account_id).single();
 
     if (error) {
       return createErrorResponse(

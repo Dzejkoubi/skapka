@@ -53,6 +53,22 @@ class AuthService {
     await signOut();
   }
 
+  Future<bool> isLoggedAccountConfirmed() async {
+    if (currentUser != null) {
+      final userId = currentUser!.id;
+      final response = await _supabaseClient.functions.invoke(
+        'is_account_approved',
+        body: {'account_id': userId},
+      );
+      if (response.data != null && response.data is Map<String, dynamic>) {
+        return response.data['is_approved'] as bool;
+      } else {
+        return false;
+      }
+    }
+    return false;
+  }
+
   // Listen to auth state changes
   Stream<AuthState> get onAuthStateChange =>
       _supabaseClient.auth.onAuthStateChange;

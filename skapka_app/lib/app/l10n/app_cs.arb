@@ -18,7 +18,6 @@
     "login_screen_login_error_email_empty": "Nezapomněl/a si na email?",
     "login_screen_login_error_email_invalid": "Pozor, takhle přece nevypadá e-mail.",
     
-
     "register_screen_title": "Registrace",
     "register_screen_1_name_hint": "Jméno",
     "register_screen_1_surname_hint": "Příjmení",
@@ -38,8 +37,20 @@
     "account_not_approved_screen_title": "Účet ještě nebyl schválen",
     "account_not_approved_screen_text": "Administrátor musí tvůj účet nejdřív schválit, než se budeš moct přihlásit. Jakmile to udělá, přijde ti e-mail.",
     "account_not_approved_screen_notify_administrator_button_text": "Upozornit administrátora",
+    "account_not_approved_screen_notify_administrator_dialog_title": "Upozornit administrátora",
+    "account_not_approved_screen_notify_administrator_dialog_description": "Tento krok upozorní administrátora emailem. Lze poslat jednou za den.",
+    "account_not_approved_screen_notify_administrator_dialog_primary_button_text": "Poslat upozornění",
+    "account_not_approved_screen_notify_administrator_button_error_dialog": "Upozornění lze poslat jen jednou za 24 hodin. Zkus to později.",
+    
     "account_not_approved_screen_logout_button_text": "Odhlásit se",
+    "account_not_approved_screen_logout_dialog_title": "Odhlásit se",
+    "account_not_approved_screen_logout_dialog_description": "Opravdu se chceš odhlásit ze svého účtu?",
+    "account_not_approved_screen_logout_dialog_primary_button_text": "Odhlásit se",
+
     "account_not_approved_screen_delete_account_button_text": "Smazat účet",
+    "account_not_approved_screen_delete_account_dialog_title": "Smazat účet",
+    "account_not_approved_screen_delete_account_dialog_description": "Opravdu chceš smazat svůj účet? Tuto akci nelze vrátit zpět.",
+    "account_not_approved_screen_delete_account_dialog_primary_button_text": "Smazat účet",
 
     "events_screen_title": "Výpravy",
     "events_screen_no_events_text": "{username} aktuálně nemá žádnou aktivní výpravu.",
@@ -50,6 +61,9 @@
             }
         }
     },
-    "events_screen_fab_create_event_text": "Vytvořit"
+    "events_screen_fab_create_event_text": "Vytvořit",
 
+    "yes": "Ano",
+    "no": "Ne",
+    "cancel": "Zrušit"
 }

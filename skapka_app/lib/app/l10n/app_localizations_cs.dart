@@ -118,10 +118,53 @@ class AppLocalizationsCs extends AppLocalizations {
       'Upozornit administrátora';
 
   @override
+  String get account_not_approved_screen_notify_administrator_dialog_title =>
+      'Upozornit administrátora';
+
+  @override
+  String
+  get account_not_approved_screen_notify_administrator_dialog_description =>
+      'Tento krok upozorní administrátora emailem. Lze poslat jednou za den.';
+
+  @override
+  String
+  get account_not_approved_screen_notify_administrator_dialog_primary_button_text =>
+      'Poslat upozornění';
+
+  @override
+  String
+  get account_not_approved_screen_notify_administrator_button_error_dialog =>
+      'Upozornění lze poslat jen jednou za 24 hodin. Zkus to později.';
+
+  @override
   String get account_not_approved_screen_logout_button_text => 'Odhlásit se';
 
   @override
+  String get account_not_approved_screen_logout_dialog_title => 'Odhlásit se';
+
+  @override
+  String get account_not_approved_screen_logout_dialog_description =>
+      'Opravdu se chceš odhlásit ze svého účtu?';
+
+  @override
+  String get account_not_approved_screen_logout_dialog_primary_button_text =>
+      'Odhlásit se';
+
+  @override
   String get account_not_approved_screen_delete_account_button_text =>
+      'Smazat účet';
+
+  @override
+  String get account_not_approved_screen_delete_account_dialog_title =>
+      'Smazat účet';
+
+  @override
+  String get account_not_approved_screen_delete_account_dialog_description =>
+      'Opravdu chceš smazat svůj účet? Tuto akci nelze vrátit zpět.';
+
+  @override
+  String
+  get account_not_approved_screen_delete_account_dialog_primary_button_text =>
       'Smazat účet';
 
   @override
@@ -134,4 +177,13 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get events_screen_fab_create_event_text => 'Vytvořit';
+
+  @override
+  String get yes => 'Ano';
+
+  @override
+  String get no => 'Ne';
+
+  @override
+  String get cancel => 'Zrušit';
 }

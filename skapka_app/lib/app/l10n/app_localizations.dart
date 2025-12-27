@@ -296,17 +296,81 @@ abstract class AppLocalizations {
   /// **'Upozornit administrátora'**
   String get account_not_approved_screen_notify_administrator_button_text;
 
+  /// No description provided for @account_not_approved_screen_notify_administrator_dialog_title.
+  ///
+  /// In cs, this message translates to:
+  /// **'Upozornit administrátora'**
+  String get account_not_approved_screen_notify_administrator_dialog_title;
+
+  /// No description provided for @account_not_approved_screen_notify_administrator_dialog_description.
+  ///
+  /// In cs, this message translates to:
+  /// **'Tento krok upozorní administrátora emailem. Lze poslat jednou za den.'**
+  String
+  get account_not_approved_screen_notify_administrator_dialog_description;
+
+  /// No description provided for @account_not_approved_screen_notify_administrator_dialog_primary_button_text.
+  ///
+  /// In cs, this message translates to:
+  /// **'Poslat upozornění'**
+  String
+  get account_not_approved_screen_notify_administrator_dialog_primary_button_text;
+
+  /// No description provided for @account_not_approved_screen_notify_administrator_button_error_dialog.
+  ///
+  /// In cs, this message translates to:
+  /// **'Upozornění lze poslat jen jednou za 24 hodin. Zkus to později.'**
+  String
+  get account_not_approved_screen_notify_administrator_button_error_dialog;
+
   /// No description provided for @account_not_approved_screen_logout_button_text.
   ///
   /// In cs, this message translates to:
   /// **'Odhlásit se'**
   String get account_not_approved_screen_logout_button_text;
 
+  /// No description provided for @account_not_approved_screen_logout_dialog_title.
+  ///
+  /// In cs, this message translates to:
+  /// **'Odhlásit se'**
+  String get account_not_approved_screen_logout_dialog_title;
+
+  /// No description provided for @account_not_approved_screen_logout_dialog_description.
+  ///
+  /// In cs, this message translates to:
+  /// **'Opravdu se chceš odhlásit ze svého účtu?'**
+  String get account_not_approved_screen_logout_dialog_description;
+
+  /// No description provided for @account_not_approved_screen_logout_dialog_primary_button_text.
+  ///
+  /// In cs, this message translates to:
+  /// **'Odhlásit se'**
+  String get account_not_approved_screen_logout_dialog_primary_button_text;
+
   /// No description provided for @account_not_approved_screen_delete_account_button_text.
   ///
   /// In cs, this message translates to:
   /// **'Smazat účet'**
   String get account_not_approved_screen_delete_account_button_text;
+
+  /// No description provided for @account_not_approved_screen_delete_account_dialog_title.
+  ///
+  /// In cs, this message translates to:
+  /// **'Smazat účet'**
+  String get account_not_approved_screen_delete_account_dialog_title;
+
+  /// No description provided for @account_not_approved_screen_delete_account_dialog_description.
+  ///
+  /// In cs, this message translates to:
+  /// **'Opravdu chceš smazat svůj účet? Tuto akci nelze vrátit zpět.'**
+  String get account_not_approved_screen_delete_account_dialog_description;
+
+  /// No description provided for @account_not_approved_screen_delete_account_dialog_primary_button_text.
+  ///
+  /// In cs, this message translates to:
+  /// **'Smazat účet'**
+  String
+  get account_not_approved_screen_delete_account_dialog_primary_button_text;
 
   /// No description provided for @events_screen_title.
   ///
@@ -325,6 +389,24 @@ abstract class AppLocalizations {
   /// In cs, this message translates to:
   /// **'Vytvořit'**
   String get events_screen_fab_create_event_text;
+
+  /// No description provided for @yes.
+  ///
+  /// In cs, this message translates to:
+  /// **'Ano'**
+  String get yes;
+
+  /// No description provided for @no.
+  ///
+  /// In cs, this message translates to:
+  /// **'Ne'**
+  String get no;
+
+  /// No description provided for @cancel.
+  ///
+  /// In cs, this message translates to:
+  /// **'Zrušit'**
+  String get cancel;
 }
 
 class _AppLocalizationsDelegate

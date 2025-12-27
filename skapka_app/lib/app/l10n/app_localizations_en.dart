@@ -114,17 +114,60 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get account_not_approved_screen_text =>
-      'An administrator must approve your account before you can log in. Once they do, you will receive an email.';
+      'n administrator must approve your account before you can log in. Once they do, you will receive an email.';
 
   @override
   String get account_not_approved_screen_notify_administrator_button_text =>
       'Notify administrator';
 
   @override
+  String get account_not_approved_screen_notify_administrator_dialog_title =>
+      'Notify administrator';
+
+  @override
+  String
+  get account_not_approved_screen_notify_administrator_dialog_description =>
+      'This step will notify the administrator by email. It can be sent once a day.';
+
+  @override
+  String
+  get account_not_approved_screen_notify_administrator_dialog_primary_button_text =>
+      'Send notification';
+
+  @override
+  String
+  get account_not_approved_screen_notify_administrator_button_error_dialog =>
+      'Notifications can only be sent once every 24 hours. Please try again later.';
+
+  @override
   String get account_not_approved_screen_logout_button_text => 'Log out';
 
   @override
+  String get account_not_approved_screen_logout_dialog_title => 'Log out';
+
+  @override
+  String get account_not_approved_screen_logout_dialog_description =>
+      'Are you sure you want to log out of your account?';
+
+  @override
+  String get account_not_approved_screen_logout_dialog_primary_button_text =>
+      'Log out';
+
+  @override
   String get account_not_approved_screen_delete_account_button_text =>
+      'Delete account';
+
+  @override
+  String get account_not_approved_screen_delete_account_dialog_title =>
+      'Delete account';
+
+  @override
+  String get account_not_approved_screen_delete_account_dialog_description =>
+      'Are you sure you want to delete your account? This action cannot be undone.';
+
+  @override
+  String
+  get account_not_approved_screen_delete_account_dialog_primary_button_text =>
       'Delete account';
 
   @override
@@ -137,4 +180,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get events_screen_fab_create_event_text => 'Create';
+
+  @override
+  String get yes => 'Yes';
+
+  @override
+  String get no => 'No';
+
+  @override
+  String get cancel => 'Cancel';
 }

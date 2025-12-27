@@ -72,10 +72,15 @@ class AccountNotApprovedScreen extends StatelessWidget {
                               context: context,
                               builder: (_) => LargeDialog(
                                 type: LargeDialogType.basic,
-                                title: 'Upozornit administrátora',
-                                description:
-                                    "Tento krok upozorní administrátora emailem. Lze poslat jednou za den.",
-                                primaryButtonText: 'Poslat upozornění',
+                                title: AppLocalizations.of(
+                                  context,
+                                )!.account_not_approved_screen_notify_administrator_dialog_title,
+                                description: AppLocalizations.of(
+                                  context,
+                                )!.account_not_approved_screen_notify_administrator_dialog_description,
+                                primaryButtonText: AppLocalizations.of(
+                                  context,
+                                )!.account_not_approved_screen_notify_administrator_dialog_primary_button_text,
                                 onPrimaryPressed: () {
                                   print('Notify administrator button pressed');
                                 },
@@ -95,8 +100,9 @@ class AccountNotApprovedScreen extends StatelessWidget {
                             BottomDialog.show(
                               context,
                               type: BottomDialogType.negative,
-                              description:
-                                  'Upozornění lze poslat jen jednou za 24 hodin.',
+                              description: AppLocalizations.of(
+                                context,
+                              )!.account_not_approved_screen_notify_administrator_button_error_dialog,
                             );
                           },
                           text: AppLocalizations.of(
@@ -116,14 +122,21 @@ class AccountNotApprovedScreen extends StatelessWidget {
                         context: context,
                         builder: (_) => LargeDialog(
                           type: LargeDialogType.negative,
-                          title: 'Odhlásit se',
-                          description:
-                              "Opravdu se chceš odhlásit ze svého účtu?",
-                          primaryButtonText: 'Odhlásit se',
+                          title: AppLocalizations.of(
+                            context,
+                          )!.account_not_approved_screen_logout_dialog_title,
+                          description: AppLocalizations.of(
+                            context,
+                          )!.account_not_approved_screen_logout_dialog_description,
+                          primaryButtonText: AppLocalizations.of(
+                            context,
+                          )!.account_not_approved_screen_logout_dialog_primary_button_text,
                           onPrimaryPressed: () {
                             print('Log out button pressed');
                           },
-                          secondaryButtonText: 'Zrušit',
+                          secondaryButtonText: AppLocalizations.of(
+                            context,
+                          )!.cancel,
                           onSecondaryPressed: () {
                             Navigator.of(context).pop();
                           },
@@ -149,14 +162,21 @@ class AccountNotApprovedScreen extends StatelessWidget {
                         context: context,
                         builder: (_) => LargeDialog(
                           type: LargeDialogType.negative,
-                          title: 'Smazat účet',
-                          description:
-                              "Opravdu se chceš smazat svůj účet? Tuto akci nelze vrátit zpět.",
-                          primaryButtonText: 'Smazat účet',
+                          title: AppLocalizations.of(
+                            context,
+                          )!.account_not_approved_screen_delete_account_dialog_title,
+                          description: AppLocalizations.of(
+                            context,
+                          )!.account_not_approved_screen_delete_account_dialog_description,
+                          primaryButtonText: AppLocalizations.of(
+                            context,
+                          )!.account_not_approved_screen_delete_account_dialog_primary_button_text,
                           onPrimaryPressed: () {
                             print('Delete account button pressed');
                           },
-                          secondaryButtonText: 'Zrušit',
+                          secondaryButtonText: AppLocalizations.of(
+                            context,
+                          )!.cancel,
                           onSecondaryPressed: () {
                             Navigator.of(context).pop();
                           },

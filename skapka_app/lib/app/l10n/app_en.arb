@@ -35,10 +35,22 @@
     "register_screen_2_error_passwords_do_not_match": "Passwords do not match.",
 
     "account_not_approved_screen_title": "Account not yet approved",
-    "account_not_approved_screen_text": "An administrator must approve your account before you can log in. Once they do, you will receive an email.",
+    "account_not_approved_screen_text": "n administrator must approve your account before you can log in. Once they do, you will receive an email.",
     "account_not_approved_screen_notify_administrator_button_text": "Notify administrator",
+    "account_not_approved_screen_notify_administrator_dialog_title": "Notify administrator",
+    "account_not_approved_screen_notify_administrator_dialog_description": "This step will notify the administrator by email. It can be sent once a day.",
+    "account_not_approved_screen_notify_administrator_dialog_primary_button_text": "Send notification",
+    "account_not_approved_screen_notify_administrator_button_error_dialog": "Notifications can only be sent once every 24 hours. Please try again later.",
+    
     "account_not_approved_screen_logout_button_text": "Log out",
+    "account_not_approved_screen_logout_dialog_title": "Log out",
+    "account_not_approved_screen_logout_dialog_description": "Are you sure you want to log out of your account?",
+    "account_not_approved_screen_logout_dialog_primary_button_text": "Log out",
+
     "account_not_approved_screen_delete_account_button_text": "Delete account",
+    "account_not_approved_screen_delete_account_dialog_title": "Delete account",
+    "account_not_approved_screen_delete_account_dialog_description": "Are you sure you want to delete your account? This action cannot be undone.",
+    "account_not_approved_screen_delete_account_dialog_primary_button_text": "Delete account",
 
     "events_screen_title": "Events",
     "events_screen_no_events_text": "{username} currently has no active events.",
@@ -49,6 +61,9 @@
             }
         }
     },
-    "events_screen_fab_create_event_text": "Create"
+    "events_screen_fab_create_event_text": "Create",
 
+    "yes": "Yes",
+    "no": "No",
+    "cancel": "Cancel"
 }

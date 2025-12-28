@@ -51,6 +51,10 @@ class AppLocalizationsEn extends AppLocalizations {
       'Invalid login credentials.';
 
   @override
+  String get login_screen_login_error_email_not_confirmed =>
+      'Email address is not confirmed. Please check your inbox.';
+
+  @override
   String get login_screen_login_error_email_empty =>
       'Did you forget your email?';
 

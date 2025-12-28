@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:skapka_app/app/l10n/app_localizations.dart';
@@ -79,19 +80,34 @@ class _LoginScreenState extends State<LoginScreen> {
         }
       } on AuthException catch (e) {
         if (mounted) {
+          if (kDebugMode) {
+            print('AuthException during login: ${e.toString()}');
+          }
+
+          String errorMessage;
+          if (e.code == 'invalid_login_credentials') {
+            errorMessage = AppLocalizations.of(
+              context,
+            )!.login_screen_login_error_invalid_credentials;
+          } else if (e.code == 'email_not_confirmed') {
+            errorMessage = AppLocalizations.of(
+              context,
+            )!.login_screen_login_error_email_not_confirmed;
+          } else {
+            errorMessage = AppLocalizations.of(
+              context,
+            )!.login_screen_login_error_generic;
+          }
           BottomDialog.show(
             context,
             type: BottomDialogType.negative,
-            description: e.message.contains('Invalid login credentials')
-                ? AppLocalizations.of(
-                    context,
-                  )!.login_screen_login_error_invalid_credentials
-                : AppLocalizations.of(
-                    context,
-                  )!.login_screen_login_error_generic,
+            description: errorMessage,
           );
         }
       } catch (e) {
+        if (kDebugMode) {
+          print('Unexpected error during login: $e');
+        }
         if (mounted) {
           BottomDialog.show(
             context,

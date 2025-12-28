@@ -176,6 +176,12 @@ abstract class AppLocalizations {
   /// **'Neplatné přihlašovací údaje.'**
   String get login_screen_login_error_invalid_credentials;
 
+  /// No description provided for @login_screen_login_error_email_not_confirmed.
+  ///
+  /// In cs, this message translates to:
+  /// **'E-mailová adresa není potvrzena. Zkontroluj prosím svou schránku.'**
+  String get login_screen_login_error_email_not_confirmed;
+
   /// No description provided for @login_screen_login_error_email_empty.
   ///
   /// In cs, this message translates to:

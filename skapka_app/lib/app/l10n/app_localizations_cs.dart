@@ -50,6 +50,10 @@ class AppLocalizationsCs extends AppLocalizations {
       'Neplatné přihlašovací údaje.';
 
   @override
+  String get login_screen_login_error_email_not_confirmed =>
+      'E-mailová adresa není potvrzena. Zkontroluj prosím svou schránku.';
+
+  @override
   String get login_screen_login_error_email_empty =>
       'Nezapomněl/a si na email?';
 

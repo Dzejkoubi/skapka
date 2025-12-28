@@ -15,6 +15,7 @@
     "login_screen_login_error_password_empty": "Nezapomeň na heslo.",
     "login_screen_login_error_password_too_short": "Heslo musí mít alespoň 8 znaků.",
     "login_screen_login_error_invalid_credentials": "Neplatné přihlašovací údaje.",
+    "login_screen_login_error_email_not_confirmed": "E-mailová adresa není potvrzena. Zkontroluj prosím svou schránku.",
     "login_screen_login_error_email_empty": "Nezapomněl/a si na email?",
     "login_screen_login_error_email_invalid": "Pozor, takhle přece nevypadá e-mail.",
     "login_screen_login_success": "Přihlášení proběhlo úspěšně!",

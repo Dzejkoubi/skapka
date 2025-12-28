@@ -24,13 +24,28 @@ class AuthService {
   Future<AuthResponse> signUp({
     required String email,
     required String password,
-    Map<String, dynamic>? data,
   }) async {
-    return await _supabaseClient.auth.signUp(
-      email: email,
-      password: password,
-      data: data,
-    );
+    return await _supabaseClient.auth.signUp(email: email, password: password);
+  }
+
+  Future<PostgrestMap> editAccountDetails({
+    required String accountId,
+    required String name,
+    required String surname,
+    required String groupId,
+    bool isApproved = false,
+  }) async {
+    return await _supabaseClient
+        .from('accounts')
+        .insert({
+          'name': name,
+          'surname': surname,
+          'group_id': groupId,
+          'is_approved': isApproved,
+        })
+        .eq('account_id', accountId)
+        .select()
+        .single();
   }
 
   // Sign Out

@@ -10,6 +10,7 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i11;
+import 'package:flutter/material.dart' as _i12;
 import 'package:skapka_app/screens/account_not_approved_screen/account_not_approved_screen.dart'
     as _i1;
 import 'package:skapka_app/screens/auth_gate/auth_gate.dart' as _i2;
@@ -141,18 +142,74 @@ class RegisterRouteFirst extends _i11.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i8.RegisterScreenSecond]
-class RegisterRouteSecond extends _i11.PageRouteInfo<void> {
-  const RegisterRouteSecond({List<_i11.PageRouteInfo>? children})
-    : super(RegisterRouteSecond.name, initialChildren: children);
+class RegisterRouteSecond extends _i11.PageRouteInfo<RegisterRouteSecondArgs> {
+  RegisterRouteSecond({
+    _i12.Key? key,
+    required String email,
+    required String name,
+    required String surname,
+    List<_i11.PageRouteInfo>? children,
+  }) : super(
+         RegisterRouteSecond.name,
+         args: RegisterRouteSecondArgs(
+           key: key,
+           email: email,
+           name: name,
+           surname: surname,
+         ),
+         initialChildren: children,
+       );
 
   static const String name = 'RegisterRouteSecond';
 
   static _i11.PageInfo page = _i11.PageInfo(
     name,
     builder: (data) {
-      return const _i8.RegisterScreenSecond();
+      final args = data.argsAs<RegisterRouteSecondArgs>();
+      return _i8.RegisterScreenSecond(
+        key: args.key,
+        email: args.email,
+        name: args.name,
+        surname: args.surname,
+      );
     },
   );
+}
+
+class RegisterRouteSecondArgs {
+  const RegisterRouteSecondArgs({
+    this.key,
+    required this.email,
+    required this.name,
+    required this.surname,
+  });
+
+  final _i12.Key? key;
+
+  final String email;
+
+  final String name;
+
+  final String surname;
+
+  @override
+  String toString() {
+    return 'RegisterRouteSecondArgs{key: $key, email: $email, name: $name, surname: $surname}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! RegisterRouteSecondArgs) return false;
+    return key == other.key &&
+        email == other.email &&
+        name == other.name &&
+        surname == other.surname;
+  }
+
+  @override
+  int get hashCode =>
+      key.hashCode ^ email.hashCode ^ name.hashCode ^ surname.hashCode;
 }
 
 /// generated route for

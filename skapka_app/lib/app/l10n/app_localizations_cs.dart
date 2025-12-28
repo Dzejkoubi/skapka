@@ -114,6 +114,18 @@ class AppLocalizationsCs extends AppLocalizations {
       'Hesla se neshodují.';
 
   @override
+  String get register_screen_2_registration_success =>
+      'Registrace proběhla úspěšně!';
+
+  @override
+  String get register_screen_2_registration_error_email_used =>
+      'Tento e-mail je již použit. Zkus se přihlásit nebo použij jiný e-mail.';
+
+  @override
+  String get register_screen_2_registration_error_generic =>
+      'Registrace se nezdařila. Zkus to prosím znovu.';
+
+  @override
   String get account_not_approved_screen_title => 'Účet ještě nebyl schválen';
 
   @override

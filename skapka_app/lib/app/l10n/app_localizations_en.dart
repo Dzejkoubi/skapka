@@ -117,11 +117,23 @@ class AppLocalizationsEn extends AppLocalizations {
       'Passwords do not match.';
 
   @override
+  String get register_screen_2_registration_success =>
+      'Registration successful!';
+
+  @override
+  String get register_screen_2_registration_error_email_used =>
+      'This email is already in use. Try logging in or use a different email.';
+
+  @override
+  String get register_screen_2_registration_error_generic =>
+      'Registration failed. Please try again.';
+
+  @override
   String get account_not_approved_screen_title => 'Account not yet approved';
 
   @override
   String get account_not_approved_screen_text =>
-      'n administrator must approve your account before you can log in. Once they do, you will receive an email.';
+      'An administrator must approve your account before you can log in. Once they do, you will receive an email.';
 
   @override
   String get account_not_approved_screen_notify_administrator_button_text =>

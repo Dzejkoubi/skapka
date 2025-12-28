@@ -114,7 +114,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return PopScope(
-      canPop: _isLoading ? false : true, // Disable back navigation when loading
+      canPop: !_isLoading, // Disable back navigation when loading
       child: Scaffold(
         backgroundColor: context.colors.primary.light,
         body: ScrollableOnKeyboardScreenWrapper(

@@ -290,6 +290,24 @@ abstract class AppLocalizations {
   /// **'Hesla se neshodují.'**
   String get register_screen_2_error_passwords_do_not_match;
 
+  /// No description provided for @register_screen_2_registration_success.
+  ///
+  /// In cs, this message translates to:
+  /// **'Registrace proběhla úspěšně!'**
+  String get register_screen_2_registration_success;
+
+  /// No description provided for @register_screen_2_registration_error_email_used.
+  ///
+  /// In cs, this message translates to:
+  /// **'Tento e-mail je již použit. Zkus se přihlásit nebo použij jiný e-mail.'**
+  String get register_screen_2_registration_error_email_used;
+
+  /// No description provided for @register_screen_2_registration_error_generic.
+  ///
+  /// In cs, this message translates to:
+  /// **'Registrace se nezdařila. Zkus to prosím znovu.'**
+  String get register_screen_2_registration_error_generic;
+
   /// No description provided for @account_not_approved_screen_title.
   ///
   /// In cs, this message translates to:

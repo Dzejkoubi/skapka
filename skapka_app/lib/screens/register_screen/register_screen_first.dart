@@ -1,14 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:provider/provider.dart';
 import 'package:skapka_app/app/l10n/app_localizations.dart';
 import 'package:skapka_app/app/router/router.gr.dart';
 import 'package:skapka_app/app/theme/app_color_theme.dart';
 import 'package:skapka_app/app/theme/app_spacing.dart';
 import 'package:skapka_app/app/theme/app_text_theme.dart';
 import 'package:skapka_app/app/theme/main_button_theme.dart';
-import 'package:skapka_app/providers/register_provider.dart';
 import 'package:skapka_app/utils/email_format_validator.dart';
 import 'package:skapka_app/utils/name_validator.dart';
 import 'package:skapka_app/widgets/appbar/appbar.dart';
@@ -45,12 +43,13 @@ class _RegisterScreenFirstState extends State<RegisterScreenFirst> {
     });
 
     if (_nameError == null && _surnameError == null && _emailError == null) {
-      final RegisterProvider registerProvider = context
-          .read<RegisterProvider>();
-      registerProvider.updateName(_nameController.text);
-      registerProvider.updateSurname(_surnameController.text);
-      registerProvider.updateEmail(_emailController.text);
-      context.router.push(const RegisterRouteSecond());
+      context.router.push(
+        RegisterRouteSecond(
+          email: _emailController.text,
+          name: _nameController.text,
+          surname: _surnameController.text,
+        ),
+      );
     }
   }
 

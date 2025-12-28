@@ -1,13 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:provider/provider.dart';
 import 'package:skapka_app/app/l10n/app_localizations.dart';
+import 'package:skapka_app/app/router/router.gr.dart';
 import 'package:skapka_app/app/theme/app_color_theme.dart';
 import 'package:skapka_app/app/theme/app_spacing.dart';
 import 'package:skapka_app/app/theme/app_text_theme.dart';
 import 'package:skapka_app/app/theme/main_button_theme.dart';
-import 'package:skapka_app/providers/auth_provider.dart';
 import 'package:skapka_app/services/auth_service.dart';
 import 'package:skapka_app/utils/email_format_validator.dart';
 import 'package:skapka_app/utils/password_validator.dart';
@@ -34,7 +33,6 @@ class _LoginScreenState extends State<LoginScreen> {
   bool _isLoading = false;
 
   AuthService authService = AuthService();
-  late final AuthProvider authProvider = context.read<AuthProvider>();
 
   @override
   void initState() {
@@ -64,11 +62,11 @@ class _LoginScreenState extends State<LoginScreen> {
         _isLoading = true;
       });
       try {
+        // First, try to sign in the user
         await authService.signIn(
           email: _emailController.text,
           password: _passwordController.text,
         );
-
         if (mounted) {
           BottomDialog.show(
             context,
@@ -77,9 +75,8 @@ class _LoginScreenState extends State<LoginScreen> {
               context,
             )!.login_screen_login_success,
           );
+          context.router.replaceAll([const AuthGate()]);
         }
-
-        authProvider.signIn();
       } on AuthException catch (e) {
         if (mounted) {
           BottomDialog.show(

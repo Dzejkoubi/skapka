@@ -3,11 +3,11 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:skapka_app/app/l10n/app_localizations.dart';
+import 'package:skapka_app/app/router/router.gr.dart';
 import 'package:skapka_app/app/theme/app_color_theme.dart';
 import 'package:skapka_app/app/theme/app_spacing.dart';
 import 'package:skapka_app/app/theme/app_text_theme.dart';
 import 'package:skapka_app/app/theme/main_button_theme.dart';
-import 'package:skapka_app/providers/auth_provider.dart';
 import 'package:skapka_app/services/auth_service.dart';
 import 'package:skapka_app/widgets/buttons/main_button.dart';
 import 'package:skapka_app/widgets/dialogs/bottom_dialog.dart';
@@ -22,7 +22,6 @@ class AccountNotApprovedScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     const notifyAdministratorButtonEnabled = false;
     AuthService authService = AuthService();
-    AuthProvider authProvider = context.read<AuthProvider>();
 
     return Scaffold(
       backgroundColor: context.colors.primary.light,
@@ -112,9 +111,10 @@ class AccountNotApprovedScreen extends StatelessWidget {
                                   context,
                                 )!.account_not_approved_screen_logout_success,
                               );
-                              Navigator.of(context).pop();
+                              context.router.replaceAll([
+                                const WelcomeRoute(),
+                              ]); // Navigate to Welcome after logout
                             }
-                            authProvider.signOut();
                           } catch (e) {
                             if (context.mounted) {
                               BottomDialog.show(
@@ -175,9 +175,10 @@ class AccountNotApprovedScreen extends StatelessWidget {
                                   context,
                                 )!.account_not_approved_screen_delete_success,
                               );
-                              Navigator.of(context).pop();
+                              context.router.replaceAll([
+                                const WelcomeRoute(),
+                              ]); // Navigate to Welcome after deletion
                             }
-                            authProvider.signOut();
                           } catch (e) {
                             if (context.mounted) {
                               BottomDialog.show(

@@ -53,7 +53,7 @@ class AuthService {
     await signOut();
   }
 
-  Future<bool> isLoggedAccountConfirmed() async {
+  Future<bool> isLoggedAccountApproved() async {
     if (currentUser != null) {
       final userId = currentUser!.id;
       final response = await _supabaseClient.functions.invoke(

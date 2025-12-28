@@ -498,6 +498,24 @@ abstract class AppLocalizations {
   /// **'Vytvořit'**
   String get events_screen_fab_create_event_text;
 
+  /// No description provided for @settings_screen_title.
+  ///
+  /// In cs, this message translates to:
+  /// **'Nastavení'**
+  String get settings_screen_title;
+
+  /// No description provided for @settings_screen_change_signout_button_text.
+  ///
+  /// In cs, this message translates to:
+  /// **'Odhlásit se'**
+  String get settings_screen_change_signout_button_text;
+
+  /// No description provided for @settings_screen_change_delete_account_button_text.
+  ///
+  /// In cs, this message translates to:
+  /// **'Smazat účet'**
+  String get settings_screen_change_delete_account_button_text;
+
   /// No description provided for @yes.
   ///
   /// In cs, this message translates to:

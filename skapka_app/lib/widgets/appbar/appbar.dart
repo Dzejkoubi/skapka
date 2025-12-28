@@ -1,5 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:skapka_app/app/router/router.gr.dart';
 import 'package:skapka_app/app/theme/app_color_theme.dart';
 import 'package:skapka_app/app/theme/app_sizes.dart';
 import 'package:skapka_app/app/theme/app_spacing.dart';
@@ -70,7 +72,7 @@ class Appbar extends StatelessWidget implements PreferredSizeWidget {
               if (showSettingsIcon)
                 GestureDetector(
                   onTap: () {
-                    // Navigate to settings screen TODO
+                    context.router.push(const SettingsRoute());
                   },
                   child: SvgPicture.asset(
                     'assets/icons/settings.svg',

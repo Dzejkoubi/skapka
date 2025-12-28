@@ -9,8 +9,8 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:auto_route/auto_route.dart' as _i15;
-import 'package:flutter/foundation.dart' as _i16;
+import 'package:auto_route/auto_route.dart' as _i16;
+import 'package:flutter/foundation.dart' as _i17;
 import 'package:skapka_app/screens/account_not_approved_screen/account_not_approved_screen.dart'
     as _i1;
 import 'package:skapka_app/screens/auth_gate/auth_gate.dart' as _i2;
@@ -27,23 +27,25 @@ import 'package:skapka_app/screens/register_screen/register_screen_first.dart'
     as _i11;
 import 'package:skapka_app/screens/register_screen/register_screen_second.dart'
     as _i12;
+import 'package:skapka_app/screens/settings_screen/settings_screen.dart'
+    as _i13;
 import 'package:skapka_app/screens/theme_showcase_screens/button_theme_showcase.dart'
     as _i3;
 import 'package:skapka_app/screens/theme_showcase_screens/large_dialog_showcase.dart'
     as _i8;
 import 'package:skapka_app/screens/theme_showcase_screens/squircle_showcase.dart'
-    as _i13;
-import 'package:skapka_app/screens/welcome_screen/welcome_screen.dart' as _i14;
+    as _i14;
+import 'package:skapka_app/screens/welcome_screen/welcome_screen.dart' as _i15;
 
 /// generated route for
 /// [_i1.AccountNotApprovedScreen]
-class AccountNotApprovedRoute extends _i15.PageRouteInfo<void> {
-  const AccountNotApprovedRoute({List<_i15.PageRouteInfo>? children})
+class AccountNotApprovedRoute extends _i16.PageRouteInfo<void> {
+  const AccountNotApprovedRoute({List<_i16.PageRouteInfo>? children})
     : super(AccountNotApprovedRoute.name, initialChildren: children);
 
   static const String name = 'AccountNotApprovedRoute';
 
-  static _i15.PageInfo page = _i15.PageInfo(
+  static _i16.PageInfo page = _i16.PageInfo(
     name,
     builder: (data) {
       return const _i1.AccountNotApprovedScreen();
@@ -53,13 +55,13 @@ class AccountNotApprovedRoute extends _i15.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i2.AuthGate]
-class AuthGate extends _i15.PageRouteInfo<void> {
-  const AuthGate({List<_i15.PageRouteInfo>? children})
+class AuthGate extends _i16.PageRouteInfo<void> {
+  const AuthGate({List<_i16.PageRouteInfo>? children})
     : super(AuthGate.name, initialChildren: children);
 
   static const String name = 'AuthGate';
 
-  static _i15.PageInfo page = _i15.PageInfo(
+  static _i16.PageInfo page = _i16.PageInfo(
     name,
     builder: (data) {
       return const _i2.AuthGate();
@@ -69,13 +71,13 @@ class AuthGate extends _i15.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i3.ButtonThemeShowcaseScreen]
-class ButtonThemeShowcaseRoute extends _i15.PageRouteInfo<void> {
-  const ButtonThemeShowcaseRoute({List<_i15.PageRouteInfo>? children})
+class ButtonThemeShowcaseRoute extends _i16.PageRouteInfo<void> {
+  const ButtonThemeShowcaseRoute({List<_i16.PageRouteInfo>? children})
     : super(ButtonThemeShowcaseRoute.name, initialChildren: children);
 
   static const String name = 'ButtonThemeShowcaseRoute';
 
-  static _i15.PageInfo page = _i15.PageInfo(
+  static _i16.PageInfo page = _i16.PageInfo(
     name,
     builder: (data) {
       return const _i3.ButtonThemeShowcaseScreen();
@@ -85,13 +87,13 @@ class ButtonThemeShowcaseRoute extends _i15.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i4.CalendarScreen]
-class CalendarRoute extends _i15.PageRouteInfo<void> {
-  const CalendarRoute({List<_i15.PageRouteInfo>? children})
+class CalendarRoute extends _i16.PageRouteInfo<void> {
+  const CalendarRoute({List<_i16.PageRouteInfo>? children})
     : super(CalendarRoute.name, initialChildren: children);
 
   static const String name = 'CalendarRoute';
 
-  static _i15.PageInfo page = _i15.PageInfo(
+  static _i16.PageInfo page = _i16.PageInfo(
     name,
     builder: (data) {
       return const _i4.CalendarScreen();
@@ -101,13 +103,13 @@ class CalendarRoute extends _i15.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i5.DependentsScreen]
-class DependentsRoute extends _i15.PageRouteInfo<void> {
-  const DependentsRoute({List<_i15.PageRouteInfo>? children})
+class DependentsRoute extends _i16.PageRouteInfo<void> {
+  const DependentsRoute({List<_i16.PageRouteInfo>? children})
     : super(DependentsRoute.name, initialChildren: children);
 
   static const String name = 'DependentsRoute';
 
-  static _i15.PageInfo page = _i15.PageInfo(
+  static _i16.PageInfo page = _i16.PageInfo(
     name,
     builder: (data) {
       return const _i5.DependentsScreen();
@@ -117,13 +119,13 @@ class DependentsRoute extends _i15.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i6.EventsScreen]
-class EventsRoute extends _i15.PageRouteInfo<void> {
-  const EventsRoute({List<_i15.PageRouteInfo>? children})
+class EventsRoute extends _i16.PageRouteInfo<void> {
+  const EventsRoute({List<_i16.PageRouteInfo>? children})
     : super(EventsRoute.name, initialChildren: children);
 
   static const String name = 'EventsRoute';
 
-  static _i15.PageInfo page = _i15.PageInfo(
+  static _i16.PageInfo page = _i16.PageInfo(
     name,
     builder: (data) {
       return const _i6.EventsScreen();
@@ -133,13 +135,13 @@ class EventsRoute extends _i15.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i7.InformationScreen]
-class InformationRoute extends _i15.PageRouteInfo<void> {
-  const InformationRoute({List<_i15.PageRouteInfo>? children})
+class InformationRoute extends _i16.PageRouteInfo<void> {
+  const InformationRoute({List<_i16.PageRouteInfo>? children})
     : super(InformationRoute.name, initialChildren: children);
 
   static const String name = 'InformationRoute';
 
-  static _i15.PageInfo page = _i15.PageInfo(
+  static _i16.PageInfo page = _i16.PageInfo(
     name,
     builder: (data) {
       return const _i7.InformationScreen();
@@ -149,13 +151,13 @@ class InformationRoute extends _i15.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i8.LargeDialogShowcaseScreen]
-class LargeDialogShowcaseRoute extends _i15.PageRouteInfo<void> {
-  const LargeDialogShowcaseRoute({List<_i15.PageRouteInfo>? children})
+class LargeDialogShowcaseRoute extends _i16.PageRouteInfo<void> {
+  const LargeDialogShowcaseRoute({List<_i16.PageRouteInfo>? children})
     : super(LargeDialogShowcaseRoute.name, initialChildren: children);
 
   static const String name = 'LargeDialogShowcaseRoute';
 
-  static _i15.PageInfo page = _i15.PageInfo(
+  static _i16.PageInfo page = _i16.PageInfo(
     name,
     builder: (data) {
       return const _i8.LargeDialogShowcaseScreen();
@@ -165,13 +167,13 @@ class LargeDialogShowcaseRoute extends _i15.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i9.LoginScreen]
-class LoginRoute extends _i15.PageRouteInfo<void> {
-  const LoginRoute({List<_i15.PageRouteInfo>? children})
+class LoginRoute extends _i16.PageRouteInfo<void> {
+  const LoginRoute({List<_i16.PageRouteInfo>? children})
     : super(LoginRoute.name, initialChildren: children);
 
   static const String name = 'LoginRoute';
 
-  static _i15.PageInfo page = _i15.PageInfo(
+  static _i16.PageInfo page = _i16.PageInfo(
     name,
     builder: (data) {
       return const _i9.LoginScreen();
@@ -181,13 +183,13 @@ class LoginRoute extends _i15.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i10.NavbarDashboard]
-class NavbarDashboard extends _i15.PageRouteInfo<void> {
-  const NavbarDashboard({List<_i15.PageRouteInfo>? children})
+class NavbarDashboard extends _i16.PageRouteInfo<void> {
+  const NavbarDashboard({List<_i16.PageRouteInfo>? children})
     : super(NavbarDashboard.name, initialChildren: children);
 
   static const String name = 'NavbarDashboard';
 
-  static _i15.PageInfo page = _i15.PageInfo(
+  static _i16.PageInfo page = _i16.PageInfo(
     name,
     builder: (data) {
       return const _i10.NavbarDashboard();
@@ -197,13 +199,13 @@ class NavbarDashboard extends _i15.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i11.RegisterScreenFirst]
-class RegisterRouteFirst extends _i15.PageRouteInfo<void> {
-  const RegisterRouteFirst({List<_i15.PageRouteInfo>? children})
+class RegisterRouteFirst extends _i16.PageRouteInfo<void> {
+  const RegisterRouteFirst({List<_i16.PageRouteInfo>? children})
     : super(RegisterRouteFirst.name, initialChildren: children);
 
   static const String name = 'RegisterRouteFirst';
 
-  static _i15.PageInfo page = _i15.PageInfo(
+  static _i16.PageInfo page = _i16.PageInfo(
     name,
     builder: (data) {
       return const _i11.RegisterScreenFirst();
@@ -213,13 +215,13 @@ class RegisterRouteFirst extends _i15.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i12.RegisterScreenSecond]
-class RegisterRouteSecond extends _i15.PageRouteInfo<RegisterRouteSecondArgs> {
+class RegisterRouteSecond extends _i16.PageRouteInfo<RegisterRouteSecondArgs> {
   RegisterRouteSecond({
-    _i16.Key? key,
+    _i17.Key? key,
     required String email,
     required String name,
     required String surname,
-    List<_i15.PageRouteInfo>? children,
+    List<_i16.PageRouteInfo>? children,
   }) : super(
          RegisterRouteSecond.name,
          args: RegisterRouteSecondArgs(
@@ -233,7 +235,7 @@ class RegisterRouteSecond extends _i15.PageRouteInfo<RegisterRouteSecondArgs> {
 
   static const String name = 'RegisterRouteSecond';
 
-  static _i15.PageInfo page = _i15.PageInfo(
+  static _i16.PageInfo page = _i16.PageInfo(
     name,
     builder: (data) {
       final args = data.argsAs<RegisterRouteSecondArgs>();
@@ -255,7 +257,7 @@ class RegisterRouteSecondArgs {
     required this.surname,
   });
 
-  final _i16.Key? key;
+  final _i17.Key? key;
 
   final String email;
 
@@ -284,33 +286,49 @@ class RegisterRouteSecondArgs {
 }
 
 /// generated route for
-/// [_i13.SquircleShowcaseScreen]
-class SquircleShowcaseRoute extends _i15.PageRouteInfo<void> {
-  const SquircleShowcaseRoute({List<_i15.PageRouteInfo>? children})
-    : super(SquircleShowcaseRoute.name, initialChildren: children);
+/// [_i13.SettingsScreen]
+class SettingsRoute extends _i16.PageRouteInfo<void> {
+  const SettingsRoute({List<_i16.PageRouteInfo>? children})
+    : super(SettingsRoute.name, initialChildren: children);
 
-  static const String name = 'SquircleShowcaseRoute';
+  static const String name = 'SettingsRoute';
 
-  static _i15.PageInfo page = _i15.PageInfo(
+  static _i16.PageInfo page = _i16.PageInfo(
     name,
     builder: (data) {
-      return const _i13.SquircleShowcaseScreen();
+      return const _i13.SettingsScreen();
     },
   );
 }
 
 /// generated route for
-/// [_i14.WelcomeScreen]
-class WelcomeRoute extends _i15.PageRouteInfo<void> {
-  const WelcomeRoute({List<_i15.PageRouteInfo>? children})
+/// [_i14.SquircleShowcaseScreen]
+class SquircleShowcaseRoute extends _i16.PageRouteInfo<void> {
+  const SquircleShowcaseRoute({List<_i16.PageRouteInfo>? children})
+    : super(SquircleShowcaseRoute.name, initialChildren: children);
+
+  static const String name = 'SquircleShowcaseRoute';
+
+  static _i16.PageInfo page = _i16.PageInfo(
+    name,
+    builder: (data) {
+      return const _i14.SquircleShowcaseScreen();
+    },
+  );
+}
+
+/// generated route for
+/// [_i15.WelcomeScreen]
+class WelcomeRoute extends _i16.PageRouteInfo<void> {
+  const WelcomeRoute({List<_i16.PageRouteInfo>? children})
     : super(WelcomeRoute.name, initialChildren: children);
 
   static const String name = 'WelcomeRoute';
 
-  static _i15.PageInfo page = _i15.PageInfo(
+  static _i16.PageInfo page = _i16.PageInfo(
     name,
     builder: (data) {
-      return const _i14.WelcomeScreen();
+      return const _i15.WelcomeScreen();
     },
   );
 }

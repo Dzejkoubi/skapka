@@ -1,6 +1,7 @@
 import 'package:colorful_safe_area/colorful_safe_area.dart';
 import 'package:flutter/material.dart';
 import 'package:skapka_app/app/theme/app_color_theme.dart';
+import 'package:skapka_app/app/theme/app_spacing.dart';
 import 'package:skapka_app/widgets/appbar/appbar.dart';
 import 'package:skapka_app/widgets/navbar/navbar.dart';
 
@@ -32,7 +33,10 @@ class ScreenWrapper extends StatelessWidget {
                     bottom: bottomNavigationBar != null ? Navbar.barHeight : 0,
                   ),
                 ),
-                child: body,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: AppSpacing.xLarge),
+                  child: body,
+                ),
               ),
             ),
             Positioned(top: 0, left: 0, right: 0, child: appBar),

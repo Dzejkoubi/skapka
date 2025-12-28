@@ -85,6 +85,10 @@
     },
     "events_screen_fab_create_event_text": "Vytvořit",
 
+    "settings_screen_title": "Nastavení",
+    "settings_screen_change_signout_button_text": "Odhlásit se",
+    "settings_screen_change_delete_account_button_text": "Smazat účet",
+
     "yes": "Ano",
     "no": "Ne",
     "cancel": "Zrušit",

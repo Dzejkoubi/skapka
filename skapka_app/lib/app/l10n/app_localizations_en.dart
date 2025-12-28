@@ -249,6 +249,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get events_screen_fab_create_event_text => 'Create';
 
   @override
+  String get settings_screen_title => 'Settings';
+
+  @override
+  String get settings_screen_change_signout_button_text => 'Sign out';
+
+  @override
+  String get settings_screen_change_delete_account_button_text =>
+      'Delete account';
+
+  @override
   String get yes => 'Yes';
 
   @override

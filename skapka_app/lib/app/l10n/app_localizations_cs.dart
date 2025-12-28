@@ -246,6 +246,15 @@ class AppLocalizationsCs extends AppLocalizations {
   String get events_screen_fab_create_event_text => 'Vytvořit';
 
   @override
+  String get settings_screen_title => 'Nastavení';
+
+  @override
+  String get settings_screen_change_signout_button_text => 'Odhlásit se';
+
+  @override
+  String get settings_screen_change_delete_account_button_text => 'Smazat účet';
+
+  @override
   String get yes => 'Ano';
 
   @override

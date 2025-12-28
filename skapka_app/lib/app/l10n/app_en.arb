@@ -1,6 +1,11 @@
 {
     "@@locale": "en",
     "language": "English",
+
+    "navbar_dependents": "Dependents",
+    "navbar_events": "Events",
+    "navbar_calendar": "Calendar",
+    "navbar_info": "Information",
      
     "welcome_screen_title": "Welcome to\nSkapka",
     "welcome_screen_login_button_text": "Log in",

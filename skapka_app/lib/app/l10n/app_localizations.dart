@@ -104,6 +104,30 @@ abstract class AppLocalizations {
   /// **'Čeština'**
   String get language;
 
+  /// No description provided for @navbar_dependents.
+  ///
+  /// In cs, this message translates to:
+  /// **'Osoby'**
+  String get navbar_dependents;
+
+  /// No description provided for @navbar_events.
+  ///
+  /// In cs, this message translates to:
+  /// **'Výpravy'**
+  String get navbar_events;
+
+  /// No description provided for @navbar_calendar.
+  ///
+  /// In cs, this message translates to:
+  /// **'Kalendář'**
+  String get navbar_calendar;
+
+  /// No description provided for @navbar_info.
+  ///
+  /// In cs, this message translates to:
+  /// **'Informace'**
+  String get navbar_info;
+
   /// No description provided for @welcome_screen_title.
   ///
   /// In cs, this message translates to:

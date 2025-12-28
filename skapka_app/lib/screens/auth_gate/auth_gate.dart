@@ -4,6 +4,7 @@ import 'package:skapka_app/app/router/router.gr.dart';
 import 'package:skapka_app/app/theme/app_color_theme.dart';
 import 'package:skapka_app/screens/auth_gate/widgets/floating_logo.dart';
 import 'package:skapka_app/services/auth_service.dart';
+import 'package:skapka_app/widgets/navbar/navbar.dart';
 
 @RoutePage()
 class AuthGate extends StatefulWidget {
@@ -31,7 +32,7 @@ class _AuthGateState extends State<AuthGate> {
       if (!mounted) return;
 
       if (isApproved) {
-        context.router.replace(const EventsRoute());
+        context.router.replace(const NavbarDashboard());
       } else {
         context.router.replace(const AccountNotApprovedRoute());
       }

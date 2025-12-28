@@ -1,6 +1,12 @@
 {
     "@@locale": "cs",
     "language": "Čeština",
+
+    "navbar_dependents": "Osoby",
+    "navbar_events": "Výpravy",
+    "navbar_calendar": "Kalendář",
+    "navbar_info": "Informace",
+    
     
     "welcome_screen_title": "Vítej ve\nSkapce",
     "welcome_screen_login_button_text": "Přihlásit se",

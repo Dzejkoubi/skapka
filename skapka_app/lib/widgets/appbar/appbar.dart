@@ -4,8 +4,7 @@ import 'package:skapka_app/app/theme/app_color_theme.dart';
 import 'package:skapka_app/app/theme/app_sizes.dart';
 import 'package:skapka_app/app/theme/app_spacing.dart';
 import 'package:skapka_app/app/theme/app_text_theme.dart';
-import 'package:skapka_app/widgets/concave_clipper/bottom_left_concave_clipper.dart';
-import 'package:skapka_app/widgets/concave_clipper/bottom_right_concave_clipper.dart';
+import 'package:skapka_app/widgets/concave_clipper.dart';
 
 class Appbar extends StatelessWidget implements PreferredSizeWidget {
   final bool showBackChevron;
@@ -92,7 +91,7 @@ class Appbar extends StatelessWidget implements PreferredSizeWidget {
         Row(
           children: [
             ClipPath(
-              clipper: BottomRightConcaveClipper(bottomRadius),
+              clipper: ConcaveClipper(bottomRight: bottomRadius),
               child: Container(
                 height: bottomRadius,
                 width: bottomRadius,
@@ -101,7 +100,7 @@ class Appbar extends StatelessWidget implements PreferredSizeWidget {
             ),
             Expanded(child: Container(color: Colors.transparent)),
             ClipPath(
-              clipper: BottomLeftConcaveClipper(bottomRadius),
+              clipper: ConcaveClipper(bottomLeft: bottomRadius),
               child: Container(
                 height: bottomRadius,
                 width: bottomRadius,

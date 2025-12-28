@@ -12,6 +12,18 @@ class AppLocalizationsEn extends AppLocalizations {
   String get language => 'English';
 
   @override
+  String get navbar_dependents => 'Dependents';
+
+  @override
+  String get navbar_events => 'Events';
+
+  @override
+  String get navbar_calendar => 'Calendar';
+
+  @override
+  String get navbar_info => 'Information';
+
+  @override
   String get welcome_screen_title => 'Welcome to\nSkapka';
 
   @override

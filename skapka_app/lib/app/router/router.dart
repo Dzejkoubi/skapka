@@ -14,6 +14,16 @@ class AppRouter extends RootStackRouter {
   List<AutoRoute> get routes => [
     AutoRoute(page: AuthGate.page, initial: true),
 
+    AutoRoute(
+      page: NavbarDashboard.page,
+      children: [
+        CustomRoute(page: DependentsRoute.page),
+        CustomRoute(page: EventsRoute.page, initial: true),
+        CustomRoute(page: CalendarRoute.page),
+        CustomRoute(page: InformationRoute.page),
+      ],
+    ),
+
     AutoRoute(page: WelcomeRoute.page),
     AutoRoute(page: EventsRoute.page),
     AutoRoute(page: LoginRoute.page),

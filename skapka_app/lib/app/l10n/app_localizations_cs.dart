@@ -12,6 +12,18 @@ class AppLocalizationsCs extends AppLocalizations {
   String get language => 'Čeština';
 
   @override
+  String get navbar_dependents => 'Osoby';
+
+  @override
+  String get navbar_events => 'Výpravy';
+
+  @override
+  String get navbar_calendar => 'Kalendář';
+
+  @override
+  String get navbar_info => 'Informace';
+
+  @override
   String get welcome_screen_title => 'Vítej ve\nSkapce';
 
   @override

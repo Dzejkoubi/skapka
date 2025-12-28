@@ -1,0 +1,85 @@
+{
+    "@@locale": "en",
+    "language": "English",
+     
+    "welcome_screen_title": "Welcome to\nSkapka",
+    "welcome_screen_login_button_text": "Log in",
+    "welcome_screen_register_button_text": "Register",
+    "welcome_screen_songbook_button_text": "Songbook",
+
+    "login_screen_title": "Login",
+    "login_screen_email_hint": "Email address",
+    "login_screen_password_hint": "Password",
+    "login_screen_forgot_password_text": "Forgot password?",
+    "login_screen_login_button_text": "Log in",
+    "login_screen_login_error_password_empty": "Did you forget your password?",
+    "login_screen_login_error_password_too_short": "Password must be at least 8 characters.",
+    "login_screen_login_error_invalid_credentials": "Invalid login credentials.",
+    "login_screen_login_error_email_not_confirmed": "Email address is not confirmed. Please check your inbox.",
+    "login_screen_login_error_email_empty": "Did you forget your email?",
+    "login_screen_login_error_email_invalid": "Oops, that doesn't look like a valid email.",
+    "login_screen_login_success": "Login successful!",
+    "login_screen_login_error_generic": "Something went wrong. Please try again.",
+
+    "register_screen_title": "Register",
+    "register_screen_1_name_hint": "Name",
+    "register_screen_1_surname_hint": "Surname",
+    "register_screen_1_email_hint": "Email address",
+    "register_screen_1_next_button_text": "Next",
+    "register_screen_1_error_invalid_name": "Name can only contain letters and hyphens.",
+    "register_screen_1_error_empty_name": "Don't you have a name?",
+    "register_screen_1_error_invalid_surname": "Surname can only contain letters and hyphens.",
+    "register_screen_1_error_empty_surname": "What about your surname?",
+    "register_screen_1_error_email_empty": "Did you forget your email?",
+    "register_screen_1_error_email_invalid": "Oops, that doesn't look like a valid email.",
+    "register_screen_2_password_hint": "Password",
+    "register_screen_2_confirm_password_hint": "Confirm password",
+    "register_screen_2_register_button_text": "Register",
+    "register_screen_2_error_passwords_do_not_match": "Passwords do not match.",
+
+    "register_screen_2_registration_success": "Registration successful!",
+    "register_screen_2_registration_error_email_used": "This email is already in use. Try logging in or use a different email.",
+    "register_screen_2_registration_error_rate_limit": "Too many attempts. Please try again later.",
+    "register_screen_2_registration_error_weak_password": "Password is too weak.",
+    "register_screen_2_registration_error_generic": "Registration failed. Please try again.",
+
+    "account_not_approved_screen_title": "Account not yet approved",
+    "account_not_approved_screen_text": "An administrator must approve your account before you can log in. Once they do, you will receive an email.",
+    "account_not_approved_screen_notify_administrator_button_text": "Notify administrator",
+    "account_not_approved_screen_notify_administrator_dialog_title": "Notify administrator",
+    "account_not_approved_screen_notify_administrator_dialog_description": "This step will notify the administrator by email. It can be sent once a day.",
+    "account_not_approved_screen_notify_administrator_dialog_primary_button_text": "Send notification",
+    "account_not_approved_screen_notify_administrator_button_error_dialog": "Notifications can only be sent once every 24 hours. Please try again later.",
+    "account_not_approved_screen_notify_success": "Administrator has been notified.",
+    "account_not_approved_screen_notify_error": "Failed to notify administrator. Please try again later.",
+    
+    "account_not_approved_screen_logout_button_text": "Log out",
+    "account_not_approved_screen_logout_dialog_title": "Log out",
+    "account_not_approved_screen_logout_dialog_description": "Are you sure you want to log out of your account?",
+    "account_not_approved_screen_logout_dialog_primary_button_text": "Log out",
+    "account_not_approved_screen_logout_success": "Logged out successfully.",
+    "account_not_approved_screen_logout_error": "Failed to log out. Please try again.",
+
+    "account_not_approved_screen_delete_account_button_text": "Delete account",
+    "account_not_approved_screen_delete_account_dialog_title": "Delete account",
+    "account_not_approved_screen_delete_account_dialog_description": "Are you sure you want to delete your account? This action cannot be undone.",
+    "account_not_approved_screen_delete_account_dialog_primary_button_text": "Delete account",
+    "account_not_approved_screen_delete_success": "Your account has been deleted.",
+    "account_not_approved_screen_delete_error": "Failed to delete account. Please try again later.",
+
+    "events_screen_title": "Events",
+    "events_screen_no_events_text": "{username} currently has no active events.",
+    "@events_screen_no_events_text": {
+        "placeholders": {
+            "version": {
+                "type": "String"
+            }
+        }
+    },
+    "events_screen_fab_create_event_text": "Create",
+
+    "yes": "Yes",
+    "no": "No",
+    "cancel": "Cancel",
+    "loading": "Loading..."
+}

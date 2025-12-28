@@ -8,15 +8,20 @@ import 'package:skapka_app/app/router/router.gr.dart';
 @AutoRouterConfig(replaceInRouteName: 'Screen|Page,Route')
 class AppRouter extends RootStackRouter {
   @override
-  RouteType get defaultRouteType => const RouteType.cupertino();
+  RouteType get defaultRouteType => const RouteType.adaptive();
 
   @override
   List<AutoRoute> get routes => [
-    AutoRoute(page: WelcomeRoute.page, initial: true),
-  ];
+    AutoRoute(page: AuthGate.page, initial: true),
 
-  @override
-  List<AutoRouteGuard> get guards => [
-    // optionally add root guards here
+    AutoRoute(page: WelcomeRoute.page),
+    AutoRoute(page: EventsRoute.page),
+    AutoRoute(page: LoginRoute.page),
+    AutoRoute(page: RegisterRouteFirst.page),
+    AutoRoute(page: RegisterRouteSecond.page),
+    AutoRoute(page: AccountNotApprovedRoute.page),
+    AutoRoute(page: ButtonThemeShowcaseRoute.page),
+    AutoRoute(page: SquircleShowcaseRoute.page),
+    AutoRoute(page: LargeDialogShowcaseRoute.page),
   ];
 }

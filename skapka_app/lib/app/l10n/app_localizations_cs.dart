@@ -1,0 +1,247 @@
+// ignore: unused_import
+import 'package:intl/intl.dart' as intl;
+import 'app_localizations.dart';
+
+// ignore_for_file: type=lint
+
+/// The translations for Czech (`cs`).
+class AppLocalizationsCs extends AppLocalizations {
+  AppLocalizationsCs([String locale = 'cs']) : super(locale);
+
+  @override
+  String get language => 'Čeština';
+
+  @override
+  String get welcome_screen_title => 'Vítej ve\nSkapce';
+
+  @override
+  String get welcome_screen_login_button_text => 'Přihlásit se';
+
+  @override
+  String get welcome_screen_register_button_text => 'Registrovat se';
+
+  @override
+  String get welcome_screen_songbook_button_text => 'Zpěvník';
+
+  @override
+  String get login_screen_title => 'Přihlášení';
+
+  @override
+  String get login_screen_email_hint => 'E-mail';
+
+  @override
+  String get login_screen_password_hint => 'Heslo';
+
+  @override
+  String get login_screen_forgot_password_text => 'Zapomněl si heslo?';
+
+  @override
+  String get login_screen_login_button_text => 'Přihlásit se';
+
+  @override
+  String get login_screen_login_error_password_empty => 'Nezapomeň na heslo.';
+
+  @override
+  String get login_screen_login_error_password_too_short =>
+      'Heslo musí mít alespoň 8 znaků.';
+
+  @override
+  String get login_screen_login_error_invalid_credentials =>
+      'Neplatné přihlašovací údaje.';
+
+  @override
+  String get login_screen_login_error_email_not_confirmed =>
+      'E-mailová adresa není potvrzena. Zkontroluj prosím svou schránku.';
+
+  @override
+  String get login_screen_login_error_email_empty =>
+      'Nezapomněl/a si na email?';
+
+  @override
+  String get login_screen_login_error_email_invalid =>
+      'Pozor, takhle přece nevypadá e-mail.';
+
+  @override
+  String get login_screen_login_success => 'Přihlášení proběhlo úspěšně!';
+
+  @override
+  String get login_screen_login_error_generic =>
+      'Něco se nepovedlo. Zkus to prosím znovu.';
+
+  @override
+  String get register_screen_title => 'Registrace';
+
+  @override
+  String get register_screen_1_name_hint => 'Jméno';
+
+  @override
+  String get register_screen_1_surname_hint => 'Příjmení';
+
+  @override
+  String get register_screen_1_email_hint => 'E-mail';
+
+  @override
+  String get register_screen_1_next_button_text => 'Další';
+
+  @override
+  String get register_screen_1_error_invalid_name =>
+      'Jméno může obsahovat jen písmena a pomlčky.';
+
+  @override
+  String get register_screen_1_error_empty_name => 'Nemáš snad jméno?';
+
+  @override
+  String get register_screen_1_error_invalid_surname =>
+      'Příjmení může obsahovat jen písmena a pomlčky.';
+
+  @override
+  String get register_screen_1_error_empty_surname => 'A co příjmení?';
+
+  @override
+  String get register_screen_1_error_email_empty => 'Nezapomněl/a si na email?';
+
+  @override
+  String get register_screen_1_error_email_invalid =>
+      'Pozor, takhle přece nevypadá e-mail.';
+
+  @override
+  String get register_screen_2_password_hint => 'Heslo';
+
+  @override
+  String get register_screen_2_confirm_password_hint => 'Potvrď heslo';
+
+  @override
+  String get register_screen_2_register_button_text => 'Registrovat';
+
+  @override
+  String get register_screen_2_error_passwords_do_not_match =>
+      'Hesla se neshodují.';
+
+  @override
+  String get register_screen_2_registration_success =>
+      'Registrace proběhla úspěšně!';
+
+  @override
+  String get register_screen_2_registration_error_email_used =>
+      'Tento e-mail je již použit. Zkus se přihlásit nebo použij jiný e-mail.';
+
+  @override
+  String get register_screen_2_registration_error_rate_limit =>
+      'Příliš mnoho pokusů. Zkus to prosím později.';
+
+  @override
+  String get register_screen_2_registration_error_weak_password =>
+      'Heslo je příliš slabé.';
+
+  @override
+  String get register_screen_2_registration_error_generic =>
+      'Registrace se nezdařila. Zkus to prosím znovu.';
+
+  @override
+  String get account_not_approved_screen_title => 'Účet ještě nebyl schválen';
+
+  @override
+  String get account_not_approved_screen_text =>
+      'Administrátor musí tvůj účet nejdřív schválit, než se budeš moct přihlásit. Jakmile to udělá, přijde ti e-mail.';
+
+  @override
+  String get account_not_approved_screen_notify_administrator_button_text =>
+      'Upozornit administrátora';
+
+  @override
+  String get account_not_approved_screen_notify_administrator_dialog_title =>
+      'Upozornit administrátora';
+
+  @override
+  String
+  get account_not_approved_screen_notify_administrator_dialog_description =>
+      'Tento krok upozorní administrátora emailem. Lze poslat jednou za den.';
+
+  @override
+  String
+  get account_not_approved_screen_notify_administrator_dialog_primary_button_text =>
+      'Poslat upozornění';
+
+  @override
+  String
+  get account_not_approved_screen_notify_administrator_button_error_dialog =>
+      'Upozornění lze poslat jen jednou za 24 hodin. Zkus to později.';
+
+  @override
+  String get account_not_approved_screen_notify_success =>
+      'Administrátor byl upozorněn.';
+
+  @override
+  String get account_not_approved_screen_notify_error =>
+      'Nepodařilo se upozornit administrátora. Zkus to prosím později.';
+
+  @override
+  String get account_not_approved_screen_logout_button_text => 'Odhlásit se';
+
+  @override
+  String get account_not_approved_screen_logout_dialog_title => 'Odhlásit se';
+
+  @override
+  String get account_not_approved_screen_logout_dialog_description =>
+      'Opravdu se chceš odhlásit ze svého účtu?';
+
+  @override
+  String get account_not_approved_screen_logout_dialog_primary_button_text =>
+      'Odhlásit se';
+
+  @override
+  String get account_not_approved_screen_logout_success =>
+      'Odhlášení proběhlo úspěšně.';
+
+  @override
+  String get account_not_approved_screen_logout_error =>
+      'Odhlášení se nezdařilo. Zkus to prosím znovu.';
+
+  @override
+  String get account_not_approved_screen_delete_account_button_text =>
+      'Smazat účet';
+
+  @override
+  String get account_not_approved_screen_delete_account_dialog_title =>
+      'Smazat účet';
+
+  @override
+  String get account_not_approved_screen_delete_account_dialog_description =>
+      'Opravdu chceš smazat svůj účet? Tuto akci nelze vrátit zpět.';
+
+  @override
+  String
+  get account_not_approved_screen_delete_account_dialog_primary_button_text =>
+      'Smazat účet';
+
+  @override
+  String get account_not_approved_screen_delete_success =>
+      'Tvůj účet byl smazán.';
+
+  @override
+  String get account_not_approved_screen_delete_error =>
+      'Smazání účtu se nezdařilo. Zkus to prosím později.';
+
+  @override
+  String get events_screen_title => 'Výpravy';
+
+  @override
+  String events_screen_no_events_text(String version, Object username) {
+    return '$username aktuálně nemá žádnou aktivní výpravu.';
+  }
+
+  @override
+  String get events_screen_fab_create_event_text => 'Vytvořit';
+
+  @override
+  String get yes => 'Ano';
+
+  @override
+  String get no => 'Ne';
+
+  @override
+  String get cancel => 'Zrušit';
+
+  @override
+  String get loading => 'Načítání...';
+}

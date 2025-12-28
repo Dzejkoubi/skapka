@@ -246,7 +246,7 @@ class _AppColorThemes {
     ),
     gradient: GradientColorCategory(
       grey0: Color(0x00FCFCFC), // 0% opacity white
-      grey100: Color(0xFF262626), // 100% opacity grey
+      grey100: Color(0xFFFCFCFC), // 100% opacity grey
     ),
     blur: BlurColorCategory(
       buttonReleased: Color(0x4DA1A1A1), // 30% opacity
@@ -313,7 +313,7 @@ class _AppColorThemes {
       shadow20: Color(0x33FFFFFF), // 20% opacity white
     ),
     gradient: GradientColorCategory(
-      grey0: Color(0x00FCFCFC), // 0% opacity white
+      grey0: Color(0x00262626), // 0% opacity white
       grey100: Color(0xFF262626), // 100% opacity grey (same in both themes)
     ),
     blur: BlurColorCategory(

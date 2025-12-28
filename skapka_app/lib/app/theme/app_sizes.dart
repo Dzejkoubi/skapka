@@ -1,9 +1,24 @@
 class AppSizes {
   // Icon sizes
-  static const double iconSizeSmall = 24;
-  static const double iconSizeMedium = 32;
-  static const double iconSizeLarge = 40;
+  /// 16.0
+  static const double iconSizeXSmall = 16.0;
+
+  /// 24.0
+  static const double iconSizeSmall = 24.0;
+
+  /// 32.0
+  static const double iconSizeMedium = 32.0;
+
+  /// 40.0
+  static const double iconSizeLarge = 40.0;
+
+  /// 64.0
+  static const double iconSizeXLarge = 64.0;
 
   // Icon stroke width
-  static const double iconStroke = 3;
+  /// 3.0
+  static const double iconStrokeNormal = 3.0;
+
+  /// 5.0
+  static const double iconStrokeThick = 5.0;
 }

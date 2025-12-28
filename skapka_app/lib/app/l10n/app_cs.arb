@@ -1,0 +1,86 @@
+{
+    "@@locale": "cs",
+    "language": "Čeština",
+    
+    "welcome_screen_title": "Vítej ve\nSkapce",
+    "welcome_screen_login_button_text": "Přihlásit se",
+    "welcome_screen_register_button_text": "Registrovat se",
+    "welcome_screen_songbook_button_text": "Zpěvník",
+
+    "login_screen_title": "Přihlášení",
+    "login_screen_email_hint": "E-mail",
+    "login_screen_password_hint": "Heslo",
+    "login_screen_forgot_password_text": "Zapomněl si heslo?",
+    "login_screen_login_button_text": "Přihlásit se",
+    "login_screen_login_error_password_empty": "Nezapomeň na heslo.",
+    "login_screen_login_error_password_too_short": "Heslo musí mít alespoň 8 znaků.",
+    "login_screen_login_error_invalid_credentials": "Neplatné přihlašovací údaje.",
+    "login_screen_login_error_email_not_confirmed": "E-mailová adresa není potvrzena. Zkontroluj prosím svou schránku.",
+    "login_screen_login_error_email_empty": "Nezapomněl/a si na email?",
+    "login_screen_login_error_email_invalid": "Pozor, takhle přece nevypadá e-mail.",
+    "login_screen_login_success": "Přihlášení proběhlo úspěšně!",
+    "login_screen_login_error_generic": "Něco se nepovedlo. Zkus to prosím znovu.",
+    
+    "register_screen_title": "Registrace",
+    "register_screen_1_name_hint": "Jméno",
+    "register_screen_1_surname_hint": "Příjmení",
+    "register_screen_1_email_hint": "E-mail",
+    "register_screen_1_next_button_text": "Další",
+    "register_screen_1_error_invalid_name": "Jméno může obsahovat jen písmena a pomlčky.",
+    "register_screen_1_error_empty_name": "Nemáš snad jméno?",
+    "register_screen_1_error_invalid_surname": "Příjmení může obsahovat jen písmena a pomlčky.",
+    "register_screen_1_error_empty_surname": "A co příjmení?",
+    "register_screen_1_error_email_empty": "Nezapomněl/a si na email?",
+    "register_screen_1_error_email_invalid": "Pozor, takhle přece nevypadá e-mail.",
+    "register_screen_2_password_hint": "Heslo",
+    "register_screen_2_confirm_password_hint": "Potvrď heslo",
+    "register_screen_2_register_button_text": "Registrovat",
+    "register_screen_2_error_passwords_do_not_match": "Hesla se neshodují.",
+
+    "register_screen_2_registration_success": "Registrace proběhla úspěšně!",
+    "register_screen_2_registration_error_email_used": "Tento e-mail je již použit. Zkus se přihlásit nebo použij jiný e-mail.",
+    "register_screen_2_registration_error_rate_limit": "Příliš mnoho pokusů. Zkus to prosím později.",
+    "register_screen_2_registration_error_weak_password": "Heslo je příliš slabé.",
+    "register_screen_2_registration_error_generic": "Registrace se nezdařila. Zkus to prosím znovu.",
+
+
+    "account_not_approved_screen_title": "Účet ještě nebyl schválen",
+    "account_not_approved_screen_text": "Administrátor musí tvůj účet nejdřív schválit, než se budeš moct přihlásit. Jakmile to udělá, přijde ti e-mail.",
+    "account_not_approved_screen_notify_administrator_button_text": "Upozornit administrátora",
+    "account_not_approved_screen_notify_administrator_dialog_title": "Upozornit administrátora",
+    "account_not_approved_screen_notify_administrator_dialog_description": "Tento krok upozorní administrátora emailem. Lze poslat jednou za den.",
+    "account_not_approved_screen_notify_administrator_dialog_primary_button_text": "Poslat upozornění",
+    "account_not_approved_screen_notify_administrator_button_error_dialog": "Upozornění lze poslat jen jednou za 24 hodin. Zkus to později.",
+    "account_not_approved_screen_notify_success": "Administrátor byl upozorněn.",
+    "account_not_approved_screen_notify_error": "Nepodařilo se upozornit administrátora. Zkus to prosím později.",
+    
+    "account_not_approved_screen_logout_button_text": "Odhlásit se",
+    "account_not_approved_screen_logout_dialog_title": "Odhlásit se",
+    "account_not_approved_screen_logout_dialog_description": "Opravdu se chceš odhlásit ze svého účtu?",
+    "account_not_approved_screen_logout_dialog_primary_button_text": "Odhlásit se",
+    "account_not_approved_screen_logout_success": "Odhlášení proběhlo úspěšně.",
+    "account_not_approved_screen_logout_error": "Odhlášení se nezdařilo. Zkus to prosím znovu.",
+
+    "account_not_approved_screen_delete_account_button_text": "Smazat účet",
+    "account_not_approved_screen_delete_account_dialog_title": "Smazat účet",
+    "account_not_approved_screen_delete_account_dialog_description": "Opravdu chceš smazat svůj účet? Tuto akci nelze vrátit zpět.",
+    "account_not_approved_screen_delete_account_dialog_primary_button_text": "Smazat účet",
+    "account_not_approved_screen_delete_success": "Tvůj účet byl smazán.",
+    "account_not_approved_screen_delete_error": "Smazání účtu se nezdařilo. Zkus to prosím později.",
+
+    "events_screen_title": "Výpravy",
+    "events_screen_no_events_text": "{username} aktuálně nemá žádnou aktivní výpravu.",
+    "@events_screen_no_events_text": {
+        "placeholders": {
+            "version": {
+                "type": "String"
+            }
+        }
+    },
+    "events_screen_fab_create_event_text": "Vytvořit",
+
+    "yes": "Ano",
+    "no": "Ne",
+    "cancel": "Zrušit",
+    "loading": "Načítání..."
+}

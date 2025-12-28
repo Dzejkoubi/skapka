@@ -1,9 +1,0 @@
-{
-    "@@locale": "en",
-    "language": "English",
-     
-    "welcome_screen_title": "Welcome to\nSkapka",
-    "welcome_screen_login_button_text": "Log in",
-    "welcome_screen_register_button_text": "Register",
-    "welcome_screen_songbook_button_text": "Songbook"
-}

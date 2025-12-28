@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:provider/provider.dart';
 import 'package:skapka_app/app/l10n/app_localizations.dart';
 import 'package:skapka_app/app/router/router.gr.dart';
 import 'package:skapka_app/app/theme/app_color_theme.dart';
@@ -64,9 +64,8 @@ class _RegisterScreenSecondState extends State<RegisterScreenSecond> {
         _isLoading = true;
       });
       try {
-        // First, try to sign up
         await authService.signUp(
-          email: widget.email,
+          email: widget.email.trim(),
           password: _passwordController.text,
         );
 
@@ -89,11 +88,14 @@ class _RegisterScreenSecondState extends State<RegisterScreenSecond> {
           context.router.replaceAll([const AuthGate()]);
         }
       } on AuthException catch (e) {
+        if (kDebugMode) {
+          print(e);
+        }
         if (mounted) {
           BottomDialog.show(
             context,
             type: BottomDialogType.negative,
-            description: e.message.contains('already registered')
+            description: e.statusCode.toString() == 'user_already_exists'
                 ? AppLocalizations.of(
                     context,
                   )!.register_screen_2_registration_error_email_used
@@ -103,6 +105,9 @@ class _RegisterScreenSecondState extends State<RegisterScreenSecond> {
           );
         }
       } catch (e) {
+        if (kDebugMode) {
+          print(e);
+        }
         if (mounted) {
           BottomDialog.show(
             context,

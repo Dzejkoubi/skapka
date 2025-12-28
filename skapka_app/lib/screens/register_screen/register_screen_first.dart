@@ -32,23 +32,19 @@ class _RegisterScreenFirstState extends State<RegisterScreenFirst> {
   String? _emailError;
 
   void _handleNextButtonPressed() {
+    final name = _nameController.text.trim();
+    final surname = _surnameController.text.trim();
+    final email = _emailController.text.trim();
+
     setState(() {
-      _nameError = validateName(false, _nameController.text, context: context);
-      _surnameError = validateName(
-        true,
-        _surnameController.text,
-        context: context,
-      );
-      _emailError = validateEmail(_emailController.text, context: context);
+      _nameError = validateName(false, name, context: context);
+      _surnameError = validateName(true, surname, context: context);
+      _emailError = validateEmail(email, context: context);
     });
 
     if (_nameError == null && _surnameError == null && _emailError == null) {
       context.router.push(
-        RegisterRouteSecond(
-          email: _emailController.text,
-          name: _nameController.text,
-          surname: _surnameController.text,
-        ),
+        RegisterRouteSecond(email: email, name: name, surname: surname),
       );
     }
   }

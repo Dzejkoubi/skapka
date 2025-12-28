@@ -38,12 +38,12 @@ class AuthService {
     return await _supabaseClient
         .from('accounts')
         .insert({
+          'account_id': accountId,
           'name': name,
           'surname': surname,
           'group_id': groupId,
           'is_approved': isApproved,
         })
-        .eq('account_id', accountId)
         .select()
         .single();
   }

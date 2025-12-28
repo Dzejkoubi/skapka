@@ -11,7 +11,7 @@ import 'package:skapka_app/app/theme/main_button_theme.dart';
 import 'package:skapka_app/services/auth_service.dart';
 import 'package:skapka_app/utils/email_format_validator.dart';
 import 'package:skapka_app/utils/password_validator.dart';
-import 'package:skapka_app/widgets/appbar/appbar.dart';
+import 'package:skapka_app/widgets/appbar/go_back_bar.dart';
 import 'package:skapka_app/widgets/buttons/main_button.dart';
 import 'package:skapka_app/widgets/dialogs/bottom_dialog.dart';
 import 'package:skapka_app/widgets/forms/custom_form.dart';
@@ -138,12 +138,7 @@ class _LoginScreenState extends State<LoginScreen> {
             return Column(
               children: [
                 SizedBox(height: AppSpacing.large),
-                Appbar(
-                  backChevronCanPop: !_isLoading,
-                  showBackChevron: true,
-                  showScreenName: false,
-                  showSettingsIcon: false,
-                ),
+                GoBackBar(canPop: !_isLoading),
                 SizedBox(height: AppSpacing.xLarge),
                 // Title with decorative shape
                 Stack(

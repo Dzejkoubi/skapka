@@ -24,6 +24,7 @@ dependencies:
   flutter_launcher_icons: ^0.14.4
   figma_squircle: ^0.6.3
   delightful_toast: ^1.1.0
+  colorful_safe_area: ^1.0.0
 
 
 dev_dependencies:

@@ -9,7 +9,7 @@ import 'package:skapka_app/app/theme/app_text_theme.dart';
 import 'package:skapka_app/app/theme/main_button_theme.dart';
 import 'package:skapka_app/utils/email_format_validator.dart';
 import 'package:skapka_app/utils/name_validator.dart';
-import 'package:skapka_app/widgets/appbar/appbar.dart';
+import 'package:skapka_app/widgets/appbar/go_back_bar.dart';
 import 'package:skapka_app/widgets/buttons/main_button.dart';
 import 'package:skapka_app/widgets/forms/custom_form.dart';
 import 'package:skapka_app/widgets/wrappers/scrollable_on_keyboard_screen_wrapper.dart';
@@ -57,11 +57,7 @@ class _RegisterScreenFirstState extends State<RegisterScreenFirst> {
         builder: (constraints) => Column(
           children: [
             SizedBox(height: AppSpacing.large),
-            Appbar(
-              showBackChevron: true,
-              showScreenName: false,
-              showSettingsIcon: false,
-            ),
+            GoBackBar(canPop: true),
             SizedBox(height: AppSpacing.xLarge),
             // Title with decorative shape
             Stack(

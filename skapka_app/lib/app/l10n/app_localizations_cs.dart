@@ -122,6 +122,14 @@ class AppLocalizationsCs extends AppLocalizations {
       'Tento e-mail je již použit. Zkus se přihlásit nebo použij jiný e-mail.';
 
   @override
+  String get register_screen_2_registration_error_rate_limit =>
+      'Příliš mnoho pokusů. Zkus to prosím později.';
+
+  @override
+  String get register_screen_2_registration_error_weak_password =>
+      'Heslo je příliš slabé.';
+
+  @override
   String get register_screen_2_registration_error_generic =>
       'Registrace se nezdařila. Zkus to prosím znovu.';
 

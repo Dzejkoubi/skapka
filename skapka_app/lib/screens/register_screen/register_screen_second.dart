@@ -92,16 +92,29 @@ class _RegisterScreenSecondState extends State<RegisterScreenSecond> {
           print(e);
         }
         if (mounted) {
+          String errorMessage;
+          if (e.code == 'user_already_exists') {
+            errorMessage = AppLocalizations.of(
+              context,
+            )!.register_screen_2_registration_error_email_used;
+          } else if (e.code == 'over_request_rate_limit') {
+            errorMessage = AppLocalizations.of(
+              context,
+            )!.register_screen_2_registration_error_rate_limit;
+          } else if (e.code == 'weak_password') {
+            errorMessage = AppLocalizations.of(
+              context,
+            )!.register_screen_2_registration_error_weak_password;
+          } else {
+            errorMessage = AppLocalizations.of(
+              context,
+            )!.register_screen_2_registration_error_generic;
+          }
+
           BottomDialog.show(
             context,
             type: BottomDialogType.negative,
-            description: e.statusCode.toString() == 'user_already_exists'
-                ? AppLocalizations.of(
-                    context,
-                  )!.register_screen_2_registration_error_email_used
-                : AppLocalizations.of(
-                    context,
-                  )!.register_screen_2_registration_error_generic,
+            description: errorMessage,
           );
         }
       } catch (e) {

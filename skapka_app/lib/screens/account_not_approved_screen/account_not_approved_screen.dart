@@ -24,189 +24,197 @@ class AccountNotApprovedScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: context.colors.primary.light,
-      body: ScrollableOnKeyboardScreenWrapper(
-        builder: (constraints) {
-          return Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              SizedBox(height: AppSpacing.huge),
-              Stack(
-                alignment: Alignment.center,
-                children: [
-                  SvgPicture.asset('assets/images/shapes/outline-shape-1.svg'),
-                  Text(
-                    textAlign: TextAlign.center,
+      body: RefreshIndicator(
+        onRefresh: () => context.router.replace(const AuthGate()),
+        color: context.colors.background.light,
+        backgroundColor: context.colors.primary.light,
+        child: ScrollableOnKeyboardScreenWrapper(
+          physics: const AlwaysScrollableScrollPhysics(),
+          builder: (constraints) {
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                SizedBox(height: AppSpacing.huge),
+                Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    SvgPicture.asset(
+                      'assets/images/shapes/outline-shape-1.svg',
+                    ),
+                    Text(
+                      textAlign: TextAlign.center,
+                      AppLocalizations.of(
+                        context,
+                      )!.account_not_approved_screen_title,
+                      style: AppTextTheme.displayLarge(
+                        context,
+                      ).copyWith(color: context.colors.text.normalLight),
+                    ),
+                  ],
+                ),
+                SizedBox(height: AppSpacing.xxLarge),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                  child: Text(
                     AppLocalizations.of(
                       context,
-                    )!.account_not_approved_screen_title,
-                    style: AppTextTheme.displayLarge(
+                    )!.account_not_approved_screen_text,
+                    style: AppTextTheme.bodyMedium(
                       context,
-                    ).copyWith(color: context.colors.text.normalLight),
+                    ).copyWith(color: context.colors.text.mutedLight),
+                    textAlign: TextAlign.center,
                   ),
-                ],
-              ),
-              SizedBox(height: AppSpacing.xxLarge),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                child: Text(
-                  AppLocalizations.of(
-                    context,
-                  )!.account_not_approved_screen_text,
-                  style: AppTextTheme.bodyMedium(
-                    context,
-                  ).copyWith(color: context.colors.text.mutedLight),
-                  textAlign: TextAlign.center,
                 ),
-              ),
-              SizedBox(height: AppSpacing.xxLarge),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: AppSpacing.xLarge,
-                ),
-                child: MainButton.filled(
-                  type: ButtonType.text,
-                  variant: ButtonStylesVariants.white,
-                  onPressed: () {
-                    onNotifyAdministratorPressed(
+                SizedBox(height: AppSpacing.xxLarge),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: AppSpacing.xLarge,
+                  ),
+                  child: MainButton.filled(
+                    type: ButtonType.text,
+                    variant: ButtonStylesVariants.white,
+                    onPressed: () {
+                      onNotifyAdministratorPressed(
+                        context,
+                        notifyAdministratorButtonEnabled:
+                            notifyAdministratorButtonEnabled,
+                      );
+                    },
+                    text: AppLocalizations.of(
                       context,
-                      notifyAdministratorButtonEnabled:
-                          notifyAdministratorButtonEnabled,
-                    );
-                  },
-                  text: AppLocalizations.of(
-                    context,
-                  )!.account_not_approved_screen_notify_administrator_button_text,
+                    )!.account_not_approved_screen_notify_administrator_button_text,
+                  ),
                 ),
-              ),
-              SizedBox(height: AppSpacing.medium),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 96),
-                child: MainButton.outlined(
-                  type: ButtonType.textIcon,
-                  iconAsset: 'assets/icons/logout.svg',
-                  variant: ButtonStylesVariants.white,
-                  onPressed: () {
-                    showDialog(
-                      context: context,
-                      builder: (_) => LargeDialog(
-                        type: LargeDialogType.negative,
-                        title: AppLocalizations.of(
-                          context,
-                        )!.account_not_approved_screen_logout_dialog_title,
-                        description: AppLocalizations.of(
-                          context,
-                        )!.account_not_approved_screen_logout_dialog_description,
-                        primaryButtonText: AppLocalizations.of(
-                          context,
-                        )!.account_not_approved_screen_logout_dialog_primary_button_text,
-                        onPrimaryPressed: () async {
-                          try {
-                            await authService.signOut();
-                            if (context.mounted) {
-                              BottomDialog.show(
-                                context,
-                                type: BottomDialogType.positive,
-                                description: AppLocalizations.of(
+                SizedBox(height: AppSpacing.medium),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 96),
+                  child: MainButton.outlined(
+                    type: ButtonType.textIcon,
+                    iconAsset: 'assets/icons/logout.svg',
+                    variant: ButtonStylesVariants.white,
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (_) => LargeDialog(
+                          type: LargeDialogType.negative,
+                          title: AppLocalizations.of(
+                            context,
+                          )!.account_not_approved_screen_logout_dialog_title,
+                          description: AppLocalizations.of(
+                            context,
+                          )!.account_not_approved_screen_logout_dialog_description,
+                          primaryButtonText: AppLocalizations.of(
+                            context,
+                          )!.account_not_approved_screen_logout_dialog_primary_button_text,
+                          onPrimaryPressed: () async {
+                            try {
+                              await authService.signOut();
+                              if (context.mounted) {
+                                BottomDialog.show(
                                   context,
-                                )!.account_not_approved_screen_logout_success,
-                              );
-                              context.router.replaceAll([
-                                const WelcomeRoute(),
-                              ]); // Navigate to Welcome after logout
-                            }
-                          } catch (e) {
-                            if (context.mounted) {
-                              BottomDialog.show(
-                                context,
-                                type: BottomDialogType.negative,
-                                description: AppLocalizations.of(
+                                  type: BottomDialogType.positive,
+                                  description: AppLocalizations.of(
+                                    context,
+                                  )!.account_not_approved_screen_logout_success,
+                                );
+                                context.router.replaceAll([
+                                  const WelcomeRoute(),
+                                ]); // Navigate to Welcome after logout
+                              }
+                            } catch (e) {
+                              if (context.mounted) {
+                                BottomDialog.show(
                                   context,
-                                )!.account_not_approved_screen_logout_error,
-                              );
+                                  type: BottomDialogType.negative,
+                                  description: AppLocalizations.of(
+                                    context,
+                                  )!.account_not_approved_screen_logout_error,
+                                );
+                              }
                             }
-                          }
-                        },
-                        secondaryButtonText: AppLocalizations.of(
-                          context,
-                        )!.cancel,
-                        onSecondaryPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                    );
-                  },
-                  text: AppLocalizations.of(
-                    context,
-                  )!.account_not_approved_screen_logout_button_text,
+                          },
+                          secondaryButtonText: AppLocalizations.of(
+                            context,
+                          )!.cancel,
+                          onSecondaryPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                      );
+                    },
+                    text: AppLocalizations.of(
+                      context,
+                    )!.account_not_approved_screen_logout_button_text,
+                  ),
                 ),
-              ),
-              SizedBox(height: AppSpacing.medium),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: AppSpacing.large,
-                ),
-                child: MainButton.text(
-                  type: ButtonType.textIcon,
-                  iconAsset: 'assets/icons/user-x.svg',
-                  variant: ButtonStylesVariants.white,
-                  onPressed: () {
-                    showDialog(
-                      context: context,
-                      builder: (_) => LargeDialog(
-                        type: LargeDialogType.negative,
-                        title: AppLocalizations.of(
-                          context,
-                        )!.account_not_approved_screen_delete_account_dialog_title,
-                        description: AppLocalizations.of(
-                          context,
-                        )!.account_not_approved_screen_delete_account_dialog_description,
-                        primaryButtonText: AppLocalizations.of(
-                          context,
-                        )!.account_not_approved_screen_delete_account_dialog_primary_button_text,
-                        onPrimaryPressed: () async {
-                          try {
-                            await authService.deleteAccount();
-                            if (context.mounted) {
-                              BottomDialog.show(
-                                context,
-                                type: BottomDialogType.positive,
-                                description: AppLocalizations.of(
+                SizedBox(height: AppSpacing.medium),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: AppSpacing.large,
+                  ),
+                  child: MainButton.text(
+                    type: ButtonType.textIcon,
+                    iconAsset: 'assets/icons/user-x.svg',
+                    variant: ButtonStylesVariants.white,
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (_) => LargeDialog(
+                          type: LargeDialogType.negative,
+                          title: AppLocalizations.of(
+                            context,
+                          )!.account_not_approved_screen_delete_account_dialog_title,
+                          description: AppLocalizations.of(
+                            context,
+                          )!.account_not_approved_screen_delete_account_dialog_description,
+                          primaryButtonText: AppLocalizations.of(
+                            context,
+                          )!.account_not_approved_screen_delete_account_dialog_primary_button_text,
+                          onPrimaryPressed: () async {
+                            try {
+                              await authService.deleteAccount();
+                              if (context.mounted) {
+                                BottomDialog.show(
                                   context,
-                                )!.account_not_approved_screen_delete_success,
-                              );
-                              context.router.replaceAll([
-                                const WelcomeRoute(),
-                              ]); // Navigate to Welcome after deletion
-                            }
-                          } catch (e) {
-                            if (context.mounted) {
-                              BottomDialog.show(
-                                context,
-                                type: BottomDialogType.negative,
-                                description: AppLocalizations.of(
+                                  type: BottomDialogType.positive,
+                                  description: AppLocalizations.of(
+                                    context,
+                                  )!.account_not_approved_screen_delete_success,
+                                );
+                                context.router.replaceAll([
+                                  const WelcomeRoute(),
+                                ]); // Navigate to Welcome after deletion
+                              }
+                            } catch (e) {
+                              if (context.mounted) {
+                                BottomDialog.show(
                                   context,
-                                )!.account_not_approved_screen_delete_error,
-                              );
+                                  type: BottomDialogType.negative,
+                                  description: AppLocalizations.of(
+                                    context,
+                                  )!.account_not_approved_screen_delete_error,
+                                );
+                              }
                             }
-                          }
-                        },
-                        secondaryButtonText: AppLocalizations.of(
-                          context,
-                        )!.cancel,
-                        onSecondaryPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                    );
-                  },
-                  text: AppLocalizations.of(
-                    context,
-                  )!.account_not_approved_screen_delete_account_button_text,
+                          },
+                          secondaryButtonText: AppLocalizations.of(
+                            context,
+                          )!.cancel,
+                          onSecondaryPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                      );
+                    },
+                    text: AppLocalizations.of(
+                      context,
+                    )!.account_not_approved_screen_delete_account_button_text,
+                  ),
                 ),
-              ),
-            ],
-          );
-        },
+              ],
+            );
+          },
+        ),
       ),
     );
   }

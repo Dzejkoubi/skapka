@@ -125,6 +125,14 @@ class AppLocalizationsEn extends AppLocalizations {
       'This email is already in use. Try logging in or use a different email.';
 
   @override
+  String get register_screen_2_registration_error_rate_limit =>
+      'Too many attempts. Please try again later.';
+
+  @override
+  String get register_screen_2_registration_error_weak_password =>
+      'Password is too weak.';
+
+  @override
   String get register_screen_2_registration_error_generic =>
       'Registration failed. Please try again.';
 

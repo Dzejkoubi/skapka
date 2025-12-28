@@ -302,6 +302,18 @@ abstract class AppLocalizations {
   /// **'Tento e-mail je již použit. Zkus se přihlásit nebo použij jiný e-mail.'**
   String get register_screen_2_registration_error_email_used;
 
+  /// No description provided for @register_screen_2_registration_error_rate_limit.
+  ///
+  /// In cs, this message translates to:
+  /// **'Příliš mnoho pokusů. Zkus to prosím později.'**
+  String get register_screen_2_registration_error_rate_limit;
+
+  /// No description provided for @register_screen_2_registration_error_weak_password.
+  ///
+  /// In cs, this message translates to:
+  /// **'Heslo je příliš slabé.'**
+  String get register_screen_2_registration_error_weak_password;
+
   /// No description provided for @register_screen_2_registration_error_generic.
   ///
   /// In cs, this message translates to:

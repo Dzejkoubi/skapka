@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:skapka_app/app/l10n/app_localizations.dart';
@@ -18,22 +16,22 @@ class NavbarDashboard extends StatelessWidget {
     final List<CustomNavBarItemInfo> navbarRoutes = [
       CustomNavBarItemInfo(
         label: AppLocalizations.of(context)!.navbar_dependents,
-        iconAsset: 'assets/icons/user-circle.svg',
+        iconAsset: 'assets/icons/navbar/navbar-user-circle.svg',
         screenRoute: DependentsRoute(),
       ),
       CustomNavBarItemInfo(
         label: AppLocalizations.of(context)!.navbar_events,
-        iconAsset: 'assets/icons/compass.svg',
+        iconAsset: 'assets/icons/navbar/navbar-compass.svg',
         screenRoute: EventsRoute(),
       ),
       CustomNavBarItemInfo(
         label: AppLocalizations.of(context)!.navbar_calendar,
-        iconAsset: 'assets/icons/calendar-month.svg',
+        iconAsset: 'assets/icons/navbar/navbar-calendar-month.svg',
         screenRoute: CalendarRoute(),
       ),
       CustomNavBarItemInfo(
         label: AppLocalizations.of(context)!.navbar_info,
-        iconAsset: 'assets/icons/info-circle.svg',
+        iconAsset: 'assets/icons/navbar/navbar-info-circle.svg',
         screenRoute: InformationRoute(),
       ),
     ];

@@ -43,6 +43,7 @@ flutter:
     - assets/images/app_icon/
     - assets/images/shapes/
     - assets/icons/
+    - assets/icons/navbar/
     - assets/app_icon/
     - .env
   fonts:

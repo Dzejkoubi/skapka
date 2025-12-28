@@ -28,16 +28,23 @@ class ScreenWrapper extends StatelessWidget {
               child: MediaQuery(
                 data: MediaQuery.of(context).copyWith(
                   padding: MediaQuery.of(context).padding.copyWith(
-                    top: Appbar.topBarHeight + appBar.bottomRadius,
+                    top: appBar.preferredSize.height,
+                    bottom: bottomNavigationBar != null ? Navbar.barHeight : 0,
                   ),
                 ),
                 child: body,
               ),
             ),
             Positioned(top: 0, left: 0, right: 0, child: appBar),
+            if (bottomNavigationBar != null)
+              Positioned(
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: bottomNavigationBar!,
+              ),
           ],
         ),
-        bottomNavigationBar: bottomNavigationBar,
       ),
     );
   }

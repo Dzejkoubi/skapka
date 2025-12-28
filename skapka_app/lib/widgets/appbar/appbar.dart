@@ -11,8 +11,8 @@ class Appbar extends StatelessWidget implements PreferredSizeWidget {
   final bool backChevronCanPop;
   final bool showSettingsIcon;
   final String? screenName;
-  final double bottomRadius;
 
+  static const double bottomRadius = 36.0;
   static const double topBarHeight = 64.0;
 
   const Appbar({
@@ -20,7 +20,6 @@ class Appbar extends StatelessWidget implements PreferredSizeWidget {
     required this.showSettingsIcon,
     this.backChevronCanPop = true,
     this.screenName = 'screenName',
-    this.bottomRadius = 36.0,
     super.key,
   });
 

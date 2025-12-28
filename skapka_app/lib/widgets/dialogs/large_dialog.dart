@@ -1,6 +1,7 @@
 import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:gaimon/gaimon.dart';
 import 'package:skapka_app/app/theme/app_color_theme.dart';
 import 'package:skapka_app/app/theme/app_gradients.dart';
 import 'package:skapka_app/app/theme/app_radius.dart';
@@ -12,7 +13,7 @@ import 'package:skapka_app/widgets/buttons/main_button.dart';
 
 enum LargeDialogType { basic, positive, negative }
 
-class LargeDialog extends StatelessWidget {
+class LargeDialog extends StatefulWidget {
   final LargeDialogType type;
   final String title;
   final String description;
@@ -35,11 +36,36 @@ class LargeDialog extends StatelessWidget {
   });
 
   @override
+  State<LargeDialog> createState() => _LargeDialogState();
+}
+
+class _LargeDialogState extends State<LargeDialog> {
+  @override
+  void initState() {
+    super.initState();
+    _playHapticFeedback();
+  }
+
+  void _playHapticFeedback() {
+    switch (widget.type) {
+      case LargeDialogType.basic:
+        Gaimon.selection();
+        break;
+      case LargeDialogType.positive:
+        Gaimon.success();
+        break;
+      case LargeDialogType.negative:
+        Gaimon.error();
+        break;
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     final config = _getDialogConfig(context);
 
     return PopScope(
-      canPop: canPop ?? true,
+      canPop: widget.canPop ?? true,
       child: Dialog(
         backgroundColor: Colors.transparent,
         insetPadding: const EdgeInsets.symmetric(horizontal: AppSpacing.xLarge),
@@ -73,7 +99,7 @@ class LargeDialog extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     // Icon
-                    if (type != LargeDialogType.basic)
+                    if (widget.type != LargeDialogType.basic)
                       SizedBox(
                         width: 80,
                         height: 80,
@@ -82,7 +108,7 @@ class LargeDialog extends StatelessWidget {
                           children: [
                             SvgPicture.asset(config.svgIconPath!),
                             SvgPicture.asset(
-                              type == LargeDialogType.positive
+                              widget.type == LargeDialogType.positive
                                   ? 'assets/icons/check.svg'
                                   : 'assets/icons/x.svg',
                               width: AppSizes.iconSizeXLarge,
@@ -99,7 +125,7 @@ class LargeDialog extends StatelessWidget {
 
                     // Title
                     Text(
-                      title,
+                      widget.title,
                       style: AppTextTheme.titleMedium(
                         context,
                       ).copyWith(color: config.contentColor),
@@ -109,7 +135,7 @@ class LargeDialog extends StatelessWidget {
 
                     // Description
                     Text(
-                      description,
+                      widget.description,
                       style: AppTextTheme.bodySmall(
                         context,
                       ).copyWith(color: config.contentColor),
@@ -118,10 +144,10 @@ class LargeDialog extends StatelessWidget {
                     const SizedBox(height: AppSpacing.large),
 
                     // Secondary button text (if exists)
-                    if (secondaryButtonText != null) ...[
+                    if (widget.secondaryButtonText != null) ...[
                       MainButton.text(
-                        text: secondaryButtonText!,
-                        onPressed: onSecondaryPressed,
+                        text: widget.secondaryButtonText!,
+                        onPressed: widget.onSecondaryPressed,
                         variant: config.buttonVariant,
                       ),
                       const SizedBox(height: AppSpacing.small),
@@ -129,8 +155,8 @@ class LargeDialog extends StatelessWidget {
 
                     // Primary button
                     MainButton.filled(
-                      text: primaryButtonText,
-                      onPressed: onPrimaryPressed,
+                      text: widget.primaryButtonText,
+                      onPressed: widget.onPrimaryPressed,
                       variant: config.buttonVariant,
                     ),
                   ],
@@ -138,7 +164,7 @@ class LargeDialog extends StatelessWidget {
               ),
             ),
 
-            if (canPop == true)
+            if (widget.canPop == true)
               Positioned(
                 top: 16.0,
                 right: 16.0,
@@ -162,7 +188,7 @@ class LargeDialog extends StatelessWidget {
   }
 
   _DialogConfig _getDialogConfig(BuildContext context) {
-    switch (type) {
+    switch (widget.type) {
       case LargeDialogType.basic:
         return _DialogConfig(
           borderGradient: AppGradients.secondaryPrimaryGradient(context),

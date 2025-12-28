@@ -10,7 +10,10 @@ class EventsScreen extends StatelessWidget {
     return SingleChildScrollView(
       child: SafeArea(
         child: Column(
-          children: [Text('Events Screen Content'), Container(height: 800)],
+          children: [
+            Text('Events Screen Content'),
+            Container(height: 800, color: Colors.red),
+          ],
         ),
       ),
     );

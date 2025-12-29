@@ -1,13 +1,18 @@
 import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:skapka_app/app/l10n/app_localizations.dart';
 import 'package:skapka_app/app/theme/app_color_theme.dart';
 import 'package:skapka_app/app/theme/app_radius.dart';
+import 'package:skapka_app/app/theme/app_sizes.dart';
+import 'package:skapka_app/app/theme/app_spacing.dart';
+import 'package:skapka_app/app/theme/app_text_theme.dart';
 import 'package:skapka_app/models/event_model.dart';
+import 'package:skapka_app/widgets/event_box/event_box.dart';
 
 enum EventsExpansionTileType { future, live, past, draft }
 
-class EventsExpansionTile extends StatelessWidget {
+class EventsExpansionTile extends StatefulWidget {
   final EventsExpansionTileType type;
   final List<EventModel> events;
 
@@ -18,24 +23,64 @@ class EventsExpansionTile extends StatelessWidget {
   });
 
   @override
+  State<EventsExpansionTile> createState() => _EventsExpansionTileState();
+}
+
+class _EventsExpansionTileState extends State<EventsExpansionTile> {
+  bool _isExpanded = false;
+
+  @override
   Widget build(BuildContext context) {
     final config = _getConfig(context);
-    return ExpansionTile(
-      title: Text(config.title),
-      backgroundColor: config.backgroundColor,
-      shape: SmoothRectangleBorder(
-        side: BorderSide(color: config.borderColor),
-        borderRadius: SmoothBorderRadius(
-          cornerRadius: AppRadius.medium,
-          cornerSmoothing: AppRadius.smoothNormal,
-        ),
+    final border = SmoothRectangleBorder(
+      side: BorderSide(color: config.borderColor, width: 1.5),
+      borderRadius: SmoothBorderRadius(
+        cornerRadius: AppRadius.medium,
+        cornerSmoothing: AppRadius.smoothNormal,
       ),
-      children: [],
+    );
+
+    return Theme(
+      data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
+      child: ExpansionTile(
+        onExpansionChanged: (value) {
+          setState(() {
+            _isExpanded = value;
+          });
+        },
+        title: Text(config.title, style: AppTextTheme.titleSmall(context)),
+        backgroundColor: config.backgroundColor,
+        collapsedBackgroundColor: config.backgroundColor,
+        shape: border,
+        collapsedShape: border,
+        trailing: AnimatedRotation(
+          turns: _isExpanded ? 0 : 0.5,
+          duration: const Duration(milliseconds: 200),
+          child: SvgPicture.asset(
+            'assets/icons/chevron-up.svg',
+            colorFilter: ColorFilter.mode(
+              context.colors.text.normal,
+              BlendMode.srcIn,
+            ),
+            width: AppSizes.iconSizeSmall,
+          ),
+        ),
+        childrenPadding: const EdgeInsets.symmetric(
+          horizontal: AppSpacing.small,
+        ),
+        children: [
+          for (final event in widget.events)
+            Padding(
+              padding: const EdgeInsets.only(bottom: AppSpacing.xSmall),
+              child: EventBox(event: event),
+            ),
+        ],
+      ),
     );
   }
 
   _EventsExpansionTileConfig _getConfig(BuildContext context) {
-    switch (type) {
+    switch (widget.type) {
       case EventsExpansionTileType.future:
         return _EventsExpansionTileConfig(
           borderColor: context.colors.secondary.light,
@@ -62,8 +107,8 @@ class EventsExpansionTile extends StatelessWidget {
         );
       case EventsExpansionTileType.draft:
         return _EventsExpansionTileConfig(
-          borderColor: context.colors.background.light,
-          backgroundColor: context.colors.background.medium,
+          borderColor: context.colors.background.medium,
+          backgroundColor: context.colors.background.light,
           title: AppLocalizations.of(
             context,
           )!.calendar_screen_event_expansion_tile_draft_title,

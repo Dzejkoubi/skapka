@@ -247,6 +247,42 @@ class AppLocalizationsCs extends AppLocalizations {
   String get events_screen_fab_create_event_text => 'Vytvořit';
 
   @override
+  String event_box_number_of_kids_text(int number_of_kids) {
+    return '$number_of_kids dětí';
+  }
+
+  @override
+  String get event_box_photos_link_text => 'Fotky';
+
+  @override
+  String get event_box_sign_up_end_date_text => 'Přihlašování do: ';
+
+  @override
+  String get event_box_event_multiple_days_start_text => 'Od: ';
+
+  @override
+  String get event_box_event_multiple_days_end_text => 'Do: ';
+
+  @override
+  String get event_box_event_single_day_text => 'Kdy: ';
+
+  @override
+  String get calendar_screen_title => 'Kalendář';
+
+  @override
+  String get calendar_screen_event_expansion_tile_future_title =>
+      'Nadcházející';
+
+  @override
+  String get calendar_screen_event_expansion_tile_live_title => 'Přihlášování';
+
+  @override
+  String get calendar_screen_event_expansion_tile_past_title => 'Proběhlé';
+
+  @override
+  String get calendar_screen_event_expansion_tile_draft_title => 'Koncepty';
+
+  @override
   String get settings_screen_title => 'Nastavení';
 
   @override

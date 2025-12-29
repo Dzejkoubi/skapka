@@ -250,6 +250,41 @@ class AppLocalizationsEn extends AppLocalizations {
   String get events_screen_fab_create_event_text => 'Create';
 
   @override
+  String event_box_number_of_kids_text(int number_of_kids) {
+    return '$number_of_kids kids';
+  }
+
+  @override
+  String get event_box_photos_link_text => 'Photos';
+
+  @override
+  String get event_box_sign_up_end_date_text => 'Sign-up ends on: ';
+
+  @override
+  String get event_box_event_multiple_days_start_text => 'From: ';
+
+  @override
+  String get event_box_event_multiple_days_end_text => 'To: ';
+
+  @override
+  String get event_box_event_single_day_text => 'When: ';
+
+  @override
+  String get calendar_screen_title => 'Calendar';
+
+  @override
+  String get calendar_screen_event_expansion_tile_future_title => 'Upcoming';
+
+  @override
+  String get calendar_screen_event_expansion_tile_live_title => 'Sign up';
+
+  @override
+  String get calendar_screen_event_expansion_tile_past_title => 'Past';
+
+  @override
+  String get calendar_screen_event_expansion_tile_draft_title => 'Drafts';
+
+  @override
   String get settings_screen_title => 'Settings';
 
   @override

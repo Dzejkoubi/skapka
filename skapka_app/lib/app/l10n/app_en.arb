@@ -90,11 +90,30 @@
     },
     "events_screen_fab_create_event_text": "Create",
 
+    "event_box_number_of_kids_text": "{number_of_kids} kids",
+    "@event_box_number_of_kids_text": {
+        "placeholders": {
+            "number_of_kids": {
+                "type": "int"
+            }
+        }
+    },
+    "event_box_photos_link_text": "Photos",
+    "event_box_sign_up_end_date_text" : "Sign-up ends on: ",
+    "event_box_event_multiple_days_start_text" : "From: ",
+    "event_box_event_multiple_days_end_text" : "To: ",
+    "event_box_event_single_day_text" : "When: ",
+
+
+    "calendar_screen_title": "Calendar",
+    "calendar_screen_event_expansion_tile_future_title": "Upcoming",
+    "calendar_screen_event_expansion_tile_live_title": "Sign up",
+    "calendar_screen_event_expansion_tile_past_title": "Past",
+    "calendar_screen_event_expansion_tile_draft_title": "Drafts",
 
     "settings_screen_title": "Settings",
     "settings_screen_change_signout_button_text": "Sign out",
     "settings_screen_change_delete_account_button_text": "Delete account",
-
 
     "yes": "Yes",
     "no": "No",

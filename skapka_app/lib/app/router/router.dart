@@ -18,8 +18,8 @@ class AppRouter extends RootStackRouter {
       page: NavbarDashboard.page,
       children: [
         CustomRoute(page: DependentsRoute.page),
-        CustomRoute(page: EventsRoute.page, initial: true),
-        CustomRoute(page: CalendarRoute.page),
+        CustomRoute(page: EventsRoute.page),
+        CustomRoute(page: CalendarRoute.page, initial: true),
         CustomRoute(page: InformationRoute.page),
       ],
     ),

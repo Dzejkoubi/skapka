@@ -498,6 +498,72 @@ abstract class AppLocalizations {
   /// **'Vytvořit'**
   String get events_screen_fab_create_event_text;
 
+  /// No description provided for @event_box_number_of_kids_text.
+  ///
+  /// In cs, this message translates to:
+  /// **'{number_of_kids} dětí'**
+  String event_box_number_of_kids_text(int number_of_kids);
+
+  /// No description provided for @event_box_photos_link_text.
+  ///
+  /// In cs, this message translates to:
+  /// **'Fotky'**
+  String get event_box_photos_link_text;
+
+  /// No description provided for @event_box_sign_up_end_date_text.
+  ///
+  /// In cs, this message translates to:
+  /// **'Přihlašování do: '**
+  String get event_box_sign_up_end_date_text;
+
+  /// No description provided for @event_box_event_multiple_days_start_text.
+  ///
+  /// In cs, this message translates to:
+  /// **'Od: '**
+  String get event_box_event_multiple_days_start_text;
+
+  /// No description provided for @event_box_event_multiple_days_end_text.
+  ///
+  /// In cs, this message translates to:
+  /// **'Do: '**
+  String get event_box_event_multiple_days_end_text;
+
+  /// No description provided for @event_box_event_single_day_text.
+  ///
+  /// In cs, this message translates to:
+  /// **'Kdy: '**
+  String get event_box_event_single_day_text;
+
+  /// No description provided for @calendar_screen_title.
+  ///
+  /// In cs, this message translates to:
+  /// **'Kalendář'**
+  String get calendar_screen_title;
+
+  /// No description provided for @calendar_screen_event_expansion_tile_future_title.
+  ///
+  /// In cs, this message translates to:
+  /// **'Nadcházející'**
+  String get calendar_screen_event_expansion_tile_future_title;
+
+  /// No description provided for @calendar_screen_event_expansion_tile_live_title.
+  ///
+  /// In cs, this message translates to:
+  /// **'Přihlášování'**
+  String get calendar_screen_event_expansion_tile_live_title;
+
+  /// No description provided for @calendar_screen_event_expansion_tile_past_title.
+  ///
+  /// In cs, this message translates to:
+  /// **'Proběhlé'**
+  String get calendar_screen_event_expansion_tile_past_title;
+
+  /// No description provided for @calendar_screen_event_expansion_tile_draft_title.
+  ///
+  /// In cs, this message translates to:
+  /// **'Koncepty'**
+  String get calendar_screen_event_expansion_tile_draft_title;
+
   /// No description provided for @settings_screen_title.
   ///
   /// In cs, this message translates to:

@@ -127,11 +127,11 @@ class SupabaseService {
   Future<void> updateEventParticipationStatus({
     required String eventId,
     required String dependentId,
-    required String status,
+    required String newStatus,
   }) async {
     await _supabaseClient
         .from('event_participants')
-        .update({'status': status})
+        .update({'status': newStatus})
         .eq('event_id', eventId)
         .eq('dependent_id', dependentId);
   }

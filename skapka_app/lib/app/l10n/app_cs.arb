@@ -7,7 +7,6 @@
     "navbar_calendar": "Kalendář",
     "navbar_info": "Informace",
     
-    
     "welcome_screen_title": "Vítej ve\nSkapce",
     "welcome_screen_login_button_text": "Přihlásit se",
     "welcome_screen_register_button_text": "Registrovat se",
@@ -49,7 +48,6 @@
     "register_screen_2_registration_error_weak_password": "Heslo je příliš slabé.",
     "register_screen_2_registration_error_generic": "Registrace se nezdařila. Zkus to prosím znovu.",
 
-
     "account_not_approved_screen_title": "Účet ještě nebyl schválen",
     "account_not_approved_screen_text": "Administrátor musí tvůj účet{name_surname}nejdřív schválit, než se budeš moct přihlásit. Jakmile to udělá, přijde ti e-mail.",
     "@account_not_approved_screen_text": {
@@ -59,7 +57,6 @@
             }
         }
     },
-    
     "account_not_approved_screen_notify_administrator_button_text": "Upozornit administrátora",
     "account_not_approved_screen_notify_administrator_dialog_title": "Upozornit administrátora",
     "account_not_approved_screen_notify_administrator_dialog_description": "Tento krok upozorní administrátora emailem. Lze poslat jednou za den.",
@@ -92,6 +89,26 @@
         }
     },
     "events_screen_fab_create_event_text": "Vytvořit",
+
+    "event_box_number_of_kids_text": "{number_of_kids} dětí",
+    "@event_box_number_of_kids_text": {
+        "placeholders": {
+            "number_of_kids": {
+                "type": "int"
+            }
+        }
+    },
+    "event_box_photos_link_text": "Fotky",
+    "event_box_sign_up_end_date_text" : "Přihlašování do: ",
+    "event_box_event_multiple_days_start_text" : "Od: ",
+    "event_box_event_multiple_days_end_text" : "Do: ",
+    "event_box_event_single_day_text" : "Kdy: ",
+
+    "calendar_screen_title": "Kalendář",
+    "calendar_screen_event_expansion_tile_future_title": "Nadcházející",
+    "calendar_screen_event_expansion_tile_live_title": "Přihlášování",
+    "calendar_screen_event_expansion_tile_past_title": "Proběhlé",
+    "calendar_screen_event_expansion_tile_draft_title": "Koncepty",
 
     "settings_screen_title": "Nastavení",
     "settings_screen_change_signout_button_text": "Odhlásit se",

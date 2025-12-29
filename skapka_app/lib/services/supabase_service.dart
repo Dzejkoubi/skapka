@@ -78,6 +78,14 @@ class SupabaseService {
     return response;
   }
 
+  Future<PostgrestList> getDependentNotes(String dependentId) async {
+    final response = await _supabaseClient
+        .from('dependent_notes')
+        .select()
+        .eq('dependent_id', dependentId);
+    return response;
+  }
+
   Future<PostgrestList> getEventsForDependent(String dependentId) async {
     final response = await _supabaseClient
         .from('event_participants')

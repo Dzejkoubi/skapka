@@ -3,6 +3,7 @@ import 'package:skapka_app/models/account_model.dart';
 import 'package:skapka_app/models/dependents/account_dependent_model.dart';
 import 'package:skapka_app/models/dependents/dependent_model.dart';
 import 'package:skapka_app/models/dependents/dependent_notes_model.dart';
+import 'package:skapka_app/models/event_model.dart';
 import 'package:skapka_app/models/group_model.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -101,23 +102,19 @@ class SupabaseService {
     return DependentNotesModel.fromJson(response);
   }
 
-  Future<PostgrestList> getEventsForDependent(String dependentId) async {
-    final response = await _supabaseClient
-        .from('event_participants')
-        .select()
-        .eq('dependent_id', dependentId);
-    return response;
-  }
-
-  Future<PostgrestMap> getEventDetail(String eventId) async {
+  // Get group events that have ended after given date(for example after start of this school year)
+  Future<List<EventModel>> getGroupEvents(String groupId, DateTime date) async {
     final response = await _supabaseClient
         .from('events')
         .select()
-        .eq('event_id', eventId)
-        .single();
-    return response;
+        .eq('group_id', groupId)
+        .gte('end_date', date.toIso8601String());
+    return response
+        .map<EventModel>((json) => EventModel.fromJson(json))
+        .toList();
   }
 
+  // Get users that are invited to given event - fetch when leader wants to see participants
   Future<PostgrestList> getEventParticipants(String eventId) async {
     final response = await _supabaseClient
         .from('event_participants')

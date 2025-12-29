@@ -95,6 +95,7 @@ class _AuthGateState extends State<AuthGate> {
 
     final dependents = await supabaseService.getAccountDependents(accountId);
 
+    dependentsProvider.clear();
     for (var ad in dependents) {
       final detail = await supabaseService.getDependentDetail(ad.dependentId);
       if (detail != null) {
@@ -122,6 +123,7 @@ class _AuthGateState extends State<AuthGate> {
       schoolYearStart,
     );
 
+    eventsProvider.clear();
     if (mounted) {
       for (var event in events) {
         eventsProvider.addEvent(event);

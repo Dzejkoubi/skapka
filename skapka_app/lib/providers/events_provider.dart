@@ -6,14 +6,24 @@ class EventsProvider extends ChangeNotifier {
 
   List<EventModel> get events => _events;
 
+  void setEvents(List<EventModel> events) {
+    clear();
+    _events.addAll(events);
+    notifyListeners();
+  }
+
   void addEvent(EventModel event) {
     _events.add(event);
-    print('Event added: ${event.title}');
     notifyListeners();
   }
 
   void removeEvent(EventModel event) {
     _events.remove(event);
+    notifyListeners();
+  }
+
+  void clear() {
+    _events.clear();
     notifyListeners();
   }
 }

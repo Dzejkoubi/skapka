@@ -6,6 +6,12 @@ class DependentsProvider extends ChangeNotifier {
 
   List<AccountDependentModel> get dependents => _dependents;
 
+  void setDependents(List<AccountDependentModel> dependents) {
+    clear();
+    _dependents.addAll(dependents);
+    notifyListeners();
+  }
+
   void addDependent(AccountDependentModel dependent) {
     _dependents.add(dependent);
     notifyListeners();
@@ -13,6 +19,11 @@ class DependentsProvider extends ChangeNotifier {
 
   void removeDependent(AccountDependentModel dependent) {
     _dependents.remove(dependent);
+    notifyListeners();
+  }
+
+  void clear() {
+    _dependents.clear();
     notifyListeners();
   }
 }

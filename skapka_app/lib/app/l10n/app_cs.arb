@@ -51,7 +51,15 @@
 
 
     "account_not_approved_screen_title": "Účet ještě nebyl schválen",
-    "account_not_approved_screen_text": "Administrátor musí tvůj účet nejdřív schválit, než se budeš moct přihlásit. Jakmile to udělá, přijde ti e-mail.",
+    "account_not_approved_screen_text": "Administrátor musí tvůj účet{name_surname}nejdřív schválit, než se budeš moct přihlásit. Jakmile to udělá, přijde ti e-mail.",
+    "@account_not_approved_screen_text": {
+        "placeholders": {
+            "name_surname": {
+                "type": "String"
+            }
+        }
+    },
+    
     "account_not_approved_screen_notify_administrator_button_text": "Upozornit administrátora",
     "account_not_approved_screen_notify_administrator_dialog_title": "Upozornit administrátora",
     "account_not_approved_screen_notify_administrator_dialog_description": "Tento krok upozorní administrátora emailem. Lze poslat jednou za den.",

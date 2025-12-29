@@ -156,8 +156,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get account_not_approved_screen_title => 'Account not yet approved';
 
   @override
-  String get account_not_approved_screen_text =>
-      'An administrator must approve your account before you can log in. Once they do, you will receive an email.';
+  String account_not_approved_screen_text(String name_surname) {
+    return 'An administrator must approve your account${name_surname}before you can log in. Once they do, you will receive an email.';
+  }
 
   @override
   String get account_not_approved_screen_notify_administrator_button_text =>

@@ -1,10 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:skapka_app/app/router/router.gr.dart';
 import 'package:skapka_app/app/theme/app_color_theme.dart';
+import 'package:skapka_app/providers/account_provider.dart';
 import 'package:skapka_app/screens/auth_gate/widgets/floating_logo.dart';
 import 'package:skapka_app/services/auth_service.dart';
-import 'package:skapka_app/widgets/navbar/navbar.dart';
+import 'package:skapka_app/services/supabase_service.dart';
 
 @RoutePage()
 class AuthGate extends StatefulWidget {
@@ -25,10 +27,19 @@ class _AuthGateState extends State<AuthGate> {
     if (!mounted) return;
 
     final authService = AuthService();
+    final supabaseService = SupabaseService();
     final session = authService.currentSession;
 
     if (session != null) {
-      final isApproved = await authService.isLoggedAccountApproved();
+      final accountProvider = context.read<AccountProvider>();
+      final account = await supabaseService.getAccountDetails(session.user.id);
+
+      if (account != null) {
+        accountProvider.setAccount(account);
+        accountProvider.updateEmail(session.user.email ?? '');
+      }
+
+      final isApproved = await supabaseService.isLoggedAccountApproved();
       if (!mounted) return;
 
       if (isApproved) {

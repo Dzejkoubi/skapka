@@ -3,11 +3,17 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 class AuthService {
   final SupabaseClient _supabaseClient = Supabase.instance.client;
 
+  SupabaseClient get supabaseClient => _supabaseClient;
+
   // Get current session
   Session? get currentSession => _supabaseClient.auth.currentSession;
 
   // Get current user
   User? get currentUser => _supabaseClient.auth.currentUser;
+
+  // Listen to auth state changes
+  Stream<AuthState> get onAuthStateChange =>
+      _supabaseClient.auth.onAuthStateChange;
 
   // Sign In
   Future<AuthResponse> signIn({
@@ -26,26 +32,6 @@ class AuthService {
     required String password,
   }) async {
     return await _supabaseClient.auth.signUp(email: email, password: password);
-  }
-
-  Future<PostgrestMap> editAccountDetails({
-    required String accountId,
-    required String name,
-    required String surname,
-    required String groupId,
-    bool isApproved = false,
-  }) async {
-    return await _supabaseClient
-        .from('accounts')
-        .insert({
-          'account_id': accountId,
-          'name': name,
-          'surname': surname,
-          'group_id': groupId,
-          'is_approved': isApproved,
-        })
-        .select()
-        .single();
   }
 
   // Sign Out
@@ -67,24 +53,4 @@ class AuthService {
     // For safety, we often just sign out if no backend logic is ready yet.
     await signOut();
   }
-
-  Future<bool> isLoggedAccountApproved() async {
-    if (currentUser != null) {
-      final userId = currentUser!.id;
-      final response = await _supabaseClient.functions.invoke(
-        'is_account_approved',
-        body: {'account_id': userId},
-      );
-      if (response.data != null && response.data is Map<String, dynamic>) {
-        return response.data['is_approved'] as bool;
-      } else {
-        return false;
-      }
-    }
-    return false;
-  }
-
-  // Listen to auth state changes
-  Stream<AuthState> get onAuthStateChange =>
-      _supabaseClient.auth.onAuthStateChange;
 }

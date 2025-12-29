@@ -49,7 +49,14 @@
     "register_screen_2_registration_error_generic": "Registration failed. Please try again.",
 
     "account_not_approved_screen_title": "Account not yet approved",
-    "account_not_approved_screen_text": "An administrator must approve your account before you can log in. Once they do, you will receive an email.",
+    "account_not_approved_screen_text": "An administrator must approve your account{name_surname}before you can log in. Once they do, you will receive an email.",
+    "@account_not_approved_screen_text": {
+        "placeholders": {
+            "name_surname": {
+                "type": "String"
+            }
+        }
+    },
     "account_not_approved_screen_notify_administrator_button_text": "Notify administrator",
     "account_not_approved_screen_notify_administrator_dialog_title": "Notify administrator",
     "account_not_approved_screen_notify_administrator_dialog_description": "This step will notify the administrator by email. It can be sent once a day.",

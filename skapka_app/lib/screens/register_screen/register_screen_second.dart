@@ -9,6 +9,7 @@ import 'package:skapka_app/app/theme/app_spacing.dart';
 import 'package:skapka_app/app/theme/app_text_theme.dart';
 import 'package:skapka_app/app/theme/main_button_theme.dart';
 import 'package:skapka_app/services/auth_service.dart';
+import 'package:skapka_app/services/supabase_service.dart';
 import 'package:skapka_app/utils/password_validator.dart';
 import 'package:skapka_app/utils/two_passwords_validator.dart';
 import 'package:skapka_app/widgets/appbar/go_back_bar.dart';
@@ -36,6 +37,7 @@ class RegisterScreenSecond extends StatefulWidget {
 
 class _RegisterScreenSecondState extends State<RegisterScreenSecond> {
   AuthService authService = AuthService();
+  SupabaseService supabaseService = SupabaseService();
 
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPasswordController =
@@ -69,7 +71,7 @@ class _RegisterScreenSecondState extends State<RegisterScreenSecond> {
           password: _passwordController.text,
         );
 
-        await authService.editAccountDetails(
+        await supabaseService.editAccountDetails(
           accountId: authService.currentUser!.id,
           name: widget.name,
           surname: widget.surname,

@@ -153,8 +153,9 @@ class AppLocalizationsCs extends AppLocalizations {
   String get account_not_approved_screen_title => 'Účet ještě nebyl schválen';
 
   @override
-  String get account_not_approved_screen_text =>
-      'Administrátor musí tvůj účet nejdřív schválit, než se budeš moct přihlásit. Jakmile to udělá, přijde ti e-mail.';
+  String account_not_approved_screen_text(String name_surname) {
+    return 'Administrátor musí tvůj účet${name_surname}nejdřív schválit, než se budeš moct přihlásit. Jakmile to udělá, přijde ti e-mail.';
+  }
 
   @override
   String get account_not_approved_screen_notify_administrator_button_text =>

@@ -359,8 +359,8 @@ abstract class AppLocalizations {
   /// No description provided for @account_not_approved_screen_text.
   ///
   /// In cs, this message translates to:
-  /// **'Administrátor musí tvůj účet nejdřív schválit, než se budeš moct přihlásit. Jakmile to udělá, přijde ti e-mail.'**
-  String get account_not_approved_screen_text;
+  /// **'Administrátor musí tvůj účet{name_surname}nejdřív schválit, než se budeš moct přihlásit. Jakmile to udělá, přijde ti e-mail.'**
+  String account_not_approved_screen_text(String name_surname);
 
   /// No description provided for @account_not_approved_screen_notify_administrator_button_text.
   ///

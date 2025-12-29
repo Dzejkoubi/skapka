@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 import 'package:skapka_app/app/l10n/app_localizations.dart';
 import 'package:skapka_app/app/router/router.gr.dart';
 import 'package:skapka_app/app/theme/app_color_theme.dart';
 import 'package:skapka_app/app/theme/app_spacing.dart';
 import 'package:skapka_app/app/theme/app_text_theme.dart';
 import 'package:skapka_app/app/theme/main_button_theme.dart';
+import 'package:skapka_app/providers/account_provider.dart';
 import 'package:skapka_app/services/auth_service.dart';
 import 'package:skapka_app/widgets/buttons/main_button.dart';
 import 'package:skapka_app/widgets/dialogs/bottom_dialog.dart';
@@ -21,6 +23,7 @@ class AccountNotApprovedScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     const notifyAdministratorButtonEnabled = false;
     AuthService authService = AuthService();
+    AccountProvider accountProvider = context.read<AccountProvider>();
 
     return Scaffold(
       backgroundColor: context.colors.primary.light,
@@ -58,7 +61,12 @@ class AccountNotApprovedScreen extends StatelessWidget {
                   child: Text(
                     AppLocalizations.of(
                       context,
-                    )!.account_not_approved_screen_text,
+                    )!.account_not_approved_screen_text(
+                      (accountProvider.name != null &&
+                              accountProvider.surname != null)
+                          ? ' ${accountProvider.name} ${accountProvider.surname} '
+                          : '',
+                    ),
                     style: AppTextTheme.bodyMedium(
                       context,
                     ).copyWith(color: context.colors.text.mutedLight),

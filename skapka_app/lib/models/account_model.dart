@@ -28,24 +28,4 @@ class AccountModel {
       surname: json['surname'] as String?,
     );
   }
-
-  AccountModel copyWith({
-    String? accountId,
-    DateTime? createdAt,
-    int? rights,
-    String? groupId,
-    bool? isApproved,
-    String? name,
-    String? surname,
-  }) {
-    return AccountModel(
-      accountId: accountId ?? this.accountId,
-      createdAt: createdAt ?? this.createdAt,
-      rights: rights ?? this.rights,
-      groupId: groupId ?? this.groupId,
-      isApproved: isApproved ?? this.isApproved,
-      name: name ?? this.name,
-      surname: surname ?? this.surname,
-    );
-  }
 }

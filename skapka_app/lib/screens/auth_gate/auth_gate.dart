@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:skapka_app/app/router/router.gr.dart';
 import 'package:skapka_app/app/theme/app_color_theme.dart';
+import 'package:skapka_app/models/group_model.dart';
 import 'package:skapka_app/providers/account_provider.dart';
 import 'package:skapka_app/screens/auth_gate/widgets/floating_logo.dart';
 import 'package:skapka_app/services/auth_service.dart';
@@ -37,6 +38,17 @@ class _AuthGateState extends State<AuthGate> {
       if (account != null) {
         accountProvider.setAccount(account);
         accountProvider.updateEmail(session.user.email ?? '');
+        if (account.groupId.isNotEmpty) {
+          final groupDetails = await supabaseService.getAccountGroupDetail(
+            account.groupId,
+          );
+          accountProvider.setGroup(
+            GroupModel(
+              name: groupDetails['name'],
+              number: groupDetails['number'],
+            ),
+          );
+        }
       }
 
       final isApproved = await supabaseService.isLoggedAccountApproved();

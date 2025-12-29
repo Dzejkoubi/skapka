@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:skapka_app/app/router/router.gr.dart';
 import 'package:skapka_app/app/theme/app_color_theme.dart';
-import 'package:skapka_app/models/group_model.dart';
+import 'package:skapka_app/models/dependents/account_dependent_model.dart';
 import 'package:skapka_app/providers/account_provider.dart';
+import 'package:skapka_app/providers/dependents_provider.dart';
 import 'package:skapka_app/screens/auth_gate/widgets/floating_logo.dart';
 import 'package:skapka_app/services/auth_service.dart';
 import 'package:skapka_app/services/supabase_service.dart';
@@ -42,12 +43,28 @@ class _AuthGateState extends State<AuthGate> {
           final groupDetails = await supabaseService.getAccountGroupDetail(
             account.groupId,
           );
-          accountProvider.setGroup(
-            GroupModel(
-              name: groupDetails['name'],
-              number: groupDetails['number'],
-            ),
-          );
+          accountProvider.setGroup(groupDetails);
+        }
+
+        if (mounted) {
+          final dependentsProvider = context.read<DependentsProvider>();
+          final List<AccountDependentModel> dependents = await supabaseService
+              .getAccountDependents(account.accountId);
+          if (dependents.isNotEmpty) {
+            for (var ad in dependents) {
+              final detail = await supabaseService.getDependentDetail(
+                ad.dependentId,
+              );
+              if (detail != null) {
+                final notes = await supabaseService.getDependentNotes(
+                  ad.dependentId,
+                );
+                dependentsProvider.addDependent(
+                  ad.copyWith(dependentDetails: detail.copyWith(notes: notes)),
+                );
+              }
+            }
+          }
         }
       }
 

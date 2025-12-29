@@ -1,5 +1,9 @@
 // lib/services/supabase_service.dart
 import 'package:skapka_app/models/account_model.dart';
+import 'package:skapka_app/models/dependents/account_dependent_model.dart';
+import 'package:skapka_app/models/dependents/dependent_model.dart';
+import 'package:skapka_app/models/dependents/dependent_notes_model.dart';
+import 'package:skapka_app/models/group_model.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class SupabaseService {
@@ -52,38 +56,49 @@ class SupabaseService {
     return AccountModel.fromJson(response);
   }
 
-  Future<PostgrestMap> getAccountGroupDetail(String groupId) async {
+  Future<GroupModel> getAccountGroupDetail(String groupId) async {
     final response = await _supabaseClient
         .from('groups')
         .select()
         .eq('group_id', groupId)
         .single();
-    return response;
+
+    return GroupModel.fromJson(response);
   }
 
-  Future<PostgrestList> getAccountDependents(String accountId) async {
+  Future<List<AccountDependentModel>> getAccountDependents(
+    String accountId,
+  ) async {
     final response = await _supabaseClient
         .from('accounts_dependents')
         .select()
         .eq('account_id', accountId);
-    return response;
+    return (response as List)
+        .map<AccountDependentModel>(
+          (json) =>
+              AccountDependentModel.fromJson(json as Map<String, dynamic>),
+        )
+        .toList();
   }
 
-  Future<PostgrestMap> getDependentDetail(String dependentId) async {
+  Future<DependentModel?> getDependentDetail(String dependentId) async {
     final response = await _supabaseClient
         .from('dependents')
         .select()
         .eq('dependent_id', dependentId)
-        .single();
-    return response;
+        .maybeSingle();
+    if (response == null) return null;
+    return DependentModel.fromJson(response);
   }
 
-  Future<PostgrestList> getDependentNotes(String dependentId) async {
+  Future<DependentNotesModel?> getDependentNotes(String dependentId) async {
     final response = await _supabaseClient
         .from('dependent_notes')
         .select()
-        .eq('dependent_id', dependentId);
-    return response;
+        .eq('dependent_id', dependentId)
+        .maybeSingle();
+    if (response == null) return null;
+    return DependentNotesModel.fromJson(response);
   }
 
   Future<PostgrestList> getEventsForDependent(String dependentId) async {

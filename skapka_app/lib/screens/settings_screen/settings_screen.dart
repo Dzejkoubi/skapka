@@ -2,6 +2,7 @@ import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:skapka_app/app/l10n/app_localizations.dart';
 import 'package:skapka_app/app/router/router.gr.dart';
 import 'package:skapka_app/app/theme/app_color_theme.dart';
@@ -9,6 +10,7 @@ import 'package:skapka_app/app/theme/app_radius.dart';
 import 'package:skapka_app/app/theme/app_spacing.dart';
 import 'package:skapka_app/app/theme/app_text_theme.dart';
 import 'package:skapka_app/app/theme/main_button_theme.dart';
+import 'package:skapka_app/providers/account_provider.dart';
 import 'package:skapka_app/services/auth_service.dart';
 import 'package:skapka_app/widgets/appbar/appbar.dart';
 import 'package:skapka_app/widgets/buttons/main_button.dart';
@@ -23,6 +25,7 @@ class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     AuthService authService = AuthService();
+    AccountProvider accountProvider = context.read<AccountProvider>();
     return ScreenWrapper(
       appBar: Appbar(
         showBackChevron: true,
@@ -51,7 +54,7 @@ class SettingsScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'Name Surname',
+                        '${accountProvider.name} ${accountProvider.surname}',
                         style: AppTextTheme.displaySmall(context),
                       ),
                     ],

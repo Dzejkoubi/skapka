@@ -410,6 +410,14 @@ class AppLocalizationsCs extends AppLocalizations {
   String get create_edit_event_screen_event_title_hint => 'Název výpravy';
 
   @override
+  String get create_edit_event_screen_event_title_error_empty =>
+      'Název výpravy nemůže být prázdný.';
+
+  @override
+  String get create_edit_event_screen_event_title_error_too_long =>
+      'Název výpravy nemůže přesáhnout 50 znaků.';
+
+  @override
   String get create_edit_event_screen_event_sign_up_from => 'Přihlašování od';
 
   @override
@@ -426,6 +434,9 @@ class AppLocalizationsCs extends AppLocalizations {
       'Vybrat účastníky';
 
   @override
+  String get create_edit_participants_screen_title => 'Vybrat účastníky';
+
+  @override
   String get create_edit_event_screen_total_participants_text =>
       'Celkový počet účastníků';
 
@@ -439,18 +450,14 @@ class AppLocalizationsCs extends AppLocalizations {
   String get create_edit_event_screen_instructions_text => 'Pokyny';
 
   @override
+  String get create_edit_instructions_screen_title => 'Pokyny výpravy';
+
+  @override
   String get create_edit_event_screen_meeting_place_text => 'Místo srazu';
 
   @override
-  String get create_edit_event_screen_meeting_place_address_text => 'Adresa';
-
-  @override
-  String get create_edit_event_screen_event_title_error_empty =>
-      'Název výpravy nemůže být prázdný.';
-
-  @override
-  String get create_edit_event_screen_event_title_error_too_long =>
-      'Název výpravy nemůže přesáhnout 50 znaků.';
+  String get create_edit_event_screen_meeting_place_description =>
+      'Adresa či jméno, které může uživatel vyhledat v mapách. Pokud nevyplníš, místo srazu nebude zobrazeno.';
 
   @override
   String get settings_screen_title => 'Nastavení';

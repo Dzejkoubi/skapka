@@ -758,6 +758,18 @@ abstract class AppLocalizations {
   /// **'Název výpravy'**
   String get create_edit_event_screen_event_title_hint;
 
+  /// No description provided for @create_edit_event_screen_event_title_error_empty.
+  ///
+  /// In cs, this message translates to:
+  /// **'Název výpravy nemůže být prázdný.'**
+  String get create_edit_event_screen_event_title_error_empty;
+
+  /// No description provided for @create_edit_event_screen_event_title_error_too_long.
+  ///
+  /// In cs, this message translates to:
+  /// **'Název výpravy nemůže přesáhnout 50 znaků.'**
+  String get create_edit_event_screen_event_title_error_too_long;
+
   /// No description provided for @create_edit_event_screen_event_sign_up_from.
   ///
   /// In cs, this message translates to:
@@ -788,6 +800,12 @@ abstract class AppLocalizations {
   /// **'Vybrat účastníky'**
   String get create_edit_event_screen_select_participants_text;
 
+  /// No description provided for @create_edit_participants_screen_title.
+  ///
+  /// In cs, this message translates to:
+  /// **'Vybrat účastníky'**
+  String get create_edit_participants_screen_title;
+
   /// No description provided for @create_edit_event_screen_total_participants_text.
   ///
   /// In cs, this message translates to:
@@ -812,29 +830,23 @@ abstract class AppLocalizations {
   /// **'Pokyny'**
   String get create_edit_event_screen_instructions_text;
 
+  /// No description provided for @create_edit_instructions_screen_title.
+  ///
+  /// In cs, this message translates to:
+  /// **'Pokyny výpravy'**
+  String get create_edit_instructions_screen_title;
+
   /// No description provided for @create_edit_event_screen_meeting_place_text.
   ///
   /// In cs, this message translates to:
   /// **'Místo srazu'**
   String get create_edit_event_screen_meeting_place_text;
 
-  /// No description provided for @create_edit_event_screen_meeting_place_address_text.
+  /// No description provided for @create_edit_event_screen_meeting_place_description.
   ///
   /// In cs, this message translates to:
-  /// **'Adresa'**
-  String get create_edit_event_screen_meeting_place_address_text;
-
-  /// No description provided for @create_edit_event_screen_event_title_error_empty.
-  ///
-  /// In cs, this message translates to:
-  /// **'Název výpravy nemůže být prázdný.'**
-  String get create_edit_event_screen_event_title_error_empty;
-
-  /// No description provided for @create_edit_event_screen_event_title_error_too_long.
-  ///
-  /// In cs, this message translates to:
-  /// **'Název výpravy nemůže přesáhnout 50 znaků.'**
-  String get create_edit_event_screen_event_title_error_too_long;
+  /// **'Adresa či jméno, které může uživatel vyhledat v mapách. Pokud nevyplníš, místo srazu nebude zobrazeno.'**
+  String get create_edit_event_screen_meeting_place_description;
 
   /// No description provided for @settings_screen_title.
   ///

@@ -4,6 +4,7 @@ import 'package:skapka_app/models/dependents/account_dependent_model.dart';
 import 'package:skapka_app/models/dependents/dependent_model.dart';
 import 'package:skapka_app/models/dependents/dependent_notes_model.dart';
 import 'package:skapka_app/models/event_model.dart';
+import 'package:skapka_app/models/event_participant.dart';
 import 'package:skapka_app/models/group_model.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -115,12 +116,18 @@ class SupabaseService {
   }
 
   // Get users that are invited to given event - fetch when leader wants to see participants
-  Future<PostgrestList> getEventParticipants(String eventId) async {
+  Future<List<EventParticipant>> getEventParticipants(
+    String eventId,
+    String groupId,
+  ) async {
     final response = await _supabaseClient
         .from('event_participants')
         .select()
-        .eq('event_id', eventId);
-    return response;
+        .eq('event_id', eventId)
+        .eq('group_id', groupId);
+    return (response as List)
+        .map<EventParticipant>((json) => EventParticipant.fromJson(json))
+        .toList();
   }
 
   // Update dependent event participation status
@@ -134,5 +141,18 @@ class SupabaseService {
         .update({'status': newStatus})
         .eq('event_id', eventId)
         .eq('dependent_id', dependentId);
+  }
+
+  Future<List<DependentModel>> getGroupDependents(String groupId) async {
+    final response = await _supabaseClient
+        .from('dependents')
+        .select(
+          'dependent_id, name, surname, nickname, born, parent1_email, parent1_phone, parent2_email, parent2_phone, troop_id, patrol_id',
+        )
+        .eq('group_id', groupId)
+        .eq('archived', false);
+    return response
+        .map<DependentModel>((json) => DependentModel.fromJson(json))
+        .toList();
   }
 }

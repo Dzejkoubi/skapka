@@ -3,23 +3,25 @@ import 'package:skapka_app/models/dependents/dependent_notes_model.dart';
 enum SexEnum { male, female, other }
 
 class DependentModel {
+  final String? dependentId;
   final String name;
   final String surname;
   final String? nickname;
   final DateTime? born;
-  final SexEnum sex;
+  final SexEnum? sex;
   final String? parent1Email;
   final String? parent1Phone;
   final String? parent2Email;
   final String? parent2Phone;
   final String? troopId;
   final String? patrolId;
-  final bool isArchived;
-  final String secretCode;
-  final DateTime createdAt;
+  final bool? isArchived;
+  final String? secretCode;
+  final DateTime? createdAt;
   final DependentNotesModel? notes;
 
   DependentModel({
+    this.dependentId,
     required this.name,
     required this.surname,
     this.nickname,
@@ -39,6 +41,7 @@ class DependentModel {
 
   factory DependentModel.fromJson(Map<String, dynamic> json) {
     return DependentModel(
+      dependentId: json['dependent_id'] as String?,
       name: json['name'] as String,
       surname: json['surname'] as String,
       nickname: json['nickname'] as String?,
@@ -65,6 +68,7 @@ class DependentModel {
   }
 
   DependentModel copyWith({
+    String? dependentId,
     String? name,
     String? surname,
     String? nickname,
@@ -82,6 +86,7 @@ class DependentModel {
     DependentNotesModel? notes,
   }) {
     return DependentModel(
+      dependentId: dependentId ?? this.dependentId,
       name: name ?? this.name,
       surname: surname ?? this.surname,
       nickname: nickname ?? this.nickname,

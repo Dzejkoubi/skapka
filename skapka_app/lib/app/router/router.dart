@@ -13,8 +13,17 @@ class AppRouter extends RootStackRouter {
 
   @override
   List<AutoRoute> get routes => [
+    // Initial route
     AutoRoute(page: AuthGate.page, initial: true),
+    // Onboarding and auth routes
+    AutoRoute(page: WelcomeRoute.page),
+    AutoRoute(page: EventsRoute.page),
+    AutoRoute(page: LoginRoute.page),
+    AutoRoute(page: RegisterRouteFirst.page),
+    AutoRoute(page: RegisterRouteSecond.page),
+    AutoRoute(page: AccountNotApprovedRoute.page),
 
+    // Main app routes with bottom navbar and settings
     AutoRoute(
       page: NavbarDashboard.page,
       children: [
@@ -24,30 +33,23 @@ class AppRouter extends RootStackRouter {
         CustomRoute(page: InformationRoute.page),
       ],
     ),
-
     AutoRoute(page: SettingsRoute.page),
 
-    AutoRoute(page: WelcomeRoute.page),
-    AutoRoute(page: EventsRoute.page),
-    AutoRoute(page: LoginRoute.page),
-    AutoRoute(page: RegisterRouteFirst.page),
-    AutoRoute(page: RegisterRouteSecond.page),
-    AutoRoute(page: AccountNotApprovedRoute.page),
-
+    // Event related routes
+    AutoRoute(page: EventDetailsRoute.page),
     AutoRoute(page: CreateEditEventRoute.page, guards: [LeaderGuard()]),
-
     AutoRoute(
       page: CreateEditEventInstructionsRoute.page,
       guards: [LeaderGuard()],
       fullscreenDialog: true,
     ),
-
     AutoRoute(
       page: CreateEditEventParticipantsRoute.page,
       guards: [LeaderGuard()],
       fullscreenDialog: true,
     ),
 
+    // Development and showcase routes
     AutoRoute(page: ButtonThemeShowcaseRoute.page),
     AutoRoute(page: SquircleShowcaseRoute.page),
     AutoRoute(page: LargeDialogShowcaseRoute.page),

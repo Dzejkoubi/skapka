@@ -409,7 +409,15 @@ class AppLocalizationsEn extends AppLocalizations {
       'Discard';
 
   @override
-  String get create_edit_event_screen_event_title_hint => 'Event Name';
+  String get create_edit_event_screen_event_title_hint => 'Event Title';
+
+  @override
+  String get create_edit_event_screen_event_title_error_empty =>
+      'Event title cannot be empty.';
+
+  @override
+  String get create_edit_event_screen_event_title_error_too_long =>
+      'Event title cannot exceed 50 characters.';
 
   @override
   String get create_edit_event_screen_event_sign_up_from => 'Sign-up from';
@@ -428,11 +436,14 @@ class AppLocalizationsEn extends AppLocalizations {
       'Select Participants';
 
   @override
+  String get create_edit_participants_screen_title => 'Select Participants';
+
+  @override
   String get create_edit_event_screen_total_participants_text =>
       'Total Participants';
 
   @override
-  String get create_edit_event_screen_troops => 'Patrols';
+  String get create_edit_event_screen_troops => 'Troops';
 
   @override
   String get create_edit_event_screen_18_leaders => 'Leaders/18+';
@@ -441,28 +452,24 @@ class AppLocalizationsEn extends AppLocalizations {
   String get create_edit_event_screen_instructions_text => 'Instructions';
 
   @override
+  String get create_edit_instructions_screen_title => 'Event Instructions';
+
+  @override
   String get create_edit_event_screen_meeting_place_text => 'Meeting Place';
 
   @override
-  String get create_edit_event_screen_meeting_place_address_text => 'Address';
-
-  @override
-  String get create_edit_event_screen_event_title_error_empty =>
-      'Event name cannot be empty.';
-
-  @override
-  String get create_edit_event_screen_event_title_error_too_long =>
-      'Event name cannot exceed 50 characters.';
+  String get create_edit_event_screen_meeting_place_description =>
+      'Address or name that the user can search for in maps. If you do not fill it in, the meeting place will not be displayed.';
 
   @override
   String get settings_screen_title => 'Settings';
 
   @override
-  String get settings_screen_change_signout_button_text => 'Sign out';
+  String get settings_screen_change_signout_button_text => 'Sign Out';
 
   @override
   String get settings_screen_change_delete_account_button_text =>
-      'Delete account';
+      'Delete Account';
 
   @override
   String get yes => 'Yes';

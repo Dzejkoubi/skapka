@@ -148,23 +148,25 @@
     "create_edit_event_screen_go_back_without_saving_dialog_primary_button_text": "Zahodit",
 
     "create_edit_event_screen_event_title_hint": "Název výpravy",
+    "create_edit_event_screen_event_title_error_empty": "Název výpravy nemůže být prázdný.",
+    "create_edit_event_screen_event_title_error_too_long": "Název výpravy nemůže přesáhnout 50 znaků.",
+
     "create_edit_event_screen_event_sign_up_from": "Přihlašování od",
     "create_edit_event_screen_event_sign_up_to": "Přihlašování do",
     "create_edit_event_screen_event_from_hint": "Od",
     "create_edit_event_screen_event_to_hint": "Do",
+
     "create_edit_event_screen_select_participants_text": "Vybrat účastníky",
+    "create_edit_participants_screen_title": "Vybrat účastníky",
     "create_edit_event_screen_total_participants_text": "Celkový počet účastníků",
     "create_edit_event_screen_troops": "Družinky",
     "create_edit_event_screen_18_leaders": "Vedoucí/18+",
+
     "create_edit_event_screen_instructions_text": "Pokyny",
+    "create_edit_instructions_screen_title": "Pokyny výpravy",
+
     "create_edit_event_screen_meeting_place_text": "Místo srazu",
-    "create_edit_event_screen_meeting_place_address_text": "Adresa",
-
-    "create_edit_event_screen_event_title_error_empty": "Název výpravy nemůže být prázdný.",
-    "create_edit_event_screen_event_title_error_too_long": "Název výpravy nemůže přesáhnout 50 znaků.",
-
-    "create_edit_participants_screen_title": "Vybrat účastníky",
-    "create_edit_details_screen_title": "Detaily výpravy",
+    "create_edit_event_screen_meeting_place_description": "Adresa či jméno, které může uživatel vyhledat v mapách. Pokud nevyplníš, místo srazu nebude zobrazeno.",
 
     "settings_screen_title": "Nastavení",
     "settings_screen_change_signout_button_text": "Odhlásit se",

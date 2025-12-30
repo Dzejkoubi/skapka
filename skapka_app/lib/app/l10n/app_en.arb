@@ -146,27 +146,31 @@
     "create_edit_event_screen_go_back_without_saving_dialog_title": "Discard Changes",
     "create_edit_event_screen_go_back_without_saving_dialog_description": "Are you sure you want to leave without saving changes? All unsaved changes will be lost.",
     "create_edit_event_screen_go_back_without_saving_dialog_primary_button_text": "Discard",
-    "create_edit_event_screen_go_back_without_saving_dialog_secondary_button_text": "Back",
 
-    "create_edit_event_screen_event_title_hint": "Event Name",
+    "create_edit_event_screen_event_title_hint": "Event Title",
+    "create_edit_event_screen_event_title_error_empty": "Event title cannot be empty.",
+    "create_edit_event_screen_event_title_error_too_long": "Event title cannot exceed 50 characters.",
+
     "create_edit_event_screen_event_sign_up_from": "Sign-up from",
     "create_edit_event_screen_event_sign_up_to": "Sign-up to",
     "create_edit_event_screen_event_from_hint": "From",
     "create_edit_event_screen_event_to_hint": "To",
-    "create_edit_event_screen_select_participants_text": "Select Participants",
-    "create_edit_event_screen_total_participants_text": "Total Participants",
-    "create_edit_event_screen_troops": "Patrols",
-    "create_edit_event_screen_18_leaders": "Leaders/18+",
-    "create_edit_event_screen_instructions_text": "Instructions",
-    "create_edit_event_screen_meeting_place_text": "Meeting Place",
-    "create_edit_event_screen_meeting_place_address_text": "Address",
 
-    "create_edit_event_screen_event_title_error_empty": "Event name cannot be empty.",
-    "create_edit_event_screen_event_title_error_too_long": "Event name cannot exceed 50 characters.",
+    "create_edit_event_screen_select_participants_text": "Select Participants",
+    "create_edit_participants_screen_title": "Select Participants",
+    "create_edit_event_screen_total_participants_text": "Total Participants",
+    "create_edit_event_screen_troops": "Troops",
+    "create_edit_event_screen_18_leaders": "Leaders/18+",
+
+    "create_edit_event_screen_instructions_text": "Instructions",
+    "create_edit_instructions_screen_title": "Event Instructions",
+
+    "create_edit_event_screen_meeting_place_text": "Meeting Place",
+    "create_edit_event_screen_meeting_place_description": "Address or name that the user can search for in maps. If you do not fill it in, the meeting place will not be displayed.",
 
     "settings_screen_title": "Settings",
-    "settings_screen_change_signout_button_text": "Sign out",
-    "settings_screen_change_delete_account_button_text": "Delete account",
+    "settings_screen_change_signout_button_text": "Sign Out",
+    "settings_screen_change_delete_account_button_text": "Delete Account",
 
     "yes": "Yes",
     "no": "No",
@@ -175,4 +179,5 @@
     "back" : "Back",
     "common_copied_to_clipboard": "Copied to clipboard",
     "create": "Create",
-    "edit": "Edit"}
+    "edit": "Edit"
+}

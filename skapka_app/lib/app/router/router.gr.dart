@@ -10,19 +10,22 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i20;
-import 'package:flutter/foundation.dart' as _i21;
-import 'package:flutter/material.dart' as _i23;
-import 'package:skapka_app/models/event_model.dart' as _i22;
+import 'package:collection/collection.dart' as _i24;
+import 'package:flutter/foundation.dart' as _i25;
+import 'package:flutter/material.dart' as _i21;
+import 'package:skapka_app/models/dependents/dependent_model.dart' as _i22;
+import 'package:skapka_app/models/event_model.dart' as _i26;
+import 'package:skapka_app/models/event_participant.dart' as _i23;
 import 'package:skapka_app/screens/account_not_approved_screen/account_not_approved_screen.dart'
     as _i1;
 import 'package:skapka_app/screens/auth_gate/auth_gate.dart' as _i2;
 import 'package:skapka_app/screens/calendar_screen/calendar_screen.dart' as _i4;
+import 'package:skapka_app/screens/create_edit_event_screen.dart/create_edit_event_screen.dart'
+    as _i7;
 import 'package:skapka_app/screens/create_edit_event_screen.dart/screens/create_edit_event_instructions_screen.dart'
     as _i5;
 import 'package:skapka_app/screens/create_edit_event_screen.dart/screens/create_edit_event_participants_screen.dart'
     as _i6;
-import 'package:skapka_app/screens/create_edit_event_screen.dart/create_edit_event_screen.dart'
-    as _i7;
 import 'package:skapka_app/screens/dependents_screen/dependents_screen.dart'
     as _i8;
 import 'package:skapka_app/screens/event_details_screen/event_details_screen.dart'
@@ -129,18 +132,78 @@ class CreateEditEventInstructionsRoute extends _i20.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i6.CreateEditEventParticipantsScreen]
-class CreateEditEventParticipantsRoute extends _i20.PageRouteInfo<void> {
-  const CreateEditEventParticipantsRoute({List<_i20.PageRouteInfo>? children})
-    : super(CreateEditEventParticipantsRoute.name, initialChildren: children);
+class CreateEditEventParticipantsRoute
+    extends _i20.PageRouteInfo<CreateEditEventParticipantsRouteArgs> {
+  CreateEditEventParticipantsRoute({
+    _i21.Key? key,
+    List<_i22.DependentModel>? getGroupDependents,
+    List<_i23.EventParticipant>? eventParticipants,
+    List<_i20.PageRouteInfo>? children,
+  }) : super(
+         CreateEditEventParticipantsRoute.name,
+         args: CreateEditEventParticipantsRouteArgs(
+           key: key,
+           getGroupDependents: getGroupDependents,
+           eventParticipants: eventParticipants,
+         ),
+         initialChildren: children,
+       );
 
   static const String name = 'CreateEditEventParticipantsRoute';
 
   static _i20.PageInfo page = _i20.PageInfo(
     name,
     builder: (data) {
-      return const _i6.CreateEditEventParticipantsScreen();
+      final args = data.argsAs<CreateEditEventParticipantsRouteArgs>(
+        orElse: () => const CreateEditEventParticipantsRouteArgs(),
+      );
+      return _i6.CreateEditEventParticipantsScreen(
+        key: args.key,
+        getGroupDependents: args.getGroupDependents,
+        eventParticipants: args.eventParticipants,
+      );
     },
   );
+}
+
+class CreateEditEventParticipantsRouteArgs {
+  const CreateEditEventParticipantsRouteArgs({
+    this.key,
+    this.getGroupDependents,
+    this.eventParticipants,
+  });
+
+  final _i21.Key? key;
+
+  final List<_i22.DependentModel>? getGroupDependents;
+
+  final List<_i23.EventParticipant>? eventParticipants;
+
+  @override
+  String toString() {
+    return 'CreateEditEventParticipantsRouteArgs{key: $key, getGroupDependents: $getGroupDependents, eventParticipants: $eventParticipants}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! CreateEditEventParticipantsRouteArgs) return false;
+    return key == other.key &&
+        const _i24.ListEquality<_i22.DependentModel>().equals(
+          getGroupDependents,
+          other.getGroupDependents,
+        ) &&
+        const _i24.ListEquality<_i23.EventParticipant>().equals(
+          eventParticipants,
+          other.eventParticipants,
+        );
+  }
+
+  @override
+  int get hashCode =>
+      key.hashCode ^
+      const _i24.ListEquality<_i22.DependentModel>().hash(getGroupDependents) ^
+      const _i24.ListEquality<_i23.EventParticipant>().hash(eventParticipants);
 }
 
 /// generated route for
@@ -148,9 +211,10 @@ class CreateEditEventParticipantsRoute extends _i20.PageRouteInfo<void> {
 class CreateEditEventRoute
     extends _i20.PageRouteInfo<CreateEditEventRouteArgs> {
   CreateEditEventRoute({
-    _i21.Key? key,
-    _i22.EventModel? event,
-    _i22.EventTimeType? eventTimeType,
+    _i25.Key? key,
+    _i26.EventModel? event,
+    _i26.EventTimeType? eventTimeType,
+    List<_i23.EventParticipant>? eventParticipants,
     List<_i20.PageRouteInfo>? children,
   }) : super(
          CreateEditEventRoute.name,
@@ -158,6 +222,7 @@ class CreateEditEventRoute
            key: key,
            event: event,
            eventTimeType: eventTimeType,
+           eventParticipants: eventParticipants,
          ),
          initialChildren: children,
        );
@@ -174,23 +239,31 @@ class CreateEditEventRoute
         key: args.key,
         event: args.event,
         eventTimeType: args.eventTimeType,
+        eventParticipants: args.eventParticipants,
       );
     },
   );
 }
 
 class CreateEditEventRouteArgs {
-  const CreateEditEventRouteArgs({this.key, this.event, this.eventTimeType});
+  const CreateEditEventRouteArgs({
+    this.key,
+    this.event,
+    this.eventTimeType,
+    this.eventParticipants,
+  });
 
-  final _i21.Key? key;
+  final _i25.Key? key;
 
-  final _i22.EventModel? event;
+  final _i26.EventModel? event;
 
-  final _i22.EventTimeType? eventTimeType;
+  final _i26.EventTimeType? eventTimeType;
+
+  final List<_i23.EventParticipant>? eventParticipants;
 
   @override
   String toString() {
-    return 'CreateEditEventRouteArgs{key: $key, event: $event, eventTimeType: $eventTimeType}';
+    return 'CreateEditEventRouteArgs{key: $key, event: $event, eventTimeType: $eventTimeType, eventParticipants: $eventParticipants}';
   }
 
   @override
@@ -199,11 +272,19 @@ class CreateEditEventRouteArgs {
     if (other is! CreateEditEventRouteArgs) return false;
     return key == other.key &&
         event == other.event &&
-        eventTimeType == other.eventTimeType;
+        eventTimeType == other.eventTimeType &&
+        const _i24.ListEquality<_i23.EventParticipant>().equals(
+          eventParticipants,
+          other.eventParticipants,
+        );
   }
 
   @override
-  int get hashCode => key.hashCode ^ event.hashCode ^ eventTimeType.hashCode;
+  int get hashCode =>
+      key.hashCode ^
+      event.hashCode ^
+      eventTimeType.hashCode ^
+      const _i24.ListEquality<_i23.EventParticipant>().hash(eventParticipants);
 }
 
 /// generated route for
@@ -226,9 +307,9 @@ class DependentsRoute extends _i20.PageRouteInfo<void> {
 /// [_i9.EventDetailsScreen]
 class EventDetailsRoute extends _i20.PageRouteInfo<EventDetailsRouteArgs> {
   EventDetailsRoute({
-    _i23.Key? key,
-    required _i22.EventModel event,
-    required _i22.EventTimeType eventTimeType,
+    _i21.Key? key,
+    required _i26.EventModel event,
+    required _i26.EventTimeType eventTimeType,
     List<_i20.PageRouteInfo>? children,
   }) : super(
          EventDetailsRoute.name,
@@ -262,11 +343,11 @@ class EventDetailsRouteArgs {
     required this.eventTimeType,
   });
 
-  final _i23.Key? key;
+  final _i21.Key? key;
 
-  final _i22.EventModel event;
+  final _i26.EventModel event;
 
-  final _i22.EventTimeType eventTimeType;
+  final _i26.EventTimeType eventTimeType;
 
   @override
   String toString() {
@@ -386,7 +467,7 @@ class RegisterRouteFirst extends _i20.PageRouteInfo<void> {
 /// [_i16.RegisterScreenSecond]
 class RegisterRouteSecond extends _i20.PageRouteInfo<RegisterRouteSecondArgs> {
   RegisterRouteSecond({
-    _i21.Key? key,
+    _i25.Key? key,
     required String email,
     required String name,
     required String surname,
@@ -426,7 +507,7 @@ class RegisterRouteSecondArgs {
     required this.surname,
   });
 
-  final _i21.Key? key;
+  final _i25.Key? key;
 
   final String email;
 

@@ -12,6 +12,7 @@ import 'package:skapka_app/app/theme/app_text_theme.dart';
 import 'package:skapka_app/models/event_model.dart';
 import 'package:skapka_app/providers/account_provider.dart';
 import 'package:skapka_app/screens/calendar_screen/widgets/events_expansion_tile.dart';
+import 'package:skapka_app/utils/is_user_leader.dart';
 import 'package:skapka_app/widgets/event_box/user_status_box.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -59,8 +60,7 @@ class EventBox extends StatelessWidget {
 
     return GestureDetector(
       onTap: () {
-        if (eventTimeType == EventTimeType.live ||
-            accountProvider.rights >= 2) {
+        if (eventTimeType == EventTimeType.live || isUserLeader(context)) {
           // Navigate to event details screen
           context.router.push(
             EventDetailsRoute(event: event, eventTimeType: eventTimeType),

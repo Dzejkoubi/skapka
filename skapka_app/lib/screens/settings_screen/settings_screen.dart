@@ -1,12 +1,9 @@
-import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:skapka_app/app/l10n/app_localizations.dart';
 import 'package:skapka_app/app/router/router.gr.dart';
-import 'package:skapka_app/app/theme/app_color_theme.dart';
-import 'package:skapka_app/app/theme/app_radius.dart';
+import 'package:skapka_app/app/theme/app_decorations.dart';
 import 'package:skapka_app/app/theme/app_spacing.dart';
 import 'package:skapka_app/app/theme/app_text_theme.dart';
 import 'package:skapka_app/app/theme/main_button_theme.dart';
@@ -38,16 +35,7 @@ class SettingsScreen extends StatelessWidget {
             Container(
               width: double.infinity,
               padding: const EdgeInsets.all(AppSpacing.medium),
-              decoration: BoxDecoration(
-                border: BoxBorder.all(
-                  color: context.colors.background.medium,
-                  width: 1.0,
-                ),
-                borderRadius: SmoothBorderRadius(
-                  cornerRadius: AppRadius.medium,
-                  cornerSmoothing: AppRadius.smoothNormal,
-                ),
-              ),
+              decoration: AppDecorations.primaryContainer(context),
               child: Column(
                 children: [
                   Row(

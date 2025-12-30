@@ -5,6 +5,7 @@ import 'package:skapka_app/app/theme/app_spacing.dart';
 import 'package:skapka_app/providers/account_provider.dart';
 import 'package:skapka_app/providers/events_provider.dart';
 import 'package:skapka_app/screens/calendar_screen/widgets/events_expansion_tile.dart';
+import 'package:skapka_app/utils/is_user_leader.dart';
 
 @RoutePage()
 class CalendarScreen extends StatelessWidget {
@@ -32,7 +33,7 @@ class CalendarScreen extends StatelessWidget {
                   type: EventTimeType.past,
                   events: provider.pastEvents,
                 ),
-                if (accountProvider.rights >= 2)
+                if (isUserLeader(context))
                   EventsExpansionTile(
                     type: EventTimeType.draft,
                     events: provider.draftEvents,

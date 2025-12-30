@@ -5,6 +5,8 @@ import 'package:provider/provider.dart';
 import 'package:skapka_app/app/l10n/app_localizations.dart';
 import 'package:skapka_app/app/router/router.gr.dart';
 import 'package:skapka_app/providers/account_provider.dart';
+import 'package:skapka_app/utils/is_user_admin.dart';
+import 'package:skapka_app/utils/is_user_leader.dart';
 import 'package:skapka_app/widgets/appbar/appbar.dart';
 import 'package:skapka_app/widgets/buttons/main_button.dart';
 import 'package:skapka_app/widgets/navbar/navbar.dart';
@@ -60,7 +62,7 @@ class NavbarDashboard extends StatelessWidget {
               iconAsset: 'assets/icons/navbar/navbar-calendar-month.svg',
               screenRoute: CalendarRoute(),
               speedDialChildren: [
-                if (accountProvider.rights >= 2)
+                if (isUserLeader(context))
                   SpeedDialChild(
                     labelWidget: MainButton.filled(
                       text: AppLocalizations.of(

@@ -1,11 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:skapka_app/app/l10n/app_localizations.dart';
 import 'package:skapka_app/app/theme/app_decorations.dart';
 import 'package:skapka_app/app/theme/app_spacing.dart';
 import 'package:skapka_app/models/event_model.dart';
-import 'package:skapka_app/utils/is_user_leader.dart';
 import 'package:skapka_app/widgets/appbar/appbar.dart';
+import 'package:skapka_app/widgets/event_time_info.dart';
 import 'package:skapka_app/widgets/wrappers/screen_wrapper.dart';
 
 @RoutePage()
@@ -32,51 +31,10 @@ class EventDetailsScreen extends StatelessWidget {
             Container(
               decoration: AppDecorations.primaryContainer(context),
               padding: EdgeInsets.all(AppSpacing.small),
-              child: Column(
-                spacing: AppSpacing.xSmall,
-                children: [
-                  if (isUserLeader(context))
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          AppLocalizations.of(
-                            context,
-                          )!.create_event_screen_event_sign_up_from,
-                        ),
-                      ],
-                    ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        AppLocalizations.of(
-                          context,
-                        )!.create_event_screen_event_sign_up_to,
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        AppLocalizations.of(
-                          context,
-                        )!.create_event_screen_event_from_hint,
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        AppLocalizations.of(
-                          context,
-                        )!.create_event_screen_event_to_hint,
-                      ),
-                    ],
-                  ),
-                ],
+              child: EventTimeInfo(
+                event: event,
+                eventTimeType: eventTimeType,
+                fullInfo: true,
               ),
             ),
           ],

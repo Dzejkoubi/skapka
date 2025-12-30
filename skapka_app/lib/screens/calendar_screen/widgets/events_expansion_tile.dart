@@ -8,6 +8,7 @@ import 'package:skapka_app/app/theme/app_sizes.dart';
 import 'package:skapka_app/app/theme/app_spacing.dart';
 import 'package:skapka_app/app/theme/app_text_theme.dart';
 import 'package:skapka_app/models/event_model.dart';
+import 'package:skapka_app/screens/calendar_screen/widgets/no_events_view.dart';
 import 'package:skapka_app/widgets/event_box/event_box.dart';
 
 enum EventsExpansionTileType { future, live, past, draft }
@@ -70,11 +71,14 @@ class _EventsExpansionTileState extends State<EventsExpansionTile> {
           vertical: AppSpacing.small,
         ),
         children: [
-          for (final event in widget.events)
-            Padding(
-              padding: const EdgeInsets.only(bottom: AppSpacing.small),
-              child: EventBox(event: event),
-            ),
+          if (widget.events.isEmpty)
+            NoEventsView(widget: widget)
+          else
+            for (final event in widget.events)
+              Padding(
+                padding: const EdgeInsets.only(bottom: AppSpacing.small),
+                child: EventBox(event: event),
+              ),
         ],
       ),
     );

@@ -28,7 +28,13 @@ class CreateEventScreen extends StatelessWidget {
                 context,
               )!.create_event_screen_title,
             ),
-            body: const Placeholder(),
+            body: SafeArea(
+              child: Center(
+                child: Text(
+                  AppLocalizations.of(context)!.create_event_screen_title,
+                ),
+              ),
+            ),
             speedDialChildren: [
               SpeedDialChild(
                 labelWidget: MainButton.outlined(

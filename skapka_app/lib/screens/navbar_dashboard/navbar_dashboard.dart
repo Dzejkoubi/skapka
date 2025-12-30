@@ -4,11 +4,13 @@ import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:provider/provider.dart';
 import 'package:skapka_app/app/l10n/app_localizations.dart';
 import 'package:skapka_app/app/router/router.gr.dart';
+import 'package:skapka_app/providers/account_provider.dart';
 import 'package:skapka_app/widgets/appbar/appbar.dart';
 import 'package:skapka_app/widgets/buttons/main_button.dart';
 import 'package:skapka_app/widgets/navbar/navbar.dart';
 import 'package:skapka_app/widgets/navbar/navbar_item.dart';
 import 'package:skapka_app/widgets/wrappers/screen_wrapper.dart';
+import 'package:skapka_app/widgets/wrappers/widgets/custom_floating_action_button_location.dart';
 
 @RoutePage()
 class NavbarDashboard extends StatelessWidget {
@@ -16,6 +18,10 @@ class NavbarDashboard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final AccountProvider accountProvider = Provider.of<AccountProvider>(
+      context,
+      listen: false,
+    );
     return ChangeNotifierProvider(
       create: (_) => ValueNotifier<bool>(false),
       child: Builder(
@@ -33,33 +39,48 @@ class NavbarDashboard extends StatelessWidget {
               label: AppLocalizations.of(context)!.navbar_events,
               iconAsset: 'assets/icons/navbar/navbar-compass.svg',
               screenRoute: EventsRoute(),
-              speedDialChildren: [
-                SpeedDialChild(
-                  labelWidget: MainButton.filled(
-                    text: AppLocalizations.of(
-                      context,
-                    )!.events_screen_speed_dial_create_event_text,
-                    onPressed: () {
-                      dialOpenNotifier.value = false;
-                      context.router.push(CreateEventRoute());
-                    },
-                  ),
-                ),
-              ],
+              speedDialChildren: accountProvider.rights >= 2
+                  ? [
+                      SpeedDialChild(
+                        labelWidget: MainButton.filled(
+                          text: AppLocalizations.of(
+                            context,
+                          )!.events_screen_speed_dial_create_event_text,
+                          onPressed: () {
+                            dialOpenNotifier.value = false;
+                            context.router.push(CreateEventRoute());
+                          },
+                        ),
+                      ),
+                    ]
+                  : null,
             ),
             CustomNavBarItemInfo(
               label: AppLocalizations.of(context)!.navbar_calendar,
               iconAsset: 'assets/icons/navbar/navbar-calendar-month.svg',
               screenRoute: CalendarRoute(),
               speedDialChildren: [
+                if (accountProvider.rights >= 2)
+                  SpeedDialChild(
+                    labelWidget: MainButton.filled(
+                      text: AppLocalizations.of(
+                        context,
+                      )!.calendar_screen_speed_dial_create_event_text,
+                      onPressed: () {
+                        dialOpenNotifier.value = false;
+                        context.router.push(CreateEventRoute());
+                      },
+                    ),
+                  ),
                 SpeedDialChild(
-                  labelWidget: MainButton.filled(
+                  labelWidget: MainButton.outlined(
                     text: AppLocalizations.of(
                       context,
-                    )!.calendar_screen_speed_dial_create_event_text,
+                    )!.calendar_screen_speed_dial_add_google_calendar,
                     onPressed: () {
-                      dialOpenNotifier.value = false;
-                      context.router.push(CreateEventRoute());
+                      print(
+                        'Add Google Calendar',
+                      ); // TODO: implement add Google Calendar
                     },
                   ),
                 ),

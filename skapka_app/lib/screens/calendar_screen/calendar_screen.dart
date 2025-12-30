@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:skapka_app/app/theme/app_spacing.dart';
+import 'package:skapka_app/providers/account_provider.dart';
 import 'package:skapka_app/providers/events_provider.dart';
 import 'package:skapka_app/screens/calendar_screen/widgets/events_expansion_tile.dart';
 
@@ -11,6 +12,7 @@ class CalendarScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final AccountProvider accountProvider = context.read<AccountProvider>();
     return SingleChildScrollView(
       child: SafeArea(
         child: Consumer<EventsProvider>(
@@ -30,10 +32,11 @@ class CalendarScreen extends StatelessWidget {
                   type: EventsExpansionTileType.past,
                   events: provider.pastEvents,
                 ),
-                EventsExpansionTile(
-                  type: EventsExpansionTileType.draft,
-                  events: provider.draftEvents,
-                ),
+                if (accountProvider.rights >= 2)
+                  EventsExpansionTile(
+                    type: EventsExpansionTileType.draft,
+                    events: provider.draftEvents,
+                  ),
               ],
             );
           },

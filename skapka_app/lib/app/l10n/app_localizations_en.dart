@@ -261,6 +261,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get event_box_photos_link_text => 'Photos';
 
   @override
+  String get event_box_sign_up_start_date_text => 'Sign-up starts on: ';
+
+  @override
   String get event_box_sign_up_end_date_text => 'Sign-up ends on: ';
 
   @override
@@ -279,16 +282,40 @@ class AppLocalizationsEn extends AppLocalizations {
   String get calendar_screen_speed_dial_create_event_text => 'Create';
 
   @override
+  String get calendar_screen_speed_dial_add_google_calendar =>
+      'Google Calendar';
+
+  @override
+  String get calendar_screen_event_expansion_tile_no_events_title =>
+      'Quiet on the front.';
+
+  @override
   String get calendar_screen_event_expansion_tile_future_title => 'Upcoming';
+
+  @override
+  String get calendar_screen_event_expansion_tile_future_no_events_subtitle =>
+      'It seems there are no upcoming events.';
 
   @override
   String get calendar_screen_event_expansion_tile_live_title => 'Sign up';
 
   @override
+  String get calendar_screen_event_expansion_tile_live_no_events_subtitle =>
+      'It seems there are no live events.';
+
+  @override
   String get calendar_screen_event_expansion_tile_past_title => 'Past';
 
   @override
+  String get calendar_screen_event_expansion_tile_past_no_events_subtitle =>
+      'It seems there are no past events.';
+
+  @override
   String get calendar_screen_event_expansion_tile_draft_title => 'Drafts';
+
+  @override
+  String get calendar_screen_event_expansion_tile_draft_no_events_subtitle =>
+      'It seems there are no draft events.';
 
   @override
   String get create_event_screen_title => 'Create Event';

@@ -100,6 +100,7 @@
         }
     },
     "event_box_photos_link_text": "Fotky",
+    "event_box_sign_up_start_date_text" : "Přihlašování od: ",
     "event_box_sign_up_end_date_text" : "Přihlašování do: ",
     "event_box_event_multiple_days_start_text" : "Od: ",
     "event_box_event_multiple_days_end_text" : "Do: ",
@@ -107,10 +108,16 @@
 
     "calendar_screen_title": "Kalendář",
     "calendar_screen_speed_dial_create_event_text": "Vytvořit",
+    "calendar_screen_speed_dial_add_google_calendar": "Google kalendář",
+    "calendar_screen_event_expansion_tile_no_events_title": "Ticho po pěšině...",
     "calendar_screen_event_expansion_tile_future_title": "Nadcházející",
-    "calendar_screen_event_expansion_tile_live_title": "Přihlášování",
+    "calendar_screen_event_expansion_tile_future_no_events_subtitle": "Zdá se, že nejsou žádné nadcházející výpravy.",
+    "calendar_screen_event_expansion_tile_live_title": "Přihlašování",
+    "calendar_screen_event_expansion_tile_live_no_events_subtitle": "Zdá se, že nejsou žádné výpravy k přihlášení.",
     "calendar_screen_event_expansion_tile_past_title": "Proběhlé",
+    "calendar_screen_event_expansion_tile_past_no_events_subtitle": "Zdá se, že nejsou žádné proběhlé výpravy.",
     "calendar_screen_event_expansion_tile_draft_title": "Koncepty",
+    "calendar_screen_event_expansion_tile_draft_no_events_subtitle": "Zdá se, že nejsou žádné koncepty.",
 
     "create_event_screen_title": "Vytvořit výpravu",
     "create_event_screen_speed_dial_save_event_text": "Uložit",

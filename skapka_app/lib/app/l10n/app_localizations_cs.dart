@@ -258,6 +258,9 @@ class AppLocalizationsCs extends AppLocalizations {
   String get event_box_photos_link_text => 'Fotky';
 
   @override
+  String get event_box_sign_up_start_date_text => 'Přihlašování od: ';
+
+  @override
   String get event_box_sign_up_end_date_text => 'Přihlašování do: ';
 
   @override
@@ -276,17 +279,41 @@ class AppLocalizationsCs extends AppLocalizations {
   String get calendar_screen_speed_dial_create_event_text => 'Vytvořit';
 
   @override
+  String get calendar_screen_speed_dial_add_google_calendar =>
+      'Google kalendář';
+
+  @override
+  String get calendar_screen_event_expansion_tile_no_events_title =>
+      'Ticho po pěšině...';
+
+  @override
   String get calendar_screen_event_expansion_tile_future_title =>
       'Nadcházející';
 
   @override
-  String get calendar_screen_event_expansion_tile_live_title => 'Přihlášování';
+  String get calendar_screen_event_expansion_tile_future_no_events_subtitle =>
+      'Zdá se, že nejsou žádné nadcházející výpravy.';
+
+  @override
+  String get calendar_screen_event_expansion_tile_live_title => 'Přihlašování';
+
+  @override
+  String get calendar_screen_event_expansion_tile_live_no_events_subtitle =>
+      'Zdá se, že nejsou žádné výpravy k přihlášení.';
 
   @override
   String get calendar_screen_event_expansion_tile_past_title => 'Proběhlé';
 
   @override
+  String get calendar_screen_event_expansion_tile_past_no_events_subtitle =>
+      'Zdá se, že nejsou žádné proběhlé výpravy.';
+
+  @override
   String get calendar_screen_event_expansion_tile_draft_title => 'Koncepty';
+
+  @override
+  String get calendar_screen_event_expansion_tile_draft_no_events_subtitle =>
+      'Zdá se, že nejsou žádné koncepty.';
 
   @override
   String get create_event_screen_title => 'Vytvořit výpravu';

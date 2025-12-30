@@ -35,6 +35,8 @@ class AppRouter extends RootStackRouter {
 
     AutoRoute(page: CreateEventRoute.page),
 
+    AutoRoute(page: EventDetailsRoute.page),
+
     AutoRoute(page: ButtonThemeShowcaseRoute.page),
     AutoRoute(page: SquircleShowcaseRoute.page),
     AutoRoute(page: LargeDialogShowcaseRoute.page),

@@ -516,6 +516,12 @@ abstract class AppLocalizations {
   /// **'Fotky'**
   String get event_box_photos_link_text;
 
+  /// No description provided for @event_box_sign_up_start_date_text.
+  ///
+  /// In cs, this message translates to:
+  /// **'Přihlašování od: '**
+  String get event_box_sign_up_start_date_text;
+
   /// No description provided for @event_box_sign_up_end_date_text.
   ///
   /// In cs, this message translates to:
@@ -552,17 +558,41 @@ abstract class AppLocalizations {
   /// **'Vytvořit'**
   String get calendar_screen_speed_dial_create_event_text;
 
+  /// No description provided for @calendar_screen_speed_dial_add_google_calendar.
+  ///
+  /// In cs, this message translates to:
+  /// **'Google kalendář'**
+  String get calendar_screen_speed_dial_add_google_calendar;
+
+  /// No description provided for @calendar_screen_event_expansion_tile_no_events_title.
+  ///
+  /// In cs, this message translates to:
+  /// **'Ticho po pěšině...'**
+  String get calendar_screen_event_expansion_tile_no_events_title;
+
   /// No description provided for @calendar_screen_event_expansion_tile_future_title.
   ///
   /// In cs, this message translates to:
   /// **'Nadcházející'**
   String get calendar_screen_event_expansion_tile_future_title;
 
+  /// No description provided for @calendar_screen_event_expansion_tile_future_no_events_subtitle.
+  ///
+  /// In cs, this message translates to:
+  /// **'Zdá se, že nejsou žádné nadcházející výpravy.'**
+  String get calendar_screen_event_expansion_tile_future_no_events_subtitle;
+
   /// No description provided for @calendar_screen_event_expansion_tile_live_title.
   ///
   /// In cs, this message translates to:
-  /// **'Přihlášování'**
+  /// **'Přihlašování'**
   String get calendar_screen_event_expansion_tile_live_title;
+
+  /// No description provided for @calendar_screen_event_expansion_tile_live_no_events_subtitle.
+  ///
+  /// In cs, this message translates to:
+  /// **'Zdá se, že nejsou žádné výpravy k přihlášení.'**
+  String get calendar_screen_event_expansion_tile_live_no_events_subtitle;
 
   /// No description provided for @calendar_screen_event_expansion_tile_past_title.
   ///
@@ -570,11 +600,23 @@ abstract class AppLocalizations {
   /// **'Proběhlé'**
   String get calendar_screen_event_expansion_tile_past_title;
 
+  /// No description provided for @calendar_screen_event_expansion_tile_past_no_events_subtitle.
+  ///
+  /// In cs, this message translates to:
+  /// **'Zdá se, že nejsou žádné proběhlé výpravy.'**
+  String get calendar_screen_event_expansion_tile_past_no_events_subtitle;
+
   /// No description provided for @calendar_screen_event_expansion_tile_draft_title.
   ///
   /// In cs, this message translates to:
   /// **'Koncepty'**
   String get calendar_screen_event_expansion_tile_draft_title;
+
+  /// No description provided for @calendar_screen_event_expansion_tile_draft_no_events_subtitle.
+  ///
+  /// In cs, this message translates to:
+  /// **'Zdá se, že nejsou žádné koncepty.'**
+  String get calendar_screen_event_expansion_tile_draft_no_events_subtitle;
 
   /// No description provided for @create_event_screen_title.
   ///

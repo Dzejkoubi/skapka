@@ -11,10 +11,10 @@ import 'package:skapka_app/models/event_model.dart';
 import 'package:skapka_app/screens/calendar_screen/widgets/no_events_view.dart';
 import 'package:skapka_app/widgets/event_box/event_box.dart';
 
-enum EventsExpansionTileType { future, live, past, draft }
+enum EventTimeType { future, live, past, draft }
 
 class EventsExpansionTile extends StatefulWidget {
-  final EventsExpansionTileType type;
+  final EventTimeType type;
   final List<EventModel> events;
 
   const EventsExpansionTile({
@@ -77,7 +77,7 @@ class _EventsExpansionTileState extends State<EventsExpansionTile> {
             for (final event in widget.events)
               Padding(
                 padding: const EdgeInsets.only(bottom: AppSpacing.small),
-                child: EventBox(event: event),
+                child: EventBox(event: event, eventTimeType: widget.type),
               ),
         ],
       ),
@@ -86,7 +86,7 @@ class _EventsExpansionTileState extends State<EventsExpansionTile> {
 
   _EventsExpansionTileConfig _getConfig(BuildContext context) {
     switch (widget.type) {
-      case EventsExpansionTileType.future:
+      case EventTimeType.future:
         return _EventsExpansionTileConfig(
           borderColor: context.colors.secondary.light,
           backgroundColor: context.colors.background.light,
@@ -94,7 +94,7 @@ class _EventsExpansionTileState extends State<EventsExpansionTile> {
             context,
           )!.calendar_screen_event_expansion_tile_future_title,
         );
-      case EventsExpansionTileType.live:
+      case EventTimeType.live:
         return _EventsExpansionTileConfig(
           borderColor: context.colors.accent.normal,
           backgroundColor: context.colors.background.light,
@@ -102,7 +102,7 @@ class _EventsExpansionTileState extends State<EventsExpansionTile> {
             context,
           )!.calendar_screen_event_expansion_tile_live_title,
         );
-      case EventsExpansionTileType.past:
+      case EventTimeType.past:
         return _EventsExpansionTileConfig(
           borderColor: context.colors.error.light,
           backgroundColor: context.colors.background.light,
@@ -110,7 +110,7 @@ class _EventsExpansionTileState extends State<EventsExpansionTile> {
             context,
           )!.calendar_screen_event_expansion_tile_past_title,
         );
-      case EventsExpansionTileType.draft:
+      case EventTimeType.draft:
         return _EventsExpansionTileConfig(
           borderColor: context.colors.background.medium,
           backgroundColor: context.colors.background.light,

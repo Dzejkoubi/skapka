@@ -61,11 +61,24 @@ class Appbar extends StatelessWidget implements PreferredSizeWidget {
               else
                 const SizedBox(width: AppSizes.iconSizeMedium),
               if (screenName != null)
-                Text(
-                  screenName!,
-                  style: AppTextTheme.displayMedium(
-                    context,
-                  ).copyWith(color: context.colors.text.normalLight),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: AppSpacing.small,
+                    ),
+                    child: Center(
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Text(
+                          screenName!,
+                          style: AppTextTheme.displayMedium(
+                            context,
+                          ).copyWith(color: context.colors.text.normalLight),
+                          maxLines: 1,
+                        ),
+                      ),
+                    ),
+                  ),
                 )
               else
                 const SizedBox.shrink(),

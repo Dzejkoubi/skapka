@@ -11,6 +11,7 @@ import 'package:skapka_app/app/theme/app_spacing.dart';
 import 'package:skapka_app/app/theme/app_text_theme.dart';
 import 'package:skapka_app/models/event_model.dart';
 import 'package:skapka_app/providers/account_provider.dart';
+import 'package:skapka_app/screens/calendar_screen/widgets/events_expansion_tile.dart';
 import 'package:skapka_app/widgets/event_box/user_status_box.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -18,11 +19,13 @@ class EventBox extends StatelessWidget {
   final EventModel event;
   final UserStatus? userStatus;
   final String? dependentId;
+  final EventTimeType eventTimeType;
 
   const EventBox({
     required this.event,
     this.userStatus,
     this.dependentId,
+    required this.eventTimeType,
     super.key,
   });
 
@@ -43,18 +46,10 @@ class EventBox extends StatelessWidget {
         startDate.day == endDate.day;
 
     // Determine event state
-    final bool isDraft = event.isDraft;
-    final bool isPast = !isDraft && endDate != null && endDate.isBefore(now);
-    final bool isLive =
-        !isDraft &&
-        !isPast &&
-        event.closeSignUp != null &&
-        event.closeSignUp!.isBefore(now);
-    final bool isFuture = !isDraft && !isPast && !isLive;
 
     // Logic for status box enablement
     final bool isStatusBoxEnabled =
-        isFuture &&
+        eventTimeType == EventTimeType.live &&
         (event.openSignUp == null || now.isAfter(event.openSignUp!));
 
     final l10n = AppLocalizations.of(context)!;
@@ -64,9 +59,12 @@ class EventBox extends StatelessWidget {
 
     return GestureDetector(
       onTap: () {
-        if (isLive || accountProvider.rights >= 2) {
+        if (eventTimeType == EventTimeType.live ||
+            accountProvider.rights >= 2) {
           // Navigate to event details screen
-          context.router.push(EventDetailsRoute(event: event));
+          context.router.push(
+            EventDetailsRoute(event: event, eventTimeType: eventTimeType),
+          );
         }
       },
       child: Container(
@@ -108,7 +106,8 @@ class EventBox extends StatelessWidget {
               ],
             ),
             SizedBox(height: AppSpacing.xSmall),
-            if (isPast && event.photoAlbumLink != null)
+            if (eventTimeType == EventTimeType.past &&
+                event.photoAlbumLink != null)
               Align(
                 alignment: Alignment.centerLeft,
                 child: GestureDetector(
@@ -154,7 +153,7 @@ class EventBox extends StatelessWidget {
               child: Column(
                 spacing: AppSpacing.xSmall,
                 children: [
-                  if (isDraft) ...[
+                  if (eventTimeType == EventTimeType.draft) ...[
                     if (event.openSignUp != null)
                       _buildInfoRow(
                         context,
@@ -167,14 +166,14 @@ class EventBox extends StatelessWidget {
                         l10n.event_box_sign_up_end_date_text,
                         dateTimeFormat.format(event.closeSignUp!),
                       ),
-                  ] else if (isLive) ...[
+                  ] else if (eventTimeType == EventTimeType.live) ...[
                     if (event.closeSignUp != null)
                       _buildInfoRow(
                         context,
                         l10n.event_box_sign_up_end_date_text,
                         dateTimeFormat.format(event.closeSignUp!),
                       ),
-                  ] else if (isFuture) ...[
+                  ] else if (eventTimeType == EventTimeType.future) ...[
                     if (event.openSignUp != null)
                       _buildInfoRow(
                         context,

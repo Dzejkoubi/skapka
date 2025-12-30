@@ -30,16 +30,16 @@ class NoEventsView extends StatelessWidget {
           SizedBox(height: AppSpacing.small),
           Text(
             switch (widget.type) {
-              EventsExpansionTileType.future => AppLocalizations.of(
+              EventTimeType.future => AppLocalizations.of(
                 context,
               )!.calendar_screen_event_expansion_tile_future_no_events_subtitle,
-              EventsExpansionTileType.live => AppLocalizations.of(
+              EventTimeType.live => AppLocalizations.of(
                 context,
               )!.calendar_screen_event_expansion_tile_live_no_events_subtitle,
-              EventsExpansionTileType.past => AppLocalizations.of(
+              EventTimeType.past => AppLocalizations.of(
                 context,
               )!.calendar_screen_event_expansion_tile_past_no_events_subtitle,
-              EventsExpansionTileType.draft => AppLocalizations.of(
+              EventTimeType.draft => AppLocalizations.of(
                 context,
               )!.calendar_screen_event_expansion_tile_draft_no_events_subtitle,
             },

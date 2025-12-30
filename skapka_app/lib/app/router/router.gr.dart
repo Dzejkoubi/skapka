@@ -10,13 +10,15 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i18;
-import 'package:flutter/foundation.dart' as _i21;
+import 'package:flutter/foundation.dart' as _i22;
 import 'package:flutter/material.dart' as _i19;
 import 'package:skapka_app/models/event_model.dart' as _i20;
 import 'package:skapka_app/screens/account_not_approved_screen/account_not_approved_screen.dart'
     as _i1;
 import 'package:skapka_app/screens/auth_gate/auth_gate.dart' as _i2;
 import 'package:skapka_app/screens/calendar_screen/calendar_screen.dart' as _i4;
+import 'package:skapka_app/screens/calendar_screen/widgets/events_expansion_tile.dart'
+    as _i21;
 import 'package:skapka_app/screens/create_event_screen.dart/create_event_screen.dart'
     as _i5;
 import 'package:skapka_app/screens/dependents_screen/dependents_screen.dart'
@@ -145,10 +147,15 @@ class EventDetailsRoute extends _i18.PageRouteInfo<EventDetailsRouteArgs> {
   EventDetailsRoute({
     _i19.Key? key,
     required _i20.EventModel event,
+    required _i21.EventTimeType eventTimeType,
     List<_i18.PageRouteInfo>? children,
   }) : super(
          EventDetailsRoute.name,
-         args: EventDetailsRouteArgs(key: key, event: event),
+         args: EventDetailsRouteArgs(
+           key: key,
+           event: event,
+           eventTimeType: eventTimeType,
+         ),
          initialChildren: children,
        );
 
@@ -158,32 +165,44 @@ class EventDetailsRoute extends _i18.PageRouteInfo<EventDetailsRouteArgs> {
     name,
     builder: (data) {
       final args = data.argsAs<EventDetailsRouteArgs>();
-      return _i7.EventDetailsScreen(key: args.key, event: args.event);
+      return _i7.EventDetailsScreen(
+        key: args.key,
+        event: args.event,
+        eventTimeType: args.eventTimeType,
+      );
     },
   );
 }
 
 class EventDetailsRouteArgs {
-  const EventDetailsRouteArgs({this.key, required this.event});
+  const EventDetailsRouteArgs({
+    this.key,
+    required this.event,
+    required this.eventTimeType,
+  });
 
   final _i19.Key? key;
 
   final _i20.EventModel event;
 
+  final _i21.EventTimeType eventTimeType;
+
   @override
   String toString() {
-    return 'EventDetailsRouteArgs{key: $key, event: $event}';
+    return 'EventDetailsRouteArgs{key: $key, event: $event, eventTimeType: $eventTimeType}';
   }
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
     if (other is! EventDetailsRouteArgs) return false;
-    return key == other.key && event == other.event;
+    return key == other.key &&
+        event == other.event &&
+        eventTimeType == other.eventTimeType;
   }
 
   @override
-  int get hashCode => key.hashCode ^ event.hashCode;
+  int get hashCode => key.hashCode ^ event.hashCode ^ eventTimeType.hashCode;
 }
 
 /// generated route for
@@ -286,7 +305,7 @@ class RegisterRouteFirst extends _i18.PageRouteInfo<void> {
 /// [_i14.RegisterScreenSecond]
 class RegisterRouteSecond extends _i18.PageRouteInfo<RegisterRouteSecondArgs> {
   RegisterRouteSecond({
-    _i21.Key? key,
+    _i22.Key? key,
     required String email,
     required String name,
     required String surname,
@@ -326,7 +345,7 @@ class RegisterRouteSecondArgs {
     required this.surname,
   });
 
-  final _i21.Key? key;
+  final _i22.Key? key;
 
   final String email;
 

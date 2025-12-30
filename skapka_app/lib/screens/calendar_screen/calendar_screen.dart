@@ -21,20 +21,20 @@ class CalendarScreen extends StatelessWidget {
               spacing: AppSpacing.large,
               children: [
                 EventsExpansionTile(
-                  type: EventsExpansionTileType.future,
+                  type: EventTimeType.future,
                   events: provider.futureEvents,
                 ),
                 EventsExpansionTile(
-                  type: EventsExpansionTileType.live,
+                  type: EventTimeType.live,
                   events: provider.liveEvents,
                 ),
                 EventsExpansionTile(
-                  type: EventsExpansionTileType.past,
+                  type: EventTimeType.past,
                   events: provider.pastEvents,
                 ),
                 if (accountProvider.rights >= 2)
                   EventsExpansionTile(
-                    type: EventsExpansionTileType.draft,
+                    type: EventTimeType.draft,
                     events: provider.draftEvents,
                   ),
               ],

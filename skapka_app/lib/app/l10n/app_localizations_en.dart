@@ -452,6 +452,14 @@ class AppLocalizationsEn extends AppLocalizations {
   String get create_edit_event_screen_meeting_place_address_text => 'Address';
 
   @override
+  String get create_edit_event_screen_event_title_error_empty =>
+      'Event name cannot be empty.';
+
+  @override
+  String get create_edit_event_screen_event_title_error_too_long =>
+      'Event name cannot exceed 50 characters.';
+
+  @override
   String get settings_screen_title => 'Settings';
 
   @override

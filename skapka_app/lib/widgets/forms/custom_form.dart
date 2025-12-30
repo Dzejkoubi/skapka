@@ -79,6 +79,10 @@ class _CustomFormState extends State<CustomForm> {
             floatingLabelStyle: _getFloatingLabelStyle(_isFocused, hasError),
             floatingLabelBehavior: FloatingLabelBehavior.auto,
             suffixIcon: _buildSuffixIcon(),
+            suffixIconConstraints: const BoxConstraints(
+              minWidth: 0,
+              minHeight: 0,
+            ),
             counterText: '',
             filled: true,
             fillColor: context.colors.background.mediumLight,
@@ -211,8 +215,8 @@ class _CustomFormState extends State<CustomForm> {
           padding: const EdgeInsets.only(right: AppSpacing.medium),
           child: SvgPicture.asset(
             widget.suffixIconAsset!,
-            width: AppSizes.iconSizeXSmall,
-            height: AppSizes.iconSizeXSmall,
+            width: AppSizes.iconSizeSmall,
+            height: AppSizes.iconSizeSmall,
             colorFilter: ColorFilter.mode(
               context.colors.text.muted,
               BlendMode.srcIn,

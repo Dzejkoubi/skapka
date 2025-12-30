@@ -8,7 +8,6 @@ import 'package:skapka_app/app/theme/app_radius.dart';
 import 'package:skapka_app/app/theme/app_spacing.dart';
 import 'package:skapka_app/app/theme/app_text_theme.dart';
 import 'package:skapka_app/models/event_model.dart';
-import 'package:skapka_app/utils/is_user_admin.dart';
 import 'package:skapka_app/utils/is_user_leader.dart';
 import 'package:skapka_app/widgets/event_box/user_status_box.dart';
 import 'package:skapka_app/widgets/event_time_info.dart';

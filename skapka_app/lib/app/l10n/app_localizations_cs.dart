@@ -450,6 +450,14 @@ class AppLocalizationsCs extends AppLocalizations {
   String get create_edit_event_screen_meeting_place_address_text => 'Adresa';
 
   @override
+  String get create_edit_event_screen_event_title_error_empty =>
+      'Název výpravy nemůže být prázdný.';
+
+  @override
+  String get create_edit_event_screen_event_title_error_too_long =>
+      'Název výpravy nemůže přesáhnout 50 znaků.';
+
+  @override
   String get settings_screen_title => 'Nastavení';
 
   @override

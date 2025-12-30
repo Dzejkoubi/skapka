@@ -10,7 +10,8 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i18;
-import 'package:flutter/foundation.dart' as _i19;
+import 'package:flutter/cupertino.dart' as _i19;
+import 'package:flutter/foundation.dart' as _i22;
 import 'package:flutter/material.dart' as _i21;
 import 'package:skapka_app/models/event_model.dart' as _i20;
 import 'package:skapka_app/screens/account_not_approved_screen/account_not_approved_screen.dart'
@@ -350,7 +351,7 @@ class RegisterRouteFirst extends _i18.PageRouteInfo<void> {
 /// [_i14.RegisterScreenSecond]
 class RegisterRouteSecond extends _i18.PageRouteInfo<RegisterRouteSecondArgs> {
   RegisterRouteSecond({
-    _i19.Key? key,
+    _i22.Key? key,
     required String email,
     required String name,
     required String surname,
@@ -390,7 +391,7 @@ class RegisterRouteSecondArgs {
     required this.surname,
   });
 
-  final _i19.Key? key;
+  final _i22.Key? key;
 
   final String email;
 

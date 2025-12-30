@@ -831,6 +831,18 @@ abstract class AppLocalizations {
   /// **'Adresa'**
   String get create_edit_event_screen_meeting_place_address_text;
 
+  /// No description provided for @create_edit_event_screen_event_title_error_empty.
+  ///
+  /// In cs, this message translates to:
+  /// **'Název výpravy nemůže být prázdný.'**
+  String get create_edit_event_screen_event_title_error_empty;
+
+  /// No description provided for @create_edit_event_screen_event_title_error_too_long.
+  ///
+  /// In cs, this message translates to:
+  /// **'Název výpravy nemůže přesáhnout 50 znaků.'**
+  String get create_edit_event_screen_event_title_error_too_long;
+
   /// No description provided for @settings_screen_title.
   ///
   /// In cs, this message translates to:

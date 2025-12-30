@@ -161,6 +161,9 @@
     "create_edit_event_screen_meeting_place_text": "Meeting Place",
     "create_edit_event_screen_meeting_place_address_text": "Address",
 
+    "create_edit_event_screen_event_title_error_empty": "Event name cannot be empty.",
+    "create_edit_event_screen_event_title_error_too_long": "Event name cannot exceed 50 characters.",
+
     "settings_screen_title": "Settings",
     "settings_screen_change_signout_button_text": "Sign out",
     "settings_screen_change_delete_account_button_text": "Delete account",

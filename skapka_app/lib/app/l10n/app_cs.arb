@@ -161,6 +161,9 @@
     "create_edit_event_screen_meeting_place_text": "Místo srazu",
     "create_edit_event_screen_meeting_place_address_text": "Adresa",
 
+    "create_edit_event_screen_event_title_error_empty": "Název výpravy nemůže být prázdný.",
+    "create_edit_event_screen_event_title_error_too_long": "Název výpravy nemůže přesáhnout 50 znaků.",
+
     "settings_screen_title": "Nastavení",
     "settings_screen_change_signout_button_text": "Odhlásit se",
     "settings_screen_change_delete_account_button_text": "Smazat účet",

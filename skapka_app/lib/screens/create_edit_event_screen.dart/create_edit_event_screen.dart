@@ -1,9 +1,15 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:skapka_app/app/l10n/app_localizations.dart';
+import 'package:skapka_app/app/theme/app_color_theme.dart';
+import 'package:skapka_app/app/theme/app_decorations.dart';
+import 'package:skapka_app/app/theme/app_spacing.dart';
+import 'package:skapka_app/app/theme/app_text_theme.dart';
 import 'package:skapka_app/app/theme/main_button_theme.dart';
 import 'package:skapka_app/models/event_model.dart';
 import 'package:skapka_app/widgets/appbar/appbar.dart';
@@ -27,13 +33,134 @@ class CreateEditEventScreen extends StatefulWidget {
 
 class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
   final TextEditingController _eventTitleController = TextEditingController();
+  DateTime? _openSignUp;
+  DateTime? _closeSignUp;
+  DateTime? _startDate;
+  DateTime? _endDate;
 
   @override
   void initState() {
     super.initState();
     if (widget.event != null) {
       _eventTitleController.text = widget.event!.title ?? '';
+      _openSignUp = widget.event!.openSignUp;
+      _closeSignUp = widget.event!.closeSignUp;
+      _startDate = widget.event!.startDate;
+      _endDate = widget.event!.endDate;
     }
+  }
+
+  Future<void> _selectDateTime(
+    BuildContext context,
+    DateTime? initialDate,
+    Function(DateTime) onSelected,
+  ) async {
+    final DateTime now = DateTime.now();
+    final DateTime effectiveInitialDate = initialDate ?? now;
+
+    if (defaultTargetPlatform == TargetPlatform.iOS) {
+      DateTime tempDate = effectiveInitialDate;
+      await showCupertinoModalPopup(
+        context: context,
+        builder: (context) => Container(
+          height: 300,
+          color: CupertinoColors.systemBackground.resolveFrom(context),
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  CupertinoButton(
+                    child: Text(AppLocalizations.of(context)!.cancel),
+                    onPressed: () => Navigator.of(context).pop(),
+                  ),
+                  CupertinoButton(
+                    child: Text(AppLocalizations.of(context)!.yes),
+                    onPressed: () {
+                      onSelected(tempDate);
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              ),
+              Expanded(
+                child: CupertinoDatePicker(
+                  initialDateTime: effectiveInitialDate,
+                  mode: CupertinoDatePickerMode.dateAndTime,
+                  use24hFormat: true,
+                  onDateTimeChanged: (DateTime newDate) {
+                    tempDate = newDate;
+                  },
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+    } else {
+      final DateTime? pickedDate = await showDatePicker(
+        context: context,
+        initialDate: effectiveInitialDate,
+        firstDate: DateTime(2000),
+        lastDate: DateTime(2101),
+      );
+
+      if (pickedDate != null) {
+        if (!context.mounted) return;
+        final TimeOfDay? pickedTime = await showTimePicker(
+          context: context,
+          initialTime: TimeOfDay.fromDateTime(effectiveInitialDate),
+        );
+
+        if (pickedTime != null) {
+          onSelected(
+            DateTime(
+              pickedDate.year,
+              pickedDate.month,
+              pickedDate.day,
+              pickedTime.hour,
+              pickedTime.minute,
+            ),
+          );
+        }
+      }
+    }
+  }
+
+  Widget _buildDateRow(
+    BuildContext context,
+    String label,
+    DateTime? date,
+    VoidCallback onTap,
+  ) {
+    return Row(
+      children: [
+        Expanded(
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Text(
+              label,
+              style: AppTextTheme.bodySmall(
+                context,
+              ).copyWith(color: context.colors.text.muted),
+            ),
+          ),
+        ),
+        Text(
+          date != null ? DateFormat('d.M.y HH:mm').format(date) : '-',
+          textAlign: TextAlign.right,
+          style: AppTextTheme.bodySmall(context),
+        ),
+        SizedBox(width: AppSpacing.medium),
+        MainButton.outlined(
+          text: '',
+          type: ButtonType.icon,
+          variant: ButtonStylesVariants.normal,
+          iconAsset: 'assets/icons/pencil.svg',
+          onPressed: onTap,
+        ),
+      ],
+    );
   }
 
   @override
@@ -59,12 +186,81 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
               child: ScrollableOnKeyboardScreenWrapper(
                 builder: (constraints) {
                   return Column(
+                    spacing: AppSpacing.large,
                     children: [
                       CustomForm(
                         controller: _eventTitleController,
                         labelText: AppLocalizations.of(
                           context,
                         )!.create_edit_event_screen_event_title_hint,
+                        characterLimit: 50,
+                        showSuffixIcon: false,
+                        validator: (title) {
+                          if (title == null || title.isEmpty) {
+                            return AppLocalizations.of(
+                              context,
+                            )!.create_edit_event_screen_event_title_error_empty;
+                          } else if (title.length > 50) {
+                            return AppLocalizations.of(
+                              context,
+                            )!.create_edit_event_screen_event_title_error_too_long;
+                          }
+                          return null;
+                        },
+                      ),
+                      Container(
+                        decoration: AppDecorations.primaryContainer(context),
+                        padding: EdgeInsets.all(AppSpacing.xSmall),
+                        child: Column(
+                          children: [
+                            _buildDateRow(
+                              context,
+                              AppLocalizations.of(
+                                context,
+                              )!.create_edit_event_screen_event_sign_up_from,
+                              _openSignUp,
+                              () => _selectDateTime(context, _openSignUp, (d) {
+                                setState(() => _openSignUp = d);
+                              }),
+                            ),
+                            SizedBox(height: AppSpacing.xSmall),
+                            _buildDateRow(
+                              context,
+                              AppLocalizations.of(
+                                context,
+                              )!.create_edit_event_screen_event_sign_up_to,
+                              _closeSignUp,
+                              () => _selectDateTime(context, _closeSignUp, (d) {
+                                setState(() => _closeSignUp = d);
+                              }),
+                            ),
+                            Divider(
+                              color: context.colors.background.medium,
+                              height: AppSpacing.medium,
+                            ),
+                            _buildDateRow(
+                              context,
+                              AppLocalizations.of(
+                                context,
+                              )!.create_edit_event_screen_event_from_hint,
+                              _startDate,
+                              () => _selectDateTime(context, _startDate, (d) {
+                                setState(() => _startDate = d);
+                              }),
+                            ),
+                            SizedBox(height: AppSpacing.xSmall),
+                            _buildDateRow(
+                              context,
+                              AppLocalizations.of(
+                                context,
+                              )!.create_edit_event_screen_event_to_hint,
+                              _endDate,
+                              () => _selectDateTime(context, _endDate, (d) {
+                                setState(() => _endDate = d);
+                              }),
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   );

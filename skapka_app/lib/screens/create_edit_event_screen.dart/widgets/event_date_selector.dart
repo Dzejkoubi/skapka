@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:skapka_app/app/l10n/app_localizations.dart';
+import 'package:skapka_app/app/l10n/l10n_extension.dart';
 import 'package:skapka_app/app/theme/app_color_theme.dart';
 import 'package:skapka_app/app/theme/app_decorations.dart';
 import 'package:skapka_app/app/theme/app_spacing.dart';
@@ -53,11 +54,11 @@ class EventDateSelector extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   CupertinoButton(
-                    child: Text(AppLocalizations.of(context)!.cancel),
+                    child: Text(context.localizations.cancel),
                     onPressed: () => Navigator.of(context).pop(),
                   ),
                   CupertinoButton(
-                    child: Text(AppLocalizations.of(context)!.yes),
+                    child: Text(context.localizations.yes),
                     onPressed: () {
                       onSelected(tempDate);
                       Navigator.of(context).pop();

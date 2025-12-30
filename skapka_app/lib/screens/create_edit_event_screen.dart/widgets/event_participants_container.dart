@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:skapka_app/app/l10n/app_localizations.dart';
+import 'package:skapka_app/app/l10n/l10n_extension.dart';
 import 'package:skapka_app/app/router/router.gr.dart';
 import 'package:skapka_app/app/theme/app_color_theme.dart';
 import 'package:skapka_app/app/theme/app_decorations.dart';
@@ -92,7 +93,7 @@ class EventParticipantsContainer extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      '${AppLocalizations.of(context)!.create_edit_event_screen_total_participants_text}:',
+                      '${context.localizations.create_edit_event_screen_total_participants_text}:',
                       style: AppTextTheme.bodyMedium(
                         context,
                       ).copyWith(color: context.colors.text.muted),
@@ -108,7 +109,7 @@ class EventParticipantsContainer extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      '${AppLocalizations.of(context)!.create_edit_event_screen_troops}:',
+                      '${context.localizations.create_edit_event_screen_troops}:',
                       style: AppTextTheme.bodyMedium(
                         context,
                       ).copyWith(color: context.colors.text.muted),
@@ -129,7 +130,7 @@ class EventParticipantsContainer extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      '${AppLocalizations.of(context)!.create_edit_event_screen_18_leaders}:',
+                      '${context.localizations.create_edit_event_screen_18_leaders}:',
                       style: AppTextTheme.bodyMedium(
                         context,
                       ).copyWith(color: context.colors.text.muted),

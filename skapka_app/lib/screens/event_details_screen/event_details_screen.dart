@@ -5,6 +5,7 @@ import 'package:flutter_markdown_plus/flutter_markdown_plus.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:provider/provider.dart';
 import 'package:skapka_app/app/l10n/app_localizations.dart';
+import 'package:skapka_app/app/l10n/l10n_extension.dart';
 import 'package:skapka_app/app/router/router.gr.dart';
 import 'package:skapka_app/app/theme/app_decorations.dart';
 import 'package:skapka_app/app/theme/app_spacing.dart';
@@ -137,7 +138,7 @@ class EventDetailsScreen extends StatelessWidget {
                 ? [
                     SpeedDialChild(
                       labelWidget: MainButton.filled(
-                        text: AppLocalizations.of(context)!.edit,
+                        text: context.localizations.edit,
                         onPressed: () {
                           dialOpenNotifier.value = false;
                           context.router.push(

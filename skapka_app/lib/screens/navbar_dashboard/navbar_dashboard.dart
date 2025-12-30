@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:provider/provider.dart';
 import 'package:skapka_app/app/l10n/app_localizations.dart';
+import 'package:skapka_app/app/l10n/l10n_extension.dart';
 import 'package:skapka_app/app/router/router.gr.dart';
 import 'package:skapka_app/providers/account_provider.dart';
 import 'package:skapka_app/utils/is_user_leader.dart';
@@ -32,20 +33,20 @@ class NavbarDashboard extends StatelessWidget {
 
           final List<CustomNavBarItemInfo> navbarRoutes = [
             CustomNavBarItemInfo(
-              label: AppLocalizations.of(context)!.navbar_dependents,
+              label: context.localizations.navbar_dependents,
               iconAsset: 'assets/icons/navbar/navbar-user-circle.svg',
               screenRoute: DependentsRoute(),
               speedDialChildren: null,
             ),
             CustomNavBarItemInfo(
-              label: AppLocalizations.of(context)!.navbar_events,
+              label: context.localizations.navbar_events,
               iconAsset: 'assets/icons/navbar/navbar-compass.svg',
               screenRoute: EventsRoute(),
               speedDialChildren: accountProvider.rights >= 2
                   ? [
                       SpeedDialChild(
                         labelWidget: MainButton.filled(
-                          text: AppLocalizations.of(context)!.create,
+                          text: context.localizations.create,
                           onPressed: () {
                             dialOpenNotifier.value = false;
                             context.router.push(
@@ -61,14 +62,14 @@ class NavbarDashboard extends StatelessWidget {
                   : null,
             ),
             CustomNavBarItemInfo(
-              label: AppLocalizations.of(context)!.navbar_calendar,
+              label: context.localizations.navbar_calendar,
               iconAsset: 'assets/icons/navbar/navbar-calendar-month.svg',
               screenRoute: CalendarRoute(),
               speedDialChildren: [
                 if (isUserLeader(context))
                   SpeedDialChild(
                     labelWidget: MainButton.filled(
-                      text: AppLocalizations.of(context)!.create,
+                      text: context.localizations.create,
                       onPressed: () {
                         dialOpenNotifier.value = false;
                         context.router.push(
@@ -97,7 +98,7 @@ class NavbarDashboard extends StatelessWidget {
               ],
             ),
             CustomNavBarItemInfo(
-              label: AppLocalizations.of(context)!.navbar_info,
+              label: context.localizations.navbar_info,
               iconAsset: 'assets/icons/navbar/navbar-info-circle.svg',
               screenRoute: InformationRoute(),
               speedDialChildren: null,

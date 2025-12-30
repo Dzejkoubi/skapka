@@ -122,7 +122,7 @@ class EventDateSelector extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             child: Text(
               label,
-              style: AppTextTheme.bodySmall(
+              style: AppTextTheme.bodyMedium(
                 context,
               ).copyWith(color: context.colors.text.muted),
             ),
@@ -131,7 +131,7 @@ class EventDateSelector extends StatelessWidget {
         Text(
           date != null ? DateFormat('d.M.y HH:mm').format(date) : '-',
           textAlign: TextAlign.right,
-          style: AppTextTheme.bodySmall(context),
+          style: AppTextTheme.bodyMedium(context),
         ),
         SizedBox(width: AppSpacing.medium),
         MainButton.outlined(

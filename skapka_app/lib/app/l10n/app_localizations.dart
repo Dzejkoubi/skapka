@@ -804,7 +804,7 @@ abstract class AppLocalizations {
   /// No description provided for @create_edit_event_screen_troops.
   ///
   /// In cs, this message translates to:
-  /// **'Oddíly'**
+  /// **'Družinky'**
   String get create_edit_event_screen_troops;
 
   /// No description provided for @create_edit_event_screen_18_leaders.

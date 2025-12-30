@@ -437,7 +437,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'Total Participants';
 
   @override
-  String get create_edit_event_screen_troops => 'Troops';
+  String get create_edit_event_screen_troops => 'Patrols';
 
   @override
   String get create_edit_event_screen_18_leaders => 'Leaders/18+';

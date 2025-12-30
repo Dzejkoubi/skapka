@@ -242,7 +242,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get events_screen_title => 'Events';
 
   @override
-  String get events_screen_speed_dial_open_create_event_text => 'Vytvořit';
+  String get events_screen_speed_dial_create_event_text => 'Create';
 
   @override
   String events_screen_no_events_text(String version, Object username) {
@@ -276,7 +276,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get calendar_screen_title => 'Calendar';
 
   @override
-  String get calendar_screen_speed_dial_open_create_event_text => 'Vytvořit';
+  String get calendar_screen_speed_dial_create_event_text => 'Create';
 
   @override
   String get calendar_screen_event_expansion_tile_future_title => 'Upcoming';
@@ -289,6 +289,122 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get calendar_screen_event_expansion_tile_draft_title => 'Drafts';
+
+  @override
+  String get create_event_screen_title => 'Create Event';
+
+  @override
+  String get create_event_screen_speed_dial_save_event_text => 'Save';
+
+  @override
+  String get create_event_screen_save_event_dialog_title => 'Save as Draft';
+
+  @override
+  String get create_event_screen_save_event_dialog_description =>
+      'Do you want to save this event as a draft? The event will be published only after clicking the publish button. You can edit it later.';
+
+  @override
+  String get create_event_screen_save_event_dialog_primary_button_text =>
+      'Save as Draft';
+
+  @override
+  String get create_event_screen_speed_dial_publish_event_text => 'Publish';
+
+  @override
+  String get create_event_screen_publish_event_dialog_title => 'Publish Event';
+
+  @override
+  String get create_event_screen_publish_event_dialog_description =>
+      'Are you sure you want to publish this event? The event will be added to the calendar and invited participants will be able to sign up when the sign-up period starts.';
+
+  @override
+  String get create_event_screen_publish_event_dialog_primary_button_text =>
+      'Publish';
+
+  @override
+  String get create_event_screen_speed_dial_unpublish_event_text => 'Unpublish';
+
+  @override
+  String get create_event_screen_unpublish_event_dialog_title =>
+      'Unpublish Event';
+
+  @override
+  String get create_event_screen_unpublish_event_dialog_description =>
+      'Are you sure you want to unpublish this event? Participants will no longer be able to sign up and the event will be removed from the calendar.';
+
+  @override
+  String get create_event_screen_unpublish_event_dialog_primary_button_text =>
+      'Unpublish';
+
+  @override
+  String get create_event_screen_speed_dial_delete_event_text => 'Delete';
+
+  @override
+  String get create_event_screen_delete_event_dialog_title => 'Delete Event';
+
+  @override
+  String get create_event_screen_delete_event_dialog_description =>
+      'Are you sure you want to delete this event? This action cannot be undone.';
+
+  @override
+  String get create_event_screen_delete_event_dialog_primary_button_text =>
+      'Delete';
+
+  @override
+  String get create_event_screen_go_back_without_saving_dialog_title =>
+      'Discard Changes';
+
+  @override
+  String get create_event_screen_go_back_without_saving_dialog_description =>
+      'Are you sure you want to leave without saving changes? All unsaved changes will be lost.';
+
+  @override
+  String
+  get create_event_screen_go_back_without_saving_dialog_primary_button_text =>
+      'Discard';
+
+  @override
+  String
+  get create_event_screen_go_back_without_saving_dialog_secondary_button_text =>
+      'Back';
+
+  @override
+  String get create_event_screen_event_name_hint => 'Event Name';
+
+  @override
+  String get create_event_screen_event_sign_up_from => 'Sign-up from';
+
+  @override
+  String get create_event_screen_event_sign_up_to => 'Sign-up to';
+
+  @override
+  String get create_event_screen_event_from_hint => 'From';
+
+  @override
+  String get create_event_screen_event_to_hint => 'To';
+
+  @override
+  String get create_event_screen_select_participants_text =>
+      'Select Participants';
+
+  @override
+  String get create_event_screen_total_participants_text =>
+      'Total Participants';
+
+  @override
+  String get create_event_screen_troops => 'Troops';
+
+  @override
+  String get create_event_screen_18_leaders => 'Leaders/18+';
+
+  @override
+  String get create_event_screen_instructions_text => 'Instructions';
+
+  @override
+  String get create_event_screen_destination_text => 'Destination';
+
+  @override
+  String get create_event_screen_destination_address_text => 'Address';
 
   @override
   String get settings_screen_title => 'Settings';
@@ -311,4 +427,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get loading => 'Loading...';
+
+  @override
+  String get back => 'Back';
 }

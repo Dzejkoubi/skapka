@@ -80,7 +80,7 @@
     "account_not_approved_screen_delete_error": "Smazání účtu se nezdařilo. Zkus to prosím později.",
 
     "events_screen_title": "Výpravy",
-    "events_screen_speed_dial_open_create_event_text": "Vytvořit",
+    "events_screen_speed_dial_create_event_text": "Vytvořit",
     "events_screen_no_events_text": "{username} aktuálně nemá žádnou aktivní výpravu.",
     "@events_screen_no_events_text": {
         "placeholders": {
@@ -106,11 +106,50 @@
     "event_box_event_single_day_text" : "Kdy: ",
 
     "calendar_screen_title": "Kalendář",
-    "calendar_screen_speed_dial_open_create_event_text": "Vytvořit",
+    "calendar_screen_speed_dial_create_event_text": "Vytvořit",
     "calendar_screen_event_expansion_tile_future_title": "Nadcházející",
     "calendar_screen_event_expansion_tile_live_title": "Přihlášování",
     "calendar_screen_event_expansion_tile_past_title": "Proběhlé",
     "calendar_screen_event_expansion_tile_draft_title": "Koncepty",
+
+    "create_event_screen_title": "Vytvořit výpravu",
+    "create_event_screen_speed_dial_save_event_text": "Uložit",
+    "create_event_screen_save_event_dialog_title": "Uložit jako koncept",
+    "create_event_screen_save_event_dialog_description": "Chceš uložit tuto výpravu jako koncept? Výprava se zveřejní až po kliknutí na tlačítko zveřejnit. Můžeš ji upravit později.",
+    "create_event_screen_save_event_dialog_primary_button_text": "Uložit jako koncept",
+    
+    "create_event_screen_speed_dial_publish_event_text": "Zveřejnit",
+    "create_event_screen_publish_event_dialog_title": "Zveřejnit výpravu",
+    "create_event_screen_publish_event_dialog_description": "Opravdu chceš zveřejnit tuto výpravu? Výprava se přidá do kalendáře a až nadejde čas přihlašování, budou se moct pozvaní účastníci přihlašovat.",
+    "create_event_screen_publish_event_dialog_primary_button_text": "Zveřejnit",
+
+    "create_event_screen_speed_dial_unpublish_event_text": "Zrušit zveřejnění",
+    "create_event_screen_unpublish_event_dialog_title": "Zrušit zveřejnění výpravy",
+    "create_event_screen_unpublish_event_dialog_description": "Opravdu chceš zrušit zveřejnění této výpravy? Účastníci se nebudou moct dál přihlašovat a výprava se odstraní z kalendáře.",
+    "create_event_screen_unpublish_event_dialog_primary_button_text": "Zrušit zveřejnění",
+
+    "create_event_screen_speed_dial_delete_event_text": "Smazat",
+    "create_event_screen_delete_event_dialog_title": "Smazat výpravu",
+    "create_event_screen_delete_event_dialog_description": "Opravdu chceš smazat tuto výpravu? Tuto akci nelze vrátit zpět.",
+    "create_event_screen_delete_event_dialog_primary_button_text": "Smazat",
+
+    "create_event_screen_go_back_without_saving_dialog_title": "Zahodit změny",
+    "create_event_screen_go_back_without_saving_dialog_description": "Opravdu chceš odejít bez uložení změn? Veškeré neuložené změny budou ztraceny.",
+    "create_event_screen_go_back_without_saving_dialog_primary_button_text": "Zahodit",
+    "create_event_screen_go_back_without_saving_dialog_secondary_button_text": "Zpět",
+
+    "create_event_screen_event_name_hint": "Název výpravy",
+    "create_event_screen_event_sign_up_from": "Přihlašování od",
+    "create_event_screen_event_sign_up_to": "Přihlašování do",
+    "create_event_screen_event_from_hint": "Od",
+    "create_event_screen_event_to_hint": "Do",
+    "create_event_screen_select_participants_text": "Vybrat účastníky",
+    "create_event_screen_total_participants_text": "Celkový počet účastníků",
+    "create_event_screen_troops": "Oddíly",
+    "create_event_screen_18_leaders": "Vedoucí/18+",
+    "create_event_screen_instructions_text": "Instrukce",
+    "create_event_screen_destination_text": "Cíl",
+    "create_event_screen_destination_address_text": "Adresa",
 
     "settings_screen_title": "Nastavení",
     "settings_screen_change_signout_button_text": "Odhlásit se",
@@ -119,5 +158,6 @@
     "yes": "Ano",
     "no": "Ne",
     "cancel": "Zrušit",
-    "loading": "Načítání..."
+    "loading": "Načítání...",
+    "back" : "Zpět"
 }

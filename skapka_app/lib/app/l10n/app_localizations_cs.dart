@@ -239,7 +239,7 @@ class AppLocalizationsCs extends AppLocalizations {
   String get events_screen_title => 'Výpravy';
 
   @override
-  String get events_screen_speed_dial_open_create_event_text => 'Vytvořit';
+  String get events_screen_speed_dial_create_event_text => 'Vytvořit';
 
   @override
   String events_screen_no_events_text(String version, Object username) {
@@ -273,7 +273,7 @@ class AppLocalizationsCs extends AppLocalizations {
   String get calendar_screen_title => 'Kalendář';
 
   @override
-  String get calendar_screen_speed_dial_open_create_event_text => 'Vytvořit';
+  String get calendar_screen_speed_dial_create_event_text => 'Vytvořit';
 
   @override
   String get calendar_screen_event_expansion_tile_future_title =>
@@ -287,6 +287,124 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get calendar_screen_event_expansion_tile_draft_title => 'Koncepty';
+
+  @override
+  String get create_event_screen_title => 'Vytvořit výpravu';
+
+  @override
+  String get create_event_screen_speed_dial_save_event_text => 'Uložit';
+
+  @override
+  String get create_event_screen_save_event_dialog_title =>
+      'Uložit jako koncept';
+
+  @override
+  String get create_event_screen_save_event_dialog_description =>
+      'Chceš uložit tuto výpravu jako koncept? Výprava se zveřejní až po kliknutí na tlačítko zveřejnit. Můžeš ji upravit později.';
+
+  @override
+  String get create_event_screen_save_event_dialog_primary_button_text =>
+      'Uložit jako koncept';
+
+  @override
+  String get create_event_screen_speed_dial_publish_event_text => 'Zveřejnit';
+
+  @override
+  String get create_event_screen_publish_event_dialog_title =>
+      'Zveřejnit výpravu';
+
+  @override
+  String get create_event_screen_publish_event_dialog_description =>
+      'Opravdu chceš zveřejnit tuto výpravu? Výprava se přidá do kalendáře a až nadejde čas přihlašování, budou se moct pozvaní účastníci přihlašovat.';
+
+  @override
+  String get create_event_screen_publish_event_dialog_primary_button_text =>
+      'Zveřejnit';
+
+  @override
+  String get create_event_screen_speed_dial_unpublish_event_text =>
+      'Zrušit zveřejnění';
+
+  @override
+  String get create_event_screen_unpublish_event_dialog_title =>
+      'Zrušit zveřejnění výpravy';
+
+  @override
+  String get create_event_screen_unpublish_event_dialog_description =>
+      'Opravdu chceš zrušit zveřejnění této výpravy? Účastníci se nebudou moct dál přihlašovat a výprava se odstraní z kalendáře.';
+
+  @override
+  String get create_event_screen_unpublish_event_dialog_primary_button_text =>
+      'Zrušit zveřejnění';
+
+  @override
+  String get create_event_screen_speed_dial_delete_event_text => 'Smazat';
+
+  @override
+  String get create_event_screen_delete_event_dialog_title => 'Smazat výpravu';
+
+  @override
+  String get create_event_screen_delete_event_dialog_description =>
+      'Opravdu chceš smazat tuto výpravu? Tuto akci nelze vrátit zpět.';
+
+  @override
+  String get create_event_screen_delete_event_dialog_primary_button_text =>
+      'Smazat';
+
+  @override
+  String get create_event_screen_go_back_without_saving_dialog_title =>
+      'Zahodit změny';
+
+  @override
+  String get create_event_screen_go_back_without_saving_dialog_description =>
+      'Opravdu chceš odejít bez uložení změn? Veškeré neuložené změny budou ztraceny.';
+
+  @override
+  String
+  get create_event_screen_go_back_without_saving_dialog_primary_button_text =>
+      'Zahodit';
+
+  @override
+  String
+  get create_event_screen_go_back_without_saving_dialog_secondary_button_text =>
+      'Zpět';
+
+  @override
+  String get create_event_screen_event_name_hint => 'Název výpravy';
+
+  @override
+  String get create_event_screen_event_sign_up_from => 'Přihlašování od';
+
+  @override
+  String get create_event_screen_event_sign_up_to => 'Přihlašování do';
+
+  @override
+  String get create_event_screen_event_from_hint => 'Od';
+
+  @override
+  String get create_event_screen_event_to_hint => 'Do';
+
+  @override
+  String get create_event_screen_select_participants_text => 'Vybrat účastníky';
+
+  @override
+  String get create_event_screen_total_participants_text =>
+      'Celkový počet účastníků';
+
+  @override
+  String get create_event_screen_troops => 'Oddíly';
+
+  @override
+  String get create_event_screen_18_leaders => 'Vedoucí/18+';
+
+  @override
+  String get create_event_screen_instructions_text => 'Instrukce';
+
+  @override
+  String get create_event_screen_destination_text => 'Cíl';
+
+  @override
+  String get create_event_screen_destination_address_text => 'Adresa';
 
   @override
   String get settings_screen_title => 'Nastavení';
@@ -308,4 +426,7 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get loading => 'Načítání...';
+
+  @override
+  String get back => 'Zpět';
 }

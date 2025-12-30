@@ -38,7 +38,7 @@ class NavbarDashboard extends StatelessWidget {
                   labelWidget: MainButton.filled(
                     text: AppLocalizations.of(
                       context,
-                    )!.events_screen_speed_dial_open_create_event_text,
+                    )!.events_screen_speed_dial_create_event_text,
                     onPressed: () {
                       dialOpenNotifier.value = false;
                       context.router.push(CreateEventRoute());
@@ -56,7 +56,7 @@ class NavbarDashboard extends StatelessWidget {
                   labelWidget: MainButton.filled(
                     text: AppLocalizations.of(
                       context,
-                    )!.calendar_screen_speed_dial_open_create_event_text,
+                    )!.calendar_screen_speed_dial_create_event_text,
                     onPressed: () {
                       dialOpenNotifier.value = false;
                       context.router.push(CreateEventRoute());

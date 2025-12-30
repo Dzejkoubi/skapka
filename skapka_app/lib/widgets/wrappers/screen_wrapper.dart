@@ -1,6 +1,12 @@
 import 'package:colorful_safe_area/colorful_safe_area.dart';
+import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:gaimon/gaimon.dart';
 import 'package:skapka_app/app/theme/app_color_theme.dart';
+import 'package:skapka_app/app/theme/app_radius.dart';
+import 'package:skapka_app/app/theme/app_sizes.dart';
 import 'package:skapka_app/app/theme/app_spacing.dart';
 import 'package:skapka_app/widgets/appbar/appbar.dart';
 import 'package:skapka_app/widgets/navbar/navbar.dart';
@@ -9,11 +15,20 @@ class ScreenWrapper extends StatelessWidget {
   final Appbar appBar;
   final Widget body;
   final Navbar? bottomNavigationBar;
+  final List<SpeedDialChild>? speedDialChildren;
+  final FloatingActionButtonLocation? floatingActionButtonLocation;
+  final Object? fabKey;
+  final ValueNotifier<bool>? openCloseDial;
+
   const ScreenWrapper({
     super.key,
     required this.appBar,
     required this.body,
     this.bottomNavigationBar,
+    this.speedDialChildren,
+    this.floatingActionButtonLocation,
+    this.fabKey,
+    this.openCloseDial,
   });
 
   @override
@@ -49,7 +64,107 @@ class ScreenWrapper extends StatelessWidget {
               ),
           ],
         ),
+        floatingActionButton: AnimatedSwitcher(
+          duration: const Duration(milliseconds: 300),
+          transitionBuilder: (Widget child, Animation<double> animation) {
+            return ScaleTransition(
+              scale: animation,
+              child: RotationTransition(turns: animation, child: child),
+            );
+          },
+          child: speedDialChildren != null
+              ? SpeedDial(
+                  key: ValueKey(fabKey ?? speedDialChildren.hashCode),
+                  openCloseDial: openCloseDial,
+                  animationCurve: Curves.easeInOut,
+                  onOpen: () => Gaimon.soft(),
+                  onClose: () => Gaimon.soft(),
+                  backgroundColor: context.colors.background.light,
+                  foregroundColor: context.colors.primary.light,
+                  shape: SmoothRectangleBorder(
+                    side: BorderSide(
+                      color: context.colors.primary.light,
+                      width: 2,
+                    ),
+                    borderRadius: SmoothBorderRadius(
+                      cornerRadius: AppRadius.medium,
+                      cornerSmoothing: AppRadius.smoothNormal,
+                    ),
+                  ),
+                  activeChild: SvgPicture.asset(
+                    'assets/icons/plus.svg',
+                    width: AppSizes.iconSizeSmall,
+                    height: AppSizes.iconSizeSmall,
+                    colorFilter: ColorFilter.mode(
+                      context.colors.primary.normal,
+                      BlendMode.srcIn,
+                    ),
+                  ),
+                  children: speedDialChildren!,
+                  child: SvgPicture.asset(
+                    'assets/icons/plus.svg',
+                    width: AppSizes.iconSizeSmall,
+                    height: AppSizes.iconSizeSmall,
+                    colorFilter: ColorFilter.mode(
+                      context.colors.primary.normal,
+                      BlendMode.srcIn,
+                    ),
+                  ),
+                )
+              : const SizedBox.shrink(),
+        ),
+        floatingActionButtonLocation: floatingActionButtonLocation,
       ),
     );
+  }
+}
+
+class CustomFloatingActionButtonLocation extends FloatingActionButtonLocation {
+  final double? left;
+  final double? right;
+  final double? top;
+  final double? bottom;
+
+  const CustomFloatingActionButtonLocation({
+    this.left,
+    this.right,
+    this.top,
+    this.bottom,
+  });
+
+  @override
+  Offset getOffset(ScaffoldPrelayoutGeometry scaffoldGeometry) {
+    double x = 0;
+    double y = 0;
+
+    if (left != null) {
+      x = left!;
+    } else if (right != null) {
+      x =
+          scaffoldGeometry.scaffoldSize.width -
+          scaffoldGeometry.floatingActionButtonSize.width -
+          right!;
+    } else {
+      x =
+          scaffoldGeometry.scaffoldSize.width -
+          scaffoldGeometry.floatingActionButtonSize.width -
+          16;
+    }
+
+    if (top != null) {
+      y = top!;
+    } else if (bottom != null) {
+      y =
+          scaffoldGeometry.scaffoldSize.height -
+          scaffoldGeometry.floatingActionButtonSize.height -
+          bottom!;
+    } else {
+      y =
+          scaffoldGeometry.scaffoldSize.height -
+          scaffoldGeometry.floatingActionButtonSize.height -
+          16;
+    }
+
+    return Offset(x, y);
   }
 }

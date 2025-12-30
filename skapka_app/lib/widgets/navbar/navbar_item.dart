@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gaimon/gaimon.dart';
 import 'package:skapka_app/app/theme/app_color_theme.dart';
@@ -11,10 +12,12 @@ class CustomNavBarItemInfo {
   final String label;
   final String iconAsset;
   final PageRouteInfo screenRoute;
+  final List<SpeedDialChild>? speedDialChildren;
   CustomNavBarItemInfo({
     required this.label,
     required this.iconAsset,
     required this.screenRoute,
+    this.speedDialChildren,
   });
 }
 

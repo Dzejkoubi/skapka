@@ -239,6 +239,9 @@ class AppLocalizationsCs extends AppLocalizations {
   String get events_screen_title => 'Výpravy';
 
   @override
+  String get events_screen_speed_dial_open_create_event_text => 'Vytvořit';
+
+  @override
   String events_screen_no_events_text(String version, Object username) {
     return '$username aktuálně nemá žádnou aktivní výpravu.';
   }
@@ -268,6 +271,9 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get calendar_screen_title => 'Kalendář';
+
+  @override
+  String get calendar_screen_speed_dial_open_create_event_text => 'Vytvořit';
 
   @override
   String get calendar_screen_event_expansion_tile_future_title =>

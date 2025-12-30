@@ -486,6 +486,12 @@ abstract class AppLocalizations {
   /// **'Výpravy'**
   String get events_screen_title;
 
+  /// No description provided for @events_screen_speed_dial_open_create_event_text.
+  ///
+  /// In cs, this message translates to:
+  /// **'Vytvořit'**
+  String get events_screen_speed_dial_open_create_event_text;
+
   /// No description provided for @events_screen_no_events_text.
   ///
   /// In cs, this message translates to:
@@ -539,6 +545,12 @@ abstract class AppLocalizations {
   /// In cs, this message translates to:
   /// **'Kalendář'**
   String get calendar_screen_title;
+
+  /// No description provided for @calendar_screen_speed_dial_open_create_event_text.
+  ///
+  /// In cs, this message translates to:
+  /// **'Vytvořit'**
+  String get calendar_screen_speed_dial_open_create_event_text;
 
   /// No description provided for @calendar_screen_event_expansion_tile_future_title.
   ///

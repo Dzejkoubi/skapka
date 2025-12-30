@@ -32,6 +32,9 @@ class AppRouter extends RootStackRouter {
     AutoRoute(page: RegisterRouteFirst.page),
     AutoRoute(page: RegisterRouteSecond.page),
     AutoRoute(page: AccountNotApprovedRoute.page),
+
+    AutoRoute(page: CreateEventRoute.page),
+
     AutoRoute(page: ButtonThemeShowcaseRoute.page),
     AutoRoute(page: SquircleShowcaseRoute.page),
     AutoRoute(page: LargeDialogShowcaseRoute.page),

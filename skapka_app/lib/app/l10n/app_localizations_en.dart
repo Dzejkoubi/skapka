@@ -242,6 +242,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get events_screen_title => 'Events';
 
   @override
+  String get events_screen_speed_dial_open_create_event_text => 'Vytvořit';
+
+  @override
   String events_screen_no_events_text(String version, Object username) {
     return '$username currently has no active events.';
   }
@@ -271,6 +274,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get calendar_screen_title => 'Calendar';
+
+  @override
+  String get calendar_screen_speed_dial_open_create_event_text => 'Vytvořit';
 
   @override
   String get calendar_screen_event_expansion_tile_future_title => 'Upcoming';

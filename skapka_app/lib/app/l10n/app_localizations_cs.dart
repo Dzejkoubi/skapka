@@ -425,13 +425,13 @@ class AppLocalizationsCs extends AppLocalizations {
   String get create_event_screen_18_leaders => 'Vedoucí/18+';
 
   @override
-  String get create_event_screen_instructions_text => 'Instrukce';
+  String get create_event_screen_instructions_text => 'Pokyny';
 
   @override
-  String get create_event_screen_destination_text => 'Cíl';
+  String get create_event_screen_meeting_place_text => 'Místo srazu';
 
   @override
-  String get create_event_screen_destination_address_text => 'Adresa';
+  String get create_event_screen_meeting_place_address_text => 'Adresa';
 
   @override
   String get settings_screen_title => 'Nastavení';
@@ -456,4 +456,7 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get back => 'Zpět';
+
+  @override
+  String get common_copied_to_clipboard => 'Zkopírováno do schránky';
 }

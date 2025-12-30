@@ -8,7 +8,7 @@ class EventModel {
   final DateTime? closeSignUp;
   final DateTime? startDate;
   final DateTime? endDate;
-  final String? location;
+  final String? meetingPlace;
   final String? photoAlbumLink;
   final String? groupId;
   final bool isDraft;
@@ -20,7 +20,7 @@ class EventModel {
     required this.closeSignUp,
     required this.startDate,
     required this.endDate,
-    required this.location,
+    required this.meetingPlace,
     required this.photoAlbumLink,
     required this.groupId,
     required this.isDraft,
@@ -42,7 +42,7 @@ class EventModel {
       endDate: json['end_date'] != null
           ? DateTime.parse(json['end_date'] as String)
           : null,
-      location: json['location'] as String?,
+      meetingPlace: json['meeting_place'] as String?,
       photoAlbumLink: json['photo_album_link'] as String?,
       groupId: json['group_id'] as String,
       isDraft: json['is_draft'] as bool? ?? false,

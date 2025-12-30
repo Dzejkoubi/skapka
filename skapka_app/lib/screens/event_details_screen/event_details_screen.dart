@@ -1,9 +1,15 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_markdown_plus/flutter_markdown_plus.dart';
+import 'package:skapka_app/app/l10n/app_localizations.dart';
 import 'package:skapka_app/app/theme/app_decorations.dart';
 import 'package:skapka_app/app/theme/app_spacing.dart';
+import 'package:skapka_app/app/theme/app_text_theme.dart';
 import 'package:skapka_app/models/event_model.dart';
 import 'package:skapka_app/widgets/appbar/appbar.dart';
+import 'package:skapka_app/widgets/buttons/main_button.dart';
+import 'package:skapka_app/widgets/dialogs/bottom_dialog.dart';
 import 'package:skapka_app/widgets/event_time_info.dart';
 import 'package:skapka_app/widgets/wrappers/screen_wrapper.dart';
 
@@ -26,18 +32,94 @@ class EventDetailsScreen extends StatelessWidget {
         screenName: event.title,
       ),
       body: SafeArea(
-        child: Column(
-          children: [
-            Container(
-              decoration: AppDecorations.primaryContainer(context),
-              padding: EdgeInsets.all(AppSpacing.small),
-              child: EventTimeInfo(
-                event: event,
-                eventTimeType: eventTimeType,
-                fullInfo: true,
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(AppSpacing.medium),
+          child: Column(
+            spacing: AppSpacing.large,
+            children: [
+              Container(
+                decoration: AppDecorations.primaryContainer(context),
+                padding: EdgeInsets.all(AppSpacing.small),
+                child: EventTimeInfo(
+                  event: event,
+                  eventTimeType: eventTimeType,
+                  fullInfo: true,
+                ),
               ),
-            ),
-          ],
+              Column(
+                spacing: AppSpacing.medium,
+                children: [
+                  Text(
+                    textAlign: TextAlign.center,
+                    AppLocalizations.of(
+                      context,
+                    )!.create_event_screen_instructions_text,
+                    style: AppTextTheme.titleMedium(context),
+                  ),
+                  Container(
+                    decoration: AppDecorations.primaryContainer(context),
+                    padding: EdgeInsets.all(AppSpacing.small),
+                    width: double.infinity,
+                    child: MarkdownBody(
+                      data: event.details ?? '',
+                      selectable: true,
+                    ),
+                  ),
+                ],
+              ),
+              if (event.meetingPlace != null)
+                Column(
+                  spacing: AppSpacing.medium,
+                  children: [
+                    Text(
+                      textAlign: TextAlign.center,
+                      AppLocalizations.of(
+                        context,
+                      )!.create_event_screen_meeting_place_text,
+                      style: AppTextTheme.titleMedium(context),
+                    ),
+                    Container(
+                      decoration: AppDecorations.primaryContainer(context),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: AppSpacing.small,
+                        vertical: AppSpacing.xSmall,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            child: SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Text(
+                                event.meetingPlace!,
+                                style: AppTextTheme.bodySmall(context),
+                              ),
+                            ),
+                          ),
+                          MainButton.text(
+                            type: ButtonType.icon,
+                            iconAsset: 'assets/icons/copy.svg',
+                            onPressed: () {
+                              Clipboard.setData(
+                                ClipboardData(text: event.meetingPlace!),
+                              );
+                              BottomDialog.show(
+                                context,
+                                type: BottomDialogType.basic,
+                                description: AppLocalizations.of(
+                                  context,
+                                )!.common_copied_to_clipboard,
+                              );
+                            },
+                            text: '',
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+            ],
+          ),
         ),
       ),
     );

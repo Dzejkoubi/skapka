@@ -154,9 +154,9 @@
     "create_event_screen_total_participants_text": "Celkový počet účastníků",
     "create_event_screen_troops": "Oddíly",
     "create_event_screen_18_leaders": "Vedoucí/18+",
-    "create_event_screen_instructions_text": "Instrukce",
-    "create_event_screen_destination_text": "Cíl",
-    "create_event_screen_destination_address_text": "Adresa",
+    "create_event_screen_instructions_text": "Pokyny",
+    "create_event_screen_meeting_place_text": "Místo srazu",
+    "create_event_screen_meeting_place_address_text": "Adresa",
 
     "settings_screen_title": "Nastavení",
     "settings_screen_change_signout_button_text": "Odhlásit se",
@@ -166,5 +166,6 @@
     "no": "Ne",
     "cancel": "Zrušit",
     "loading": "Načítání...",
-    "back" : "Zpět"
+    "back" : "Zpět",
+    "common_copied_to_clipboard": "Zkopírováno do schránky"
 }

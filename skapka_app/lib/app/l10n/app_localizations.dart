@@ -803,20 +803,20 @@ abstract class AppLocalizations {
   /// No description provided for @create_event_screen_instructions_text.
   ///
   /// In cs, this message translates to:
-  /// **'Instrukce'**
+  /// **'Pokyny'**
   String get create_event_screen_instructions_text;
 
-  /// No description provided for @create_event_screen_destination_text.
+  /// No description provided for @create_event_screen_meeting_place_text.
   ///
   /// In cs, this message translates to:
-  /// **'Cíl'**
-  String get create_event_screen_destination_text;
+  /// **'Místo srazu'**
+  String get create_event_screen_meeting_place_text;
 
-  /// No description provided for @create_event_screen_destination_address_text.
+  /// No description provided for @create_event_screen_meeting_place_address_text.
   ///
   /// In cs, this message translates to:
   /// **'Adresa'**
-  String get create_event_screen_destination_address_text;
+  String get create_event_screen_meeting_place_address_text;
 
   /// No description provided for @settings_screen_title.
   ///
@@ -865,6 +865,12 @@ abstract class AppLocalizations {
   /// In cs, this message translates to:
   /// **'Zpět'**
   String get back;
+
+  /// No description provided for @common_copied_to_clipboard.
+  ///
+  /// In cs, this message translates to:
+  /// **'Zkopírováno do schránky'**
+  String get common_copied_to_clipboard;
 }
 
 class _AppLocalizationsDelegate

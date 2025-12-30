@@ -428,10 +428,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get create_event_screen_instructions_text => 'Instructions';
 
   @override
-  String get create_event_screen_destination_text => 'Destination';
+  String get create_event_screen_meeting_place_text => 'Meeting Place';
 
   @override
-  String get create_event_screen_destination_address_text => 'Address';
+  String get create_event_screen_meeting_place_address_text => 'Address';
 
   @override
   String get settings_screen_title => 'Settings';
@@ -457,4 +457,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get back => 'Back';
+
+  @override
+  String get common_copied_to_clipboard => 'Copied to clipboard';
 }

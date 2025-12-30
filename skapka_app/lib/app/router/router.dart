@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:skapka_app/app/router/guards/leader_guard.dart';
 import 'package:skapka_app/app/router/router.gr.dart';
 // To generate the router file, run:
 // flutter pub run build_runner build
@@ -33,7 +34,7 @@ class AppRouter extends RootStackRouter {
     AutoRoute(page: RegisterRouteSecond.page),
     AutoRoute(page: AccountNotApprovedRoute.page),
 
-    AutoRoute(page: CreateEventRoute.page),
+    AutoRoute(page: CreateEventRoute.page, guards: [LeaderGuard()]),
 
     AutoRoute(page: EventDetailsRoute.page),
 

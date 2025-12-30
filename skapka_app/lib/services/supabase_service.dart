@@ -4,7 +4,7 @@ import 'package:skapka_app/models/dependents/account_dependent_model.dart';
 import 'package:skapka_app/models/dependents/dependent_model.dart';
 import 'package:skapka_app/models/dependents/dependent_notes_model.dart';
 import 'package:skapka_app/models/event_model.dart';
-import 'package:skapka_app/models/event_participant.dart';
+import 'package:skapka_app/models/event_participant_model.dart';
 import 'package:skapka_app/models/group_model.dart';
 import 'package:skapka_app/models/leader_model.dart';
 import 'package:skapka_app/models/patrol_model.dart';
@@ -120,6 +120,7 @@ class SupabaseService {
 
   // Get all active dependents in given group
   Future<List<DependentModel>> getGroupDependents(String groupId) async {
+    print('Fetching dependents for groupId: $groupId');
     final response = await _supabaseClient
         .from('dependents')
         .select(
@@ -133,7 +134,7 @@ class SupabaseService {
   }
 
   // Get users that are invited to given event with their statuses
-  Future<List<EventParticipant>> getEventDependents(
+  Future<List<EventParticipantModel>> getEventParticipants(
     String eventId,
     String groupId,
   ) async {
@@ -143,7 +144,9 @@ class SupabaseService {
         .eq('event_id', eventId)
         .eq('group_id', groupId);
     return (response as List)
-        .map<EventParticipant>((json) => EventParticipant.fromJson(json))
+        .map<EventParticipantModel>(
+          (json) => EventParticipantModel.fromJson(json),
+        )
         .toList();
   }
 

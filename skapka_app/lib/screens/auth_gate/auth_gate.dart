@@ -6,7 +6,7 @@ import 'package:skapka_app/app/theme/app_color_theme.dart';
 import 'package:skapka_app/providers/account_provider.dart';
 import 'package:skapka_app/providers/dependents_provider.dart';
 import 'package:skapka_app/providers/events_provider.dart';
-import 'package:skapka_app/screens/auth_gate/widgets/floating_logo.dart';
+import 'package:skapka_app/widgets/loading_floating_logo.dart';
 import 'package:skapka_app/services/auth_service.dart';
 import 'package:skapka_app/services/supabase_service.dart';
 
@@ -137,7 +137,7 @@ class _AuthGateState extends State<AuthGate> {
       body: Center(
         child: GestureDetector(
           onTap: () => AuthService().signOut(),
-          child: FloatingLogo(),
+          child: LoadingFloatingLogo(),
         ),
       ),
     );

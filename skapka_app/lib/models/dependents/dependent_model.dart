@@ -59,8 +59,10 @@ class DependentModel {
       troopId: json['troop_id'] as String?,
       patrolId: json['patrol_id'] as String?,
       isArchived: json['is_archived'] as bool? ?? false,
-      secretCode: json['secret_code'] as String,
-      createdAt: DateTime.parse(json['created_at'] as String),
+      secretCode: json['secret_code'] as String?,
+      createdAt: json['created_at'] != null
+          ? DateTime.parse(json['created_at'] as String)
+          : null,
       notes: json['notes'] != null
           ? DependentNotesModel.fromJson(json['notes'] as Map<String, dynamic>)
           : null,

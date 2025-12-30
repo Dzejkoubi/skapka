@@ -15,7 +15,7 @@ import 'package:flutter/foundation.dart' as _i25;
 import 'package:flutter/material.dart' as _i21;
 import 'package:skapka_app/models/dependents/dependent_model.dart' as _i22;
 import 'package:skapka_app/models/event_model.dart' as _i26;
-import 'package:skapka_app/models/event_participant.dart' as _i23;
+import 'package:skapka_app/models/event_participant_model.dart' as _i23;
 import 'package:skapka_app/screens/account_not_approved_screen/account_not_approved_screen.dart'
     as _i1;
 import 'package:skapka_app/screens/auth_gate/auth_gate.dart' as _i2;
@@ -137,7 +137,7 @@ class CreateEditEventParticipantsRoute
   CreateEditEventParticipantsRoute({
     _i21.Key? key,
     List<_i22.DependentModel>? getGroupDependents,
-    List<_i23.EventParticipant>? eventParticipants,
+    List<_i23.EventParticipantModel>? eventParticipants,
     List<_i20.PageRouteInfo>? children,
   }) : super(
          CreateEditEventParticipantsRoute.name,
@@ -177,7 +177,7 @@ class CreateEditEventParticipantsRouteArgs {
 
   final List<_i22.DependentModel>? getGroupDependents;
 
-  final List<_i23.EventParticipant>? eventParticipants;
+  final List<_i23.EventParticipantModel>? eventParticipants;
 
   @override
   String toString() {
@@ -193,7 +193,7 @@ class CreateEditEventParticipantsRouteArgs {
           getGroupDependents,
           other.getGroupDependents,
         ) &&
-        const _i24.ListEquality<_i23.EventParticipant>().equals(
+        const _i24.ListEquality<_i23.EventParticipantModel>().equals(
           eventParticipants,
           other.eventParticipants,
         );
@@ -203,7 +203,9 @@ class CreateEditEventParticipantsRouteArgs {
   int get hashCode =>
       key.hashCode ^
       const _i24.ListEquality<_i22.DependentModel>().hash(getGroupDependents) ^
-      const _i24.ListEquality<_i23.EventParticipant>().hash(eventParticipants);
+      const _i24.ListEquality<_i23.EventParticipantModel>().hash(
+        eventParticipants,
+      );
 }
 
 /// generated route for
@@ -214,7 +216,7 @@ class CreateEditEventRoute
     _i25.Key? key,
     _i26.EventModel? event,
     _i26.EventTimeType? eventTimeType,
-    List<_i23.EventParticipant>? eventParticipants,
+    List<_i23.EventParticipantModel>? eventParticipants,
     List<_i20.PageRouteInfo>? children,
   }) : super(
          CreateEditEventRoute.name,
@@ -259,7 +261,7 @@ class CreateEditEventRouteArgs {
 
   final _i26.EventTimeType? eventTimeType;
 
-  final List<_i23.EventParticipant>? eventParticipants;
+  final List<_i23.EventParticipantModel>? eventParticipants;
 
   @override
   String toString() {
@@ -273,7 +275,7 @@ class CreateEditEventRouteArgs {
     return key == other.key &&
         event == other.event &&
         eventTimeType == other.eventTimeType &&
-        const _i24.ListEquality<_i23.EventParticipant>().equals(
+        const _i24.ListEquality<_i23.EventParticipantModel>().equals(
           eventParticipants,
           other.eventParticipants,
         );
@@ -284,7 +286,9 @@ class CreateEditEventRouteArgs {
       key.hashCode ^
       event.hashCode ^
       eventTimeType.hashCode ^
-      const _i24.ListEquality<_i23.EventParticipant>().hash(eventParticipants);
+      const _i24.ListEquality<_i23.EventParticipantModel>().hash(
+        eventParticipants,
+      );
 }
 
 /// generated route for

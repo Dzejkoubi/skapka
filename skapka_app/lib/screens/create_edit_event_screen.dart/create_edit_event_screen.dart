@@ -4,9 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:skapka_app/app/l10n/l10n_extension.dart';
 import 'package:skapka_app/app/theme/app_spacing.dart';
+import 'package:skapka_app/models/dependents/dependent_model.dart';
 import 'package:skapka_app/models/event_model.dart';
-import 'package:skapka_app/models/event_participant.dart';
+import 'package:skapka_app/models/event_participant_model.dart';
+import 'package:skapka_app/models/leader_model.dart';
+import 'package:skapka_app/models/patrol_model.dart';
+import 'package:skapka_app/models/troop_model.dart';
 import 'package:skapka_app/screens/create_edit_event_screen.dart/widgets/event_instructions_container.dart';
+import 'package:skapka_app/services/supabase_service.dart';
+import 'package:skapka_app/widgets/loading_floating_logo.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:skapka_app/screens/create_edit_event_screen.dart/widgets/event_participants_container.dart';
 import 'package:skapka_app/screens/create_edit_event_screen.dart/widgets/event_title_form.dart';
 import 'package:skapka_app/screens/create_edit_event_screen.dart/widgets/meeting_place_container.dart';
@@ -20,7 +27,7 @@ import 'package:skapka_app/screens/create_edit_event_screen.dart/widgets/create_
 class CreateEditEventScreen extends StatefulWidget {
   final EventModel? event;
   final EventTimeType? eventTimeType;
-  final List<EventParticipant>? eventParticipants;
+  final List<EventParticipantModel>? eventParticipants;
   const CreateEditEventScreen({
     super.key,
     this.event,
@@ -81,10 +88,17 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
     isDraft: _isDraft,
   );
 
-  late List<EventParticipant> _originalEventParticipants =
+  late List<EventParticipantModel> _originalEventParticipants =
       widget.eventParticipants ?? [];
 
-  late List<EventParticipant> _editedEventParticipants = [];
+  late List<EventParticipantModel> _editedEventParticipants = [];
+
+  final SupabaseService _supabaseService = SupabaseService();
+  List<DependentModel> _groupDependents = [];
+  List<LeaderModel> _groupLeaders = [];
+  List<PatrolModel> _groupPatrols = [];
+  List<TroopModel> _groupTroops = [];
+  late Future<void> _dataFetchFuture;
 
   int _totalParticipantsCount = 0;
   int _totalSignedUpParticipantsCount = 0;
@@ -110,6 +124,127 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
       _lastEditedBy = widget.event!.lastEditedBy;
       _isDraft = widget.event!.isDraft;
     }
+    _dataFetchFuture = _fetchData();
+  }
+
+  Future<void> _fetchData() async {
+    try {
+      final userId = Supabase.instance.client.auth.currentUser?.id;
+      if (userId == null) return;
+
+      // Get account to find group_id
+      final account = await _supabaseService.getAccountDetails(userId);
+      if (account == null) return;
+      _groupId = account.groupId;
+
+      // Fetch group data
+      final results = await Future.wait([
+        _supabaseService.getGroupDependents(_groupId!),
+        _supabaseService.getGroupLeaders(_groupId!),
+        _supabaseService.getGroupPatrols(_groupId!),
+        _supabaseService.getGroupTroops(_groupId!),
+      ]);
+
+      _groupDependents = results[0] as List<DependentModel>;
+      _groupLeaders = results[1] as List<LeaderModel>;
+      _groupPatrols = results[2] as List<PatrolModel>;
+      _groupTroops = results[3] as List<TroopModel>;
+
+      if (kDebugMode) {
+        print('--- Data Fetch Debug ---');
+        print('GroupId: $_groupId');
+        print('Dependents: ${_groupDependents.length}');
+        print('Leaders: ${_groupLeaders.length}');
+        print('Patrols: ${_groupPatrols.map((p) => p.name).toList()}');
+        print('Troops: ${_groupTroops.map((t) => t.name).toList()}');
+      }
+
+      // If editing, fetch participants if not provided
+      if (widget.event != null && widget.eventParticipants == null) {
+        _editedEventParticipants = await _supabaseService.getEventParticipants(
+          widget.event!.eventId,
+          _groupId!,
+        );
+      } else if (widget.eventParticipants != null) {
+        _editedEventParticipants = List.from(widget.eventParticipants!);
+      }
+
+      if (kDebugMode) {
+        print('Event Participants: ${_editedEventParticipants.length}');
+      }
+
+      _calculateStats();
+    } catch (e) {
+      if (kDebugMode) print('Error fetching data: $e');
+    }
+  }
+
+  void _calculateStats() {
+    _totalParticipantsCount = _editedEventParticipants.length;
+    _totalSignedUpParticipantsCount = _editedEventParticipants
+        .where((p) => p.status == 'attending' || p.status == 'signed_up')
+        .length;
+
+    int leaders = 0;
+    int plus18 = 0;
+    final Set<String> patrolIds = {};
+
+    for (var p in _editedEventParticipants) {
+      // Check leader
+      if (_groupLeaders.any((l) => l.dependentId == p.dependentId)) {
+        leaders++;
+      }
+
+      // Find dependent
+      final dependent = _groupDependents.firstWhere(
+        (d) => d.dependentId == p.dependentId,
+        orElse: () => DependentModel(
+          name: '',
+          surname: '',
+          sex: SexEnum.other,
+          isArchived: false,
+          secretCode: '',
+          createdAt: DateTime.now(),
+        ),
+      );
+
+      // Check 18+
+      if (dependent.born != null) {
+        final age = DateTime.now().difference(dependent.born!).inDays / 365.25;
+        if (age >= 18) plus18++;
+      }
+
+      // Collect patrol ID
+      if (dependent.patrolId != null) {
+        patrolIds.add(dependent.patrolId!);
+      }
+    }
+
+    _totalLeadersCount = leaders;
+    _total18PlusCount = plus18;
+
+    // Update target patrols
+    _targetPatrolsIds = patrolIds.toList();
+    if (_targetPatrolsIds != null && _targetPatrolsIds!.isNotEmpty) {
+      final names = _groupPatrols
+          .where((p) => _targetPatrolsIds!.contains(p.patrolId))
+          .map((p) => p.name)
+          .toList();
+      _targetPatrolNames = names.join(', ');
+    } else {
+      _targetPatrolNames = '';
+    }
+
+    if (kDebugMode) {
+      print('--- Stats Calculation Debug ---');
+      print('Total Participants: $_totalParticipantsCount');
+      print('Signed Up: $_totalSignedUpParticipantsCount');
+      print('Leaders Count: $_totalLeadersCount');
+      print('18+ Count: $_total18PlusCount');
+      print('Target Patrols: $_targetPatrolNames');
+    }
+
+    setState(() {});
   }
 
   @override
@@ -155,41 +290,52 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
                 }
               },
             ),
-            body: SingleChildScrollView(
-              child: SafeArea(
-                child: Column(
-                  spacing: AppSpacing.large,
-                  children: [
-                    EventTitleForm(eventTitleController: _eventTitleController),
-                    EventDateSelector(
-                      openSignUp: _openSignUp,
-                      closeSignUp: _closeSignUp,
-                      startDate: _startDate,
-                      endDate: _endDate,
-                      onOpenSignUpChanged: (d) =>
-                          setState(() => _openSignUp = d),
-                      onCloseSignUpChanged: (d) =>
-                          setState(() => _closeSignUp = d),
-                      onStartDateChanged: (d) => setState(() => _startDate = d),
-                      onEndDateChanged: (d) => setState(() => _endDate = d),
+            body: FutureBuilder(
+              future: _dataFetchFuture,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: LoadingFloatingLogo());
+                }
+                return SingleChildScrollView(
+                  child: SafeArea(
+                    child: Column(
+                      spacing: AppSpacing.large,
+                      children: [
+                        EventTitleForm(
+                          eventTitleController: _eventTitleController,
+                        ),
+                        EventDateSelector(
+                          openSignUp: _openSignUp,
+                          closeSignUp: _closeSignUp,
+                          startDate: _startDate,
+                          endDate: _endDate,
+                          onOpenSignUpChanged: (d) =>
+                              setState(() => _openSignUp = d),
+                          onCloseSignUpChanged: (d) =>
+                              setState(() => _closeSignUp = d),
+                          onStartDateChanged: (d) =>
+                              setState(() => _startDate = d),
+                          onEndDateChanged: (d) => setState(() => _endDate = d),
+                        ),
+                        EventParticipantsContainer(
+                          widget: widget,
+                          totalParticipantsCount: _totalParticipantsCount,
+                          targetPatrolNames: _targetPatrolNames,
+                          totalLeadersCount: _totalLeadersCount,
+                          total18PlusCount: _total18PlusCount,
+                          totalSignedUpParticipantsCount:
+                              _totalSignedUpParticipantsCount,
+                        ),
+                        EventInstructionsContainer(),
+                        MeetingPlaceContainer(
+                          meetingPlaceController: _meetingPlaceController,
+                        ),
+                        SizedBox(height: AppSpacing.bottomSpace),
+                      ],
                     ),
-                    EventParticipantsContainer(
-                      widget: widget,
-                      totalParticipantsCount: _totalParticipantsCount,
-                      targetPatrolNames: _targetPatrolNames,
-                      totalLeadersCount: _totalLeadersCount,
-                      total18PlusCount: _total18PlusCount,
-                      totalSignedUpParticipantsCount:
-                          _totalSignedUpParticipantsCount,
-                    ),
-                    EventInstructionsContainer(),
-                    MeetingPlaceContainer(
-                      meetingPlaceController: _meetingPlaceController,
-                    ),
-                    SizedBox(height: AppSpacing.bottomSpace),
-                  ],
-                ),
-              ),
+                  ),
+                );
+              },
             ),
 
             speedDialChildren: CreateEditEventSpeedDial.build(

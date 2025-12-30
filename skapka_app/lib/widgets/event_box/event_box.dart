@@ -68,46 +68,51 @@ class EventBox extends StatelessWidget {
         children: [
           Row(
             children: [
-              Text(event.title ?? '', style: AppTextTheme.titleSmall(context)),
-              Spacer(),
-              if (userStatus != null && dependentId != null)
+              Expanded(
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Text(
+                    event.title ?? '',
+                    style: AppTextTheme.titleSmall(context),
+                    maxLines: 1,
+                  ),
+                ),
+              ),
+              if (userStatus != null && dependentId != null) ...[
+                SizedBox(width: AppSpacing.small),
                 UserStatusBox(
                   status: userStatus!,
                   isEnabled: isStatusBoxEnabled,
                   eventId: event.eventId,
                   dependentId: dependentId!,
                 ),
+              ],
             ],
           ),
           SizedBox(height: AppSpacing.xSmall),
-          Column(
-            spacing: AppSpacing.xxSmall,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              if (event.photoAlbumLink != null)
-                GestureDetector(
-                  onTap: () async {
-                    final url = Uri.parse(event.photoAlbumLink!);
-                    if (await canLaunchUrl(url)) {
-                      await launchUrl(
-                        url,
-                        mode: LaunchMode.externalApplication,
-                      );
-                    }
-                  },
-                  child: Text.rich(
-                    TextSpan(
-                      text:
-                          '${AppLocalizations.of(context)!.event_box_photos_link_text}: ',
-                      style: AppTextTheme.bodyMedium(context).copyWith(
-                        color: context.colors.secondary.normal,
-                        decoration: TextDecoration.underline,
-                      ),
+          if (event.photoAlbumLink != null)
+            Align(
+              alignment: Alignment.centerLeft,
+              child: GestureDetector(
+                onTap: () async {
+                  final url = Uri.parse(event.photoAlbumLink!);
+                  if (await canLaunchUrl(url)) {
+                    await launchUrl(url, mode: LaunchMode.externalApplication);
+                  }
+                },
+                child: Text.rich(
+                  TextSpan(
+                    text: AppLocalizations.of(
+                      context,
+                    )!.event_box_photos_link_text,
+                    style: AppTextTheme.labelMedium(context).copyWith(
+                      color: context.colors.secondary.normal,
+                      decoration: TextDecoration.underline,
                     ),
                   ),
                 ),
-            ],
-          ),
+              ),
+            ),
           SizedBox(height: AppSpacing.large),
           Container(
             padding: EdgeInsets.all(AppSpacing.small),
@@ -167,16 +172,15 @@ class EventBox extends StatelessWidget {
       children: [
         Text(
           label,
-          style: AppTextTheme.bodyMedium(
+          style: AppTextTheme.labelMedium(
             context,
           ).copyWith(color: context.colors.text.muted),
         ),
         Text(
           value,
-          style: AppTextTheme.bodyMedium(context).copyWith(
-            fontWeight: FontWeight.bold,
-            color: context.colors.text.normal,
-          ),
+          style: AppTextTheme.labelMedium(
+            context,
+          ).copyWith(color: context.colors.text.normal),
         ),
       ],
     );

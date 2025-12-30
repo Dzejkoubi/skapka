@@ -34,12 +34,16 @@ class EventsProvider extends ChangeNotifier {
   void setEvents(List<EventModel> events) {
     clear();
     _events.addAll(events);
+    print('Events set: ${_events.length} events loaded.');
     notifyListeners();
   }
 
   void addEvent(EventModel event) {
     _events.add(event);
     notifyListeners();
+    print(
+      'Event added: ${event.eventId}. Total events: ${_events.length}. ${event.photoAlbumLink}',
+    );
   }
 
   void removeEvent(EventModel event) {

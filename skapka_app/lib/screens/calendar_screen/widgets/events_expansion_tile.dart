@@ -67,11 +67,12 @@ class _EventsExpansionTileState extends State<EventsExpansionTile> {
         ),
         childrenPadding: const EdgeInsets.symmetric(
           horizontal: AppSpacing.small,
+          vertical: AppSpacing.small,
         ),
         children: [
           for (final event in widget.events)
             Padding(
-              padding: const EdgeInsets.only(bottom: AppSpacing.xSmall),
+              padding: const EdgeInsets.only(bottom: AppSpacing.small),
               child: EventBox(event: event),
             ),
         ],

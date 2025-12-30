@@ -812,17 +812,29 @@ abstract class AppLocalizations {
   /// **'Celkový počet účastníků'**
   String get create_edit_event_screen_total_participants_text;
 
+  /// No description provided for @create_edit_event_screen_total_signed_up_participants_text.
+  ///
+  /// In cs, this message translates to:
+  /// **'Celkový počet přihlášených'**
+  String get create_edit_event_screen_total_signed_up_participants_text;
+
   /// No description provided for @create_edit_event_screen_troops.
   ///
   /// In cs, this message translates to:
   /// **'Družinky'**
   String get create_edit_event_screen_troops;
 
-  /// No description provided for @create_edit_event_screen_18_leaders.
+  /// No description provided for @create_edit_event_screen_leaders.
   ///
   /// In cs, this message translates to:
-  /// **'Vedoucí/18+'**
-  String get create_edit_event_screen_18_leaders;
+  /// **'Vedoucí'**
+  String get create_edit_event_screen_leaders;
+
+  /// No description provided for @create_edit_event_screen_18_plus.
+  ///
+  /// In cs, this message translates to:
+  /// **'18+'**
+  String get create_edit_event_screen_18_plus;
 
   /// No description provided for @create_edit_event_screen_instructions_text.
   ///

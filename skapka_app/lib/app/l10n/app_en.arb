@@ -159,8 +159,10 @@
     "create_edit_event_screen_select_participants_text": "Select Participants",
     "create_edit_participants_screen_title": "Select Participants",
     "create_edit_event_screen_total_participants_text": "Total Participants",
+    "create_edit_event_screen_total_signed_up_participants_text": "Total Signed Up Participants",
     "create_edit_event_screen_troops": "Troops",
-    "create_edit_event_screen_18_leaders": "Leaders/18+",
+    "create_edit_event_screen_leaders": "Leaders",
+    "create_edit_event_screen_18_plus": "18+",
 
     "create_edit_event_screen_instructions_text": "Instructions",
     "create_edit_instructions_screen_title": "Event Instructions",

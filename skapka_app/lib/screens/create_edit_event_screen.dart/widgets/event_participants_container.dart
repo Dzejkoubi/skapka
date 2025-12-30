@@ -10,6 +10,7 @@ import 'package:skapka_app/app/theme/app_sizes.dart';
 import 'package:skapka_app/app/theme/app_spacing.dart';
 import 'package:skapka_app/app/theme/app_text_theme.dart';
 import 'package:skapka_app/screens/create_edit_event_screen.dart/create_edit_event_screen.dart';
+import 'package:skapka_app/screens/create_edit_event_screen.dart/widgets/participant_info_row.dart';
 
 class EventParticipantsContainer extends StatelessWidget {
   const EventParticipantsContainer({
@@ -19,16 +20,18 @@ class EventParticipantsContainer extends StatelessWidget {
     required String targetPatrolNames,
     required int totalLeadersCount,
     required int total18PlusCount,
+    required int totalSignedUpParticipantsCount,
   }) : _totalParticipantsCount = totalParticipantsCount,
        _targetPatrolNames = targetPatrolNames,
        _totalLeadersCount = totalLeadersCount,
-       _total18PlusCount = total18PlusCount;
-
+       _total18PlusCount = total18PlusCount,
+       _totalSignedUpParticipantsCount = totalSignedUpParticipantsCount;
   final CreateEditEventScreen widget;
   final int _totalParticipantsCount;
   final String _targetPatrolNames;
   final int _totalLeadersCount;
   final int _total18PlusCount;
+  final int _totalSignedUpParticipantsCount;
 
   @override
   Widget build(BuildContext context) {
@@ -89,63 +92,30 @@ class EventParticipantsContainer extends StatelessWidget {
             child: Column(
               spacing: AppSpacing.xSmall,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      '${context.localizations.create_edit_event_screen_total_participants_text}:',
-                      style: AppTextTheme.bodyMedium(
-                        context,
-                      ).copyWith(color: context.colors.text.muted),
-                    ),
-                    const SizedBox(width: AppSpacing.medium),
-                    Text(
-                      '$_totalParticipantsCount',
-                      style: AppTextTheme.bodyMedium(context),
-                    ),
-                  ],
+                ParticipantInfoRow(
+                  label: context
+                      .localizations
+                      .create_edit_event_screen_total_participants_text,
+                  value: '$_totalParticipantsCount',
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      '${context.localizations.create_edit_event_screen_troops}:',
-                      style: AppTextTheme.bodyMedium(
-                        context,
-                      ).copyWith(color: context.colors.text.muted),
-                    ),
-                    const SizedBox(width: AppSpacing.medium),
-                    Flexible(
-                      child: SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Text(
-                          _targetPatrolNames,
-                          style: AppTextTheme.bodyMedium(context),
-                        ),
-                      ),
-                    ),
-                  ],
+                ParticipantInfoRow(
+                  label: context
+                      .localizations
+                      .create_edit_event_screen_total_signed_up_participants_text,
+                  value: '$_totalSignedUpParticipantsCount',
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      '${context.localizations.create_edit_event_screen_18_leaders}:',
-                      style: AppTextTheme.bodyMedium(
-                        context,
-                      ).copyWith(color: context.colors.text.muted),
-                    ),
-                    const SizedBox(width: AppSpacing.medium),
-                    Flexible(
-                      child: SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Text(
-                          '$_totalLeadersCount / $_total18PlusCount',
-                          style: AppTextTheme.bodyMedium(context),
-                        ),
-                      ),
-                    ),
-                  ],
+                ParticipantInfoRow(
+                  label: context.localizations.create_edit_event_screen_18_plus,
+                  value: '$_total18PlusCount',
+                ),
+                ParticipantInfoRow(
+                  label: context.localizations.create_edit_event_screen_leaders,
+                  value: '$_totalLeadersCount',
+                ),
+                ParticipantInfoRow(
+                  label: context.localizations.create_edit_event_screen_troops,
+                  value: _targetPatrolNames,
+                  isScrollable: true,
                 ),
               ],
             ),

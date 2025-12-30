@@ -441,10 +441,17 @@ class AppLocalizationsCs extends AppLocalizations {
       'Celkový počet účastníků';
 
   @override
+  String get create_edit_event_screen_total_signed_up_participants_text =>
+      'Celkový počet přihlášených';
+
+  @override
   String get create_edit_event_screen_troops => 'Družinky';
 
   @override
-  String get create_edit_event_screen_18_leaders => 'Vedoucí/18+';
+  String get create_edit_event_screen_leaders => 'Vedoucí';
+
+  @override
+  String get create_edit_event_screen_18_plus => '18+';
 
   @override
   String get create_edit_event_screen_instructions_text => 'Pokyny';

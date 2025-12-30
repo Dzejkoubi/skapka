@@ -1,22 +1,17 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:skapka_app/app/l10n/l10n_extension.dart';
-import 'package:skapka_app/app/router/router.gr.dart';
-import 'package:skapka_app/app/theme/app_color_theme.dart';
-import 'package:skapka_app/app/theme/app_decorations.dart';
-import 'package:skapka_app/app/theme/app_sizes.dart';
 import 'package:skapka_app/app/theme/app_spacing.dart';
-import 'package:skapka_app/app/theme/app_text_theme.dart';
 import 'package:skapka_app/models/event_model.dart';
 import 'package:skapka_app/models/event_participant.dart';
+import 'package:skapka_app/screens/create_edit_event_screen.dart/widgets/event_instructions_container.dart';
 import 'package:skapka_app/screens/create_edit_event_screen.dart/widgets/event_participants_container.dart';
 import 'package:skapka_app/screens/create_edit_event_screen.dart/widgets/event_title_form.dart';
+import 'package:skapka_app/screens/create_edit_event_screen.dart/widgets/meeting_place_container.dart';
 import 'package:skapka_app/widgets/appbar/appbar.dart';
 import 'package:skapka_app/widgets/dialogs/large_dialog.dart';
-import 'package:skapka_app/widgets/forms/custom_form.dart';
 import 'package:skapka_app/widgets/wrappers/screen_wrapper.dart';
 import 'package:skapka_app/screens/create_edit_event_screen.dart/widgets/event_date_selector.dart';
 import 'package:skapka_app/screens/create_edit_event_screen.dart/widgets/create_edit_event_speed_dial.dart';
@@ -92,6 +87,7 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
   late List<EventParticipant> _editedEventParticipants = [];
 
   int _totalParticipantsCount = 0;
+  int _totalSignedUpParticipantsCount = 0;
   String _targetPatrolNames = '';
   int _totalLeadersCount = 0;
   int _total18PlusCount = 0;
@@ -183,78 +179,12 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
                       targetPatrolNames: _targetPatrolNames,
                       totalLeadersCount: _totalLeadersCount,
                       total18PlusCount: _total18PlusCount,
+                      totalSignedUpParticipantsCount:
+                          _totalSignedUpParticipantsCount,
                     ),
-                    GestureDetector(
-                      onTap: () {
-                        context.router.push(CreateEditEventInstructionsRoute());
-                      },
-                      child: Container(
-                        decoration: AppDecorations.primaryContainer(context),
-                        width: double.infinity,
-                        padding: EdgeInsets.all(AppSpacing.xSmall),
-                        child: Row(
-                          children: [
-                            SvgPicture.asset(
-                              'assets/icons/chevron-right.svg',
-                              width: AppSizes.iconSizeSmall,
-                              height: AppSizes.iconSizeSmall,
-                              colorFilter: ColorFilter.mode(
-                                Colors.transparent,
-                                BlendMode.srcIn,
-                              ),
-                            ),
-                            Expanded(
-                              child: Text(
-                                context
-                                    .localizations
-                                    .create_edit_event_screen_instructions_text,
-                                style: AppTextTheme.titleSmall(context),
-                                textAlign: TextAlign.center,
-                              ),
-                            ),
-                            SvgPicture.asset(
-                              'assets/icons/chevron-right.svg',
-                              width: AppSizes.iconSizeSmall,
-                              height: AppSizes.iconSizeSmall,
-                              colorFilter: ColorFilter.mode(
-                                context.colors.primary.light,
-                                BlendMode.srcIn,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Container(
-                      decoration: AppDecorations.primaryContainer(context),
-                      width: double.infinity,
-                      padding: EdgeInsets.all(AppSpacing.xSmall),
-                      child: Column(
-                        spacing: AppSpacing.medium,
-                        children: [
-                          CustomForm(
-                            controller: _meetingPlaceController,
-                            labelText: context
-                                .localizations
-                                .create_edit_event_screen_meeting_place_text,
-                            characterLimit: 50,
-                            showSuffixIcon: false,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: AppSpacing.xSmall,
-                            ),
-                            child: Text(
-                              context
-                                  .localizations
-                                  .create_edit_event_screen_meeting_place_description,
-                              style: AppTextTheme.bodySmall(
-                                context,
-                              ).copyWith(color: context.colors.text.muted),
-                            ),
-                          ),
-                        ],
-                      ),
+                    EventInstructionsContainer(),
+                    MeetingPlaceContainer(
+                      meetingPlaceController: _meetingPlaceController,
                     ),
                     SizedBox(height: AppSpacing.bottomSpace),
                   ],

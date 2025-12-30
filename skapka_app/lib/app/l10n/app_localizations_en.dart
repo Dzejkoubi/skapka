@@ -443,10 +443,17 @@ class AppLocalizationsEn extends AppLocalizations {
       'Total Participants';
 
   @override
+  String get create_edit_event_screen_total_signed_up_participants_text =>
+      'Total Signed Up Participants';
+
+  @override
   String get create_edit_event_screen_troops => 'Troops';
 
   @override
-  String get create_edit_event_screen_18_leaders => 'Leaders/18+';
+  String get create_edit_event_screen_leaders => 'Leaders';
+
+  @override
+  String get create_edit_event_screen_18_plus => '18+';
 
   @override
   String get create_edit_event_screen_instructions_text => 'Instructions';

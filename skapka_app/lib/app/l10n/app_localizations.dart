@@ -600,205 +600,236 @@ abstract class AppLocalizations {
   /// **'Zdá se, že nejsou žádné koncepty.'**
   String get calendar_screen_event_expansion_tile_draft_no_events_subtitle;
 
-  /// No description provided for @create_event_screen_title.
+  /// No description provided for @create_edit_event_screen_title_create.
   ///
   /// In cs, this message translates to:
   /// **'Vytvořit výpravu'**
-  String get create_event_screen_title;
+  String get create_edit_event_screen_title_create;
 
-  /// No description provided for @create_event_screen_speed_dial_save_event_text.
+  /// No description provided for @create_edit_event_screen_title_edit.
+  ///
+  /// In cs, this message translates to:
+  /// **'Upravit výpravu'**
+  String get create_edit_event_screen_title_edit;
+
+  /// No description provided for @create_edit_event_screen_speed_dial_save_event_text.
   ///
   /// In cs, this message translates to:
   /// **'Uložit'**
-  String get create_event_screen_speed_dial_save_event_text;
+  String get create_edit_event_screen_speed_dial_save_event_text;
 
-  /// No description provided for @create_event_screen_save_event_dialog_title.
+  /// No description provided for @create_edit_event_screen_save_event_dialog_title.
   ///
   /// In cs, this message translates to:
   /// **'Uložit jako koncept'**
-  String get create_event_screen_save_event_dialog_title;
+  String get create_edit_event_screen_save_event_dialog_title;
 
-  /// No description provided for @create_event_screen_save_event_dialog_description.
+  /// No description provided for @create_edit_event_screen_save_event_dialog_description.
   ///
   /// In cs, this message translates to:
   /// **'Chceš uložit tuto výpravu jako koncept? Výprava se zveřejní až po kliknutí na tlačítko zveřejnit. Můžeš ji upravit později.'**
-  String get create_event_screen_save_event_dialog_description;
+  String get create_edit_event_screen_save_event_dialog_description;
 
-  /// No description provided for @create_event_screen_save_event_dialog_primary_button_text.
+  /// No description provided for @create_edit_event_screen_save_event_dialog_primary_button_text.
   ///
   /// In cs, this message translates to:
   /// **'Uložit jako koncept'**
-  String get create_event_screen_save_event_dialog_primary_button_text;
+  String get create_edit_event_screen_save_event_dialog_primary_button_text;
 
-  /// No description provided for @create_event_screen_speed_dial_publish_event_text.
+  /// No description provided for @create_edit_event_screen_save_changes_dialog_title.
+  ///
+  /// In cs, this message translates to:
+  /// **'Uložit změny'**
+  String get create_edit_event_screen_save_changes_dialog_title;
+
+  /// No description provided for @create_edit_event_screen_save_changes_dialog_description.
+  ///
+  /// In cs, this message translates to:
+  /// **'Opravdu chceš uložit změny v této výpravě?'**
+  String get create_edit_event_screen_save_changes_dialog_description;
+
+  /// No description provided for @create_edit_event_screen_save_changes_dialog_primary_button_text.
+  ///
+  /// In cs, this message translates to:
+  /// **'Uložit'**
+  String get create_edit_event_screen_save_changes_dialog_primary_button_text;
+
+  /// No description provided for @create_edit_event_screen_speed_dial_publish_event_text.
   ///
   /// In cs, this message translates to:
   /// **'Zveřejnit'**
-  String get create_event_screen_speed_dial_publish_event_text;
+  String get create_edit_event_screen_speed_dial_publish_event_text;
 
-  /// No description provided for @create_event_screen_publish_event_dialog_title.
+  /// No description provided for @create_edit_event_screen_publish_event_dialog_title.
   ///
   /// In cs, this message translates to:
   /// **'Zveřejnit výpravu'**
-  String get create_event_screen_publish_event_dialog_title;
+  String get create_edit_event_screen_publish_event_dialog_title;
 
-  /// No description provided for @create_event_screen_publish_event_dialog_description.
+  /// No description provided for @create_edit_event_screen_publish_event_dialog_description.
   ///
   /// In cs, this message translates to:
   /// **'Opravdu chceš zveřejnit tuto výpravu? Výprava se přidá do kalendáře a až nadejde čas přihlašování, budou se moct pozvaní účastníci přihlašovat.'**
-  String get create_event_screen_publish_event_dialog_description;
+  String get create_edit_event_screen_publish_event_dialog_description;
 
-  /// No description provided for @create_event_screen_publish_event_dialog_primary_button_text.
+  /// No description provided for @create_edit_event_screen_publish_event_dialog_primary_button_text.
   ///
   /// In cs, this message translates to:
   /// **'Zveřejnit'**
-  String get create_event_screen_publish_event_dialog_primary_button_text;
+  String get create_edit_event_screen_publish_event_dialog_primary_button_text;
 
-  /// No description provided for @create_event_screen_speed_dial_unpublish_event_text.
+  /// No description provided for @create_edit_event_screen_speed_dial_unpublish_event_text.
   ///
   /// In cs, this message translates to:
   /// **'Zrušit zveřejnění'**
-  String get create_event_screen_speed_dial_unpublish_event_text;
+  String get create_edit_event_screen_speed_dial_unpublish_event_text;
 
-  /// No description provided for @create_event_screen_unpublish_event_dialog_title.
+  /// No description provided for @create_edit_event_screen_unpublish_event_dialog_title.
   ///
   /// In cs, this message translates to:
   /// **'Zrušit zveřejnění výpravy'**
-  String get create_event_screen_unpublish_event_dialog_title;
+  String get create_edit_event_screen_unpublish_event_dialog_title;
 
-  /// No description provided for @create_event_screen_unpublish_event_dialog_description.
+  /// No description provided for @create_edit_event_screen_unpublish_event_dialog_description.
   ///
   /// In cs, this message translates to:
   /// **'Opravdu chceš zrušit zveřejnění této výpravy? Účastníci se nebudou moct dál přihlašovat a výprava se odstraní z kalendáře.'**
-  String get create_event_screen_unpublish_event_dialog_description;
+  String get create_edit_event_screen_unpublish_event_dialog_description;
 
-  /// No description provided for @create_event_screen_unpublish_event_dialog_primary_button_text.
+  /// No description provided for @create_edit_event_screen_unpublish_event_dialog_primary_button_text.
   ///
   /// In cs, this message translates to:
   /// **'Zrušit zveřejnění'**
-  String get create_event_screen_unpublish_event_dialog_primary_button_text;
+  String
+  get create_edit_event_screen_unpublish_event_dialog_primary_button_text;
 
-  /// No description provided for @create_event_screen_speed_dial_delete_event_text.
+  /// No description provided for @create_edit_event_screen_speed_dial_delete_event_text.
   ///
   /// In cs, this message translates to:
   /// **'Smazat'**
-  String get create_event_screen_speed_dial_delete_event_text;
+  String get create_edit_event_screen_speed_dial_delete_event_text;
 
-  /// No description provided for @create_event_screen_delete_event_dialog_title.
+  /// No description provided for @create_edit_event_screen_delete_event_dialog_title.
   ///
   /// In cs, this message translates to:
   /// **'Smazat výpravu'**
-  String get create_event_screen_delete_event_dialog_title;
+  String get create_edit_event_screen_delete_event_dialog_title;
 
-  /// No description provided for @create_event_screen_delete_event_dialog_description.
+  /// No description provided for @create_edit_event_screen_delete_event_dialog_description.
   ///
   /// In cs, this message translates to:
   /// **'Opravdu chceš smazat tuto výpravu? Tuto akci nelze vrátit zpět.'**
-  String get create_event_screen_delete_event_dialog_description;
+  String get create_edit_event_screen_delete_event_dialog_description;
 
-  /// No description provided for @create_event_screen_delete_event_dialog_primary_button_text.
+  /// No description provided for @create_edit_event_screen_delete_event_dialog_primary_button_text.
   ///
   /// In cs, this message translates to:
   /// **'Smazat'**
-  String get create_event_screen_delete_event_dialog_primary_button_text;
+  String get create_edit_event_screen_delete_event_dialog_primary_button_text;
 
-  /// No description provided for @create_event_screen_go_back_without_saving_dialog_title.
+  /// No description provided for @create_edit_event_screen_past_event_admin_only_error.
+  ///
+  /// In cs, this message translates to:
+  /// **'Pouze administrátoři mohou mazat nebo rušit zveřejnění proběhlých výprav.'**
+  String get create_edit_event_screen_past_event_admin_only_error;
+
+  /// No description provided for @create_edit_event_screen_go_back_without_saving_dialog_title.
   ///
   /// In cs, this message translates to:
   /// **'Zahodit změny'**
-  String get create_event_screen_go_back_without_saving_dialog_title;
+  String get create_edit_event_screen_go_back_without_saving_dialog_title;
 
-  /// No description provided for @create_event_screen_go_back_without_saving_dialog_description.
+  /// No description provided for @create_edit_event_screen_go_back_without_saving_dialog_description.
   ///
   /// In cs, this message translates to:
   /// **'Opravdu chceš odejít bez uložení změn? Veškeré neuložené změny budou ztraceny.'**
-  String get create_event_screen_go_back_without_saving_dialog_description;
+  String get create_edit_event_screen_go_back_without_saving_dialog_description;
 
-  /// No description provided for @create_event_screen_go_back_without_saving_dialog_primary_button_text.
+  /// No description provided for @create_edit_event_screen_go_back_without_saving_dialog_primary_button_text.
   ///
   /// In cs, this message translates to:
   /// **'Zahodit'**
   String
-  get create_event_screen_go_back_without_saving_dialog_primary_button_text;
+  get create_edit_event_screen_go_back_without_saving_dialog_primary_button_text;
 
-  /// No description provided for @create_event_screen_go_back_without_saving_dialog_secondary_button_text.
+  /// No description provided for @create_edit_event_screen_go_back_without_saving_dialog_secondary_button_text.
   ///
   /// In cs, this message translates to:
   /// **'Zpět'**
   String
-  get create_event_screen_go_back_without_saving_dialog_secondary_button_text;
+  get create_edit_event_screen_go_back_without_saving_dialog_secondary_button_text;
 
-  /// No description provided for @create_event_screen_event_name_hint.
+  /// No description provided for @create_edit_event_screen_event_title_hint.
   ///
   /// In cs, this message translates to:
   /// **'Název výpravy'**
-  String get create_event_screen_event_name_hint;
+  String get create_edit_event_screen_event_title_hint;
 
-  /// No description provided for @create_event_screen_event_sign_up_from.
+  /// No description provided for @create_edit_event_screen_event_sign_up_from.
   ///
   /// In cs, this message translates to:
   /// **'Přihlašování od'**
-  String get create_event_screen_event_sign_up_from;
+  String get create_edit_event_screen_event_sign_up_from;
 
-  /// No description provided for @create_event_screen_event_sign_up_to.
+  /// No description provided for @create_edit_event_screen_event_sign_up_to.
   ///
   /// In cs, this message translates to:
   /// **'Přihlašování do'**
-  String get create_event_screen_event_sign_up_to;
+  String get create_edit_event_screen_event_sign_up_to;
 
-  /// No description provided for @create_event_screen_event_from_hint.
+  /// No description provided for @create_edit_event_screen_event_from_hint.
   ///
   /// In cs, this message translates to:
   /// **'Od'**
-  String get create_event_screen_event_from_hint;
+  String get create_edit_event_screen_event_from_hint;
 
-  /// No description provided for @create_event_screen_event_to_hint.
+  /// No description provided for @create_edit_event_screen_event_to_hint.
   ///
   /// In cs, this message translates to:
   /// **'Do'**
-  String get create_event_screen_event_to_hint;
+  String get create_edit_event_screen_event_to_hint;
 
-  /// No description provided for @create_event_screen_select_participants_text.
+  /// No description provided for @create_edit_event_screen_select_participants_text.
   ///
   /// In cs, this message translates to:
   /// **'Vybrat účastníky'**
-  String get create_event_screen_select_participants_text;
+  String get create_edit_event_screen_select_participants_text;
 
-  /// No description provided for @create_event_screen_total_participants_text.
+  /// No description provided for @create_edit_event_screen_total_participants_text.
   ///
   /// In cs, this message translates to:
   /// **'Celkový počet účastníků'**
-  String get create_event_screen_total_participants_text;
+  String get create_edit_event_screen_total_participants_text;
 
-  /// No description provided for @create_event_screen_troops.
+  /// No description provided for @create_edit_event_screen_troops.
   ///
   /// In cs, this message translates to:
   /// **'Oddíly'**
-  String get create_event_screen_troops;
+  String get create_edit_event_screen_troops;
 
-  /// No description provided for @create_event_screen_18_leaders.
+  /// No description provided for @create_edit_event_screen_18_leaders.
   ///
   /// In cs, this message translates to:
   /// **'Vedoucí/18+'**
-  String get create_event_screen_18_leaders;
+  String get create_edit_event_screen_18_leaders;
 
-  /// No description provided for @create_event_screen_instructions_text.
+  /// No description provided for @create_edit_event_screen_instructions_text.
   ///
   /// In cs, this message translates to:
   /// **'Pokyny'**
-  String get create_event_screen_instructions_text;
+  String get create_edit_event_screen_instructions_text;
 
-  /// No description provided for @create_event_screen_meeting_place_text.
+  /// No description provided for @create_edit_event_screen_meeting_place_text.
   ///
   /// In cs, this message translates to:
   /// **'Místo srazu'**
-  String get create_event_screen_meeting_place_text;
+  String get create_edit_event_screen_meeting_place_text;
 
-  /// No description provided for @create_event_screen_meeting_place_address_text.
+  /// No description provided for @create_edit_event_screen_meeting_place_address_text.
   ///
   /// In cs, this message translates to:
   /// **'Adresa'**
-  String get create_event_screen_meeting_place_address_text;
+  String get create_edit_event_screen_meeting_place_address_text;
 
   /// No description provided for @settings_screen_title.
   ///
@@ -859,6 +890,12 @@ abstract class AppLocalizations {
   /// In cs, this message translates to:
   /// **'Vytvořit'**
   String get create;
+
+  /// No description provided for @edit.
+  ///
+  /// In cs, this message translates to:
+  /// **'Upravit'**
+  String get edit;
 }
 
 class _AppLocalizationsDelegate

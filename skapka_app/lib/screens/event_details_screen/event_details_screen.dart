@@ -62,7 +62,7 @@ class EventDetailsScreen extends StatelessWidget {
                           textAlign: TextAlign.center,
                           AppLocalizations.of(
                             context,
-                          )!.create_event_screen_instructions_text,
+                          )!.create_edit_event_screen_instructions_text,
                           style: AppTextTheme.titleMedium(context),
                         ),
                         Container(
@@ -84,7 +84,7 @@ class EventDetailsScreen extends StatelessWidget {
                             textAlign: TextAlign.center,
                             AppLocalizations.of(
                               context,
-                            )!.create_event_screen_meeting_place_text,
+                            )!.create_edit_event_screen_meeting_place_text,
                             style: AppTextTheme.titleMedium(context),
                           ),
                           Container(
@@ -137,10 +137,15 @@ class EventDetailsScreen extends StatelessWidget {
                 ? [
                     SpeedDialChild(
                       labelWidget: MainButton.filled(
-                        text: AppLocalizations.of(context)!.create,
+                        text: AppLocalizations.of(context)!.edit,
                         onPressed: () {
                           dialOpenNotifier.value = false;
-                          context.router.push(CreateEventRoute());
+                          context.router.push(
+                            CreateEditEventRoute(
+                              event: event,
+                              eventTimeType: eventTimeType,
+                            ),
+                          );
                         },
                       ),
                     ),

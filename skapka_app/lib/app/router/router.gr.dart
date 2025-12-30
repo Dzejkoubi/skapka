@@ -10,14 +10,14 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i18;
-import 'package:flutter/foundation.dart' as _i21;
-import 'package:flutter/material.dart' as _i19;
+import 'package:flutter/foundation.dart' as _i19;
+import 'package:flutter/material.dart' as _i21;
 import 'package:skapka_app/models/event_model.dart' as _i20;
 import 'package:skapka_app/screens/account_not_approved_screen/account_not_approved_screen.dart'
     as _i1;
 import 'package:skapka_app/screens/auth_gate/auth_gate.dart' as _i2;
 import 'package:skapka_app/screens/calendar_screen/calendar_screen.dart' as _i4;
-import 'package:skapka_app/screens/create_event_screen.dart/create_event_screen.dart'
+import 'package:skapka_app/screens/create_edit_event_screen.dart/create_edit_event_screen.dart'
     as _i5;
 import 'package:skapka_app/screens/dependents_screen/dependents_screen.dart'
     as _i6;
@@ -108,19 +108,66 @@ class CalendarRoute extends _i18.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i5.CreateEventScreen]
-class CreateEventRoute extends _i18.PageRouteInfo<void> {
-  const CreateEventRoute({List<_i18.PageRouteInfo>? children})
-    : super(CreateEventRoute.name, initialChildren: children);
+/// [_i5.CreateEditEventScreen]
+class CreateEditEventRoute
+    extends _i18.PageRouteInfo<CreateEditEventRouteArgs> {
+  CreateEditEventRoute({
+    _i19.Key? key,
+    _i20.EventModel? event,
+    _i20.EventTimeType? eventTimeType,
+    List<_i18.PageRouteInfo>? children,
+  }) : super(
+         CreateEditEventRoute.name,
+         args: CreateEditEventRouteArgs(
+           key: key,
+           event: event,
+           eventTimeType: eventTimeType,
+         ),
+         initialChildren: children,
+       );
 
-  static const String name = 'CreateEventRoute';
+  static const String name = 'CreateEditEventRoute';
 
   static _i18.PageInfo page = _i18.PageInfo(
     name,
     builder: (data) {
-      return const _i5.CreateEventScreen();
+      final args = data.argsAs<CreateEditEventRouteArgs>(
+        orElse: () => const CreateEditEventRouteArgs(),
+      );
+      return _i5.CreateEditEventScreen(
+        key: args.key,
+        event: args.event,
+        eventTimeType: args.eventTimeType,
+      );
     },
   );
+}
+
+class CreateEditEventRouteArgs {
+  const CreateEditEventRouteArgs({this.key, this.event, this.eventTimeType});
+
+  final _i19.Key? key;
+
+  final _i20.EventModel? event;
+
+  final _i20.EventTimeType? eventTimeType;
+
+  @override
+  String toString() {
+    return 'CreateEditEventRouteArgs{key: $key, event: $event, eventTimeType: $eventTimeType}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! CreateEditEventRouteArgs) return false;
+    return key == other.key &&
+        event == other.event &&
+        eventTimeType == other.eventTimeType;
+  }
+
+  @override
+  int get hashCode => key.hashCode ^ event.hashCode ^ eventTimeType.hashCode;
 }
 
 /// generated route for
@@ -143,7 +190,7 @@ class DependentsRoute extends _i18.PageRouteInfo<void> {
 /// [_i7.EventDetailsScreen]
 class EventDetailsRoute extends _i18.PageRouteInfo<EventDetailsRouteArgs> {
   EventDetailsRoute({
-    _i19.Key? key,
+    _i21.Key? key,
     required _i20.EventModel event,
     required _i20.EventTimeType eventTimeType,
     List<_i18.PageRouteInfo>? children,
@@ -179,7 +226,7 @@ class EventDetailsRouteArgs {
     required this.eventTimeType,
   });
 
-  final _i19.Key? key;
+  final _i21.Key? key;
 
   final _i20.EventModel event;
 
@@ -303,7 +350,7 @@ class RegisterRouteFirst extends _i18.PageRouteInfo<void> {
 /// [_i14.RegisterScreenSecond]
 class RegisterRouteSecond extends _i18.PageRouteInfo<RegisterRouteSecondArgs> {
   RegisterRouteSecond({
-    _i21.Key? key,
+    _i19.Key? key,
     required String email,
     required String name,
     required String surname,
@@ -343,7 +390,7 @@ class RegisterRouteSecondArgs {
     required this.surname,
   });
 
-  final _i21.Key? key;
+  final _i19.Key? key;
 
   final String email;
 

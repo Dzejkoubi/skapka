@@ -48,7 +48,12 @@ class NavbarDashboard extends StatelessWidget {
                           text: AppLocalizations.of(context)!.create,
                           onPressed: () {
                             dialOpenNotifier.value = false;
-                            context.router.push(CreateEventRoute());
+                            context.router.push(
+                              CreateEditEventRoute(
+                                event: null,
+                                eventTimeType: null,
+                              ),
+                            );
                           },
                         ),
                       ),
@@ -66,7 +71,12 @@ class NavbarDashboard extends StatelessWidget {
                       text: AppLocalizations.of(context)!.create,
                       onPressed: () {
                         dialOpenNotifier.value = false;
-                        context.router.push(CreateEventRoute());
+                        context.router.push(
+                          CreateEditEventRoute(
+                            event: null,
+                            eventTimeType: null,
+                          ),
+                        );
                       },
                     ),
                   ),

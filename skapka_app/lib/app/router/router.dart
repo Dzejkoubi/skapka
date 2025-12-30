@@ -34,7 +34,7 @@ class AppRouter extends RootStackRouter {
     AutoRoute(page: RegisterRouteSecond.page),
     AutoRoute(page: AccountNotApprovedRoute.page),
 
-    AutoRoute(page: CreateEventRoute.page, guards: [LeaderGuard()]),
+    AutoRoute(page: CreateEditEventRoute.page, guards: [LeaderGuard()]),
 
     AutoRoute(page: EventDetailsRoute.page),
 

@@ -13,6 +13,7 @@ class Appbar extends StatelessWidget implements PreferredSizeWidget {
   final bool backChevronCanPop;
   final bool showSettingsIcon;
   final String? screenName;
+  final Function()? onBackPressed;
 
   static const double bottomRadius = 36.0;
   static const double topBarHeight = 64.0;
@@ -22,6 +23,7 @@ class Appbar extends StatelessWidget implements PreferredSizeWidget {
     required this.showSettingsIcon,
     this.backChevronCanPop = true,
     this.screenName = 'screenName',
+    this.onBackPressed,
     super.key,
   });
 
@@ -44,7 +46,10 @@ class Appbar extends StatelessWidget implements PreferredSizeWidget {
               if (showBackChevron)
                 GestureDetector(
                   onTap: () {
-                    if (backChevronCanPop && Navigator.of(context).canPop()) {
+                    if (onBackPressed != null) {
+                      onBackPressed!();
+                    } else if (backChevronCanPop &&
+                        Navigator.of(context).canPop()) {
                       Navigator.of(context).pop();
                     }
                   },

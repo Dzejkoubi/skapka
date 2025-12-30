@@ -409,11 +409,6 @@ class AppLocalizationsEn extends AppLocalizations {
       'Discard';
 
   @override
-  String
-  get create_edit_event_screen_go_back_without_saving_dialog_secondary_button_text =>
-      'Back';
-
-  @override
   String get create_edit_event_screen_event_title_hint => 'Event Name';
 
   @override

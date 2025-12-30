@@ -70,7 +70,7 @@ class EventDetailsScreen extends StatelessWidget {
                           padding: EdgeInsets.all(AppSpacing.small),
                           width: double.infinity,
                           child: MarkdownBody(
-                            data: event.details ?? '',
+                            data: event.instructions ?? '',
                             selectable: true,
                           ),
                         ),

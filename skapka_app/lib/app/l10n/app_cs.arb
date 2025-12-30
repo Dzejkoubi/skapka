@@ -146,7 +146,6 @@
     "create_edit_event_screen_go_back_without_saving_dialog_title": "Zahodit změny",
     "create_edit_event_screen_go_back_without_saving_dialog_description": "Opravdu chceš odejít bez uložení změn? Veškeré neuložené změny budou ztraceny.",
     "create_edit_event_screen_go_back_without_saving_dialog_primary_button_text": "Zahodit",
-    "create_edit_event_screen_go_back_without_saving_dialog_secondary_button_text": "Zpět",
 
     "create_edit_event_screen_event_title_hint": "Název výpravy",
     "create_edit_event_screen_event_sign_up_from": "Přihlašování od",
@@ -163,6 +162,9 @@
 
     "create_edit_event_screen_event_title_error_empty": "Název výpravy nemůže být prázdný.",
     "create_edit_event_screen_event_title_error_too_long": "Název výpravy nemůže přesáhnout 50 znaků.",
+
+    "create_edit_participants_screen_title": "Vybrat účastníky",
+    "create_edit_details_screen_title": "Detaily výpravy",
 
     "settings_screen_title": "Nastavení",
     "settings_screen_change_signout_button_text": "Odhlásit se",

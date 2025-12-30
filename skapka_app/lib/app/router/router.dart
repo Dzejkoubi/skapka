@@ -36,7 +36,17 @@ class AppRouter extends RootStackRouter {
 
     AutoRoute(page: CreateEditEventRoute.page, guards: [LeaderGuard()]),
 
-    AutoRoute(page: EventDetailsRoute.page),
+    AutoRoute(
+      page: CreateEditEventInstructionsRoute.page,
+      guards: [LeaderGuard()],
+      fullscreenDialog: true,
+    ),
+
+    AutoRoute(
+      page: CreateEditEventParticipantsRoute.page,
+      guards: [LeaderGuard()],
+      fullscreenDialog: true,
+    ),
 
     AutoRoute(page: ButtonThemeShowcaseRoute.page),
     AutoRoute(page: SquircleShowcaseRoute.page),

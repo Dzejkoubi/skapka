@@ -12,7 +12,7 @@ import 'package:skapka_app/app/theme/app_text_theme.dart';
 import 'package:skapka_app/models/event_model.dart';
 import 'package:skapka_app/screens/create_edit_event_screen.dart/widgets/event_title_form.dart';
 import 'package:skapka_app/widgets/appbar/appbar.dart';
-import 'package:skapka_app/widgets/forms/custom_form.dart';
+import 'package:skapka_app/widgets/dialogs/large_dialog.dart';
 import 'package:skapka_app/widgets/wrappers/screen_wrapper.dart';
 import 'package:skapka_app/widgets/wrappers/scrollable_on_keyboard_screen_wrapper.dart';
 import 'package:skapka_app/screens/create_edit_event_screen.dart/widgets/event_date_selector.dart';
@@ -29,14 +29,56 @@ class CreateEditEventScreen extends StatefulWidget {
 }
 
 class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
+  String? _eventId;
   final TextEditingController _eventTitleController = TextEditingController();
+  String? _instructions;
   DateTime? _openSignUp;
   DateTime? _closeSignUp;
   DateTime? _startDate;
   DateTime? _endDate;
+  String? _meetingPlace;
+  String? _photoAlbumLink;
+  String? _groupId;
+  List<String>? _targetPatrolsIds;
+  String? _lastEditedBy;
+  bool _isDraft = true;
+
+  late final EventModel originalEvent =
+      widget.event ??
+      EventModel(
+        eventId: '',
+        title: '',
+        instructions: '',
+        openSignUp: null,
+        closeSignUp: null,
+        startDate: null,
+        endDate: null,
+        meetingPlace: null,
+        photoAlbumLink: null,
+        groupId: null,
+        targetPatrolsIds: null,
+        lastEditedBy: null,
+        isDraft: true,
+      );
+
+  late EventModel editedEvent = originalEvent.copyWith(
+    eventId: _eventId,
+    title: _eventTitleController.text,
+    instructions: _instructions,
+    openSignUp: _openSignUp,
+    closeSignUp: _closeSignUp,
+    startDate: _startDate,
+    endDate: _endDate,
+    meetingPlace: _meetingPlace,
+    photoAlbumLink: _photoAlbumLink,
+    groupId: _groupId,
+    targetPatrolsIds: _targetPatrolsIds,
+    lastEditedBy: _lastEditedBy,
+    isDraft: _isDraft,
+  );
 
   int _totalParticipantsCount = 0;
-  String _patrols = '';
+  String _targetPatrolNames = '';
   int _totalLeadersCount = 0;
   int _total18PlusCount = 0;
 
@@ -44,11 +86,19 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
   void initState() {
     super.initState();
     if (widget.event != null) {
+      _eventId = widget.event!.eventId;
       _eventTitleController.text = widget.event!.title ?? '';
+      _instructions = widget.event!.instructions;
       _openSignUp = widget.event!.openSignUp;
       _closeSignUp = widget.event!.closeSignUp;
       _startDate = widget.event!.startDate;
       _endDate = widget.event!.endDate;
+      _meetingPlace = widget.event!.meetingPlace;
+      _photoAlbumLink = widget.event!.photoAlbumLink;
+      _groupId = widget.event!.groupId;
+      _targetPatrolsIds = widget.event!.targetPatrolsIds;
+      _lastEditedBy = widget.event!.lastEditedBy;
+      _isDraft = widget.event!.isDraft;
     }
   }
 
@@ -70,6 +120,36 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
                   : AppLocalizations.of(
                       context,
                     )!.create_edit_event_screen_title_edit,
+              onBackPressed: () {
+                if (originalEvent != editedEvent) {
+                  // Show confirmation dialog before leaving
+                  showDialog(
+                    context: context,
+                    builder: (builder) {
+                      return LargeDialog(
+                        type: LargeDialogType.negative,
+                        title: AppLocalizations.of(
+                          context,
+                        )!.create_edit_event_screen_go_back_without_saving_dialog_title,
+                        description: AppLocalizations.of(
+                          context,
+                        )!.create_edit_event_screen_go_back_without_saving_dialog_description,
+                        primaryButtonText: AppLocalizations.of(
+                          context,
+                        )!.create_edit_event_screen_go_back_without_saving_dialog_primary_button_text,
+                        secondaryButtonText: AppLocalizations.of(
+                          context,
+                        )!.cancel,
+                        onSecondaryPressed: () => Navigator.of(context).pop(),
+                        onPrimaryPressed: () {
+                          Navigator.of(context).pop(); // Close dialog
+                          Navigator.of(context).pop(); // Go back
+                        },
+                      );
+                    },
+                  );
+                }
+              },
             ),
             body: SafeArea(
               child: ScrollableOnKeyboardScreenWrapper(
@@ -187,7 +267,7 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
                                           child: SingleChildScrollView(
                                             scrollDirection: Axis.horizontal,
                                             child: Text(
-                                              _patrols,
+                                              _targetPatrolNames,
                                               style: AppTextTheme.bodyMedium(
                                                 context,
                                               ),

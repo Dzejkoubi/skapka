@@ -10,15 +10,13 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i18;
-import 'package:flutter/foundation.dart' as _i22;
+import 'package:flutter/foundation.dart' as _i21;
 import 'package:flutter/material.dart' as _i19;
 import 'package:skapka_app/models/event_model.dart' as _i20;
 import 'package:skapka_app/screens/account_not_approved_screen/account_not_approved_screen.dart'
     as _i1;
 import 'package:skapka_app/screens/auth_gate/auth_gate.dart' as _i2;
 import 'package:skapka_app/screens/calendar_screen/calendar_screen.dart' as _i4;
-import 'package:skapka_app/screens/calendar_screen/widgets/events_expansion_tile.dart'
-    as _i21;
 import 'package:skapka_app/screens/create_event_screen.dart/create_event_screen.dart'
     as _i5;
 import 'package:skapka_app/screens/dependents_screen/dependents_screen.dart'
@@ -147,7 +145,7 @@ class EventDetailsRoute extends _i18.PageRouteInfo<EventDetailsRouteArgs> {
   EventDetailsRoute({
     _i19.Key? key,
     required _i20.EventModel event,
-    required _i21.EventTimeType eventTimeType,
+    required _i20.EventTimeType eventTimeType,
     List<_i18.PageRouteInfo>? children,
   }) : super(
          EventDetailsRoute.name,
@@ -185,7 +183,7 @@ class EventDetailsRouteArgs {
 
   final _i20.EventModel event;
 
-  final _i21.EventTimeType eventTimeType;
+  final _i20.EventTimeType eventTimeType;
 
   @override
   String toString() {
@@ -305,7 +303,7 @@ class RegisterRouteFirst extends _i18.PageRouteInfo<void> {
 /// [_i14.RegisterScreenSecond]
 class RegisterRouteSecond extends _i18.PageRouteInfo<RegisterRouteSecondArgs> {
   RegisterRouteSecond({
-    _i22.Key? key,
+    _i21.Key? key,
     required String email,
     required String name,
     required String surname,
@@ -345,7 +343,7 @@ class RegisterRouteSecondArgs {
     required this.surname,
   });
 
-  final _i22.Key? key;
+  final _i21.Key? key;
 
   final String email;
 

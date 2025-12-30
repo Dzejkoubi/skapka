@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:skapka_app/app/l10n/app_localizations.dart';
 import 'package:skapka_app/app/theme/app_color_theme.dart';
 import 'package:skapka_app/app/theme/app_spacing.dart';
 import 'package:skapka_app/app/theme/app_text_theme.dart';
+import 'package:skapka_app/models/event_model.dart';
 import 'package:skapka_app/screens/calendar_screen/widgets/events_expansion_tile.dart';
 
 class NoEventsView extends StatelessWidget {

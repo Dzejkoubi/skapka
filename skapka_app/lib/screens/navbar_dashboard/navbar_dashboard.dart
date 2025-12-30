@@ -1,11 +1,11 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:provider/provider.dart';
 import 'package:skapka_app/app/l10n/app_localizations.dart';
 import 'package:skapka_app/app/router/router.gr.dart';
 import 'package:skapka_app/providers/account_provider.dart';
-import 'package:skapka_app/utils/is_user_admin.dart';
 import 'package:skapka_app/utils/is_user_leader.dart';
 import 'package:skapka_app/widgets/appbar/appbar.dart';
 import 'package:skapka_app/widgets/buttons/main_button.dart';
@@ -80,9 +80,11 @@ class NavbarDashboard extends StatelessWidget {
                       context,
                     )!.calendar_screen_speed_dial_add_google_calendar,
                     onPressed: () {
-                      print(
-                        'Add Google Calendar',
-                      ); // TODO: implement add Google Calendar
+                      if (kDebugMode) {
+                        print(
+                          'Add Google Calendar',
+                        ); // TODO: implement add Google Calendar
+                      }
                     },
                   ),
                 ),

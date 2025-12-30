@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_svg/svg.dart';
@@ -246,7 +247,9 @@ class AccountNotApprovedScreen extends StatelessWidget {
             context,
           )!.account_not_approved_screen_notify_administrator_dialog_primary_button_text,
           onPrimaryPressed: () {
-            print('Notify administrator button pressed');
+            if (kDebugMode) {
+              print('Notify administrator button pressed');
+            }
           },
         ),
       );

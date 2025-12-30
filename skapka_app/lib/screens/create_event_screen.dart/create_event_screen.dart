@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:provider/provider.dart';
@@ -61,9 +62,11 @@ class CreateEventScreen extends StatelessWidget {
                             context,
                           )!.create_event_screen_delete_event_dialog_primary_button_text,
                           onPrimaryPressed: () {
-                            print(
-                              'User confirmed delete event',
-                            ); // TODO: implement delete event
+                            if (kDebugMode) {
+                              print(
+                                'User confirmed delete event',
+                              ); // TODO: implement delete event
+                            }
                             Navigator.of(context).pop();
                           },
                           secondaryButtonText: AppLocalizations.of(
@@ -103,10 +106,12 @@ class CreateEventScreen extends StatelessWidget {
                             context,
                           )!.create_event_screen_publish_event_dialog_primary_button_text,
                           onPrimaryPressed: () {
-                            print(
-                              'User confirmed publish event',
-                            ); // TODO: implement publish event
-                            Navigator.of(context).pop();
+                            if (kDebugMode) {
+                              print(
+                                'User confirmed publish event',
+                              ); // TODO: implement publish event
+                              Navigator.of(context).pop();
+                            }
                           },
                           secondaryButtonText: AppLocalizations.of(
                             context,
@@ -145,10 +150,12 @@ class CreateEventScreen extends StatelessWidget {
                             context,
                           )!.create_event_screen_save_event_dialog_primary_button_text,
                           onPrimaryPressed: () {
-                            print(
-                              'User confirmed save event',
-                            ); // TODO: implement save event
-                            Navigator.of(context).pop();
+                            if (kDebugMode) {
+                              print(
+                                'User confirmed save event',
+                              ); // TODO: implement save event
+                              Navigator.of(context).pop();
+                            }
                           },
                           secondaryButtonText: AppLocalizations.of(
                             context,

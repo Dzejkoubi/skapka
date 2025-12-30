@@ -1,3 +1,5 @@
+enum EventTimeType { future, live, past, draft }
+
 class EventModel {
   final String eventId;
   final String? title;

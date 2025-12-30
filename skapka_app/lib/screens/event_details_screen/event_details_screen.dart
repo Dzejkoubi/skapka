@@ -1,13 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:skapka_app/app/l10n/app_localizations.dart';
 import 'package:skapka_app/app/theme/app_decorations.dart';
 import 'package:skapka_app/app/theme/app_spacing.dart';
 import 'package:skapka_app/models/event_model.dart';
-import 'package:skapka_app/providers/account_provider.dart';
-import 'package:skapka_app/screens/calendar_screen/widgets/events_expansion_tile.dart';
-import 'package:skapka_app/utils/is_user_admin.dart';
 import 'package:skapka_app/utils/is_user_leader.dart';
 import 'package:skapka_app/widgets/appbar/appbar.dart';
 import 'package:skapka_app/widgets/wrappers/screen_wrapper.dart';

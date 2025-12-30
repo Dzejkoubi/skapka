@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:skapka_app/models/event_model.dart';
 
 class EventsProvider extends ChangeNotifier {
@@ -34,16 +34,20 @@ class EventsProvider extends ChangeNotifier {
   void setEvents(List<EventModel> events) {
     clear();
     _events.addAll(events);
-    print('Events set: ${_events.length} events loaded.');
+    if (kDebugMode) {
+      print('Events set: ${_events.length} events loaded.');
+    }
     notifyListeners();
   }
 
   void addEvent(EventModel event) {
     _events.add(event);
     notifyListeners();
-    print(
-      'Event added: ${event.eventId}. Total events: ${_events.length}. ${event.photoAlbumLink}',
-    );
+    if (kDebugMode) {
+      print(
+        'Event added: ${event.eventId}. Total events: ${_events.length}. ${event.photoAlbumLink}',
+      );
+    }
   }
 
   void removeEvent(EventModel event) {

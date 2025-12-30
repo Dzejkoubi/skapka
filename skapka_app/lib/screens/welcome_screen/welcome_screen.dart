@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:skapka_app/app/router/router.gr.dart';
@@ -72,8 +73,11 @@ class WelcomeScreen extends StatelessWidget {
                       text: AppLocalizations.of(
                         context,
                       )!.welcome_screen_songbook_button_text,
+
                       onPressed: () {
-                        print('songbook button pressed');
+                        if (kDebugMode) {
+                          print('songbook button pressed');
+                        }
                       },
                     ),
                   ],

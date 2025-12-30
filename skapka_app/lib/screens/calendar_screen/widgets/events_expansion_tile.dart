@@ -11,8 +11,6 @@ import 'package:skapka_app/models/event_model.dart';
 import 'package:skapka_app/screens/calendar_screen/widgets/no_events_view.dart';
 import 'package:skapka_app/widgets/event_box/event_box.dart';
 
-enum EventTimeType { future, live, past, draft }
-
 class EventsExpansionTile extends StatefulWidget {
   final EventTimeType type;
   final List<EventModel> events;

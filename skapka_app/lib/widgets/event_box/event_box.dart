@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
 import 'package:skapka_app/app/l10n/app_localizations.dart';
 import 'package:skapka_app/app/router/router.gr.dart';
 import 'package:skapka_app/app/theme/app_color_theme.dart';
@@ -10,8 +9,6 @@ import 'package:skapka_app/app/theme/app_radius.dart';
 import 'package:skapka_app/app/theme/app_spacing.dart';
 import 'package:skapka_app/app/theme/app_text_theme.dart';
 import 'package:skapka_app/models/event_model.dart';
-import 'package:skapka_app/providers/account_provider.dart';
-import 'package:skapka_app/screens/calendar_screen/widgets/events_expansion_tile.dart';
 import 'package:skapka_app/utils/is_user_leader.dart';
 import 'package:skapka_app/widgets/event_box/user_status_box.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -32,8 +29,6 @@ class EventBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final AccountProvider accountProvider = context.read<AccountProvider>();
-
     final now = DateTime.now();
 
     // Logic for date display

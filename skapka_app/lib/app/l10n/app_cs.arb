@@ -80,7 +80,6 @@
     "account_not_approved_screen_delete_error": "Smazání účtu se nezdařilo. Zkus to prosím později.",
 
     "events_screen_title": "Výpravy",
-    "events_screen_speed_dial_create_event_text": "Vytvořit",
     "events_screen_no_events_text": "{username} aktuálně nemá žádnou aktivní výpravu.",
     "@events_screen_no_events_text": {
         "placeholders": {
@@ -89,7 +88,6 @@
             }
         }
     },
-    "events_screen_fab_create_event_text": "Vytvořit",
 
     "event_box_number_of_kids_text": "{number_of_kids} dětí",
     "@event_box_number_of_kids_text": {
@@ -107,7 +105,6 @@
     "event_box_event_single_day_text" : "Kdy: ",
 
     "calendar_screen_title": "Kalendář",
-    "calendar_screen_speed_dial_create_event_text": "Vytvořit",
     "calendar_screen_speed_dial_add_google_calendar": "Google kalendář",
     "calendar_screen_event_expansion_tile_no_events_title": "Ticho po pěšině...",
     "calendar_screen_event_expansion_tile_future_title": "Nadcházející",
@@ -167,5 +164,7 @@
     "cancel": "Zrušit",
     "loading": "Načítání...",
     "back" : "Zpět",
-    "common_copied_to_clipboard": "Zkopírováno do schránky"
+    "common_copied_to_clipboard": "Zkopírováno do schránky",
+    "create": "Vytvořit"
+
 }

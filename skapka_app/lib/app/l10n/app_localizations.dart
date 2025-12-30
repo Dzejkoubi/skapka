@@ -486,23 +486,11 @@ abstract class AppLocalizations {
   /// **'Výpravy'**
   String get events_screen_title;
 
-  /// No description provided for @events_screen_speed_dial_create_event_text.
-  ///
-  /// In cs, this message translates to:
-  /// **'Vytvořit'**
-  String get events_screen_speed_dial_create_event_text;
-
   /// No description provided for @events_screen_no_events_text.
   ///
   /// In cs, this message translates to:
   /// **'{username} aktuálně nemá žádnou aktivní výpravu.'**
   String events_screen_no_events_text(String version, Object username);
-
-  /// No description provided for @events_screen_fab_create_event_text.
-  ///
-  /// In cs, this message translates to:
-  /// **'Vytvořit'**
-  String get events_screen_fab_create_event_text;
 
   /// No description provided for @event_box_number_of_kids_text.
   ///
@@ -551,12 +539,6 @@ abstract class AppLocalizations {
   /// In cs, this message translates to:
   /// **'Kalendář'**
   String get calendar_screen_title;
-
-  /// No description provided for @calendar_screen_speed_dial_create_event_text.
-  ///
-  /// In cs, this message translates to:
-  /// **'Vytvořit'**
-  String get calendar_screen_speed_dial_create_event_text;
 
   /// No description provided for @calendar_screen_speed_dial_add_google_calendar.
   ///
@@ -871,6 +853,12 @@ abstract class AppLocalizations {
   /// In cs, this message translates to:
   /// **'Zkopírováno do schránky'**
   String get common_copied_to_clipboard;
+
+  /// No description provided for @create.
+  ///
+  /// In cs, this message translates to:
+  /// **'Vytvořit'**
+  String get create;
 }
 
 class _AppLocalizationsDelegate

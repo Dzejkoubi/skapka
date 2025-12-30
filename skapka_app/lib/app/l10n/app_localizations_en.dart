@@ -242,15 +242,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get events_screen_title => 'Events';
 
   @override
-  String get events_screen_speed_dial_create_event_text => 'Create';
-
-  @override
   String events_screen_no_events_text(String version, Object username) {
     return '$username currently has no active events.';
   }
-
-  @override
-  String get events_screen_fab_create_event_text => 'Create';
 
   @override
   String event_box_number_of_kids_text(int number_of_kids) {
@@ -277,9 +271,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get calendar_screen_title => 'Calendar';
-
-  @override
-  String get calendar_screen_speed_dial_create_event_text => 'Create';
 
   @override
   String get calendar_screen_speed_dial_add_google_calendar =>
@@ -460,4 +451,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get common_copied_to_clipboard => 'Copied to clipboard';
+
+  @override
+  String get create => 'Create';
 }

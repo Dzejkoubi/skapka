@@ -80,7 +80,6 @@
     "account_not_approved_screen_delete_error": "Failed to delete account. Please try again later.",
 
     "events_screen_title": "Events",
-    "events_screen_speed_dial_create_event_text": "Create",
     "events_screen_no_events_text": "{username} currently has no active events.",
     "@events_screen_no_events_text": {
         "placeholders": {
@@ -89,7 +88,6 @@
             }
         }
     },
-    "events_screen_fab_create_event_text": "Create",
 
     "event_box_number_of_kids_text": "{number_of_kids} kids",
     "@event_box_number_of_kids_text": {
@@ -107,7 +105,6 @@
     "event_box_event_single_day_text" : "When: ",
 
     "calendar_screen_title": "Calendar",
-    "calendar_screen_speed_dial_create_event_text": "Create",
     "calendar_screen_speed_dial_add_google_calendar": "Google Calendar",
     "calendar_screen_event_expansion_tile_no_events_title": "Quiet on the front.",
     "calendar_screen_event_expansion_tile_future_title": "Upcoming",
@@ -167,5 +164,6 @@
     "cancel": "Cancel",
     "loading": "Loading...",
     "back" : "Back",
-    "common_copied_to_clipboard": "Copied to clipboard"
+    "common_copied_to_clipboard": "Copied to clipboard",
+    "create": "Create"
 }

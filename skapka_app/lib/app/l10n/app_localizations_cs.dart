@@ -239,15 +239,9 @@ class AppLocalizationsCs extends AppLocalizations {
   String get events_screen_title => 'Výpravy';
 
   @override
-  String get events_screen_speed_dial_create_event_text => 'Vytvořit';
-
-  @override
   String events_screen_no_events_text(String version, Object username) {
     return '$username aktuálně nemá žádnou aktivní výpravu.';
   }
-
-  @override
-  String get events_screen_fab_create_event_text => 'Vytvořit';
 
   @override
   String event_box_number_of_kids_text(int number_of_kids) {
@@ -274,9 +268,6 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get calendar_screen_title => 'Kalendář';
-
-  @override
-  String get calendar_screen_speed_dial_create_event_text => 'Vytvořit';
 
   @override
   String get calendar_screen_speed_dial_add_google_calendar =>
@@ -459,4 +450,7 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get common_copied_to_clipboard => 'Zkopírováno do schránky';
+
+  @override
+  String get create => 'Vytvořit';
 }

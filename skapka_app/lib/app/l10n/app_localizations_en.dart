@@ -450,10 +450,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get create_edit_event_screen_troops => 'Troops';
 
   @override
-  String get create_edit_event_screen_leaders => 'Leaders';
+  String get create_edit_event_screen_leaders => 'Signed up leaders';
 
   @override
-  String get create_edit_event_screen_18_plus => '18+';
+  String get create_edit_event_screen_18_plus => 'Signed up 18+';
 
   @override
   String get create_edit_event_screen_instructions_text => 'Instructions';

@@ -161,8 +161,8 @@
     "create_edit_event_screen_total_participants_text": "Total Participants",
     "create_edit_event_screen_total_signed_up_participants_text": "Total Signed Up Participants",
     "create_edit_event_screen_troops": "Troops",
-    "create_edit_event_screen_leaders": "Leaders",
-    "create_edit_event_screen_18_plus": "18+",
+    "create_edit_event_screen_leaders": "Signed up leaders",
+    "create_edit_event_screen_18_plus": "Signed up 18+",
 
     "create_edit_event_screen_instructions_text": "Instructions",
     "create_edit_instructions_screen_title": "Event Instructions",

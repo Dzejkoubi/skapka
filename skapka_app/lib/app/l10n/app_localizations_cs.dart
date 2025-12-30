@@ -448,10 +448,10 @@ class AppLocalizationsCs extends AppLocalizations {
   String get create_edit_event_screen_troops => 'Družinky';
 
   @override
-  String get create_edit_event_screen_leaders => 'Vedoucí';
+  String get create_edit_event_screen_leaders => 'Přihlášení vedoucí';
 
   @override
-  String get create_edit_event_screen_18_plus => '18+';
+  String get create_edit_event_screen_18_plus => 'Přihlášení 18+';
 
   @override
   String get create_edit_event_screen_instructions_text => 'Pokyny';

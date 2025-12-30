@@ -827,13 +827,13 @@ abstract class AppLocalizations {
   /// No description provided for @create_edit_event_screen_leaders.
   ///
   /// In cs, this message translates to:
-  /// **'Vedoucí'**
+  /// **'Přihlášení vedoucí'**
   String get create_edit_event_screen_leaders;
 
   /// No description provided for @create_edit_event_screen_18_plus.
   ///
   /// In cs, this message translates to:
-  /// **'18+'**
+  /// **'Přihlášení 18+'**
   String get create_edit_event_screen_18_plus;
 
   /// No description provided for @create_edit_event_screen_instructions_text.

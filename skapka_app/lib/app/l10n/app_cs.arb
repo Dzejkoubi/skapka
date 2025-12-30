@@ -161,8 +161,8 @@
     "create_edit_event_screen_total_participants_text": "Celkový počet účastníků",
     "create_edit_event_screen_total_signed_up_participants_text": "Celkový počet přihlášených",
     "create_edit_event_screen_troops": "Družinky",
-    "create_edit_event_screen_leaders": "Vedoucí",
-    "create_edit_event_screen_18_plus": "18+",
+    "create_edit_event_screen_leaders": "Přihlášení vedoucí",
+    "create_edit_event_screen_18_plus": "Přihlášení 18+",
 
     "create_edit_event_screen_instructions_text": "Pokyny",
     "create_edit_instructions_screen_title": "Pokyny výpravy",

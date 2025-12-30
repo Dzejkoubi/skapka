@@ -6,6 +6,9 @@ import 'package:skapka_app/models/dependents/dependent_notes_model.dart';
 import 'package:skapka_app/models/event_model.dart';
 import 'package:skapka_app/models/event_participant.dart';
 import 'package:skapka_app/models/group_model.dart';
+import 'package:skapka_app/models/leader_model.dart';
+import 'package:skapka_app/models/patrol_model.dart';
+import 'package:skapka_app/models/troop_model.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class SupabaseService {
@@ -115,8 +118,22 @@ class SupabaseService {
         .toList();
   }
 
-  // Get users that are invited to given event - fetch when leader wants to see participants
-  Future<List<EventParticipant>> getEventParticipants(
+  // Get all active dependents in given group
+  Future<List<DependentModel>> getGroupDependents(String groupId) async {
+    final response = await _supabaseClient
+        .from('dependents')
+        .select(
+          'dependent_id, name, surname, nickname, born, parent1_email, parent1_phone, parent2_email, parent2_phone, troop_id, patrol_id',
+        )
+        .eq('group_id', groupId)
+        .eq('archived', false);
+    return response
+        .map<DependentModel>((json) => DependentModel.fromJson(json))
+        .toList();
+  }
+
+  // Get users that are invited to given event with their statuses
+  Future<List<EventParticipant>> getEventDependents(
     String eventId,
     String groupId,
   ) async {
@@ -127,6 +144,39 @@ class SupabaseService {
         .eq('group_id', groupId);
     return (response as List)
         .map<EventParticipant>((json) => EventParticipant.fromJson(json))
+        .toList();
+  }
+
+  // Get group troops
+  Future<List<TroopModel>> getGroupTroops(String groupId) async {
+    final response = await _supabaseClient
+        .from('troops')
+        .select()
+        .eq('group_id', groupId);
+    return (response as List)
+        .map<TroopModel>((json) => TroopModel.fromJson(json))
+        .toList();
+  }
+
+  // Get group patrols
+  Future<List<PatrolModel>> getGroupPatrols(String groupId) async {
+    final response = await _supabaseClient
+        .from('patrols')
+        .select()
+        .eq('group_id', groupId);
+    return (response as List)
+        .map<PatrolModel>((json) => PatrolModel.fromJson(json))
+        .toList();
+  }
+
+  // Get groups leaders
+  Future<List<LeaderModel>> getGroupLeaders(String groupId) async {
+    final response = await _supabaseClient
+        .from('leaders')
+        .select()
+        .eq('group_id', groupId);
+    return (response as List)
+        .map<LeaderModel>((json) => LeaderModel.fromJson(json))
         .toList();
   }
 
@@ -141,18 +191,5 @@ class SupabaseService {
         .update({'status': newStatus})
         .eq('event_id', eventId)
         .eq('dependent_id', dependentId);
-  }
-
-  Future<List<DependentModel>> getGroupDependents(String groupId) async {
-    final response = await _supabaseClient
-        .from('dependents')
-        .select(
-          'dependent_id, name, surname, nickname, born, parent1_email, parent1_phone, parent2_email, parent2_phone, troop_id, patrol_id',
-        )
-        .eq('group_id', groupId)
-        .eq('archived', false);
-    return response
-        .map<DependentModel>((json) => DependentModel.fromJson(json))
-        .toList();
   }
 }

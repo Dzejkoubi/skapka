@@ -47,24 +47,29 @@ class EventDateSelector extends StatelessWidget {
         context: context,
         builder: (context) => Container(
           height: 300,
-          color: CupertinoColors.systemBackground.resolveFrom(context),
+          color: context.colors.background.light,
           child: Column(
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  CupertinoButton(
-                    child: Text(context.localizations.cancel),
-                    onPressed: () => Navigator.of(context).pop(),
-                  ),
-                  CupertinoButton(
-                    child: Text(context.localizations.yes),
-                    onPressed: () {
-                      onSelected(tempDate);
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                ],
+              Padding(
+                padding: const EdgeInsets.all(AppSpacing.small),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    MainButton.text(
+                      variant: ButtonStylesVariants.destructive,
+                      text: context.localizations.cancel,
+                      onPressed: () => Navigator.of(context).pop(),
+                    ),
+                    MainButton.outlined(
+                      variant: ButtonStylesVariants.normal,
+                      text: context.localizations.save,
+                      onPressed: () {
+                        onSelected(tempDate);
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                  ],
+                ),
               ),
               Expanded(
                 child: CupertinoDatePicker(

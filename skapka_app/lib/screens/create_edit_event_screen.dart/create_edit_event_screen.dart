@@ -318,7 +318,17 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
                           onEndDateChanged: (d) => setState(() => _endDate = d),
                         ),
                         EventParticipantsContainer(
-                          widget: widget,
+                          groupDependents: _groupDependents,
+                          groupLeaders: _groupLeaders,
+                          groupPatrols: _groupPatrols,
+                          groupTroops: _groupTroops,
+                          eventParticipants: _editedEventParticipants,
+                          onParticipantsChanged: (participants) {
+                            setState(() {
+                              _editedEventParticipants = participants;
+                            });
+                            _calculateStats();
+                          },
                           totalParticipantsCount: _totalParticipantsCount,
                           targetPatrolNames: _targetPatrolNames,
                           totalLeadersCount: _totalLeadersCount,

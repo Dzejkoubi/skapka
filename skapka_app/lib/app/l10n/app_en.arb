@@ -158,6 +158,8 @@
 
     "create_edit_event_screen_select_participants_text": "Select Participants",
     "create_edit_participants_screen_title": "Select Participants",
+    "create_edit_participants_screen_dial_print": "Print List",
+    "create_edit_participants_screen_dial_limit": "Participant Limit",
     "create_edit_event_screen_total_participants_text": "Total Participants",
     "create_edit_event_screen_total_signed_up_participants_text": "Total Signed Up Participants",
     "create_edit_event_screen_troops": "Troops",
@@ -181,5 +183,6 @@
     "back" : "Back",
     "common_copied_to_clipboard": "Copied to clipboard",
     "create": "Create",
-    "edit": "Edit"
+    "edit": "Edit",
+    "save": "Save"
 }

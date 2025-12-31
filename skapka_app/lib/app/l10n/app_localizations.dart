@@ -806,6 +806,18 @@ abstract class AppLocalizations {
   /// **'Vybrat účastníky'**
   String get create_edit_participants_screen_title;
 
+  /// No description provided for @create_edit_participants_screen_dial_print.
+  ///
+  /// In cs, this message translates to:
+  /// **'Vytisknout seznam'**
+  String get create_edit_participants_screen_dial_print;
+
+  /// No description provided for @create_edit_participants_screen_dial_limit.
+  ///
+  /// In cs, this message translates to:
+  /// **'Limit účastníků'**
+  String get create_edit_participants_screen_dial_limit;
+
   /// No description provided for @create_edit_event_screen_total_participants_text.
   ///
   /// In cs, this message translates to:
@@ -925,6 +937,12 @@ abstract class AppLocalizations {
   /// In cs, this message translates to:
   /// **'Upravit'**
   String get edit;
+
+  /// No description provided for @save.
+  ///
+  /// In cs, this message translates to:
+  /// **'Uložit'**
+  String get save;
 }
 
 class _AppLocalizationsDelegate

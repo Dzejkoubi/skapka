@@ -437,6 +437,12 @@ class AppLocalizationsCs extends AppLocalizations {
   String get create_edit_participants_screen_title => 'Vybrat účastníky';
 
   @override
+  String get create_edit_participants_screen_dial_print => 'Vytisknout seznam';
+
+  @override
+  String get create_edit_participants_screen_dial_limit => 'Limit účastníků';
+
+  @override
   String get create_edit_event_screen_total_participants_text =>
       'Celkový počet účastníků';
 
@@ -498,4 +504,7 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get edit => 'Upravit';
+
+  @override
+  String get save => 'Uložit';
 }

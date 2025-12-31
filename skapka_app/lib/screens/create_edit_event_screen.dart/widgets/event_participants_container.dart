@@ -9,13 +9,22 @@ import 'package:skapka_app/app/theme/app_decorations.dart';
 import 'package:skapka_app/app/theme/app_sizes.dart';
 import 'package:skapka_app/app/theme/app_spacing.dart';
 import 'package:skapka_app/app/theme/app_text_theme.dart';
-import 'package:skapka_app/screens/create_edit_event_screen.dart/create_edit_event_screen.dart';
+import 'package:skapka_app/models/dependents/dependent_model.dart';
+import 'package:skapka_app/models/event_participant_model.dart';
+import 'package:skapka_app/models/leader_model.dart';
+import 'package:skapka_app/models/patrol_model.dart';
+import 'package:skapka_app/models/troop_model.dart';
 import 'package:skapka_app/screens/create_edit_event_screen.dart/widgets/participant_info_row.dart';
 
 class EventParticipantsContainer extends StatelessWidget {
   const EventParticipantsContainer({
     super.key,
-    required this.widget,
+    required this.groupDependents,
+    required this.groupLeaders,
+    required this.groupPatrols,
+    required this.groupTroops,
+    required this.eventParticipants,
+    required this.onParticipantsChanged,
     required int totalParticipantsCount,
     required String targetPatrolNames,
     required int totalLeadersCount,
@@ -26,7 +35,14 @@ class EventParticipantsContainer extends StatelessWidget {
        _totalLeadersCount = totalLeadersCount,
        _total18PlusCount = total18PlusCount,
        _totalSignedUpParticipantsCount = totalSignedUpParticipantsCount;
-  final CreateEditEventScreen widget;
+
+  final List<DependentModel> groupDependents;
+  final List<LeaderModel> groupLeaders;
+  final List<PatrolModel> groupPatrols;
+  final List<TroopModel> groupTroops;
+  final List<EventParticipantModel> eventParticipants;
+  final Function(List<EventParticipantModel>) onParticipantsChanged;
+
   final int _totalParticipantsCount;
   final String _targetPatrolNames;
   final int _totalLeadersCount;
@@ -43,12 +59,19 @@ class EventParticipantsContainer extends StatelessWidget {
         spacing: AppSpacing.medium,
         children: [
           GestureDetector(
-            onTap: () {
-              context.router.push(
+            onTap: () async {
+              final result = await context.router.push(
                 CreateEditEventParticipantsRoute(
-                  eventParticipants: widget.eventParticipants,
+                  groupDependents: groupDependents,
+                  groupLeaders: groupLeaders,
+                  groupPatrols: groupPatrols,
+                  groupTroops: groupTroops,
+                  initialParticipants: eventParticipants,
                 ),
               );
+              if (result != null && result is List<EventParticipantModel>) {
+                onParticipantsChanged(result);
+              }
             },
             child: Container(
               decoration: AppDecorations.secondaryContainer(context),

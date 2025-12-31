@@ -439,6 +439,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get create_edit_participants_screen_title => 'Select Participants';
 
   @override
+  String get create_edit_participants_screen_dial_print => 'Print List';
+
+  @override
+  String get create_edit_participants_screen_dial_limit => 'Participant Limit';
+
+  @override
   String get create_edit_event_screen_total_participants_text =>
       'Total Participants';
 
@@ -501,4 +507,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get edit => 'Edit';
+
+  @override
+  String get save => 'Save';
 }

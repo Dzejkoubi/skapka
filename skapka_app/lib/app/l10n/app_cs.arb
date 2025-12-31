@@ -158,6 +158,8 @@
 
     "create_edit_event_screen_select_participants_text": "Vybrat účastníky",
     "create_edit_participants_screen_title": "Vybrat účastníky",
+    "create_edit_participants_screen_dial_print": "Vytisknout seznam",
+    "create_edit_participants_screen_dial_limit": "Limit účastníků",
     "create_edit_event_screen_total_participants_text": "Celkový počet účastníků",
     "create_edit_event_screen_total_signed_up_participants_text": "Celkový počet přihlášených",
     "create_edit_event_screen_troops": "Družinky",
@@ -181,5 +183,6 @@
     "back" : "Zpět",
     "common_copied_to_clipboard": "Zkopírováno do schránky",
     "create": "Vytvořit",
-    "edit": "Upravit"
+    "edit": "Upravit",
+    "save": "Uložit"
 }

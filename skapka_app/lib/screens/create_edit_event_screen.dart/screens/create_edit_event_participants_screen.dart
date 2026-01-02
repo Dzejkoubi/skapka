@@ -253,7 +253,6 @@ class _CreateEditEventParticipantsScreenState
                 ParticipantRow(
                   dependent: leader,
                   isSelected: isSelected,
-                  is18plus: leader.is18plus,
                   onChanged: (value) {
                     setState(() {
                       if (value == true) {

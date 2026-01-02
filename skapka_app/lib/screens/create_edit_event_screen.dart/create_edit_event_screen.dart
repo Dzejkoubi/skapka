@@ -91,7 +91,9 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
           (d) => d?.dependentId == p.dependentId,
           orElse: () => null,
         );
-        return dependent != null && dependent.isLeader && dependent.is18plus;
+        return dependent != null &&
+            dependent.isLeader &&
+            _isDependent18Plus(dependent);
       }).length;
 
   int get total18PlusInvitedLeadersCount => _editedEventParticipants.where((p) {
@@ -99,8 +101,22 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
       (d) => d?.dependentId == p.dependentId,
       orElse: () => null,
     );
-    return dependent != null && dependent.isLeader && dependent.is18plus;
+    return dependent != null &&
+        dependent.isLeader &&
+        _isDependent18Plus(dependent);
   }).length;
+
+  bool _isDependent18Plus(DependentModel dependent) {
+    if (dependent.born == null) return false;
+    final referenceDate = _startDate ?? DateTime.now();
+    int age = referenceDate.year - dependent.born!.year;
+    if (referenceDate.month < dependent.born!.month ||
+        (referenceDate.month == dependent.born!.month &&
+            referenceDate.day < dependent.born!.day)) {
+      age--;
+    }
+    return age >= 18;
+  }
 
   List<String> get targetPatrolIds {
     final participantDependentIds = _editedEventParticipants

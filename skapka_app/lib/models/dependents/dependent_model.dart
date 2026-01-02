@@ -25,7 +25,13 @@ class DependentModel {
 
   bool get is18plus {
     if (born == null) return false;
-    final age = DateTime.now().difference(born!).inDays / 365.25;
+    final now = DateTime.now();
+    int age = now.year - born!.year;
+    int month = now.month - born!.month;
+    int day = now.day - born!.day;
+    if (month < 0 || (month == 0 && day < 0)) {
+      age--;
+    }
     return age >= 18;
   }
 

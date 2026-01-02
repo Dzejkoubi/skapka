@@ -12,14 +12,12 @@ class ParticipantRow extends StatelessWidget {
   final DependentModel dependent;
   final bool isSelected;
   final ValueChanged<bool?> onChanged;
-  final bool is18plus;
 
   const ParticipantRow({
     super.key,
     required this.dependent,
     required this.isSelected,
     required this.onChanged,
-    this.is18plus = false,
   });
 
   @override
@@ -45,7 +43,7 @@ class ParticipantRow extends StatelessWidget {
               style: AppTextTheme.bodyMedium(context),
             ),
           ),
-          if (is18plus)
+          if (dependent.is18plus)
             Padding(
               padding: const EdgeInsets.only(left: AppSpacing.small),
               child: SvgPicture.asset(

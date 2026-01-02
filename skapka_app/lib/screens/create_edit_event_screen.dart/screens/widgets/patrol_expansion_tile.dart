@@ -166,7 +166,6 @@ class PatrolExpansionTile extends StatelessWidget {
     return ParticipantRow(
       dependent: dependent,
       isSelected: isSelected,
-      is18plus: dependent.is18plus,
       onChanged: (value) {
         final newList = List<EventParticipantModel>.from(selectedParticipants);
         if (value == true) {

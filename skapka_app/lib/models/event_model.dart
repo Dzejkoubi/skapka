@@ -71,7 +71,7 @@ class EventModel {
   factory EventModel.fromJson(Map<String, dynamic> json) {
     return EventModel(
       eventId: json['event_id'] as String,
-      title: json['title'] as String?,
+      title: json['title'] as String? ?? '',
       instructions: json['instructions'] as String?,
       openSignUp: json['open_sign_up'] != null
           ? DateTime.parse(json['open_sign_up'] as String)
@@ -85,8 +85,8 @@ class EventModel {
       endDate: json['end_date'] != null
           ? DateTime.parse(json['end_date'] as String)
           : null,
-      meetingPlace: json['meeting_place'] as String?,
-      photoAlbumLink: json['photo_album_link'] as String?,
+      meetingPlace: json['meeting_place'] as String? ?? '',
+      photoAlbumLink: json['photo_album_link'] as String? ?? '',
       groupId: json['group_id'] as String?,
       targetPatrolsIds: (json['target_patrols'] as List<dynamic>?)
           ?.map((e) => e as String)

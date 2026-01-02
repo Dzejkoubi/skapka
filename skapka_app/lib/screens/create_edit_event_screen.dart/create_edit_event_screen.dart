@@ -37,16 +37,16 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
   EventModel get editedEvent => EventModel(
     eventId: eventId ?? '',
     title: _eventTitleController.text,
-    instructions: _instructions ?? '',
+    instructions: _instructions,
     openSignUp: _openSignUp,
     closeSignUp: _closeSignUp,
     startDate: _startDate,
     endDate: _endDate,
     meetingPlace: _meetingPlaceController.text,
     photoAlbumLink: _photoAlbumLinkController.text,
-    groupId: groupId ?? '',
-    targetPatrolsIds: targetPatrolsIds ?? [],
-    lastEditedBy: lastEditedBy ?? '',
+    groupId: groupId,
+    targetPatrolsIds: targetPatrolsIds,
+    lastEditedBy: lastEditedBy,
     isDraft: isDraft,
   );
 
@@ -75,16 +75,16 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
         EventModel(
           eventId: '',
           title: '',
-          instructions: '',
+          instructions: null,
           openSignUp: null,
           closeSignUp: null,
           startDate: null,
           endDate: null,
           meetingPlace: '',
           photoAlbumLink: '',
-          groupId: '',
-          targetPatrolsIds: [],
-          lastEditedBy: '',
+          groupId: null,
+          targetPatrolsIds: null,
+          lastEditedBy: null,
           isDraft: true,
         );
     eventId = widget.event?.eventId;

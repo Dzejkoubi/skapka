@@ -4,6 +4,7 @@ enum SexEnum { male, female, other }
 
 class DependentModel {
   final String? dependentId;
+  final bool isLeader;
   final String name;
   final String surname;
   final String? nickname;
@@ -30,6 +31,7 @@ class DependentModel {
 
   DependentModel({
     this.dependentId,
+    this.isLeader = false,
     required this.name,
     required this.surname,
     this.nickname,
@@ -52,6 +54,7 @@ class DependentModel {
   factory DependentModel.fromJson(Map<String, dynamic> json) {
     return DependentModel(
       dependentId: json['dependent_id'] as String?,
+      isLeader: json['is_leader'] as bool? ?? false,
       name: json['name'] as String,
       surname: json['surname'] as String,
       nickname: json['nickname'] as String?,
@@ -83,6 +86,7 @@ class DependentModel {
 
   DependentModel copyWith({
     String? dependentId,
+    bool? isLeader,
     String? name,
     String? surname,
     String? nickname,
@@ -103,6 +107,7 @@ class DependentModel {
   }) {
     return DependentModel(
       dependentId: dependentId ?? this.dependentId,
+      isLeader: isLeader ?? this.isLeader,
       name: name ?? this.name,
       surname: surname ?? this.surname,
       nickname: nickname ?? this.nickname,

@@ -4,13 +4,18 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:skapka_app/app/l10n/l10n_extension.dart';
 import 'package:skapka_app/app/theme/app_spacing.dart';
+import 'package:skapka_app/models/dependents/dependent_model.dart';
 import 'package:skapka_app/models/event_model.dart';
 import 'package:skapka_app/models/event_participant_model.dart';
+import 'package:skapka_app/models/leader_model.dart';
+import 'package:skapka_app/providers/account_provider.dart';
 import 'package:skapka_app/screens/create_edit_event_screen.dart/widgets/event_instructions_container.dart';
 import 'package:skapka_app/screens/create_edit_event_screen.dart/widgets/event_title_form.dart';
+import 'package:skapka_app/services/supabase_service.dart';
 import 'package:skapka_app/widgets/forms/form_with_details.dart';
 import 'package:skapka_app/widgets/appbar/appbar.dart';
 import 'package:skapka_app/widgets/dialogs/large_dialog.dart';
+import 'package:skapka_app/widgets/loading_floating_logo.dart';
 import 'package:skapka_app/widgets/wrappers/screen_wrapper.dart';
 import 'package:skapka_app/screens/create_edit_event_screen.dart/widgets/event_date_selector.dart';
 import 'package:skapka_app/screens/create_edit_event_screen.dart/widgets/create_edit_event_speed_dial.dart';
@@ -32,6 +37,9 @@ class CreateEditEventScreen extends StatefulWidget {
 }
 
 class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
+  // Services and providers
+  final SupabaseService _supabaseService = SupabaseService();
+  late final AccountProvider _accountProvider = context.read<AccountProvider>();
   // Original event and edited event for change detection
   late final EventModel originalEvent;
   EventModel get editedEvent => EventModel(
@@ -73,6 +81,7 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
   @override
   void initState() {
     super.initState();
+
     // Setting values from the original event to initialize edited event
     originalEvent =
         widget.event ??
@@ -106,156 +115,193 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
     isDraft = widget.event?.isDraft ?? true;
   }
 
+  Future<void> fetchAndDivideGroupDependents(String groupId) async {
+    List<DependentModel> allDependents = await _supabaseService
+        .getGroupDependents(groupId);
+    List<LeaderModel> groupLeaders = await _supabaseService.getGroupLeaders(
+      groupId,
+    );
+    print('Fetched ${allDependents.length} dependents');
+    print('Fetched ${groupLeaders.length} leaders');
+  }
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (_) => ValueNotifier<bool>(false),
-      child: Builder(
-        builder: (context) {
-          final dialOpenNotifier = context.watch<ValueNotifier<bool>>();
-          return ScreenWrapper(
-            appBar: Appbar(
-              showBackChevron: true,
-              showSettingsIcon: false,
-              screenName: widget.event == null
-                  ? context.localizations.create_edit_event_screen_title_create
-                  : context.localizations.create_edit_event_screen_title_edit,
-              onBackPressed: () {
-                // print(
-                //   'Original eventId: ${originalEvent.eventId}; Edited eventId: ${editedEvent.eventId}',
-                // );
-                // print(
-                //   'Original eventTitle: ${originalEvent.title}; Edited eventTitle: ${editedEvent.title}',
-                // );
-                // print(
-                //   'Original eventInstructions: ${originalEvent.instructions}; Edited eventInstructions: ${editedEvent.instructions}',
-                // );
-                // print(
-                //   'Original eventOpenSignUp: ${originalEvent.openSignUp}; Edited eventOpenSignUp: ${editedEvent.openSignUp}',
-                // );
-                // print(
-                //   'Original eventCloseSignUp: ${originalEvent.closeSignUp}; Edited eventCloseSignUp: ${editedEvent.closeSignUp}',
-                // );
-                // print(
-                //   'Original eventStartDate: ${originalEvent.startDate}; Edited eventStartDate: ${editedEvent.startDate}',
-                // );
-                // print(
-                //   'Original eventEndDate: ${originalEvent.endDate}; Edited eventEndDate: ${editedEvent.endDate}',
-                // );
-                // print(
-                //   'Original eventMeetingPlace: ${originalEvent.meetingPlace}; Edited eventMeetingPlace: ${editedEvent.meetingPlace}',
-                // );
-                // print(
-                //   'Original eventPhotoAlbumLink: ${originalEvent.photoAlbumLink}; Edited eventPhotoAlbumLink: ${editedEvent.photoAlbumLink}',
-                // );
-                // print(
-                //   'Original groupId: ${originalEvent.groupId}; Edited groupId: ${editedEvent.groupId}',
-                // );
-                // print(
-                //   'Original targetPatrolsIds: ${originalEvent.targetPatrolsIds}; Edited targetPatrolsIds: ${editedEvent.targetPatrolsIds}',
-                // );
-                // print(
-                //   'Original lastEditedBy: ${originalEvent.lastEditedBy}; Edited lastEditedBy: ${editedEvent.lastEditedBy}',
-                // );
-                // print(
-                //   'Original eventIsDraft: ${originalEvent.isDraft}; Edited eventIsDraft: ${editedEvent.isDraft}',
-                // );
+      child: FutureBuilder(
+        future: fetchAndDivideGroupDependents(_accountProvider.groupId),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return ScreenWrapper(
+              appBar: Appbar(
+                showBackChevron: true,
+                showSettingsIcon: false,
+                screenName: widget.event == null
+                    ? context
+                          .localizations
+                          .create_edit_event_screen_title_create
+                    : context.localizations.create_edit_event_screen_title_edit,
+              ),
+              body: Center(child: const LoadingFloatingLogo()),
+            );
+          }
+          return Builder(
+            builder: (context) {
+              final dialOpenNotifier = context.watch<ValueNotifier<bool>>();
+              return ScreenWrapper(
+                appBar: Appbar(
+                  showBackChevron: true,
+                  showSettingsIcon: false,
+                  screenName: widget.event == null
+                      ? context
+                            .localizations
+                            .create_edit_event_screen_title_create
+                      : context
+                            .localizations
+                            .create_edit_event_screen_title_edit,
+                  onBackPressed: () {
+                    // print(
+                    //   'Original eventId: ${originalEvent.eventId}; Edited eventId: ${editedEvent.eventId}',
+                    // );
+                    // print(
+                    //   'Original eventTitle: ${originalEvent.title}; Edited eventTitle: ${editedEvent.title}',
+                    // );
+                    // print(
+                    //   'Original eventInstructions: ${originalEvent.instructions}; Edited eventInstructions: ${editedEvent.instructions}',
+                    // );
+                    // print(
+                    //   'Original eventOpenSignUp: ${originalEvent.openSignUp}; Edited eventOpenSignUp: ${editedEvent.openSignUp}',
+                    // );
+                    // print(
+                    //   'Original eventCloseSignUp: ${originalEvent.closeSignUp}; Edited eventCloseSignUp: ${editedEvent.closeSignUp}',
+                    // );
+                    // print(
+                    //   'Original eventStartDate: ${originalEvent.startDate}; Edited eventStartDate: ${editedEvent.startDate}',
+                    // );
+                    // print(
+                    //   'Original eventEndDate: ${originalEvent.endDate}; Edited eventEndDate: ${editedEvent.endDate}',
+                    // );
+                    // print(
+                    //   'Original eventMeetingPlace: ${originalEvent.meetingPlace}; Edited eventMeetingPlace: ${editedEvent.meetingPlace}',
+                    // );
+                    // print(
+                    //   'Original eventPhotoAlbumLink: ${originalEvent.photoAlbumLink}; Edited eventPhotoAlbumLink: ${editedEvent.photoAlbumLink}',
+                    // );
+                    // print(
+                    //   'Original groupId: ${originalEvent.groupId}; Edited groupId: ${editedEvent.groupId}',
+                    // );
+                    // print(
+                    //   'Original targetPatrolsIds: ${originalEvent.targetPatrolsIds}; Edited targetPatrolsIds: ${editedEvent.targetPatrolsIds}',
+                    // );
+                    // print(
+                    //   'Original lastEditedBy: ${originalEvent.lastEditedBy}; Edited lastEditedBy: ${editedEvent.lastEditedBy}',
+                    // );
+                    // print(
+                    //   'Original eventIsDraft: ${originalEvent.isDraft}; Edited eventIsDraft: ${editedEvent.isDraft}',
+                    // );
 
-                if (originalEvent != editedEvent) {
-                  // Show confirmation dialog before leaving
-                  showDialog(
-                    context: context,
-                    builder: (builder) {
-                      return LargeDialog(
-                        type: LargeDialogType.negative,
-                        title: context
-                            .localizations
-                            .create_edit_event_screen_go_back_without_saving_dialog_title,
-                        description: context
-                            .localizations
-                            .create_edit_event_screen_go_back_without_saving_dialog_description,
-                        primaryButtonText: context
-                            .localizations
-                            .create_edit_event_screen_go_back_without_saving_dialog_primary_button_text,
-                        secondaryButtonText: context.localizations.cancel,
-                        onSecondaryPressed: () => Navigator.of(context).pop(),
-                        onPrimaryPressed: () {
-                          Navigator.of(context).pop(); // Close dialog
-                          Navigator.of(context).pop(); // Go back
+                    if (originalEvent != editedEvent) {
+                      // Show confirmation dialog before leaving
+                      showDialog(
+                        context: context,
+                        builder: (builder) {
+                          return LargeDialog(
+                            type: LargeDialogType.negative,
+                            title: context
+                                .localizations
+                                .create_edit_event_screen_go_back_without_saving_dialog_title,
+                            description: context
+                                .localizations
+                                .create_edit_event_screen_go_back_without_saving_dialog_description,
+                            primaryButtonText: context
+                                .localizations
+                                .create_edit_event_screen_go_back_without_saving_dialog_primary_button_text,
+                            secondaryButtonText: context.localizations.cancel,
+                            onSecondaryPressed: () =>
+                                Navigator.of(context).pop(),
+                            onPrimaryPressed: () {
+                              Navigator.of(context).pop(); // Close dialog
+                              Navigator.of(context).pop(); // Go back
+                            },
+                          );
                         },
                       );
-                    },
-                  );
-                } else {
-                  Navigator.of(context).pop();
-                }
-              },
-            ),
-            body: SingleChildScrollView(
-              child: SafeArea(
-                child: Column(
-                  spacing: AppSpacing.large,
-                  children: [
-                    EventTitleForm(eventTitleController: _eventTitleController),
-                    EventDateSelector(
-                      openSignUp: _openSignUp,
-                      closeSignUp: _closeSignUp,
-                      startDate: _startDate,
-                      endDate: _endDate,
-                      onOpenSignUpChanged: (d) =>
-                          setState(() => _openSignUp = d),
-                      onCloseSignUpChanged: (d) =>
-                          setState(() => _closeSignUp = d),
-                      onStartDateChanged: (d) => setState(() => _startDate = d),
-                      onEndDateChanged: (d) => setState(() => _endDate = d),
-                    ),
-                    EventInstructionsContainer(),
-                    FormWithDetails(
-                      textController: _meetingPlaceController,
-                      labelText: context
-                          .localizations
-                          .create_edit_event_screen_meeting_place_text,
-                      descriptionText: context
-                          .localizations
-                          .create_edit_event_screen_meeting_place_description,
-                    ),
-                    FormWithDetails(
-                      textController: _photoAlbumLinkController,
-                      labelText: context
-                          .localizations
-                          .create_edit_event_screen_photo_album_link_text,
-                      descriptionText: context
-                          .localizations
-                          .create_edit_event_screen_photo_album_link_description,
-                    ),
-                    SizedBox(height: AppSpacing.bottomSpace),
-                  ],
+                    } else {
+                      Navigator.of(context).pop();
+                    }
+                  },
                 ),
-              ),
-            ),
+                body: SingleChildScrollView(
+                  child: SafeArea(
+                    child: Column(
+                      spacing: AppSpacing.large,
+                      children: [
+                        EventTitleForm(
+                          eventTitleController: _eventTitleController,
+                        ),
+                        EventDateSelector(
+                          openSignUp: _openSignUp,
+                          closeSignUp: _closeSignUp,
+                          startDate: _startDate,
+                          endDate: _endDate,
+                          onOpenSignUpChanged: (d) =>
+                              setState(() => _openSignUp = d),
+                          onCloseSignUpChanged: (d) =>
+                              setState(() => _closeSignUp = d),
+                          onStartDateChanged: (d) =>
+                              setState(() => _startDate = d),
+                          onEndDateChanged: (d) => setState(() => _endDate = d),
+                        ),
+                        EventInstructionsContainer(),
+                        FormWithDetails(
+                          textController: _meetingPlaceController,
+                          labelText: context
+                              .localizations
+                              .create_edit_event_screen_meeting_place_text,
+                          descriptionText: context
+                              .localizations
+                              .create_edit_event_screen_meeting_place_description,
+                        ),
+                        FormWithDetails(
+                          textController: _photoAlbumLinkController,
+                          labelText: context
+                              .localizations
+                              .create_edit_event_screen_photo_album_link_text,
+                          descriptionText: context
+                              .localizations
+                              .create_edit_event_screen_photo_album_link_description,
+                        ),
+                        SizedBox(height: AppSpacing.bottomSpace),
+                      ],
+                    ),
+                  ),
+                ),
 
-            speedDialChildren: CreateEditEventSpeedDial.build(
-              context: context,
-              dialOpenNotifier: dialOpenNotifier,
-              event: widget.event,
-              eventTimeType: widget.eventTimeType,
-              onDelete: () {
-                if (kDebugMode) print('User confirmed delete event');
-              },
-              onPublish: () {
-                if (kDebugMode) print('User confirmed publish event');
-              },
-              onUnpublish: () {
-                if (kDebugMode) print('User confirmed unpublish event');
-              },
-              onSave: ({required bool asDraft}) {
-                if (kDebugMode) {
-                  print('User confirmed save event (asDraft: $asDraft)');
-                }
-              },
-            ),
-            fabKey: dialOpenNotifier.hashCode,
-            openCloseDial: dialOpenNotifier,
+                speedDialChildren: CreateEditEventSpeedDial.build(
+                  context: context,
+                  dialOpenNotifier: dialOpenNotifier,
+                  event: widget.event,
+                  eventTimeType: widget.eventTimeType,
+                  onDelete: () {
+                    if (kDebugMode) print('User confirmed delete event');
+                  },
+                  onPublish: () {
+                    if (kDebugMode) print('User confirmed publish event');
+                  },
+                  onUnpublish: () {
+                    if (kDebugMode) print('User confirmed unpublish event');
+                  },
+                  onSave: ({required bool asDraft}) {
+                    if (kDebugMode) {
+                      print('User confirmed save event (asDraft: $asDraft)');
+                    }
+                  },
+                ),
+                fabKey: dialOpenNotifier.hashCode,
+                openCloseDial: dialOpenNotifier,
+              );
+            },
           );
         },
       ),

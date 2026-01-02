@@ -135,6 +135,7 @@ class SupabaseService {
         .select('''
       dependent_id,
       name,
+      is_leader,
       surname,
       nickname,
       born,
@@ -203,7 +204,7 @@ class SupabaseService {
   // Get groups leaders
   Future<List<LeaderModel>> getGroupLeaders(String groupId) async {
     final response = await _supabaseClient
-        .from('leaders')
+        .from('patrols_leaders')
         .select()
         .eq('group_id', groupId);
     return (response as List)

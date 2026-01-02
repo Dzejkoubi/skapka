@@ -1,6 +1,6 @@
 class LeaderModel {
   final String dependentId;
-  final String? patrolId;
+  final String patrolId;
   final String groupId;
 
   LeaderModel({
@@ -12,7 +12,7 @@ class LeaderModel {
   factory LeaderModel.fromJson(Map<String, dynamic> json) {
     return LeaderModel(
       dependentId: json['dependent_id'] as String,
-      patrolId: json['patrol_id'] as String?,
+      patrolId: json['patrol_id'] as String,
       groupId: json['group_id'] as String,
     );
   }

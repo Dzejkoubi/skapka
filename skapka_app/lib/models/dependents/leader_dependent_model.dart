@@ -1,7 +1,7 @@
 import 'package:skapka_app/models/dependents/dependent_model.dart';
 
 class LeaderDependentModel extends DependentModel {
-  final String? leaderOfPatrolId;
+  final List<String>? leaderOfPatrolId;
 
   LeaderDependentModel({
     required DependentModel dependent,

@@ -8,6 +8,7 @@ import 'package:skapka_app/app/theme/main_button_theme.dart';
 import 'package:skapka_app/widgets/dialogs/large_dialog.dart';
 import 'package:skapka_app/widgets/dialogs/bottom_dialog.dart';
 import 'package:skapka_app/utils/is_user_admin.dart';
+import 'package:skapka_app/utils/is_user_leader.dart';
 
 class CreateEditEventSpeedDial {
   static List<SpeedDialChild> build({
@@ -36,6 +37,7 @@ class CreateEditEventSpeedDial {
           l10n,
           eventTimeType,
           onDelete,
+          event,
         ),
         _buildPublishChild(context, dialOpenNotifier, l10n, onPublish),
         _buildSaveChild(context, dialOpenNotifier, l10n, onSave, asDraft: true),
@@ -48,6 +50,7 @@ class CreateEditEventSpeedDial {
           l10n,
           eventTimeType,
           onDelete,
+          event,
         ),
         _buildUnpublishChild(
           context,
@@ -72,6 +75,7 @@ class CreateEditEventSpeedDial {
           l10n,
           eventTimeType,
           onDelete,
+          event,
         ),
         _buildUnpublishChild(
           context,
@@ -99,6 +103,7 @@ class CreateEditEventSpeedDial {
     AppLocalizations l10n,
     EventTimeType? eventTimeType,
     VoidCallback onDelete,
+    EventModel? event,
   ) {
     return SpeedDialChild(
       labelWidget: MainButton.outlined(
@@ -109,12 +114,32 @@ class CreateEditEventSpeedDial {
         onPressed: () {
           dialOpenNotifier.value = false;
 
-          if (eventTimeType == EventTimeType.past && !isUserAdmin(context)) {
+          if (event == null || event.eventId.isEmpty) {
+            BottomDialog.show(
+              context,
+              type: BottomDialogType.negative,
+              description: l10n
+                  .create_edit_event_screen_delete_event_error_event_not_created,
+            );
+            return;
+          }
+
+          if (!isUserLeader(context)) {
             BottomDialog.show(
               context,
               type: BottomDialogType.negative,
               description:
-                  l10n.create_edit_event_screen_past_event_admin_only_error,
+                  l10n.create_edit_event_screen_delete_event_error_not_rights,
+            );
+            return;
+          }
+
+          if (eventTimeType == EventTimeType.past && !isUserAdmin(context)) {
+            BottomDialog.show(
+              context,
+              type: BottomDialogType.negative,
+              description: l10n
+                  .create_edit_event_screen_delete_event_error_past_event_admin_only,
             );
             return;
           }
@@ -197,8 +222,8 @@ class CreateEditEventSpeedDial {
             BottomDialog.show(
               context,
               type: BottomDialogType.negative,
-              description:
-                  l10n.create_edit_event_screen_past_event_admin_only_error,
+              description: l10n
+                  .create_edit_event_screen_delete_event_error_past_event_admin_only,
             );
             return;
           }
@@ -237,7 +262,7 @@ class CreateEditEventSpeedDial {
         type: ButtonType.textIcon,
         variant: ButtonStylesVariants.normal,
         iconAsset: 'assets/icons/device-floppy.svg',
-        text: l10n.create_edit_event_screen_speed_dial_save_event_text,
+        text: l10n.save,
         onPressed: () {
           dialOpenNotifier.value = false;
           showDialog(
@@ -252,7 +277,7 @@ class CreateEditEventSpeedDial {
                   : l10n.create_edit_event_screen_save_changes_dialog_description,
               primaryButtonText: asDraft
                   ? l10n.create_edit_event_screen_save_event_dialog_primary_button_text
-                  : l10n.create_edit_event_screen_save_changes_dialog_primary_button_text,
+                  : l10n.save,
               onPrimaryPressed: () {
                 onSave(asDraft: asDraft);
                 Navigator.of(context).pop();

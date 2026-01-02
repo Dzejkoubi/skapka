@@ -612,12 +612,6 @@ abstract class AppLocalizations {
   /// **'Upravit výpravu'**
   String get create_edit_event_screen_title_edit;
 
-  /// No description provided for @create_edit_event_screen_speed_dial_save_event_text.
-  ///
-  /// In cs, this message translates to:
-  /// **'Uložit'**
-  String get create_edit_event_screen_speed_dial_save_event_text;
-
   /// No description provided for @create_edit_event_screen_save_event_dialog_title.
   ///
   /// In cs, this message translates to:
@@ -647,12 +641,6 @@ abstract class AppLocalizations {
   /// In cs, this message translates to:
   /// **'Opravdu chceš uložit změny v této výpravě?'**
   String get create_edit_event_screen_save_changes_dialog_description;
-
-  /// No description provided for @create_edit_event_screen_save_changes_dialog_primary_button_text.
-  ///
-  /// In cs, this message translates to:
-  /// **'Uložit'**
-  String get create_edit_event_screen_save_changes_dialog_primary_button_text;
 
   /// No description provided for @create_edit_event_screen_speed_dial_publish_event_text.
   ///
@@ -718,7 +706,7 @@ abstract class AppLocalizations {
   /// No description provided for @create_edit_event_screen_delete_event_dialog_description.
   ///
   /// In cs, this message translates to:
-  /// **'Opravdu chceš smazat tuto výpravu? Tuto akci nelze vrátit zpět.'**
+  /// **'Opravdu chcete smazat tuto výpravu? Tuto akci nelze vrátit zpět.'**
   String get create_edit_event_screen_delete_event_dialog_description;
 
   /// No description provided for @create_edit_event_screen_delete_event_dialog_primary_button_text.
@@ -727,11 +715,29 @@ abstract class AppLocalizations {
   /// **'Smazat'**
   String get create_edit_event_screen_delete_event_dialog_primary_button_text;
 
-  /// No description provided for @create_edit_event_screen_past_event_admin_only_error.
+  /// No description provided for @create_edit_event_screen_delete_event_error_past_event_admin_only.
   ///
   /// In cs, this message translates to:
-  /// **'Pouze administrátoři mohou mazat nebo rušit zveřejnění proběhlých výprav.'**
-  String get create_edit_event_screen_past_event_admin_only_error;
+  /// **'Pouze administrátoři mohou mazat nebo zrušit publikování minulých výpravuí.'**
+  String get create_edit_event_screen_delete_event_error_past_event_admin_only;
+
+  /// No description provided for @create_edit_event_screen_delete_event_error_event_not_created.
+  ///
+  /// In cs, this message translates to:
+  /// **'Nelze smazat výpravu, která ještě nebyla vytvořena.'**
+  String get create_edit_event_screen_delete_event_error_event_not_created;
+
+  /// No description provided for @create_edit_event_screen_delete_event_error_not_rights.
+  ///
+  /// In cs, this message translates to:
+  /// **'Nemáte oprávnění mazat výpravy.'**
+  String get create_edit_event_screen_delete_event_error_not_rights;
+
+  /// No description provided for @create_edit_event_screen_delete_event_error_generic.
+  ///
+  /// In cs, this message translates to:
+  /// **'Smazání výpravy se nezdařilo. Zkuste to prosím znovu.'**
+  String get create_edit_event_screen_delete_event_error_generic;
 
   /// No description provided for @create_edit_event_screen_go_back_without_saving_dialog_title.
   ///
@@ -913,6 +919,48 @@ abstract class AppLocalizations {
   /// In cs, this message translates to:
   /// **'Odkaz na sdílenené fotoalbum z výpravy. Pokud nevyplníš, odkaz na fotoalbum nebude zobrazen.'**
   String get create_edit_event_screen_photo_album_link_description;
+
+  /// No description provided for @create_edit_event_screen_creating_event_progress_text.
+  ///
+  /// In cs, this message translates to:
+  /// **'Vytvářím výpravu...'**
+  String get create_edit_event_screen_creating_event_progress_text;
+
+  /// No description provided for @create_edit_event_screen_editing_event_progress_text.
+  ///
+  /// In cs, this message translates to:
+  /// **'Upravuji výpravu...'**
+  String get create_edit_event_screen_editing_event_progress_text;
+
+  /// No description provided for @create_edit_event_screen_deleting_event_progress_text.
+  ///
+  /// In cs, this message translates to:
+  /// **'Mažu výprava...'**
+  String get create_edit_event_screen_deleting_event_progress_text;
+
+  /// No description provided for @create_edit_event_screen_creating_event_success.
+  ///
+  /// In cs, this message translates to:
+  /// **'Výprava byla úspěšně vytvořena🥳.'**
+  String get create_edit_event_screen_creating_event_success;
+
+  /// No description provided for @create_edit_event_screen_creating_event_error_generic.
+  ///
+  /// In cs, this message translates to:
+  /// **'Vytvoření výpravy se nezdařilo. Zkus to prosím znovu.'**
+  String get create_edit_event_screen_creating_event_error_generic;
+
+  /// No description provided for @create_edit_event_screen_save_success.
+  ///
+  /// In cs, this message translates to:
+  /// **'Výprava byla úspěšně uložena🥳.'**
+  String get create_edit_event_screen_save_success;
+
+  /// No description provided for @create_edit_event_screen_save_error_generic.
+  ///
+  /// In cs, this message translates to:
+  /// **'Nepodařilo se uložit výpravu. Zkus to prosím znovu.'**
+  String get create_edit_event_screen_save_error_generic;
 
   /// No description provided for @settings_screen_title.
   ///

@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:skapka_app/app/l10n/l10n_extension.dart';
 import 'package:skapka_app/app/theme/app_spacing.dart';
+import 'package:skapka_app/app/theme/app_color_theme.dart';
+import 'package:skapka_app/app/theme/app_text_theme.dart';
 import 'package:skapka_app/models/dependents/dependent_model.dart';
 import 'package:skapka_app/models/event_model.dart';
 import 'package:skapka_app/models/event_participant_model.dart';
@@ -17,6 +19,7 @@ import 'package:skapka_app/screens/create_edit_event_screen.dart/widgets/event_t
 import 'package:skapka_app/services/supabase_service.dart';
 import 'package:skapka_app/widgets/forms/form_with_details.dart';
 import 'package:skapka_app/widgets/appbar/appbar.dart';
+import 'package:skapka_app/widgets/dialogs/bottom_dialog.dart';
 import 'package:skapka_app/widgets/dialogs/large_dialog.dart';
 import 'package:skapka_app/widgets/loading_floating_logo.dart';
 import 'package:skapka_app/widgets/wrappers/screen_wrapper.dart';
@@ -38,6 +41,8 @@ class CreateEditEventScreen extends StatefulWidget {
   @override
   State<CreateEditEventScreen> createState() => _CreateEditEventScreenState();
 }
+
+enum _ProcessingType { none, creating, editing, deleting }
 
 class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
   // Services and providers
@@ -99,9 +104,7 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
           (d) => d?.dependentId == p.dependentId,
           orElse: () => null,
         );
-        return dependent != null &&
-            dependent.isLeader &&
-            _isDependent18Plus(dependent);
+        return dependent != null && dependent.isLeader && dependent.is18plus;
       }).length;
 
   int get total18PlusInvitedLeadersCount => _editedEventParticipants.where((p) {
@@ -109,22 +112,8 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
       (d) => d?.dependentId == p.dependentId,
       orElse: () => null,
     );
-    return dependent != null &&
-        dependent.isLeader &&
-        _isDependent18Plus(dependent);
+    return dependent != null && dependent.isLeader && dependent.is18plus;
   }).length;
-
-  bool _isDependent18Plus(DependentModel dependent) {
-    if (dependent.born == null) return false;
-    final referenceDate = _startDate ?? DateTime.now();
-    int age = referenceDate.year - dependent.born!.year;
-    if (referenceDate.month < dependent.born!.month ||
-        (referenceDate.month == dependent.born!.month &&
-            referenceDate.day < dependent.born!.day)) {
-      age--;
-    }
-    return age >= 18;
-  }
 
   List<String> get targetPatrolIds {
     final participantDependentIds = _editedEventParticipants
@@ -169,6 +158,9 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
   List<String>? targetPatrolsIds;
   String? lastEditedBy;
   bool isDraft = true;
+
+  _ProcessingType _processingType = _ProcessingType.none;
+  bool get _isProcessing => _processingType != _ProcessingType.none;
 
   late Future<void> _initializationFuture;
 
@@ -256,6 +248,211 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
     }
   }
 
+  List<EventParticipantModel> get deleteParticipants =>
+      _originalEventParticipants
+          .where(
+            (original) => !_editedEventParticipants.any(
+              (edited) => edited.dependentId == original.dependentId,
+            ),
+          )
+          .toList();
+
+  List<EventParticipantModel> get addParticipants => _editedEventParticipants
+      .where(
+        (edited) => !_originalEventParticipants.any(
+          (original) => original.dependentId == edited.dependentId,
+        ),
+      )
+      .toList();
+
+  // Creating new event
+  Future<void> _createNewEvent({required bool asDraft}) async {
+    setState(() {
+      _processingType = _ProcessingType.creating;
+    });
+    try {
+      final newEvent = editedEvent.copyWith(isDraft: asDraft);
+      final createdEvent = await _supabaseService.createEvent(
+        newEvent,
+        _accountProvider,
+      );
+
+      // Update local eventId
+      eventId = createdEvent.eventId;
+
+      // Save participants
+      for (final participant in _editedEventParticipants) {
+        final p = participant.copyWith(
+          eventId: createdEvent.eventId,
+          groupId: groupId,
+        );
+        await _supabaseService.addEventParticipant(p);
+      }
+
+      // Sync original participants
+      _originalEventParticipants = List.from(_editedEventParticipants);
+
+      if (kDebugMode) {
+        print(
+          'Event ${createdEvent.eventId} created successfully as ${asDraft ? 'draft' : 'published'}.',
+        );
+      }
+      if (mounted) {
+        BottomDialog.show(
+          context,
+          type: BottomDialogType.positive,
+          description:
+              context.localizations.create_edit_event_screen_save_success,
+        );
+      }
+    } catch (e) {
+      if (kDebugMode) {
+        print('Error creating event: $e');
+      }
+      if (mounted) {
+        BottomDialog.show(
+          context,
+          type: BottomDialogType.negative,
+          description:
+              context.localizations.create_edit_event_screen_save_error_generic,
+        );
+      }
+    } finally {
+      if (mounted) {
+        setState(() {
+          _processingType = _ProcessingType.none;
+        });
+      }
+    }
+  }
+
+  // Saving edited event
+  Future<void> _saveEditedEvent({required bool asDraft}) async {
+    setState(() {
+      _processingType = _ProcessingType.editing;
+    });
+    try {
+      final updatedEvent = editedEvent.copyWith(isDraft: asDraft);
+      await _supabaseService.editEventDetails(updatedEvent, _accountProvider);
+
+      // Handle participants changes
+      final participantsToAdd = addParticipants;
+      final participantsToDelete = deleteParticipants;
+
+      if (kDebugMode) {
+        print('Adding ${participantsToAdd.length} participants');
+        print('Deleting ${participantsToDelete.length} participants');
+      }
+
+      for (final participant in participantsToAdd) {
+        // Ensure correct eventId and groupId
+        final p = participant.copyWith(
+          eventId: updatedEvent.eventId,
+          groupId: groupId,
+        );
+        await _supabaseService.addEventParticipant(p);
+      }
+
+      for (final participant in participantsToDelete) {
+        await _supabaseService.removeEventParticipant(
+          eventId: updatedEvent.eventId,
+          dependentId: participant.dependentId,
+        );
+      }
+
+      // Sync original participants
+      _originalEventParticipants = List.from(_editedEventParticipants);
+
+      if (kDebugMode) {
+        print(
+          'Event ${updatedEvent.eventId} saved successfully as ${asDraft ? 'draft' : 'published'}.',
+        );
+      }
+
+      if (mounted) {
+        BottomDialog.show(
+          context,
+          type: BottomDialogType.positive,
+          description:
+              context.localizations.create_edit_event_screen_save_success,
+        );
+      }
+    } catch (e) {
+      if (kDebugMode) {
+        print('Error saving event: $e');
+      }
+      if (mounted) {
+        BottomDialog.show(
+          context,
+          type: BottomDialogType.negative,
+          description:
+              context.localizations.create_edit_event_screen_save_error_generic,
+        );
+      }
+    } finally {
+      if (mounted) {
+        setState(() {
+          _processingType = _ProcessingType.none;
+        });
+      }
+    }
+  }
+
+  // Deleting event
+  Future<void> _deleteEvent() async {
+    setState(() {
+      _processingType = _ProcessingType.deleting;
+    });
+    try {
+      await _supabaseService.deleteEvent(eventId!);
+      if (kDebugMode) {
+        print('Event $eventId deleted successfully.');
+      }
+      if (mounted) {
+        context.router.pop(); // Close the screen after deletion
+      }
+    } catch (e) {
+      if (kDebugMode) {
+        print('Error deleting event: $e');
+      }
+      if (mounted) {
+        BottomDialog.show(
+          context,
+          type: BottomDialogType.negative,
+          description: context
+              .localizations
+              .create_edit_event_screen_delete_event_error_generic,
+        );
+      }
+    } finally {
+      if (mounted) {
+        setState(() {
+          _processingType = _ProcessingType.none;
+        });
+      }
+    }
+  }
+
+  // Get the text that should be displayed during processing
+  String _getProcessingText(BuildContext context) {
+    switch (_processingType) {
+      case _ProcessingType.creating:
+        return context
+            .localizations
+            .create_edit_event_screen_creating_event_progress_text;
+      case _ProcessingType.editing:
+        return context
+            .localizations
+            .create_edit_event_screen_editing_event_progress_text;
+      case _ProcessingType.deleting:
+        return context
+            .localizations
+            .create_edit_event_screen_deleting_event_progress_text;
+      case _ProcessingType.none:
+        return '';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
@@ -280,184 +477,193 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
           return Builder(
             builder: (context) {
               final dialOpenNotifier = context.watch<ValueNotifier<bool>>();
-              return ScreenWrapper(
-                appBar: Appbar(
-                  showBackChevron: true,
-                  showSettingsIcon: false,
-                  screenName: widget.event == null
-                      ? context
-                            .localizations
-                            .create_edit_event_screen_title_create
-                      : context
-                            .localizations
-                            .create_edit_event_screen_title_edit,
-                  onBackPressed: () {
-                    // print(
-                    //   'Original eventId: ${originalEvent.eventId}; Edited eventId: ${editedEvent.eventId}',
-                    // );
-                    // print(
-                    //   'Original eventTitle: ${originalEvent.title}; Edited eventTitle: ${editedEvent.title}',
-                    // );
-                    // print(
-                    //   'Original eventInstructions: ${originalEvent.instructions}; Edited eventInstructions: ${editedEvent.instructions}',
-                    // );
-                    // print(
-                    //   'Original eventOpenSignUp: ${originalEvent.openSignUp}; Edited eventOpenSignUp: ${editedEvent.openSignUp}',
-                    // );
-                    // print(
-                    //   'Original eventCloseSignUp: ${originalEvent.closeSignUp}; Edited eventCloseSignUp: ${editedEvent.closeSignUp}',
-                    // );
-                    // print(
-                    //   'Original eventStartDate: ${originalEvent.startDate}; Edited eventStartDate: ${editedEvent.startDate}',
-                    // );
-                    // print(
-                    //   'Original eventEndDate: ${originalEvent.endDate}; Edited eventEndDate: ${editedEvent.endDate}',
-                    // );
-                    // print(
-                    //   'Original eventMeetingPlace: ${originalEvent.meetingPlace}; Edited eventMeetingPlace: ${editedEvent.meetingPlace}',
-                    // );
-                    // print(
-                    //   'Original eventPhotoAlbumLink: ${originalEvent.photoAlbumLink}; Edited eventPhotoAlbumLink: ${editedEvent.photoAlbumLink}',
-                    // );
-                    // print(
-                    //   'Original groupId: ${originalEvent.groupId}; Edited groupId: ${editedEvent.groupId}',
-                    // );
-                    // print(
-                    //   'Original targetPatrolsIds: ${originalEvent.targetPatrolsIds}; Edited targetPatrolsIds: ${editedEvent.targetPatrolsIds}',
-                    // );
-                    // print(
-                    //   'Original lastEditedBy: ${originalEvent.lastEditedBy}; Edited lastEditedBy: ${editedEvent.lastEditedBy}',
-                    // );
-                    // print(
-                    //   'Original eventIsDraft: ${originalEvent.isDraft}; Edited eventIsDraft: ${editedEvent.isDraft}',
-                    // );
-
-                    if (originalEvent != editedEvent ||
-                        !listEquals(
-                          _originalEventParticipants,
-                          _editedEventParticipants,
-                        )) {
-                      // Show confirmation dialog before leaving
-                      showDialog(
-                        context: context,
-                        builder: (builder) {
-                          return LargeDialog(
-                            type: LargeDialogType.negative,
-                            title: context
+              return Stack(
+                children: [
+                  ScreenWrapper(
+                    appBar: Appbar(
+                      showBackChevron: true,
+                      showSettingsIcon: false,
+                      screenName: widget.event == null
+                          ? context
                                 .localizations
-                                .create_edit_event_screen_go_back_without_saving_dialog_title,
-                            description: context
+                                .create_edit_event_screen_title_create
+                          : context
                                 .localizations
-                                .create_edit_event_screen_go_back_without_saving_dialog_description,
-                            primaryButtonText: context
-                                .localizations
-                                .create_edit_event_screen_go_back_without_saving_dialog_primary_button_text,
-                            secondaryButtonText: context.localizations.cancel,
-                            onSecondaryPressed: () =>
-                                Navigator.of(context).pop(),
-                            onPrimaryPressed: () {
-                              Navigator.of(context).pop(); // Close dialog
-                              Navigator.of(context).pop(); // Go back
+                                .create_edit_event_screen_title_edit,
+                      onBackPressed: _isProcessing
+                          ? () {}
+                          : () {
+                              if (originalEvent != editedEvent ||
+                                  !listEquals(
+                                    _originalEventParticipants,
+                                    _editedEventParticipants,
+                                  )) {
+                                // Show confirmation dialog before leaving
+                                showDialog(
+                                  context: context,
+                                  builder: (builder) {
+                                    return LargeDialog(
+                                      type: LargeDialogType.negative,
+                                      title: context
+                                          .localizations
+                                          .create_edit_event_screen_go_back_without_saving_dialog_title,
+                                      description: context
+                                          .localizations
+                                          .create_edit_event_screen_go_back_without_saving_dialog_description,
+                                      primaryButtonText: context
+                                          .localizations
+                                          .create_edit_event_screen_go_back_without_saving_dialog_primary_button_text,
+                                      secondaryButtonText:
+                                          context.localizations.cancel,
+                                      onSecondaryPressed: () =>
+                                          Navigator.of(context).pop(),
+                                      onPrimaryPressed: () {
+                                        Navigator.of(
+                                          context,
+                                        ).pop(); // Close dialog
+                                        Navigator.of(context).pop(); // Go back
+                                      },
+                                    );
+                                  },
+                                );
+                              } else {
+                                Navigator.of(context).pop();
+                              }
                             },
-                          );
-                        },
-                      );
-                    } else {
-                      Navigator.of(context).pop();
-                    }
-                  },
-                ),
-                body: SingleChildScrollView(
-                  child: SafeArea(
-                    child: Column(
-                      spacing: AppSpacing.large,
-                      children: [
-                        EventTitleForm(
-                          eventTitleController: _eventTitleController,
-                        ),
-                        EventDateSelector(
-                          openSignUp: _openSignUp,
-                          closeSignUp: _closeSignUp,
-                          startDate: _startDate,
-                          endDate: _endDate,
-                          onOpenSignUpChanged: (d) =>
-                              setState(() => _openSignUp = d),
-                          onCloseSignUpChanged: (d) =>
-                              setState(() => _closeSignUp = d),
-                          onStartDateChanged: (d) =>
-                              setState(() => _startDate = d),
-                          onEndDateChanged: (d) => setState(() => _endDate = d),
-                        ),
-                        EventInstructionsContainer(),
-                        EventParticipantsContainer(
-                          originalParticipantsCount: originalParticipantsCount,
-                          invitedParticipantsCount: totalParticipantsCount,
-                          signedUpParticipantsCount:
-                              totalSignedUpParticipantsCount,
-                          invitedLeadersCount: totalInvitedLeadersCount,
-                          signedUpLeadersCount: totalSignedUpLeadersCount,
-                          invited18PlusLeadersCount:
-                              total18PlusInvitedLeadersCount,
-                          signedUp18PlusLeadersCount:
-                              total18PlusSignedUpLeadersCount,
-                          targetPatrolNames: targetPatrolNames,
-                          groupDependents: _groupDependents,
-                          groupLeaders: _groupLeaders,
-                          groupPatrols: _groupPatrols,
-                          groupTroops: _groupTroops,
-                          initialParticipants: _editedEventParticipants,
-                          onParticipantsChanged: (updatedParticipants) {
-                            setState(() {
-                              _editedEventParticipants = updatedParticipants;
-                            });
-                          },
-                        ),
-                        FormWithDetails(
-                          textController: _meetingPlaceController,
-                          labelText: context
-                              .localizations
-                              .create_edit_event_screen_meeting_place_text,
-                          descriptionText: context
-                              .localizations
-                              .create_edit_event_screen_meeting_place_description,
-                        ),
-                        FormWithDetails(
-                          textController: _photoAlbumLinkController,
-                          labelText: context
-                              .localizations
-                              .create_edit_event_screen_photo_album_link_text,
-                          descriptionText: context
-                              .localizations
-                              .create_edit_event_screen_photo_album_link_description,
-                        ),
-                        SizedBox(height: AppSpacing.bottomSpace),
-                      ],
                     ),
-                  ),
-                ),
+                    body: SingleChildScrollView(
+                      child: SafeArea(
+                        child: Column(
+                          spacing: AppSpacing.large,
+                          children: [
+                            EventTitleForm(
+                              eventTitleController: _eventTitleController,
+                            ),
+                            EventDateSelector(
+                              openSignUp: _openSignUp,
+                              closeSignUp: _closeSignUp,
+                              startDate: _startDate,
+                              endDate: _endDate,
+                              onOpenSignUpChanged: (d) =>
+                                  setState(() => _openSignUp = d),
+                              onCloseSignUpChanged: (d) =>
+                                  setState(() => _closeSignUp = d),
+                              onStartDateChanged: (d) =>
+                                  setState(() => _startDate = d),
+                              onEndDateChanged: (d) =>
+                                  setState(() => _endDate = d),
+                            ),
+                            EventInstructionsContainer(),
+                            EventParticipantsContainer(
+                              originalParticipantsCount:
+                                  originalParticipantsCount,
+                              invitedParticipantsCount: totalParticipantsCount,
+                              signedUpParticipantsCount:
+                                  totalSignedUpParticipantsCount,
+                              invitedLeadersCount: totalInvitedLeadersCount,
+                              signedUpLeadersCount: totalSignedUpLeadersCount,
+                              invited18PlusLeadersCount:
+                                  total18PlusInvitedLeadersCount,
+                              signedUp18PlusLeadersCount:
+                                  total18PlusSignedUpLeadersCount,
+                              targetPatrolNames: targetPatrolNames,
+                              groupDependents: _groupDependents,
+                              groupLeaders: _groupLeaders,
+                              groupPatrols: _groupPatrols,
+                              groupTroops: _groupTroops,
+                              initialParticipants: _editedEventParticipants,
+                              onParticipantsChanged: (updatedParticipants) {
+                                setState(() {
+                                  _editedEventParticipants =
+                                      updatedParticipants;
+                                });
+                              },
+                            ),
+                            FormWithDetails(
+                              textController: _meetingPlaceController,
+                              labelText: context
+                                  .localizations
+                                  .create_edit_event_screen_meeting_place_text,
+                              descriptionText: context
+                                  .localizations
+                                  .create_edit_event_screen_meeting_place_description,
+                            ),
+                            FormWithDetails(
+                              textController: _photoAlbumLinkController,
+                              labelText: context
+                                  .localizations
+                                  .create_edit_event_screen_photo_album_link_text,
+                              descriptionText: context
+                                  .localizations
+                                  .create_edit_event_screen_photo_album_link_description,
+                            ),
+                            SizedBox(height: AppSpacing.bottomSpace),
+                          ],
+                        ),
+                      ),
+                    ),
 
-                speedDialChildren: CreateEditEventSpeedDial.build(
-                  context: context,
-                  dialOpenNotifier: dialOpenNotifier,
-                  event: widget.event,
-                  eventTimeType: widget.eventTimeType,
-                  onDelete: () {
-                    if (kDebugMode) print('User confirmed delete event');
-                  },
-                  onPublish: () {
-                    if (kDebugMode) print('User confirmed publish event');
-                  },
-                  onUnpublish: () {
-                    if (kDebugMode) print('User confirmed unpublish event');
-                  },
-                  onSave: ({required bool asDraft}) {
-                    if (kDebugMode) {
-                      print('User confirmed save event (asDraft: $asDraft)');
-                    }
-                  },
-                ),
-                fabKey: dialOpenNotifier.hashCode,
-                openCloseDial: dialOpenNotifier,
+                    speedDialChildren: CreateEditEventSpeedDial.build(
+                      context: context,
+                      dialOpenNotifier: dialOpenNotifier,
+                      event: widget.event,
+                      eventTimeType: widget.eventTimeType,
+                      onDelete: () {
+                        if (kDebugMode) print('User confirmed delete event');
+                        _deleteEvent();
+                      },
+                      onPublish: () {
+                        if (kDebugMode) print('User confirmed publish event');
+                        if (eventId == null) {
+                          _createNewEvent(asDraft: false);
+                        } else {
+                          _saveEditedEvent(asDraft: false);
+                        }
+                      },
+                      onUnpublish: () {
+                        if (kDebugMode) print('User confirmed unpublish event');
+                        if (eventId == null) {
+                          _createNewEvent(asDraft: true);
+                        } else {
+                          _saveEditedEvent(asDraft: true);
+                        }
+                      },
+                      onSave: ({required bool asDraft}) {
+                        if (kDebugMode) {
+                          print(
+                            'User confirmed save event (asDraft: $asDraft)',
+                          );
+                        }
+                        if (eventId == null) {
+                          _createNewEvent(asDraft: asDraft);
+                        } else {
+                          _saveEditedEvent(asDraft: asDraft);
+                        }
+                      },
+                    ),
+                    fabKey: dialOpenNotifier.hashCode,
+                    openCloseDial: dialOpenNotifier,
+                  ),
+                  if (_isProcessing)
+                    Container(
+                      color: Colors.black.withOpacity(0.5),
+                      child: Center(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            const LoadingFloatingLogo(),
+                            const SizedBox(height: AppSpacing.medium),
+                            Text(
+                              _getProcessingText(context),
+                              style: AppTextTheme.titleMedium(context).copyWith(
+                                color: context.colors.text.normalReversed,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                ],
               );
             },
           );

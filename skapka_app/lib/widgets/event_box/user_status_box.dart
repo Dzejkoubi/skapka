@@ -32,7 +32,7 @@ class UserStatusBox extends StatelessWidget {
     return GestureDetector(
       onTap: isEnabled
           ? () {
-              supabaseService.updateEventParticipationStatus(
+              supabaseService.updateDependentEventParticipationStatus(
                 eventId: eventId,
                 dependentId: dependentId,
                 newStatus: switch (status) {

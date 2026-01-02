@@ -313,9 +313,6 @@ class AppLocalizationsCs extends AppLocalizations {
   String get create_edit_event_screen_title_edit => 'Upravit výpravu';
 
   @override
-  String get create_edit_event_screen_speed_dial_save_event_text => 'Uložit';
-
-  @override
   String get create_edit_event_screen_save_event_dialog_title =>
       'Uložit jako koncept';
 
@@ -334,10 +331,6 @@ class AppLocalizationsCs extends AppLocalizations {
   @override
   String get create_edit_event_screen_save_changes_dialog_description =>
       'Opravdu chceš uložit změny v této výpravě?';
-
-  @override
-  String get create_edit_event_screen_save_changes_dialog_primary_button_text =>
-      'Uložit';
 
   @override
   String get create_edit_event_screen_speed_dial_publish_event_text =>
@@ -382,15 +375,28 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get create_edit_event_screen_delete_event_dialog_description =>
-      'Opravdu chceš smazat tuto výpravu? Tuto akci nelze vrátit zpět.';
+      'Opravdu chcete smazat tuto výpravu? Tuto akci nelze vrátit zpět.';
 
   @override
   String get create_edit_event_screen_delete_event_dialog_primary_button_text =>
       'Smazat';
 
   @override
-  String get create_edit_event_screen_past_event_admin_only_error =>
-      'Pouze administrátoři mohou mazat nebo rušit zveřejnění proběhlých výprav.';
+  String
+  get create_edit_event_screen_delete_event_error_past_event_admin_only =>
+      'Pouze administrátoři mohou mazat nebo zrušit publikování minulých výpravuí.';
+
+  @override
+  String get create_edit_event_screen_delete_event_error_event_not_created =>
+      'Nelze smazat výpravu, která ještě nebyla vytvořena.';
+
+  @override
+  String get create_edit_event_screen_delete_event_error_not_rights =>
+      'Nemáte oprávnění mazat výpravy.';
+
+  @override
+  String get create_edit_event_screen_delete_event_error_generic =>
+      'Smazání výpravy se nezdařilo. Zkuste to prosím znovu.';
 
   @override
   String get create_edit_event_screen_go_back_without_saving_dialog_title =>
@@ -494,6 +500,34 @@ class AppLocalizationsCs extends AppLocalizations {
   @override
   String get create_edit_event_screen_photo_album_link_description =>
       'Odkaz na sdílenené fotoalbum z výpravy. Pokud nevyplníš, odkaz na fotoalbum nebude zobrazen.';
+
+  @override
+  String get create_edit_event_screen_creating_event_progress_text =>
+      'Vytvářím výpravu...';
+
+  @override
+  String get create_edit_event_screen_editing_event_progress_text =>
+      'Upravuji výpravu...';
+
+  @override
+  String get create_edit_event_screen_deleting_event_progress_text =>
+      'Mažu výprava...';
+
+  @override
+  String get create_edit_event_screen_creating_event_success =>
+      'Výprava byla úspěšně vytvořena🥳.';
+
+  @override
+  String get create_edit_event_screen_creating_event_error_generic =>
+      'Vytvoření výpravy se nezdařilo. Zkus to prosím znovu.';
+
+  @override
+  String get create_edit_event_screen_save_success =>
+      'Výprava byla úspěšně uložena🥳.';
+
+  @override
+  String get create_edit_event_screen_save_error_generic =>
+      'Nepodařilo se uložit výpravu. Zkus to prosím znovu.';
 
   @override
   String get settings_screen_title => 'Nastavení';

@@ -315,9 +315,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get create_edit_event_screen_title_edit => 'Edit event';
 
   @override
-  String get create_edit_event_screen_speed_dial_save_event_text => 'Save';
-
-  @override
   String get create_edit_event_screen_save_event_dialog_title =>
       'Save as Draft';
 
@@ -338,10 +335,6 @@ class AppLocalizationsEn extends AppLocalizations {
       'Are you sure you want to save changes to this event?';
 
   @override
-  String get create_edit_event_screen_save_changes_dialog_primary_button_text =>
-      'Save';
-
-  @override
   String get create_edit_event_screen_speed_dial_publish_event_text =>
       'Publish';
 
@@ -351,7 +344,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get create_edit_event_screen_publish_event_dialog_description =>
-      'Are you sure you want to publish this event? The event will be added to the calendar and invited participants will be able to sign up when the sign-up period starts.';
+      'Are you sure you want to publish this event? It will be visible to all participants.';
 
   @override
   String
@@ -368,7 +361,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get create_edit_event_screen_unpublish_event_dialog_description =>
-      'Are you sure you want to unpublish this event? Participants will no longer be able to sign up and the event will be removed from the calendar.';
+      'Are you sure you want to unpublish this event? It will be hidden from all participants.';
 
   @override
   String
@@ -376,7 +369,8 @@ class AppLocalizationsEn extends AppLocalizations {
       'Unpublish';
 
   @override
-  String get create_edit_event_screen_speed_dial_delete_event_text => 'Delete';
+  String get create_edit_event_screen_speed_dial_delete_event_text =>
+      'Delete Event';
 
   @override
   String get create_edit_event_screen_delete_event_dialog_title =>
@@ -391,8 +385,21 @@ class AppLocalizationsEn extends AppLocalizations {
       'Delete';
 
   @override
-  String get create_edit_event_screen_past_event_admin_only_error =>
+  String
+  get create_edit_event_screen_delete_event_error_past_event_admin_only =>
       'Only administrators can delete or unpublish past events.';
+
+  @override
+  String get create_edit_event_screen_delete_event_error_event_not_created =>
+      'Cannot delete an event that has not been created yet.';
+
+  @override
+  String get create_edit_event_screen_delete_event_error_not_rights =>
+      'You do not have permission to delete events.';
+
+  @override
+  String get create_edit_event_screen_delete_event_error_generic =>
+      'Deleting the event failed. Please try again.';
 
   @override
   String get create_edit_event_screen_go_back_without_saving_dialog_title =>
@@ -401,7 +408,7 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String
   get create_edit_event_screen_go_back_without_saving_dialog_description =>
-      'Are you sure you want to leave without saving changes? All unsaved changes will be lost.';
+      'Are you sure you want to go back without saving changes? All unsaved changes will be lost.';
 
   @override
   String
@@ -496,6 +503,34 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get create_edit_event_screen_photo_album_link_description =>
       'Link to the shared photo album from the event. If you do not fill it in, the photo album link will not be displayed.';
+
+  @override
+  String get create_edit_event_screen_creating_event_progress_text =>
+      'Creating event...';
+
+  @override
+  String get create_edit_event_screen_editing_event_progress_text =>
+      'Editing event...';
+
+  @override
+  String get create_edit_event_screen_deleting_event_progress_text =>
+      'Deleting event...';
+
+  @override
+  String get create_edit_event_screen_creating_event_success =>
+      'Event was successfully created🥳.';
+
+  @override
+  String get create_edit_event_screen_creating_event_error_generic =>
+      'Failed to create event. Please try again.';
+
+  @override
+  String get create_edit_event_screen_save_success =>
+      'Event was successfully saved🥳.';
+
+  @override
+  String get create_edit_event_screen_save_error_generic =>
+      'Failed to save event. Please try again.';
 
   @override
   String get settings_screen_title => 'Settings';

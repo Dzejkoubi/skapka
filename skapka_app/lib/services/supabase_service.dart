@@ -213,6 +213,32 @@ class SupabaseService {
         .toList();
   }
 
+  Future<EventModel> createEvent(
+    EventModel event,
+    AccountProvider accountProvider,
+  ) async {
+    final response = await _supabaseClient
+        .from('events')
+        .insert({
+          'title': event.title,
+          'instructions': event.instructions,
+          'open_sign_up': event.openSignUp?.toIso8601String(),
+          'close_sign_up': event.closeSignUp?.toIso8601String(),
+          'start_date': event.startDate?.toIso8601String(),
+          'end_date': event.endDate?.toIso8601String(),
+          'meeting_place': event.meetingPlace,
+          'photo_album_link': event.photoAlbumLink,
+          'group_id': event.groupId,
+          'target_patrols': event.targetPatrolsIds,
+          'last_edited_by': accountProvider.accountId,
+          'is_draft': event.isDraft,
+        })
+        .select()
+        .single();
+
+    return EventModel.fromJson(response);
+  }
+
   // Edit event details
   Future<void> editEventDetails(
     EventModel event,
@@ -234,6 +260,11 @@ class SupabaseService {
           'is_draft': event.isDraft,
         })
         .eq('event_id', event.eventId);
+  }
+
+  // Delete event
+  Future<void> deleteEvent(String eventId) async {
+    await _supabaseClient.from('events').delete().eq('event_id', eventId);
   }
 
   // Add event participant
@@ -259,7 +290,7 @@ class SupabaseService {
   }
 
   // Update dependent event participation status
-  Future<void> updateEventParticipationStatus({
+  Future<void> updateDependentEventParticipationStatus({
     required String eventId,
     required String dependentId,
     required String newStatus,

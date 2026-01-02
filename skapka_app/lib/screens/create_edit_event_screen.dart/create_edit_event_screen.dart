@@ -79,10 +79,18 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
       .length;
   int get totalSignedUpLeadersCount => _editedEventParticipants
       .where((p) => p.status == EventParticipantStatus.signedUp)
-      .where((p) => _groupLeaders.any((l) => l.dependentId == p.dependentId))
+      .where(
+        (p) => _groupDependents.any(
+          (l) => l.isLeader && l.dependentId == p.dependentId,
+        ),
+      )
       .length;
   int get totalInvitedLeadersCount => _editedEventParticipants
-      .where((p) => _groupLeaders.any((l) => l.dependentId == p.dependentId))
+      .where(
+        (p) => _groupDependents.any(
+          (l) => l.isLeader && l.dependentId == p.dependentId,
+        ),
+      )
       .length;
   int get total18PlusSignedUpLeadersCount =>
       _editedEventParticipants.where((p) {
@@ -334,7 +342,7 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
                         context: context,
                         builder: (builder) {
                           return LargeDialog(
-                            type: LargeDialogType.basic,
+                            type: LargeDialogType.negative,
                             title: context
                                 .localizations
                                 .create_edit_event_screen_go_back_without_saving_dialog_title,

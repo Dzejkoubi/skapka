@@ -136,6 +136,8 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
   String? lastEditedBy;
   bool isDraft = true;
 
+  late Future<void> _initializationFuture;
+
   /// Fetch all necessary data (dependents, patrols, troops, participants)
   Future<void> fetchRequiredData() async {
     await fetchGroupDependentsAndLeaders(_accountProvider.groupId);
@@ -151,6 +153,7 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
   @override
   void initState() {
     super.initState();
+    _initializationFuture = fetchRequiredData();
 
     // Setting values from the original event to initialize edited event
     originalEvent =
@@ -224,7 +227,7 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
     return ChangeNotifierProvider(
       create: (_) => ValueNotifier<bool>(false),
       child: FutureBuilder(
-        future: fetchRequiredData(),
+        future: _initializationFuture,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return ScreenWrapper(
@@ -360,6 +363,11 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
                           groupPatrols: _groupPatrols,
                           groupTroops: _groupTroops,
                           initialParticipants: _editedEventParticipants,
+                          onParticipantsChanged: (updatedParticipants) {
+                            setState(() {
+                              _editedEventParticipants = updatedParticipants;
+                            });
+                          },
                         ),
                         FormWithDetails(
                           textController: _meetingPlaceController,

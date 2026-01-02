@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:skapka_app/app/l10n/app_localizations.dart';
+import 'package:skapka_app/app/l10n/l10n_extension.dart';
 import 'package:skapka_app/models/event_model.dart';
 import 'package:skapka_app/widgets/buttons/main_button.dart';
 import 'package:skapka_app/app/theme/main_button_theme.dart';
@@ -19,7 +20,7 @@ class CreateEditEventSpeedDial {
     required VoidCallback onUnpublish,
     required Function({required bool asDraft}) onSave,
   }) {
-    final l10n = AppLocalizations.of(context)!;
+    final l10n = context.localizations;
     final isDraft = event == null || eventTimeType == EventTimeType.draft;
     final isFutureOrLive =
         event != null &&

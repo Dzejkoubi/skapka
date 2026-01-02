@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:skapka_app/app/l10n/app_localizations.dart';
 import 'package:skapka_app/app/l10n/l10n_extension.dart';
 import 'package:skapka_app/app/theme/app_color_theme.dart';
 import 'package:skapka_app/app/theme/app_decorations.dart';
@@ -153,7 +152,6 @@ class EventDateSelector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
     return Container(
       decoration: AppDecorations.primaryContainer(context),
       padding: const EdgeInsets.all(AppSpacing.xSmall),
@@ -161,14 +159,14 @@ class EventDateSelector extends StatelessWidget {
         children: [
           _buildDateRow(
             context,
-            l10n.create_edit_event_screen_event_sign_up_from,
+            context.localizations.create_edit_event_screen_event_sign_up_from,
             openSignUp,
             () => _selectDateTime(context, openSignUp, onOpenSignUpChanged),
           ),
           const SizedBox(height: AppSpacing.xSmall),
           _buildDateRow(
             context,
-            l10n.create_edit_event_screen_event_sign_up_to,
+            context.localizations.create_edit_event_screen_event_sign_up_to,
             closeSignUp,
             () => _selectDateTime(context, closeSignUp, onCloseSignUpChanged),
           ),
@@ -178,14 +176,14 @@ class EventDateSelector extends StatelessWidget {
           ),
           _buildDateRow(
             context,
-            l10n.create_edit_event_screen_event_from_hint,
+            context.localizations.create_edit_event_screen_event_from_hint,
             startDate,
             () => _selectDateTime(context, startDate, onStartDateChanged),
           ),
           const SizedBox(height: AppSpacing.xSmall),
           _buildDateRow(
             context,
-            l10n.create_edit_event_screen_event_to_hint,
+            context.localizations.create_edit_event_screen_event_to_hint,
             endDate,
             () => _selectDateTime(context, endDate, onEndDateChanged),
           ),

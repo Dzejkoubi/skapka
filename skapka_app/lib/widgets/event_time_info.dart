@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:skapka_app/app/l10n/app_localizations.dart';
+import 'package:skapka_app/app/l10n/l10n_extension.dart';
 import 'package:skapka_app/app/theme/app_color_theme.dart';
 import 'package:skapka_app/app/theme/app_spacing.dart';
 import 'package:skapka_app/app/theme/app_text_theme.dart';
@@ -21,7 +21,6 @@ class EventTimeInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
     final dateFormat = DateFormat('d. M. yyyy');
     final timeFormat = DateFormat('HH:mm');
     final dateTimeFormat = DateFormat('d. M. yyyy HH:mm');
@@ -42,13 +41,13 @@ class EventTimeInfo extends StatelessWidget {
           if (isUserLeader(context) && event.openSignUp != null)
             _buildRow(
               context,
-              l10n.event_box_sign_up_start_date_text,
+              context.localizations.event_box_sign_up_start_date_text,
               dateTimeFormat.format(event.openSignUp!),
             ),
           if (event.closeSignUp != null)
             _buildRow(
               context,
-              l10n.event_box_sign_up_end_date_text,
+              context.localizations.event_box_sign_up_end_date_text,
               dateTimeFormat.format(event.closeSignUp!),
             ),
         ] else ...[
@@ -56,27 +55,27 @@ class EventTimeInfo extends StatelessWidget {
             if (event.openSignUp != null)
               _buildRow(
                 context,
-                l10n.event_box_sign_up_start_date_text,
+                context.localizations.event_box_sign_up_start_date_text,
                 dateTimeFormat.format(event.openSignUp!),
               ),
             if (event.closeSignUp != null)
               _buildRow(
                 context,
-                l10n.event_box_sign_up_end_date_text,
+                context.localizations.event_box_sign_up_end_date_text,
                 dateTimeFormat.format(event.closeSignUp!),
               ),
           ] else if (eventTimeType == EventTimeType.live) ...[
             if (event.closeSignUp != null)
               _buildRow(
                 context,
-                l10n.event_box_sign_up_end_date_text,
+                context.localizations.event_box_sign_up_end_date_text,
                 dateTimeFormat.format(event.closeSignUp!),
               ),
           ] else if (eventTimeType == EventTimeType.future) ...[
             if (event.openSignUp != null)
               _buildRow(
                 context,
-                l10n.event_box_sign_up_start_date_text,
+                context.localizations.event_box_sign_up_start_date_text,
                 dateTimeFormat.format(event.openSignUp!),
               ),
           ],
@@ -85,18 +84,18 @@ class EventTimeInfo extends StatelessWidget {
           if (isSingleDay)
             _buildRow(
               context,
-              l10n.event_box_event_single_day_text,
+              context.localizations.event_box_event_single_day_text,
               '${dateFormat.format(startDate)} ${timeFormat.format(startDate)} - ${timeFormat.format(endDate)}',
             )
           else ...[
             _buildRow(
               context,
-              l10n.event_box_event_multiple_days_start_text,
+              context.localizations.event_box_event_multiple_days_start_text,
               dateTimeFormat.format(startDate),
             ),
             _buildRow(
               context,
-              l10n.event_box_event_multiple_days_end_text,
+              context.localizations.event_box_event_multiple_days_end_text,
               dateTimeFormat.format(endDate),
             ),
           ],

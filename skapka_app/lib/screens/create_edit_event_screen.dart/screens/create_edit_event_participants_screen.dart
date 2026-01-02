@@ -2,9 +2,13 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:figma_squircle/figma_squircle.dart';
 import 'package:skapka_app/app/l10n/app_localizations.dart';
 import 'package:skapka_app/app/l10n/l10n_extension.dart';
+import 'package:skapka_app/app/theme/app_color_theme.dart';
+import 'package:skapka_app/app/theme/app_radius.dart';
 import 'package:skapka_app/app/theme/app_spacing.dart';
+import 'package:skapka_app/app/theme/app_text_theme.dart';
 import 'package:skapka_app/app/theme/main_button_theme.dart';
 import 'package:skapka_app/models/dependents/dependent_model.dart';
 import 'package:skapka_app/models/dependents/leader_dependent_model.dart';
@@ -97,10 +101,8 @@ class _CreateEditEventParticipantsScreenState
       appBar: Appbar(
         showBackChevron: true,
         showSettingsIcon: false,
-        screenName: AppLocalizations.of(
-          context,
-        )!.create_edit_participants_screen_title,
-        onBackPressed: () => context.router.pop(),
+        screenName: context.localizations.create_edit_participants_screen_title,
+        onBackPressed: () => context.router.pop(_selectedParticipants),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -172,40 +174,236 @@ class _CreateEditEventParticipantsScreenState
   Widget _buildContent(int activeIndex) {
     if (activeIndex == widget.groupTroops.length) {
       // Leaders tab
+      final allLeaderIds = _groupDependentLeaders
+          .map((l) => l.dependentId)
+          .toSet();
+      final selectedLeaderIds = _selectedParticipants
+          .map((p) => p.dependentId)
+          .where((id) => allLeaderIds.contains(id))
+          .toSet();
+
+      final areAllSelected =
+          allLeaderIds.isNotEmpty &&
+          selectedLeaderIds.length == allLeaderIds.length;
+      final areSomeSelected =
+          selectedLeaderIds.isNotEmpty &&
+          selectedLeaderIds.length < allLeaderIds.length;
+
       return Column(
-        children: _groupDependentLeaders.map((leader) {
-          final isSelected = _selectedParticipants.any(
-            (p) => p.dependentId == leader.dependentId,
-          );
-          return ParticipantRow(
-            dependent: leader,
-            isSelected: isSelected,
-            is18plus: leader.is18plus,
-            onChanged: (value) {
-              setState(() {
-                if (value == true) {
-                  _selectedParticipants.add(
-                    EventParticipantModel(
-                      eventId: widget.initialParticipants.isNotEmpty
-                          ? widget.initialParticipants.first.eventId
-                          : '',
-                      dependentId: leader.dependentId!,
-                      status: EventParticipantStatus.notSpecified,
-                      note: '',
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(bottom: AppSpacing.small),
+            child: Row(
+              children: [
+                Checkbox(
+                  value: areAllSelected
+                      ? true
+                      : (areSomeSelected ? null : false),
+                  tristate: true,
+                  activeColor: context.colors.primary.normal,
+                  shape: SmoothRectangleBorder(
+                    borderRadius: SmoothBorderRadius(
+                      cornerRadius: AppRadius.xxSmall,
+                      cornerSmoothing: AppRadius.smoothNormal,
                     ),
-                  );
-                } else {
-                  _selectedParticipants.removeWhere(
-                    (p) => p.dependentId == leader.dependentId,
-                  );
-                }
-              });
-            },
-          );
-        }).toList(),
+                  ),
+                  onChanged: (value) {
+                    setState(() {
+                      if (!areAllSelected) {
+                        for (var leader in _groupDependentLeaders) {
+                          if (!_selectedParticipants.any(
+                            (p) => p.dependentId == leader.dependentId,
+                          )) {
+                            _selectedParticipants.add(
+                              EventParticipantModel(
+                                eventId: widget.initialParticipants.isNotEmpty
+                                    ? widget.initialParticipants.first.eventId
+                                    : '',
+                                dependentId: leader.dependentId!,
+                                status: EventParticipantStatus.notSpecified,
+                                note: '',
+                              ),
+                            );
+                          }
+                        }
+                      } else {
+                        _selectedParticipants.removeWhere(
+                          (p) => allLeaderIds.contains(p.dependentId),
+                        );
+                      }
+                    });
+                  },
+                ),
+                const SizedBox(width: AppSpacing.small),
+                Text(
+                  context
+                      .localizations
+                      .create_edit_participants_screen_select_all,
+                  style: AppTextTheme.titleSmall(context),
+                ),
+              ],
+            ),
+          ),
+          ..._groupDependentLeaders.map((leader) {
+            final isSelected = _selectedParticipants.any(
+              (p) => p.dependentId == leader.dependentId,
+            );
+            return Column(
+              children: [
+                ParticipantRow(
+                  dependent: leader,
+                  isSelected: isSelected,
+                  is18plus: leader.is18plus,
+                  onChanged: (value) {
+                    setState(() {
+                      if (value == true) {
+                        _selectedParticipants.add(
+                          EventParticipantModel(
+                            eventId: widget.initialParticipants.isNotEmpty
+                                ? widget.initialParticipants.first.eventId
+                                : '',
+                            dependentId: leader.dependentId!,
+                            status: EventParticipantStatus.notSpecified,
+                            note: '',
+                          ),
+                        );
+                      } else {
+                        _selectedParticipants.removeWhere(
+                          (p) => p.dependentId == leader.dependentId,
+                        );
+                      }
+                    });
+                  },
+                ),
+              ],
+            );
+          }),
+        ],
       );
     } else {
-      return Column();
+      final selectedTroop = widget.groupTroops[activeIndex];
+
+      final troopPatrols = widget.groupPatrols
+          .where((patrol) => patrol.troopId == selectedTroop.troopId)
+          .toList();
+
+      // Calculate all dependents for this troop (members + leaders of patrols in this troop)
+      final troopPatrolIds = troopPatrols.map((p) => p.patrolId).toSet();
+
+      final troopLeaderIds = widget.groupLeaders
+          .where((l) => troopPatrolIds.contains(l.patrolId))
+          .map((l) => l.dependentId)
+          .toSet();
+
+      final allTroopDependents = widget.groupDependents.where((d) {
+        final isMember = troopPatrolIds.contains(d.patrolId);
+        final isLeader = troopLeaderIds.contains(d.dependentId);
+        return isMember || isLeader;
+      }).toList();
+
+      final allTroopDependentIds = allTroopDependents
+          .map((d) => d.dependentId)
+          .toSet();
+
+      final selectedTroopDependentIds = _selectedParticipants
+          .map((p) => p.dependentId)
+          .where((id) => allTroopDependentIds.contains(id))
+          .toSet();
+
+      final areAllSelected =
+          allTroopDependentIds.isNotEmpty &&
+          selectedTroopDependentIds.length == allTroopDependentIds.length;
+      final areSomeSelected =
+          selectedTroopDependentIds.isNotEmpty &&
+          selectedTroopDependentIds.length < allTroopDependentIds.length;
+
+      return Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(bottom: AppSpacing.small),
+            child: Row(
+              children: [
+                Checkbox(
+                  value: areAllSelected
+                      ? true
+                      : (areSomeSelected ? null : false),
+                  tristate: true,
+                  activeColor: context.colors.primary.normal,
+                  shape: SmoothRectangleBorder(
+                    borderRadius: SmoothBorderRadius(
+                      cornerRadius: AppRadius.xxSmall,
+                      cornerSmoothing: AppRadius.smoothNormal,
+                    ),
+                  ),
+                  onChanged: (value) {
+                    setState(() {
+                      if (!areAllSelected) {
+                        for (var dependent in allTroopDependents) {
+                          if (!_selectedParticipants.any(
+                            (p) => p.dependentId == dependent.dependentId,
+                          )) {
+                            _selectedParticipants.add(
+                              EventParticipantModel(
+                                eventId: widget.initialParticipants.isNotEmpty
+                                    ? widget.initialParticipants.first.eventId
+                                    : '',
+                                dependentId: dependent.dependentId!,
+                                status: EventParticipantStatus.notSpecified,
+                                note: '',
+                              ),
+                            );
+                          }
+                        }
+                      } else {
+                        _selectedParticipants.removeWhere(
+                          (p) => allTroopDependentIds.contains(p.dependentId),
+                        );
+                      }
+                    });
+                  },
+                ),
+                const SizedBox(width: AppSpacing.small),
+                Text(
+                  context
+                      .localizations
+                      .create_edit_participants_screen_select_all,
+                  style: AppTextTheme.titleSmall(context),
+                ),
+              ],
+            ),
+          ),
+          Column(
+            spacing: AppSpacing.small,
+            children: troopPatrols.map((patrol) {
+              final patrolLeaderIds = widget.groupLeaders
+                  .where((l) => l.patrolId == patrol.patrolId)
+                  .map((l) => l.dependentId)
+                  .toSet();
+
+              final patrolDependents = widget.groupDependents.where((d) {
+                final isMember = d.patrolId == patrol.patrolId;
+                final isLeader = patrolLeaderIds.contains(d.dependentId);
+                return isMember || isLeader;
+              }).toList();
+
+              return PatrolExpansionTile(
+                patrol: patrol,
+                dependents: patrolDependents,
+                leaders: widget.groupLeaders,
+                selectedParticipants: _selectedParticipants,
+                eventId: widget.initialParticipants.isNotEmpty
+                    ? widget.initialParticipants.first.eventId
+                    : '',
+                onChanged: (updatedList) {
+                  setState(() {
+                    _selectedParticipants = updatedList;
+                  });
+                },
+              );
+            }).toList(),
+          ),
+        ],
+      );
     }
   }
 }

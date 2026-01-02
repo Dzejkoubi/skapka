@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:skapka_app/app/l10n/l10n_extension.dart';
 import 'package:skapka_app/app/theme/app_color_theme.dart';
 import 'package:skapka_app/app/theme/app_spacing.dart';
 import 'package:skapka_app/app/theme/app_text_theme.dart';
@@ -17,6 +16,7 @@ class PatrolExpansionTile extends StatelessWidget {
   final List<LeaderModel> leaders;
   final List<EventParticipantModel> selectedParticipants;
   final Function(List<EventParticipantModel>) onChanged;
+  final String eventId;
 
   const PatrolExpansionTile({
     super.key,
@@ -25,16 +25,41 @@ class PatrolExpansionTile extends StatelessWidget {
     required this.leaders,
     required this.selectedParticipants,
     required this.onChanged,
+    required this.eventId,
   });
 
   @override
   Widget build(BuildContext context) {
     final patrolLeaders = dependents
-        .where((d) => leaders.any((l) => l.dependentId == d.dependentId))
+        .where(
+          (d) => leaders.any(
+            (l) =>
+                l.dependentId == d.dependentId && l.patrolId == patrol.patrolId,
+          ),
+        )
         .toList();
     final patrolKids = dependents
-        .where((d) => !leaders.any((l) => l.dependentId == d.dependentId))
+        .where(
+          (d) => !leaders.any(
+            (l) =>
+                l.dependentId == d.dependentId && l.patrolId == patrol.patrolId,
+          ),
+        )
         .toList();
+
+    // Calculate selection state
+    final allDependentsIds = dependents.map((d) => d.dependentId).toSet();
+    final selectedDependentsIds = selectedParticipants
+        .map((p) => p.dependentId)
+        .where((id) => allDependentsIds.contains(id))
+        .toSet();
+
+    final areAllSelected =
+        allDependentsIds.isNotEmpty &&
+        selectedDependentsIds.length == allDependentsIds.length;
+    final areSomeSelected =
+        selectedDependentsIds.isNotEmpty &&
+        selectedDependentsIds.length < allDependentsIds.length;
 
     final border = SmoothRectangleBorder(
       side: BorderSide(color: context.colors.background.medium, width: 1.5),
@@ -44,35 +69,77 @@ class PatrolExpansionTile extends StatelessWidget {
       ),
     );
 
-    return ExpansionTile(
-      shape: border,
-      collapsedShape: border,
-      backgroundColor: context.colors.background.light,
-      collapsedBackgroundColor: context.colors.background.light,
-      title: Text(patrol.name, style: AppTextTheme.titleSmall(context)),
-      childrenPadding: const EdgeInsets.symmetric(
-        horizontal: AppSpacing.medium,
-        vertical: AppSpacing.small,
+    return Theme(
+      data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
+      child: ExpansionTile(
+        shape: border,
+        collapsedShape: border,
+        backgroundColor: context.colors.background.light,
+        collapsedBackgroundColor: context.colors.background.light,
+        title: Row(
+          children: [
+            Checkbox(
+              value: areAllSelected ? true : (areSomeSelected ? null : false),
+              tristate: true,
+              activeColor: context.colors.primary.normal,
+              shape: SmoothRectangleBorder(
+                borderRadius: SmoothBorderRadius(
+                  cornerRadius: AppRadius.xxSmall,
+                  cornerSmoothing: AppRadius.smoothNormal,
+                ),
+              ),
+              onChanged: (value) {
+                final newSelectedParticipants =
+                    List<EventParticipantModel>.from(selectedParticipants);
+
+                // If not all are selected, we select all. Otherwise we deselect all.
+                final shouldSelectAll = !areAllSelected;
+
+                if (shouldSelectAll) {
+                  for (var dependent in dependents) {
+                    if (!newSelectedParticipants.any(
+                      (p) => p.dependentId == dependent.dependentId,
+                    )) {
+                      newSelectedParticipants.add(
+                        EventParticipantModel(
+                          eventId: eventId,
+                          dependentId: dependent.dependentId!,
+                          status: EventParticipantStatus.notSpecified,
+                          note: '',
+                        ),
+                      );
+                    }
+                  }
+                } else {
+                  newSelectedParticipants.removeWhere(
+                    (p) => allDependentsIds.contains(p.dependentId),
+                  );
+                }
+                onChanged(newSelectedParticipants);
+              },
+            ),
+            const SizedBox(width: AppSpacing.small),
+            Text(patrol.name, style: AppTextTheme.titleSmall(context)),
+          ],
+        ),
+        childrenPadding: const EdgeInsets.symmetric(
+          horizontal: AppSpacing.medium,
+          vertical: AppSpacing.small,
+        ),
+        children: [
+          if (patrolLeaders.isNotEmpty) ...[
+            _buildSectionTitle(context, 'Vedoucí'),
+            ...patrolLeaders.map(
+              (leader) => _buildParticipantRow(context, leader),
+            ),
+            const SizedBox(height: AppSpacing.small),
+          ],
+          if (patrolKids.isNotEmpty) ...[
+            _buildSectionTitle(context, 'Děti'),
+            ...patrolKids.map((kid) => _buildParticipantRow(context, kid)),
+          ],
+        ],
       ),
-      children: [
-        if (patrolLeaders.isNotEmpty) ...[
-          _buildSectionTitle(
-            context,
-            context.localizations.create_edit_participants_screen_leaders,
-          ),
-          ...patrolLeaders.map(
-            (leader) => _buildParticipantRow(context, leader),
-          ),
-          const SizedBox(height: AppSpacing.small),
-        ],
-        if (patrolKids.isNotEmpty) ...[
-          _buildSectionTitle(
-            context,
-            context.localizations.create_edit_participants_screen_kids,
-          ),
-          ...patrolKids.map((kid) => _buildParticipantRow(context, kid)),
-        ],
-      ],
     );
   }
 

@@ -443,6 +443,9 @@ class AppLocalizationsCs extends AppLocalizations {
   String get create_edit_participants_screen_kids => 'Děti';
 
   @override
+  String get create_edit_participants_screen_select_all => 'Vybrat všechny';
+
+  @override
   String get create_edit_participants_screen_dial_print => 'Vytisknout seznam';
 
   @override

@@ -160,6 +160,7 @@
     "create_edit_participants_screen_title": "Select Participants",
     "create_edit_participants_screen_leaders": "Leaders",
     "create_edit_participants_screen_kids": "Kids",
+    "create_edit_participants_screen_select_all": "Select All",
     "create_edit_participants_screen_dial_print": "Print List",
     "create_edit_participants_screen_dial_limit": "Participant Limit",
     "create_edit_event_screen_total_participants_text": "Total Participants",

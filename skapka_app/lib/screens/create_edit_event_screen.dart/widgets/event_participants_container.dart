@@ -27,6 +27,7 @@ class EventParticipantsContainer extends StatelessWidget {
   final List<PatrolModel> groupPatrols;
   final List<TroopModel> groupTroops;
   final List<EventParticipantModel> initialParticipants;
+  final ValueChanged<List<EventParticipantModel>>? onParticipantsChanged;
 
   const EventParticipantsContainer({
     super.key,
@@ -40,6 +41,7 @@ class EventParticipantsContainer extends StatelessWidget {
     required this.groupPatrols,
     required this.groupTroops,
     required this.initialParticipants,
+    this.onParticipantsChanged,
   });
 
   @override
@@ -53,7 +55,7 @@ class EventParticipantsContainer extends StatelessWidget {
         children: [
           GestureDetector(
             onTap: () async {
-              await context.router.push(
+              final result = await context.router.push(
                 CreateEditEventParticipantsRoute(
                   groupDependents: groupDependents,
                   groupLeaders: groupLeaders,
@@ -62,6 +64,9 @@ class EventParticipantsContainer extends StatelessWidget {
                   initialParticipants: initialParticipants,
                 ),
               );
+              if (result != null && result is List<EventParticipantModel>) {
+                onParticipantsChanged?.call(result);
+              }
             },
             child: Container(
               decoration: AppDecorations.secondaryContainer(context),

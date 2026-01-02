@@ -818,6 +818,12 @@ abstract class AppLocalizations {
   /// **'Děti'**
   String get create_edit_participants_screen_kids;
 
+  /// No description provided for @create_edit_participants_screen_select_all.
+  ///
+  /// In cs, this message translates to:
+  /// **'Vybrat všechny'**
+  String get create_edit_participants_screen_select_all;
+
   /// No description provided for @create_edit_participants_screen_dial_print.
   ///
   /// In cs, this message translates to:

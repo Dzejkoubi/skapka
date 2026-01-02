@@ -8,6 +8,7 @@ import 'package:skapka_app/models/event_participant_model.dart';
 import 'package:skapka_app/models/leader_model.dart';
 import 'package:skapka_app/models/patrol_model.dart';
 import 'package:figma_squircle/figma_squircle.dart';
+import 'package:skapka_app/screens/create_edit_event_screen.dart/screens/widgets/participant_row.dart';
 
 class PatrolExpansionTile extends StatelessWidget {
   final PatrolModel patrol;
@@ -34,38 +35,39 @@ class PatrolExpansionTile extends StatelessWidget {
         .where((d) => !leaders.any((l) => l.dependentId == d.dependentId))
         .toList();
 
-    return Container(
-      decoration: ShapeDecoration(
-        color: context.colors.background.light,
-        shape: SmoothRectangleBorder(
-          borderRadius: SmoothBorderRadius(
-            cornerRadius: AppRadius.medium,
-            cornerSmoothing: AppRadius.smoothNormal,
-          ),
-        ),
+    final border = SmoothRectangleBorder(
+      side: BorderSide(color: context.colors.background.medium, width: 1.5),
+      borderRadius: SmoothBorderRadius(
+        cornerRadius: AppRadius.medium,
+        cornerSmoothing: AppRadius.smoothNormal,
       ),
-      child: Theme(
-        data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
-        child: ExpansionTile(
-          title: Text(patrol.name, style: AppTextTheme.titleSmall(context)),
-          childrenPadding: const EdgeInsets.symmetric(
-            horizontal: AppSpacing.medium,
-            vertical: AppSpacing.small,
-          ),
-          children: [
-            if (patrolLeaders.isNotEmpty) ...[
-              _buildSectionTitle(context, 'Vedoucí'),
-              ...patrolLeaders.map(
-                (leader) => _buildParticipantRow(context, leader),
-              ),
-              const SizedBox(height: AppSpacing.small),
-            ],
-            if (patrolKids.isNotEmpty) ...[
-              _buildSectionTitle(context, 'Děti'),
-              ...patrolKids.map((kid) => _buildParticipantRow(context, kid)),
-            ],
-          ],
+    );
+
+    return Theme(
+      data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
+      child: ExpansionTile(
+        shape: border,
+        collapsedShape: border,
+        backgroundColor: context.colors.background.light,
+        collapsedBackgroundColor: context.colors.background.light,
+        title: Text(patrol.name, style: AppTextTheme.titleSmall(context)),
+        childrenPadding: const EdgeInsets.symmetric(
+          horizontal: AppSpacing.medium,
+          vertical: AppSpacing.small,
         ),
+        children: [
+          if (patrolLeaders.isNotEmpty) ...[
+            _buildSectionTitle(context, 'Vedoucí'),
+            ...patrolLeaders.map(
+              (leader) => _buildParticipantRow(context, leader),
+            ),
+            const SizedBox(height: AppSpacing.small),
+          ],
+          if (patrolKids.isNotEmpty) ...[
+            _buildSectionTitle(context, 'Děti'),
+            ...patrolKids.map((kid) => _buildParticipantRow(context, kid)),
+          ],
+        ],
       ),
     );
   }
@@ -93,6 +95,8 @@ class PatrolExpansionTile extends StatelessWidget {
     return ParticipantRow(
       dependent: dependent,
       isSelected: isSelected,
+      is18plus: dependent.is18plus,
+      isArchived: dependent.isArchived ?? false,
       onChanged: (value) {
         final newList = List<EventParticipantModel>.from(selectedParticipants);
         if (value == true) {
@@ -109,44 +113,6 @@ class PatrolExpansionTile extends StatelessWidget {
         }
         onChanged(newList);
       },
-    );
-  }
-}
-
-class ParticipantRow extends StatelessWidget {
-  final DependentModel dependent;
-  final bool isSelected;
-  final ValueChanged<bool?> onChanged;
-
-  const ParticipantRow({
-    super.key,
-    required this.dependent,
-    required this.isSelected,
-    required this.onChanged,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: AppSpacing.xxSmall),
-      child: Row(
-        children: [
-          Expanded(
-            child: Text(
-              '${dependent.name} ${dependent.surname}',
-              style: AppTextTheme.bodyMedium(context),
-            ),
-          ),
-          Checkbox(
-            value: isSelected,
-            onChanged: onChanged,
-            activeColor: context.colors.primary.normal,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(4),
-            ),
-          ),
-        ],
-      ),
     );
   }
 }

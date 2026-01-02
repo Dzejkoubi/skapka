@@ -10,11 +10,12 @@ import 'package:skapka_app/models/event_participant_model.dart';
 import 'package:skapka_app/models/leader_model.dart';
 import 'package:skapka_app/models/patrol_model.dart';
 import 'package:skapka_app/models/troop_model.dart';
+import 'package:skapka_app/screens/create_edit_event_screen.dart/screens/widgets/participant_row.dart';
 import 'package:skapka_app/widgets/appbar/appbar.dart';
 import 'package:skapka_app/widgets/buttons/content_switcher.dart';
 import 'package:skapka_app/widgets/buttons/main_button.dart';
 import 'package:skapka_app/widgets/wrappers/screen_wrapper.dart';
-import 'package:skapka_app/screens/create_edit_event_screen.dart/widgets/event_participants_expansion_tile.dart';
+import 'package:skapka_app/screens/create_edit_event_screen.dart/screens/widgets/patrol_expansion_tile.dart';
 
 @RoutePage()
 class CreateEditEventParticipantsScreen extends StatefulWidget {
@@ -169,6 +170,8 @@ class _CreateEditEventParticipantsScreenState
             return ParticipantRow(
               dependent: leader,
               isSelected: isSelected,
+              is18plus: leader.is18plus,
+              isArchived: leader.isArchived ?? false,
               onChanged: (value) {
                 setState(() {
                   if (value == true) {

@@ -20,6 +20,12 @@ class DependentModel {
   final DateTime? createdAt;
   final DependentNotesModel? notes;
 
+  bool get is18plus {
+    if (born == null) return false;
+    final age = DateTime.now().difference(born!).inDays / 365.25;
+    return age >= 18;
+  }
+
   DependentModel({
     this.dependentId,
     required this.name,

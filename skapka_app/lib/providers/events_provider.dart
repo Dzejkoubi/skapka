@@ -43,11 +43,6 @@ class EventsProvider extends ChangeNotifier {
   void addEvent(EventModel event) {
     _events.add(event);
     notifyListeners();
-    if (kDebugMode) {
-      print(
-        'Event added: ${event.eventId}. Total events: ${_events.length}. ${event.photoAlbumLink}',
-      );
-    }
   }
 
   void removeEvent(EventModel event) {

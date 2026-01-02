@@ -111,26 +111,45 @@ class SupabaseService {
     final response = await _supabaseClient
         .from('events')
         .select()
-        .eq('group_id', groupId)
-        .gte('end_date', date.toIso8601String());
+        .eq('group_id', groupId);
+    print(response.length);
     return response
         .map<EventModel>((json) => EventModel.fromJson(json))
         .toList();
   }
 
   // Get all active dependents in given group
-  Future<List<DependentModel>> getGroupDependents(String groupId) async {
-    print('Fetching dependents for groupId: $groupId');
-    final response = await _supabaseClient
+  Future<List<DependentModel>> getGroupDependents(
+    String groupId, {
+    bool includeArchived = true,
+  }) async {
+    var query = _supabaseClient
         .from('dependents')
-        .select(
-          'dependent_id, name, surname, nickname, born, parent1_email, parent1_phone, parent2_email, parent2_phone, troop_id, patrol_id',
-        )
-        .eq('group_id', groupId)
-        .eq('archived', false);
-    return response
-        .map<DependentModel>((json) => DependentModel.fromJson(json))
-        .toList();
+        .select('''
+      dependent_id,
+      name,
+      surname,
+      nickname,
+      born,
+      sex,
+      parent1_email,
+      parent1_phone,
+      parent2_email,
+      parent2_phone,
+      troop_id,
+      patrol_id,
+      archived,
+      created_at,
+      group_id
+    ''')
+        .eq('group_id', groupId);
+
+    if (!includeArchived) {
+      query = query.eq('archived', false);
+    }
+
+    final response = await query;
+    return response.map((json) => DependentModel.fromJson(json)).toList();
   }
 
   // Get users that are invited to given event with their statuses

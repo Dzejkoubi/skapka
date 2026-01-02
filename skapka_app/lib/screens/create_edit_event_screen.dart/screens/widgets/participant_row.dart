@@ -13,7 +13,6 @@ class ParticipantRow extends StatelessWidget {
   final bool isSelected;
   final ValueChanged<bool?> onChanged;
   final bool is18plus;
-  final bool isArchived;
 
   const ParticipantRow({
     super.key,
@@ -21,7 +20,6 @@ class ParticipantRow extends StatelessWidget {
     required this.isSelected,
     required this.onChanged,
     this.is18plus = false,
-    this.isArchived = false,
   });
 
   @override
@@ -56,7 +54,7 @@ class ParticipantRow extends StatelessWidget {
                 height: AppSizes.iconSizeSmall,
               ),
             ),
-          if (isArchived)
+          if (dependent.isArchived ?? false)
             Padding(
               padding: const EdgeInsets.only(left: AppSpacing.small),
               child: SvgPicture.asset(

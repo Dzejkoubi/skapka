@@ -105,6 +105,7 @@ class _CreateEditEventParticipantsScreenState
       body: SingleChildScrollView(
         child: Column(
           children: [
+            // Content switcher with troops and leaders + top padding and side margins
             SizedBox(height: Appbar.topBarHeight + Appbar.bottomRadius),
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
@@ -126,6 +127,10 @@ class _CreateEditEventParticipantsScreenState
               ),
             ),
             const SizedBox(height: AppSpacing.large),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: AppSpacing.xLarge),
+              child: Column(children: [_buildContent(_activeSwitcherIndex)]),
+            ),
           ],
         ),
       ),
@@ -162,5 +167,45 @@ class _CreateEditEventParticipantsScreenState
         ),
       ],
     );
+  }
+
+  Widget _buildContent(int activeIndex) {
+    if (activeIndex == widget.groupTroops.length) {
+      // Leaders tab
+      return Column(
+        children: _groupDependentLeaders.map((leader) {
+          final isSelected = _selectedParticipants.any(
+            (p) => p.dependentId == leader.dependentId,
+          );
+          return ParticipantRow(
+            dependent: leader,
+            isSelected: isSelected,
+            is18plus: leader.is18plus,
+            onChanged: (value) {
+              setState(() {
+                if (value == true) {
+                  _selectedParticipants.add(
+                    EventParticipantModel(
+                      eventId: widget.initialParticipants.isNotEmpty
+                          ? widget.initialParticipants.first.eventId
+                          : '',
+                      dependentId: leader.dependentId!,
+                      status: EventParticipantStatus.notSpecified,
+                      note: '',
+                    ),
+                  );
+                } else {
+                  _selectedParticipants.removeWhere(
+                    (p) => p.dependentId == leader.dependentId,
+                  );
+                }
+              });
+            },
+          );
+        }).toList(),
+      );
+    } else {
+      return Column();
+    }
   }
 }

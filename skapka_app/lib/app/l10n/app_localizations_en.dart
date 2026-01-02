@@ -442,6 +442,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get create_edit_participants_screen_leaders => 'Leaders';
 
   @override
+  String get create_edit_participants_screen_kids => 'Kids';
+
+  @override
   String get create_edit_participants_screen_dial_print => 'Print List';
 
   @override

@@ -187,7 +187,10 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
 
   /// Fetch and divide group dependents into leaders, children, and 18+ dependents and store them locally
   Future<void> fetchGroupDependentsAndLeaders(String groupId) async {
-    _groupDependents = await _supabaseService.getGroupDependents(groupId);
+    _groupDependents = await _supabaseService.getGroupDependents(
+      groupId,
+      excludeArchived: false,
+    );
     _groupLeaders = await _supabaseService.getGroupLeaders(groupId);
   }
 

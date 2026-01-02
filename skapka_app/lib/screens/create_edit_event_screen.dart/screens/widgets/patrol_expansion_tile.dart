@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:skapka_app/app/l10n/l10n_extension.dart';
 import 'package:skapka_app/app/theme/app_color_theme.dart';
 import 'package:skapka_app/app/theme/app_spacing.dart';
 import 'package:skapka_app/app/theme/app_text_theme.dart';
@@ -43,32 +44,35 @@ class PatrolExpansionTile extends StatelessWidget {
       ),
     );
 
-    return Theme(
-      data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
-      child: ExpansionTile(
-        shape: border,
-        collapsedShape: border,
-        backgroundColor: context.colors.background.light,
-        collapsedBackgroundColor: context.colors.background.light,
-        title: Text(patrol.name, style: AppTextTheme.titleSmall(context)),
-        childrenPadding: const EdgeInsets.symmetric(
-          horizontal: AppSpacing.medium,
-          vertical: AppSpacing.small,
-        ),
-        children: [
-          if (patrolLeaders.isNotEmpty) ...[
-            _buildSectionTitle(context, 'Vedoucí'),
-            ...patrolLeaders.map(
-              (leader) => _buildParticipantRow(context, leader),
-            ),
-            const SizedBox(height: AppSpacing.small),
-          ],
-          if (patrolKids.isNotEmpty) ...[
-            _buildSectionTitle(context, 'Děti'),
-            ...patrolKids.map((kid) => _buildParticipantRow(context, kid)),
-          ],
-        ],
+    return ExpansionTile(
+      shape: border,
+      collapsedShape: border,
+      backgroundColor: context.colors.background.light,
+      collapsedBackgroundColor: context.colors.background.light,
+      title: Text(patrol.name, style: AppTextTheme.titleSmall(context)),
+      childrenPadding: const EdgeInsets.symmetric(
+        horizontal: AppSpacing.medium,
+        vertical: AppSpacing.small,
       ),
+      children: [
+        if (patrolLeaders.isNotEmpty) ...[
+          _buildSectionTitle(
+            context,
+            context.localizations.create_edit_participants_screen_leaders,
+          ),
+          ...patrolLeaders.map(
+            (leader) => _buildParticipantRow(context, leader),
+          ),
+          const SizedBox(height: AppSpacing.small),
+        ],
+        if (patrolKids.isNotEmpty) ...[
+          _buildSectionTitle(
+            context,
+            context.localizations.create_edit_participants_screen_kids,
+          ),
+          ...patrolKids.map((kid) => _buildParticipantRow(context, kid)),
+        ],
+      ],
     );
   }
 
@@ -96,7 +100,6 @@ class PatrolExpansionTile extends StatelessWidget {
       dependent: dependent,
       isSelected: isSelected,
       is18plus: dependent.is18plus,
-      isArchived: dependent.isArchived ?? false,
       onChanged: (value) {
         final newList = List<EventParticipantModel>.from(selectedParticipants);
         if (value == true) {

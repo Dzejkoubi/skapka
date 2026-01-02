@@ -128,7 +128,7 @@ class SupabaseService {
   // Get all active dependents in given group
   Future<List<DependentModel>> getGroupDependents(
     String groupId, {
-    bool includeArchived = true,
+    bool excludeArchived = true,
   }) async {
     var query = _supabaseClient
         .from('dependents')
@@ -148,14 +148,14 @@ class SupabaseService {
       contact_phone,
       troop_id,
       patrol_id,
-      archived,
+      is_archived,
       created_at,
       group_id
     ''')
         .eq('group_id', groupId);
 
-    if (!includeArchived) {
-      query = query.eq('archived', false);
+    if (excludeArchived) {
+      query = query.eq('is_archived', false);
     }
 
     final response = await query;

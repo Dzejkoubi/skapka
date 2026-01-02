@@ -812,6 +812,12 @@ abstract class AppLocalizations {
   /// **'Vedoucí'**
   String get create_edit_participants_screen_leaders;
 
+  /// No description provided for @create_edit_participants_screen_kids.
+  ///
+  /// In cs, this message translates to:
+  /// **'Děti'**
+  String get create_edit_participants_screen_kids;
+
   /// No description provided for @create_edit_participants_screen_dial_print.
   ///
   /// In cs, this message translates to:

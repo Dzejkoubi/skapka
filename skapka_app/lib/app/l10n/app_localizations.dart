@@ -806,6 +806,12 @@ abstract class AppLocalizations {
   /// **'Vybrat účastníky'**
   String get create_edit_participants_screen_title;
 
+  /// No description provided for @create_edit_participants_screen_leaders.
+  ///
+  /// In cs, this message translates to:
+  /// **'Vedoucí'**
+  String get create_edit_participants_screen_leaders;
+
   /// No description provided for @create_edit_participants_screen_dial_print.
   ///
   /// In cs, this message translates to:

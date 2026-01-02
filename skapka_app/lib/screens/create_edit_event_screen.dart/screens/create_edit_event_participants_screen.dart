@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:skapka_app/app/l10n/app_localizations.dart';
+import 'package:skapka_app/app/l10n/l10n_extension.dart';
 import 'package:skapka_app/app/theme/app_spacing.dart';
 import 'package:skapka_app/app/theme/main_button_theme.dart';
 import 'package:skapka_app/models/dependents/dependent_model.dart';
@@ -42,12 +43,22 @@ class CreateEditEventParticipantsScreen extends StatefulWidget {
 
 class _CreateEditEventParticipantsScreenState
     extends State<CreateEditEventParticipantsScreen> {
+  int _activeSwitcherIndex = 0;
+  late List<EventParticipantModel> _selectedParticipants;
+
+  void onChanged(int index) {
+    setState(() {
+      _activeSwitcherIndex = index;
+    });
+  }
+
   final List<LeaderDependentModel> _groupDependentLeaders = [];
   final List<DependentModel> _groupDependentChildren = [];
 
   @override
   void initState() {
     super.initState();
+    _selectedParticipants = List.from(widget.initialParticipants);
     _separateDependents();
   }
 
@@ -82,6 +93,7 @@ class _CreateEditEventParticipantsScreenState
   @override
   Widget build(BuildContext context) {
     return ScreenWrapper(
+      padding: EdgeInsets.zero,
       appBar: Appbar(
         showBackChevron: true,
         showSettingsIcon: false,
@@ -91,30 +103,39 @@ class _CreateEditEventParticipantsScreenState
         onBackPressed: () => context.router.pop(),
       ),
       body: SingleChildScrollView(
-        child: SafeArea(
-          child: Column(
-            children: [
-              for (var patrol in widget.groupPatrols)
-                PatrolExpansionTile(
-                  patrol: patrol,
-                  dependents: widget.groupDependents,
-                  leaders: widget.groupLeaders,
-                  selectedParticipants: widget.initialParticipants,
-                  onChanged: (updatedParticipants) {
-                    // Handle participant changes here
-                  },
-                ),
-            ],
-          ),
+        child: Column(
+          children: [
+            SizedBox(height: Appbar.topBarHeight + Appbar.bottomRadius),
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  SizedBox(width: AppSpacing.xLarge),
+                  ContentSwitcher(
+                    items: [
+                      ...widget.groupTroops.map((troop) => troop.name),
+                      context
+                          .localizations
+                          .create_edit_participants_screen_leaders,
+                    ],
+                    selectedIndex: _activeSwitcherIndex,
+                    onChanged: onChanged,
+                  ),
+                  SizedBox(width: AppSpacing.xLarge),
+                ],
+              ),
+            ),
+            const SizedBox(height: AppSpacing.large),
+          ],
         ),
       ),
       speedDialChildren: [
         SpeedDialChild(
           labelWidget: MainButton.text(
             variant: ButtonStylesVariants.destructive,
-            text: AppLocalizations.of(
-              context,
-            )!.create_edit_participants_screen_dial_limit,
+            text: context
+                .localizations
+                .create_edit_participants_screen_dial_limit,
             onPressed: () {
               if (kDebugMode) {
                 print(
@@ -129,9 +150,9 @@ class _CreateEditEventParticipantsScreenState
             variant: ButtonStylesVariants.normal,
             type: ButtonType.textIcon,
             iconAsset: 'assets/icons/printer.svg',
-            text: AppLocalizations.of(
-              context,
-            )!.create_edit_participants_screen_dial_print,
+            text: context
+                .localizations
+                .create_edit_participants_screen_dial_print,
             onPressed: () {
               if (kDebugMode) {
                 print('Print List'); // TODO: implement print list

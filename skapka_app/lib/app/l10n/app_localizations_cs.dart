@@ -437,6 +437,9 @@ class AppLocalizationsCs extends AppLocalizations {
   String get create_edit_participants_screen_title => 'Vybrat účastníky';
 
   @override
+  String get create_edit_participants_screen_leaders => 'Vedoucí';
+
+  @override
   String get create_edit_participants_screen_dial_print => 'Vytisknout seznam';
 
   @override

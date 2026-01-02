@@ -19,6 +19,7 @@ class ScreenWrapper extends StatelessWidget {
   final FloatingActionButtonLocation? floatingActionButtonLocation;
   final Object? fabKey;
   final ValueNotifier<bool>? openCloseDial;
+  final EdgeInsetsGeometry padding;
 
   const ScreenWrapper({
     super.key,
@@ -29,6 +30,7 @@ class ScreenWrapper extends StatelessWidget {
     this.floatingActionButtonLocation,
     this.fabKey,
     this.openCloseDial,
+    this.padding = const EdgeInsets.symmetric(horizontal: AppSpacing.xLarge),
   });
 
   @override
@@ -48,10 +50,7 @@ class ScreenWrapper extends StatelessWidget {
                     bottom: bottomNavigationBar != null ? Navbar.barHeight : 0,
                   ),
                 ),
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: AppSpacing.xLarge),
-                  child: body,
-                ),
+                child: Padding(padding: padding, child: body),
               ),
             ),
             Positioned(top: 0, left: 0, right: 0, child: appBar),

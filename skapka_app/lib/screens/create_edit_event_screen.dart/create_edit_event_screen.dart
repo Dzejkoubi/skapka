@@ -13,6 +13,7 @@ import 'package:skapka_app/models/patrol_model.dart';
 import 'package:skapka_app/models/troop_model.dart';
 import 'package:skapka_app/providers/account_provider.dart';
 import 'package:skapka_app/screens/create_edit_event_screen.dart/widgets/event_instructions_container.dart';
+import 'package:skapka_app/screens/create_edit_event_screen.dart/widgets/event_participants_container.dart';
 import 'package:skapka_app/screens/create_edit_event_screen.dart/widgets/event_title_form.dart';
 import 'package:skapka_app/services/supabase_service.dart';
 import 'package:skapka_app/widgets/forms/form_with_details.dart';
@@ -63,11 +64,61 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
 
   // Total group dependents, leaders, patrols, and troops
   late List<DependentModel> _groupDependents;
-  late List<LeaderDependentModel> _groupDependentLeaders;
-  late List<DependentModel> _groupDependentChildren;
   late List<TroopModel> _groupTroops;
   late List<PatrolModel> _groupPatrols;
-  late List<EventParticipantModel> _eventParticipants;
+  late List<LeaderModel> _groupLeaders;
+
+  // Event participants
+  late List<EventParticipantModel> _originalEventParticipants;
+  late List<EventParticipantModel> _editedEventParticipants;
+
+  // Participant statistics getters
+  int get totalParticipantsCount => _editedEventParticipants.length;
+  int get totalSignedUpParticipantsCount => _editedEventParticipants
+      .where((p) => p.status == EventParticipantStatus.signedUp)
+      .length;
+  int get totalSignedUpLeadersCount => _editedEventParticipants
+      .where((p) => p.status == EventParticipantStatus.signedUp)
+      .where((p) => _groupLeaders.any((l) => l.dependentId == p.dependentId))
+      .length;
+
+  int get total18PlusSignedUpLeadersCount =>
+      _editedEventParticipants.where((p) {
+        if (p.status != EventParticipantStatus.signedUp) return false;
+        final dependent = _groupDependents.cast<DependentModel?>().firstWhere(
+          (d) => d?.dependentId == p.dependentId,
+          orElse: () => null,
+        );
+        return dependent != null && dependent.isLeader && dependent.is18plus;
+      }).length;
+
+  List<String> get targetPatrolIds {
+    final participantDependentIds = _editedEventParticipants
+        .map((p) => p.dependentId)
+        .toSet();
+
+    return _groupDependents
+        .where((d) => participantDependentIds.contains(d.dependentId))
+        .map((d) => d.patrolId)
+        .whereType<String>()
+        .toSet()
+        .toList();
+  }
+
+  String get targetPatrolNames {
+    final patrolIds = targetPatrolIds;
+
+    if (kDebugMode) {
+      print('Found patrol IDs for signed up dependents: $patrolIds');
+    }
+
+    final names = _groupPatrols
+        .where((p) => patrolIds.contains(p.patrolId))
+        .map((p) => p.name)
+        .toList();
+
+    return names.isEmpty ? '-' : names.join(', ');
+  }
 
   // Creating local variables to hold form data
   late String? eventId;
@@ -86,11 +137,14 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
   bool isDraft = true;
 
   /// Fetch all necessary data (dependents, patrols, troops, participants)
-  Future<void> fetchAllData() async {
-    await fetchAndDivideGroupDependents(_accountProvider.groupId);
+  Future<void> fetchRequiredData() async {
+    await fetchGroupDependentsAndLeaders(_accountProvider.groupId);
     await fetchGroupPatrolsAndTroops(_accountProvider.groupId);
     if (widget.event != null) {
       await fetchEventParticipants(widget.event!.eventId);
+    } else {
+      _originalEventParticipants = [];
+      _editedEventParticipants = [];
     }
   }
 
@@ -131,57 +185,35 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
     isDraft = widget.event?.isDraft ?? true;
   }
 
-  /// Fetch and divide group dependents into leaders and children and store them locally
-  Future<void> fetchAndDivideGroupDependents(String groupId) async {
+  /// Fetch and divide group dependents into leaders, children, and 18+ dependents and store them locally
+  Future<void> fetchGroupDependentsAndLeaders(String groupId) async {
     _groupDependents = await _supabaseService.getGroupDependents(groupId);
-    List<LeaderModel> groupLeaders = await _supabaseService.getGroupLeaders(
-      groupId,
-    );
-
-    _groupDependentLeaders = [];
-    _groupDependentChildren = [];
-
-    for (var dependent in _groupDependents) {
-      if (dependent.isLeader) {
-        final ledPatrols = groupLeaders
-            .where((l) => l.dependentId == dependent.dependentId)
-            .map((l) => l.patrolId)
-            .toList();
-        _groupDependentLeaders.add(
-          LeaderDependentModel(
-            dependent: dependent,
-            leaderOfPatrolId: ledPatrols,
-          ),
-        );
-      } else {
-        _groupDependentChildren.add(dependent);
-      }
-    }
-    print(
-      'Fetched ${_groupDependents.length} dependents: '
-      '${_groupDependentLeaders.length} leaders and '
-      '${_groupDependentChildren.length} children for group $groupId.',
-    );
+    _groupLeaders = await _supabaseService.getGroupLeaders(groupId);
   }
 
   ///Fetch group patrols and troops and store them locally
   Future<void> fetchGroupPatrolsAndTroops(String groupId) async {
     _groupPatrols = await _supabaseService.getGroupPatrols(groupId);
     _groupTroops = await _supabaseService.getGroupTroops(groupId);
-    print(
-      'Fetched ${_groupPatrols.length} patrols and ${_groupTroops.length} troops for group $groupId.',
-    );
+    if (kDebugMode) {
+      print(
+        'Fetched ${_groupPatrols.length} patrols and ${_groupTroops.length} troops for group $groupId.',
+      );
+    }
   }
 
   /// Fetch event participants and store them locally
   Future<void> fetchEventParticipants(String eventId) async {
-    _eventParticipants = await _supabaseService.getEventParticipants(
+    _originalEventParticipants = await _supabaseService.getEventParticipants(
       eventId,
       groupId!,
     );
-    print(
-      'Fetched ${_eventParticipants.length} participants for event $eventId.',
-    );
+    _editedEventParticipants = List.from(_originalEventParticipants);
+    if (kDebugMode) {
+      print(
+        'Fetched ${_originalEventParticipants.length} participants for event $eventId.',
+      );
+    }
   }
 
   @override
@@ -189,7 +221,7 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
     return ChangeNotifierProvider(
       create: (_) => ValueNotifier<bool>(false),
       child: FutureBuilder(
-        future: fetchAllData(),
+        future: fetchRequiredData(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return ScreenWrapper(
@@ -313,6 +345,19 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
                           onEndDateChanged: (d) => setState(() => _endDate = d),
                         ),
                         EventInstructionsContainer(),
+                        EventParticipantsContainer(
+                          totalParticipantsCount: totalParticipantsCount,
+                          totalSignedUpParticipantsCount:
+                              totalSignedUpParticipantsCount,
+                          totalLeadersCount: totalSignedUpLeadersCount,
+                          total18PlusCount: total18PlusSignedUpLeadersCount,
+                          targetPatrolNames: targetPatrolNames,
+                          groupDependents: _groupDependents,
+                          groupLeaders: _groupLeaders,
+                          groupPatrols: _groupPatrols,
+                          groupTroops: _groupTroops,
+                          initialParticipants: _editedEventParticipants,
+                        ),
                         FormWithDetails(
                           textController: _meetingPlaceController,
                           labelText: context

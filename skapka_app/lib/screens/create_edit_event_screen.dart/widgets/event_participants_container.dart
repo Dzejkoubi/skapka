@@ -17,37 +17,30 @@ import 'package:skapka_app/models/troop_model.dart';
 import 'package:skapka_app/screens/create_edit_event_screen.dart/widgets/participant_info_row.dart';
 
 class EventParticipantsContainer extends StatelessWidget {
-  const EventParticipantsContainer({
-    super.key,
-    required this.groupDependents,
-    required this.groupLeaders,
-    required this.groupPatrols,
-    required this.groupTroops,
-    required this.eventParticipants,
-    required this.onParticipantsChanged,
-    required int totalParticipantsCount,
-    required String targetPatrolNames,
-    required int totalLeadersCount,
-    required int total18PlusCount,
-    required int totalSignedUpParticipantsCount,
-  }) : _totalParticipantsCount = totalParticipantsCount,
-       _targetPatrolNames = targetPatrolNames,
-       _totalLeadersCount = totalLeadersCount,
-       _total18PlusCount = total18PlusCount,
-       _totalSignedUpParticipantsCount = totalSignedUpParticipantsCount;
-
+  final int totalParticipantsCount;
+  final int totalSignedUpParticipantsCount;
+  final int totalLeadersCount;
+  final int total18PlusCount;
+  final String targetPatrolNames;
   final List<DependentModel> groupDependents;
   final List<LeaderModel> groupLeaders;
   final List<PatrolModel> groupPatrols;
   final List<TroopModel> groupTroops;
-  final List<EventParticipantModel> eventParticipants;
-  final Function(List<EventParticipantModel>) onParticipantsChanged;
+  final List<EventParticipantModel> initialParticipants;
 
-  final int _totalParticipantsCount;
-  final String _targetPatrolNames;
-  final int _totalLeadersCount;
-  final int _total18PlusCount;
-  final int _totalSignedUpParticipantsCount;
+  const EventParticipantsContainer({
+    super.key,
+    required this.totalParticipantsCount,
+    required this.targetPatrolNames,
+    required this.totalLeadersCount,
+    required this.total18PlusCount,
+    required this.totalSignedUpParticipantsCount,
+    required this.groupDependents,
+    required this.groupLeaders,
+    required this.groupPatrols,
+    required this.groupTroops,
+    required this.initialParticipants,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -60,18 +53,15 @@ class EventParticipantsContainer extends StatelessWidget {
         children: [
           GestureDetector(
             onTap: () async {
-              final result = await context.router.push(
+              await context.router.push(
                 CreateEditEventParticipantsRoute(
                   groupDependents: groupDependents,
                   groupLeaders: groupLeaders,
                   groupPatrols: groupPatrols,
                   groupTroops: groupTroops,
-                  initialParticipants: eventParticipants,
+                  initialParticipants: initialParticipants,
                 ),
               );
-              if (result != null && result is List<EventParticipantModel>) {
-                onParticipantsChanged(result);
-              }
             },
             child: Container(
               decoration: AppDecorations.secondaryContainer(context),
@@ -119,25 +109,25 @@ class EventParticipantsContainer extends StatelessWidget {
                   label: context
                       .localizations
                       .create_edit_event_screen_total_participants_text,
-                  value: '$_totalParticipantsCount',
+                  value: totalParticipantsCount.toString(),
                 ),
                 ParticipantInfoRow(
                   label: context
                       .localizations
                       .create_edit_event_screen_total_signed_up_participants_text,
-                  value: '$_totalSignedUpParticipantsCount',
-                ),
-                ParticipantInfoRow(
-                  label: context.localizations.create_edit_event_screen_18_plus,
-                  value: '$_total18PlusCount',
+                  value: totalSignedUpParticipantsCount.toString(),
                 ),
                 ParticipantInfoRow(
                   label: context.localizations.create_edit_event_screen_leaders,
-                  value: '$_totalLeadersCount',
+                  value: totalLeadersCount.toString(),
+                ),
+                ParticipantInfoRow(
+                  label: context.localizations.create_edit_event_screen_18_plus,
+                  value: total18PlusCount.toString(),
                 ),
                 ParticipantInfoRow(
                   label: context.localizations.create_edit_event_screen_troops,
-                  value: _targetPatrolNames,
+                  value: targetPatrolNames.isEmpty ? '-' : targetPatrolNames,
                   isScrollable: true,
                 ),
               ],

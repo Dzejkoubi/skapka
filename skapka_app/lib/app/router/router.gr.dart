@@ -16,9 +16,9 @@ import 'package:flutter/material.dart' as _i29;
 import 'package:skapka_app/models/dependents/dependent_model.dart' as _i22;
 import 'package:skapka_app/models/event_model.dart' as _i28;
 import 'package:skapka_app/models/event_participant_model.dart' as _i26;
-import 'package:skapka_app/models/leader_model.dart' as _i23;
-import 'package:skapka_app/models/patrol_model.dart' as _i24;
-import 'package:skapka_app/models/troop_model.dart' as _i25;
+import 'package:skapka_app/models/leader_model.dart' as _i25;
+import 'package:skapka_app/models/patrol_model.dart' as _i23;
+import 'package:skapka_app/models/troop_model.dart' as _i24;
 import 'package:skapka_app/screens/account_not_approved_screen/account_not_approved_screen.dart'
     as _i1;
 import 'package:skapka_app/screens/auth_gate/auth_gate.dart' as _i2;
@@ -140,9 +140,9 @@ class CreateEditEventParticipantsRoute
   CreateEditEventParticipantsRoute({
     _i21.Key? key,
     required List<_i22.DependentModel> groupDependents,
-    required List<_i23.LeaderModel> groupLeaders,
-    required List<_i24.PatrolModel> groupPatrols,
-    required List<_i25.TroopModel> groupTroops,
+    required List<_i23.PatrolModel> groupPatrols,
+    required List<_i24.TroopModel> groupTroops,
+    required List<_i25.LeaderModel> groupLeaders,
     required List<_i26.EventParticipantModel> initialParticipants,
     List<_i20.PageRouteInfo>? children,
   }) : super(
@@ -150,9 +150,9 @@ class CreateEditEventParticipantsRoute
          args: CreateEditEventParticipantsRouteArgs(
            key: key,
            groupDependents: groupDependents,
-           groupLeaders: groupLeaders,
            groupPatrols: groupPatrols,
            groupTroops: groupTroops,
+           groupLeaders: groupLeaders,
            initialParticipants: initialParticipants,
          ),
          initialChildren: children,
@@ -167,9 +167,9 @@ class CreateEditEventParticipantsRoute
       return _i6.CreateEditEventParticipantsScreen(
         key: args.key,
         groupDependents: args.groupDependents,
-        groupLeaders: args.groupLeaders,
         groupPatrols: args.groupPatrols,
         groupTroops: args.groupTroops,
+        groupLeaders: args.groupLeaders,
         initialParticipants: args.initialParticipants,
       );
     },
@@ -180,9 +180,9 @@ class CreateEditEventParticipantsRouteArgs {
   const CreateEditEventParticipantsRouteArgs({
     this.key,
     required this.groupDependents,
-    required this.groupLeaders,
     required this.groupPatrols,
     required this.groupTroops,
+    required this.groupLeaders,
     required this.initialParticipants,
   });
 
@@ -190,17 +190,17 @@ class CreateEditEventParticipantsRouteArgs {
 
   final List<_i22.DependentModel> groupDependents;
 
-  final List<_i23.LeaderModel> groupLeaders;
+  final List<_i23.PatrolModel> groupPatrols;
 
-  final List<_i24.PatrolModel> groupPatrols;
+  final List<_i24.TroopModel> groupTroops;
 
-  final List<_i25.TroopModel> groupTroops;
+  final List<_i25.LeaderModel> groupLeaders;
 
   final List<_i26.EventParticipantModel> initialParticipants;
 
   @override
   String toString() {
-    return 'CreateEditEventParticipantsRouteArgs{key: $key, groupDependents: $groupDependents, groupLeaders: $groupLeaders, groupPatrols: $groupPatrols, groupTroops: $groupTroops, initialParticipants: $initialParticipants}';
+    return 'CreateEditEventParticipantsRouteArgs{key: $key, groupDependents: $groupDependents, groupPatrols: $groupPatrols, groupTroops: $groupTroops, groupLeaders: $groupLeaders, initialParticipants: $initialParticipants}';
   }
 
   @override
@@ -212,17 +212,17 @@ class CreateEditEventParticipantsRouteArgs {
           groupDependents,
           other.groupDependents,
         ) &&
-        const _i27.ListEquality<_i23.LeaderModel>().equals(
-          groupLeaders,
-          other.groupLeaders,
-        ) &&
-        const _i27.ListEquality<_i24.PatrolModel>().equals(
+        const _i27.ListEquality<_i23.PatrolModel>().equals(
           groupPatrols,
           other.groupPatrols,
         ) &&
-        const _i27.ListEquality<_i25.TroopModel>().equals(
+        const _i27.ListEquality<_i24.TroopModel>().equals(
           groupTroops,
           other.groupTroops,
+        ) &&
+        const _i27.ListEquality<_i25.LeaderModel>().equals(
+          groupLeaders,
+          other.groupLeaders,
         ) &&
         const _i27.ListEquality<_i26.EventParticipantModel>().equals(
           initialParticipants,
@@ -234,9 +234,9 @@ class CreateEditEventParticipantsRouteArgs {
   int get hashCode =>
       key.hashCode ^
       const _i27.ListEquality<_i22.DependentModel>().hash(groupDependents) ^
-      const _i27.ListEquality<_i23.LeaderModel>().hash(groupLeaders) ^
-      const _i27.ListEquality<_i24.PatrolModel>().hash(groupPatrols) ^
-      const _i27.ListEquality<_i25.TroopModel>().hash(groupTroops) ^
+      const _i27.ListEquality<_i23.PatrolModel>().hash(groupPatrols) ^
+      const _i27.ListEquality<_i24.TroopModel>().hash(groupTroops) ^
+      const _i27.ListEquality<_i25.LeaderModel>().hash(groupLeaders) ^
       const _i27.ListEquality<_i26.EventParticipantModel>().hash(
         initialParticipants,
       );

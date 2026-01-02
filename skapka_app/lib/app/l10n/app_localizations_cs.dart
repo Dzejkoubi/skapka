@@ -375,7 +375,7 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get create_edit_event_screen_delete_event_dialog_description =>
-      'Opravdu chcete smazat tuto výpravu? Tuto akci nelze vrátit zpět.';
+      'Opravdu chceš smazat tuto výpravu? Tuto akci nelze vrátit zpět.';
 
   @override
   String get create_edit_event_screen_delete_event_dialog_primary_button_text =>
@@ -392,11 +392,11 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get create_edit_event_screen_delete_event_error_not_rights =>
-      'Nemáte oprávnění mazat výpravy.';
+      'Nemáš oprávnění mazat výpravy.';
 
   @override
   String get create_edit_event_screen_delete_event_error_generic =>
-      'Smazání výpravy se nezdařilo. Zkuste to prosím znovu.';
+      'Smazání výpravy se nezdařilo. Zkus to prosím znovu.';
 
   @override
   String get create_edit_event_screen_go_back_without_saving_dialog_title =>
@@ -564,4 +564,13 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get save => 'Uložit';
+
+  @override
+  String get load_more => 'Načíst další';
+
+  @override
+  String get error => 'Chyba';
+
+  @override
+  String get generic_error => 'Něco se pokazilo. Zkus to prosím znovu.';
 }

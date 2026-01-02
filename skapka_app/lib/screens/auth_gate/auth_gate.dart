@@ -63,7 +63,7 @@ class _AuthGateState extends State<AuthGate> {
     }
 
     // 5. User is approved, load all necessary app data
-    await _loadAppData(account.accountId, account.groupId);
+    await loadAppData(account.accountId, account.groupId);
 
     if (mounted) {
       context.router.replace(const NavbarDashboard());
@@ -71,7 +71,7 @@ class _AuthGateState extends State<AuthGate> {
   }
 
   /// Orchestrates loading of all data needed for the main app experience
-  Future<void> _loadAppData(String accountId, String groupId) async {
+  Future<void> loadAppData(String accountId, String groupId) async {
     final supabaseService = SupabaseService();
 
     // Load Group Details

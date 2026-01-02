@@ -568,4 +568,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get save => 'Save';
+
+  @override
+  String get load_more => 'Load more';
+
+  @override
+  String get error => 'Error';
+
+  @override
+  String get generic_error => 'Something went wrong. Please try again.';
 }

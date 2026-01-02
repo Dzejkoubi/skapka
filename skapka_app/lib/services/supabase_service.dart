@@ -119,8 +119,24 @@ class SupabaseService {
     }
 
     final response = await qery;
+    return response
+        .map<EventModel>((json) => EventModel.fromJson(json))
+        .toList();
+  }
 
-    print(response.length);
+  // Get group events that have ended before given date
+  Future<List<EventModel>> getOlderGroupEvents({
+    required String groupId,
+    required DateTime date,
+  }) async {
+    final response = await _supabaseClient
+        .from('events')
+        .select()
+        .eq('group_id', groupId)
+        .lt('end_date', date.toIso8601String())
+        .order('end_date', ascending: false)
+        .limit(20); // Load in chunks of 20
+
     return response
         .map<EventModel>((json) => EventModel.fromJson(json))
         .toList();
@@ -228,7 +244,7 @@ class SupabaseService {
           'end_date': event.endDate?.toIso8601String(),
           'meeting_place': event.meetingPlace,
           'photo_album_link': event.photoAlbumLink,
-          'group_id': event.groupId,
+          'group_id': accountProvider.groupId,
           'target_patrols': event.targetPatrolsIds,
           'last_edited_by': accountProvider.accountId,
           'is_draft': event.isDraft,
@@ -272,7 +288,7 @@ class SupabaseService {
     await _supabaseClient.from('event_participants').insert({
       'event_id': participant.eventId,
       'dependent_id': participant.dependentId,
-      'status': participant.status,
+      'status': participant.status.value,
       'group_id': participant.groupId,
     });
   }

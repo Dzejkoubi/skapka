@@ -706,7 +706,7 @@ abstract class AppLocalizations {
   /// No description provided for @create_edit_event_screen_delete_event_dialog_description.
   ///
   /// In cs, this message translates to:
-  /// **'Opravdu chcete smazat tuto výpravu? Tuto akci nelze vrátit zpět.'**
+  /// **'Opravdu chceš smazat tuto výpravu? Tuto akci nelze vrátit zpět.'**
   String get create_edit_event_screen_delete_event_dialog_description;
 
   /// No description provided for @create_edit_event_screen_delete_event_dialog_primary_button_text.
@@ -730,13 +730,13 @@ abstract class AppLocalizations {
   /// No description provided for @create_edit_event_screen_delete_event_error_not_rights.
   ///
   /// In cs, this message translates to:
-  /// **'Nemáte oprávnění mazat výpravy.'**
+  /// **'Nemáš oprávnění mazat výpravy.'**
   String get create_edit_event_screen_delete_event_error_not_rights;
 
   /// No description provided for @create_edit_event_screen_delete_event_error_generic.
   ///
   /// In cs, this message translates to:
-  /// **'Smazání výpravy se nezdařilo. Zkuste to prosím znovu.'**
+  /// **'Smazání výpravy se nezdařilo. Zkus to prosím znovu.'**
   String get create_edit_event_screen_delete_event_error_generic;
 
   /// No description provided for @create_edit_event_screen_go_back_without_saving_dialog_title.
@@ -1033,6 +1033,24 @@ abstract class AppLocalizations {
   /// In cs, this message translates to:
   /// **'Uložit'**
   String get save;
+
+  /// No description provided for @load_more.
+  ///
+  /// In cs, this message translates to:
+  /// **'Načíst další'**
+  String get load_more;
+
+  /// No description provided for @error.
+  ///
+  /// In cs, this message translates to:
+  /// **'Chyba'**
+  String get error;
+
+  /// No description provided for @generic_error.
+  ///
+  /// In cs, this message translates to:
+  /// **'Něco se pokazilo. Zkus to prosím znovu.'**
+  String get generic_error;
 }
 
 class _AppLocalizationsDelegate

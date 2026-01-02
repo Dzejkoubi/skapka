@@ -3,6 +3,14 @@ import 'package:skapka_app/models/event_model.dart';
 
 class EventsProvider extends ChangeNotifier {
   final List<EventModel> _events = [];
+  bool _hasMorePastEvents = true;
+
+  bool get hasMorePastEvents => _hasMorePastEvents;
+
+  void setHasMorePastEvents(bool value) {
+    _hasMorePastEvents = value;
+    notifyListeners();
+  }
 
   List<EventModel> get events => _events;
   List<EventModel> get futureEvents => _events.where((event) {
@@ -42,6 +50,11 @@ class EventsProvider extends ChangeNotifier {
 
   void addEvent(EventModel event) {
     _events.add(event);
+    notifyListeners();
+  }
+
+  void addEvents(List<EventModel> events) {
+    _events.addAll(events);
     notifyListeners();
   }
 

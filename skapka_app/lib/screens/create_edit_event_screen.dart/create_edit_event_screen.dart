@@ -304,6 +304,7 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
           description:
               context.localizations.create_edit_event_screen_save_success,
         );
+        context.router.pop(); // Close the screen after creation
       }
     } catch (e) {
       if (kDebugMode) {
@@ -376,6 +377,7 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
           description:
               context.localizations.create_edit_event_screen_save_success,
         );
+        context.router.pop(); // Close the screen after editing
       }
     } catch (e) {
       if (kDebugMode) {
@@ -423,6 +425,7 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
               .localizations
               .create_edit_event_screen_delete_event_error_generic,
         );
+        context.router.pop(); // Close the screen after deletion
       }
     } finally {
       if (mounted) {
@@ -646,7 +649,7 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
                   ),
                   if (_isProcessing)
                     Container(
-                      color: Colors.black.withOpacity(0.5),
+                      color: context.colors.shadow.shadow10,
                       child: Center(
                         child: Column(
                           mainAxisSize: MainAxisSize.min,

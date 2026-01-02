@@ -136,12 +136,12 @@
 
     "create_edit_event_screen_speed_dial_delete_event_text": "Smazat",
     "create_edit_event_screen_delete_event_dialog_title": "Smazat výpravu",
-    "create_edit_event_screen_delete_event_dialog_description": "Opravdu chcete smazat tuto výpravu? Tuto akci nelze vrátit zpět.",
+    "create_edit_event_screen_delete_event_dialog_description": "Opravdu chceš smazat tuto výpravu? Tuto akci nelze vrátit zpět.",
     "create_edit_event_screen_delete_event_dialog_primary_button_text": "Smazat",
     "create_edit_event_screen_delete_event_error_past_event_admin_only": "Pouze administrátoři mohou mazat nebo zrušit publikování minulých výpravuí.",
     "create_edit_event_screen_delete_event_error_event_not_created": "Nelze smazat výpravu, která ještě nebyla vytvořena.",
-    "create_edit_event_screen_delete_event_error_not_rights": "Nemáte oprávnění mazat výpravy.",
-    "create_edit_event_screen_delete_event_error_generic": "Smazání výpravy se nezdařilo. Zkuste to prosím znovu.",
+    "create_edit_event_screen_delete_event_error_not_rights": "Nemáš oprávnění mazat výpravy.",
+    "create_edit_event_screen_delete_event_error_generic": "Smazání výpravy se nezdařilo. Zkus to prosím znovu.",
 
     "create_edit_event_screen_go_back_without_saving_dialog_title": "Zahodit změny",
     "create_edit_event_screen_go_back_without_saving_dialog_description": "Opravdu chceš odejít bez uložení změn? Veškeré neuložené změny budou ztraceny.",
@@ -202,5 +202,9 @@
     "common_copied_to_clipboard": "Zkopírováno do schránky",
     "create": "Vytvořit",
     "edit": "Upravit",
-    "save": "Uložit"
+    "save": "Uložit",
+    "load_more": "Načíst další",
+
+    "error": "Chyba",
+    "generic_error": "Něco se pokazilo. Zkus to prosím znovu."
 }

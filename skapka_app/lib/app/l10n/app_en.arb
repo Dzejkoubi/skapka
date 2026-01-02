@@ -205,5 +205,9 @@
     "common_copied_to_clipboard": "Copied to clipboard",
     "create": "Create",
     "edit": "Edit",
-    "save": "Save"
+    "save": "Save",
+    "load_more": "Load more",
+
+    "error": "Error",
+    "generic_error": "Something went wrong. Please try again."
 }

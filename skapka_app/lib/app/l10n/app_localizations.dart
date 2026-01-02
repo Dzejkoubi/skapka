@@ -839,32 +839,44 @@ abstract class AppLocalizations {
   /// No description provided for @create_edit_event_screen_total_participants_text.
   ///
   /// In cs, this message translates to:
-  /// **'Celkový počet účastníků'**
+  /// **'Pozvaní účastníci'**
   String get create_edit_event_screen_total_participants_text;
 
   /// No description provided for @create_edit_event_screen_total_signed_up_participants_text.
   ///
   /// In cs, this message translates to:
-  /// **'Celkový počet přihlášených'**
+  /// **'Přihlášení účastníci'**
   String get create_edit_event_screen_total_signed_up_participants_text;
+
+  /// No description provided for @create_edit_event_screen_signed_up_leaders.
+  ///
+  /// In cs, this message translates to:
+  /// **'Přihlášení vedoucí'**
+  String get create_edit_event_screen_signed_up_leaders;
+
+  /// No description provided for @create_edit_event_screen_invited_leaders.
+  ///
+  /// In cs, this message translates to:
+  /// **'Pozvaní vedoucí'**
+  String get create_edit_event_screen_invited_leaders;
+
+  /// No description provided for @create_edit_event_screen_signed_up_18_plus.
+  ///
+  /// In cs, this message translates to:
+  /// **'Přihlášení 18+'**
+  String get create_edit_event_screen_signed_up_18_plus;
+
+  /// No description provided for @create_edit_event_screen_invited_18_plus.
+  ///
+  /// In cs, this message translates to:
+  /// **'Pozvaní 18+'**
+  String get create_edit_event_screen_invited_18_plus;
 
   /// No description provided for @create_edit_event_screen_troops.
   ///
   /// In cs, this message translates to:
   /// **'Družinky'**
   String get create_edit_event_screen_troops;
-
-  /// No description provided for @create_edit_event_screen_leaders.
-  ///
-  /// In cs, this message translates to:
-  /// **'Přihlášení vedoucí'**
-  String get create_edit_event_screen_leaders;
-
-  /// No description provided for @create_edit_event_screen_18_plus.
-  ///
-  /// In cs, this message translates to:
-  /// **'Přihlášení 18+'**
-  String get create_edit_event_screen_18_plus;
 
   /// No description provided for @create_edit_event_screen_instructions_text.
   ///

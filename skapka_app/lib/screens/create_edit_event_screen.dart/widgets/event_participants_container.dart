@@ -17,10 +17,13 @@ import 'package:skapka_app/models/troop_model.dart';
 import 'package:skapka_app/screens/create_edit_event_screen.dart/widgets/participant_info_row.dart';
 
 class EventParticipantsContainer extends StatelessWidget {
-  final int totalParticipantsCount;
-  final int totalSignedUpParticipantsCount;
-  final int totalLeadersCount;
-  final int total18PlusCount;
+  final int originalParticipantsCount;
+  final int invitedParticipantsCount;
+  final int signedUpParticipantsCount;
+  final int invitedLeadersCount;
+  final int signedUpLeadersCount;
+  final int invited18PlusLeadersCount;
+  final int signedUp18PlusLeadersCount;
   final String targetPatrolNames;
   final List<DependentModel> groupDependents;
   final List<LeaderModel> groupLeaders;
@@ -31,11 +34,14 @@ class EventParticipantsContainer extends StatelessWidget {
 
   const EventParticipantsContainer({
     super.key,
-    required this.totalParticipantsCount,
+    required this.originalParticipantsCount,
+    required this.invitedParticipantsCount,
+    required this.signedUpParticipantsCount,
+    required this.invitedLeadersCount,
+    required this.signedUpLeadersCount,
+    required this.invited18PlusLeadersCount,
+    required this.signedUp18PlusLeadersCount,
     required this.targetPatrolNames,
-    required this.totalLeadersCount,
-    required this.total18PlusCount,
-    required this.totalSignedUpParticipantsCount,
     required this.groupDependents,
     required this.groupLeaders,
     required this.groupPatrols,
@@ -114,22 +120,44 @@ class EventParticipantsContainer extends StatelessWidget {
                   label: context
                       .localizations
                       .create_edit_event_screen_total_participants_text,
-                  value: totalParticipantsCount.toString(),
+                  value: invitedParticipantsCount.toString(),
                 ),
-                ParticipantInfoRow(
-                  label: context
-                      .localizations
-                      .create_edit_event_screen_total_signed_up_participants_text,
-                  value: totalSignedUpParticipantsCount.toString(),
-                ),
-                ParticipantInfoRow(
-                  label: context.localizations.create_edit_event_screen_leaders,
-                  value: totalLeadersCount.toString(),
-                ),
-                ParticipantInfoRow(
-                  label: context.localizations.create_edit_event_screen_18_plus,
-                  value: total18PlusCount.toString(),
-                ),
+
+                if (originalParticipantsCount > 0)
+                  ParticipantInfoRow(
+                    label: context
+                        .localizations
+                        .create_edit_event_screen_total_signed_up_participants_text,
+                    value: signedUpParticipantsCount.toString(),
+                  ),
+                if (originalParticipantsCount > 0)
+                  ParticipantInfoRow(
+                    label: context
+                        .localizations
+                        .create_edit_event_screen_signed_up_leaders,
+                    value: signedUpLeadersCount.toString(),
+                  ),
+                if (originalParticipantsCount == 0)
+                  ParticipantInfoRow(
+                    label: context
+                        .localizations
+                        .create_edit_event_screen_invited_leaders,
+                    value: invitedLeadersCount.toString(),
+                  ),
+                if (originalParticipantsCount > 0)
+                  ParticipantInfoRow(
+                    label: context
+                        .localizations
+                        .create_edit_event_screen_signed_up_18_plus,
+                    value: signedUp18PlusLeadersCount.toString(),
+                  ),
+                if (originalParticipantsCount == 0)
+                  ParticipantInfoRow(
+                    label: context
+                        .localizations
+                        .create_edit_event_screen_invited_18_plus,
+                    value: invited18PlusLeadersCount.toString(),
+                  ),
                 ParticipantInfoRow(
                   label: context.localizations.create_edit_event_screen_troops,
                   value: targetPatrolNames.isEmpty ? '-' : targetPatrolNames,

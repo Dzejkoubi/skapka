@@ -5,7 +5,6 @@ import 'package:provider/provider.dart';
 import 'package:skapka_app/app/l10n/l10n_extension.dart';
 import 'package:skapka_app/app/theme/app_spacing.dart';
 import 'package:skapka_app/models/dependents/dependent_model.dart';
-import 'package:skapka_app/models/dependents/leader_dependent_model.dart';
 import 'package:skapka_app/models/event_model.dart';
 import 'package:skapka_app/models/event_participant_model.dart';
 import 'package:skapka_app/models/leader_model.dart';
@@ -73,6 +72,7 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
   late List<EventParticipantModel> _editedEventParticipants;
 
   // Participant statistics getters
+  int get originalParticipantsCount => _originalEventParticipants.length;
   int get totalParticipantsCount => _editedEventParticipants.length;
   int get totalSignedUpParticipantsCount => _editedEventParticipants
       .where((p) => p.status == EventParticipantStatus.signedUp)
@@ -81,7 +81,9 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
       .where((p) => p.status == EventParticipantStatus.signedUp)
       .where((p) => _groupLeaders.any((l) => l.dependentId == p.dependentId))
       .length;
-
+  int get totalInvitedLeadersCount => _editedEventParticipants
+      .where((p) => _groupLeaders.any((l) => l.dependentId == p.dependentId))
+      .length;
   int get total18PlusSignedUpLeadersCount =>
       _editedEventParticipants.where((p) {
         if (p.status != EventParticipantStatus.signedUp) return false;
@@ -91,6 +93,14 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
         );
         return dependent != null && dependent.isLeader && dependent.is18plus;
       }).length;
+
+  int get total18PlusInvitedLeadersCount => _editedEventParticipants.where((p) {
+    final dependent = _groupDependents.cast<DependentModel?>().firstWhere(
+      (d) => d?.dependentId == p.dependentId,
+      orElse: () => null,
+    );
+    return dependent != null && dependent.isLeader && dependent.is18plus;
+  }).length;
 
   List<String> get targetPatrolIds {
     final participantDependentIds = _editedEventParticipants
@@ -298,13 +308,17 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
                     //   'Original eventIsDraft: ${originalEvent.isDraft}; Edited eventIsDraft: ${editedEvent.isDraft}',
                     // );
 
-                    if (originalEvent != editedEvent) {
+                    if (originalEvent != editedEvent ||
+                        !listEquals(
+                          _originalEventParticipants,
+                          _editedEventParticipants,
+                        )) {
                       // Show confirmation dialog before leaving
                       showDialog(
                         context: context,
                         builder: (builder) {
                           return LargeDialog(
-                            type: LargeDialogType.negative,
+                            type: LargeDialogType.basic,
                             title: context
                                 .localizations
                                 .create_edit_event_screen_go_back_without_saving_dialog_title,
@@ -352,11 +366,16 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
                         ),
                         EventInstructionsContainer(),
                         EventParticipantsContainer(
-                          totalParticipantsCount: totalParticipantsCount,
-                          totalSignedUpParticipantsCount:
+                          originalParticipantsCount: originalParticipantsCount,
+                          invitedParticipantsCount: totalParticipantsCount,
+                          signedUpParticipantsCount:
                               totalSignedUpParticipantsCount,
-                          totalLeadersCount: totalSignedUpLeadersCount,
-                          total18PlusCount: total18PlusSignedUpLeadersCount,
+                          invitedLeadersCount: totalInvitedLeadersCount,
+                          signedUpLeadersCount: totalSignedUpLeadersCount,
+                          invited18PlusLeadersCount:
+                              total18PlusInvitedLeadersCount,
+                          signedUp18PlusLeadersCount:
+                              total18PlusSignedUpLeadersCount,
                           targetPatrolNames: targetPatrolNames,
                           groupDependents: _groupDependents,
                           groupLeaders: _groupLeaders,

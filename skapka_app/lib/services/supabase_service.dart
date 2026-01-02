@@ -9,6 +9,7 @@ import 'package:skapka_app/models/group_model.dart';
 import 'package:skapka_app/models/leader_model.dart';
 import 'package:skapka_app/models/patrol_model.dart';
 import 'package:skapka_app/models/troop_model.dart';
+import 'package:skapka_app/providers/account_provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class SupabaseService {
@@ -210,6 +211,51 @@ class SupabaseService {
     return (response as List)
         .map<LeaderModel>((json) => LeaderModel.fromJson(json))
         .toList();
+  }
+
+  // Edit event details
+  Future<void> editEventDetails(
+    EventModel event,
+    AccountProvider accountProvider,
+  ) async {
+    await _supabaseClient
+        .from('events')
+        .update({
+          'title': event.title,
+          'instructions': event.instructions,
+          'open_sign_up': event.openSignUp?.toIso8601String(),
+          'close_sign_up': event.closeSignUp?.toIso8601String(),
+          'start_date': event.startDate?.toIso8601String(),
+          'end_date': event.endDate?.toIso8601String(),
+          'meeting_place': event.meetingPlace,
+          'photo_album_link': event.photoAlbumLink,
+          'target_patrols': event.targetPatrolsIds,
+          'last_edited_by': accountProvider.accountId,
+          'is_draft': event.isDraft,
+        })
+        .eq('event_id', event.eventId);
+  }
+
+  // Add event participant
+  Future<void> addEventParticipant(EventParticipantModel participant) async {
+    await _supabaseClient.from('event_participants').insert({
+      'event_id': participant.eventId,
+      'dependent_id': participant.dependentId,
+      'status': participant.status,
+      'group_id': participant.groupId,
+    });
+  }
+
+  // Remove event participant
+  Future<void> removeEventParticipant({
+    required String eventId,
+    required String dependentId,
+  }) async {
+    await _supabaseClient
+        .from('event_participants')
+        .delete()
+        .eq('event_id', eventId)
+        .eq('dependent_id', dependentId);
   }
 
   // Update dependent event participation status

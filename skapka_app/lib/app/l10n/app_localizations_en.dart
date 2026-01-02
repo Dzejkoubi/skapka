@@ -455,20 +455,26 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get create_edit_event_screen_total_participants_text =>
-      'Total Participants';
+      'Invited Participants';
 
   @override
   String get create_edit_event_screen_total_signed_up_participants_text =>
-      'Total Signed Up Participants';
+      'Signed Up Participants';
+
+  @override
+  String get create_edit_event_screen_signed_up_leaders => 'Signed up leaders';
+
+  @override
+  String get create_edit_event_screen_invited_leaders => 'Invited leaders';
+
+  @override
+  String get create_edit_event_screen_signed_up_18_plus => 'Signed up 18+';
+
+  @override
+  String get create_edit_event_screen_invited_18_plus => 'Invited 18+';
 
   @override
   String get create_edit_event_screen_troops => 'Troops';
-
-  @override
-  String get create_edit_event_screen_leaders => 'Signed up leaders';
-
-  @override
-  String get create_edit_event_screen_18_plus => 'Signed up 18+';
 
   @override
   String get create_edit_event_screen_instructions_text => 'Instructions';

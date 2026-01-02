@@ -5,9 +5,12 @@ import 'package:provider/provider.dart';
 import 'package:skapka_app/app/l10n/l10n_extension.dart';
 import 'package:skapka_app/app/theme/app_spacing.dart';
 import 'package:skapka_app/models/dependents/dependent_model.dart';
+import 'package:skapka_app/models/dependents/leader_dependent_model.dart';
 import 'package:skapka_app/models/event_model.dart';
 import 'package:skapka_app/models/event_participant_model.dart';
 import 'package:skapka_app/models/leader_model.dart';
+import 'package:skapka_app/models/patrol_model.dart';
+import 'package:skapka_app/models/troop_model.dart';
 import 'package:skapka_app/providers/account_provider.dart';
 import 'package:skapka_app/screens/create_edit_event_screen.dart/widgets/event_instructions_container.dart';
 import 'package:skapka_app/screens/create_edit_event_screen.dart/widgets/event_title_form.dart';
@@ -58,9 +61,13 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
     isDraft: isDraft,
   );
 
-  // Original and edited event participants for change detection
-  late final List<EventParticipantModel> originalEventParticipants =
-      widget.eventParticipants ?? [];
+  // Total group dependents, leaders, patrols, and troops
+  late List<DependentModel> _groupDependents;
+  late List<LeaderDependentModel> _groupDependentLeaders;
+  late List<DependentModel> _groupDependentChildren;
+  late List<TroopModel> _groupTroops;
+  late List<PatrolModel> _groupPatrols;
+  late List<EventParticipantModel> _eventParticipants;
 
   // Creating local variables to hold form data
   late String? eventId;
@@ -77,6 +84,15 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
   List<String>? targetPatrolsIds;
   String? lastEditedBy;
   bool isDraft = true;
+
+  /// Fetch all necessary data (dependents, patrols, troops, participants)
+  Future<void> fetchAllData() async {
+    await fetchAndDivideGroupDependents(_accountProvider.groupId);
+    await fetchGroupPatrolsAndTroops(_accountProvider.groupId);
+    if (widget.event != null) {
+      await fetchEventParticipants(widget.event!.eventId);
+    }
+  }
 
   @override
   void initState() {
@@ -115,14 +131,57 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
     isDraft = widget.event?.isDraft ?? true;
   }
 
+  /// Fetch and divide group dependents into leaders and children and store them locally
   Future<void> fetchAndDivideGroupDependents(String groupId) async {
-    List<DependentModel> allDependents = await _supabaseService
-        .getGroupDependents(groupId);
+    _groupDependents = await _supabaseService.getGroupDependents(groupId);
     List<LeaderModel> groupLeaders = await _supabaseService.getGroupLeaders(
       groupId,
     );
-    print('Fetched ${allDependents.length} dependents');
-    print('Fetched ${groupLeaders.length} leaders');
+
+    _groupDependentLeaders = [];
+    _groupDependentChildren = [];
+
+    for (var dependent in _groupDependents) {
+      if (dependent.isLeader) {
+        final ledPatrols = groupLeaders
+            .where((l) => l.dependentId == dependent.dependentId)
+            .map((l) => l.patrolId)
+            .toList();
+        _groupDependentLeaders.add(
+          LeaderDependentModel(
+            dependent: dependent,
+            leaderOfPatrolId: ledPatrols,
+          ),
+        );
+      } else {
+        _groupDependentChildren.add(dependent);
+      }
+    }
+    print(
+      'Fetched ${_groupDependents.length} dependents: '
+      '${_groupDependentLeaders.length} leaders and '
+      '${_groupDependentChildren.length} children for group $groupId.',
+    );
+  }
+
+  ///Fetch group patrols and troops and store them locally
+  Future<void> fetchGroupPatrolsAndTroops(String groupId) async {
+    _groupPatrols = await _supabaseService.getGroupPatrols(groupId);
+    _groupTroops = await _supabaseService.getGroupTroops(groupId);
+    print(
+      'Fetched ${_groupPatrols.length} patrols and ${_groupTroops.length} troops for group $groupId.',
+    );
+  }
+
+  /// Fetch event participants and store them locally
+  Future<void> fetchEventParticipants(String eventId) async {
+    _eventParticipants = await _supabaseService.getEventParticipants(
+      eventId,
+      groupId!,
+    );
+    print(
+      'Fetched ${_eventParticipants.length} participants for event $eventId.',
+    );
   }
 
   @override
@@ -130,7 +189,7 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
     return ChangeNotifierProvider(
       create: (_) => ValueNotifier<bool>(false),
       child: FutureBuilder(
-        future: fetchAndDivideGroupDependents(_accountProvider.groupId),
+        future: fetchAllData(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return ScreenWrapper(

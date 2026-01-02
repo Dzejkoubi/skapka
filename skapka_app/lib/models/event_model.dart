@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 enum EventTimeType { future, live, past, draft }
 
 class EventModel {
@@ -14,6 +16,7 @@ class EventModel {
   final List<String>? targetPatrolsIds;
   final String? lastEditedBy;
   final bool isDraft;
+
   EventModel({
     required this.eventId,
     required this.title,
@@ -29,6 +32,42 @@ class EventModel {
     required this.lastEditedBy,
     required this.isDraft,
   });
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is EventModel &&
+          runtimeType == other.runtimeType &&
+          eventId == other.eventId &&
+          title == other.title &&
+          instructions == other.instructions &&
+          openSignUp == other.openSignUp &&
+          closeSignUp == other.closeSignUp &&
+          startDate == other.startDate &&
+          endDate == other.endDate &&
+          meetingPlace == other.meetingPlace &&
+          photoAlbumLink == other.photoAlbumLink &&
+          groupId == other.groupId &&
+          listEquals(targetPatrolsIds, other.targetPatrolsIds) &&
+          lastEditedBy == other.lastEditedBy &&
+          isDraft == other.isDraft;
+
+  @override
+  int get hashCode =>
+      eventId.hashCode ^
+      title.hashCode ^
+      instructions.hashCode ^
+      openSignUp.hashCode ^
+      closeSignUp.hashCode ^
+      startDate.hashCode ^
+      endDate.hashCode ^
+      meetingPlace.hashCode ^
+      photoAlbumLink.hashCode ^
+      groupId.hashCode ^
+      targetPatrolsIds.hashCode ^
+      lastEditedBy.hashCode ^
+      isDraft.hashCode;
+
   factory EventModel.fromJson(Map<String, dynamic> json) {
     return EventModel(
       eventId: json['event_id'] as String,

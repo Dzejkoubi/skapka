@@ -33,8 +33,8 @@ class CreateEditEventScreen extends StatefulWidget {
 
 class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
   // Original event and edited event for change detection
-  late final EventModel? originalEvent;
-  late EventModel? editedEvent = EventModel(
+  late final EventModel originalEvent;
+  EventModel get editedEvent => EventModel(
     eventId: eventId ?? '',
     title: _eventTitleController.text,
     instructions: _instructions ?? '',
@@ -64,13 +64,29 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
   String? groupId;
   List<String>? targetPatrolsIds;
   String? lastEditedBy;
-  bool isDraft = false;
+  bool isDraft = true;
 
   @override
   void initState() {
     super.initState();
     // Setting values from the original event to initialize edited event
-    originalEvent = widget.event;
+    originalEvent =
+        widget.event ??
+        EventModel(
+          eventId: '',
+          title: '',
+          instructions: '',
+          openSignUp: null,
+          closeSignUp: null,
+          startDate: null,
+          endDate: null,
+          meetingPlace: '',
+          photoAlbumLink: '',
+          groupId: '',
+          targetPatrolsIds: [],
+          lastEditedBy: '',
+          isDraft: true,
+        );
     eventId = widget.event?.eventId;
     _eventTitleController.text = widget.event?.title ?? '';
     _instructions = widget.event?.instructions;
@@ -83,7 +99,7 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
     groupId = widget.event?.groupId;
     targetPatrolsIds = widget.event?.targetPatrolsIds;
     lastEditedBy = widget.event?.lastEditedBy;
-    isDraft = widget.event?.isDraft ?? false;
+    isDraft = widget.event?.isDraft ?? true;
   }
 
   @override
@@ -101,6 +117,46 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
                   ? context.localizations.create_edit_event_screen_title_create
                   : context.localizations.create_edit_event_screen_title_edit,
               onBackPressed: () {
+                print(
+                  'Original eventId: ${originalEvent.eventId}; Edited eventId: ${editedEvent.eventId}',
+                );
+                print(
+                  'Original eventTitle: ${originalEvent.title}; Edited eventTitle: ${editedEvent.title}',
+                );
+                print(
+                  'Original eventInstructions: ${originalEvent.instructions}; Edited eventInstructions: ${editedEvent.instructions}',
+                );
+                print(
+                  'Original eventOpenSignUp: ${originalEvent.openSignUp}; Edited eventOpenSignUp: ${editedEvent.openSignUp}',
+                );
+                print(
+                  'Original eventCloseSignUp: ${originalEvent.closeSignUp}; Edited eventCloseSignUp: ${editedEvent.closeSignUp}',
+                );
+                print(
+                  'Original eventStartDate: ${originalEvent.startDate}; Edited eventStartDate: ${editedEvent.startDate}',
+                );
+                print(
+                  'Original eventEndDate: ${originalEvent.endDate}; Edited eventEndDate: ${editedEvent.endDate}',
+                );
+                print(
+                  'Original eventMeetingPlace: ${originalEvent.meetingPlace}; Edited eventMeetingPlace: ${editedEvent.meetingPlace}',
+                );
+                print(
+                  'Original eventPhotoAlbumLink: ${originalEvent.photoAlbumLink}; Edited eventPhotoAlbumLink: ${editedEvent.photoAlbumLink}',
+                );
+                print(
+                  'Original groupId: ${originalEvent.groupId}; Edited groupId: ${editedEvent.groupId}',
+                );
+                print(
+                  'Original targetPatrolsIds: ${originalEvent.targetPatrolsIds}; Edited targetPatrolsIds: ${editedEvent.targetPatrolsIds}',
+                );
+                print(
+                  'Original lastEditedBy: ${originalEvent.lastEditedBy}; Edited lastEditedBy: ${editedEvent.lastEditedBy}',
+                );
+                print(
+                  'Original eventIsDraft: ${originalEvent.isDraft}; Edited eventIsDraft: ${editedEvent.isDraft}',
+                );
+
                 if (originalEvent != editedEvent) {
                   // Show confirmation dialog before leaving
                   showDialog(
@@ -126,6 +182,8 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
                       );
                     },
                   );
+                } else {
+                  Navigator.of(context).pop();
                 }
               },
             ),

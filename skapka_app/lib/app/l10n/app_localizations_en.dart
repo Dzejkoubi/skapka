@@ -475,6 +475,14 @@ class AppLocalizationsEn extends AppLocalizations {
       'Address or name that the user can search for in maps. If you do not fill it in, the meeting place will not be displayed.';
 
   @override
+  String get create_edit_event_screen_photo_album_link_text =>
+      'Photo Album Link';
+
+  @override
+  String get create_edit_event_screen_photo_album_link_description =>
+      'Link to the shared photo album from the event. If you do not fill it in, the photo album link will not be displayed.';
+
+  @override
   String get settings_screen_title => 'Settings';
 
   @override

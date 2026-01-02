@@ -172,6 +172,9 @@
     "create_edit_event_screen_meeting_place_text": "Meeting Place",
     "create_edit_event_screen_meeting_place_description": "Address or name that the user can search for in maps. If you do not fill it in, the meeting place will not be displayed.",
 
+    "create_edit_event_screen_photo_album_link_text": "Photo Album Link",
+    "create_edit_event_screen_photo_album_link_description": "Link to the shared photo album from the event. If you do not fill it in, the photo album link will not be displayed.",
+
     "settings_screen_title": "Settings",
     "settings_screen_change_signout_button_text": "Sign Out",
     "settings_screen_change_delete_account_button_text": "Delete Account",

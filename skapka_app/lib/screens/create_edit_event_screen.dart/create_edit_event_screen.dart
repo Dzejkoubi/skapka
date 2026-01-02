@@ -4,19 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:skapka_app/app/l10n/l10n_extension.dart';
 import 'package:skapka_app/app/theme/app_spacing.dart';
-import 'package:skapka_app/models/dependents/dependent_model.dart';
 import 'package:skapka_app/models/event_model.dart';
 import 'package:skapka_app/models/event_participant_model.dart';
-import 'package:skapka_app/models/leader_model.dart';
-import 'package:skapka_app/models/patrol_model.dart';
-import 'package:skapka_app/models/troop_model.dart';
 import 'package:skapka_app/screens/create_edit_event_screen.dart/widgets/event_instructions_container.dart';
-import 'package:skapka_app/services/supabase_service.dart';
-import 'package:skapka_app/widgets/loading_floating_logo.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:skapka_app/screens/create_edit_event_screen.dart/widgets/event_participants_container.dart';
 import 'package:skapka_app/screens/create_edit_event_screen.dart/widgets/event_title_form.dart';
-import 'package:skapka_app/screens/create_edit_event_screen.dart/widgets/meeting_place_container.dart';
+import 'package:skapka_app/widgets/forms/form_with_details.dart';
 import 'package:skapka_app/widgets/appbar/appbar.dart';
 import 'package:skapka_app/widgets/dialogs/large_dialog.dart';
 import 'package:skapka_app/widgets/wrappers/screen_wrapper.dart';
@@ -40,211 +32,58 @@ class CreateEditEventScreen extends StatefulWidget {
 }
 
 class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
-  String? _eventId;
-  final TextEditingController _eventTitleController = TextEditingController();
-  String? _instructions;
-  DateTime? _openSignUp;
-  DateTime? _closeSignUp;
-  DateTime? _startDate;
-  DateTime? _endDate;
-  final TextEditingController _meetingPlaceController = TextEditingController();
-  String? _photoAlbumLink;
-  String? _groupId;
-  List<String>? _targetPatrolsIds;
-  String? _lastEditedBy;
-  bool _isDraft = true;
-
-  late final EventModel originalEvent =
-      widget.event ??
-      EventModel(
-        eventId: '',
-        title: '',
-        instructions: '',
-        openSignUp: null,
-        closeSignUp: null,
-        startDate: null,
-        endDate: null,
-        meetingPlace: null,
-        photoAlbumLink: null,
-        groupId: null,
-        targetPatrolsIds: null,
-        lastEditedBy: null,
-        isDraft: true,
-      );
-
-  late EventModel editedEvent = originalEvent.copyWith(
-    eventId: _eventId,
+  // Original event and edited event for change detection
+  late final EventModel? originalEvent;
+  late EventModel? editedEvent = EventModel(
+    eventId: eventId ?? '',
     title: _eventTitleController.text,
-    instructions: _instructions,
+    instructions: _instructions ?? '',
     openSignUp: _openSignUp,
     closeSignUp: _closeSignUp,
     startDate: _startDate,
     endDate: _endDate,
     meetingPlace: _meetingPlaceController.text,
-    photoAlbumLink: _photoAlbumLink,
-    groupId: _groupId,
-    targetPatrolsIds: _targetPatrolsIds,
-    lastEditedBy: _lastEditedBy,
-    isDraft: _isDraft,
+    photoAlbumLink: _photoAlbumLinkController.text,
+    groupId: groupId ?? '',
+    targetPatrolsIds: targetPatrolsIds ?? [],
+    lastEditedBy: lastEditedBy ?? '',
+    isDraft: isDraft,
   );
 
-  late List<EventParticipantModel> _originalEventParticipants =
-      widget.eventParticipants ?? [];
-
-  late List<EventParticipantModel> _editedEventParticipants = [];
-
-  final SupabaseService _supabaseService = SupabaseService();
-  List<DependentModel> _groupDependents = [];
-  List<LeaderModel> _groupLeaders = [];
-  List<PatrolModel> _groupPatrols = [];
-  List<TroopModel> _groupTroops = [];
-  late Future<void> _dataFetchFuture;
-
-  int _totalParticipantsCount = 0;
-  int _totalSignedUpParticipantsCount = 0;
-  String _targetPatrolNames = '';
-  int _totalLeadersCount = 0;
-  int _total18PlusCount = 0;
+  // Creating local variables to hold form data
+  late String? eventId;
+  final TextEditingController _eventTitleController = TextEditingController();
+  late String? _instructions;
+  late DateTime? _openSignUp;
+  late DateTime? _closeSignUp;
+  late DateTime? _startDate;
+  late DateTime? _endDate;
+  final TextEditingController _meetingPlaceController = TextEditingController();
+  final TextEditingController _photoAlbumLinkController =
+      TextEditingController();
+  String? groupId;
+  List<String>? targetPatrolsIds;
+  String? lastEditedBy;
+  bool isDraft = false;
 
   @override
   void initState() {
     super.initState();
-    if (widget.event != null) {
-      _eventId = widget.event!.eventId;
-      _eventTitleController.text = widget.event!.title ?? '';
-      _instructions = widget.event!.instructions;
-      _openSignUp = widget.event!.openSignUp;
-      _closeSignUp = widget.event!.closeSignUp;
-      _startDate = widget.event!.startDate;
-      _endDate = widget.event!.endDate;
-      _meetingPlaceController.text = widget.event!.meetingPlace ?? '';
-      _photoAlbumLink = widget.event!.photoAlbumLink;
-      _groupId = widget.event!.groupId;
-      _targetPatrolsIds = widget.event!.targetPatrolsIds;
-      _lastEditedBy = widget.event!.lastEditedBy;
-      _isDraft = widget.event!.isDraft;
-    }
-    _dataFetchFuture = _fetchData();
-  }
-
-  Future<void> _fetchData() async {
-    try {
-      final userId = Supabase.instance.client.auth.currentUser?.id;
-      if (userId == null) return;
-
-      // Get account to find group_id
-      final account = await _supabaseService.getAccountDetails(userId);
-      if (account == null) return;
-      _groupId = account.groupId;
-
-      // Fetch group data
-      final results = await Future.wait([
-        _supabaseService.getGroupDependents(_groupId!),
-        _supabaseService.getGroupLeaders(_groupId!),
-        _supabaseService.getGroupPatrols(_groupId!),
-        _supabaseService.getGroupTroops(_groupId!),
-      ]);
-
-      _groupDependents = results[0] as List<DependentModel>;
-      _groupLeaders = results[1] as List<LeaderModel>;
-      _groupPatrols = results[2] as List<PatrolModel>;
-      _groupTroops = results[3] as List<TroopModel>;
-
-      if (kDebugMode) {
-        print('--- Data Fetch Debug ---');
-        print('GroupId: $_groupId');
-        print('Dependents: ${_groupDependents.length}');
-        print('Leaders: ${_groupLeaders.length}');
-        print('Patrols: ${_groupPatrols.map((p) => p.name).toList()}');
-        print('Troops: ${_groupTroops.map((t) => t.name).toList()}');
-      }
-
-      // If editing, fetch participants if not provided
-      if (widget.event != null && widget.eventParticipants == null) {
-        _editedEventParticipants = await _supabaseService.getEventParticipants(
-          widget.event!.eventId,
-          _groupId!,
-        );
-      } else if (widget.eventParticipants != null) {
-        _editedEventParticipants = List.from(widget.eventParticipants!);
-      }
-
-      if (kDebugMode) {
-        print('Event Participants: ${_editedEventParticipants.length}');
-      }
-
-      _calculateStats();
-    } catch (e) {
-      if (kDebugMode) print('Error fetching data: $e');
-    }
-  }
-
-  void _calculateStats() {
-    _totalParticipantsCount = _editedEventParticipants.length;
-    _totalSignedUpParticipantsCount = _editedEventParticipants
-        .where((p) => p.status == 'attending' || p.status == 'signed_up')
-        .length;
-
-    int leaders = 0;
-    int plus18 = 0;
-    final Set<String> patrolIds = {};
-
-    for (var p in _editedEventParticipants) {
-      // Check leader
-      if (_groupLeaders.any((l) => l.dependentId == p.dependentId)) {
-        leaders++;
-      }
-
-      // Find dependent
-      final dependent = _groupDependents.firstWhere(
-        (d) => d.dependentId == p.dependentId,
-        orElse: () => DependentModel(
-          name: '',
-          surname: '',
-          sex: SexEnum.other,
-          isArchived: false,
-          secretCode: '',
-          createdAt: DateTime.now(),
-        ),
-      );
-
-      // Check 18+
-      if (dependent.born != null) {
-        final age = DateTime.now().difference(dependent.born!).inDays / 365.25;
-        if (age >= 18) plus18++;
-      }
-
-      // Collect patrol ID
-      if (dependent.patrolId != null) {
-        patrolIds.add(dependent.patrolId!);
-      }
-    }
-
-    _totalLeadersCount = leaders;
-    _total18PlusCount = plus18;
-
-    // Update target patrols
-    _targetPatrolsIds = patrolIds.toList();
-    if (_targetPatrolsIds != null && _targetPatrolsIds!.isNotEmpty) {
-      final names = _groupPatrols
-          .where((p) => _targetPatrolsIds!.contains(p.patrolId))
-          .map((p) => p.name)
-          .toList();
-      _targetPatrolNames = names.join(', ');
-    } else {
-      _targetPatrolNames = '';
-    }
-
-    if (kDebugMode) {
-      print('--- Stats Calculation Debug ---');
-      print('Total Participants: $_totalParticipantsCount');
-      print('Signed Up: $_totalSignedUpParticipantsCount');
-      print('Leaders Count: $_totalLeadersCount');
-      print('18+ Count: $_total18PlusCount');
-      print('Target Patrols: $_targetPatrolNames');
-    }
-
-    setState(() {});
+    // Setting values from the original event to initialize edited event
+    originalEvent = widget.event;
+    eventId = widget.event?.eventId;
+    _eventTitleController.text = widget.event?.title ?? '';
+    _instructions = widget.event?.instructions;
+    _openSignUp = widget.event?.openSignUp;
+    _closeSignUp = widget.event?.closeSignUp;
+    _startDate = widget.event?.startDate;
+    _endDate = widget.event?.endDate;
+    _meetingPlaceController.text = widget.event?.meetingPlace ?? '';
+    _photoAlbumLinkController.text = widget.event?.photoAlbumLink ?? '';
+    groupId = widget.event?.groupId;
+    targetPatrolsIds = widget.event?.targetPatrolsIds;
+    lastEditedBy = widget.event?.lastEditedBy;
+    isDraft = widget.event?.isDraft ?? false;
   }
 
   @override
@@ -290,62 +129,47 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
                 }
               },
             ),
-            body: FutureBuilder(
-              future: _dataFetchFuture,
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(child: LoadingFloatingLogo());
-                }
-                return SingleChildScrollView(
-                  child: SafeArea(
-                    child: Column(
-                      spacing: AppSpacing.large,
-                      children: [
-                        EventTitleForm(
-                          eventTitleController: _eventTitleController,
-                        ),
-                        EventDateSelector(
-                          openSignUp: _openSignUp,
-                          closeSignUp: _closeSignUp,
-                          startDate: _startDate,
-                          endDate: _endDate,
-                          onOpenSignUpChanged: (d) =>
-                              setState(() => _openSignUp = d),
-                          onCloseSignUpChanged: (d) =>
-                              setState(() => _closeSignUp = d),
-                          onStartDateChanged: (d) =>
-                              setState(() => _startDate = d),
-                          onEndDateChanged: (d) => setState(() => _endDate = d),
-                        ),
-                        EventParticipantsContainer(
-                          groupDependents: _groupDependents,
-                          groupLeaders: _groupLeaders,
-                          groupPatrols: _groupPatrols,
-                          groupTroops: _groupTroops,
-                          eventParticipants: _editedEventParticipants,
-                          onParticipantsChanged: (participants) {
-                            setState(() {
-                              _editedEventParticipants = participants;
-                            });
-                            _calculateStats();
-                          },
-                          totalParticipantsCount: _totalParticipantsCount,
-                          targetPatrolNames: _targetPatrolNames,
-                          totalLeadersCount: _totalLeadersCount,
-                          total18PlusCount: _total18PlusCount,
-                          totalSignedUpParticipantsCount:
-                              _totalSignedUpParticipantsCount,
-                        ),
-                        EventInstructionsContainer(),
-                        MeetingPlaceContainer(
-                          meetingPlaceController: _meetingPlaceController,
-                        ),
-                        SizedBox(height: AppSpacing.bottomSpace),
-                      ],
+            body: SingleChildScrollView(
+              child: SafeArea(
+                child: Column(
+                  spacing: AppSpacing.large,
+                  children: [
+                    EventTitleForm(eventTitleController: _eventTitleController),
+                    EventDateSelector(
+                      openSignUp: _openSignUp,
+                      closeSignUp: _closeSignUp,
+                      startDate: _startDate,
+                      endDate: _endDate,
+                      onOpenSignUpChanged: (d) =>
+                          setState(() => _openSignUp = d),
+                      onCloseSignUpChanged: (d) =>
+                          setState(() => _closeSignUp = d),
+                      onStartDateChanged: (d) => setState(() => _startDate = d),
+                      onEndDateChanged: (d) => setState(() => _endDate = d),
                     ),
-                  ),
-                );
-              },
+                    EventInstructionsContainer(),
+                    FormWithDetails(
+                      textController: _meetingPlaceController,
+                      labelText: context
+                          .localizations
+                          .create_edit_event_screen_meeting_place_text,
+                      descriptionText: context
+                          .localizations
+                          .create_edit_event_screen_meeting_place_description,
+                    ),
+                    FormWithDetails(
+                      textController: _photoAlbumLinkController,
+                      labelText: context
+                          .localizations
+                          .create_edit_event_screen_photo_album_link_text,
+                      descriptionText: context
+                          .localizations
+                          .create_edit_event_screen_photo_album_link_description,
+                    ),
+                    SizedBox(height: AppSpacing.bottomSpace),
+                  ],
+                ),
+              ),
             ),
 
             speedDialChildren: CreateEditEventSpeedDial.build(
@@ -363,8 +187,9 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
                 if (kDebugMode) print('User confirmed unpublish event');
               },
               onSave: ({required bool asDraft}) {
-                if (kDebugMode)
+                if (kDebugMode) {
                   print('User confirmed save event (asDraft: $asDraft)');
+                }
               },
             ),
             fabKey: dialOpenNotifier.hashCode,

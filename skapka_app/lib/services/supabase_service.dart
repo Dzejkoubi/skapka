@@ -107,11 +107,18 @@ class SupabaseService {
   }
 
   // Get group events that have ended after given date(for example after start of this school year)
-  Future<List<EventModel>> getGroupEvents(String groupId, DateTime date) async {
-    final response = await _supabaseClient
-        .from('events')
-        .select()
-        .eq('group_id', groupId);
+  Future<List<EventModel>> getGroupEvents({
+    required String groupId,
+    DateTime? date,
+  }) async {
+    var qery = _supabaseClient.from('events').select().eq('group_id', groupId);
+
+    if (date != null) {
+      qery = qery.gte('end_date', date.toIso8601String());
+    }
+
+    final response = await qery;
+
     print(response.length);
     return response
         .map<EventModel>((json) => EventModel.fromJson(json))

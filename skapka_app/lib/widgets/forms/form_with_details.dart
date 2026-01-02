@@ -6,13 +6,16 @@ import 'package:skapka_app/app/theme/app_spacing.dart';
 import 'package:skapka_app/app/theme/app_text_theme.dart';
 import 'package:skapka_app/widgets/forms/custom_form.dart';
 
-class MeetingPlaceContainer extends StatelessWidget {
-  const MeetingPlaceContainer({
+class FormWithDetails extends StatelessWidget {
+  final TextEditingController _textController;
+  final String labelText;
+  final String descriptionText;
+  const FormWithDetails({
     super.key,
-    required TextEditingController meetingPlaceController,
-  }) : _meetingPlaceController = meetingPlaceController;
-
-  final TextEditingController _meetingPlaceController;
+    required TextEditingController textController,
+    required this.labelText,
+    required this.descriptionText,
+  }) : _textController = textController;
 
   @override
   Widget build(BuildContext context) {
@@ -24,19 +27,15 @@ class MeetingPlaceContainer extends StatelessWidget {
         spacing: AppSpacing.medium,
         children: [
           CustomForm(
-            controller: _meetingPlaceController,
-            labelText: context
-                .localizations
-                .create_edit_event_screen_meeting_place_text,
+            controller: _textController,
+            labelText: labelText,
             characterLimit: 50,
             showSuffixIcon: false,
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: AppSpacing.xSmall),
             child: Text(
-              context
-                  .localizations
-                  .create_edit_event_screen_meeting_place_description,
+              descriptionText,
               style: AppTextTheme.bodySmall(
                 context,
               ).copyWith(color: context.colors.text.muted),

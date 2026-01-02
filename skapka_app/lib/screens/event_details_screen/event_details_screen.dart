@@ -77,7 +77,8 @@ class EventDetailsScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    if (event.meetingPlace != null)
+                    if (event.meetingPlace != null &&
+                        event.meetingPlace!.isNotEmpty)
                       Column(
                         spacing: AppSpacing.medium,
                         children: [

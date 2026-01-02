@@ -872,6 +872,18 @@ abstract class AppLocalizations {
   /// **'Adresa či jméno, které může uživatel vyhledat v mapách. Pokud nevyplníš, místo srazu nebude zobrazeno.'**
   String get create_edit_event_screen_meeting_place_description;
 
+  /// No description provided for @create_edit_event_screen_photo_album_link_text.
+  ///
+  /// In cs, this message translates to:
+  /// **'Odkaz na fotoalbum'**
+  String get create_edit_event_screen_photo_album_link_text;
+
+  /// No description provided for @create_edit_event_screen_photo_album_link_description.
+  ///
+  /// In cs, this message translates to:
+  /// **'Odkaz na sdílenené fotoalbum z výpravy. Pokud nevyplníš, odkaz na fotoalbum nebude zobrazen.'**
+  String get create_edit_event_screen_photo_album_link_description;
+
   /// No description provided for @settings_screen_title.
   ///
   /// In cs, this message translates to:

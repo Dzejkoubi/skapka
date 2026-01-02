@@ -116,10 +116,14 @@ class _AuthGateState extends State<AuthGate> {
     final eventsProvider = Provider.of<EventsProvider>(context, listen: false);
 
     // Fetch events from the start of the current school year (Sept 1st)
-    final schoolYearStart = DateTime(DateTime.now().year, 9, 1);
+    final now = DateTime.now();
+    // If current month is before September (1-8), use previous year. Otherwise, use current year.
+    final startYear = now.month < 9 ? now.year - 1 : now.year;
+    final schoolYearStart = DateTime(startYear, 9, 1);
+
     final events = await supabaseService.getGroupEvents(
-      groupId,
-      schoolYearStart,
+      groupId: groupId,
+      date: schoolYearStart,
     );
 
     eventsProvider.clear();

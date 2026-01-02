@@ -172,6 +172,9 @@
     "create_edit_event_screen_meeting_place_text": "Místo srazu",
     "create_edit_event_screen_meeting_place_description": "Adresa či jméno, které může uživatel vyhledat v mapách. Pokud nevyplníš, místo srazu nebude zobrazeno.",
 
+    "create_edit_event_screen_photo_album_link_text": "Odkaz na fotoalbum",
+    "create_edit_event_screen_photo_album_link_description": "Odkaz na sdílenené fotoalbum z výpravy. Pokud nevyplníš, odkaz na fotoalbum nebude zobrazen.",
+
     "settings_screen_title": "Nastavení",
     "settings_screen_change_signout_button_text": "Odhlásit se",
     "settings_screen_change_delete_account_button_text": "Smazat účet",

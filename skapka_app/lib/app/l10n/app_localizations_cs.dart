@@ -473,6 +473,14 @@ class AppLocalizationsCs extends AppLocalizations {
       'Adresa či jméno, které může uživatel vyhledat v mapách. Pokud nevyplníš, místo srazu nebude zobrazeno.';
 
   @override
+  String get create_edit_event_screen_photo_album_link_text =>
+      'Odkaz na fotoalbum';
+
+  @override
+  String get create_edit_event_screen_photo_album_link_description =>
+      'Odkaz na sdílenené fotoalbum z výpravy. Pokud nevyplníš, odkaz na fotoalbum nebude zobrazen.';
+
+  @override
   String get settings_screen_title => 'Nastavení';
 
   @override

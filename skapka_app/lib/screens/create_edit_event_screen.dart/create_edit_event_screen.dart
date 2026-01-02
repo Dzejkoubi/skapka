@@ -50,6 +50,10 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
     isDraft: isDraft,
   );
 
+  // Original and edited event participants for change detection
+  late final List<EventParticipantModel> originalEventParticipants =
+      widget.eventParticipants ?? [];
+
   // Creating local variables to hold form data
   late String? eventId;
   final TextEditingController _eventTitleController = TextEditingController();
@@ -117,45 +121,45 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
                   ? context.localizations.create_edit_event_screen_title_create
                   : context.localizations.create_edit_event_screen_title_edit,
               onBackPressed: () {
-                print(
-                  'Original eventId: ${originalEvent.eventId}; Edited eventId: ${editedEvent.eventId}',
-                );
-                print(
-                  'Original eventTitle: ${originalEvent.title}; Edited eventTitle: ${editedEvent.title}',
-                );
-                print(
-                  'Original eventInstructions: ${originalEvent.instructions}; Edited eventInstructions: ${editedEvent.instructions}',
-                );
-                print(
-                  'Original eventOpenSignUp: ${originalEvent.openSignUp}; Edited eventOpenSignUp: ${editedEvent.openSignUp}',
-                );
-                print(
-                  'Original eventCloseSignUp: ${originalEvent.closeSignUp}; Edited eventCloseSignUp: ${editedEvent.closeSignUp}',
-                );
-                print(
-                  'Original eventStartDate: ${originalEvent.startDate}; Edited eventStartDate: ${editedEvent.startDate}',
-                );
-                print(
-                  'Original eventEndDate: ${originalEvent.endDate}; Edited eventEndDate: ${editedEvent.endDate}',
-                );
-                print(
-                  'Original eventMeetingPlace: ${originalEvent.meetingPlace}; Edited eventMeetingPlace: ${editedEvent.meetingPlace}',
-                );
-                print(
-                  'Original eventPhotoAlbumLink: ${originalEvent.photoAlbumLink}; Edited eventPhotoAlbumLink: ${editedEvent.photoAlbumLink}',
-                );
-                print(
-                  'Original groupId: ${originalEvent.groupId}; Edited groupId: ${editedEvent.groupId}',
-                );
-                print(
-                  'Original targetPatrolsIds: ${originalEvent.targetPatrolsIds}; Edited targetPatrolsIds: ${editedEvent.targetPatrolsIds}',
-                );
-                print(
-                  'Original lastEditedBy: ${originalEvent.lastEditedBy}; Edited lastEditedBy: ${editedEvent.lastEditedBy}',
-                );
-                print(
-                  'Original eventIsDraft: ${originalEvent.isDraft}; Edited eventIsDraft: ${editedEvent.isDraft}',
-                );
+                // print(
+                //   'Original eventId: ${originalEvent.eventId}; Edited eventId: ${editedEvent.eventId}',
+                // );
+                // print(
+                //   'Original eventTitle: ${originalEvent.title}; Edited eventTitle: ${editedEvent.title}',
+                // );
+                // print(
+                //   'Original eventInstructions: ${originalEvent.instructions}; Edited eventInstructions: ${editedEvent.instructions}',
+                // );
+                // print(
+                //   'Original eventOpenSignUp: ${originalEvent.openSignUp}; Edited eventOpenSignUp: ${editedEvent.openSignUp}',
+                // );
+                // print(
+                //   'Original eventCloseSignUp: ${originalEvent.closeSignUp}; Edited eventCloseSignUp: ${editedEvent.closeSignUp}',
+                // );
+                // print(
+                //   'Original eventStartDate: ${originalEvent.startDate}; Edited eventStartDate: ${editedEvent.startDate}',
+                // );
+                // print(
+                //   'Original eventEndDate: ${originalEvent.endDate}; Edited eventEndDate: ${editedEvent.endDate}',
+                // );
+                // print(
+                //   'Original eventMeetingPlace: ${originalEvent.meetingPlace}; Edited eventMeetingPlace: ${editedEvent.meetingPlace}',
+                // );
+                // print(
+                //   'Original eventPhotoAlbumLink: ${originalEvent.photoAlbumLink}; Edited eventPhotoAlbumLink: ${editedEvent.photoAlbumLink}',
+                // );
+                // print(
+                //   'Original groupId: ${originalEvent.groupId}; Edited groupId: ${editedEvent.groupId}',
+                // );
+                // print(
+                //   'Original targetPatrolsIds: ${originalEvent.targetPatrolsIds}; Edited targetPatrolsIds: ${editedEvent.targetPatrolsIds}',
+                // );
+                // print(
+                //   'Original lastEditedBy: ${originalEvent.lastEditedBy}; Edited lastEditedBy: ${editedEvent.lastEditedBy}',
+                // );
+                // print(
+                //   'Original eventIsDraft: ${originalEvent.isDraft}; Edited eventIsDraft: ${editedEvent.isDraft}',
+                // );
 
                 if (originalEvent != editedEvent) {
                   // Show confirmation dialog before leaving

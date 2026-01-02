@@ -13,6 +13,8 @@ class DependentModel {
   final String? parent1Phone;
   final String? parent2Email;
   final String? parent2Phone;
+  final String? contactEmail;
+  final String? contactPhone;
   final String? troopId;
   final String? patrolId;
   final bool? isArchived;
@@ -37,6 +39,8 @@ class DependentModel {
     this.parent1Phone,
     this.parent2Email,
     this.parent2Phone,
+    this.contactEmail,
+    this.contactPhone,
     this.troopId,
     this.patrolId,
     required this.isArchived,
@@ -62,6 +66,8 @@ class DependentModel {
       parent1Phone: json['parent1_phone'] as String?,
       parent2Email: json['parent2_email'] as String?,
       parent2Phone: json['parent2_phone'] as String?,
+      contactEmail: json['contact_email'] as String?,
+      contactPhone: json['contact_phone'] as String?,
       troopId: json['troop_id'] as String?,
       patrolId: json['patrol_id'] as String?,
       isArchived: json['is_archived'] as bool? ?? false,
@@ -86,6 +92,8 @@ class DependentModel {
     String? parent1Phone,
     String? parent2Email,
     String? parent2Phone,
+    String? contactEmail,
+    String? contactPhone,
     String? troopId,
     String? patrolId,
     bool? isArchived,
@@ -104,6 +112,8 @@ class DependentModel {
       parent1Phone: parent1Phone ?? this.parent1Phone,
       parent2Email: parent2Email ?? this.parent2Email,
       parent2Phone: parent2Phone ?? this.parent2Phone,
+      contactEmail: contactEmail ?? this.contactEmail,
+      contactPhone: contactPhone ?? this.contactPhone,
       troopId: troopId ?? this.troopId,
       patrolId: patrolId ?? this.patrolId,
       isArchived: isArchived ?? this.isArchived,

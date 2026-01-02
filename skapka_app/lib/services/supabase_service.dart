@@ -143,6 +143,8 @@ class SupabaseService {
       parent1_phone,
       parent2_email,
       parent2_phone,
+      contact_email,
+      contact_phone,
       troop_id,
       patrol_id,
       archived,

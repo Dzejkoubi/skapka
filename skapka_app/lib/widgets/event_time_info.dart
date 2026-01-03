@@ -104,7 +104,7 @@ class EventTimeInfo extends StatelessWidget {
   }
 
   Widget buildRow(BuildContext context, String label, String value) {
-    final style = AppTextTheme.bodySmall(context);
+    final style = AppTextTheme.labelLarge(context);
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,

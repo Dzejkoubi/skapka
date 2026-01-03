@@ -102,7 +102,28 @@ class EventBox extends StatelessWidget {
                 ],
               ],
             ),
-            SizedBox(height: AppSpacing.xSmall),
+            if (event.targetPatrolsIds != null &&
+                event.targetPatrolsIds!.isNotEmpty) ...[
+              SizedBox(height: AppSpacing.xxSmall),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    unitsProvider.patrols
+                        .where(
+                          (patrol) =>
+                              event.targetPatrolsIds!.contains(patrol.patrolId),
+                        )
+                        .map((patrol) => patrol.name)
+                        .join(', '),
+                    textAlign: TextAlign.left,
+                    style: AppTextTheme.labelLarge(
+                      context,
+                    ).copyWith(color: context.colors.text.muted),
+                  ),
+                ],
+              ),
+            ],
             if (eventTimeType == EventTimeType.past &&
                 event.photoAlbumLink != null)
               Align(
@@ -122,7 +143,7 @@ class EventBox extends StatelessWidget {
                       text: AppLocalizations.of(
                         context,
                       )!.event_box_photos_link_text,
-                      style: AppTextTheme.labelMedium(context).copyWith(
+                      style: AppTextTheme.labelLarge(context).copyWith(
                         color: context.colors.secondary.normal,
                         decoration: TextDecoration.underline,
                       ),
@@ -151,36 +172,6 @@ class EventBox extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   EventTimeInfo(event: event, eventTimeType: eventTimeType),
-                  if (event.targetPatrolsIds != null &&
-                      event.targetPatrolsIds!.isNotEmpty) ...[
-                    SizedBox(height: AppSpacing.small),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          AppLocalizations.of(
-                            context,
-                          )!.event_box_target_patrols_text,
-                          style: AppTextTheme.bodySmall(
-                            context,
-                          ).copyWith(color: context.colors.text.muted),
-                        ),
-                        Text(
-                          unitsProvider.patrols
-                              .where(
-                                (patrol) => event.targetPatrolsIds!.contains(
-                                  patrol.patrolId,
-                                ),
-                              )
-                              .map((patrol) => patrol.name)
-                              .join(', '),
-                          style: AppTextTheme.bodySmall(
-                            context,
-                          ).copyWith(color: context.colors.text.normal),
-                        ),
-                      ],
-                    ),
-                  ],
                 ],
               ),
             ),

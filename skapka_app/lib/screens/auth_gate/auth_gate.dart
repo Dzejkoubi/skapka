@@ -5,6 +5,9 @@ import 'package:skapka_app/app/router/router.gr.dart';
 import 'package:skapka_app/app/theme/app_color_theme.dart';
 import 'package:skapka_app/models/patrol_model.dart';
 import 'package:skapka_app/models/troop_model.dart';
+import 'package:skapka_app/models/dependents/dependent_model.dart';
+import 'package:skapka_app/models/dependents/dependent_notes_model.dart';
+import 'package:skapka_app/models/event_participant_model.dart';
 import 'package:skapka_app/providers/account_provider.dart';
 import 'package:skapka_app/providers/dependents_provider.dart';
 import 'package:skapka_app/providers/events_provider.dart';
@@ -122,17 +125,26 @@ class _AuthGateState extends State<AuthGate> {
 
     dependentsProvider.clear();
     for (var ad in dependents) {
-      final detail = await supabaseService.getDependentDetail(ad.dependentId);
-      if (detail != null) {
-        final notes = await supabaseService.getDependentNotes(ad.dependentId);
-        if (mounted) {
-          dependentsProvider.addDependent(
-            ad.copyWith(dependentDetails: detail.copyWith(notes: notes)),
-          );
-        }
+      final results = await Future.wait([
+        supabaseService.getDependentDetail(ad.dependentId),
+        supabaseService.getDependentNotes(ad.dependentId),
+        supabaseService.getDependentParticipation(ad.dependentId),
+      ]);
+
+      final detail = results[0] as DependentModel?;
+      final notes = results[1] as DependentNotesModel?;
+      final participation = results[2] as List<EventParticipantModel>;
+
+      if (detail != null && mounted) {
+        dependentsProvider.addDependent(
+          ad.copyWith(dependentDetails: detail.copyWith(notes: notes)),
+        );
+        dependentsProvider.setParticipation(ad.dependentId, participation);
       }
     }
   }
+
+  ///
 
   /// Fetches events for the group starting from the current school year
   Future<void> _loadEvents(String groupId) async {

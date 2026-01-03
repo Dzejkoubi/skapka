@@ -38,6 +38,5 @@ class SomethingIsMissingWidget extends StatelessWidget {
         ),
       ],
     );
-    ;
   }
 }

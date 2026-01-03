@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-class FloatingLogo extends StatefulWidget {
-  const FloatingLogo({super.key});
+class LoadingFloatingLogo extends StatefulWidget {
+  const LoadingFloatingLogo({super.key});
 
   @override
-  State<FloatingLogo> createState() => _FloatingLogoState();
+  State<LoadingFloatingLogo> createState() => _LoadingFloatingLogoState();
 }
 
-class _FloatingLogoState extends State<FloatingLogo>
+class _LoadingFloatingLogoState extends State<LoadingFloatingLogo>
     with SingleTickerProviderStateMixin {
   late AnimationController controller;
 

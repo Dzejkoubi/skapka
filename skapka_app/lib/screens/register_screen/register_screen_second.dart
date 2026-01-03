@@ -3,12 +3,14 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:skapka_app/app/l10n/app_localizations.dart';
+import 'package:skapka_app/app/l10n/l10n_extension.dart';
 import 'package:skapka_app/app/router/router.gr.dart';
 import 'package:skapka_app/app/theme/app_color_theme.dart';
 import 'package:skapka_app/app/theme/app_spacing.dart';
 import 'package:skapka_app/app/theme/app_text_theme.dart';
 import 'package:skapka_app/app/theme/main_button_theme.dart';
 import 'package:skapka_app/services/auth_service.dart';
+import 'package:skapka_app/services/supabase_service.dart';
 import 'package:skapka_app/utils/password_validator.dart';
 import 'package:skapka_app/utils/two_passwords_validator.dart';
 import 'package:skapka_app/widgets/appbar/go_back_bar.dart';
@@ -36,6 +38,7 @@ class RegisterScreenSecond extends StatefulWidget {
 
 class _RegisterScreenSecondState extends State<RegisterScreenSecond> {
   AuthService authService = AuthService();
+  SupabaseService supabaseService = SupabaseService();
 
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPasswordController =
@@ -69,7 +72,7 @@ class _RegisterScreenSecondState extends State<RegisterScreenSecond> {
           password: _passwordController.text,
         );
 
-        await authService.editAccountDetails(
+        await supabaseService.editAccountDetails(
           accountId: authService.currentUser!.id,
           name: widget.name,
           surname: widget.surname,
@@ -159,7 +162,7 @@ class _RegisterScreenSecondState extends State<RegisterScreenSecond> {
                   children: [
                     SvgPicture.asset('assets/images/shapes/shape-3.svg'),
                     Text(
-                      AppLocalizations.of(context)!.register_screen_title,
+                      context.localizations.register_screen_title,
                       style: AppTextTheme.displayLarge(context),
                     ),
                   ],
@@ -221,7 +224,7 @@ class _RegisterScreenSecondState extends State<RegisterScreenSecond> {
                   child: MainButton.filled(
                     variant: ButtonStylesVariants.white,
                     text: _isLoading
-                        ? AppLocalizations.of(context)!.loading
+                        ? context.localizations.loading
                         : AppLocalizations.of(
                             context,
                           )!.register_screen_2_register_button_text,

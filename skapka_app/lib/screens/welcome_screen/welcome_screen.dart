@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:skapka_app/app/l10n/l10n_extension.dart';
 import 'package:skapka_app/app/router/router.gr.dart';
 import 'package:skapka_app/app/theme/app_color_theme.dart';
 import 'package:skapka_app/app/theme/app_spacing.dart';
@@ -31,7 +33,7 @@ class WelcomeScreen extends StatelessWidget {
               ),
               Text(
                 textAlign: TextAlign.center,
-                AppLocalizations.of(context)!.welcome_screen_title,
+                context.localizations.welcome_screen_title,
                 style: AppTextTheme.displayLarge(
                   context,
                 ).copyWith(color: context.colors.text.normalLight),
@@ -72,8 +74,11 @@ class WelcomeScreen extends StatelessWidget {
                       text: AppLocalizations.of(
                         context,
                       )!.welcome_screen_songbook_button_text,
+
                       onPressed: () {
-                        print('songbook button pressed');
+                        if (kDebugMode) {
+                          print('songbook button pressed');
+                        }
                       },
                     ),
                   ],

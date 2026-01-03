@@ -148,7 +148,7 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
     return names.isEmpty ? '-' : names.join(', ');
   }
 
-  // Creating local variables to hold form data
+  // Creating local variables to hold new event data -
   late String? eventId;
   final TextEditingController _eventTitleController = TextEditingController();
   late String? _instructions;
@@ -166,6 +166,9 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
   _ProcessingType _processingType = _ProcessingType.none;
   bool get _isProcessing => _processingType != _ProcessingType.none;
 
+  // Tracks if data loading is complete
+  bool _isInitialized = false;
+  // Future for initial data fetching
   late Future<void> _initializationFuture;
 
   /// Fetch all necessary data (dependents, patrols, troops, participants)
@@ -180,6 +183,7 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
       _originalEventParticipants = [];
       _editedEventParticipants = [];
     }
+    _isInitialized = true;
   }
 
   @override
@@ -201,7 +205,7 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
           meetingPlace: '',
           photoAlbumLink: '',
           groupId: null,
-          targetPatrolsIds: null,
+          targetPatrolsIds: [],
           lastEditedBy: null,
           isDraft: true,
         );
@@ -531,239 +535,254 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
     }
   }
 
+  bool _forcePop = false;
+
+  bool get _hasUnsavedChanges {
+    if (!_isInitialized) return false;
+    return originalEvent != editedEvent ||
+        !listEquals(_originalEventParticipants, _editedEventParticipants);
+  }
+
+  void _showExitConfirmationDialog() {
+    showDialog(
+      context: context,
+      builder: (builder) {
+        return LargeDialog(
+          type: LargeDialogType.negative,
+          title: context
+              .localizations
+              .create_edit_event_screen_go_back_without_saving_dialog_title,
+          description: context
+              .localizations
+              .create_edit_event_screen_go_back_without_saving_dialog_description,
+          primaryButtonText: context
+              .localizations
+              .create_edit_event_screen_go_back_without_saving_dialog_primary_button_text,
+          secondaryButtonText: context.localizations.cancel,
+          onSecondaryPressed: () => Navigator.of(context).pop(),
+          onPrimaryPressed: () {
+            Navigator.of(context).pop(); // Close dialog
+            setState(() {
+              _forcePop = true;
+            });
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              Navigator.of(context).pop();
+            });
+          },
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => ValueNotifier<bool>(false),
-      child: FutureBuilder(
-        future: _initializationFuture,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return ScreenWrapper(
-              appBar: Appbar(
-                showBackChevron: true,
-                showSettingsIcon: false,
-                screenName: widget.event == null
-                    ? context
-                          .localizations
-                          .create_edit_event_screen_title_create
-                    : context.localizations.create_edit_event_screen_title_edit,
-              ),
-              body: Center(child: const LoadingFloatingLogo()),
-            );
-          }
-          return Builder(
-            builder: (context) {
-              final dialOpenNotifier = context.watch<ValueNotifier<bool>>();
-              return Stack(
-                children: [
-                  ScreenWrapper(
-                    appBar: Appbar(
-                      showBackChevron: true,
-                      showSettingsIcon: false,
-                      screenName: widget.event == null
-                          ? context
-                                .localizations
-                                .create_edit_event_screen_title_create
-                          : context
-                                .localizations
-                                .create_edit_event_screen_title_edit,
-                      onBackPressed: _isProcessing
-                          ? () {}
-                          : () {
-                              if (originalEvent != editedEvent ||
-                                  !listEquals(
-                                    _originalEventParticipants,
-                                    _editedEventParticipants,
-                                  )) {
-                                // Show confirmation dialog before leaving
-                                showDialog(
-                                  context: context,
-                                  builder: (builder) {
-                                    return LargeDialog(
-                                      type: LargeDialogType.negative,
-                                      title: context
-                                          .localizations
-                                          .create_edit_event_screen_go_back_without_saving_dialog_title,
-                                      description: context
-                                          .localizations
-                                          .create_edit_event_screen_go_back_without_saving_dialog_description,
-                                      primaryButtonText: context
-                                          .localizations
-                                          .create_edit_event_screen_go_back_without_saving_dialog_primary_button_text,
-                                      secondaryButtonText:
-                                          context.localizations.cancel,
-                                      onSecondaryPressed: () =>
-                                          Navigator.of(context).pop(),
-                                      onPrimaryPressed: () {
-                                        Navigator.of(
-                                          context,
-                                        ).pop(); // Close dialog
-                                        Navigator.of(context).pop(); // Go back
-                                      },
-                                    );
-                                  },
-                                );
-                              } else {
-                                Navigator.of(context).pop();
-                              }
-                            },
-                    ),
-                    body: SingleChildScrollView(
-                      child: SafeArea(
-                        child: Column(
-                          spacing: AppSpacing.large,
-                          children: [
-                            EventTitleForm(
-                              eventTitleController: _eventTitleController,
-                            ),
-                            EventDateSelector(
-                              openSignUp: _openSignUp,
-                              closeSignUp: _closeSignUp,
-                              startDate: _startDate,
-                              endDate: _endDate,
-                              onOpenSignUpChanged: (d) =>
-                                  setState(() => _openSignUp = d),
-                              onCloseSignUpChanged: (d) =>
-                                  setState(() => _closeSignUp = d),
-                              onStartDateChanged: (d) =>
-                                  setState(() => _startDate = d),
-                              onEndDateChanged: (d) =>
-                                  setState(() => _endDate = d),
-                            ),
-                            EventInstructionsContainer(),
-                            EventParticipantsContainer(
-                              originalParticipantsCount:
-                                  originalParticipantsCount,
-                              invitedParticipantsCount: totalParticipantsCount,
-                              signedUpParticipantsCount:
-                                  totalSignedUpParticipantsCount,
-                              invitedLeadersCount: totalInvitedLeadersCount,
-                              signedUpLeadersCount: totalSignedUpLeadersCount,
-                              invited18PlusLeadersCount:
-                                  total18PlusInvitedLeadersCount,
-                              signedUp18PlusLeadersCount:
-                                  total18PlusSignedUpLeadersCount,
-                              targetPatrolNames: targetPatrolNames,
-                              groupDependents: _groupDependents,
-                              groupLeaders: _groupLeaders,
-                              groupPatrols: _groupPatrols,
-                              groupTroops: _groupTroops,
-                              initialParticipants: _editedEventParticipants,
-                              onParticipantsChanged: (updatedParticipants) {
-                                setState(() {
-                                  _editedEventParticipants =
-                                      updatedParticipants;
-                                });
-                              },
-                            ),
-                            FormWithDetails(
-                              textController: _meetingPlaceController,
-                              labelText: context
-                                  .localizations
-                                  .create_edit_event_screen_meeting_place_text,
-                              descriptionText: context
-                                  .localizations
-                                  .create_edit_event_screen_meeting_place_description,
-                            ),
-                            FormWithDetails(
-                              textController: _photoAlbumLinkController,
-                              labelText: context
-                                  .localizations
-                                  .create_edit_event_screen_photo_album_link_text,
-                              descriptionText: context
-                                  .localizations
-                                  .create_edit_event_screen_photo_album_link_description,
-                            ),
-                            SizedBox(height: AppSpacing.bottomSpace),
-                          ],
-                        ),
-                      ),
-                    ),
-
-                    speedDialChildren: CreateEditEventSpeedDial.build(
-                      context: context,
-                      dialOpenNotifier: dialOpenNotifier,
-                      event: widget.event,
-                      eventTimeType: widget.eventTimeType,
-                      onDelete: () {
-                        if (kDebugMode) print('User confirmed delete event');
-                        _deleteEvent();
-                      },
-                      onPublish: () {
-                        if (kDebugMode) print('User confirmed publish event');
-                        final error = _validateEvent();
-                        if (error != null) {
-                          BottomDialog.show(
-                            context,
-                            type: BottomDialogType.negative,
-                            description: error,
-                          );
-                          return;
-                        }
-                        if (eventId == null) {
-                          _createNewEvent(asDraft: false);
-                        } else {
-                          _saveEditedEvent(asDraft: false);
-                        }
-                      },
-                      onUnpublish: () {
-                        if (kDebugMode) print('User confirmed unpublish event');
-                        if (eventId == null) {
-                          _createNewEvent(asDraft: true);
-                        } else {
-                          _saveEditedEvent(asDraft: true);
-                        }
-                      },
-                      onSave: ({required bool asDraft}) {
-                        if (kDebugMode) {
-                          print(
-                            'User confirmed save event (asDraft: $asDraft)',
-                          );
-                        }
-                        final error = _validateEvent();
-                        if (error != null) {
-                          BottomDialog.show(
-                            context,
-                            type: BottomDialogType.negative,
-                            description: error,
-                          );
-                          return;
-                        }
-                        if (eventId == null) {
-                          _createNewEvent(asDraft: asDraft);
-                        } else {
-                          _saveEditedEvent(asDraft: asDraft);
-                        }
-                      },
-                    ),
-                    fabKey: dialOpenNotifier.hashCode,
-                    openCloseDial: dialOpenNotifier,
-                  ),
-                  if (_isProcessing)
-                    Container(
-                      color: context.colors.shadow.shadow10,
-                      child: Center(
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            const LoadingFloatingLogo(),
-                            const SizedBox(height: AppSpacing.medium),
-                            Text(
-                              _getProcessingText(context),
-                              style: AppTextTheme.titleMedium(context).copyWith(
-                                color: context.colors.text.normalReversed,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                ],
+    return PopScope(
+      canPop: _forcePop || (!_isProcessing && !_hasUnsavedChanges),
+      onPopInvokedWithResult: (didPop, result) {
+        if (didPop) return;
+        if (_isProcessing) return;
+        _showExitConfirmationDialog();
+      },
+      child: ChangeNotifierProvider(
+        create: (_) => ValueNotifier<bool>(false),
+        child: FutureBuilder(
+          future: _initializationFuture,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return ScreenWrapper(
+                appBar: Appbar(
+                  showBackChevron: true,
+                  showSettingsIcon: false,
+                  screenName: widget.event == null
+                      ? context
+                            .localizations
+                            .create_edit_event_screen_title_create
+                      : context
+                            .localizations
+                            .create_edit_event_screen_title_edit,
+                ),
+                body: Center(child: const LoadingFloatingLogo()),
               );
-            },
-          );
-        },
+            }
+            return Builder(
+              builder: (context) {
+                final dialOpenNotifier = context.watch<ValueNotifier<bool>>();
+                return Stack(
+                  children: [
+                    ScreenWrapper(
+                      appBar: Appbar(
+                        showBackChevron: true,
+                        showSettingsIcon: false,
+                        screenName: widget.event == null
+                            ? context
+                                  .localizations
+                                  .create_edit_event_screen_title_create
+                            : context
+                                  .localizations
+                                  .create_edit_event_screen_title_edit,
+                        onBackPressed: _isProcessing
+                            ? () {}
+                            : () => Navigator.of(context).maybePop(),
+                      ),
+                      body: SingleChildScrollView(
+                        child: SafeArea(
+                          child: Column(
+                            spacing: AppSpacing.large,
+                            children: [
+                              EventTitleForm(
+                                eventTitleController: _eventTitleController,
+                              ),
+                              EventDateSelector(
+                                openSignUp: _openSignUp,
+                                closeSignUp: _closeSignUp,
+                                startDate: _startDate,
+                                endDate: _endDate,
+                                onOpenSignUpChanged: (d) =>
+                                    setState(() => _openSignUp = d),
+                                onCloseSignUpChanged: (d) =>
+                                    setState(() => _closeSignUp = d),
+                                onStartDateChanged: (d) =>
+                                    setState(() => _startDate = d),
+                                onEndDateChanged: (d) =>
+                                    setState(() => _endDate = d),
+                              ),
+                              EventInstructionsContainer(),
+                              EventParticipantsContainer(
+                                originalParticipantsCount:
+                                    originalParticipantsCount,
+                                invitedParticipantsCount:
+                                    totalParticipantsCount,
+                                signedUpParticipantsCount:
+                                    totalSignedUpParticipantsCount,
+                                invitedLeadersCount: totalInvitedLeadersCount,
+                                signedUpLeadersCount: totalSignedUpLeadersCount,
+                                invited18PlusLeadersCount:
+                                    total18PlusInvitedLeadersCount,
+                                signedUp18PlusLeadersCount:
+                                    total18PlusSignedUpLeadersCount,
+                                targetPatrolNames: targetPatrolNames,
+                                groupDependents: _groupDependents,
+                                groupLeaders: _groupLeaders,
+                                groupPatrols: _groupPatrols,
+                                groupTroops: _groupTroops,
+                                initialParticipants: _editedEventParticipants,
+                                onParticipantsChanged: (updatedParticipants) {
+                                  setState(() {
+                                    _editedEventParticipants =
+                                        updatedParticipants;
+                                  });
+                                },
+                              ),
+                              FormWithDetails(
+                                textController: _meetingPlaceController,
+                                labelText: context
+                                    .localizations
+                                    .create_edit_event_screen_meeting_place_text,
+                                descriptionText: context
+                                    .localizations
+                                    .create_edit_event_screen_meeting_place_description,
+                              ),
+                              FormWithDetails(
+                                textController: _photoAlbumLinkController,
+                                labelText: context
+                                    .localizations
+                                    .create_edit_event_screen_photo_album_link_text,
+                                descriptionText: context
+                                    .localizations
+                                    .create_edit_event_screen_photo_album_link_description,
+                              ),
+                              SizedBox(height: AppSpacing.bottomSpace),
+                            ],
+                          ),
+                        ),
+                      ),
+
+                      speedDialChildren: CreateEditEventSpeedDial.build(
+                        context: context,
+                        dialOpenNotifier: dialOpenNotifier,
+                        event: widget.event,
+                        eventTimeType: widget.eventTimeType,
+                        onDelete: () {
+                          if (kDebugMode) print('User confirmed delete event');
+                          _deleteEvent();
+                        },
+                        onPublish: () {
+                          if (kDebugMode) print('User confirmed publish event');
+                          final error = _validateEvent();
+                          if (error != null) {
+                            BottomDialog.show(
+                              context,
+                              type: BottomDialogType.negative,
+                              description: error,
+                            );
+                            return;
+                          }
+                          if (eventId == null) {
+                            _createNewEvent(asDraft: false);
+                          } else {
+                            _saveEditedEvent(asDraft: false);
+                          }
+                        },
+                        onUnpublish: () {
+                          if (kDebugMode)
+                            print('User confirmed unpublish event');
+                          if (eventId == null) {
+                            _createNewEvent(asDraft: true);
+                          } else {
+                            _saveEditedEvent(asDraft: true);
+                          }
+                        },
+                        onSave: ({required bool asDraft}) {
+                          if (kDebugMode) {
+                            print(
+                              'User confirmed save event (asDraft: $asDraft)',
+                            );
+                          }
+                          final error = _validateEvent();
+                          if (error != null) {
+                            BottomDialog.show(
+                              context,
+                              type: BottomDialogType.negative,
+                              description: error,
+                            );
+                            return;
+                          }
+                          if (eventId == null) {
+                            _createNewEvent(asDraft: asDraft);
+                          } else {
+                            _saveEditedEvent(asDraft: asDraft);
+                          }
+                        },
+                      ),
+                      fabKey: dialOpenNotifier.hashCode,
+                      openCloseDial: dialOpenNotifier,
+                    ),
+                    if (_isProcessing)
+                      Container(
+                        color: context.colors.shadow.shadow10,
+                        child: Center(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              const LoadingFloatingLogo(),
+                              const SizedBox(height: AppSpacing.medium),
+                              Text(
+                                _getProcessingText(context),
+                                style: AppTextTheme.titleMedium(context)
+                                    .copyWith(
+                                      color: context.colors.text.normalReversed,
+                                    ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                  ],
+                );
+              },
+            );
+          },
+        ),
       ),
     );
   }

@@ -399,6 +399,10 @@ class AppLocalizationsCs extends AppLocalizations {
       'Smazání výpravy se nezdařilo. Zkus to prosím znovu.';
 
   @override
+  String get create_edit_event_screen_delete_event_success =>
+      'Výprava byla úspěšně smazána🥳.';
+
+  @override
   String get create_edit_event_screen_go_back_without_saving_dialog_title =>
       'Zahodit změny';
 

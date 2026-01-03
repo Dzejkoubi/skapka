@@ -142,6 +142,7 @@
     "create_edit_event_screen_delete_event_error_event_not_created": "Nelze smazat výpravu, která ještě nebyla vytvořena.",
     "create_edit_event_screen_delete_event_error_not_rights": "Nemáš oprávnění mazat výpravy.",
     "create_edit_event_screen_delete_event_error_generic": "Smazání výpravy se nezdařilo. Zkus to prosím znovu.",
+    "create_edit_event_screen_delete_event_success": "Výprava byla úspěšně smazána🥳.",
 
     "create_edit_event_screen_go_back_without_saving_dialog_title": "Zahodit změny",
     "create_edit_event_screen_go_back_without_saving_dialog_description": "Opravdu chceš odejít bez uložení změn? Veškeré neuložené změny budou ztraceny.",

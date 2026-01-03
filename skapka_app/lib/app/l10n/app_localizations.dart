@@ -739,6 +739,12 @@ abstract class AppLocalizations {
   /// **'Smazání výpravy se nezdařilo. Zkus to prosím znovu.'**
   String get create_edit_event_screen_delete_event_error_generic;
 
+  /// No description provided for @create_edit_event_screen_delete_event_success.
+  ///
+  /// In cs, this message translates to:
+  /// **'Výprava byla úspěšně smazána🥳.'**
+  String get create_edit_event_screen_delete_event_success;
+
   /// No description provided for @create_edit_event_screen_go_back_without_saving_dialog_title.
   ///
   /// In cs, this message translates to:

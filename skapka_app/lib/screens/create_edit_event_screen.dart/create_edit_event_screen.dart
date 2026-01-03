@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:skapka_app/app/l10n/l10n_extension.dart';
+import 'package:skapka_app/app/router/router.gr.dart';
 import 'package:skapka_app/app/theme/app_spacing.dart';
 import 'package:skapka_app/app/theme/app_color_theme.dart';
 import 'package:skapka_app/app/theme/app_text_theme.dart';
@@ -14,6 +15,7 @@ import 'package:skapka_app/models/patrol_model.dart';
 import 'package:skapka_app/models/troop_model.dart';
 import 'package:skapka_app/providers/account_provider.dart';
 import 'package:skapka_app/providers/events_provider.dart';
+import 'package:skapka_app/utils/event_utils.dart';
 import 'package:skapka_app/screens/create_edit_event_screen.dart/widgets/event_instructions_container.dart';
 import 'package:skapka_app/screens/create_edit_event_screen.dart/widgets/event_participants_container.dart';
 import 'package:skapka_app/screens/create_edit_event_screen.dart/widgets/event_title_form.dart';
@@ -338,10 +340,7 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
               context.localizations.create_edit_event_screen_save_success,
         );
 
-        await _loadEventsAfterSuccess();
-        if (mounted) {
-          context.router.pop(); // Close the screen and return after deletion
-        }
+        await _loadEventsAfterSuccess(event: createdEvent);
       }
     } catch (e) {
       if (kDebugMode) {
@@ -414,10 +413,7 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
           description:
               context.localizations.create_edit_event_screen_save_success,
         );
-        await _loadEventsAfterSuccess();
-        if (mounted) {
-          context.router.pop(); // Close the screen and return after deletion
-        }
+        await _loadEventsAfterSuccess(event: updatedEvent);
       }
     } catch (e) {
       if (kDebugMode) {
@@ -450,11 +446,15 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
       if (kDebugMode) {
         print('Event $eventId deleted successfully.');
       }
-
-      await _loadEventsAfterSuccess();
       if (mounted) {
-        context.router.pop();
-        context.router.pop(); // Close the screen and return after deletion
+        BottomDialog.show(
+          context,
+          type: BottomDialogType.positive,
+          description: context
+              .localizations
+              .create_edit_event_screen_delete_event_success,
+        );
+        await _loadEventsAfterSuccess();
       }
     } catch (e) {
       if (kDebugMode) {
@@ -498,12 +498,37 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
     }
   }
 
-  Future<void> _loadEventsAfterSuccess() async {
+  Future<void> _loadEventsAfterSuccess({EventModel? event}) async {
     final events = await SupabaseService().getGroupEvents(
       groupId: _accountProvider.groupId,
     );
     if (mounted) {
       context.read<EventsProvider>().setEvents(events);
+    }
+    if (mounted) {
+      if (event == null) {
+        // Deletion: pop CreateEdit and pop EventDetails
+        context.router.pop(); // Pop CreateEdit
+        if (widget.event != null) {
+          context.router.pop(); // Pop EventDetails
+        }
+      } else {
+        // Create/Edit: pop CreateEdit and push/replace EventDetails
+        final type = EventUtils.getEventTimeType(event);
+
+        if (widget.event != null) {
+          // We were editing, replace the old details screen
+          context.router.pop(); // Pop CreateEdit
+          context.router.popAndPush(
+            EventDetailsRoute(event: event, eventTimeType: type),
+          );
+        } else {
+          // We were creating, replace CreateEdit with new details screen
+          context.router.popAndPush(
+            EventDetailsRoute(event: event, eventTimeType: type),
+          );
+        }
+      }
     }
   }
 

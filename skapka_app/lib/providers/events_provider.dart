@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:skapka_app/models/event_model.dart';
+import 'package:skapka_app/utils/event_utils.dart';
 
 class EventsProvider extends ChangeNotifier {
   final List<EventModel> _events = [];
@@ -13,29 +14,17 @@ class EventsProvider extends ChangeNotifier {
   }
 
   List<EventModel> get events => _events;
-  List<EventModel> get futureEvents => _events.where((event) {
-    if (event.isDraft) return false;
-    final now = DateTime.now();
-    return event.openSignUp != null && event.openSignUp!.isAfter(now);
-  }).toList();
+  List<EventModel> get futureEvents =>
+      _events.where((event) => EventUtils.isFuture(event)).toList();
 
-  List<EventModel> get liveEvents => _events.where((event) {
-    if (event.isDraft) return false;
-    final now = DateTime.now();
-    return event.openSignUp != null &&
-        event.openSignUp!.isBefore(now) &&
-        event.endDate != null &&
-        event.endDate!.isAfter(now);
-  }).toList();
+  List<EventModel> get liveEvents =>
+      _events.where((event) => EventUtils.isLive(event)).toList();
 
-  List<EventModel> get pastEvents => _events.where((event) {
-    if (event.isDraft) return false;
-    final now = DateTime.now();
-    return event.endDate != null && event.endDate!.isBefore(now);
-  }).toList();
+  List<EventModel> get pastEvents =>
+      _events.where((event) => EventUtils.isPast(event)).toList();
 
   List<EventModel> get draftEvents =>
-      _events.where((event) => event.isDraft).toList();
+      _events.where((event) => EventUtils.isDraft(event)).toList();
 
   void setEvents(List<EventModel> events) {
     clear();

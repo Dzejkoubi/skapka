@@ -402,6 +402,10 @@ class AppLocalizationsEn extends AppLocalizations {
       'Deleting the event failed. Please try again.';
 
   @override
+  String get create_edit_event_screen_delete_event_success =>
+      'Event was successfully deleted🥳.';
+
+  @override
   String get create_edit_event_screen_go_back_without_saving_dialog_title =>
       'Discard Changes';
 

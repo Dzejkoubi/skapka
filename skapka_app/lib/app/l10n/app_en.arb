@@ -142,7 +142,7 @@
     "create_edit_event_screen_delete_event_error_event_not_created": "Cannot delete an event that has not been created yet.",
     "create_edit_event_screen_delete_event_error_not_rights": "You do not have permission to delete events.",
     "create_edit_event_screen_delete_event_error_generic": "Deleting the event failed. Please try again.",
-
+    "create_edit_event_screen_delete_event_success": "Event was successfully deleted🥳.",
 
     "create_edit_event_screen_go_back_without_saving_dialog_title": "Discard Changes",
     "create_edit_event_screen_go_back_without_saving_dialog_description": "Are you sure you want to go back without saving changes? All unsaved changes will be lost.",

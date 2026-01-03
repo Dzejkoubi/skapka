@@ -111,8 +111,8 @@ class _LargeDialogState extends State<LargeDialog> {
                               widget.type == LargeDialogType.positive
                                   ? 'assets/icons/check.svg'
                                   : 'assets/icons/x.svg',
-                              width: AppSizes.iconSizeXLarge,
-                              height: AppSizes.iconSizeXLarge,
+                              width: AppSizes.iconSizeHuge,
+                              height: AppSizes.iconSizeHuge,
                               colorFilter: ColorFilter.mode(
                                 config.contentColor,
                                 BlendMode.srcIn,

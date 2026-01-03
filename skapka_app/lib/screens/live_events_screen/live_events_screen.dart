@@ -52,11 +52,21 @@ class LiveEventsScreen extends StatelessWidget {
                                 );
                               }).toList();
 
+                              final filteredParticipation = participation
+                                  .where(
+                                    (p) => dependentsLiveEvents.any(
+                                      (e) => e.eventId == p.eventId,
+                                    ),
+                                  )
+                                  .toList();
+
                               return DependentView(
                                 dependentName:
                                     '${dependent.dependentDetails?.name ?? ''} ${dependent.dependentDetails?.surname ?? ''}',
                                 dependentsLiveEvents: dependentsLiveEvents,
                                 unitsProvider: context.read<UnitsProvider>(),
+                                dependentId: dependent.dependentId,
+                                usersParticipation: filteredParticipation,
                               );
                             },
                           ),

@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:skapka_app/app/l10n/app_localizations.dart';
+import 'package:skapka_app/app/l10n/l10n_extension.dart';
 import 'package:skapka_app/app/router/router.gr.dart';
 import 'package:skapka_app/app/theme/app_color_theme.dart';
 import 'package:skapka_app/app/theme/app_spacing.dart';
@@ -65,7 +66,7 @@ class _RegisterScreenFirstState extends State<RegisterScreenFirst> {
               children: [
                 SvgPicture.asset('assets/images/shapes/shape-2.svg'),
                 Text(
-                  AppLocalizations.of(context)!.register_screen_title,
+                  context.localizations.register_screen_title,
                   style: AppTextTheme.displayLarge(context),
                 ),
               ],

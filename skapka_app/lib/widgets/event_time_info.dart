@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:skapka_app/app/l10n/app_localizations.dart';
+import 'package:skapka_app/app/l10n/l10n_extension.dart';
 import 'package:skapka_app/app/theme/app_color_theme.dart';
 import 'package:skapka_app/app/theme/app_spacing.dart';
 import 'package:skapka_app/app/theme/app_text_theme.dart';
@@ -21,7 +21,6 @@ class EventTimeInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
     final dateFormat = DateFormat('d. M. yyyy');
     final timeFormat = DateFormat('HH:mm');
     final dateTimeFormat = DateFormat('d. M. yyyy HH:mm');
@@ -40,63 +39,63 @@ class EventTimeInfo extends StatelessWidget {
       children: [
         if (fullInfo) ...[
           if (isUserLeader(context) && event.openSignUp != null)
-            _buildRow(
+            buildRow(
               context,
-              l10n.event_box_sign_up_start_date_text,
+              context.localizations.event_box_sign_up_start_date_text,
               dateTimeFormat.format(event.openSignUp!),
             ),
           if (event.closeSignUp != null)
-            _buildRow(
+            buildRow(
               context,
-              l10n.event_box_sign_up_end_date_text,
+              context.localizations.event_box_sign_up_end_date_text,
               dateTimeFormat.format(event.closeSignUp!),
             ),
         ] else ...[
           if (eventTimeType == EventTimeType.draft) ...[
             if (event.openSignUp != null)
-              _buildRow(
+              buildRow(
                 context,
-                l10n.event_box_sign_up_start_date_text,
+                context.localizations.event_box_sign_up_start_date_text,
                 dateTimeFormat.format(event.openSignUp!),
               ),
             if (event.closeSignUp != null)
-              _buildRow(
+              buildRow(
                 context,
-                l10n.event_box_sign_up_end_date_text,
+                context.localizations.event_box_sign_up_end_date_text,
                 dateTimeFormat.format(event.closeSignUp!),
               ),
           ] else if (eventTimeType == EventTimeType.live) ...[
             if (event.closeSignUp != null)
-              _buildRow(
+              buildRow(
                 context,
-                l10n.event_box_sign_up_end_date_text,
+                context.localizations.event_box_sign_up_end_date_text,
                 dateTimeFormat.format(event.closeSignUp!),
               ),
           ] else if (eventTimeType == EventTimeType.future) ...[
             if (event.openSignUp != null)
-              _buildRow(
+              buildRow(
                 context,
-                l10n.event_box_sign_up_start_date_text,
+                context.localizations.event_box_sign_up_start_date_text,
                 dateTimeFormat.format(event.openSignUp!),
               ),
           ],
         ],
         if (startDate != null && endDate != null)
           if (isSingleDay)
-            _buildRow(
+            buildRow(
               context,
-              l10n.event_box_event_single_day_text,
+              context.localizations.event_box_event_single_day_text,
               '${dateFormat.format(startDate)} ${timeFormat.format(startDate)} - ${timeFormat.format(endDate)}',
             )
           else ...[
-            _buildRow(
+            buildRow(
               context,
-              l10n.event_box_event_multiple_days_start_text,
+              context.localizations.event_box_event_multiple_days_start_text,
               dateTimeFormat.format(startDate),
             ),
-            _buildRow(
+            buildRow(
               context,
-              l10n.event_box_event_multiple_days_end_text,
+              context.localizations.event_box_event_multiple_days_end_text,
               dateTimeFormat.format(endDate),
             ),
           ],
@@ -104,14 +103,23 @@ class EventTimeInfo extends StatelessWidget {
     );
   }
 
-  Widget _buildRow(BuildContext context, String label, String value) {
+  Widget buildRow(BuildContext context, String label, String value) {
     final style = AppTextTheme.bodySmall(context);
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(label, style: style.copyWith(color: context.colors.text.muted)),
-        Text(value, style: style.copyWith(color: context.colors.text.normal)),
+        Expanded(
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            reverse: true,
+            child: Text(
+              value,
+              style: style.copyWith(color: context.colors.text.normal),
+            ),
+          ),
+        ),
       ],
     );
   }

@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:gaimon/gaimon.dart';
 import 'package:skapka_app/app/router/router.gr.dart';
 import 'package:skapka_app/app/theme/app_color_theme.dart';
 import 'package:skapka_app/app/theme/app_sizes.dart';
@@ -13,6 +14,7 @@ class Appbar extends StatelessWidget implements PreferredSizeWidget {
   final bool backChevronCanPop;
   final bool showSettingsIcon;
   final String? screenName;
+  final Function()? onBackPressed;
 
   static const double bottomRadius = 36.0;
   static const double topBarHeight = 64.0;
@@ -22,6 +24,7 @@ class Appbar extends StatelessWidget implements PreferredSizeWidget {
     required this.showSettingsIcon,
     this.backChevronCanPop = true,
     this.screenName = 'screenName',
+    this.onBackPressed,
     super.key,
   });
 
@@ -44,7 +47,10 @@ class Appbar extends StatelessWidget implements PreferredSizeWidget {
               if (showBackChevron)
                 GestureDetector(
                   onTap: () {
-                    if (backChevronCanPop && Navigator.of(context).canPop()) {
+                    if (onBackPressed != null) {
+                      onBackPressed!();
+                    } else if (backChevronCanPop &&
+                        Navigator.of(context).canPop()) {
                       Navigator.of(context).pop();
                     }
                   },
@@ -85,6 +91,7 @@ class Appbar extends StatelessWidget implements PreferredSizeWidget {
               if (showSettingsIcon)
                 GestureDetector(
                   onTap: () {
+                    Gaimon.soft();
                     context.router.push(const SettingsRoute());
                   },
                   child: SvgPicture.asset(

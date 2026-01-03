@@ -1,14 +1,18 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
+import 'package:gaimon/gaimon.dart';
 import 'package:skapka_app/app/l10n/app_localizations.dart';
+import 'package:skapka_app/app/l10n/l10n_extension.dart';
 import 'package:skapka_app/app/router/router.gr.dart';
 import 'package:skapka_app/app/theme/app_color_theme.dart';
 import 'package:skapka_app/app/theme/app_radius.dart';
 import 'package:skapka_app/app/theme/app_spacing.dart';
 import 'package:skapka_app/app/theme/app_text_theme.dart';
 import 'package:skapka_app/models/event_model.dart';
+import 'package:skapka_app/providers/units_provider.dart';
 import 'package:skapka_app/utils/is_user_leader.dart';
+import 'package:skapka_app/widgets/dialogs/bottom_dialog.dart';
 import 'package:skapka_app/widgets/event_box/user_status_box.dart';
 import 'package:skapka_app/widgets/event_time_info.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -18,12 +22,14 @@ class EventBox extends StatelessWidget {
   final UserStatus? userStatus;
   final String? dependentId;
   final EventTimeType eventTimeType;
+  final UnitsProvider unitsProvider;
 
   const EventBox({
     required this.event,
     this.userStatus,
     this.dependentId,
     required this.eventTimeType,
+    required this.unitsProvider,
     super.key,
   });
 
@@ -40,8 +46,21 @@ class EventBox extends StatelessWidget {
       onTap: () {
         if (eventTimeType == EventTimeType.live || isUserLeader(context)) {
           // Navigate to event details screen
+          Gaimon.success();
           context.router.push(
-            EventDetailsRoute(event: event, eventTimeType: eventTimeType),
+            EventDetailsRoute(
+              event: event,
+              eventTimeType: eventTimeType,
+              unitsProvider: unitsProvider,
+            ),
+          );
+        } else {
+          Gaimon.error();
+          BottomDialog.show(
+            context,
+            type: BottomDialogType.negative,
+            description:
+                context.localizations.event_box_open_error_event_not_live,
           );
         }
       },
@@ -128,7 +147,42 @@ class EventBox extends StatelessWidget {
                 ),
               ),
               width: double.infinity,
-              child: EventTimeInfo(event: event, eventTimeType: eventTimeType),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  EventTimeInfo(event: event, eventTimeType: eventTimeType),
+                  if (event.targetPatrolsIds != null &&
+                      event.targetPatrolsIds!.isNotEmpty) ...[
+                    SizedBox(height: AppSpacing.small),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          AppLocalizations.of(
+                            context,
+                          )!.event_box_target_patrols_text,
+                          style: AppTextTheme.bodySmall(
+                            context,
+                          ).copyWith(color: context.colors.text.muted),
+                        ),
+                        Text(
+                          unitsProvider.patrols
+                              .where(
+                                (patrol) => event.targetPatrolsIds!.contains(
+                                  patrol.patrolId,
+                                ),
+                              )
+                              .map((patrol) => patrol.name)
+                              .join(', '),
+                          style: AppTextTheme.bodySmall(
+                            context,
+                          ).copyWith(color: context.colors.text.normal),
+                        ),
+                      ],
+                    ),
+                  ],
+                ],
+              ),
             ),
           ],
         ),

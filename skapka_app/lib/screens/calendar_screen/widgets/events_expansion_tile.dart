@@ -1,6 +1,8 @@
 import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:gaimon/gaimon.dart';
+import 'package:provider/provider.dart';
 import 'package:skapka_app/app/l10n/app_localizations.dart';
 import 'package:skapka_app/app/theme/app_color_theme.dart';
 import 'package:skapka_app/app/theme/app_radius.dart';
@@ -8,16 +10,21 @@ import 'package:skapka_app/app/theme/app_sizes.dart';
 import 'package:skapka_app/app/theme/app_spacing.dart';
 import 'package:skapka_app/app/theme/app_text_theme.dart';
 import 'package:skapka_app/models/event_model.dart';
+import 'package:skapka_app/providers/units_provider.dart';
 import 'package:skapka_app/screens/calendar_screen/widgets/no_events_view.dart';
+import 'package:skapka_app/widgets/buttons/main_button.dart';
+import 'package:skapka_app/app/theme/main_button_theme.dart';
 import 'package:skapka_app/widgets/event_box/event_box.dart';
 
 class EventsExpansionTile extends StatefulWidget {
   final EventTimeType type;
   final List<EventModel> events;
+  final VoidCallback? onLoadMore;
 
   const EventsExpansionTile({
     required this.type,
     required this.events,
+    this.onLoadMore,
     super.key,
   });
 
@@ -43,11 +50,22 @@ class _EventsExpansionTileState extends State<EventsExpansionTile> {
       data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
       child: ExpansionTile(
         onExpansionChanged: (value) {
+          // If new state opened
+          if (value == true && !_isExpanded) {
+            Gaimon.soft();
+          }
+          // If new state closed
+          else if (value == false && _isExpanded) {
+            Gaimon.rigid();
+          }
           setState(() {
             _isExpanded = value;
           });
         },
-        title: Text(config.title, style: AppTextTheme.titleSmall(context)),
+        title: Text(
+          '${config.title} (${widget.events.length})',
+          style: AppTextTheme.titleSmall(context),
+        ),
         backgroundColor: config.backgroundColor,
         collapsedBackgroundColor: config.backgroundColor,
         shape: border,
@@ -71,12 +89,28 @@ class _EventsExpansionTileState extends State<EventsExpansionTile> {
         children: [
           if (widget.events.isEmpty)
             NoEventsView(widget: widget)
-          else
+          else ...[
             for (final event in widget.events)
               Padding(
                 padding: const EdgeInsets.only(bottom: AppSpacing.small),
-                child: EventBox(event: event, eventTimeType: widget.type),
+                child: EventBox(
+                  event: event,
+                  eventTimeType: widget.type,
+                  unitsProvider: context.read<UnitsProvider>(),
+                ),
               ),
+            if (widget.onLoadMore != null)
+              Padding(
+                padding: const EdgeInsets.only(top: AppSpacing.small),
+                child: MainButton(
+                  style: ButtonStyleTypes.outlined,
+                  variant: ButtonStylesVariants.normal,
+                  text: AppLocalizations.of(context)!.load_more,
+                  onPressed: widget.onLoadMore,
+                  expandToFillWidth: true,
+                ),
+              ),
+          ],
         ],
       ),
     );

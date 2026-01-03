@@ -3,23 +3,42 @@ import 'package:skapka_app/models/dependents/dependent_notes_model.dart';
 enum SexEnum { male, female, other }
 
 class DependentModel {
+  final String? dependentId;
+  final bool isLeader;
   final String name;
   final String surname;
   final String? nickname;
   final DateTime? born;
-  final SexEnum sex;
+  final SexEnum? sex;
   final String? parent1Email;
   final String? parent1Phone;
   final String? parent2Email;
   final String? parent2Phone;
+  final String? contactEmail;
+  final String? contactPhone;
+  final String groupId;
   final String? troopId;
   final String? patrolId;
-  final bool isArchived;
-  final String secretCode;
-  final DateTime createdAt;
+  final bool? isArchived;
+  final String? secretCode;
+  final DateTime? createdAt;
   final DependentNotesModel? notes;
 
+  bool get is18plus {
+    if (born == null) return false;
+    final now = DateTime.now();
+    int age = now.year - born!.year;
+    int month = now.month - born!.month;
+    int day = now.day - born!.day;
+    if (month < 0 || (month == 0 && day < 0)) {
+      age--;
+    }
+    return age >= 18;
+  }
+
   DependentModel({
+    this.dependentId,
+    this.isLeader = false,
     required this.name,
     required this.surname,
     this.nickname,
@@ -29,6 +48,9 @@ class DependentModel {
     this.parent1Phone,
     this.parent2Email,
     this.parent2Phone,
+    this.contactEmail,
+    this.contactPhone,
+    required this.groupId,
     this.troopId,
     this.patrolId,
     required this.isArchived,
@@ -39,6 +61,8 @@ class DependentModel {
 
   factory DependentModel.fromJson(Map<String, dynamic> json) {
     return DependentModel(
+      dependentId: json['dependent_id'] as String?,
+      isLeader: json['is_leader'] as bool? ?? false,
       name: json['name'] as String,
       surname: json['surname'] as String,
       nickname: json['nickname'] as String?,
@@ -53,11 +77,16 @@ class DependentModel {
       parent1Phone: json['parent1_phone'] as String?,
       parent2Email: json['parent2_email'] as String?,
       parent2Phone: json['parent2_phone'] as String?,
+      contactEmail: json['contact_email'] as String?,
+      contactPhone: json['contact_phone'] as String?,
+      groupId: json['group_id'] as String,
       troopId: json['troop_id'] as String?,
       patrolId: json['patrol_id'] as String?,
       isArchived: json['is_archived'] as bool? ?? false,
-      secretCode: json['secret_code'] as String,
-      createdAt: DateTime.parse(json['created_at'] as String),
+      secretCode: json['secret_code'] as String?,
+      createdAt: json['created_at'] != null
+          ? DateTime.parse(json['created_at'] as String)
+          : null,
       notes: json['notes'] != null
           ? DependentNotesModel.fromJson(json['notes'] as Map<String, dynamic>)
           : null,
@@ -65,6 +94,8 @@ class DependentModel {
   }
 
   DependentModel copyWith({
+    String? dependentId,
+    bool? isLeader,
     String? name,
     String? surname,
     String? nickname,
@@ -74,6 +105,9 @@ class DependentModel {
     String? parent1Phone,
     String? parent2Email,
     String? parent2Phone,
+    String? contactEmail,
+    String? contactPhone,
+    String? groupId,
     String? troopId,
     String? patrolId,
     bool? isArchived,
@@ -82,6 +116,8 @@ class DependentModel {
     DependentNotesModel? notes,
   }) {
     return DependentModel(
+      dependentId: dependentId ?? this.dependentId,
+      isLeader: isLeader ?? this.isLeader,
       name: name ?? this.name,
       surname: surname ?? this.surname,
       nickname: nickname ?? this.nickname,
@@ -91,6 +127,9 @@ class DependentModel {
       parent1Phone: parent1Phone ?? this.parent1Phone,
       parent2Email: parent2Email ?? this.parent2Email,
       parent2Phone: parent2Phone ?? this.parent2Phone,
+      contactEmail: contactEmail ?? this.contactEmail,
+      contactPhone: contactPhone ?? this.contactPhone,
+      groupId: groupId ?? this.groupId,
       troopId: troopId ?? this.troopId,
       patrolId: patrolId ?? this.patrolId,
       isArchived: isArchived ?? this.isArchived,

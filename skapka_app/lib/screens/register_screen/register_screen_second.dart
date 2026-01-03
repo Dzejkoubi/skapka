@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:skapka_app/app/l10n/app_localizations.dart';
+import 'package:skapka_app/app/l10n/l10n_extension.dart';
 import 'package:skapka_app/app/router/router.gr.dart';
 import 'package:skapka_app/app/theme/app_color_theme.dart';
 import 'package:skapka_app/app/theme/app_spacing.dart';
@@ -161,7 +162,7 @@ class _RegisterScreenSecondState extends State<RegisterScreenSecond> {
                   children: [
                     SvgPicture.asset('assets/images/shapes/shape-3.svg'),
                     Text(
-                      AppLocalizations.of(context)!.register_screen_title,
+                      context.localizations.register_screen_title,
                       style: AppTextTheme.displayLarge(context),
                     ),
                   ],
@@ -223,7 +224,7 @@ class _RegisterScreenSecondState extends State<RegisterScreenSecond> {
                   child: MainButton.filled(
                     variant: ButtonStylesVariants.white,
                     text: _isLoading
-                        ? AppLocalizations.of(context)!.loading
+                        ? context.localizations.loading
                         : AppLocalizations.of(
                             context,
                           )!.register_screen_2_register_button_text,

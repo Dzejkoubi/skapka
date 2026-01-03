@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:skapka_app/app/l10n/app_localizations.dart';
+import 'package:skapka_app/app/l10n/l10n_extension.dart';
 import 'package:skapka_app/app/router/router.gr.dart';
 import 'package:skapka_app/app/theme/app_color_theme.dart';
 import 'package:skapka_app/app/theme/app_spacing.dart';
@@ -146,7 +147,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: [
                     SvgPicture.asset('assets/images/shapes/shape-1.svg'),
                     Text(
-                      AppLocalizations.of(context)!.login_screen_title,
+                      context.localizations.login_screen_title,
                       style: AppTextTheme.displayLarge(context),
                     ),
                   ],
@@ -202,7 +203,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: MainButton.filled(
                     variant: ButtonStylesVariants.white,
                     text: _isLoading
-                        ? AppLocalizations.of(context)!.loading
+                        ? context.localizations.loading
                         : AppLocalizations.of(
                             context,
                           )!.login_screen_login_button_text,

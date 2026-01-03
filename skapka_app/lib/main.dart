@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:skapka_app/providers/dependents_provider.dart';
 import 'package:skapka_app/providers/account_provider.dart';
 import 'package:skapka_app/providers/events_provider.dart';
+import 'package:skapka_app/providers/units_provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 void main() async {
@@ -48,6 +49,7 @@ class App extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => AccountProvider()),
         ChangeNotifierProvider(create: (context) => DependentsProvider()),
         ChangeNotifierProvider(create: (context) => EventsProvider()),
+        ChangeNotifierProvider(create: (context) => UnitsProvider()),
       ],
 
       child: Builder(

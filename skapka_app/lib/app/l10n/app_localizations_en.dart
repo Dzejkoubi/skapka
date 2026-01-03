@@ -24,7 +24,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get navbar_info => 'Information';
 
   @override
-  String get welcome_screen_title => 'Welcome to\nSkapka';
+  String get welcome_screen_title => 'Welcome to\nSkapka 👋';
 
   @override
   String get welcome_screen_login_button_text => 'Log in';
@@ -75,7 +75,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'Oops, that doesn\'t look like a valid email.';
 
   @override
-  String get login_screen_login_success => 'Login successful!';
+  String get login_screen_login_success => 'Login successful! 🎉';
 
   @override
   String get login_screen_login_error_generic =>
@@ -134,7 +134,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get register_screen_2_registration_success =>
-      'Registration successful!';
+      'Registration successful! 🎊';
 
   @override
   String get register_screen_2_registration_error_email_used =>
@@ -185,7 +185,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get account_not_approved_screen_notify_success =>
-      'Administrator has been notified.';
+      'Administrator has been notified. 📧';
 
   @override
   String get account_not_approved_screen_notify_error =>
@@ -232,7 +232,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get account_not_approved_screen_delete_success =>
-      'Your account has been deleted.';
+      'Your account has been deleted. 👋';
 
   @override
   String get account_not_approved_screen_delete_error =>
@@ -270,6 +270,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get event_box_event_single_day_text => 'When: ';
 
   @override
+  String get event_box_target_patrols_text => 'Patrols: ';
+
+  @override
+  String get event_box_open_error_event_not_live =>
+      'Cannot open event details for an event that is not live.';
+
+  @override
   String get calendar_screen_title => 'Calendar';
 
   @override
@@ -278,7 +285,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get calendar_screen_event_expansion_tile_no_events_title =>
-      'Quiet on the front.';
+      'Quiet on the front. 🤫';
 
   @override
   String get calendar_screen_event_expansion_tile_future_title => 'Upcoming';
@@ -309,130 +316,262 @@ class AppLocalizationsEn extends AppLocalizations {
       'It seems there are no draft events.';
 
   @override
-  String get create_event_screen_title => 'Create Event';
+  String get create_edit_event_screen_title_create => 'Create event';
 
   @override
-  String get create_event_screen_speed_dial_save_event_text => 'Save';
+  String get create_edit_event_screen_title_edit => 'Edit event';
 
   @override
-  String get create_event_screen_save_event_dialog_title => 'Save as Draft';
-
-  @override
-  String get create_event_screen_save_event_dialog_description =>
-      'Do you want to save this event as a draft? The event will be published only after clicking the publish button. You can edit it later.';
-
-  @override
-  String get create_event_screen_save_event_dialog_primary_button_text =>
+  String get create_edit_event_screen_save_event_dialog_title =>
       'Save as Draft';
 
   @override
-  String get create_event_screen_speed_dial_publish_event_text => 'Publish';
+  String get create_edit_event_screen_save_event_dialog_description =>
+      'Do you want to save this event as a draft? The event will be published only after clicking the publish button. You can edit it later.';
 
   @override
-  String get create_event_screen_publish_event_dialog_title => 'Publish Event';
+  String get create_edit_event_screen_save_event_dialog_primary_button_text =>
+      'Save as Draft';
 
   @override
-  String get create_event_screen_publish_event_dialog_description =>
-      'Are you sure you want to publish this event? The event will be added to the calendar and invited participants will be able to sign up when the sign-up period starts.';
+  String get create_edit_event_screen_save_changes_dialog_title =>
+      'Save Changes';
 
   @override
-  String get create_event_screen_publish_event_dialog_primary_button_text =>
+  String get create_edit_event_screen_save_changes_dialog_description =>
+      'Are you sure you want to save changes to this event?';
+
+  @override
+  String get create_edit_event_screen_speed_dial_publish_event_text =>
       'Publish';
 
   @override
-  String get create_event_screen_speed_dial_unpublish_event_text => 'Unpublish';
+  String get create_edit_event_screen_publish_event_dialog_title =>
+      'Publish Event';
 
   @override
-  String get create_event_screen_unpublish_event_dialog_title =>
-      'Unpublish Event';
+  String get create_edit_event_screen_publish_event_dialog_description =>
+      'Are you sure you want to publish this event? It will be visible to all participants.';
 
   @override
-  String get create_event_screen_unpublish_event_dialog_description =>
-      'Are you sure you want to unpublish this event? Participants will no longer be able to sign up and the event will be removed from the calendar.';
+  String
+  get create_edit_event_screen_publish_event_dialog_primary_button_text =>
+      'Publish';
 
   @override
-  String get create_event_screen_unpublish_event_dialog_primary_button_text =>
+  String get create_edit_event_screen_speed_dial_unpublish_event_text =>
       'Unpublish';
 
   @override
-  String get create_event_screen_speed_dial_delete_event_text => 'Delete';
+  String get create_edit_event_screen_unpublish_event_dialog_title =>
+      'Unpublish Event';
 
   @override
-  String get create_event_screen_delete_event_dialog_title => 'Delete Event';
+  String get create_edit_event_screen_unpublish_event_dialog_description =>
+      'Are you sure you want to unpublish this event? It will be hidden from all participants.';
 
   @override
-  String get create_event_screen_delete_event_dialog_description =>
+  String
+  get create_edit_event_screen_unpublish_event_dialog_primary_button_text =>
+      'Unpublish';
+
+  @override
+  String get create_edit_event_screen_speed_dial_delete_event_text =>
+      'Delete Event';
+
+  @override
+  String get create_edit_event_screen_delete_event_dialog_title =>
+      'Delete Event';
+
+  @override
+  String get create_edit_event_screen_delete_event_dialog_description =>
       'Are you sure you want to delete this event? This action cannot be undone.';
 
   @override
-  String get create_event_screen_delete_event_dialog_primary_button_text =>
+  String get create_edit_event_screen_delete_event_dialog_primary_button_text =>
       'Delete';
 
   @override
-  String get create_event_screen_go_back_without_saving_dialog_title =>
+  String
+  get create_edit_event_screen_delete_event_error_past_event_admin_only =>
+      'Only administrators can delete or unpublish past events.';
+
+  @override
+  String get create_edit_event_screen_delete_event_error_event_not_created =>
+      'Cannot delete an event that has not been created yet.';
+
+  @override
+  String get create_edit_event_screen_delete_event_error_not_rights =>
+      'You do not have permission to delete events.';
+
+  @override
+  String get create_edit_event_screen_delete_event_error_generic =>
+      'Deleting the event failed. Please try again.';
+
+  @override
+  String get create_edit_event_screen_delete_event_success =>
+      'Event was successfully deleted🥳.';
+
+  @override
+  String get create_edit_event_screen_go_back_without_saving_dialog_title =>
       'Discard Changes';
 
   @override
-  String get create_event_screen_go_back_without_saving_dialog_description =>
-      'Are you sure you want to leave without saving changes? All unsaved changes will be lost.';
+  String
+  get create_edit_event_screen_go_back_without_saving_dialog_description =>
+      'Are you sure you want to go back without saving changes? All unsaved changes will be lost.';
 
   @override
   String
-  get create_event_screen_go_back_without_saving_dialog_primary_button_text =>
+  get create_edit_event_screen_go_back_without_saving_dialog_primary_button_text =>
       'Discard';
 
   @override
-  String
-  get create_event_screen_go_back_without_saving_dialog_secondary_button_text =>
-      'Back';
+  String get create_edit_event_screen_event_title_hint => 'Event Title';
 
   @override
-  String get create_event_screen_event_name_hint => 'Event Name';
+  String get create_edit_event_screen_event_title_error_empty =>
+      'Event title cannot be empty.';
 
   @override
-  String get create_event_screen_event_sign_up_from => 'Sign-up from';
+  String get create_edit_event_screen_event_title_error_too_long =>
+      'Event title cannot exceed 50 characters.';
 
   @override
-  String get create_event_screen_event_sign_up_to => 'Sign-up to';
+  String get create_edit_event_screen_event_sign_up_from => 'Sign-up from';
 
   @override
-  String get create_event_screen_event_from_hint => 'From';
+  String get create_edit_event_screen_event_sign_up_to => 'Sign-up to';
 
   @override
-  String get create_event_screen_event_to_hint => 'To';
+  String get create_edit_event_screen_event_from_hint => 'From';
 
   @override
-  String get create_event_screen_select_participants_text =>
+  String get create_edit_event_screen_event_to_hint => 'To';
+
+  @override
+  String get create_edit_event_screen_select_participants_text =>
       'Select Participants';
 
   @override
-  String get create_event_screen_total_participants_text =>
-      'Total Participants';
+  String get create_edit_participants_screen_title => 'Select Participants';
 
   @override
-  String get create_event_screen_troops => 'Troops';
+  String get create_edit_participants_screen_leaders => 'Leaders';
 
   @override
-  String get create_event_screen_18_leaders => 'Leaders/18+';
+  String get create_edit_participants_screen_kids => 'Kids';
 
   @override
-  String get create_event_screen_instructions_text => 'Instructions';
+  String get create_edit_participants_screen_select_all => 'Select All';
 
   @override
-  String get create_event_screen_meeting_place_text => 'Meeting Place';
+  String get create_edit_participants_screen_dial_print => 'Print List';
 
   @override
-  String get create_event_screen_meeting_place_address_text => 'Address';
+  String get create_edit_participants_screen_dial_limit => 'Participant Limit';
+
+  @override
+  String get create_edit_event_screen_total_participants_text =>
+      'Invited Participants';
+
+  @override
+  String get create_edit_event_screen_total_signed_up_participants_text =>
+      'Signed Up Participants';
+
+  @override
+  String get create_edit_event_screen_signed_up_leaders => 'Signed up leaders';
+
+  @override
+  String get create_edit_event_screen_invited_leaders => 'Invited leaders';
+
+  @override
+  String get create_edit_event_screen_signed_up_18_plus => 'Signed up 18+';
+
+  @override
+  String get create_edit_event_screen_invited_18_plus => 'Invited 18+';
+
+  @override
+  String get create_edit_event_screen_troops => 'Troops';
+
+  @override
+  String get create_edit_event_screen_instructions_text => 'Instructions';
+
+  @override
+  String get create_edit_instructions_screen_title => 'Event Instructions';
+
+  @override
+  String get create_edit_event_screen_meeting_place_text => 'Meeting Place';
+
+  @override
+  String get create_edit_event_screen_meeting_place_description =>
+      'Address or name that the user can search for in maps. If you do not fill it in, the meeting place will not be displayed.';
+
+  @override
+  String get create_edit_event_screen_photo_album_link_text =>
+      'Photo Album Link';
+
+  @override
+  String get create_edit_event_screen_photo_album_link_description =>
+      'Link to the shared photo album from the event. If you do not fill it in, the photo album link will not be displayed.';
+
+  @override
+  String get create_edit_event_screen_validation_error_title_empty =>
+      'Please enter an event title.';
+
+  @override
+  String get create_edit_event_screen_validation_error_dates_empty =>
+      'Please fill in all date fields.';
+
+  @override
+  String get create_edit_event_screen_validation_error_signup_start_after_end =>
+      'Sign-up start must be before sign-up end.';
+
+  @override
+  String get create_edit_event_screen_validation_error_signup_end_after_start =>
+      'Sign-up must end before the event starts.';
+
+  @override
+  String get create_edit_event_screen_validation_error_start_after_end =>
+      'Event start must be before event end.';
+
+  @override
+  String get create_edit_event_screen_creating_event_progress_text =>
+      'Creating event...';
+
+  @override
+  String get create_edit_event_screen_editing_event_progress_text =>
+      'Editing event...';
+
+  @override
+  String get create_edit_event_screen_deleting_event_progress_text =>
+      'Deleting event...';
+
+  @override
+  String get create_edit_event_screen_creating_event_success =>
+      'Event was successfully created🥳.';
+
+  @override
+  String get create_edit_event_screen_creating_event_error_generic =>
+      'Failed to create event. Please try again.';
+
+  @override
+  String get create_edit_event_screen_save_success =>
+      'Event was successfully saved🥳.';
+
+  @override
+  String get create_edit_event_screen_save_error_generic =>
+      'Failed to save event. Please try again.';
 
   @override
   String get settings_screen_title => 'Settings';
 
   @override
-  String get settings_screen_change_signout_button_text => 'Sign out';
+  String get settings_screen_change_signout_button_text => 'Sign Out';
 
   @override
   String get settings_screen_change_delete_account_button_text =>
-      'Delete account';
+      'Delete Account';
 
   @override
   String get yes => 'Yes';
@@ -450,8 +589,23 @@ class AppLocalizationsEn extends AppLocalizations {
   String get back => 'Back';
 
   @override
-  String get common_copied_to_clipboard => 'Copied to clipboard';
+  String get common_copied_to_clipboard => 'Copied to clipboard 📋';
 
   @override
   String get create => 'Create';
+
+  @override
+  String get edit => 'Edit';
+
+  @override
+  String get save => 'Save';
+
+  @override
+  String get load_more => 'Load more';
+
+  @override
+  String get error => 'Error';
+
+  @override
+  String get generic_error => 'Something went wrong. Please try again.';
 }

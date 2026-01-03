@@ -1,5 +1,6 @@
 class AppSizes {
   // Icon sizes
+
   /// 16.0
   static const double iconSizeXSmall = 16.0;
 

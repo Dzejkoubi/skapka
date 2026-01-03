@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:skapka_app/app/l10n/app_localizations.dart';
+import 'package:skapka_app/app/l10n/l10n_extension.dart';
 import 'package:skapka_app/app/theme/app_color_theme.dart';
 import 'package:skapka_app/app/theme/app_spacing.dart';
 import 'package:skapka_app/app/theme/app_text_theme.dart';
@@ -21,27 +22,31 @@ class NoEventsView extends StatelessWidget {
       child: Column(
         children: [
           Text(
-            AppLocalizations.of(
-              context,
-            )!.calendar_screen_event_expansion_tile_no_events_title,
+            context
+                .localizations
+                .calendar_screen_event_expansion_tile_no_events_title,
             style: AppTextTheme.titleMedium(context),
             textAlign: TextAlign.center,
           ),
           SizedBox(height: AppSpacing.small),
           Text(
             switch (widget.type) {
-              EventTimeType.future => AppLocalizations.of(
-                context,
-              )!.calendar_screen_event_expansion_tile_future_no_events_subtitle,
-              EventTimeType.live => AppLocalizations.of(
-                context,
-              )!.calendar_screen_event_expansion_tile_live_no_events_subtitle,
-              EventTimeType.past => AppLocalizations.of(
-                context,
-              )!.calendar_screen_event_expansion_tile_past_no_events_subtitle,
-              EventTimeType.draft => AppLocalizations.of(
-                context,
-              )!.calendar_screen_event_expansion_tile_draft_no_events_subtitle,
+              EventTimeType.future =>
+                context
+                    .localizations
+                    .calendar_screen_event_expansion_tile_future_no_events_subtitle,
+              EventTimeType.live =>
+                context
+                    .localizations
+                    .calendar_screen_event_expansion_tile_live_no_events_subtitle,
+              EventTimeType.past =>
+                context
+                    .localizations
+                    .calendar_screen_event_expansion_tile_past_no_events_subtitle,
+              EventTimeType.draft =>
+                context
+                    .localizations
+                    .calendar_screen_event_expansion_tile_draft_no_events_subtitle,
             },
             style: AppTextTheme.bodyMedium(
               context,

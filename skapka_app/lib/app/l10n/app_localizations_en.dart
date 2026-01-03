@@ -12,6 +12,48 @@ class AppLocalizationsEn extends AppLocalizations {
   String get language => 'English';
 
   @override
+  String get category_common => '--- COMMON ---';
+
+  @override
+  String get yes => 'Yes';
+
+  @override
+  String get no => 'No';
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
+  String get loading => 'Loading...';
+
+  @override
+  String get back => 'Back';
+
+  @override
+  String get common_copied_to_clipboard => 'Copied to clipboard 📋';
+
+  @override
+  String get create => 'Create';
+
+  @override
+  String get edit => 'Edit';
+
+  @override
+  String get save => 'Save';
+
+  @override
+  String get load_more => 'Load more';
+
+  @override
+  String get error => 'Error';
+
+  @override
+  String get generic_error => 'Something went wrong. Please try again.';
+
+  @override
+  String get category_navigation => '--- NAVIGATION ---';
+
+  @override
   String get navbar_dependents => 'Dependents';
 
   @override
@@ -24,6 +66,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get navbar_info => 'Information';
 
   @override
+  String get category_welcome_screen => '--- WELCOME SCREEN ---';
+
+  @override
   String get welcome_screen_title => 'Welcome to\nSkapka 👋';
 
   @override
@@ -34,6 +79,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get welcome_screen_songbook_button_text => 'Songbook';
+
+  @override
+  String get category_login_screen => '--- LOGIN SCREEN ---';
 
   @override
   String get login_screen_title => 'Login';
@@ -80,6 +128,9 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get login_screen_login_error_generic =>
       'Something went wrong. Please try again.';
+
+  @override
+  String get category_register_screen => '--- REGISTER SCREEN ---';
 
   @override
   String get register_screen_title => 'Register';
@@ -151,6 +202,10 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get register_screen_2_registration_error_generic =>
       'Registration failed. Please try again.';
+
+  @override
+  String get category_account_not_approved_screen =>
+      '--- ACCOUNT NOT APPROVED SCREEN ---';
 
   @override
   String get account_not_approved_screen_title => 'Account not yet approved';
@@ -239,12 +294,18 @@ class AppLocalizationsEn extends AppLocalizations {
       'Failed to delete account. Please try again later.';
 
   @override
+  String get category_events_screen => '--- EVENTS SCREEN ---';
+
+  @override
   String get events_screen_title => 'Events';
 
   @override
   String events_screen_no_events_text(String version, Object username) {
     return '$username currently has no active events.';
   }
+
+  @override
+  String get category_event_box_widget => '--- EVENT BOX WIDGET ---';
 
   @override
   String event_box_number_of_kids_text(int number_of_kids) {
@@ -275,6 +336,9 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get event_box_open_error_event_not_live =>
       'Cannot open event details for an event that is not live.';
+
+  @override
+  String get category_calendar_screen => '--- CALENDAR SCREEN ---';
 
   @override
   String get calendar_screen_title => 'Calendar';
@@ -314,6 +378,10 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get calendar_screen_event_expansion_tile_draft_no_events_subtitle =>
       'It seems there are no draft events.';
+
+  @override
+  String get category_create_edit_event_screen =>
+      '--- CREATE/EDIT EVENT SCREEN ---';
 
   @override
   String get create_edit_event_screen_title_create => 'Create event';
@@ -564,6 +632,31 @@ class AppLocalizationsEn extends AppLocalizations {
       'Failed to save event. Please try again.';
 
   @override
+  String get category_live_events_screen => '--- LIVE EVENTS ---';
+
+  @override
+  String get live_events_screen_no_dependents_view_title =>
+      'Quiet on the front... 🤷‍♂️';
+
+  @override
+  String get live_events_screen_no_dependents_view_subtitle =>
+      'It seems that you currently have no persons who could sign up for events.';
+
+  @override
+  String get live_events_screen_no_live_events_view_title =>
+      'Quiet on the front... 🤫';
+
+  @override
+  String live_events_screen_no_live_events_view_subtitle(
+    String dependent_name,
+  ) {
+    return 'Person $dependent_name currently has no events to sign up for.';
+  }
+
+  @override
+  String get category_settings_screen => '--- SETTINGS SCREEN ---';
+
+  @override
   String get settings_screen_title => 'Settings';
 
   @override
@@ -572,40 +665,4 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get settings_screen_change_delete_account_button_text =>
       'Delete Account';
-
-  @override
-  String get yes => 'Yes';
-
-  @override
-  String get no => 'No';
-
-  @override
-  String get cancel => 'Cancel';
-
-  @override
-  String get loading => 'Loading...';
-
-  @override
-  String get back => 'Back';
-
-  @override
-  String get common_copied_to_clipboard => 'Copied to clipboard 📋';
-
-  @override
-  String get create => 'Create';
-
-  @override
-  String get edit => 'Edit';
-
-  @override
-  String get save => 'Save';
-
-  @override
-  String get load_more => 'Load more';
-
-  @override
-  String get error => 'Error';
-
-  @override
-  String get generic_error => 'Something went wrong. Please try again.';
 }

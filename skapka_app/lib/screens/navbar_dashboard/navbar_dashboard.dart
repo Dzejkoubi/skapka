@@ -41,7 +41,7 @@ class NavbarDashboard extends StatelessWidget {
             CustomNavBarItemInfo(
               label: context.localizations.navbar_events,
               iconAsset: 'assets/icons/navbar/navbar-compass.svg',
-              screenRoute: EventsRoute(),
+              screenRoute: LiveEventsRoute(),
               speedDialChildren: accountProvider.rights >= 2
                   ? [
                       SpeedDialChild(

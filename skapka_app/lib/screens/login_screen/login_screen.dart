@@ -73,9 +73,7 @@ class _LoginScreenState extends State<LoginScreen> {
           BottomDialog.show(
             context,
             type: BottomDialogType.positive,
-            description: AppLocalizations.of(
-              context,
-            )!.login_screen_login_success,
+            description: context.localizations.login_screen_login_success,
           );
           context.router.replaceAll([const AuthGate()]);
         }
@@ -87,17 +85,16 @@ class _LoginScreenState extends State<LoginScreen> {
 
           String errorMessage;
           if (e.code == 'invalid_login_credentials') {
-            errorMessage = AppLocalizations.of(
-              context,
-            )!.login_screen_login_error_invalid_credentials;
+            errorMessage = context
+                .localizations
+                .login_screen_login_error_invalid_credentials;
           } else if (e.code == 'email_not_confirmed') {
-            errorMessage = AppLocalizations.of(
-              context,
-            )!.login_screen_login_error_email_not_confirmed;
+            errorMessage = context
+                .localizations
+                .login_screen_login_error_email_not_confirmed;
           } else {
-            errorMessage = AppLocalizations.of(
-              context,
-            )!.login_screen_login_error_generic;
+            errorMessage =
+                context.localizations.login_screen_login_error_generic;
           }
           BottomDialog.show(
             context,
@@ -113,9 +110,7 @@ class _LoginScreenState extends State<LoginScreen> {
           BottomDialog.show(
             context,
             type: BottomDialogType.negative,
-            description: AppLocalizations.of(
-              context,
-            )!.login_screen_login_error_generic,
+            description: context.localizations.login_screen_login_error_generic,
           );
         }
       } finally {

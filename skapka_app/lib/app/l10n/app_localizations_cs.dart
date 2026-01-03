@@ -12,6 +12,48 @@ class AppLocalizationsCs extends AppLocalizations {
   String get language => 'Čeština';
 
   @override
+  String get category_common => '--- SPOLEČNÉ ---';
+
+  @override
+  String get yes => 'Ano';
+
+  @override
+  String get no => 'Ne';
+
+  @override
+  String get cancel => 'Zrušit';
+
+  @override
+  String get loading => 'Načítání...';
+
+  @override
+  String get back => 'Zpět';
+
+  @override
+  String get common_copied_to_clipboard => 'Zkopírováno do schránky 📋';
+
+  @override
+  String get create => 'Vytvořit';
+
+  @override
+  String get edit => 'Upravit';
+
+  @override
+  String get save => 'Uložit';
+
+  @override
+  String get load_more => 'Načíst další';
+
+  @override
+  String get error => 'Chyba';
+
+  @override
+  String get generic_error => 'Něco se pokazilo. Zkus to prosím znovu.';
+
+  @override
+  String get category_navigation => '--- NAVIGACE ---';
+
+  @override
   String get navbar_dependents => 'Osoby';
 
   @override
@@ -24,6 +66,9 @@ class AppLocalizationsCs extends AppLocalizations {
   String get navbar_info => 'Informace';
 
   @override
+  String get category_welcome_screen => '--- UVÍTACÍ OBRAZOVKA ---';
+
+  @override
   String get welcome_screen_title => 'Vítej ve\nSkapce 👋';
 
   @override
@@ -34,6 +79,9 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get welcome_screen_songbook_button_text => 'Zpěvník';
+
+  @override
+  String get category_login_screen => '--- PŘIHLÁŠENÍ ---';
 
   @override
   String get login_screen_title => 'Přihlášení';
@@ -79,6 +127,9 @@ class AppLocalizationsCs extends AppLocalizations {
   @override
   String get login_screen_login_error_generic =>
       'Něco se nepovedlo. Zkus to prosím znovu.';
+
+  @override
+  String get category_register_screen => '--- REGISTRACE ---';
 
   @override
   String get register_screen_title => 'Registrace';
@@ -148,6 +199,10 @@ class AppLocalizationsCs extends AppLocalizations {
   @override
   String get register_screen_2_registration_error_generic =>
       'Registrace se nezdařila. Zkus to prosím znovu.';
+
+  @override
+  String get category_account_not_approved_screen =>
+      '--- OBRAZOVKA NESCHVÁLENÉHO ÚČTU ---';
 
   @override
   String get account_not_approved_screen_title => 'Účet ještě nebyl schválen';
@@ -236,12 +291,18 @@ class AppLocalizationsCs extends AppLocalizations {
       'Smazání účtu se nezdařilo. Zkus to prosím později.';
 
   @override
+  String get category_events_screen => '--- VÝPRAVY ---';
+
+  @override
   String get events_screen_title => 'Výpravy';
 
   @override
   String events_screen_no_events_text(String version, Object username) {
     return '$username aktuálně nemá žádnou aktivní výpravu.';
   }
+
+  @override
+  String get category_event_box_widget => '--- WIDGET VÝPRAVY ---';
 
   @override
   String event_box_number_of_kids_text(int number_of_kids) {
@@ -272,6 +333,9 @@ class AppLocalizationsCs extends AppLocalizations {
   @override
   String get event_box_open_error_event_not_live =>
       'Nelze zobrazit detail výpravy, na kterou se nelze přihlašovat.';
+
+  @override
+  String get category_calendar_screen => '--- KALENDÁŘ ---';
 
   @override
   String get calendar_screen_title => 'Kalendář';
@@ -312,6 +376,10 @@ class AppLocalizationsCs extends AppLocalizations {
   @override
   String get calendar_screen_event_expansion_tile_draft_no_events_subtitle =>
       'Zdá se, že nejsou žádné koncepty.';
+
+  @override
+  String get category_create_edit_event_screen =>
+      '--- VYTVOŘIT/UPRAVIT VÝPRAVU ---';
 
   @override
   String get create_edit_event_screen_title_create => 'Vytvořit výpravu';
@@ -561,6 +629,31 @@ class AppLocalizationsCs extends AppLocalizations {
       'Nepodařilo se uložit výpravu. Zkus to prosím znovu.';
 
   @override
+  String get category_live_events_screen => '--- PŘIHLAŠOVACÍ VÝPRAVY ---';
+
+  @override
+  String get live_events_screen_no_dependents_view_title =>
+      'Ticho po pěšině... 🤷‍♂️';
+
+  @override
+  String get live_events_screen_no_dependents_view_subtitle =>
+      'Zdá se, že momentálně nemáš žádné osoby, které by se mohly přihlašovat na výpravy.';
+
+  @override
+  String get live_events_screen_no_live_events_view_title =>
+      'Ticho po pěšině... 🤫';
+
+  @override
+  String live_events_screen_no_live_events_view_subtitle(
+    String dependent_name,
+  ) {
+    return 'Osoba $dependent_name momentálně nemá žádné výpravy k přihlášení.';
+  }
+
+  @override
+  String get category_settings_screen => '--- NASTAVENÍ ---';
+
+  @override
   String get settings_screen_title => 'Nastavení';
 
   @override
@@ -568,40 +661,4 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get settings_screen_change_delete_account_button_text => 'Smazat účet';
-
-  @override
-  String get yes => 'Ano';
-
-  @override
-  String get no => 'Ne';
-
-  @override
-  String get cancel => 'Zrušit';
-
-  @override
-  String get loading => 'Načítání...';
-
-  @override
-  String get back => 'Zpět';
-
-  @override
-  String get common_copied_to_clipboard => 'Zkopírováno do schránky 📋';
-
-  @override
-  String get create => 'Vytvořit';
-
-  @override
-  String get edit => 'Upravit';
-
-  @override
-  String get save => 'Uložit';
-
-  @override
-  String get load_more => 'Načíst další';
-
-  @override
-  String get error => 'Chyba';
-
-  @override
-  String get generic_error => 'Něco se pokazilo. Zkus to prosím znovu.';
 }

@@ -34,7 +34,8 @@ import 'package:skapka_app/screens/dependents_screen/dependents_screen.dart'
     as _i8;
 import 'package:skapka_app/screens/event_details_screen/event_details_screen.dart'
     as _i9;
-import 'package:skapka_app/screens/events_screen/events_screen.dart' as _i10;
+import 'package:skapka_app/screens/live_events_screen/live_events_screen.dart'
+    as _i10;
 import 'package:skapka_app/screens/information_screen/information_screen.dart'
     as _i11;
 import 'package:skapka_app/screens/login_screen/login_screen.dart' as _i13;
@@ -418,17 +419,17 @@ class EventDetailsRouteArgs {
 }
 
 /// generated route for
-/// [_i10.EventsScreen]
-class EventsRoute extends _i20.PageRouteInfo<void> {
-  const EventsRoute({List<_i20.PageRouteInfo>? children})
-    : super(EventsRoute.name, initialChildren: children);
+/// [_i10.LiveEventsScreen]
+class LiveEventsRoute extends _i20.PageRouteInfo<void> {
+  const LiveEventsRoute({List<_i20.PageRouteInfo>? children})
+    : super(LiveEventsRoute.name, initialChildren: children);
 
   static const String name = 'EventsRoute';
 
   static _i20.PageInfo page = _i20.PageInfo(
     name,
     builder: (data) {
-      return const _i10.EventsScreen();
+      return const _i10.LiveEventsScreen();
     },
   );
 }

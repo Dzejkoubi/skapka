@@ -215,6 +215,7 @@ class _CreateEditEventParticipantsScreenState
                           )) {
                             _selectedParticipants.add(
                               EventParticipantModel(
+                                groupId: leader.groupId,
                                 eventId: widget.initialParticipants.isNotEmpty
                                     ? widget.initialParticipants.first.eventId
                                     : '',
@@ -257,6 +258,7 @@ class _CreateEditEventParticipantsScreenState
                       if (value == true) {
                         _selectedParticipants.add(
                           EventParticipantModel(
+                            groupId: leader.groupId,
                             eventId: widget.initialParticipants.isNotEmpty
                                 ? widget.initialParticipants.first.eventId
                                 : '',
@@ -342,6 +344,7 @@ class _CreateEditEventParticipantsScreenState
                           )) {
                             _selectedParticipants.add(
                               EventParticipantModel(
+                                groupId: dependent.groupId,
                                 eventId: widget.initialParticipants.isNotEmpty
                                     ? widget.initialParticipants.first.eventId
                                     : '',

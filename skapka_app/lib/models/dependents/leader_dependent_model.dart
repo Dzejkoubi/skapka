@@ -19,6 +19,7 @@ class LeaderDependentModel extends DependentModel {
          parent2Phone: dependent.parent2Phone,
          contactEmail: dependent.contactEmail,
          contactPhone: dependent.contactPhone,
+         groupId: dependent.groupId,
          troopId: dependent.troopId,
          patrolId: dependent.patrolId,
          isArchived: dependent.isArchived,

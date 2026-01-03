@@ -17,14 +17,14 @@ enum EventParticipantStatus {
 class EventParticipantModel {
   final String eventId;
   final String dependentId;
-  final String? groupId;
+  final String groupId;
   final EventParticipantStatus status;
   final String note;
 
   EventParticipantModel({
     required this.eventId,
     required this.dependentId,
-    this.groupId,
+    required this.groupId,
     required this.status,
     required this.note,
   });
@@ -33,7 +33,7 @@ class EventParticipantModel {
     return EventParticipantModel(
       eventId: json['event_id'] as String,
       dependentId: json['dependent_id'] as String,
-      groupId: json['group_id'] as String?,
+      groupId: json['group_id'] as String,
       status: EventParticipantStatus.fromString(json['status'] as String),
       note: json['note'] as String? ?? '',
     );

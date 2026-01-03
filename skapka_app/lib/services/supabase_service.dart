@@ -264,6 +264,7 @@ class SupabaseService {
         .from('events')
         .update({
           'title': event.title,
+          'group_id': accountProvider.groupId,
           'instructions': event.instructions,
           'open_sign_up': event.openSignUp?.toIso8601String(),
           'close_sign_up': event.closeSignUp?.toIso8601String(),

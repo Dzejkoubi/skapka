@@ -36,75 +36,80 @@ class CalendarScreen extends StatelessWidget {
         child: SafeArea(
           child: Consumer<EventsProvider>(
             builder: (context, provider, child) {
-              return Column(
-                spacing: AppSpacing.large,
-                children: [
-                  EventsExpansionTile(
-                    type: EventTimeType.future,
-                    events: provider.futureEvents,
-                  ),
-                  EventsExpansionTile(
-                    type: EventTimeType.live,
-                    events: provider.liveEvents,
-                  ),
-                  EventsExpansionTile(
-                    type: EventTimeType.past,
-                    events: provider.pastEvents,
-                    onLoadMore: provider.hasMorePastEvents
-                        ? () async {
-                            try {
-                              final accountProvider = context
-                                  .read<AccountProvider>();
-                              final groupId = accountProvider.groupId;
+              return Padding(
+                padding: EdgeInsetsGeometry.only(
+                  bottom: AppSpacing.bottomSpace + AppSpacing.large,
+                ),
+                child: Column(
+                  spacing: AppSpacing.large,
+                  children: [
+                    EventsExpansionTile(
+                      type: EventTimeType.future,
+                      events: provider.futureEvents,
+                    ),
+                    EventsExpansionTile(
+                      type: EventTimeType.live,
+                      events: provider.liveEvents,
+                    ),
+                    EventsExpansionTile(
+                      type: EventTimeType.past,
+                      events: provider.pastEvents,
+                      onLoadMore: provider.hasMorePastEvents
+                          ? () async {
+                              try {
+                                final accountProvider = context
+                                    .read<AccountProvider>();
+                                final groupId = accountProvider.groupId;
 
-                              // Find oldest event date
-                              DateTime oldestDate;
-                              if (provider.pastEvents.isNotEmpty) {
-                                oldestDate = provider.pastEvents
-                                    .map((e) => e.endDate!)
-                                    .reduce((a, b) => a.isBefore(b) ? a : b);
-                              } else {
-                                // Fallback to school year start
-                                final now = DateTime.now();
-                                final startYear = now.month < 9
-                                    ? now.year - 1
-                                    : now.year;
-                                oldestDate = DateTime(startYear, 9, 1);
-                              }
+                                // Find oldest event date
+                                DateTime oldestDate;
+                                if (provider.pastEvents.isNotEmpty) {
+                                  oldestDate = provider.pastEvents
+                                      .map((e) => e.endDate!)
+                                      .reduce((a, b) => a.isBefore(b) ? a : b);
+                                } else {
+                                  // Fallback to school year start
+                                  final now = DateTime.now();
+                                  final startYear = now.month < 9
+                                      ? now.year - 1
+                                      : now.year;
+                                  oldestDate = DateTime(startYear, 9, 1);
+                                }
 
-                              final newEvents = await SupabaseService()
-                                  .getOlderGroupEvents(
-                                    groupId: groupId,
-                                    date: oldestDate,
+                                final newEvents = await SupabaseService()
+                                    .getOlderGroupEvents(
+                                      groupId: groupId,
+                                      date: oldestDate,
+                                    );
+
+                                if (context.mounted) {
+                                  final eventsProvider = context
+                                      .read<EventsProvider>();
+                                  eventsProvider.addEvents(newEvents);
+                                  if (newEvents.length < 10) {
+                                    eventsProvider.setHasMorePastEvents(false);
+                                  }
+                                }
+                              } catch (e) {
+                                if (context.mounted) {
+                                  BottomDialog.show(
+                                    context,
+                                    type: BottomDialogType.negative,
+                                    description:
+                                        context.localizations.generic_error,
                                   );
-
-                              if (context.mounted) {
-                                final eventsProvider = context
-                                    .read<EventsProvider>();
-                                eventsProvider.addEvents(newEvents);
-                                if (newEvents.length < 10) {
-                                  eventsProvider.setHasMorePastEvents(false);
                                 }
                               }
-                            } catch (e) {
-                              if (context.mounted) {
-                                BottomDialog.show(
-                                  context,
-                                  type: BottomDialogType.negative,
-                                  description:
-                                      context.localizations.generic_error,
-                                );
-                              }
                             }
-                          }
-                        : null,
-                  ),
-                  if (isUserLeader(context))
-                    EventsExpansionTile(
-                      type: EventTimeType.draft,
-                      events: provider.draftEvents,
+                          : null,
                     ),
-                ],
+                    if (isUserLeader(context))
+                      EventsExpansionTile(
+                        type: EventTimeType.draft,
+                        events: provider.draftEvents,
+                      ),
+                  ],
+                ),
               );
             },
           ),

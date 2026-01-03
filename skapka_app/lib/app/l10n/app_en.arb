@@ -181,6 +181,11 @@
     "create_edit_event_screen_photo_album_link_text": "Photo Album Link",
     "create_edit_event_screen_photo_album_link_description": "Link to the shared photo album from the event. If you do not fill it in, the photo album link will not be displayed.",
 
+    "create_edit_event_screen_validation_error_title_empty": "Please enter an event title.",
+    "create_edit_event_screen_validation_error_dates_empty": "Please fill in all date fields.",
+    "create_edit_event_screen_validation_error_signup_start_after_end": "Sign-up start must be before sign-up end.",
+    "create_edit_event_screen_validation_error_signup_end_after_start": "Sign-up must end before the event starts.",
+    "create_edit_event_screen_validation_error_start_after_end": "Event start must be before event end.",
 
     "create_edit_event_screen_creating_event_progress_text": "Creating event...",
     "create_edit_event_screen_editing_event_progress_text": "Editing event...",
@@ -191,7 +196,6 @@
 
     "create_edit_event_screen_save_success": "Event was successfully saved🥳.",
     "create_edit_event_screen_save_error_generic": "Failed to save event. Please try again.",
-    
 
     "settings_screen_title": "Settings",
     "settings_screen_change_signout_button_text": "Sign Out",

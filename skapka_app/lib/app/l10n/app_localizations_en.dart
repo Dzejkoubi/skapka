@@ -505,6 +505,26 @@ class AppLocalizationsEn extends AppLocalizations {
       'Link to the shared photo album from the event. If you do not fill it in, the photo album link will not be displayed.';
 
   @override
+  String get create_edit_event_screen_validation_error_title_empty =>
+      'Please enter an event title.';
+
+  @override
+  String get create_edit_event_screen_validation_error_dates_empty =>
+      'Please fill in all date fields.';
+
+  @override
+  String get create_edit_event_screen_validation_error_signup_start_after_end =>
+      'Sign-up start must be before sign-up end.';
+
+  @override
+  String get create_edit_event_screen_validation_error_signup_end_after_start =>
+      'Sign-up must end before the event starts.';
+
+  @override
+  String get create_edit_event_screen_validation_error_start_after_end =>
+      'Event start must be before event end.';
+
+  @override
   String get create_edit_event_screen_creating_event_progress_text =>
       'Creating event...';
 

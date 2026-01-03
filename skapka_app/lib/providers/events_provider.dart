@@ -16,16 +16,14 @@ class EventsProvider extends ChangeNotifier {
   List<EventModel> get futureEvents => _events.where((event) {
     if (event.isDraft) return false;
     final now = DateTime.now();
-    return event.openSignUp != null &&
-        event.openSignUp!.isBefore(now) &&
-        (event.closeSignUp == null || event.closeSignUp!.isAfter(now));
+    return event.openSignUp != null && event.openSignUp!.isAfter(now);
   }).toList();
 
   List<EventModel> get liveEvents => _events.where((event) {
     if (event.isDraft) return false;
     final now = DateTime.now();
-    return event.closeSignUp != null &&
-        event.closeSignUp!.isBefore(now) &&
+    return event.openSignUp != null &&
+        event.openSignUp!.isBefore(now) &&
         event.endDate != null &&
         event.endDate!.isAfter(now);
   }).toList();

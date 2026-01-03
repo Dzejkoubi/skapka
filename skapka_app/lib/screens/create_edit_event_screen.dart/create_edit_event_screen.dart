@@ -13,6 +13,7 @@ import 'package:skapka_app/models/leader_model.dart';
 import 'package:skapka_app/models/patrol_model.dart';
 import 'package:skapka_app/models/troop_model.dart';
 import 'package:skapka_app/providers/account_provider.dart';
+import 'package:skapka_app/providers/events_provider.dart';
 import 'package:skapka_app/screens/create_edit_event_screen.dart/widgets/event_instructions_container.dart';
 import 'package:skapka_app/screens/create_edit_event_screen.dart/widgets/event_participants_container.dart';
 import 'package:skapka_app/screens/create_edit_event_screen.dart/widgets/event_title_form.dart';
@@ -265,6 +266,38 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
       )
       .toList();
 
+  String? _validateEvent() {
+    if (_eventTitleController.text.trim().isEmpty) {
+      return context
+          .localizations
+          .create_edit_event_screen_validation_error_title_empty;
+    }
+    if (_openSignUp == null ||
+        _closeSignUp == null ||
+        _startDate == null ||
+        _endDate == null) {
+      return context
+          .localizations
+          .create_edit_event_screen_validation_error_dates_empty;
+    }
+    if (_openSignUp!.isAfter(_closeSignUp!)) {
+      return context
+          .localizations
+          .create_edit_event_screen_validation_error_signup_start_after_end;
+    }
+    if (_closeSignUp!.isAfter(_startDate!)) {
+      return context
+          .localizations
+          .create_edit_event_screen_validation_error_signup_end_after_start;
+    }
+    if (_startDate!.isAfter(_endDate!)) {
+      return context
+          .localizations
+          .create_edit_event_screen_validation_error_start_after_end;
+    }
+    return null;
+  }
+
   // Creating new event
   Future<void> _createNewEvent({required bool asDraft}) async {
     setState(() {
@@ -304,7 +337,11 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
           description:
               context.localizations.create_edit_event_screen_save_success,
         );
-        context.router.pop(); // Close the screen after creation
+
+        await _loadEventsAfterSuccess();
+        if (mounted) {
+          context.router.pop(); // Close the screen and return after deletion
+        }
       }
     } catch (e) {
       if (kDebugMode) {
@@ -377,7 +414,10 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
           description:
               context.localizations.create_edit_event_screen_save_success,
         );
-        context.router.pop(); // Close the screen after editing
+        await _loadEventsAfterSuccess();
+        if (mounted) {
+          context.router.pop(); // Close the screen and return after deletion
+        }
       }
     } catch (e) {
       if (kDebugMode) {
@@ -410,8 +450,11 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
       if (kDebugMode) {
         print('Event $eventId deleted successfully.');
       }
+
+      await _loadEventsAfterSuccess();
       if (mounted) {
-        context.router.pop(); // Close the screen after deletion
+        context.router.pop();
+        context.router.pop(); // Close the screen and return after deletion
       }
     } catch (e) {
       if (kDebugMode) {
@@ -425,7 +468,6 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
               .localizations
               .create_edit_event_screen_delete_event_error_generic,
         );
-        context.router.pop(); // Close the screen after deletion
       }
     } finally {
       if (mounted) {
@@ -453,6 +495,15 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
             .create_edit_event_screen_deleting_event_progress_text;
       case _ProcessingType.none:
         return '';
+    }
+  }
+
+  Future<void> _loadEventsAfterSuccess() async {
+    final events = await SupabaseService().getGroupEvents(
+      groupId: _accountProvider.groupId,
+    );
+    if (mounted) {
+      context.read<EventsProvider>().setEvents(events);
     }
   }
 
@@ -617,6 +668,15 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
                       },
                       onPublish: () {
                         if (kDebugMode) print('User confirmed publish event');
+                        final error = _validateEvent();
+                        if (error != null) {
+                          BottomDialog.show(
+                            context,
+                            type: BottomDialogType.negative,
+                            description: error,
+                          );
+                          return;
+                        }
                         if (eventId == null) {
                           _createNewEvent(asDraft: false);
                         } else {
@@ -636,6 +696,15 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
                           print(
                             'User confirmed save event (asDraft: $asDraft)',
                           );
+                        }
+                        final error = _validateEvent();
+                        if (error != null) {
+                          BottomDialog.show(
+                            context,
+                            type: BottomDialogType.negative,
+                            description: error,
+                          );
+                          return;
                         }
                         if (eventId == null) {
                           _createNewEvent(asDraft: asDraft);

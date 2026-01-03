@@ -502,6 +502,26 @@ class AppLocalizationsCs extends AppLocalizations {
       'Odkaz na sdílenené fotoalbum z výpravy. Pokud nevyplníš, odkaz na fotoalbum nebude zobrazen.';
 
   @override
+  String get create_edit_event_screen_validation_error_title_empty =>
+      'Prosím zadej název výpravy.';
+
+  @override
+  String get create_edit_event_screen_validation_error_dates_empty =>
+      'Prosím vyplň všechna data.';
+
+  @override
+  String get create_edit_event_screen_validation_error_signup_start_after_end =>
+      'Začátek přihlašování musí být před koncem přihlašování.';
+
+  @override
+  String get create_edit_event_screen_validation_error_signup_end_after_start =>
+      'Konec přihlašování musí být před začátkem výpravy.';
+
+  @override
+  String get create_edit_event_screen_validation_error_start_after_end =>
+      'Začátek výpravy musí být před koncem výpravy.';
+
+  @override
   String get create_edit_event_screen_creating_event_progress_text =>
       'Vytvářím výpravu...';
 

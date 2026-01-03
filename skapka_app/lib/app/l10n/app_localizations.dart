@@ -920,6 +920,36 @@ abstract class AppLocalizations {
   /// **'Odkaz na sdílenené fotoalbum z výpravy. Pokud nevyplníš, odkaz na fotoalbum nebude zobrazen.'**
   String get create_edit_event_screen_photo_album_link_description;
 
+  /// No description provided for @create_edit_event_screen_validation_error_title_empty.
+  ///
+  /// In cs, this message translates to:
+  /// **'Prosím zadej název výpravy.'**
+  String get create_edit_event_screen_validation_error_title_empty;
+
+  /// No description provided for @create_edit_event_screen_validation_error_dates_empty.
+  ///
+  /// In cs, this message translates to:
+  /// **'Prosím vyplň všechna data.'**
+  String get create_edit_event_screen_validation_error_dates_empty;
+
+  /// No description provided for @create_edit_event_screen_validation_error_signup_start_after_end.
+  ///
+  /// In cs, this message translates to:
+  /// **'Začátek přihlašování musí být před koncem přihlašování.'**
+  String get create_edit_event_screen_validation_error_signup_start_after_end;
+
+  /// No description provided for @create_edit_event_screen_validation_error_signup_end_after_start.
+  ///
+  /// In cs, this message translates to:
+  /// **'Konec přihlašování musí být před začátkem výpravy.'**
+  String get create_edit_event_screen_validation_error_signup_end_after_start;
+
+  /// No description provided for @create_edit_event_screen_validation_error_start_after_end.
+  ///
+  /// In cs, this message translates to:
+  /// **'Začátek výpravy musí být před koncem výpravy.'**
+  String get create_edit_event_screen_validation_error_start_after_end;
+
   /// No description provided for @create_edit_event_screen_creating_event_progress_text.
   ///
   /// In cs, this message translates to:

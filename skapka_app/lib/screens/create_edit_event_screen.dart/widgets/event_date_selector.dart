@@ -37,7 +37,13 @@ class EventDateSelector extends StatelessWidget {
     DateTime? initialDate,
     Function(DateTime) onSelected,
   ) async {
-    final DateTime now = DateTime.now();
+    final DateTime now = DateTime(
+      DateTime.now().year,
+      DateTime.now().month,
+      DateTime.now().day,
+      0,
+      0,
+    );
     final DateTime effectiveInitialDate = initialDate ?? now;
 
     if (defaultTargetPlatform == TargetPlatform.iOS) {

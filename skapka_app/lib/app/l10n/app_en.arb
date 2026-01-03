@@ -7,7 +7,7 @@
     "navbar_calendar": "Calendar",
     "navbar_info": "Information",
      
-    "welcome_screen_title": "Welcome to\nSkapka",
+    "welcome_screen_title": "Welcome to\nSkapka 👋",
     "welcome_screen_login_button_text": "Log in",
     "welcome_screen_register_button_text": "Register",
     "welcome_screen_songbook_button_text": "Songbook",
@@ -23,7 +23,7 @@
     "login_screen_login_error_email_not_confirmed": "Email address is not confirmed. Please check your inbox.",
     "login_screen_login_error_email_empty": "Did you forget your email?",
     "login_screen_login_error_email_invalid": "Oops, that doesn't look like a valid email.",
-    "login_screen_login_success": "Login successful!",
+    "login_screen_login_success": "Login successful! 🎉",
     "login_screen_login_error_generic": "Something went wrong. Please try again.",
 
     "register_screen_title": "Register",
@@ -42,7 +42,7 @@
     "register_screen_2_register_button_text": "Register",
     "register_screen_2_error_passwords_do_not_match": "Passwords do not match.",
 
-    "register_screen_2_registration_success": "Registration successful!",
+    "register_screen_2_registration_success": "Registration successful! 🎊",
     "register_screen_2_registration_error_email_used": "This email is already in use. Try logging in or use a different email.",
     "register_screen_2_registration_error_rate_limit": "Too many attempts. Please try again later.",
     "register_screen_2_registration_error_weak_password": "Password is too weak.",
@@ -62,7 +62,7 @@
     "account_not_approved_screen_notify_administrator_dialog_description": "This step will notify the administrator by email. It can be sent once a day.",
     "account_not_approved_screen_notify_administrator_dialog_primary_button_text": "Send notification",
     "account_not_approved_screen_notify_administrator_button_error_dialog": "Notifications can only be sent once every 24 hours. Please try again later.",
-    "account_not_approved_screen_notify_success": "Administrator has been notified.",
+    "account_not_approved_screen_notify_success": "Administrator has been notified. 📧",
     "account_not_approved_screen_notify_error": "Failed to notify administrator. Please try again later.",
     
     "account_not_approved_screen_logout_button_text": "Log out",
@@ -76,7 +76,7 @@
     "account_not_approved_screen_delete_account_dialog_title": "Delete account",
     "account_not_approved_screen_delete_account_dialog_description": "Are you sure you want to delete your account? This action cannot be undone.",
     "account_not_approved_screen_delete_account_dialog_primary_button_text": "Delete account",
-    "account_not_approved_screen_delete_success": "Your account has been deleted.",
+    "account_not_approved_screen_delete_success": "Your account has been deleted. 👋",
     "account_not_approved_screen_delete_error": "Failed to delete account. Please try again later.",
 
     "events_screen_title": "Events",
@@ -108,7 +108,7 @@
 
     "calendar_screen_title": "Calendar",
     "calendar_screen_speed_dial_add_google_calendar": "Google Calendar",
-    "calendar_screen_event_expansion_tile_no_events_title": "Quiet on the front.",
+    "calendar_screen_event_expansion_tile_no_events_title": "Quiet on the front. 🤫",
     "calendar_screen_event_expansion_tile_future_title": "Upcoming",
     "calendar_screen_event_expansion_tile_future_no_events_subtitle": "It seems there are no upcoming events.",
     "calendar_screen_event_expansion_tile_live_title": "Sign up",
@@ -208,7 +208,7 @@
     "cancel": "Cancel",
     "loading": "Loading...",
     "back" : "Back",
-    "common_copied_to_clipboard": "Copied to clipboard",
+    "common_copied_to_clipboard": "Copied to clipboard 📋",
     "create": "Create",
     "edit": "Edit",
     "save": "Save",

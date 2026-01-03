@@ -24,7 +24,7 @@ class AppLocalizationsCs extends AppLocalizations {
   String get navbar_info => 'Informace';
 
   @override
-  String get welcome_screen_title => 'Vítej ve\nSkapce';
+  String get welcome_screen_title => 'Vítej ve\nSkapce 👋';
 
   @override
   String get welcome_screen_login_button_text => 'Přihlásit se';
@@ -74,7 +74,7 @@ class AppLocalizationsCs extends AppLocalizations {
       'Pozor, takhle přece nevypadá e-mail.';
 
   @override
-  String get login_screen_login_success => 'Přihlášení proběhlo úspěšně!';
+  String get login_screen_login_success => 'Přihlášení proběhlo úspěšně! 🎉';
 
   @override
   String get login_screen_login_error_generic =>
@@ -131,7 +131,7 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get register_screen_2_registration_success =>
-      'Registrace proběhla úspěšně!';
+      'Registrace proběhla úspěšně! 🎊';
 
   @override
   String get register_screen_2_registration_error_email_used =>
@@ -182,7 +182,7 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get account_not_approved_screen_notify_success =>
-      'Administrátor byl upozorněn.';
+      'Administrátor byl upozorněn. 📧';
 
   @override
   String get account_not_approved_screen_notify_error =>
@@ -229,7 +229,7 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get account_not_approved_screen_delete_success =>
-      'Tvůj účet byl smazán.';
+      'Tvůj účet byl smazán. 👋';
 
   @override
   String get account_not_approved_screen_delete_error =>
@@ -282,7 +282,7 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get calendar_screen_event_expansion_tile_no_events_title =>
-      'Ticho po pěšině...';
+      'Ticho po pěšině... 🤫';
 
   @override
   String get calendar_screen_event_expansion_tile_future_title =>
@@ -585,7 +585,7 @@ class AppLocalizationsCs extends AppLocalizations {
   String get back => 'Zpět';
 
   @override
-  String get common_copied_to_clipboard => 'Zkopírováno do schránky';
+  String get common_copied_to_clipboard => 'Zkopírováno do schránky 📋';
 
   @override
   String get create => 'Vytvořit';

@@ -24,7 +24,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get navbar_info => 'Information';
 
   @override
-  String get welcome_screen_title => 'Welcome to\nSkapka';
+  String get welcome_screen_title => 'Welcome to\nSkapka 👋';
 
   @override
   String get welcome_screen_login_button_text => 'Log in';
@@ -75,7 +75,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'Oops, that doesn\'t look like a valid email.';
 
   @override
-  String get login_screen_login_success => 'Login successful!';
+  String get login_screen_login_success => 'Login successful! 🎉';
 
   @override
   String get login_screen_login_error_generic =>
@@ -134,7 +134,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get register_screen_2_registration_success =>
-      'Registration successful!';
+      'Registration successful! 🎊';
 
   @override
   String get register_screen_2_registration_error_email_used =>
@@ -185,7 +185,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get account_not_approved_screen_notify_success =>
-      'Administrator has been notified.';
+      'Administrator has been notified. 📧';
 
   @override
   String get account_not_approved_screen_notify_error =>
@@ -232,7 +232,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get account_not_approved_screen_delete_success =>
-      'Your account has been deleted.';
+      'Your account has been deleted. 👋';
 
   @override
   String get account_not_approved_screen_delete_error =>
@@ -285,7 +285,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get calendar_screen_event_expansion_tile_no_events_title =>
-      'Quiet on the front.';
+      'Quiet on the front. 🤫';
 
   @override
   String get calendar_screen_event_expansion_tile_future_title => 'Upcoming';
@@ -589,7 +589,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get back => 'Back';
 
   @override
-  String get common_copied_to_clipboard => 'Copied to clipboard';
+  String get common_copied_to_clipboard => 'Copied to clipboard 📋';
 
   @override
   String get create => 'Create';

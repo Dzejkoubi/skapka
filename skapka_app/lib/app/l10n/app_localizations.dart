@@ -131,7 +131,7 @@ abstract class AppLocalizations {
   /// No description provided for @welcome_screen_title.
   ///
   /// In cs, this message translates to:
-  /// **'Vítej ve\nSkapce'**
+  /// **'Vítej ve\nSkapce 👋'**
   String get welcome_screen_title;
 
   /// No description provided for @welcome_screen_login_button_text.
@@ -221,7 +221,7 @@ abstract class AppLocalizations {
   /// No description provided for @login_screen_login_success.
   ///
   /// In cs, this message translates to:
-  /// **'Přihlášení proběhlo úspěšně!'**
+  /// **'Přihlášení proběhlo úspěšně! 🎉'**
   String get login_screen_login_success;
 
   /// No description provided for @login_screen_login_error_generic.
@@ -323,7 +323,7 @@ abstract class AppLocalizations {
   /// No description provided for @register_screen_2_registration_success.
   ///
   /// In cs, this message translates to:
-  /// **'Registrace proběhla úspěšně!'**
+  /// **'Registrace proběhla úspěšně! 🎊'**
   String get register_screen_2_registration_success;
 
   /// No description provided for @register_screen_2_registration_error_email_used.
@@ -398,7 +398,7 @@ abstract class AppLocalizations {
   /// No description provided for @account_not_approved_screen_notify_success.
   ///
   /// In cs, this message translates to:
-  /// **'Administrátor byl upozorněn.'**
+  /// **'Administrátor byl upozorněn. 📧'**
   String get account_not_approved_screen_notify_success;
 
   /// No description provided for @account_not_approved_screen_notify_error.
@@ -471,7 +471,7 @@ abstract class AppLocalizations {
   /// No description provided for @account_not_approved_screen_delete_success.
   ///
   /// In cs, this message translates to:
-  /// **'Tvůj účet byl smazán.'**
+  /// **'Tvůj účet byl smazán. 👋'**
   String get account_not_approved_screen_delete_success;
 
   /// No description provided for @account_not_approved_screen_delete_error.
@@ -561,7 +561,7 @@ abstract class AppLocalizations {
   /// No description provided for @calendar_screen_event_expansion_tile_no_events_title.
   ///
   /// In cs, this message translates to:
-  /// **'Ticho po pěšině...'**
+  /// **'Ticho po pěšině... 🤫'**
   String get calendar_screen_event_expansion_tile_no_events_title;
 
   /// No description provided for @calendar_screen_event_expansion_tile_future_title.
@@ -1061,7 +1061,7 @@ abstract class AppLocalizations {
   /// No description provided for @common_copied_to_clipboard.
   ///
   /// In cs, this message translates to:
-  /// **'Zkopírováno do schránky'**
+  /// **'Zkopírováno do schránky 📋'**
   String get common_copied_to_clipboard;
 
   /// No description provided for @create.

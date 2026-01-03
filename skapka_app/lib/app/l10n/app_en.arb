@@ -15,6 +15,9 @@
     "load_more": "Load more",
     "error": "Error",
     "generic_error": "Something went wrong. Please try again.",
+    "something_is_missing_title_1": "Quiet on the front... 🤫",
+    "something_is_missing_title_2": "Quiet on the front... 🤷‍♂️",
+
 
     "category_navigation": "--- NAVIGATION ---",
     "navbar_dependents": "Dependents",
@@ -127,7 +130,6 @@
     "category_calendar_screen": "--- CALENDAR SCREEN ---",
     "calendar_screen_title": "Calendar",
     "calendar_screen_speed_dial_add_google_calendar": "Google Calendar",
-    "calendar_screen_event_expansion_tile_no_events_title": "Quiet on the front. 🤫",
     "calendar_screen_event_expansion_tile_future_title": "Upcoming",
     "calendar_screen_event_expansion_tile_future_no_events_subtitle": "It seems there are no upcoming events.",
     "calendar_screen_event_expansion_tile_live_title": "Sign up",
@@ -206,9 +208,7 @@
     "create_edit_event_screen_save_error_generic": "Failed to save event. Please try again.",
 
     "category_live_events_screen": "--- LIVE EVENTS ---",
-    "live_events_screen_no_dependents_view_title": "Quiet on the front... 🤷‍♂️",
     "live_events_screen_no_dependents_view_subtitle": "It seems that you currently have no persons who could sign up for events.",
-    "live_events_screen_no_live_events_view_title": "Quiet on the front... 🤫",
     "live_events_screen_no_live_events_view_subtitle": "Person {dependent_name} currently has no events to sign up for.",
     "@live_events_screen_no_live_events_view_subtitle": {
         "placeholders": {

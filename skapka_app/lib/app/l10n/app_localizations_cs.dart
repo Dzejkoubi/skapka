@@ -51,6 +51,12 @@ class AppLocalizationsCs extends AppLocalizations {
   String get generic_error => 'Něco se pokazilo. Zkus to prosím znovu.';
 
   @override
+  String get something_is_missing_title_1 => 'Ticho po pěšině... 🤫';
+
+  @override
+  String get something_is_missing_title_2 => 'Ticho po pěšině... 🤷‍♂️';
+
+  @override
   String get category_navigation => '--- NAVIGACE ---';
 
   @override
@@ -345,10 +351,6 @@ class AppLocalizationsCs extends AppLocalizations {
       'Google kalendář';
 
   @override
-  String get calendar_screen_event_expansion_tile_no_events_title =>
-      'Ticho po pěšině... 🤫';
-
-  @override
   String get calendar_screen_event_expansion_tile_future_title =>
       'Nadcházející';
 
@@ -632,16 +634,8 @@ class AppLocalizationsCs extends AppLocalizations {
   String get category_live_events_screen => '--- PŘIHLAŠOVACÍ VÝPRAVY ---';
 
   @override
-  String get live_events_screen_no_dependents_view_title =>
-      'Ticho po pěšině... 🤷‍♂️';
-
-  @override
   String get live_events_screen_no_dependents_view_subtitle =>
       'Zdá se, že momentálně nemáš žádné osoby, které by se mohly přihlašovat na výpravy.';
-
-  @override
-  String get live_events_screen_no_live_events_view_title =>
-      'Ticho po pěšině... 🤫';
 
   @override
   String live_events_screen_no_live_events_view_subtitle(

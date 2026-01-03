@@ -51,6 +51,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get generic_error => 'Something went wrong. Please try again.';
 
   @override
+  String get something_is_missing_title_1 => 'Quiet on the front... 🤫';
+
+  @override
+  String get something_is_missing_title_2 => 'Quiet on the front... 🤷‍♂️';
+
+  @override
   String get category_navigation => '--- NAVIGATION ---';
 
   @override
@@ -348,10 +354,6 @@ class AppLocalizationsEn extends AppLocalizations {
       'Google Calendar';
 
   @override
-  String get calendar_screen_event_expansion_tile_no_events_title =>
-      'Quiet on the front. 🤫';
-
-  @override
   String get calendar_screen_event_expansion_tile_future_title => 'Upcoming';
 
   @override
@@ -635,16 +637,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get category_live_events_screen => '--- LIVE EVENTS ---';
 
   @override
-  String get live_events_screen_no_dependents_view_title =>
-      'Quiet on the front... 🤷‍♂️';
-
-  @override
   String get live_events_screen_no_dependents_view_subtitle =>
       'It seems that you currently have no persons who could sign up for events.';
-
-  @override
-  String get live_events_screen_no_live_events_view_title =>
-      'Quiet on the front... 🤫';
 
   @override
   String live_events_screen_no_live_events_view_subtitle(

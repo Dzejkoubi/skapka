@@ -182,6 +182,18 @@ abstract class AppLocalizations {
   /// **'Něco se pokazilo. Zkus to prosím znovu.'**
   String get generic_error;
 
+  /// No description provided for @something_is_missing_title_1.
+  ///
+  /// In cs, this message translates to:
+  /// **'Ticho po pěšině... 🤫'**
+  String get something_is_missing_title_1;
+
+  /// No description provided for @something_is_missing_title_2.
+  ///
+  /// In cs, this message translates to:
+  /// **'Ticho po pěšině... 🤷‍♂️'**
+  String get something_is_missing_title_2;
+
   /// No description provided for @category_navigation.
   ///
   /// In cs, this message translates to:
@@ -684,12 +696,6 @@ abstract class AppLocalizations {
   /// **'Google kalendář'**
   String get calendar_screen_speed_dial_add_google_calendar;
 
-  /// No description provided for @calendar_screen_event_expansion_tile_no_events_title.
-  ///
-  /// In cs, this message translates to:
-  /// **'Ticho po pěšině... 🤫'**
-  String get calendar_screen_event_expansion_tile_no_events_title;
-
   /// No description provided for @calendar_screen_event_expansion_tile_future_title.
   ///
   /// In cs, this message translates to:
@@ -1148,23 +1154,11 @@ abstract class AppLocalizations {
   /// **'--- PŘIHLAŠOVACÍ VÝPRAVY ---'**
   String get category_live_events_screen;
 
-  /// No description provided for @live_events_screen_no_dependents_view_title.
-  ///
-  /// In cs, this message translates to:
-  /// **'Ticho po pěšině... 🤷‍♂️'**
-  String get live_events_screen_no_dependents_view_title;
-
   /// No description provided for @live_events_screen_no_dependents_view_subtitle.
   ///
   /// In cs, this message translates to:
   /// **'Zdá se, že momentálně nemáš žádné osoby, které by se mohly přihlašovat na výpravy.'**
   String get live_events_screen_no_dependents_view_subtitle;
-
-  /// No description provided for @live_events_screen_no_live_events_view_title.
-  ///
-  /// In cs, this message translates to:
-  /// **'Ticho po pěšině... 🤫'**
-  String get live_events_screen_no_live_events_view_title;
 
   /// No description provided for @live_events_screen_no_live_events_view_subtitle.
   ///

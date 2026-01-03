@@ -724,8 +724,9 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
                           }
                         },
                         onUnpublish: () {
-                          if (kDebugMode)
+                          if (kDebugMode) {
                             print('User confirmed unpublish event');
+                          }
                           if (eventId == null) {
                             _createNewEvent(asDraft: true);
                           } else {

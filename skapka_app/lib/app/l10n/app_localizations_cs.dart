@@ -270,6 +270,10 @@ class AppLocalizationsCs extends AppLocalizations {
   String get event_box_target_patrols_text => 'Družinky: ';
 
   @override
+  String get event_box_open_error_event_not_live =>
+      'Nelze zobrazit detail výpravy, na kterou se nelze přihlašovat.';
+
+  @override
   String get calendar_screen_title => 'Kalendář';
 
   @override

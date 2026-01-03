@@ -104,6 +104,7 @@
     "event_box_event_multiple_days_end_text" : "To: ",
     "event_box_event_single_day_text" : "When: ",
     "event_box_target_patrols_text": "Patrols: ",
+    "event_box_open_error_event_not_live": "Cannot open event details for an event that is not live.",
 
     "calendar_screen_title": "Calendar",
     "calendar_screen_speed_dial_add_google_calendar": "Google Calendar",

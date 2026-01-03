@@ -1,6 +1,7 @@
 import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:gaimon/gaimon.dart';
 import 'package:provider/provider.dart';
 import 'package:skapka_app/app/l10n/app_localizations.dart';
 import 'package:skapka_app/app/theme/app_color_theme.dart';
@@ -49,6 +50,14 @@ class _EventsExpansionTileState extends State<EventsExpansionTile> {
       data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
       child: ExpansionTile(
         onExpansionChanged: (value) {
+          // If new state opened
+          if (value == true && !_isExpanded) {
+            Gaimon.soft();
+          }
+          // If new state closed
+          else if (value == false && _isExpanded) {
+            Gaimon.rigid();
+          }
           setState(() {
             _isExpanded = value;
           });

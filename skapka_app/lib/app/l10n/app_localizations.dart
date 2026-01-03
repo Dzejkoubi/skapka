@@ -540,6 +540,12 @@ abstract class AppLocalizations {
   /// **'Družinky: '**
   String get event_box_target_patrols_text;
 
+  /// No description provided for @event_box_open_error_event_not_live.
+  ///
+  /// In cs, this message translates to:
+  /// **'Nelze zobrazit detail výpravy, na kterou se nelze přihlašovat.'**
+  String get event_box_open_error_event_not_live;
+
   /// No description provided for @calendar_screen_title.
   ///
   /// In cs, this message translates to:

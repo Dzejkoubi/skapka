@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:gaimon/gaimon.dart';
 import 'package:skapka_app/app/router/router.gr.dart';
 import 'package:skapka_app/app/theme/app_color_theme.dart';
 import 'package:skapka_app/app/theme/app_sizes.dart';
@@ -90,6 +91,7 @@ class Appbar extends StatelessWidget implements PreferredSizeWidget {
               if (showSettingsIcon)
                 GestureDetector(
                   onTap: () {
+                    Gaimon.soft();
                     context.router.push(const SettingsRoute());
                   },
                   child: SvgPicture.asset(

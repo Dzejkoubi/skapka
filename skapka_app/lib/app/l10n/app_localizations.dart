@@ -534,6 +534,12 @@ abstract class AppLocalizations {
   /// **'Kdy: '**
   String get event_box_event_single_day_text;
 
+  /// No description provided for @event_box_target_patrols_text.
+  ///
+  /// In cs, this message translates to:
+  /// **'Družinky: '**
+  String get event_box_target_patrols_text;
+
   /// No description provided for @calendar_screen_title.
   ///
   /// In cs, this message translates to:

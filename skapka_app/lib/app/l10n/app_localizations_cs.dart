@@ -267,6 +267,9 @@ class AppLocalizationsCs extends AppLocalizations {
   String get event_box_event_single_day_text => 'Kdy: ';
 
   @override
+  String get event_box_target_patrols_text => 'Družinky: ';
+
+  @override
   String get calendar_screen_title => 'Kalendář';
 
   @override

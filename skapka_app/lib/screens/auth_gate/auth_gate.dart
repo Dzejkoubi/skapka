@@ -3,9 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:skapka_app/app/router/router.gr.dart';
 import 'package:skapka_app/app/theme/app_color_theme.dart';
+import 'package:skapka_app/models/patrol_model.dart';
+import 'package:skapka_app/models/troop_model.dart';
 import 'package:skapka_app/providers/account_provider.dart';
 import 'package:skapka_app/providers/dependents_provider.dart';
 import 'package:skapka_app/providers/events_provider.dart';
+import 'package:skapka_app/providers/units_provider.dart';
 import 'package:skapka_app/widgets/loading_floating_logo.dart';
 import 'package:skapka_app/services/auth_service.dart';
 import 'package:skapka_app/services/supabase_service.dart';
@@ -77,11 +80,34 @@ class _AuthGateState extends State<AuthGate> {
     // Load Group Details
     if (groupId.isNotEmpty) {
       final groupDetails = await supabaseService.getAccountGroupDetail(groupId);
-      if (mounted) context.read<AccountProvider>().setGroup(groupDetails);
+      if (mounted) {
+        context.read<AccountProvider>().setGroup(groupDetails);
+        context.read<UnitsProvider>().setAccountGroup(groupDetails);
+      }
     }
 
-    // Load Dependents and Events in parallel to speed up startup
-    await Future.wait([_loadDependents(accountId), _loadEvents(groupId)]);
+    // Load Dependents, Events and Units in parallel to speed up startup
+    await Future.wait([
+      _loadDependents(accountId),
+      _loadEvents(groupId),
+      _loadUnits(groupId),
+    ]);
+  }
+
+  Future<void> _loadUnits(String groupId) async {
+    if (groupId.isEmpty) return;
+    final supabaseService = SupabaseService();
+
+    final results = await Future.wait([
+      supabaseService.getGroupTroops(groupId),
+      supabaseService.getGroupPatrols(groupId),
+    ]);
+
+    if (mounted) {
+      final unitsProvider = context.read<UnitsProvider>();
+      unitsProvider.setTroops(results[0] as List<TroopModel>);
+      unitsProvider.setPatrols(results[1] as List<PatrolModel>);
+    }
   }
 
   /// Fetches all dependents linked to the account, including their details and notes

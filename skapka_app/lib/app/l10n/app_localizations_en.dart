@@ -270,6 +270,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get event_box_event_single_day_text => 'When: ';
 
   @override
+  String get event_box_target_patrols_text => 'Patrols: ';
+
+  @override
   String get calendar_screen_title => 'Calendar';
 
   @override

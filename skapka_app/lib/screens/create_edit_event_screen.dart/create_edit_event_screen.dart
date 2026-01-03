@@ -15,6 +15,7 @@ import 'package:skapka_app/models/patrol_model.dart';
 import 'package:skapka_app/models/troop_model.dart';
 import 'package:skapka_app/providers/account_provider.dart';
 import 'package:skapka_app/providers/events_provider.dart';
+import 'package:skapka_app/providers/units_provider.dart';
 import 'package:skapka_app/utils/event_utils.dart';
 import 'package:skapka_app/screens/create_edit_event_screen.dart/widgets/event_instructions_container.dart';
 import 'package:skapka_app/screens/create_edit_event_screen.dart/widgets/event_participants_container.dart';
@@ -51,6 +52,7 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
   // Services and providers
   final SupabaseService _supabaseService = SupabaseService();
   late final AccountProvider _accountProvider = context.read<AccountProvider>();
+  late final UnitsProvider _unitsProvider = context.read<UnitsProvider>();
   // Original event and edited event for change detection
   late final EventModel originalEvent;
   EventModel get editedEvent => EventModel(
@@ -64,7 +66,7 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
     meetingPlace: _meetingPlaceController.text,
     photoAlbumLink: _photoAlbumLinkController.text,
     groupId: groupId,
-    targetPatrolsIds: targetPatrolsIds,
+    targetPatrolsIds: targetPatrolIds,
     lastEditedBy: lastEditedBy,
     isDraft: isDraft,
   );
@@ -158,7 +160,6 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
   final TextEditingController _photoAlbumLinkController =
       TextEditingController();
   String? groupId;
-  List<String>? targetPatrolsIds;
   String? lastEditedBy;
   bool isDraft = true;
 
@@ -169,8 +170,10 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
 
   /// Fetch all necessary data (dependents, patrols, troops, participants)
   Future<void> fetchRequiredData() async {
+    _groupPatrols = _unitsProvider.patrols;
+    _groupTroops = _unitsProvider.troops;
+
     await fetchGroupDependentsAndLeaders(_accountProvider.groupId);
-    await fetchGroupPatrolsAndTroops(_accountProvider.groupId);
     if (widget.event != null) {
       await fetchEventParticipants(widget.event!.eventId);
     } else {
@@ -212,7 +215,6 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
     _meetingPlaceController.text = widget.event?.meetingPlace ?? '';
     _photoAlbumLinkController.text = widget.event?.photoAlbumLink ?? '';
     groupId = widget.event?.groupId;
-    targetPatrolsIds = widget.event?.targetPatrolsIds;
     lastEditedBy = widget.event?.lastEditedBy;
     isDraft = widget.event?.isDraft ?? true;
   }
@@ -224,17 +226,6 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
       excludeArchived: false,
     );
     _groupLeaders = await _supabaseService.getGroupLeaders(groupId);
-  }
-
-  ///Fetch group patrols and troops and store them locally
-  Future<void> fetchGroupPatrolsAndTroops(String groupId) async {
-    _groupPatrols = await _supabaseService.getGroupPatrols(groupId);
-    _groupTroops = await _supabaseService.getGroupTroops(groupId);
-    if (kDebugMode) {
-      print(
-        'Fetched ${_groupPatrols.length} patrols and ${_groupTroops.length} troops for group $groupId.',
-      );
-    }
   }
 
   /// Fetch event participants and store them locally
@@ -520,12 +511,20 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
           // We were editing, replace the old details screen
           context.router.pop(); // Pop CreateEdit
           context.router.popAndPush(
-            EventDetailsRoute(event: event, eventTimeType: type),
+            EventDetailsRoute(
+              event: event,
+              eventTimeType: type,
+              unitsProvider: _unitsProvider,
+            ),
           );
         } else {
           // We were creating, replace CreateEdit with new details screen
           context.router.popAndPush(
-            EventDetailsRoute(event: event, eventTimeType: type),
+            EventDetailsRoute(
+              event: event,
+              eventTimeType: type,
+              unitsProvider: _unitsProvider,
+            ),
           );
         }
       }

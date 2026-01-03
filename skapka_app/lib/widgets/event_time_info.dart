@@ -39,13 +39,13 @@ class EventTimeInfo extends StatelessWidget {
       children: [
         if (fullInfo) ...[
           if (isUserLeader(context) && event.openSignUp != null)
-            _buildRow(
+            buildRow(
               context,
               context.localizations.event_box_sign_up_start_date_text,
               dateTimeFormat.format(event.openSignUp!),
             ),
           if (event.closeSignUp != null)
-            _buildRow(
+            buildRow(
               context,
               context.localizations.event_box_sign_up_end_date_text,
               dateTimeFormat.format(event.closeSignUp!),
@@ -53,27 +53,27 @@ class EventTimeInfo extends StatelessWidget {
         ] else ...[
           if (eventTimeType == EventTimeType.draft) ...[
             if (event.openSignUp != null)
-              _buildRow(
+              buildRow(
                 context,
                 context.localizations.event_box_sign_up_start_date_text,
                 dateTimeFormat.format(event.openSignUp!),
               ),
             if (event.closeSignUp != null)
-              _buildRow(
+              buildRow(
                 context,
                 context.localizations.event_box_sign_up_end_date_text,
                 dateTimeFormat.format(event.closeSignUp!),
               ),
           ] else if (eventTimeType == EventTimeType.live) ...[
             if (event.closeSignUp != null)
-              _buildRow(
+              buildRow(
                 context,
                 context.localizations.event_box_sign_up_end_date_text,
                 dateTimeFormat.format(event.closeSignUp!),
               ),
           ] else if (eventTimeType == EventTimeType.future) ...[
             if (event.openSignUp != null)
-              _buildRow(
+              buildRow(
                 context,
                 context.localizations.event_box_sign_up_start_date_text,
                 dateTimeFormat.format(event.openSignUp!),
@@ -82,18 +82,18 @@ class EventTimeInfo extends StatelessWidget {
         ],
         if (startDate != null && endDate != null)
           if (isSingleDay)
-            _buildRow(
+            buildRow(
               context,
               context.localizations.event_box_event_single_day_text,
               '${dateFormat.format(startDate)} ${timeFormat.format(startDate)} - ${timeFormat.format(endDate)}',
             )
           else ...[
-            _buildRow(
+            buildRow(
               context,
               context.localizations.event_box_event_multiple_days_start_text,
               dateTimeFormat.format(startDate),
             ),
-            _buildRow(
+            buildRow(
               context,
               context.localizations.event_box_event_multiple_days_end_text,
               dateTimeFormat.format(endDate),
@@ -103,14 +103,23 @@ class EventTimeInfo extends StatelessWidget {
     );
   }
 
-  Widget _buildRow(BuildContext context, String label, String value) {
+  Widget buildRow(BuildContext context, String label, String value) {
     final style = AppTextTheme.bodySmall(context);
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(label, style: style.copyWith(color: context.colors.text.muted)),
-        Text(value, style: style.copyWith(color: context.colors.text.normal)),
+        Expanded(
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            reverse: true,
+            child: Text(
+              value,
+              style: style.copyWith(color: context.colors.text.normal),
+            ),
+          ),
+        ),
       ],
     );
   }

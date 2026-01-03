@@ -19,6 +19,7 @@ import 'package:skapka_app/models/event_participant_model.dart' as _i26;
 import 'package:skapka_app/models/leader_model.dart' as _i25;
 import 'package:skapka_app/models/patrol_model.dart' as _i23;
 import 'package:skapka_app/models/troop_model.dart' as _i24;
+import 'package:skapka_app/providers/units_provider.dart' as _i30;
 import 'package:skapka_app/screens/account_not_approved_screen/account_not_approved_screen.dart'
     as _i1;
 import 'package:skapka_app/screens/auth_gate/auth_gate.dart' as _i2;
@@ -348,6 +349,7 @@ class EventDetailsRoute extends _i20.PageRouteInfo<EventDetailsRouteArgs> {
     _i29.Key? key,
     required _i28.EventModel event,
     required _i28.EventTimeType eventTimeType,
+    required _i30.UnitsProvider unitsProvider,
     List<_i20.PageRouteInfo>? children,
   }) : super(
          EventDetailsRoute.name,
@@ -355,6 +357,7 @@ class EventDetailsRoute extends _i20.PageRouteInfo<EventDetailsRouteArgs> {
            key: key,
            event: event,
            eventTimeType: eventTimeType,
+           unitsProvider: unitsProvider,
          ),
          initialChildren: children,
        );
@@ -369,6 +372,7 @@ class EventDetailsRoute extends _i20.PageRouteInfo<EventDetailsRouteArgs> {
         key: args.key,
         event: args.event,
         eventTimeType: args.eventTimeType,
+        unitsProvider: args.unitsProvider,
       );
     },
   );
@@ -379,6 +383,7 @@ class EventDetailsRouteArgs {
     this.key,
     required this.event,
     required this.eventTimeType,
+    required this.unitsProvider,
   });
 
   final _i29.Key? key;
@@ -387,9 +392,11 @@ class EventDetailsRouteArgs {
 
   final _i28.EventTimeType eventTimeType;
 
+  final _i30.UnitsProvider unitsProvider;
+
   @override
   String toString() {
-    return 'EventDetailsRouteArgs{key: $key, event: $event, eventTimeType: $eventTimeType}';
+    return 'EventDetailsRouteArgs{key: $key, event: $event, eventTimeType: $eventTimeType, unitsProvider: $unitsProvider}';
   }
 
   @override
@@ -398,11 +405,16 @@ class EventDetailsRouteArgs {
     if (other is! EventDetailsRouteArgs) return false;
     return key == other.key &&
         event == other.event &&
-        eventTimeType == other.eventTimeType;
+        eventTimeType == other.eventTimeType &&
+        unitsProvider == other.unitsProvider;
   }
 
   @override
-  int get hashCode => key.hashCode ^ event.hashCode ^ eventTimeType.hashCode;
+  int get hashCode =>
+      key.hashCode ^
+      event.hashCode ^
+      eventTimeType.hashCode ^
+      unitsProvider.hashCode;
 }
 
 /// generated route for

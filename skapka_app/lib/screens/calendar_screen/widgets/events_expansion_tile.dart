@@ -1,6 +1,7 @@
 import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 import 'package:skapka_app/app/l10n/app_localizations.dart';
 import 'package:skapka_app/app/theme/app_color_theme.dart';
 import 'package:skapka_app/app/theme/app_radius.dart';
@@ -8,6 +9,7 @@ import 'package:skapka_app/app/theme/app_sizes.dart';
 import 'package:skapka_app/app/theme/app_spacing.dart';
 import 'package:skapka_app/app/theme/app_text_theme.dart';
 import 'package:skapka_app/models/event_model.dart';
+import 'package:skapka_app/providers/units_provider.dart';
 import 'package:skapka_app/screens/calendar_screen/widgets/no_events_view.dart';
 import 'package:skapka_app/widgets/buttons/main_button.dart';
 import 'package:skapka_app/app/theme/main_button_theme.dart';
@@ -51,7 +53,10 @@ class _EventsExpansionTileState extends State<EventsExpansionTile> {
             _isExpanded = value;
           });
         },
-        title: Text(config.title, style: AppTextTheme.titleSmall(context)),
+        title: Text(
+          '${config.title} (${widget.events.length})',
+          style: AppTextTheme.titleSmall(context),
+        ),
         backgroundColor: config.backgroundColor,
         collapsedBackgroundColor: config.backgroundColor,
         shape: border,
@@ -79,7 +84,11 @@ class _EventsExpansionTileState extends State<EventsExpansionTile> {
             for (final event in widget.events)
               Padding(
                 padding: const EdgeInsets.only(bottom: AppSpacing.small),
-                child: EventBox(event: event, eventTimeType: widget.type),
+                child: EventBox(
+                  event: event,
+                  eventTimeType: widget.type,
+                  unitsProvider: context.read<UnitsProvider>(),
+                ),
               ),
             if (widget.onLoadMore != null)
               Padding(

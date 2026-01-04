@@ -54,7 +54,32 @@ class AppLocalizationsCs extends AppLocalizations {
   String get something_is_missing_title_1 => 'Ticho po pěšině... 🤫';
 
   @override
-  String get something_is_missing_title_2 => 'Ticho po pěšině... 🤷‍♂️';
+  String get something_is_missing_title_2 => 'Kde nic, tu nic... 🤷‍♂️';
+
+  @override
+  String get something_is_missing_title_3 => 'Tady chcípl pes... 🐕';
+
+  @override
+  String get something_is_missing_title_4 => 'Pusto a prázdno... 🏜️';
+
+  @override
+  String get something_is_missing_title_5 => 'Vymeteno... 🧹';
+
+  @override
+  String get something_is_missing_title_6 => 'Ani noha... 👣';
+
+  @override
+  String get something_is_missing_title_7 => 'Široko daleko ani živáčka... 🔭';
+
+  @override
+  String get something_is_missing_title_8 =>
+      'Tady lišky dávají dobrou noc... 🦊';
+
+  @override
+  String get something_is_missing_title_9 => 'Pusto prázdno... 🕳️';
+
+  @override
+  String get something_is_missing_title_10 => 'Zeje to tu prázdnotou... 💨';
 
   @override
   String get category_navigation => '--- NAVIGACE ---';

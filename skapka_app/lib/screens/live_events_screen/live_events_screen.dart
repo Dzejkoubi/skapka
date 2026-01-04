@@ -43,10 +43,14 @@ class LiveEventsScreen extends StatelessWidget {
               return Column(
                 children: [
                   provider.dependents.isEmpty
-                      ? SomethingIsMissingWidget(
-                          subtitle: context
-                              .localizations
-                              .live_events_screen_no_dependents_view_subtitle,
+                      ? Column(
+                          children: [
+                            SomethingIsMissingWidget(
+                              subtitle: context
+                                  .localizations
+                                  .live_events_screen_no_dependents_view_subtitle,
+                            ),
+                          ],
                         )
                       : Padding(
                           padding: const EdgeInsets.only(

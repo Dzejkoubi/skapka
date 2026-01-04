@@ -14,6 +14,14 @@ class SomethingIsMissingWidget extends StatelessWidget {
       final titles = [
         context.localizations.something_is_missing_title_1,
         context.localizations.something_is_missing_title_2,
+        context.localizations.something_is_missing_title_3,
+        context.localizations.something_is_missing_title_4,
+        context.localizations.something_is_missing_title_5,
+        context.localizations.something_is_missing_title_6,
+        context.localizations.something_is_missing_title_7,
+        context.localizations.something_is_missing_title_8,
+        context.localizations.something_is_missing_title_9,
+        context.localizations.something_is_missing_title_10,
       ];
       titles.shuffle();
       return titles.first;
@@ -23,9 +31,10 @@ class SomethingIsMissingWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
+        const SizedBox(height: AppSpacing.large),
         Text(
           getRandomTitle(),
-          style: AppTextTheme.titleMedium(context),
+          style: AppTextTheme.titleSmall(context),
           textAlign: TextAlign.center,
         ),
         const SizedBox(height: AppSpacing.small),
@@ -36,6 +45,7 @@ class SomethingIsMissingWidget extends StatelessWidget {
           ).copyWith(color: context.colors.text.muted),
           textAlign: TextAlign.center,
         ),
+        const SizedBox(height: AppSpacing.xLarge),
       ],
     );
   }

@@ -191,8 +191,56 @@ abstract class AppLocalizations {
   /// No description provided for @something_is_missing_title_2.
   ///
   /// In cs, this message translates to:
-  /// **'Ticho po pěšině... 🤷‍♂️'**
+  /// **'Kde nic, tu nic... 🤷‍♂️'**
   String get something_is_missing_title_2;
+
+  /// No description provided for @something_is_missing_title_3.
+  ///
+  /// In cs, this message translates to:
+  /// **'Tady chcípl pes... 🐕'**
+  String get something_is_missing_title_3;
+
+  /// No description provided for @something_is_missing_title_4.
+  ///
+  /// In cs, this message translates to:
+  /// **'Pusto a prázdno... 🏜️'**
+  String get something_is_missing_title_4;
+
+  /// No description provided for @something_is_missing_title_5.
+  ///
+  /// In cs, this message translates to:
+  /// **'Vymeteno... 🧹'**
+  String get something_is_missing_title_5;
+
+  /// No description provided for @something_is_missing_title_6.
+  ///
+  /// In cs, this message translates to:
+  /// **'Ani noha... 👣'**
+  String get something_is_missing_title_6;
+
+  /// No description provided for @something_is_missing_title_7.
+  ///
+  /// In cs, this message translates to:
+  /// **'Široko daleko ani živáčka... 🔭'**
+  String get something_is_missing_title_7;
+
+  /// No description provided for @something_is_missing_title_8.
+  ///
+  /// In cs, this message translates to:
+  /// **'Tady lišky dávají dobrou noc... 🦊'**
+  String get something_is_missing_title_8;
+
+  /// No description provided for @something_is_missing_title_9.
+  ///
+  /// In cs, this message translates to:
+  /// **'Pusto prázdno... 🕳️'**
+  String get something_is_missing_title_9;
+
+  /// No description provided for @something_is_missing_title_10.
+  ///
+  /// In cs, this message translates to:
+  /// **'Zeje to tu prázdnotou... 💨'**
+  String get something_is_missing_title_10;
 
   /// No description provided for @category_navigation.
   ///

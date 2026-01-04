@@ -54,7 +54,31 @@ class AppLocalizationsEn extends AppLocalizations {
   String get something_is_missing_title_1 => 'Quiet on the front... 🤫';
 
   @override
-  String get something_is_missing_title_2 => 'Quiet on the front... 🤷‍♂️';
+  String get something_is_missing_title_2 => 'Nothing to see here... 🤷‍♂️';
+
+  @override
+  String get something_is_missing_title_3 => 'It\'s a ghost town... 👻';
+
+  @override
+  String get something_is_missing_title_4 => 'Empty as a desert... 🏜️';
+
+  @override
+  String get something_is_missing_title_5 => 'Crickets... 🦗';
+
+  @override
+  String get something_is_missing_title_6 => 'Tumbleweeds... 🌵';
+
+  @override
+  String get something_is_missing_title_7 => 'Not a soul in sight... �';
+
+  @override
+  String get something_is_missing_title_8 => 'All quiet... 🎖️';
+
+  @override
+  String get something_is_missing_title_9 => 'The void... 🌌';
+
+  @override
+  String get something_is_missing_title_10 => 'Clean slate... 🧼';
 
   @override
   String get category_navigation => '--- NAVIGATION ---';

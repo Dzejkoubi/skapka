@@ -16,7 +16,15 @@
     "error": "Error",
     "generic_error": "Something went wrong. Please try again.",
     "something_is_missing_title_1": "Quiet on the front... 🤫",
-    "something_is_missing_title_2": "Quiet on the front... 🤷‍♂️",
+    "something_is_missing_title_2": "Nothing to see here... 🤷‍♂️",
+    "something_is_missing_title_3": "It's a ghost town... 👻",
+    "something_is_missing_title_4": "Empty as a desert... 🏜️",
+    "something_is_missing_title_5": "Crickets... 🦗",
+    "something_is_missing_title_6": "Tumbleweeds... 🌵",
+    "something_is_missing_title_7": "Not a soul in sight... �",
+    "something_is_missing_title_8": "All quiet... 🎖️",
+    "something_is_missing_title_9": "The void... 🌌",
+    "something_is_missing_title_10": "Clean slate... 🧼",
 
 
     "category_navigation": "--- NAVIGATION ---",

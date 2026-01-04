@@ -27,7 +27,7 @@ class DependentView extends StatelessWidget {
     return Column(
       children: [
         Text(
-          dependentModel.dependentDetails!.name,
+          '${dependentModel.dependentDetails!.name} ${dependentModel.dependentDetails!.surname}',
           style: AppTextTheme.titleMedium(context),
           textAlign: TextAlign.center,
         ),

@@ -37,6 +37,7 @@ class LiveEventsScreen extends StatelessWidget {
         );
       },
       child: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
         child: SafeArea(
           child: Consumer<DependentsProvider>(
             builder: (context, provider, child) {

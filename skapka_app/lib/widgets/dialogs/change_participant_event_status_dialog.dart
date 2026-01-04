@@ -93,7 +93,7 @@ class _ChangeParticipantEventStatusDialogState
             type: BottomDialogType.positive,
             description: context.localizations
                 .live_events_screen_change_dependent_status_dialog_success(
-                  widget.dependent.dependentDetails?.name ?? '',
+                  '${widget.dependent.dependentDetails?.name} ${widget.dependent.dependentDetails?.surname}',
                   statusText,
                 ),
           );
@@ -172,7 +172,7 @@ class _ChangeParticipantEventStatusDialogState
                     Text(
                       context.localizations
                           .live_events_screen_change_dependent_status_dialog_description(
-                            widget.dependent.dependentDetails?.name ?? '',
+                            '${widget.dependent.dependentDetails?.name} ${widget.dependent.dependentDetails?.surname}',
                             widget.eventModel.title ?? '',
                           ),
                       style: AppTextTheme.bodyMedium(

@@ -486,7 +486,7 @@ class AppLocalizationsCs extends AppLocalizations {
   @override
   String
   get create_edit_event_screen_delete_event_error_past_event_admin_only =>
-      'Pouze administrátoři mohou mazat nebo zrušit publikování minulých výpravuí.';
+      'Pouze administrátoři mohou mazat nebo zrušit publikování minulých výprav.';
 
   @override
   String get create_edit_event_screen_delete_event_error_event_not_created =>

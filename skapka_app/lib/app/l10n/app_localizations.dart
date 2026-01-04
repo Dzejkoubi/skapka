@@ -916,7 +916,7 @@ abstract class AppLocalizations {
   /// No description provided for @create_edit_event_screen_delete_event_error_past_event_admin_only.
   ///
   /// In cs, this message translates to:
-  /// **'Pouze administrátoři mohou mazat nebo zrušit publikování minulých výpravuí.'**
+  /// **'Pouze administrátoři mohou mazat nebo zrušit publikování minulých výprav.'**
   String get create_edit_event_screen_delete_event_error_past_event_admin_only;
 
   /// No description provided for @create_edit_event_screen_delete_event_error_event_not_created.

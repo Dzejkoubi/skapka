@@ -1280,6 +1280,138 @@ abstract class AppLocalizations {
   /// **'Nelze změnit stav přihlášení na výpravu po vypršení datumu přihlašování.'**
   String get live_events_screen_cannot_change_status_past_signup_deadline;
 
+  /// No description provided for @category_dependents_screen.
+  ///
+  /// In cs, this message translates to:
+  /// **'--- DEPENDENTS SCREEN ---'**
+  String get category_dependents_screen;
+
+  /// No description provided for @dependents_screen_add_dependent_button_text.
+  ///
+  /// In cs, this message translates to:
+  /// **'Přidat'**
+  String get dependents_screen_add_dependent_button_text;
+
+  /// No description provided for @dependents_screen_dependent_nickname.
+  ///
+  /// In cs, this message translates to:
+  /// **'Přezdívka'**
+  String get dependents_screen_dependent_nickname;
+
+  /// No description provided for @dependents_screen_dependent_patrol.
+  ///
+  /// In cs, this message translates to:
+  /// **'Družina'**
+  String get dependents_screen_dependent_patrol;
+
+  /// No description provided for @dependents_screen_dependent_this_school_year_event_attendance.
+  ///
+  /// In cs, this message translates to:
+  /// **'Účast na výpravách v tomto školním roce'**
+  String get dependents_screen_dependent_this_school_year_event_attendance;
+
+  /// No description provided for @dependents_screen_dependent_notes.
+  ///
+  /// In cs, this message translates to:
+  /// **'Upravit detaily'**
+  String get dependents_screen_dependent_notes;
+
+  /// No description provided for @dependents_screen_dependent_description.
+  ///
+  /// In cs, this message translates to:
+  /// **'Pokud chceš, můžeš sem napsat něco o osobě {name_surname}. Detaily uvidí pouze administrátoři a vedoucí. Pomůže to při organizaci výprav.'**
+  String dependents_screen_dependent_description(Object name_surname);
+
+  /// No description provided for @dependents_screen_depents_details_has_gluten_allergy.
+  ///
+  /// In cs, this message translates to:
+  /// **'Má alergii na lepek'**
+  String get dependents_screen_depents_details_has_gluten_allergy;
+
+  /// No description provided for @dependents_screen_depents_details_has_lactose_intolerance.
+  ///
+  /// In cs, this message translates to:
+  /// **'Má alergii na laktózu'**
+  String get dependents_screen_depents_details_has_lactose_intolerance;
+
+  /// No description provided for @dependents_screen_depents_details_has_nut_allergy.
+  ///
+  /// In cs, this message translates to:
+  /// **'Má alergii na ořechy'**
+  String get dependents_screen_depents_details_has_nut_allergy;
+
+  /// No description provided for @dependents_screen_depents_details_is_claustrophobic.
+  ///
+  /// In cs, this message translates to:
+  /// **'Má klaustrofobii'**
+  String get dependents_screen_depents_details_is_claustrophobic;
+
+  /// No description provided for @dependents_screen_depents_details_has_epilepsy.
+  ///
+  /// In cs, this message translates to:
+  /// **'Má epilepsii'**
+  String get dependents_screen_depents_details_has_epilepsy;
+
+  /// No description provided for @dependents_screen_depents_details_has_asthma.
+  ///
+  /// In cs, this message translates to:
+  /// **'Má astma'**
+  String get dependents_screen_depents_details_has_asthma;
+
+  /// No description provided for @dependents_screen_depents_details_is_swimmer.
+  ///
+  /// In cs, this message translates to:
+  /// **'Je plavec'**
+  String get dependents_screen_depents_details_is_swimmer;
+
+  /// No description provided for @dependents_screen_depents_details_other_medical_notes.
+  ///
+  /// In cs, this message translates to:
+  /// **'Jiné zdravotní poznámky'**
+  String get dependents_screen_depents_details_other_medical_notes;
+
+  /// No description provided for @dependents_screen_depents_details_other_dietary_notes.
+  ///
+  /// In cs, this message translates to:
+  /// **'Jiné dietní poznámky'**
+  String get dependents_screen_depents_details_other_dietary_notes;
+
+  /// No description provided for @dependents_screen_depents_details_other_notes.
+  ///
+  /// In cs, this message translates to:
+  /// **'Jiné poznámky'**
+  String get dependents_screen_depents_details_other_notes;
+
+  /// No description provided for @dependents_screen_save_success.
+  ///
+  /// In cs, this message translates to:
+  /// **'Detaily byly úspěšně uloženy 💾.'**
+  String get dependents_screen_save_success;
+
+  /// No description provided for @dependents_screen_unsaved_changes_dialog_title.
+  ///
+  /// In cs, this message translates to:
+  /// **'Uložit změny?'**
+  String get dependents_screen_unsaved_changes_dialog_title;
+
+  /// No description provided for @dependents_screen_unsaved_changes_dialog_description.
+  ///
+  /// In cs, this message translates to:
+  /// **'Máš neuložené změny. Chceš je před odchodem uložit?'**
+  String get dependents_screen_unsaved_changes_dialog_description;
+
+  /// No description provided for @dependents_screen_unsaved_changes_dialog_save.
+  ///
+  /// In cs, this message translates to:
+  /// **'Uložit'**
+  String get dependents_screen_unsaved_changes_dialog_save;
+
+  /// No description provided for @dependents_screen_unsaved_changes_dialog_discard.
+  ///
+  /// In cs, this message translates to:
+  /// **'Zahodit'**
+  String get dependents_screen_unsaved_changes_dialog_discard;
+
   /// No description provided for @category_settings_screen.
   ///
   /// In cs, this message translates to:

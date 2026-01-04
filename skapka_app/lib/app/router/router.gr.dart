@@ -9,17 +9,19 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:auto_route/auto_route.dart' as _i20;
-import 'package:collection/collection.dart' as _i28;
-import 'package:flutter/foundation.dart' as _i22;
-import 'package:flutter/material.dart' as _i21;
-import 'package:skapka_app/models/dependents/dependent_model.dart' as _i23;
-import 'package:skapka_app/models/event_model.dart' as _i29;
-import 'package:skapka_app/models/event_participant_model.dart' as _i27;
-import 'package:skapka_app/models/leader_model.dart' as _i26;
-import 'package:skapka_app/models/patrol_model.dart' as _i24;
-import 'package:skapka_app/models/troop_model.dart' as _i25;
-import 'package:skapka_app/providers/units_provider.dart' as _i30;
+import 'package:auto_route/auto_route.dart' as _i21;
+import 'package:collection/collection.dart' as _i29;
+import 'package:flutter/foundation.dart' as _i23;
+import 'package:flutter/material.dart' as _i22;
+import 'package:skapka_app/models/dependents/account_dependent_model.dart'
+    as _i31;
+import 'package:skapka_app/models/dependents/dependent_model.dart' as _i24;
+import 'package:skapka_app/models/event_model.dart' as _i30;
+import 'package:skapka_app/models/event_participant_model.dart' as _i28;
+import 'package:skapka_app/models/leader_model.dart' as _i27;
+import 'package:skapka_app/models/patrol_model.dart' as _i25;
+import 'package:skapka_app/models/troop_model.dart' as _i26;
+import 'package:skapka_app/providers/units_provider.dart' as _i32;
 import 'package:skapka_app/screens/account_not_approved_screen/account_not_approved_screen.dart'
     as _i1;
 import 'package:skapka_app/screens/auth_gate/auth_gate.dart' as _i2;
@@ -32,38 +34,40 @@ import 'package:skapka_app/screens/create_edit_event_screen.dart/screens/create_
     as _i6;
 import 'package:skapka_app/screens/dependents_screen/dependents_screen.dart'
     as _i8;
-import 'package:skapka_app/screens/event_details_screen/event_details_screen.dart'
+import 'package:skapka_app/screens/dependents_screen/screens/edit_dependent_details_screen.dart'
     as _i9;
-import 'package:skapka_app/screens/information_screen/information_screen.dart'
+import 'package:skapka_app/screens/event_details_screen/event_details_screen.dart'
     as _i10;
+import 'package:skapka_app/screens/information_screen/information_screen.dart'
+    as _i11;
 import 'package:skapka_app/screens/live_events_screen/live_events_screen.dart'
-    as _i12;
-import 'package:skapka_app/screens/login_screen/login_screen.dart' as _i13;
+    as _i13;
+import 'package:skapka_app/screens/login_screen/login_screen.dart' as _i14;
 import 'package:skapka_app/screens/navbar_dashboard/navbar_dashboard.dart'
-    as _i14;
-import 'package:skapka_app/screens/register_screen/register_screen_first.dart'
     as _i15;
-import 'package:skapka_app/screens/register_screen/register_screen_second.dart'
+import 'package:skapka_app/screens/register_screen/register_screen_first.dart'
     as _i16;
-import 'package:skapka_app/screens/settings_screen/settings_screen.dart'
+import 'package:skapka_app/screens/register_screen/register_screen_second.dart'
     as _i17;
+import 'package:skapka_app/screens/settings_screen/settings_screen.dart'
+    as _i18;
 import 'package:skapka_app/screens/theme_showcase_screens/button_theme_showcase.dart'
     as _i3;
 import 'package:skapka_app/screens/theme_showcase_screens/large_dialog_showcase.dart'
-    as _i11;
+    as _i12;
 import 'package:skapka_app/screens/theme_showcase_screens/squircle_showcase.dart'
-    as _i18;
-import 'package:skapka_app/screens/welcome_screen/welcome_screen.dart' as _i19;
+    as _i19;
+import 'package:skapka_app/screens/welcome_screen/welcome_screen.dart' as _i20;
 
 /// generated route for
 /// [_i1.AccountNotApprovedScreen]
-class AccountNotApprovedRoute extends _i20.PageRouteInfo<void> {
-  const AccountNotApprovedRoute({List<_i20.PageRouteInfo>? children})
+class AccountNotApprovedRoute extends _i21.PageRouteInfo<void> {
+  const AccountNotApprovedRoute({List<_i21.PageRouteInfo>? children})
     : super(AccountNotApprovedRoute.name, initialChildren: children);
 
   static const String name = 'AccountNotApprovedRoute';
 
-  static _i20.PageInfo page = _i20.PageInfo(
+  static _i21.PageInfo page = _i21.PageInfo(
     name,
     builder: (data) {
       return const _i1.AccountNotApprovedScreen();
@@ -73,13 +77,13 @@ class AccountNotApprovedRoute extends _i20.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i2.AuthGate]
-class AuthGate extends _i20.PageRouteInfo<void> {
-  const AuthGate({List<_i20.PageRouteInfo>? children})
+class AuthGate extends _i21.PageRouteInfo<void> {
+  const AuthGate({List<_i21.PageRouteInfo>? children})
     : super(AuthGate.name, initialChildren: children);
 
   static const String name = 'AuthGate';
 
-  static _i20.PageInfo page = _i20.PageInfo(
+  static _i21.PageInfo page = _i21.PageInfo(
     name,
     builder: (data) {
       return const _i2.AuthGate();
@@ -89,13 +93,13 @@ class AuthGate extends _i20.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i3.ButtonThemeShowcaseScreen]
-class ButtonThemeShowcaseRoute extends _i20.PageRouteInfo<void> {
-  const ButtonThemeShowcaseRoute({List<_i20.PageRouteInfo>? children})
+class ButtonThemeShowcaseRoute extends _i21.PageRouteInfo<void> {
+  const ButtonThemeShowcaseRoute({List<_i21.PageRouteInfo>? children})
     : super(ButtonThemeShowcaseRoute.name, initialChildren: children);
 
   static const String name = 'ButtonThemeShowcaseRoute';
 
-  static _i20.PageInfo page = _i20.PageInfo(
+  static _i21.PageInfo page = _i21.PageInfo(
     name,
     builder: (data) {
       return const _i3.ButtonThemeShowcaseScreen();
@@ -105,13 +109,13 @@ class ButtonThemeShowcaseRoute extends _i20.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i4.CalendarScreen]
-class CalendarRoute extends _i20.PageRouteInfo<void> {
-  const CalendarRoute({List<_i20.PageRouteInfo>? children})
+class CalendarRoute extends _i21.PageRouteInfo<void> {
+  const CalendarRoute({List<_i21.PageRouteInfo>? children})
     : super(CalendarRoute.name, initialChildren: children);
 
   static const String name = 'CalendarRoute';
 
-  static _i20.PageInfo page = _i20.PageInfo(
+  static _i21.PageInfo page = _i21.PageInfo(
     name,
     builder: (data) {
       return const _i4.CalendarScreen();
@@ -122,12 +126,12 @@ class CalendarRoute extends _i20.PageRouteInfo<void> {
 /// generated route for
 /// [_i5.CreateEditEventInstructionsScreen]
 class CreateEditEventInstructionsRoute
-    extends _i20.PageRouteInfo<CreateEditEventInstructionsRouteArgs> {
+    extends _i21.PageRouteInfo<CreateEditEventInstructionsRouteArgs> {
   CreateEditEventInstructionsRoute({
-    _i21.Key? key,
+    _i22.Key? key,
     String? initialInstructions,
     required dynamic Function(String) onSave,
-    List<_i20.PageRouteInfo>? children,
+    List<_i21.PageRouteInfo>? children,
   }) : super(
          CreateEditEventInstructionsRoute.name,
          args: CreateEditEventInstructionsRouteArgs(
@@ -140,7 +144,7 @@ class CreateEditEventInstructionsRoute
 
   static const String name = 'CreateEditEventInstructionsRoute';
 
-  static _i20.PageInfo page = _i20.PageInfo(
+  static _i21.PageInfo page = _i21.PageInfo(
     name,
     builder: (data) {
       final args = data.argsAs<CreateEditEventInstructionsRouteArgs>();
@@ -160,7 +164,7 @@ class CreateEditEventInstructionsRouteArgs {
     required this.onSave,
   });
 
-  final _i21.Key? key;
+  final _i22.Key? key;
 
   final String? initialInstructions;
 
@@ -185,15 +189,15 @@ class CreateEditEventInstructionsRouteArgs {
 /// generated route for
 /// [_i6.CreateEditEventParticipantsScreen]
 class CreateEditEventParticipantsRoute
-    extends _i20.PageRouteInfo<CreateEditEventParticipantsRouteArgs> {
+    extends _i21.PageRouteInfo<CreateEditEventParticipantsRouteArgs> {
   CreateEditEventParticipantsRoute({
-    _i22.Key? key,
-    required List<_i23.DependentModel> groupDependents,
-    required List<_i24.PatrolModel> groupPatrols,
-    required List<_i25.TroopModel> groupTroops,
-    required List<_i26.LeaderModel> groupLeaders,
-    required List<_i27.EventParticipantModel> initialParticipants,
-    List<_i20.PageRouteInfo>? children,
+    _i23.Key? key,
+    required List<_i24.DependentModel> groupDependents,
+    required List<_i25.PatrolModel> groupPatrols,
+    required List<_i26.TroopModel> groupTroops,
+    required List<_i27.LeaderModel> groupLeaders,
+    required List<_i28.EventParticipantModel> initialParticipants,
+    List<_i21.PageRouteInfo>? children,
   }) : super(
          CreateEditEventParticipantsRoute.name,
          args: CreateEditEventParticipantsRouteArgs(
@@ -209,7 +213,7 @@ class CreateEditEventParticipantsRoute
 
   static const String name = 'CreateEditEventParticipantsRoute';
 
-  static _i20.PageInfo page = _i20.PageInfo(
+  static _i21.PageInfo page = _i21.PageInfo(
     name,
     builder: (data) {
       final args = data.argsAs<CreateEditEventParticipantsRouteArgs>();
@@ -235,17 +239,17 @@ class CreateEditEventParticipantsRouteArgs {
     required this.initialParticipants,
   });
 
-  final _i22.Key? key;
+  final _i23.Key? key;
 
-  final List<_i23.DependentModel> groupDependents;
+  final List<_i24.DependentModel> groupDependents;
 
-  final List<_i24.PatrolModel> groupPatrols;
+  final List<_i25.PatrolModel> groupPatrols;
 
-  final List<_i25.TroopModel> groupTroops;
+  final List<_i26.TroopModel> groupTroops;
 
-  final List<_i26.LeaderModel> groupLeaders;
+  final List<_i27.LeaderModel> groupLeaders;
 
-  final List<_i27.EventParticipantModel> initialParticipants;
+  final List<_i28.EventParticipantModel> initialParticipants;
 
   @override
   String toString() {
@@ -257,23 +261,23 @@ class CreateEditEventParticipantsRouteArgs {
     if (identical(this, other)) return true;
     if (other is! CreateEditEventParticipantsRouteArgs) return false;
     return key == other.key &&
-        const _i28.ListEquality<_i23.DependentModel>().equals(
+        const _i29.ListEquality<_i24.DependentModel>().equals(
           groupDependents,
           other.groupDependents,
         ) &&
-        const _i28.ListEquality<_i24.PatrolModel>().equals(
+        const _i29.ListEquality<_i25.PatrolModel>().equals(
           groupPatrols,
           other.groupPatrols,
         ) &&
-        const _i28.ListEquality<_i25.TroopModel>().equals(
+        const _i29.ListEquality<_i26.TroopModel>().equals(
           groupTroops,
           other.groupTroops,
         ) &&
-        const _i28.ListEquality<_i26.LeaderModel>().equals(
+        const _i29.ListEquality<_i27.LeaderModel>().equals(
           groupLeaders,
           other.groupLeaders,
         ) &&
-        const _i28.ListEquality<_i27.EventParticipantModel>().equals(
+        const _i29.ListEquality<_i28.EventParticipantModel>().equals(
           initialParticipants,
           other.initialParticipants,
         );
@@ -282,11 +286,11 @@ class CreateEditEventParticipantsRouteArgs {
   @override
   int get hashCode =>
       key.hashCode ^
-      const _i28.ListEquality<_i23.DependentModel>().hash(groupDependents) ^
-      const _i28.ListEquality<_i24.PatrolModel>().hash(groupPatrols) ^
-      const _i28.ListEquality<_i25.TroopModel>().hash(groupTroops) ^
-      const _i28.ListEquality<_i26.LeaderModel>().hash(groupLeaders) ^
-      const _i28.ListEquality<_i27.EventParticipantModel>().hash(
+      const _i29.ListEquality<_i24.DependentModel>().hash(groupDependents) ^
+      const _i29.ListEquality<_i25.PatrolModel>().hash(groupPatrols) ^
+      const _i29.ListEquality<_i26.TroopModel>().hash(groupTroops) ^
+      const _i29.ListEquality<_i27.LeaderModel>().hash(groupLeaders) ^
+      const _i29.ListEquality<_i28.EventParticipantModel>().hash(
         initialParticipants,
       );
 }
@@ -294,13 +298,13 @@ class CreateEditEventParticipantsRouteArgs {
 /// generated route for
 /// [_i7.CreateEditEventScreen]
 class CreateEditEventRoute
-    extends _i20.PageRouteInfo<CreateEditEventRouteArgs> {
+    extends _i21.PageRouteInfo<CreateEditEventRouteArgs> {
   CreateEditEventRoute({
-    _i22.Key? key,
-    _i29.EventModel? event,
-    _i29.EventTimeType? eventTimeType,
-    List<_i27.EventParticipantModel>? eventParticipants,
-    List<_i20.PageRouteInfo>? children,
+    _i23.Key? key,
+    _i30.EventModel? event,
+    _i30.EventTimeType? eventTimeType,
+    List<_i28.EventParticipantModel>? eventParticipants,
+    List<_i21.PageRouteInfo>? children,
   }) : super(
          CreateEditEventRoute.name,
          args: CreateEditEventRouteArgs(
@@ -314,7 +318,7 @@ class CreateEditEventRoute
 
   static const String name = 'CreateEditEventRoute';
 
-  static _i20.PageInfo page = _i20.PageInfo(
+  static _i21.PageInfo page = _i21.PageInfo(
     name,
     builder: (data) {
       final args = data.argsAs<CreateEditEventRouteArgs>(
@@ -338,13 +342,13 @@ class CreateEditEventRouteArgs {
     this.eventParticipants,
   });
 
-  final _i22.Key? key;
+  final _i23.Key? key;
 
-  final _i29.EventModel? event;
+  final _i30.EventModel? event;
 
-  final _i29.EventTimeType? eventTimeType;
+  final _i30.EventTimeType? eventTimeType;
 
-  final List<_i27.EventParticipantModel>? eventParticipants;
+  final List<_i28.EventParticipantModel>? eventParticipants;
 
   @override
   String toString() {
@@ -358,7 +362,7 @@ class CreateEditEventRouteArgs {
     return key == other.key &&
         event == other.event &&
         eventTimeType == other.eventTimeType &&
-        const _i28.ListEquality<_i27.EventParticipantModel>().equals(
+        const _i29.ListEquality<_i28.EventParticipantModel>().equals(
           eventParticipants,
           other.eventParticipants,
         );
@@ -369,20 +373,20 @@ class CreateEditEventRouteArgs {
       key.hashCode ^
       event.hashCode ^
       eventTimeType.hashCode ^
-      const _i28.ListEquality<_i27.EventParticipantModel>().hash(
+      const _i29.ListEquality<_i28.EventParticipantModel>().hash(
         eventParticipants,
       );
 }
 
 /// generated route for
 /// [_i8.DependentsScreen]
-class DependentsRoute extends _i20.PageRouteInfo<void> {
-  const DependentsRoute({List<_i20.PageRouteInfo>? children})
+class DependentsRoute extends _i21.PageRouteInfo<void> {
+  const DependentsRoute({List<_i21.PageRouteInfo>? children})
     : super(DependentsRoute.name, initialChildren: children);
 
   static const String name = 'DependentsRoute';
 
-  static _i20.PageInfo page = _i20.PageInfo(
+  static _i21.PageInfo page = _i21.PageInfo(
     name,
     builder: (data) {
       return const _i8.DependentsScreen();
@@ -391,14 +395,65 @@ class DependentsRoute extends _i20.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i9.EventDetailsScreen]
-class EventDetailsRoute extends _i20.PageRouteInfo<EventDetailsRouteArgs> {
+/// [_i9.EditDependentDetailsScreen]
+class EditDependentDetailsRoute
+    extends _i21.PageRouteInfo<EditDependentDetailsRouteArgs> {
+  EditDependentDetailsRoute({
+    _i22.Key? key,
+    required _i31.AccountDependentModel dependent,
+    List<_i21.PageRouteInfo>? children,
+  }) : super(
+         EditDependentDetailsRoute.name,
+         args: EditDependentDetailsRouteArgs(key: key, dependent: dependent),
+         initialChildren: children,
+       );
+
+  static const String name = 'EditDependentDetailsRoute';
+
+  static _i21.PageInfo page = _i21.PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<EditDependentDetailsRouteArgs>();
+      return _i9.EditDependentDetailsScreen(
+        key: args.key,
+        dependent: args.dependent,
+      );
+    },
+  );
+}
+
+class EditDependentDetailsRouteArgs {
+  const EditDependentDetailsRouteArgs({this.key, required this.dependent});
+
+  final _i22.Key? key;
+
+  final _i31.AccountDependentModel dependent;
+
+  @override
+  String toString() {
+    return 'EditDependentDetailsRouteArgs{key: $key, dependent: $dependent}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! EditDependentDetailsRouteArgs) return false;
+    return key == other.key && dependent == other.dependent;
+  }
+
+  @override
+  int get hashCode => key.hashCode ^ dependent.hashCode;
+}
+
+/// generated route for
+/// [_i10.EventDetailsScreen]
+class EventDetailsRoute extends _i21.PageRouteInfo<EventDetailsRouteArgs> {
   EventDetailsRoute({
-    _i21.Key? key,
-    required _i29.EventModel event,
-    required _i29.EventTimeType eventTimeType,
-    required _i30.UnitsProvider unitsProvider,
-    List<_i20.PageRouteInfo>? children,
+    _i22.Key? key,
+    required _i30.EventModel event,
+    required _i30.EventTimeType eventTimeType,
+    required _i32.UnitsProvider unitsProvider,
+    List<_i21.PageRouteInfo>? children,
   }) : super(
          EventDetailsRoute.name,
          args: EventDetailsRouteArgs(
@@ -412,11 +467,11 @@ class EventDetailsRoute extends _i20.PageRouteInfo<EventDetailsRouteArgs> {
 
   static const String name = 'EventDetailsRoute';
 
-  static _i20.PageInfo page = _i20.PageInfo(
+  static _i21.PageInfo page = _i21.PageInfo(
     name,
     builder: (data) {
       final args = data.argsAs<EventDetailsRouteArgs>();
-      return _i9.EventDetailsScreen(
+      return _i10.EventDetailsScreen(
         key: args.key,
         event: args.event,
         eventTimeType: args.eventTimeType,
@@ -434,13 +489,13 @@ class EventDetailsRouteArgs {
     required this.unitsProvider,
   });
 
-  final _i21.Key? key;
+  final _i22.Key? key;
 
-  final _i29.EventModel event;
+  final _i30.EventModel event;
 
-  final _i29.EventTimeType eventTimeType;
+  final _i30.EventTimeType eventTimeType;
 
-  final _i30.UnitsProvider unitsProvider;
+  final _i32.UnitsProvider unitsProvider;
 
   @override
   String toString() {
@@ -466,110 +521,110 @@ class EventDetailsRouteArgs {
 }
 
 /// generated route for
-/// [_i10.InformationScreen]
-class InformationRoute extends _i20.PageRouteInfo<void> {
-  const InformationRoute({List<_i20.PageRouteInfo>? children})
+/// [_i11.InformationScreen]
+class InformationRoute extends _i21.PageRouteInfo<void> {
+  const InformationRoute({List<_i21.PageRouteInfo>? children})
     : super(InformationRoute.name, initialChildren: children);
 
   static const String name = 'InformationRoute';
 
-  static _i20.PageInfo page = _i20.PageInfo(
+  static _i21.PageInfo page = _i21.PageInfo(
     name,
     builder: (data) {
-      return const _i10.InformationScreen();
+      return const _i11.InformationScreen();
     },
   );
 }
 
 /// generated route for
-/// [_i11.LargeDialogShowcaseScreen]
-class LargeDialogShowcaseRoute extends _i20.PageRouteInfo<void> {
-  const LargeDialogShowcaseRoute({List<_i20.PageRouteInfo>? children})
+/// [_i12.LargeDialogShowcaseScreen]
+class LargeDialogShowcaseRoute extends _i21.PageRouteInfo<void> {
+  const LargeDialogShowcaseRoute({List<_i21.PageRouteInfo>? children})
     : super(LargeDialogShowcaseRoute.name, initialChildren: children);
 
   static const String name = 'LargeDialogShowcaseRoute';
 
-  static _i20.PageInfo page = _i20.PageInfo(
+  static _i21.PageInfo page = _i21.PageInfo(
     name,
     builder: (data) {
-      return const _i11.LargeDialogShowcaseScreen();
+      return const _i12.LargeDialogShowcaseScreen();
     },
   );
 }
 
 /// generated route for
-/// [_i12.LiveEventsScreen]
-class LiveEventsRoute extends _i20.PageRouteInfo<void> {
-  const LiveEventsRoute({List<_i20.PageRouteInfo>? children})
+/// [_i13.LiveEventsScreen]
+class LiveEventsRoute extends _i21.PageRouteInfo<void> {
+  const LiveEventsRoute({List<_i21.PageRouteInfo>? children})
     : super(LiveEventsRoute.name, initialChildren: children);
 
   static const String name = 'LiveEventsRoute';
 
-  static _i20.PageInfo page = _i20.PageInfo(
+  static _i21.PageInfo page = _i21.PageInfo(
     name,
     builder: (data) {
-      return const _i12.LiveEventsScreen();
+      return const _i13.LiveEventsScreen();
     },
   );
 }
 
 /// generated route for
-/// [_i13.LoginScreen]
-class LoginRoute extends _i20.PageRouteInfo<void> {
-  const LoginRoute({List<_i20.PageRouteInfo>? children})
+/// [_i14.LoginScreen]
+class LoginRoute extends _i21.PageRouteInfo<void> {
+  const LoginRoute({List<_i21.PageRouteInfo>? children})
     : super(LoginRoute.name, initialChildren: children);
 
   static const String name = 'LoginRoute';
 
-  static _i20.PageInfo page = _i20.PageInfo(
+  static _i21.PageInfo page = _i21.PageInfo(
     name,
     builder: (data) {
-      return const _i13.LoginScreen();
+      return const _i14.LoginScreen();
     },
   );
 }
 
 /// generated route for
-/// [_i14.NavbarDashboard]
-class NavbarDashboard extends _i20.PageRouteInfo<void> {
-  const NavbarDashboard({List<_i20.PageRouteInfo>? children})
+/// [_i15.NavbarDashboard]
+class NavbarDashboard extends _i21.PageRouteInfo<void> {
+  const NavbarDashboard({List<_i21.PageRouteInfo>? children})
     : super(NavbarDashboard.name, initialChildren: children);
 
   static const String name = 'NavbarDashboard';
 
-  static _i20.PageInfo page = _i20.PageInfo(
+  static _i21.PageInfo page = _i21.PageInfo(
     name,
     builder: (data) {
-      return const _i14.NavbarDashboard();
+      return const _i15.NavbarDashboard();
     },
   );
 }
 
 /// generated route for
-/// [_i15.RegisterScreenFirst]
-class RegisterRouteFirst extends _i20.PageRouteInfo<void> {
-  const RegisterRouteFirst({List<_i20.PageRouteInfo>? children})
+/// [_i16.RegisterScreenFirst]
+class RegisterRouteFirst extends _i21.PageRouteInfo<void> {
+  const RegisterRouteFirst({List<_i21.PageRouteInfo>? children})
     : super(RegisterRouteFirst.name, initialChildren: children);
 
   static const String name = 'RegisterRouteFirst';
 
-  static _i20.PageInfo page = _i20.PageInfo(
+  static _i21.PageInfo page = _i21.PageInfo(
     name,
     builder: (data) {
-      return const _i15.RegisterScreenFirst();
+      return const _i16.RegisterScreenFirst();
     },
   );
 }
 
 /// generated route for
-/// [_i16.RegisterScreenSecond]
-class RegisterRouteSecond extends _i20.PageRouteInfo<RegisterRouteSecondArgs> {
+/// [_i17.RegisterScreenSecond]
+class RegisterRouteSecond extends _i21.PageRouteInfo<RegisterRouteSecondArgs> {
   RegisterRouteSecond({
-    _i22.Key? key,
+    _i23.Key? key,
     required String email,
     required String name,
     required String surname,
-    List<_i20.PageRouteInfo>? children,
+    List<_i21.PageRouteInfo>? children,
   }) : super(
          RegisterRouteSecond.name,
          args: RegisterRouteSecondArgs(
@@ -583,11 +638,11 @@ class RegisterRouteSecond extends _i20.PageRouteInfo<RegisterRouteSecondArgs> {
 
   static const String name = 'RegisterRouteSecond';
 
-  static _i20.PageInfo page = _i20.PageInfo(
+  static _i21.PageInfo page = _i21.PageInfo(
     name,
     builder: (data) {
       final args = data.argsAs<RegisterRouteSecondArgs>();
-      return _i16.RegisterScreenSecond(
+      return _i17.RegisterScreenSecond(
         key: args.key,
         email: args.email,
         name: args.name,
@@ -605,7 +660,7 @@ class RegisterRouteSecondArgs {
     required this.surname,
   });
 
-  final _i22.Key? key;
+  final _i23.Key? key;
 
   final String email;
 
@@ -634,49 +689,49 @@ class RegisterRouteSecondArgs {
 }
 
 /// generated route for
-/// [_i17.SettingsScreen]
-class SettingsRoute extends _i20.PageRouteInfo<void> {
-  const SettingsRoute({List<_i20.PageRouteInfo>? children})
+/// [_i18.SettingsScreen]
+class SettingsRoute extends _i21.PageRouteInfo<void> {
+  const SettingsRoute({List<_i21.PageRouteInfo>? children})
     : super(SettingsRoute.name, initialChildren: children);
 
   static const String name = 'SettingsRoute';
 
-  static _i20.PageInfo page = _i20.PageInfo(
+  static _i21.PageInfo page = _i21.PageInfo(
     name,
     builder: (data) {
-      return const _i17.SettingsScreen();
+      return const _i18.SettingsScreen();
     },
   );
 }
 
 /// generated route for
-/// [_i18.SquircleShowcaseScreen]
-class SquircleShowcaseRoute extends _i20.PageRouteInfo<void> {
-  const SquircleShowcaseRoute({List<_i20.PageRouteInfo>? children})
+/// [_i19.SquircleShowcaseScreen]
+class SquircleShowcaseRoute extends _i21.PageRouteInfo<void> {
+  const SquircleShowcaseRoute({List<_i21.PageRouteInfo>? children})
     : super(SquircleShowcaseRoute.name, initialChildren: children);
 
   static const String name = 'SquircleShowcaseRoute';
 
-  static _i20.PageInfo page = _i20.PageInfo(
+  static _i21.PageInfo page = _i21.PageInfo(
     name,
     builder: (data) {
-      return const _i18.SquircleShowcaseScreen();
+      return const _i19.SquircleShowcaseScreen();
     },
   );
 }
 
 /// generated route for
-/// [_i19.WelcomeScreen]
-class WelcomeRoute extends _i20.PageRouteInfo<void> {
-  const WelcomeRoute({List<_i20.PageRouteInfo>? children})
+/// [_i20.WelcomeScreen]
+class WelcomeRoute extends _i21.PageRouteInfo<void> {
+  const WelcomeRoute({List<_i21.PageRouteInfo>? children})
     : super(WelcomeRoute.name, initialChildren: children);
 
   static const String name = 'WelcomeRoute';
 
-  static _i20.PageInfo page = _i20.PageInfo(
+  static _i21.PageInfo page = _i21.PageInfo(
     name,
     builder: (data) {
-      return const _i19.WelcomeScreen();
+      return const _i20.WelcomeScreen();
     },
   );
 }

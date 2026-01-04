@@ -35,6 +35,9 @@ class AppRouter extends RootStackRouter {
     ),
     AutoRoute(page: SettingsRoute.page),
 
+    // Dependent related routes
+    AutoRoute(page: EditDependentDetailsRoute.page, fullscreenDialog: true),
+
     // Event related routes
     AutoRoute(page: EventDetailsRoute.page),
     AutoRoute(page: CreateEditEventRoute.page, guards: [LeaderGuard()]),

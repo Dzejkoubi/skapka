@@ -13,6 +13,22 @@ class UnitsProvider extends ChangeNotifier {
   List<TroopModel> get troops => _troops;
   List<PatrolModel> get patrols => _patrols;
 
+  String? getPatrolNameById(String patrolId) {
+    try {
+      return _patrols.firstWhere((patrol) => patrol.patrolId == patrolId).name;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  String? getTroopNameById(String troopId) {
+    try {
+      return _troops.firstWhere((troop) => troop.troopId == troopId).name;
+    } catch (e) {
+      return null;
+    }
+  }
+
   // Setters
   void setAccountGroup(GroupModel group) {
     _accountGroup = group;

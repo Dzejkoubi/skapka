@@ -718,6 +718,83 @@ class AppLocalizationsCs extends AppLocalizations {
       'Nelze změnit stav přihlášení na výpravu po vypršení datumu přihlašování.';
 
   @override
+  String get category_dependents_screen => '--- DEPENDENTS SCREEN ---';
+
+  @override
+  String get dependents_screen_add_dependent_button_text => 'Přidat';
+
+  @override
+  String get dependents_screen_dependent_nickname => 'Přezdívka';
+
+  @override
+  String get dependents_screen_dependent_patrol => 'Družina';
+
+  @override
+  String get dependents_screen_dependent_this_school_year_event_attendance =>
+      'Účast na výpravách v tomto školním roce';
+
+  @override
+  String get dependents_screen_dependent_notes => 'Upravit detaily';
+
+  @override
+  String dependents_screen_dependent_description(Object name_surname) {
+    return 'Pokud chceš, můžeš sem napsat něco o osobě $name_surname. Detaily uvidí pouze administrátoři a vedoucí. Pomůže to při organizaci výprav.';
+  }
+
+  @override
+  String get dependents_screen_depents_details_has_gluten_allergy =>
+      'Má alergii na lepek';
+
+  @override
+  String get dependents_screen_depents_details_has_lactose_intolerance =>
+      'Má alergii na laktózu';
+
+  @override
+  String get dependents_screen_depents_details_has_nut_allergy =>
+      'Má alergii na ořechy';
+
+  @override
+  String get dependents_screen_depents_details_is_claustrophobic =>
+      'Má klaustrofobii';
+
+  @override
+  String get dependents_screen_depents_details_has_epilepsy => 'Má epilepsii';
+
+  @override
+  String get dependents_screen_depents_details_has_asthma => 'Má astma';
+
+  @override
+  String get dependents_screen_depents_details_is_swimmer => 'Je plavec';
+
+  @override
+  String get dependents_screen_depents_details_other_medical_notes =>
+      'Jiné zdravotní poznámky';
+
+  @override
+  String get dependents_screen_depents_details_other_dietary_notes =>
+      'Jiné dietní poznámky';
+
+  @override
+  String get dependents_screen_depents_details_other_notes => 'Jiné poznámky';
+
+  @override
+  String get dependents_screen_save_success =>
+      'Detaily byly úspěšně uloženy 💾.';
+
+  @override
+  String get dependents_screen_unsaved_changes_dialog_title => 'Uložit změny?';
+
+  @override
+  String get dependents_screen_unsaved_changes_dialog_description =>
+      'Máš neuložené změny. Chceš je před odchodem uložit?';
+
+  @override
+  String get dependents_screen_unsaved_changes_dialog_save => 'Uložit';
+
+  @override
+  String get dependents_screen_unsaved_changes_dialog_discard => 'Zahodit';
+
+  @override
   String get category_settings_screen => '--- NASTAVENÍ ---';
 
   @override

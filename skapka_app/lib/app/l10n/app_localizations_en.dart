@@ -720,6 +720,83 @@ class AppLocalizationsEn extends AppLocalizations {
       'Cannot change participation status for an event after the signup deadline has passed.';
 
   @override
+  String get category_dependents_screen => '--- DEPENDENTS SCREEN ---';
+
+  @override
+  String get dependents_screen_add_dependent_button_text => 'Add';
+
+  @override
+  String get dependents_screen_dependent_nickname => 'Nickname';
+
+  @override
+  String get dependents_screen_dependent_patrol => 'Patrol';
+
+  @override
+  String get dependents_screen_dependent_this_school_year_event_attendance =>
+      'This School Year Event Attendance';
+
+  @override
+  String get dependents_screen_dependent_notes => 'Edit Details';
+
+  @override
+  String dependents_screen_dependent_description(Object name_surname) {
+    return 'If you want, you can write something about the person $name_surname here. Details will only be visible to administrators and leaders. It helps with organizing events.';
+  }
+
+  @override
+  String get dependents_screen_depents_details_has_gluten_allergy =>
+      'Has gluten allergy';
+
+  @override
+  String get dependents_screen_depents_details_has_lactose_intolerance =>
+      'Has lactose intolerance';
+
+  @override
+  String get dependents_screen_depents_details_has_nut_allergy =>
+      'Has nut allergy';
+
+  @override
+  String get dependents_screen_depents_details_is_claustrophobic =>
+      'Is claustrophobic';
+
+  @override
+  String get dependents_screen_depents_details_has_epilepsy => 'Has epilepsy';
+
+  @override
+  String get dependents_screen_depents_details_has_asthma => 'Has asthma';
+
+  @override
+  String get dependents_screen_depents_details_is_swimmer => 'Is swimmer';
+
+  @override
+  String get dependents_screen_depents_details_other_medical_notes =>
+      'Other medical notes';
+
+  @override
+  String get dependents_screen_depents_details_other_dietary_notes =>
+      'Other dietary notes';
+
+  @override
+  String get dependents_screen_depents_details_other_notes => 'Other notes';
+
+  @override
+  String get dependents_screen_save_success =>
+      'Details were successfully saved 💾.';
+
+  @override
+  String get dependents_screen_unsaved_changes_dialog_title => 'Save changes?';
+
+  @override
+  String get dependents_screen_unsaved_changes_dialog_description =>
+      'You have unsaved changes. Do you want to save them before leaving?';
+
+  @override
+  String get dependents_screen_unsaved_changes_dialog_save => 'Save';
+
+  @override
+  String get dependents_screen_unsaved_changes_dialog_discard => 'Discard';
+
+  @override
   String get category_settings_screen => '--- SETTINGS SCREEN ---';
 
   @override

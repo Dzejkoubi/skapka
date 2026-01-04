@@ -333,4 +333,24 @@ class SupabaseService {
         .eq('event_id', eventId)
         .eq('dependent_id', dependentId);
   }
+
+  // Update dependent notes
+  Future<void> updateDependentNotes({
+    required String dependentId,
+    required DependentNotesModel notes,
+  }) async {
+    await _supabaseClient.from('dependent_notes').upsert({
+      'dependent_id': dependentId,
+      'has_gluten_allergy': notes.hasGlutenAllergy,
+      'has_lactose_intolerance': notes.hasLactoseIntolerance,
+      'has_nut_allergy': notes.hasNutAllergy,
+      'has_asthma': notes.hasAsthma,
+      'is_claustrophobic': notes.isClaustrophobic,
+      'has_epilepsy': notes.hasEpilepsy,
+      'is_swimmer': notes.isSwimmer,
+      'medical_note': notes.medicalNote,
+      'dietary_note': notes.dietaryNote,
+      'other_note': notes.otherNote,
+    });
+  }
 }

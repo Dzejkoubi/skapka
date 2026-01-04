@@ -198,6 +198,7 @@
     "create_edit_event_screen_troops": "Troops",
     "create_edit_event_screen_instructions_text": "Instructions",
     "create_edit_instructions_screen_title": "Event Instructions",
+    "create_edit_event_screen_instructions_hint": "Write instructions here (Markdown supported)...",
     "create_edit_event_screen_meeting_place_text": "Meeting Place",
     "create_edit_event_screen_meeting_place_description": "Address or name that the user can search for in maps. If you do not fill it in, the meeting place will not be displayed.",
     "create_edit_event_screen_photo_album_link_text": "Photo Album Link",

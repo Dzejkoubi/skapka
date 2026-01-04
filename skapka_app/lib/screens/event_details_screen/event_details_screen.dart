@@ -232,29 +232,54 @@ class EventDetailsScreen extends StatelessWidget {
                               ],
                             ),
                           ),
-                          Column(
-                            spacing: AppSpacing.medium,
-                            children: [
-                              Text(
-                                textAlign: TextAlign.center,
-                                AppLocalizations.of(
-                                  context,
-                                )!.create_edit_event_screen_instructions_text,
-                                style: AppTextTheme.titleMedium(context),
-                              ),
-                              Container(
-                                decoration: AppDecorations.primaryContainer(
-                                  context,
+                          if (event.instructions != null &&
+                              event.instructions!.trim().isNotEmpty)
+                            Column(
+                              spacing: AppSpacing.medium,
+                              children: [
+                                Text(
+                                  textAlign: TextAlign.center,
+                                  AppLocalizations.of(
+                                    context,
+                                  )!.create_edit_event_screen_instructions_text,
+                                  style: AppTextTheme.titleLarge(context),
                                 ),
-                                padding: EdgeInsets.all(AppSpacing.small),
-                                width: double.infinity,
-                                child: MarkdownBody(
-                                  data: event.instructions ?? '',
-                                  selectable: true,
+                                Container(
+                                  decoration: AppDecorations.primaryContainer(
+                                    context,
+                                  ),
+                                  padding: EdgeInsets.all(AppSpacing.small),
+                                  width: double.infinity,
+                                  child: MarkdownBody(
+                                    data: event.instructions!,
+                                    selectable: true,
+                                    styleSheet: MarkdownStyleSheet(
+                                      h1: AppTextTheme.titleMedium(context),
+                                      h2: AppTextTheme.titleSmall(context),
+                                      h3: AppTextTheme.bodyLargeBold(context),
+                                      p: AppTextTheme.bodyMedium(context),
+                                      strong: AppTextTheme.bodyMediumBold(
+                                        context,
+                                      ),
+                                      listBullet: AppTextTheme.bodyMedium(
+                                        context,
+                                      ),
+                                      horizontalRuleDecoration: BoxDecoration(
+                                        border: Border(
+                                          top: BorderSide(
+                                            color: context
+                                                .colors
+                                                .background
+                                                .medium,
+                                            width: 1,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
+                              ],
+                            ),
                           if (event.meetingPlace != null &&
                               event.meetingPlace!.isNotEmpty)
                             Column(
@@ -265,7 +290,7 @@ class EventDetailsScreen extends StatelessWidget {
                                   AppLocalizations.of(
                                     context,
                                   )!.create_edit_event_screen_meeting_place_text,
-                                  style: AppTextTheme.titleMedium(context),
+                                  style: AppTextTheme.titleLarge(context),
                                 ),
                                 Container(
                                   decoration: AppDecorations.primaryContainer(

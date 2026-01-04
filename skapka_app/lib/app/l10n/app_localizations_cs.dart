@@ -593,6 +593,10 @@ class AppLocalizationsCs extends AppLocalizations {
   String get create_edit_instructions_screen_title => 'Pokyny výpravy';
 
   @override
+  String get create_edit_event_screen_instructions_hint =>
+      'Sem napiš pokyny (Markdown podporován)...';
+
+  @override
   String get create_edit_event_screen_meeting_place_text => 'Místo srazu';
 
   @override

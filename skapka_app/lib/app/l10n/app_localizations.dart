@@ -1100,6 +1100,12 @@ abstract class AppLocalizations {
   /// **'Pokyny výpravy'**
   String get create_edit_instructions_screen_title;
 
+  /// No description provided for @create_edit_event_screen_instructions_hint.
+  ///
+  /// In cs, this message translates to:
+  /// **'Sem napiš pokyny (Markdown podporován)...'**
+  String get create_edit_event_screen_instructions_hint;
+
   /// No description provided for @create_edit_event_screen_meeting_place_text.
   ///
   /// In cs, this message translates to:

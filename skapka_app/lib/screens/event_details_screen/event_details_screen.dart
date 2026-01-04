@@ -12,11 +12,13 @@ import 'package:skapka_app/app/theme/app_decorations.dart';
 import 'package:skapka_app/app/theme/app_spacing.dart';
 import 'package:skapka_app/app/theme/app_text_theme.dart';
 import 'package:skapka_app/models/event_model.dart';
+import 'package:skapka_app/providers/dependents_provider.dart';
 import 'package:skapka_app/providers/units_provider.dart';
 import 'package:skapka_app/utils/is_user_leader.dart';
 import 'package:skapka_app/widgets/appbar/appbar.dart';
 import 'package:skapka_app/widgets/buttons/main_button.dart';
 import 'package:skapka_app/widgets/dialogs/bottom_dialog.dart';
+import 'package:skapka_app/widgets/event_box/participant_event_status_box.dart';
 import 'package:skapka_app/widgets/event_time_info.dart';
 import 'package:skapka_app/widgets/wrappers/screen_wrapper.dart';
 
@@ -34,6 +36,7 @@ class EventDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    DependentsProvider dependentsProvider = context.read<DependentsProvider>();
     return ChangeNotifierProvider(
       create: (_) => ValueNotifier<bool>(false),
       child: Builder(
@@ -45,133 +48,218 @@ class EventDetailsScreen extends StatelessWidget {
               showSettingsIcon: false,
               screenName: event.title,
             ),
-            body: SafeArea(
-              child: SingleChildScrollView(
-                padding: const EdgeInsets.all(AppSpacing.medium),
-                child: Column(
-                  spacing: AppSpacing.large,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        EventTimeInfo(
-                          event: event,
-                          eventTimeType: eventTimeType,
-                        ),
-                        if (event.targetPatrolsIds != null &&
-                            event.targetPatrolsIds!.isNotEmpty) ...[
-                          SizedBox(height: AppSpacing.small),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            body: SingleChildScrollView(
+              child: SafeArea(
+                child: Consumer<DependentsProvider>(
+                  builder: (context, provider, child) {
+                    return Padding(
+                      padding: const EdgeInsets.only(
+                        bottom: AppSpacing.bottomSpace + AppSpacing.large,
+                      ),
+                      child: Column(
+                        spacing: AppSpacing.large,
+                        children: [
+                          if (dependentsProvider.dependents.isNotEmpty)
+                            Column(
+                              spacing: AppSpacing.small,
+                              children: [
+                                for (var dependent
+                                    in dependentsProvider.dependents)
+                                  Builder(
+                                    builder: (context) {
+                                      final participation = dependentsProvider
+                                          .getParticipationForDependent(
+                                            dependent.dependentId,
+                                          );
+                                      final eventParticipationList =
+                                          participation.where(
+                                            (p) => p.eventId == event.eventId,
+                                          );
+
+                                      if (eventParticipationList.isEmpty) {
+                                        return const SizedBox.shrink();
+                                      }
+                                      final eventParticipation =
+                                          eventParticipationList.first;
+
+                                      return Container(
+                                        padding: EdgeInsets.symmetric(
+                                          horizontal: AppSpacing.small,
+                                          vertical: AppSpacing.xSmall,
+                                        ),
+                                        decoration:
+                                            AppDecorations.primaryContainer(
+                                              context,
+                                            ),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              '${dependent.dependentDetails?.name} ${dependent.dependentDetails?.surname}',
+                                              style:
+                                                  AppTextTheme.bodyLarge(
+                                                    context,
+                                                  ).copyWith(
+                                                    color: context
+                                                        .colors
+                                                        .text
+                                                        .normal,
+                                                  ),
+                                            ),
+                                            ParticipantEventStatusBox(
+                                              status: eventParticipation.status,
+                                              isEnabled:
+                                                  eventTimeType ==
+                                                      EventTimeType.live &&
+                                                  event.closeSignUp!.isAfter(
+                                                    DateTime.now(),
+                                                  ),
+                                              eventModel: event,
+                                              dependent: dependent,
+                                            ),
+                                          ],
+                                        ),
+                                      );
+                                    },
+                                  ),
+                              ],
+                            ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              EventTimeInfo(
+                                event: event,
+                                eventTimeType: eventTimeType,
+                              ),
+                              if (event.targetPatrolsIds != null &&
+                                  event.targetPatrolsIds!.isNotEmpty) ...[
+                                SizedBox(height: AppSpacing.small),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      AppLocalizations.of(
+                                        context,
+                                      )!.event_box_target_patrols_text,
+                                      style: AppTextTheme.bodySmall(context)
+                                          .copyWith(
+                                            color: context.colors.text.muted,
+                                          ),
+                                    ),
+                                    Expanded(
+                                      child: SingleChildScrollView(
+                                        scrollDirection: Axis.horizontal,
+                                        reverse: true,
+                                        child: Text(
+                                          unitsProvider.patrols
+                                              .where(
+                                                (patrol) => event
+                                                    .targetPatrolsIds!
+                                                    .contains(patrol.patrolId),
+                                              )
+                                              .map((patrol) => patrol.name)
+                                              .join(', '),
+                                          style: AppTextTheme.bodySmall(context)
+                                              .copyWith(
+                                                color:
+                                                    context.colors.text.normal,
+                                              ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ],
+                          ),
+                          Column(
+                            spacing: AppSpacing.medium,
                             children: [
                               Text(
+                                textAlign: TextAlign.center,
                                 AppLocalizations.of(
                                   context,
-                                )!.event_box_target_patrols_text,
-                                style: AppTextTheme.bodySmall(
-                                  context,
-                                ).copyWith(color: context.colors.text.muted),
+                                )!.create_edit_event_screen_instructions_text,
+                                style: AppTextTheme.titleMedium(context),
                               ),
-                              Expanded(
-                                child: SingleChildScrollView(
-                                  scrollDirection: Axis.horizontal,
-                                  reverse: true,
-                                  child: Text(
-                                    unitsProvider.patrols
-                                        .where(
-                                          (patrol) => event.targetPatrolsIds!
-                                              .contains(patrol.patrolId),
-                                        )
-                                        .map((patrol) => patrol.name)
-                                        .join(', '),
-                                    style: AppTextTheme.bodySmall(context)
-                                        .copyWith(
-                                          color: context.colors.text.normal,
-                                        ),
-                                  ),
+                              Container(
+                                decoration: AppDecorations.primaryContainer(
+                                  context,
+                                ),
+                                padding: EdgeInsets.all(AppSpacing.small),
+                                width: double.infinity,
+                                child: MarkdownBody(
+                                  data: event.instructions ?? '',
+                                  selectable: true,
                                 ),
                               ),
                             ],
                           ),
-                        ],
-                      ],
-                    ),
-                    Column(
-                      spacing: AppSpacing.medium,
-                      children: [
-                        Text(
-                          textAlign: TextAlign.center,
-                          AppLocalizations.of(
-                            context,
-                          )!.create_edit_event_screen_instructions_text,
-                          style: AppTextTheme.titleMedium(context),
-                        ),
-                        Container(
-                          decoration: AppDecorations.primaryContainer(context),
-                          padding: EdgeInsets.all(AppSpacing.small),
-                          width: double.infinity,
-                          child: MarkdownBody(
-                            data: event.instructions ?? '',
-                            selectable: true,
-                          ),
-                        ),
-                      ],
-                    ),
-                    if (event.meetingPlace != null &&
-                        event.meetingPlace!.isNotEmpty)
-                      Column(
-                        spacing: AppSpacing.medium,
-                        children: [
-                          Text(
-                            textAlign: TextAlign.center,
-                            AppLocalizations.of(
-                              context,
-                            )!.create_edit_event_screen_meeting_place_text,
-                            style: AppTextTheme.titleMedium(context),
-                          ),
-                          Container(
-                            decoration: AppDecorations.primaryContainer(
-                              context,
-                            ),
-                            padding: EdgeInsets.symmetric(
-                              horizontal: AppSpacing.small,
-                              vertical: AppSpacing.xSmall,
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          if (event.meetingPlace != null &&
+                              event.meetingPlace!.isNotEmpty)
+                            Column(
+                              spacing: AppSpacing.medium,
                               children: [
-                                Expanded(
-                                  child: SingleChildScrollView(
-                                    scrollDirection: Axis.horizontal,
-                                    child: Text(
-                                      event.meetingPlace!,
-                                      style: AppTextTheme.bodySmall(context),
-                                    ),
-                                  ),
+                                Text(
+                                  textAlign: TextAlign.center,
+                                  AppLocalizations.of(
+                                    context,
+                                  )!.create_edit_event_screen_meeting_place_text,
+                                  style: AppTextTheme.titleMedium(context),
                                 ),
-                                MainButton.text(
-                                  type: ButtonType.icon,
-                                  iconAsset: 'assets/icons/copy.svg',
-                                  onPressed: () {
-                                    Clipboard.setData(
-                                      ClipboardData(text: event.meetingPlace!),
-                                    );
-                                    BottomDialog.show(
-                                      context,
-                                      type: BottomDialogType.basic,
-                                      description: AppLocalizations.of(
-                                        context,
-                                      )!.common_copied_to_clipboard,
-                                    );
-                                  },
-                                  text: '',
+                                Container(
+                                  decoration: AppDecorations.primaryContainer(
+                                    context,
+                                  ),
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: AppSpacing.small,
+                                    vertical: AppSpacing.xSmall,
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Expanded(
+                                        child: SingleChildScrollView(
+                                          scrollDirection: Axis.horizontal,
+                                          child: Text(
+                                            event.meetingPlace!,
+                                            style: AppTextTheme.bodySmall(
+                                              context,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      MainButton.text(
+                                        type: ButtonType.icon,
+                                        iconAsset: 'assets/icons/copy.svg',
+                                        onPressed: () {
+                                          Clipboard.setData(
+                                            ClipboardData(
+                                              text: event.meetingPlace!,
+                                            ),
+                                          );
+                                          BottomDialog.show(
+                                            context,
+                                            type: BottomDialogType.basic,
+                                            description: AppLocalizations.of(
+                                              context,
+                                            )!.common_copied_to_clipboard,
+                                          );
+                                        },
+                                        text: '',
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ],
                             ),
-                          ),
                         ],
                       ),
-                  ],
+                    );
+                  },
                 ),
               ),
             ),

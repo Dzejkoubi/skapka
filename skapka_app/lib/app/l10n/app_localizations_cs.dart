@@ -359,11 +359,11 @@ class AppLocalizationsCs extends AppLocalizations {
       'Zdá se, že nejsou žádné nadcházející výpravy.';
 
   @override
-  String get calendar_screen_event_expansion_tile_live_title => 'Přihlašování';
+  String get calendar_screen_event_expansion_tile_live_title => 'Aktuální';
 
   @override
   String get calendar_screen_event_expansion_tile_live_no_events_subtitle =>
-      'Zdá se, že nejsou žádné výpravy k přihlášení.';
+      'Zdá se, že nejsou žádné aktuální výpravy.';
 
   @override
   String get calendar_screen_event_expansion_tile_past_title => 'Proběhlé';

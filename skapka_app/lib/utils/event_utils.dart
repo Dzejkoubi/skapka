@@ -13,15 +13,11 @@ class EventUtils {
     if (event.isDraft) return false;
     final now = DateTime.now();
     // Sign up is open if:
-    // 1. openSignUp is set and in the past
-    // 2. closeSignUp is not set OR in the future
-    // AND the event hasn't ended yet
-    bool isSignUpOpen =
-        event.openSignUp != null &&
-        event.openSignUp!.isBefore(now) &&
-        (event.closeSignUp == null || event.closeSignUp!.isAfter(now));
+    // 1. opensignup is before now
+    // 2. end date is after now
 
-    return isSignUpOpen && !isPast(event);
+    return event.openSignUp!.isBefore(now) &&
+        (event.endDate == null || event.endDate!.isAfter(now));
   }
 
   static bool isFuture(EventModel event) {

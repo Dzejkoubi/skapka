@@ -711,13 +711,13 @@ abstract class AppLocalizations {
   /// No description provided for @calendar_screen_event_expansion_tile_live_title.
   ///
   /// In cs, this message translates to:
-  /// **'Přihlašování'**
+  /// **'Aktuální'**
   String get calendar_screen_event_expansion_tile_live_title;
 
   /// No description provided for @calendar_screen_event_expansion_tile_live_no_events_subtitle.
   ///
   /// In cs, this message translates to:
-  /// **'Zdá se, že nejsou žádné výpravy k přihlášení.'**
+  /// **'Zdá se, že nejsou žádné aktuální výpravy.'**
   String get calendar_screen_event_expansion_tile_live_no_events_subtitle;
 
   /// No description provided for @calendar_screen_event_expansion_tile_past_title.

@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import 'package:skapka_app/app/l10n/l10n_extension.dart';
 import 'package:skapka_app/app/theme/app_color_theme.dart';
 import 'package:skapka_app/app/theme/app_spacing.dart';
-import 'package:skapka_app/providers/account_provider.dart';
 import 'package:skapka_app/providers/dependents_provider.dart';
 import 'package:skapka_app/providers/events_provider.dart';
 import 'package:skapka_app/providers/units_provider.dart';
@@ -21,7 +20,6 @@ class LiveEventsScreen extends StatelessWidget {
     DependentsProvider dependentsProvider = context.read<DependentsProvider>();
     EventsProvider eventsProvider = context.read<EventsProvider>();
     SupabaseService supabaseService = SupabaseService();
-    AccountProvider accountProvider = context.read<AccountProvider>();
 
     return RefreshIndicator(
       color: context.colors.background.light,

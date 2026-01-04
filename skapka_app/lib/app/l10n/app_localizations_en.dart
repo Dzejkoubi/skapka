@@ -361,11 +361,11 @@ class AppLocalizationsEn extends AppLocalizations {
       'It seems there are no upcoming events.';
 
   @override
-  String get calendar_screen_event_expansion_tile_live_title => 'Sign up';
+  String get calendar_screen_event_expansion_tile_live_title => 'Current';
 
   @override
   String get calendar_screen_event_expansion_tile_live_no_events_subtitle =>
-      'It seems there are no live events.';
+      'It seems there are no current events.';
 
   @override
   String get calendar_screen_event_expansion_tile_past_title => 'Past';

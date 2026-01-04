@@ -10,13 +10,25 @@ import 'package:skapka_app/app/theme/app_spacing.dart';
 import 'package:skapka_app/app/theme/app_text_theme.dart';
 
 class EventInstructionsContainer extends StatelessWidget {
-  const EventInstructionsContainer({super.key});
+  final String? instructions;
+  final Function(String) onSave;
+
+  const EventInstructionsContainer({
+    super.key,
+    this.instructions,
+    required this.onSave,
+  });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        context.router.push(CreateEditEventInstructionsRoute());
+        context.router.push(
+          CreateEditEventInstructionsRoute(
+            initialInstructions: instructions,
+            onSave: onSave,
+          ),
+        );
       },
       child: Container(
         decoration: AppDecorations.primaryContainer(context),

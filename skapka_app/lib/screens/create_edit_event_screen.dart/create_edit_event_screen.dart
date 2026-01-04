@@ -647,7 +647,14 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
                                 onEndDateChanged: (d) =>
                                     setState(() => _endDate = d),
                               ),
-                              EventInstructionsContainer(),
+                              EventInstructionsContainer(
+                                instructions: _instructions,
+                                onSave: (newInstructions) {
+                                  setState(() {
+                                    _instructions = newInstructions;
+                                  });
+                                },
+                              ),
                               EventParticipantsContainer(
                                 originalParticipantsCount:
                                     originalParticipantsCount,

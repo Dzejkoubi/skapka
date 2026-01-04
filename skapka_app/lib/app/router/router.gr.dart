@@ -10,15 +10,15 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i20;
-import 'package:collection/collection.dart' as _i27;
-import 'package:flutter/foundation.dart' as _i21;
-import 'package:flutter/material.dart' as _i29;
-import 'package:skapka_app/models/dependents/dependent_model.dart' as _i22;
-import 'package:skapka_app/models/event_model.dart' as _i28;
-import 'package:skapka_app/models/event_participant_model.dart' as _i26;
-import 'package:skapka_app/models/leader_model.dart' as _i25;
-import 'package:skapka_app/models/patrol_model.dart' as _i23;
-import 'package:skapka_app/models/troop_model.dart' as _i24;
+import 'package:collection/collection.dart' as _i28;
+import 'package:flutter/foundation.dart' as _i22;
+import 'package:flutter/material.dart' as _i21;
+import 'package:skapka_app/models/dependents/dependent_model.dart' as _i23;
+import 'package:skapka_app/models/event_model.dart' as _i29;
+import 'package:skapka_app/models/event_participant_model.dart' as _i27;
+import 'package:skapka_app/models/leader_model.dart' as _i26;
+import 'package:skapka_app/models/patrol_model.dart' as _i24;
+import 'package:skapka_app/models/troop_model.dart' as _i25;
 import 'package:skapka_app/providers/units_provider.dart' as _i30;
 import 'package:skapka_app/screens/account_not_approved_screen/account_not_approved_screen.dart'
     as _i1;
@@ -34,9 +34,10 @@ import 'package:skapka_app/screens/dependents_screen/dependents_screen.dart'
     as _i8;
 import 'package:skapka_app/screens/event_details_screen/event_details_screen.dart'
     as _i9;
-import 'package:skapka_app/screens/events_screen/events_screen.dart' as _i10;
 import 'package:skapka_app/screens/information_screen/information_screen.dart'
-    as _i11;
+    as _i10;
+import 'package:skapka_app/screens/live_events_screen/live_events_screen.dart'
+    as _i12;
 import 'package:skapka_app/screens/login_screen/login_screen.dart' as _i13;
 import 'package:skapka_app/screens/navbar_dashboard/navbar_dashboard.dart'
     as _i14;
@@ -49,7 +50,7 @@ import 'package:skapka_app/screens/settings_screen/settings_screen.dart'
 import 'package:skapka_app/screens/theme_showcase_screens/button_theme_showcase.dart'
     as _i3;
 import 'package:skapka_app/screens/theme_showcase_screens/large_dialog_showcase.dart'
-    as _i12;
+    as _i11;
 import 'package:skapka_app/screens/theme_showcase_screens/squircle_showcase.dart'
     as _i18;
 import 'package:skapka_app/screens/welcome_screen/welcome_screen.dart' as _i19;
@@ -120,18 +121,65 @@ class CalendarRoute extends _i20.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i5.CreateEditEventInstructionsScreen]
-class CreateEditEventInstructionsRoute extends _i20.PageRouteInfo<void> {
-  const CreateEditEventInstructionsRoute({List<_i20.PageRouteInfo>? children})
-    : super(CreateEditEventInstructionsRoute.name, initialChildren: children);
+class CreateEditEventInstructionsRoute
+    extends _i20.PageRouteInfo<CreateEditEventInstructionsRouteArgs> {
+  CreateEditEventInstructionsRoute({
+    _i21.Key? key,
+    String? initialInstructions,
+    required dynamic Function(String) onSave,
+    List<_i20.PageRouteInfo>? children,
+  }) : super(
+         CreateEditEventInstructionsRoute.name,
+         args: CreateEditEventInstructionsRouteArgs(
+           key: key,
+           initialInstructions: initialInstructions,
+           onSave: onSave,
+         ),
+         initialChildren: children,
+       );
 
   static const String name = 'CreateEditEventInstructionsRoute';
 
   static _i20.PageInfo page = _i20.PageInfo(
     name,
     builder: (data) {
-      return const _i5.CreateEditEventInstructionsScreen();
+      final args = data.argsAs<CreateEditEventInstructionsRouteArgs>();
+      return _i5.CreateEditEventInstructionsScreen(
+        key: args.key,
+        initialInstructions: args.initialInstructions,
+        onSave: args.onSave,
+      );
     },
   );
+}
+
+class CreateEditEventInstructionsRouteArgs {
+  const CreateEditEventInstructionsRouteArgs({
+    this.key,
+    this.initialInstructions,
+    required this.onSave,
+  });
+
+  final _i21.Key? key;
+
+  final String? initialInstructions;
+
+  final dynamic Function(String) onSave;
+
+  @override
+  String toString() {
+    return 'CreateEditEventInstructionsRouteArgs{key: $key, initialInstructions: $initialInstructions, onSave: $onSave}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! CreateEditEventInstructionsRouteArgs) return false;
+    return key == other.key && initialInstructions == other.initialInstructions;
+  }
+
+  @override
+  int get hashCode => key.hashCode ^ initialInstructions.hashCode;
 }
 
 /// generated route for
@@ -139,12 +187,12 @@ class CreateEditEventInstructionsRoute extends _i20.PageRouteInfo<void> {
 class CreateEditEventParticipantsRoute
     extends _i20.PageRouteInfo<CreateEditEventParticipantsRouteArgs> {
   CreateEditEventParticipantsRoute({
-    _i21.Key? key,
-    required List<_i22.DependentModel> groupDependents,
-    required List<_i23.PatrolModel> groupPatrols,
-    required List<_i24.TroopModel> groupTroops,
-    required List<_i25.LeaderModel> groupLeaders,
-    required List<_i26.EventParticipantModel> initialParticipants,
+    _i22.Key? key,
+    required List<_i23.DependentModel> groupDependents,
+    required List<_i24.PatrolModel> groupPatrols,
+    required List<_i25.TroopModel> groupTroops,
+    required List<_i26.LeaderModel> groupLeaders,
+    required List<_i27.EventParticipantModel> initialParticipants,
     List<_i20.PageRouteInfo>? children,
   }) : super(
          CreateEditEventParticipantsRoute.name,
@@ -187,17 +235,17 @@ class CreateEditEventParticipantsRouteArgs {
     required this.initialParticipants,
   });
 
-  final _i21.Key? key;
+  final _i22.Key? key;
 
-  final List<_i22.DependentModel> groupDependents;
+  final List<_i23.DependentModel> groupDependents;
 
-  final List<_i23.PatrolModel> groupPatrols;
+  final List<_i24.PatrolModel> groupPatrols;
 
-  final List<_i24.TroopModel> groupTroops;
+  final List<_i25.TroopModel> groupTroops;
 
-  final List<_i25.LeaderModel> groupLeaders;
+  final List<_i26.LeaderModel> groupLeaders;
 
-  final List<_i26.EventParticipantModel> initialParticipants;
+  final List<_i27.EventParticipantModel> initialParticipants;
 
   @override
   String toString() {
@@ -209,23 +257,23 @@ class CreateEditEventParticipantsRouteArgs {
     if (identical(this, other)) return true;
     if (other is! CreateEditEventParticipantsRouteArgs) return false;
     return key == other.key &&
-        const _i27.ListEquality<_i22.DependentModel>().equals(
+        const _i28.ListEquality<_i23.DependentModel>().equals(
           groupDependents,
           other.groupDependents,
         ) &&
-        const _i27.ListEquality<_i23.PatrolModel>().equals(
+        const _i28.ListEquality<_i24.PatrolModel>().equals(
           groupPatrols,
           other.groupPatrols,
         ) &&
-        const _i27.ListEquality<_i24.TroopModel>().equals(
+        const _i28.ListEquality<_i25.TroopModel>().equals(
           groupTroops,
           other.groupTroops,
         ) &&
-        const _i27.ListEquality<_i25.LeaderModel>().equals(
+        const _i28.ListEquality<_i26.LeaderModel>().equals(
           groupLeaders,
           other.groupLeaders,
         ) &&
-        const _i27.ListEquality<_i26.EventParticipantModel>().equals(
+        const _i28.ListEquality<_i27.EventParticipantModel>().equals(
           initialParticipants,
           other.initialParticipants,
         );
@@ -234,11 +282,11 @@ class CreateEditEventParticipantsRouteArgs {
   @override
   int get hashCode =>
       key.hashCode ^
-      const _i27.ListEquality<_i22.DependentModel>().hash(groupDependents) ^
-      const _i27.ListEquality<_i23.PatrolModel>().hash(groupPatrols) ^
-      const _i27.ListEquality<_i24.TroopModel>().hash(groupTroops) ^
-      const _i27.ListEquality<_i25.LeaderModel>().hash(groupLeaders) ^
-      const _i27.ListEquality<_i26.EventParticipantModel>().hash(
+      const _i28.ListEquality<_i23.DependentModel>().hash(groupDependents) ^
+      const _i28.ListEquality<_i24.PatrolModel>().hash(groupPatrols) ^
+      const _i28.ListEquality<_i25.TroopModel>().hash(groupTroops) ^
+      const _i28.ListEquality<_i26.LeaderModel>().hash(groupLeaders) ^
+      const _i28.ListEquality<_i27.EventParticipantModel>().hash(
         initialParticipants,
       );
 }
@@ -248,10 +296,10 @@ class CreateEditEventParticipantsRouteArgs {
 class CreateEditEventRoute
     extends _i20.PageRouteInfo<CreateEditEventRouteArgs> {
   CreateEditEventRoute({
-    _i21.Key? key,
-    _i28.EventModel? event,
-    _i28.EventTimeType? eventTimeType,
-    List<_i26.EventParticipantModel>? eventParticipants,
+    _i22.Key? key,
+    _i29.EventModel? event,
+    _i29.EventTimeType? eventTimeType,
+    List<_i27.EventParticipantModel>? eventParticipants,
     List<_i20.PageRouteInfo>? children,
   }) : super(
          CreateEditEventRoute.name,
@@ -290,13 +338,13 @@ class CreateEditEventRouteArgs {
     this.eventParticipants,
   });
 
-  final _i21.Key? key;
+  final _i22.Key? key;
 
-  final _i28.EventModel? event;
+  final _i29.EventModel? event;
 
-  final _i28.EventTimeType? eventTimeType;
+  final _i29.EventTimeType? eventTimeType;
 
-  final List<_i26.EventParticipantModel>? eventParticipants;
+  final List<_i27.EventParticipantModel>? eventParticipants;
 
   @override
   String toString() {
@@ -310,7 +358,7 @@ class CreateEditEventRouteArgs {
     return key == other.key &&
         event == other.event &&
         eventTimeType == other.eventTimeType &&
-        const _i27.ListEquality<_i26.EventParticipantModel>().equals(
+        const _i28.ListEquality<_i27.EventParticipantModel>().equals(
           eventParticipants,
           other.eventParticipants,
         );
@@ -321,7 +369,7 @@ class CreateEditEventRouteArgs {
       key.hashCode ^
       event.hashCode ^
       eventTimeType.hashCode ^
-      const _i27.ListEquality<_i26.EventParticipantModel>().hash(
+      const _i28.ListEquality<_i27.EventParticipantModel>().hash(
         eventParticipants,
       );
 }
@@ -346,9 +394,9 @@ class DependentsRoute extends _i20.PageRouteInfo<void> {
 /// [_i9.EventDetailsScreen]
 class EventDetailsRoute extends _i20.PageRouteInfo<EventDetailsRouteArgs> {
   EventDetailsRoute({
-    _i29.Key? key,
-    required _i28.EventModel event,
-    required _i28.EventTimeType eventTimeType,
+    _i21.Key? key,
+    required _i29.EventModel event,
+    required _i29.EventTimeType eventTimeType,
     required _i30.UnitsProvider unitsProvider,
     List<_i20.PageRouteInfo>? children,
   }) : super(
@@ -386,11 +434,11 @@ class EventDetailsRouteArgs {
     required this.unitsProvider,
   });
 
-  final _i29.Key? key;
+  final _i21.Key? key;
 
-  final _i28.EventModel event;
+  final _i29.EventModel event;
 
-  final _i28.EventTimeType eventTimeType;
+  final _i29.EventTimeType eventTimeType;
 
   final _i30.UnitsProvider unitsProvider;
 
@@ -418,23 +466,7 @@ class EventDetailsRouteArgs {
 }
 
 /// generated route for
-/// [_i10.EventsScreen]
-class EventsRoute extends _i20.PageRouteInfo<void> {
-  const EventsRoute({List<_i20.PageRouteInfo>? children})
-    : super(EventsRoute.name, initialChildren: children);
-
-  static const String name = 'EventsRoute';
-
-  static _i20.PageInfo page = _i20.PageInfo(
-    name,
-    builder: (data) {
-      return const _i10.EventsScreen();
-    },
-  );
-}
-
-/// generated route for
-/// [_i11.InformationScreen]
+/// [_i10.InformationScreen]
 class InformationRoute extends _i20.PageRouteInfo<void> {
   const InformationRoute({List<_i20.PageRouteInfo>? children})
     : super(InformationRoute.name, initialChildren: children);
@@ -444,13 +476,13 @@ class InformationRoute extends _i20.PageRouteInfo<void> {
   static _i20.PageInfo page = _i20.PageInfo(
     name,
     builder: (data) {
-      return const _i11.InformationScreen();
+      return const _i10.InformationScreen();
     },
   );
 }
 
 /// generated route for
-/// [_i12.LargeDialogShowcaseScreen]
+/// [_i11.LargeDialogShowcaseScreen]
 class LargeDialogShowcaseRoute extends _i20.PageRouteInfo<void> {
   const LargeDialogShowcaseRoute({List<_i20.PageRouteInfo>? children})
     : super(LargeDialogShowcaseRoute.name, initialChildren: children);
@@ -460,7 +492,23 @@ class LargeDialogShowcaseRoute extends _i20.PageRouteInfo<void> {
   static _i20.PageInfo page = _i20.PageInfo(
     name,
     builder: (data) {
-      return const _i12.LargeDialogShowcaseScreen();
+      return const _i11.LargeDialogShowcaseScreen();
+    },
+  );
+}
+
+/// generated route for
+/// [_i12.LiveEventsScreen]
+class LiveEventsRoute extends _i20.PageRouteInfo<void> {
+  const LiveEventsRoute({List<_i20.PageRouteInfo>? children})
+    : super(LiveEventsRoute.name, initialChildren: children);
+
+  static const String name = 'LiveEventsRoute';
+
+  static _i20.PageInfo page = _i20.PageInfo(
+    name,
+    builder: (data) {
+      return const _i12.LiveEventsScreen();
     },
   );
 }
@@ -517,7 +565,7 @@ class RegisterRouteFirst extends _i20.PageRouteInfo<void> {
 /// [_i16.RegisterScreenSecond]
 class RegisterRouteSecond extends _i20.PageRouteInfo<RegisterRouteSecondArgs> {
   RegisterRouteSecond({
-    _i21.Key? key,
+    _i22.Key? key,
     required String email,
     required String name,
     required String surname,
@@ -557,7 +605,7 @@ class RegisterRouteSecondArgs {
     required this.surname,
   });
 
-  final _i21.Key? key;
+  final _i22.Key? key;
 
   final String email;
 

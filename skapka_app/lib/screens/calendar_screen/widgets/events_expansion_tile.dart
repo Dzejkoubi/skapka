@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:gaimon/gaimon.dart';
 import 'package:provider/provider.dart';
 import 'package:skapka_app/app/l10n/app_localizations.dart';
+import 'package:skapka_app/app/l10n/l10n_extension.dart';
 import 'package:skapka_app/app/theme/app_color_theme.dart';
 import 'package:skapka_app/app/theme/app_radius.dart';
 import 'package:skapka_app/app/theme/app_sizes.dart';
@@ -11,10 +12,10 @@ import 'package:skapka_app/app/theme/app_spacing.dart';
 import 'package:skapka_app/app/theme/app_text_theme.dart';
 import 'package:skapka_app/models/event_model.dart';
 import 'package:skapka_app/providers/units_provider.dart';
-import 'package:skapka_app/screens/calendar_screen/widgets/no_events_view.dart';
 import 'package:skapka_app/widgets/buttons/main_button.dart';
 import 'package:skapka_app/app/theme/main_button_theme.dart';
 import 'package:skapka_app/widgets/event_box/event_box.dart';
+import 'package:skapka_app/widgets/something_is_missing_widget.dart';
 
 class EventsExpansionTile extends StatefulWidget {
   final EventTimeType type;
@@ -88,7 +89,26 @@ class _EventsExpansionTileState extends State<EventsExpansionTile> {
         ),
         children: [
           if (widget.events.isEmpty)
-            NoEventsView(widget: widget)
+            SomethingIsMissingWidget(
+              subtitle: switch (widget.type) {
+                EventTimeType.future =>
+                  context
+                      .localizations
+                      .calendar_screen_event_expansion_tile_future_no_events_subtitle,
+                EventTimeType.live =>
+                  context
+                      .localizations
+                      .calendar_screen_event_expansion_tile_live_no_events_subtitle,
+                EventTimeType.past =>
+                  context
+                      .localizations
+                      .calendar_screen_event_expansion_tile_past_no_events_subtitle,
+                EventTimeType.draft =>
+                  context
+                      .localizations
+                      .calendar_screen_event_expansion_tile_draft_no_events_subtitle,
+              },
+            )
           else ...[
             for (final event in widget.events)
               Padding(

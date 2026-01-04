@@ -13,8 +13,11 @@ class AppSizes {
   /// 40.0
   static const double iconSizeLarge = 40.0;
 
+  /// 48.0
+  static const double iconSizeXLarge = 48.0;
+
   /// 64.0
-  static const double iconSizeXLarge = 64.0;
+  static const double iconSizeHuge = 64.0;
 
   // Icon stroke width
   /// 3.0

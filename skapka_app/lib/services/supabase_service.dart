@@ -179,7 +179,7 @@ class SupabaseService {
     return response.map((json) => DependentModel.fromJson(json)).toList();
   }
 
-  // Get users that are invited to given event with their statuses
+  // Get event_participants that are invited to given event with their statuses
   Future<List<EventParticipantModel>> getEventParticipants(
     String eventId,
     String groupId,
@@ -189,6 +189,21 @@ class SupabaseService {
         .select()
         .eq('event_id', eventId)
         .eq('group_id', groupId);
+    return (response as List)
+        .map<EventParticipantModel>(
+          (json) => EventParticipantModel.fromJson(json),
+        )
+        .toList();
+  }
+
+  // Get event_participants for given dependent
+  Future<List<EventParticipantModel>> getDependentParticipation(
+    String dependentId,
+  ) async {
+    final response = await _supabaseClient
+        .from('event_participants')
+        .select()
+        .eq('dependent_id', dependentId);
     return (response as List)
         .map<EventParticipantModel>(
           (json) => EventParticipantModel.fromJson(json),

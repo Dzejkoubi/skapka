@@ -84,9 +84,7 @@ class _RegisterScreenSecondState extends State<RegisterScreenSecond> {
           BottomDialog.show(
             context,
             type: BottomDialogType.positive,
-            description: AppLocalizations.of(
-              context,
-            )!.login_screen_login_success,
+            description: context.localizations.login_screen_login_success,
           );
           context.router.replaceAll([const AuthGate()]);
         }
@@ -97,21 +95,21 @@ class _RegisterScreenSecondState extends State<RegisterScreenSecond> {
         if (mounted) {
           String errorMessage;
           if (e.code == 'user_already_exists') {
-            errorMessage = AppLocalizations.of(
-              context,
-            )!.register_screen_2_registration_error_email_used;
+            errorMessage = context
+                .localizations
+                .register_screen_2_registration_error_email_used;
           } else if (e.code == 'over_request_rate_limit') {
-            errorMessage = AppLocalizations.of(
-              context,
-            )!.register_screen_2_registration_error_rate_limit;
+            errorMessage = context
+                .localizations
+                .register_screen_2_registration_error_rate_limit;
           } else if (e.code == 'weak_password') {
-            errorMessage = AppLocalizations.of(
-              context,
-            )!.register_screen_2_registration_error_weak_password;
+            errorMessage = context
+                .localizations
+                .register_screen_2_registration_error_weak_password;
           } else {
-            errorMessage = AppLocalizations.of(
-              context,
-            )!.register_screen_2_registration_error_generic;
+            errorMessage = context
+                .localizations
+                .register_screen_2_registration_error_generic;
           }
 
           BottomDialog.show(
@@ -128,9 +126,9 @@ class _RegisterScreenSecondState extends State<RegisterScreenSecond> {
           BottomDialog.show(
             context,
             type: BottomDialogType.negative,
-            description: AppLocalizations.of(
-              context,
-            )!.register_screen_2_registration_error_generic,
+            description: context
+                .localizations
+                .register_screen_2_registration_error_generic,
           );
         }
       } finally {

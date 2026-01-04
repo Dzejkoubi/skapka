@@ -17,7 +17,7 @@ class AppRouter extends RootStackRouter {
     AutoRoute(page: AuthGate.page, initial: true),
     // Onboarding and auth routes
     AutoRoute(page: WelcomeRoute.page),
-    AutoRoute(page: EventsRoute.page),
+    AutoRoute(page: LiveEventsRoute.page),
     AutoRoute(page: LoginRoute.page),
     AutoRoute(page: RegisterRouteFirst.page),
     AutoRoute(page: RegisterRouteSecond.page),
@@ -27,9 +27,9 @@ class AppRouter extends RootStackRouter {
     AutoRoute(
       page: NavbarDashboard.page,
       children: [
-        CustomRoute(page: DependentsRoute.page),
-        CustomRoute(page: EventsRoute.page),
-        CustomRoute(page: CalendarRoute.page, initial: true),
+        CustomRoute(page: DependentsRoute.page, initial: true),
+        CustomRoute(page: LiveEventsRoute.page, initial: false),
+        CustomRoute(page: CalendarRoute.page),
         CustomRoute(page: InformationRoute.page),
       ],
     ),

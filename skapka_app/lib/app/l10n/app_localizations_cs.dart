@@ -12,6 +12,79 @@ class AppLocalizationsCs extends AppLocalizations {
   String get language => 'Čeština';
 
   @override
+  String get category_common => '--- SPOLEČNÉ ---';
+
+  @override
+  String get yes => 'Ano';
+
+  @override
+  String get no => 'Ne';
+
+  @override
+  String get cancel => 'Zrušit';
+
+  @override
+  String get loading => 'Načítání...';
+
+  @override
+  String get back => 'Zpět';
+
+  @override
+  String get common_copied_to_clipboard => 'Zkopírováno do schránky 📋';
+
+  @override
+  String get create => 'Vytvořit';
+
+  @override
+  String get edit => 'Upravit';
+
+  @override
+  String get save => 'Uložit';
+
+  @override
+  String get load_more => 'Načíst další';
+
+  @override
+  String get error => 'Chyba';
+
+  @override
+  String get generic_error => 'Něco se pokazilo. Zkus to prosím znovu.';
+
+  @override
+  String get something_is_missing_title_1 => 'Ticho po pěšině... 🤫';
+
+  @override
+  String get something_is_missing_title_2 => 'Kde nic, tu nic... 🤷‍♂️';
+
+  @override
+  String get something_is_missing_title_3 => 'Tady chcípl pes... 🐕';
+
+  @override
+  String get something_is_missing_title_4 => 'Pusto a prázdno... 🏜️';
+
+  @override
+  String get something_is_missing_title_5 => 'Vymeteno... 🧹';
+
+  @override
+  String get something_is_missing_title_6 => 'Ani noha... 👣';
+
+  @override
+  String get something_is_missing_title_7 => 'Široko daleko ani živáčka... 🔭';
+
+  @override
+  String get something_is_missing_title_8 =>
+      'Tady lišky dávají dobrou noc... 🦊';
+
+  @override
+  String get something_is_missing_title_9 => 'Pusto prázdno... 🕳️';
+
+  @override
+  String get something_is_missing_title_10 => 'Zeje to tu prázdnotou... 💨';
+
+  @override
+  String get category_navigation => '--- NAVIGACE ---';
+
+  @override
   String get navbar_dependents => 'Osoby';
 
   @override
@@ -24,6 +97,9 @@ class AppLocalizationsCs extends AppLocalizations {
   String get navbar_info => 'Informace';
 
   @override
+  String get category_welcome_screen => '--- UVÍTACÍ OBRAZOVKA ---';
+
+  @override
   String get welcome_screen_title => 'Vítej ve\nSkapce 👋';
 
   @override
@@ -34,6 +110,9 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get welcome_screen_songbook_button_text => 'Zpěvník';
+
+  @override
+  String get category_login_screen => '--- PŘIHLÁŠENÍ ---';
 
   @override
   String get login_screen_title => 'Přihlášení';
@@ -79,6 +158,9 @@ class AppLocalizationsCs extends AppLocalizations {
   @override
   String get login_screen_login_error_generic =>
       'Něco se nepovedlo. Zkus to prosím znovu.';
+
+  @override
+  String get category_register_screen => '--- REGISTRACE ---';
 
   @override
   String get register_screen_title => 'Registrace';
@@ -148,6 +230,10 @@ class AppLocalizationsCs extends AppLocalizations {
   @override
   String get register_screen_2_registration_error_generic =>
       'Registrace se nezdařila. Zkus to prosím znovu.';
+
+  @override
+  String get category_account_not_approved_screen =>
+      '--- OBRAZOVKA NESCHVÁLENÉHO ÚČTU ---';
 
   @override
   String get account_not_approved_screen_title => 'Účet ještě nebyl schválen';
@@ -236,12 +322,18 @@ class AppLocalizationsCs extends AppLocalizations {
       'Smazání účtu se nezdařilo. Zkus to prosím později.';
 
   @override
+  String get category_events_screen => '--- VÝPRAVY ---';
+
+  @override
   String get events_screen_title => 'Výpravy';
 
   @override
   String events_screen_no_events_text(String version, Object username) {
     return '$username aktuálně nemá žádnou aktivní výpravu.';
   }
+
+  @override
+  String get category_event_box_widget => '--- WIDGET VÝPRAVY ---';
 
   @override
   String event_box_number_of_kids_text(int number_of_kids) {
@@ -274,15 +366,14 @@ class AppLocalizationsCs extends AppLocalizations {
       'Nelze zobrazit detail výpravy, na kterou se nelze přihlašovat.';
 
   @override
+  String get category_calendar_screen => '--- KALENDÁŘ ---';
+
+  @override
   String get calendar_screen_title => 'Kalendář';
 
   @override
   String get calendar_screen_speed_dial_add_google_calendar =>
       'Google kalendář';
-
-  @override
-  String get calendar_screen_event_expansion_tile_no_events_title =>
-      'Ticho po pěšině... 🤫';
 
   @override
   String get calendar_screen_event_expansion_tile_future_title =>
@@ -293,11 +384,11 @@ class AppLocalizationsCs extends AppLocalizations {
       'Zdá se, že nejsou žádné nadcházející výpravy.';
 
   @override
-  String get calendar_screen_event_expansion_tile_live_title => 'Přihlašování';
+  String get calendar_screen_event_expansion_tile_live_title => 'Aktuální';
 
   @override
   String get calendar_screen_event_expansion_tile_live_no_events_subtitle =>
-      'Zdá se, že nejsou žádné výpravy k přihlášení.';
+      'Zdá se, že nejsou žádné aktuální výpravy.';
 
   @override
   String get calendar_screen_event_expansion_tile_past_title => 'Proběhlé';
@@ -312,6 +403,10 @@ class AppLocalizationsCs extends AppLocalizations {
   @override
   String get calendar_screen_event_expansion_tile_draft_no_events_subtitle =>
       'Zdá se, že nejsou žádné koncepty.';
+
+  @override
+  String get category_create_edit_event_screen =>
+      '--- VYTVOŘIT/UPRAVIT VÝPRAVU ---';
 
   @override
   String get create_edit_event_screen_title_create => 'Vytvořit výpravu';
@@ -391,7 +486,7 @@ class AppLocalizationsCs extends AppLocalizations {
   @override
   String
   get create_edit_event_screen_delete_event_error_past_event_admin_only =>
-      'Pouze administrátoři mohou mazat nebo zrušit publikování minulých výpravuí.';
+      'Pouze administrátoři mohou mazat nebo zrušit publikování minulých výprav.';
 
   @override
   String get create_edit_event_screen_delete_event_error_event_not_created =>
@@ -498,6 +593,10 @@ class AppLocalizationsCs extends AppLocalizations {
   String get create_edit_instructions_screen_title => 'Pokyny výpravy';
 
   @override
+  String get create_edit_event_screen_instructions_hint =>
+      'Sem napiš pokyny (Markdown podporován)...';
+
+  @override
   String get create_edit_event_screen_meeting_place_text => 'Místo srazu';
 
   @override
@@ -561,6 +660,67 @@ class AppLocalizationsCs extends AppLocalizations {
       'Nepodařilo se uložit výpravu. Zkus to prosím znovu.';
 
   @override
+  String get category_live_events_screen => '--- PŘIHLAŠOVACÍ VÝPRAVY ---';
+
+  @override
+  String get live_events_screen_no_dependents_view_subtitle =>
+      'Zdá se, že momentálně nemáš žádné osoby, které by se mohly přihlašovat na výpravy.';
+
+  @override
+  String live_events_screen_no_live_events_view_subtitle(
+    String dependent_name,
+  ) {
+    return 'Osoba $dependent_name momentálně nemá žádné výpravy k přihlášení.';
+  }
+
+  @override
+  String get live_events_screen_change_dependent_status_dialog_title =>
+      'Změnit stav účasti';
+
+  @override
+  String live_events_screen_change_dependent_status_dialog_description(
+    String dependent_name,
+    String event_name,
+  ) {
+    return 'Změnit stav účasti osoby $dependent_name na výpravě $event_name.';
+  }
+
+  @override
+  String get live_events_screen_change_dependent_status_dialog_no_response =>
+      'Bez odpovědi';
+
+  @override
+  String get live_events_screen_change_dependent_status_dialog_signed_up =>
+      'Přihlásit';
+
+  @override
+  String get live_events_screen_change_dependent_status_dialog_excused =>
+      'Omluvit';
+
+  @override
+  String get live_events_screen_change_dependent_status_dialog_loading =>
+      'Probíhá změna stavu účasti...';
+
+  @override
+  String get live_events_screen_change_dependent_status_dialog_error =>
+      'Nepodařilo se změnit stav účasti. Zkus to prosím znovu.';
+
+  @override
+  String live_events_screen_change_dependent_status_dialog_success(
+    String dependent_name,
+    String new_status,
+  ) {
+    return 'Stav osoby $dependent_name byl úspěšně změněn na $new_status.';
+  }
+
+  @override
+  String get live_events_screen_cannot_change_status_past_signup_deadline =>
+      'Nelze změnit stav přihlášení na výpravu po vypršení datumu přihlašování.';
+
+  @override
+  String get category_settings_screen => '--- NASTAVENÍ ---';
+
+  @override
   String get settings_screen_title => 'Nastavení';
 
   @override
@@ -568,40 +728,4 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get settings_screen_change_delete_account_button_text => 'Smazat účet';
-
-  @override
-  String get yes => 'Ano';
-
-  @override
-  String get no => 'Ne';
-
-  @override
-  String get cancel => 'Zrušit';
-
-  @override
-  String get loading => 'Načítání...';
-
-  @override
-  String get back => 'Zpět';
-
-  @override
-  String get common_copied_to_clipboard => 'Zkopírováno do schránky 📋';
-
-  @override
-  String get create => 'Vytvořit';
-
-  @override
-  String get edit => 'Upravit';
-
-  @override
-  String get save => 'Uložit';
-
-  @override
-  String get load_more => 'Načíst další';
-
-  @override
-  String get error => 'Chyba';
-
-  @override
-  String get generic_error => 'Něco se pokazilo. Zkus to prosím znovu.';
 }

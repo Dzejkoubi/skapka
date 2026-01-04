@@ -104,6 +104,150 @@ abstract class AppLocalizations {
   /// **'Čeština'**
   String get language;
 
+  /// No description provided for @category_common.
+  ///
+  /// In cs, this message translates to:
+  /// **'--- SPOLEČNÉ ---'**
+  String get category_common;
+
+  /// No description provided for @yes.
+  ///
+  /// In cs, this message translates to:
+  /// **'Ano'**
+  String get yes;
+
+  /// No description provided for @no.
+  ///
+  /// In cs, this message translates to:
+  /// **'Ne'**
+  String get no;
+
+  /// No description provided for @cancel.
+  ///
+  /// In cs, this message translates to:
+  /// **'Zrušit'**
+  String get cancel;
+
+  /// No description provided for @loading.
+  ///
+  /// In cs, this message translates to:
+  /// **'Načítání...'**
+  String get loading;
+
+  /// No description provided for @back.
+  ///
+  /// In cs, this message translates to:
+  /// **'Zpět'**
+  String get back;
+
+  /// No description provided for @common_copied_to_clipboard.
+  ///
+  /// In cs, this message translates to:
+  /// **'Zkopírováno do schránky 📋'**
+  String get common_copied_to_clipboard;
+
+  /// No description provided for @create.
+  ///
+  /// In cs, this message translates to:
+  /// **'Vytvořit'**
+  String get create;
+
+  /// No description provided for @edit.
+  ///
+  /// In cs, this message translates to:
+  /// **'Upravit'**
+  String get edit;
+
+  /// No description provided for @save.
+  ///
+  /// In cs, this message translates to:
+  /// **'Uložit'**
+  String get save;
+
+  /// No description provided for @load_more.
+  ///
+  /// In cs, this message translates to:
+  /// **'Načíst další'**
+  String get load_more;
+
+  /// No description provided for @error.
+  ///
+  /// In cs, this message translates to:
+  /// **'Chyba'**
+  String get error;
+
+  /// No description provided for @generic_error.
+  ///
+  /// In cs, this message translates to:
+  /// **'Něco se pokazilo. Zkus to prosím znovu.'**
+  String get generic_error;
+
+  /// No description provided for @something_is_missing_title_1.
+  ///
+  /// In cs, this message translates to:
+  /// **'Ticho po pěšině... 🤫'**
+  String get something_is_missing_title_1;
+
+  /// No description provided for @something_is_missing_title_2.
+  ///
+  /// In cs, this message translates to:
+  /// **'Kde nic, tu nic... 🤷‍♂️'**
+  String get something_is_missing_title_2;
+
+  /// No description provided for @something_is_missing_title_3.
+  ///
+  /// In cs, this message translates to:
+  /// **'Tady chcípl pes... 🐕'**
+  String get something_is_missing_title_3;
+
+  /// No description provided for @something_is_missing_title_4.
+  ///
+  /// In cs, this message translates to:
+  /// **'Pusto a prázdno... 🏜️'**
+  String get something_is_missing_title_4;
+
+  /// No description provided for @something_is_missing_title_5.
+  ///
+  /// In cs, this message translates to:
+  /// **'Vymeteno... 🧹'**
+  String get something_is_missing_title_5;
+
+  /// No description provided for @something_is_missing_title_6.
+  ///
+  /// In cs, this message translates to:
+  /// **'Ani noha... 👣'**
+  String get something_is_missing_title_6;
+
+  /// No description provided for @something_is_missing_title_7.
+  ///
+  /// In cs, this message translates to:
+  /// **'Široko daleko ani živáčka... 🔭'**
+  String get something_is_missing_title_7;
+
+  /// No description provided for @something_is_missing_title_8.
+  ///
+  /// In cs, this message translates to:
+  /// **'Tady lišky dávají dobrou noc... 🦊'**
+  String get something_is_missing_title_8;
+
+  /// No description provided for @something_is_missing_title_9.
+  ///
+  /// In cs, this message translates to:
+  /// **'Pusto prázdno... 🕳️'**
+  String get something_is_missing_title_9;
+
+  /// No description provided for @something_is_missing_title_10.
+  ///
+  /// In cs, this message translates to:
+  /// **'Zeje to tu prázdnotou... 💨'**
+  String get something_is_missing_title_10;
+
+  /// No description provided for @category_navigation.
+  ///
+  /// In cs, this message translates to:
+  /// **'--- NAVIGACE ---'**
+  String get category_navigation;
+
   /// No description provided for @navbar_dependents.
   ///
   /// In cs, this message translates to:
@@ -128,6 +272,12 @@ abstract class AppLocalizations {
   /// **'Informace'**
   String get navbar_info;
 
+  /// No description provided for @category_welcome_screen.
+  ///
+  /// In cs, this message translates to:
+  /// **'--- UVÍTACÍ OBRAZOVKA ---'**
+  String get category_welcome_screen;
+
   /// No description provided for @welcome_screen_title.
   ///
   /// In cs, this message translates to:
@@ -151,6 +301,12 @@ abstract class AppLocalizations {
   /// In cs, this message translates to:
   /// **'Zpěvník'**
   String get welcome_screen_songbook_button_text;
+
+  /// No description provided for @category_login_screen.
+  ///
+  /// In cs, this message translates to:
+  /// **'--- PŘIHLÁŠENÍ ---'**
+  String get category_login_screen;
 
   /// No description provided for @login_screen_title.
   ///
@@ -229,6 +385,12 @@ abstract class AppLocalizations {
   /// In cs, this message translates to:
   /// **'Něco se nepovedlo. Zkus to prosím znovu.'**
   String get login_screen_login_error_generic;
+
+  /// No description provided for @category_register_screen.
+  ///
+  /// In cs, this message translates to:
+  /// **'--- REGISTRACE ---'**
+  String get category_register_screen;
 
   /// No description provided for @register_screen_title.
   ///
@@ -349,6 +511,12 @@ abstract class AppLocalizations {
   /// In cs, this message translates to:
   /// **'Registrace se nezdařila. Zkus to prosím znovu.'**
   String get register_screen_2_registration_error_generic;
+
+  /// No description provided for @category_account_not_approved_screen.
+  ///
+  /// In cs, this message translates to:
+  /// **'--- OBRAZOVKA NESCHVÁLENÉHO ÚČTU ---'**
+  String get category_account_not_approved_screen;
 
   /// No description provided for @account_not_approved_screen_title.
   ///
@@ -480,6 +648,12 @@ abstract class AppLocalizations {
   /// **'Smazání účtu se nezdařilo. Zkus to prosím později.'**
   String get account_not_approved_screen_delete_error;
 
+  /// No description provided for @category_events_screen.
+  ///
+  /// In cs, this message translates to:
+  /// **'--- VÝPRAVY ---'**
+  String get category_events_screen;
+
   /// No description provided for @events_screen_title.
   ///
   /// In cs, this message translates to:
@@ -491,6 +665,12 @@ abstract class AppLocalizations {
   /// In cs, this message translates to:
   /// **'{username} aktuálně nemá žádnou aktivní výpravu.'**
   String events_screen_no_events_text(String version, Object username);
+
+  /// No description provided for @category_event_box_widget.
+  ///
+  /// In cs, this message translates to:
+  /// **'--- WIDGET VÝPRAVY ---'**
+  String get category_event_box_widget;
 
   /// No description provided for @event_box_number_of_kids_text.
   ///
@@ -546,6 +726,12 @@ abstract class AppLocalizations {
   /// **'Nelze zobrazit detail výpravy, na kterou se nelze přihlašovat.'**
   String get event_box_open_error_event_not_live;
 
+  /// No description provided for @category_calendar_screen.
+  ///
+  /// In cs, this message translates to:
+  /// **'--- KALENDÁŘ ---'**
+  String get category_calendar_screen;
+
   /// No description provided for @calendar_screen_title.
   ///
   /// In cs, this message translates to:
@@ -557,12 +743,6 @@ abstract class AppLocalizations {
   /// In cs, this message translates to:
   /// **'Google kalendář'**
   String get calendar_screen_speed_dial_add_google_calendar;
-
-  /// No description provided for @calendar_screen_event_expansion_tile_no_events_title.
-  ///
-  /// In cs, this message translates to:
-  /// **'Ticho po pěšině... 🤫'**
-  String get calendar_screen_event_expansion_tile_no_events_title;
 
   /// No description provided for @calendar_screen_event_expansion_tile_future_title.
   ///
@@ -579,13 +759,13 @@ abstract class AppLocalizations {
   /// No description provided for @calendar_screen_event_expansion_tile_live_title.
   ///
   /// In cs, this message translates to:
-  /// **'Přihlašování'**
+  /// **'Aktuální'**
   String get calendar_screen_event_expansion_tile_live_title;
 
   /// No description provided for @calendar_screen_event_expansion_tile_live_no_events_subtitle.
   ///
   /// In cs, this message translates to:
-  /// **'Zdá se, že nejsou žádné výpravy k přihlášení.'**
+  /// **'Zdá se, že nejsou žádné aktuální výpravy.'**
   String get calendar_screen_event_expansion_tile_live_no_events_subtitle;
 
   /// No description provided for @calendar_screen_event_expansion_tile_past_title.
@@ -611,6 +791,12 @@ abstract class AppLocalizations {
   /// In cs, this message translates to:
   /// **'Zdá se, že nejsou žádné koncepty.'**
   String get calendar_screen_event_expansion_tile_draft_no_events_subtitle;
+
+  /// No description provided for @category_create_edit_event_screen.
+  ///
+  /// In cs, this message translates to:
+  /// **'--- VYTVOŘIT/UPRAVIT VÝPRAVU ---'**
+  String get category_create_edit_event_screen;
 
   /// No description provided for @create_edit_event_screen_title_create.
   ///
@@ -730,7 +916,7 @@ abstract class AppLocalizations {
   /// No description provided for @create_edit_event_screen_delete_event_error_past_event_admin_only.
   ///
   /// In cs, this message translates to:
-  /// **'Pouze administrátoři mohou mazat nebo zrušit publikování minulých výpravuí.'**
+  /// **'Pouze administrátoři mohou mazat nebo zrušit publikování minulých výprav.'**
   String get create_edit_event_screen_delete_event_error_past_event_admin_only;
 
   /// No description provided for @create_edit_event_screen_delete_event_error_event_not_created.
@@ -914,6 +1100,12 @@ abstract class AppLocalizations {
   /// **'Pokyny výpravy'**
   String get create_edit_instructions_screen_title;
 
+  /// No description provided for @create_edit_event_screen_instructions_hint.
+  ///
+  /// In cs, this message translates to:
+  /// **'Sem napiš pokyny (Markdown podporován)...'**
+  String get create_edit_event_screen_instructions_hint;
+
   /// No description provided for @create_edit_event_screen_meeting_place_text.
   ///
   /// In cs, this message translates to:
@@ -1010,6 +1202,90 @@ abstract class AppLocalizations {
   /// **'Nepodařilo se uložit výpravu. Zkus to prosím znovu.'**
   String get create_edit_event_screen_save_error_generic;
 
+  /// No description provided for @category_live_events_screen.
+  ///
+  /// In cs, this message translates to:
+  /// **'--- PŘIHLAŠOVACÍ VÝPRAVY ---'**
+  String get category_live_events_screen;
+
+  /// No description provided for @live_events_screen_no_dependents_view_subtitle.
+  ///
+  /// In cs, this message translates to:
+  /// **'Zdá se, že momentálně nemáš žádné osoby, které by se mohly přihlašovat na výpravy.'**
+  String get live_events_screen_no_dependents_view_subtitle;
+
+  /// No description provided for @live_events_screen_no_live_events_view_subtitle.
+  ///
+  /// In cs, this message translates to:
+  /// **'Osoba {dependent_name} momentálně nemá žádné výpravy k přihlášení.'**
+  String live_events_screen_no_live_events_view_subtitle(String dependent_name);
+
+  /// No description provided for @live_events_screen_change_dependent_status_dialog_title.
+  ///
+  /// In cs, this message translates to:
+  /// **'Změnit stav účasti'**
+  String get live_events_screen_change_dependent_status_dialog_title;
+
+  /// No description provided for @live_events_screen_change_dependent_status_dialog_description.
+  ///
+  /// In cs, this message translates to:
+  /// **'Změnit stav účasti osoby {dependent_name} na výpravě {event_name}.'**
+  String live_events_screen_change_dependent_status_dialog_description(
+    String dependent_name,
+    String event_name,
+  );
+
+  /// No description provided for @live_events_screen_change_dependent_status_dialog_no_response.
+  ///
+  /// In cs, this message translates to:
+  /// **'Bez odpovědi'**
+  String get live_events_screen_change_dependent_status_dialog_no_response;
+
+  /// No description provided for @live_events_screen_change_dependent_status_dialog_signed_up.
+  ///
+  /// In cs, this message translates to:
+  /// **'Přihlásit'**
+  String get live_events_screen_change_dependent_status_dialog_signed_up;
+
+  /// No description provided for @live_events_screen_change_dependent_status_dialog_excused.
+  ///
+  /// In cs, this message translates to:
+  /// **'Omluvit'**
+  String get live_events_screen_change_dependent_status_dialog_excused;
+
+  /// No description provided for @live_events_screen_change_dependent_status_dialog_loading.
+  ///
+  /// In cs, this message translates to:
+  /// **'Probíhá změna stavu účasti...'**
+  String get live_events_screen_change_dependent_status_dialog_loading;
+
+  /// No description provided for @live_events_screen_change_dependent_status_dialog_error.
+  ///
+  /// In cs, this message translates to:
+  /// **'Nepodařilo se změnit stav účasti. Zkus to prosím znovu.'**
+  String get live_events_screen_change_dependent_status_dialog_error;
+
+  /// No description provided for @live_events_screen_change_dependent_status_dialog_success.
+  ///
+  /// In cs, this message translates to:
+  /// **'Stav osoby {dependent_name} byl úspěšně změněn na {new_status}.'**
+  String live_events_screen_change_dependent_status_dialog_success(
+    String dependent_name,
+    String new_status,
+  );
+
+  /// No description provided for @live_events_screen_cannot_change_status_past_signup_deadline.
+  ///
+  /// In cs, this message translates to:
+  /// **'Nelze změnit stav přihlášení na výpravu po vypršení datumu přihlašování.'**
+  String get live_events_screen_cannot_change_status_past_signup_deadline;
+
+  /// No description provided for @category_settings_screen.
+  ///
+  /// In cs, this message translates to:
+  /// **'--- NASTAVENÍ ---'**
+  String get category_settings_screen;
+
   /// No description provided for @settings_screen_title.
   ///
   /// In cs, this message translates to:
@@ -1027,78 +1303,6 @@ abstract class AppLocalizations {
   /// In cs, this message translates to:
   /// **'Smazat účet'**
   String get settings_screen_change_delete_account_button_text;
-
-  /// No description provided for @yes.
-  ///
-  /// In cs, this message translates to:
-  /// **'Ano'**
-  String get yes;
-
-  /// No description provided for @no.
-  ///
-  /// In cs, this message translates to:
-  /// **'Ne'**
-  String get no;
-
-  /// No description provided for @cancel.
-  ///
-  /// In cs, this message translates to:
-  /// **'Zrušit'**
-  String get cancel;
-
-  /// No description provided for @loading.
-  ///
-  /// In cs, this message translates to:
-  /// **'Načítání...'**
-  String get loading;
-
-  /// No description provided for @back.
-  ///
-  /// In cs, this message translates to:
-  /// **'Zpět'**
-  String get back;
-
-  /// No description provided for @common_copied_to_clipboard.
-  ///
-  /// In cs, this message translates to:
-  /// **'Zkopírováno do schránky 📋'**
-  String get common_copied_to_clipboard;
-
-  /// No description provided for @create.
-  ///
-  /// In cs, this message translates to:
-  /// **'Vytvořit'**
-  String get create;
-
-  /// No description provided for @edit.
-  ///
-  /// In cs, this message translates to:
-  /// **'Upravit'**
-  String get edit;
-
-  /// No description provided for @save.
-  ///
-  /// In cs, this message translates to:
-  /// **'Uložit'**
-  String get save;
-
-  /// No description provided for @load_more.
-  ///
-  /// In cs, this message translates to:
-  /// **'Načíst další'**
-  String get load_more;
-
-  /// No description provided for @error.
-  ///
-  /// In cs, this message translates to:
-  /// **'Chyba'**
-  String get error;
-
-  /// No description provided for @generic_error.
-  ///
-  /// In cs, this message translates to:
-  /// **'Něco se pokazilo. Zkus to prosím znovu.'**
-  String get generic_error;
 }
 
 class _AppLocalizationsDelegate

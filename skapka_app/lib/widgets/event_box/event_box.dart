@@ -46,7 +46,7 @@ class EventBox extends StatelessWidget {
           onTap: () {
             if (eventTimeType == EventTimeType.live || isUserLeader(context)) {
               // Navigate to event details screen
-              Gaimon.success();
+              Gaimon.soft();
               context.router.push(
                 EventDetailsRoute(
                   event: event,

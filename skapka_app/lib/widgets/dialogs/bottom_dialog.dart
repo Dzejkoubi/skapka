@@ -97,7 +97,7 @@ class BottomDialog {
 
       WidgetsBinding.instance.scheduleFrame();
 
-      Future.delayed(const Duration(milliseconds: 500), () {
+      Future.delayed(const Duration(milliseconds: 2000), () {
         _isToastShowing = false;
       });
     });

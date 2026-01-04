@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_markdown_plus/flutter_markdown_plus.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:gaimon/gaimon.dart';
 import 'package:provider/provider.dart';
 import 'package:skapka_app/app/l10n/app_localizations.dart';
 import 'package:skapka_app/app/l10n/l10n_extension.dart';
@@ -18,6 +19,7 @@ import 'package:skapka_app/utils/is_user_leader.dart';
 import 'package:skapka_app/widgets/appbar/appbar.dart';
 import 'package:skapka_app/widgets/buttons/main_button.dart';
 import 'package:skapka_app/widgets/dialogs/bottom_dialog.dart';
+import 'package:skapka_app/widgets/dialogs/change_participant_event_status_dialog.dart';
 import 'package:skapka_app/widgets/event_box/participant_event_status_box.dart';
 import 'package:skapka_app/widgets/event_time_info.dart';
 import 'package:skapka_app/widgets/wrappers/screen_wrapper.dart';
@@ -82,43 +84,87 @@ class EventDetailsScreen extends StatelessWidget {
                                       final eventParticipation =
                                           eventParticipationList.first;
 
-                                      return Container(
-                                        padding: EdgeInsets.symmetric(
-                                          horizontal: AppSpacing.small,
-                                          vertical: AppSpacing.xSmall,
-                                        ),
-                                        decoration:
-                                            AppDecorations.primaryContainer(
-                                              context,
-                                            ),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Text(
-                                              '${dependent.dependentDetails?.name} ${dependent.dependentDetails?.surname}',
-                                              style:
-                                                  AppTextTheme.bodyLarge(
-                                                    context,
-                                                  ).copyWith(
-                                                    color: context
-                                                        .colors
-                                                        .text
-                                                        .normal,
-                                                  ),
-                                            ),
-                                            ParticipantEventStatusBox(
-                                              status: eventParticipation.status,
-                                              isEnabled:
-                                                  eventTimeType ==
-                                                      EventTimeType.live &&
-                                                  event.closeSignUp!.isAfter(
-                                                    DateTime.now(),
-                                                  ),
-                                              eventModel: event,
-                                              dependent: dependent,
-                                            ),
-                                          ],
+                                      final bool isEnabled =
+                                          eventTimeType == EventTimeType.live &&
+                                          event.closeSignUp!.isAfter(
+                                            DateTime.now(),
+                                          );
+
+                                      return GestureDetector(
+                                        onTap: isEnabled
+                                            ? () async {
+                                                await Future.delayed(
+                                                  Duration.zero,
+                                                );
+                                                if (context.mounted) {
+                                                  showDialog(
+                                                    context: context,
+                                                    useRootNavigator: true,
+                                                    builder: (builder) {
+                                                      return ChangeParticipantEventStatusDialog(
+                                                        dependent: dependent,
+                                                        eventModel: event,
+                                                        oldStatus:
+                                                            eventParticipation
+                                                                .status,
+                                                        dependentsProvider: context
+                                                            .read<
+                                                              DependentsProvider
+                                                            >(),
+                                                      );
+                                                    },
+                                                  );
+                                                }
+                                                Gaimon.success();
+                                              }
+                                            : () {
+                                                Gaimon.error();
+                                                BottomDialog.show(
+                                                  context,
+                                                  type:
+                                                      BottomDialogType.negative,
+                                                  description: context
+                                                      .localizations
+                                                      .live_events_screen_cannot_change_status_past_signup_deadline,
+                                                );
+                                              },
+                                        child: Container(
+                                          padding: EdgeInsets.symmetric(
+                                            horizontal: AppSpacing.small,
+                                            vertical: AppSpacing.xSmall,
+                                          ),
+                                          decoration:
+                                              AppDecorations.primaryContainer(
+                                                context,
+                                              ),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(
+                                                '${dependent.dependentDetails?.name} ${dependent.dependentDetails?.surname}',
+                                                style:
+                                                    AppTextTheme.bodyLarge(
+                                                      context,
+                                                    ).copyWith(
+                                                      color: context
+                                                          .colors
+                                                          .text
+                                                          .normal,
+                                                    ),
+                                              ),
+                                              AbsorbPointer(
+                                                child:
+                                                    ParticipantEventStatusBox(
+                                                      status: eventParticipation
+                                                          .status,
+                                                      isEnabled: isEnabled,
+                                                      eventModel: event,
+                                                      dependent: dependent,
+                                                    ),
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       );
                                     },

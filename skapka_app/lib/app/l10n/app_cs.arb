@@ -217,6 +217,38 @@
         }
     },
 
+    "live_events_screen_change_dependent_status_dialog_title": "Změnit stav účasti",
+    "live_events_screen_change_dependent_status_dialog_description": "Změnit stav účasti osoby {dependent_name} na výpravě {event_name}.",
+    "@live_events_screen_change_dependent_status_dialog_description": {
+        "placeholders": {
+            "dependent_name": {
+                "type": "String"
+            },
+            "event_name": {
+                "type": "String"
+            }
+        }
+    },
+    "live_events_screen_change_dependent_status_dialog_no_response": "Bez odpovědi",
+    "live_events_screen_change_dependent_status_dialog_signed_up": "Přihlásit",
+    "live_events_screen_change_dependent_status_dialog_excused": "Omluvit",
+    "live_events_screen_change_dependent_status_dialog_loading": "Probíhá změna stavu účasti...",
+    "live_events_screen_change_dependent_status_dialog_error": "Nepodařilo se změnit stav účasti. Zkus to prosím znovu.",
+    "live_events_screen_change_dependent_status_dialog_success": "Stav osoby {dependent_name} byl úspěšně změněn na {new_status}.",
+    "@live_events_screen_change_dependent_status_dialog_success": {
+        "placeholders": {
+            "dependent_name": {
+                "type": "String"
+            },
+            "new_status": {
+                "type": "String"
+            }
+        }
+    },
+    
+
+
+
     "category_settings_screen": "--- NASTAVENÍ ---",
     "settings_screen_title": "Nastavení",
     "settings_screen_change_signout_button_text": "Odhlásit se",

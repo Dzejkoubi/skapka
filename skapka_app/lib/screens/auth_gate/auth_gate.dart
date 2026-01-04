@@ -144,8 +144,6 @@ class _AuthGateState extends State<AuthGate> {
     }
   }
 
-  ///
-
   /// Fetches events for the group starting from the current school year
   Future<void> _loadEvents(String groupId) async {
     if (groupId.isEmpty) return;

@@ -218,6 +218,37 @@
         }
     },
 
+    "live_events_screen_change_dependent_status_dialog_title": "Change Participation Status",
+    "live_events_screen_change_dependent_status_dialog_description": "Change participation status of person {dependent_name} for event {event_name}.",
+    "@live_events_screen_change_dependent_status_dialog_description": {
+        "placeholders": {
+            "dependent_name": {
+                "type": "String"
+            },
+            "event_name": {
+                "type": "String"
+            }
+        }
+    },
+    "live_events_screen_change_dependent_status_dialog_no_response": "No Response",
+    "live_events_screen_change_dependent_status_dialog_signed_up": "Sign Up",
+    "live_events_screen_change_dependent_status_dialog_excused": "Excuse",
+    "live_events_screen_change_dependent_status_dialog_loading": "Changing participation status...",
+    "live_events_screen_change_dependent_status_dialog_error": "Failed to change participation status. Please try again.",
+    "live_events_screen_change_dependent_status_dialog_success": "The status of {dependent_name} was successfully changed to {new_status}.",
+    "@live_events_screen_change_dependent_status_dialog_success": {
+        "placeholders": {
+            "dependent_name": {
+                "type": "String"
+            },
+            "new_status": {
+                "type": "String"
+            }
+        }
+    },
+
+
+
     "category_settings_screen": "--- SETTINGS SCREEN ---",
     "settings_screen_title": "Settings",
     "settings_screen_change_signout_button_text": "Sign Out",

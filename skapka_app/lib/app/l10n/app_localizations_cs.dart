@@ -645,6 +645,46 @@ class AppLocalizationsCs extends AppLocalizations {
   }
 
   @override
+  String get live_events_screen_change_dependent_status_dialog_title =>
+      'Změnit stav účasti';
+
+  @override
+  String live_events_screen_change_dependent_status_dialog_description(
+    String dependent_name,
+    String event_name,
+  ) {
+    return 'Změnit stav účasti osoby $dependent_name na výpravě $event_name.';
+  }
+
+  @override
+  String get live_events_screen_change_dependent_status_dialog_no_response =>
+      'Bez odpovědi';
+
+  @override
+  String get live_events_screen_change_dependent_status_dialog_signed_up =>
+      'Přihlásit';
+
+  @override
+  String get live_events_screen_change_dependent_status_dialog_excused =>
+      'Omluvit';
+
+  @override
+  String get live_events_screen_change_dependent_status_dialog_loading =>
+      'Probíhá změna stavu účasti...';
+
+  @override
+  String get live_events_screen_change_dependent_status_dialog_error =>
+      'Nepodařilo se změnit stav účasti. Zkus to prosím znovu.';
+
+  @override
+  String live_events_screen_change_dependent_status_dialog_success(
+    String dependent_name,
+    String new_status,
+  ) {
+    return 'Stav osoby $dependent_name byl úspěšně změněn na $new_status.';
+  }
+
+  @override
   String get category_settings_screen => '--- NASTAVENÍ ---';
 
   @override

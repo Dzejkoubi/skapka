@@ -9,6 +9,7 @@ import 'package:skapka_app/app/theme/app_color_theme.dart';
 import 'package:skapka_app/app/theme/app_radius.dart';
 import 'package:skapka_app/app/theme/app_spacing.dart';
 import 'package:skapka_app/app/theme/app_text_theme.dart';
+import 'package:skapka_app/models/dependents/account_dependent_model.dart';
 import 'package:skapka_app/models/event_model.dart';
 import 'package:skapka_app/models/event_participant_model.dart';
 import 'package:skapka_app/providers/units_provider.dart';
@@ -21,14 +22,14 @@ import 'package:url_launcher/url_launcher.dart';
 class EventBox extends StatelessWidget {
   final EventModel event;
   final EventParticipantStatus? userStatus;
-  final String? dependentId;
+  final AccountDependentModel? dependent;
   final EventTimeType eventTimeType;
   final UnitsProvider unitsProvider;
 
   const EventBox({
     required this.event,
     this.userStatus,
-    this.dependentId,
+    this.dependent,
     required this.eventTimeType,
     required this.unitsProvider,
     super.key,
@@ -179,15 +180,15 @@ class EventBox extends StatelessWidget {
             ),
           ),
         ),
-        if (eventTimeType == EventTimeType.live && dependentId != null)
+        if (eventTimeType == EventTimeType.live && dependent != null)
           Positioned(
             right: AppSpacing.medium,
             top: AppSpacing.medium,
             child: ParticipantEventStatusBox(
               status: userStatus ?? EventParticipantStatus.notSpecified,
               isEnabled: isEnabled,
-              eventId: event.eventId,
-              dependentId: dependentId!,
+              eventModel: event,
+              dependent: dependent!,
             ),
           ),
       ],

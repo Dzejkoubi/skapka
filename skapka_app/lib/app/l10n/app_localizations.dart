@@ -1166,6 +1166,60 @@ abstract class AppLocalizations {
   /// **'Osoba {dependent_name} momentálně nemá žádné výpravy k přihlášení.'**
   String live_events_screen_no_live_events_view_subtitle(String dependent_name);
 
+  /// No description provided for @live_events_screen_change_dependent_status_dialog_title.
+  ///
+  /// In cs, this message translates to:
+  /// **'Změnit stav účasti'**
+  String get live_events_screen_change_dependent_status_dialog_title;
+
+  /// No description provided for @live_events_screen_change_dependent_status_dialog_description.
+  ///
+  /// In cs, this message translates to:
+  /// **'Změnit stav účasti osoby {dependent_name} na výpravě {event_name}.'**
+  String live_events_screen_change_dependent_status_dialog_description(
+    String dependent_name,
+    String event_name,
+  );
+
+  /// No description provided for @live_events_screen_change_dependent_status_dialog_no_response.
+  ///
+  /// In cs, this message translates to:
+  /// **'Bez odpovědi'**
+  String get live_events_screen_change_dependent_status_dialog_no_response;
+
+  /// No description provided for @live_events_screen_change_dependent_status_dialog_signed_up.
+  ///
+  /// In cs, this message translates to:
+  /// **'Přihlásit'**
+  String get live_events_screen_change_dependent_status_dialog_signed_up;
+
+  /// No description provided for @live_events_screen_change_dependent_status_dialog_excused.
+  ///
+  /// In cs, this message translates to:
+  /// **'Omluvit'**
+  String get live_events_screen_change_dependent_status_dialog_excused;
+
+  /// No description provided for @live_events_screen_change_dependent_status_dialog_loading.
+  ///
+  /// In cs, this message translates to:
+  /// **'Probíhá změna stavu účasti...'**
+  String get live_events_screen_change_dependent_status_dialog_loading;
+
+  /// No description provided for @live_events_screen_change_dependent_status_dialog_error.
+  ///
+  /// In cs, this message translates to:
+  /// **'Nepodařilo se změnit stav účasti. Zkus to prosím znovu.'**
+  String get live_events_screen_change_dependent_status_dialog_error;
+
+  /// No description provided for @live_events_screen_change_dependent_status_dialog_success.
+  ///
+  /// In cs, this message translates to:
+  /// **'Stav osoby {dependent_name} byl úspěšně změněn na {new_status}.'**
+  String live_events_screen_change_dependent_status_dialog_success(
+    String dependent_name,
+    String new_status,
+  );
+
   /// No description provided for @category_settings_screen.
   ///
   /// In cs, this message translates to:

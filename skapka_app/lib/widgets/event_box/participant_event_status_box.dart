@@ -1,44 +1,48 @@
 import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 import 'package:skapka_app/app/theme/app_color_theme.dart';
 import 'package:skapka_app/app/theme/app_gradients.dart';
 import 'package:skapka_app/app/theme/app_radius.dart';
 import 'package:skapka_app/app/theme/app_shadow.dart';
 import 'package:skapka_app/app/theme/app_sizes.dart';
+import 'package:skapka_app/models/dependents/account_dependent_model.dart';
+import 'package:skapka_app/models/event_model.dart';
 import 'package:skapka_app/models/event_participant_model.dart';
-import 'package:skapka_app/services/supabase_service.dart';
+import 'package:skapka_app/providers/dependents_provider.dart';
 import 'package:skapka_app/widgets/dialogs/bottom_dialog.dart';
+import 'package:skapka_app/widgets/dialogs/change_participant_event_status_dialog.dart';
 
 class ParticipantEventStatusBox extends StatelessWidget {
   final EventParticipantStatus status;
   final bool isEnabled;
-  final String eventId;
-  final String dependentId;
+  final EventModel eventModel;
+  final AccountDependentModel dependent;
 
   const ParticipantEventStatusBox({
     super.key,
     required this.status,
     required this.isEnabled,
-    required this.eventId,
-    required this.dependentId,
+    required this.eventModel,
+    required this.dependent,
   });
 
   @override
   Widget build(BuildContext context) {
     final config = _getConfig(context);
-    SupabaseService supabaseService = SupabaseService();
-
     return GestureDetector(
       onTap: isEnabled
           ? () {
-              supabaseService.updateDependentEventParticipationStatus(
-                eventId: eventId,
-                dependentId: dependentId,
-                newStatus: switch (status) {
-                  EventParticipantStatus.notSpecified => 'signed_up',
-                  EventParticipantStatus.signedUp => 'excused',
-                  EventParticipantStatus.excused => 'not_specified',
+              showDialog(
+                context: context,
+                builder: (builder) {
+                  return ChangeParticipantEventStatusDialog(
+                    dependent: dependent,
+                    eventModel: eventModel,
+                    oldStatus: status,
+                    dependentsProvider: context.read<DependentsProvider>(),
+                  );
                 },
               );
             }

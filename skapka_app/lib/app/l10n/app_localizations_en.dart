@@ -648,6 +648,46 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get live_events_screen_change_dependent_status_dialog_title =>
+      'Change Participation Status';
+
+  @override
+  String live_events_screen_change_dependent_status_dialog_description(
+    String dependent_name,
+    String event_name,
+  ) {
+    return 'Change participation status of person $dependent_name for event $event_name.';
+  }
+
+  @override
+  String get live_events_screen_change_dependent_status_dialog_no_response =>
+      'No Response';
+
+  @override
+  String get live_events_screen_change_dependent_status_dialog_signed_up =>
+      'Sign Up';
+
+  @override
+  String get live_events_screen_change_dependent_status_dialog_excused =>
+      'Excuse';
+
+  @override
+  String get live_events_screen_change_dependent_status_dialog_loading =>
+      'Changing participation status...';
+
+  @override
+  String get live_events_screen_change_dependent_status_dialog_error =>
+      'Failed to change participation status. Please try again.';
+
+  @override
+  String live_events_screen_change_dependent_status_dialog_success(
+    String dependent_name,
+    String new_status,
+  ) {
+    return 'The status of $dependent_name was successfully changed to $new_status.';
+  }
+
+  @override
   String get category_settings_screen => '--- SETTINGS SCREEN ---';
 
   @override

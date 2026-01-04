@@ -34,10 +34,10 @@ import 'package:skapka_app/screens/dependents_screen/dependents_screen.dart'
     as _i8;
 import 'package:skapka_app/screens/event_details_screen/event_details_screen.dart'
     as _i9;
-import 'package:skapka_app/screens/live_events_screen/live_events_screen.dart'
-    as _i10;
 import 'package:skapka_app/screens/information_screen/information_screen.dart'
-    as _i11;
+    as _i10;
+import 'package:skapka_app/screens/live_events_screen/live_events_screen.dart'
+    as _i12;
 import 'package:skapka_app/screens/login_screen/login_screen.dart' as _i13;
 import 'package:skapka_app/screens/navbar_dashboard/navbar_dashboard.dart'
     as _i14;
@@ -50,7 +50,7 @@ import 'package:skapka_app/screens/settings_screen/settings_screen.dart'
 import 'package:skapka_app/screens/theme_showcase_screens/button_theme_showcase.dart'
     as _i3;
 import 'package:skapka_app/screens/theme_showcase_screens/large_dialog_showcase.dart'
-    as _i12;
+    as _i11;
 import 'package:skapka_app/screens/theme_showcase_screens/squircle_showcase.dart'
     as _i18;
 import 'package:skapka_app/screens/welcome_screen/welcome_screen.dart' as _i19;
@@ -419,23 +419,7 @@ class EventDetailsRouteArgs {
 }
 
 /// generated route for
-/// [_i10.LiveEventsScreen]
-class LiveEventsRoute extends _i20.PageRouteInfo<void> {
-  const LiveEventsRoute({List<_i20.PageRouteInfo>? children})
-    : super(LiveEventsRoute.name, initialChildren: children);
-
-  static const String name = 'EventsRoute';
-
-  static _i20.PageInfo page = _i20.PageInfo(
-    name,
-    builder: (data) {
-      return const _i10.LiveEventsScreen();
-    },
-  );
-}
-
-/// generated route for
-/// [_i11.InformationScreen]
+/// [_i10.InformationScreen]
 class InformationRoute extends _i20.PageRouteInfo<void> {
   const InformationRoute({List<_i20.PageRouteInfo>? children})
     : super(InformationRoute.name, initialChildren: children);
@@ -445,13 +429,13 @@ class InformationRoute extends _i20.PageRouteInfo<void> {
   static _i20.PageInfo page = _i20.PageInfo(
     name,
     builder: (data) {
-      return const _i11.InformationScreen();
+      return const _i10.InformationScreen();
     },
   );
 }
 
 /// generated route for
-/// [_i12.LargeDialogShowcaseScreen]
+/// [_i11.LargeDialogShowcaseScreen]
 class LargeDialogShowcaseRoute extends _i20.PageRouteInfo<void> {
   const LargeDialogShowcaseRoute({List<_i20.PageRouteInfo>? children})
     : super(LargeDialogShowcaseRoute.name, initialChildren: children);
@@ -461,7 +445,23 @@ class LargeDialogShowcaseRoute extends _i20.PageRouteInfo<void> {
   static _i20.PageInfo page = _i20.PageInfo(
     name,
     builder: (data) {
-      return const _i12.LargeDialogShowcaseScreen();
+      return const _i11.LargeDialogShowcaseScreen();
+    },
+  );
+}
+
+/// generated route for
+/// [_i12.LiveEventsScreen]
+class LiveEventsRoute extends _i20.PageRouteInfo<void> {
+  const LiveEventsRoute({List<_i20.PageRouteInfo>? children})
+    : super(LiveEventsRoute.name, initialChildren: children);
+
+  static const String name = 'LiveEventsRoute';
+
+  static _i20.PageInfo page = _i20.PageInfo(
+    name,
+    builder: (data) {
+      return const _i12.LiveEventsScreen();
     },
   );
 }

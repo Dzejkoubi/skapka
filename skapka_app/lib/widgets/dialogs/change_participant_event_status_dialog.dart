@@ -13,9 +13,11 @@ import 'package:skapka_app/models/dependents/account_dependent_model.dart';
 import 'package:skapka_app/models/event_model.dart';
 import 'package:skapka_app/models/event_participant_model.dart';
 import 'package:skapka_app/providers/dependents_provider.dart';
+import 'package:skapka_app/providers/loading_provider.dart';
 import 'package:skapka_app/services/supabase_service.dart';
 import 'package:skapka_app/widgets/buttons/main_button.dart';
 import 'package:skapka_app/widgets/dialogs/bottom_dialog.dart';
+import 'package:provider/provider.dart';
 
 class ChangeParticipantEventStatusDialog extends StatefulWidget {
   final AccountDependentModel dependent;
@@ -44,9 +46,17 @@ class _ChangeParticipantEventStatusDialogState
   Future<void> _updateStatus(EventParticipantStatus newStatus) async {
     if (_isLoading) return;
 
+    final loadingProvider = context.read<LoadingProvider>();
+
     setState(() {
       _isLoading = true;
     });
+
+    loadingProvider.show(
+      text: context
+          .localizations
+          .live_events_screen_change_dependent_status_dialog_loading,
+    );
 
     try {
       await _supabaseService.updateDependentEventParticipationStatus(
@@ -55,51 +65,57 @@ class _ChangeParticipantEventStatusDialogState
         newStatus: newStatus.value,
       );
 
-      if (mounted) {
-        Navigator.of(context).pop();
-
-        String statusText = '';
-        switch (newStatus) {
-          case EventParticipantStatus.signedUp:
+      String statusText = '';
+      switch (newStatus) {
+        case EventParticipantStatus.signedUp:
+          if (mounted) {
             statusText = context
                 .localizations
                 .live_events_screen_change_dependent_status_dialog_signed_up;
-            break;
-          case EventParticipantStatus.excused:
+          }
+          break;
+        case EventParticipantStatus.excused:
+          if (mounted) {
             statusText = context
                 .localizations
                 .live_events_screen_change_dependent_status_dialog_excused;
-            break;
-          case EventParticipantStatus.notSpecified:
+          }
+          break;
+        case EventParticipantStatus.notSpecified:
+          if (mounted) {
             statusText = context
                 .localizations
                 .live_events_screen_change_dependent_status_dialog_no_response;
-            break;
-        }
+          }
+          break;
+      }
 
-        await Future.wait(
-          widget.dependentsProvider.dependents.map((dependent) async {
-            final participation = await _supabaseService
-                .getDependentParticipation(dependent.dependentId);
-            widget.dependentsProvider.setParticipation(
-              dependent.dependentId,
-              participation,
-            );
-          }),
-        );
-        if (mounted) {
-          BottomDialog.show(
-            context,
-            type: BottomDialogType.positive,
-            description: context.localizations
-                .live_events_screen_change_dependent_status_dialog_success(
-                  '${widget.dependent.dependentDetails?.name} ${widget.dependent.dependentDetails?.surname}',
-                  statusText,
-                ),
+      await Future.wait(
+        widget.dependentsProvider.dependents.map((dependent) async {
+          final participation = await _supabaseService
+              .getDependentParticipation(dependent.dependentId);
+          widget.dependentsProvider.setParticipation(
+            dependent.dependentId,
+            participation,
           );
-        }
+        }),
+      );
+
+      if (mounted) {
+        loadingProvider.hide();
+        Navigator.of(context).pop();
+        BottomDialog.show(
+          context,
+          type: BottomDialogType.positive,
+          description: context.localizations
+              .live_events_screen_change_dependent_status_dialog_success(
+                '${widget.dependent.dependentDetails?.name} ${widget.dependent.dependentDetails?.surname}',
+                statusText,
+              ),
+        );
       }
     } catch (e) {
+      loadingProvider.hide();
       if (mounted) {
         setState(() {
           _isLoading = false;
@@ -311,25 +327,6 @@ class _ChangeParticipantEventStatusDialogState
                     colorFilter: ColorFilter.mode(
                       context.colors.text.normal,
                       BlendMode.srcIn,
-                    ),
-                  ),
-                ),
-              ),
-            if (_isLoading)
-              Positioned.fill(
-                child: Container(
-                  decoration: ShapeDecoration(
-                    color: context.colors.shadow.shadow10,
-                    shape: SmoothRectangleBorder(
-                      borderRadius: SmoothBorderRadius(
-                        cornerRadius: AppRadius.xLarge,
-                        cornerSmoothing: AppRadius.smoothNormal,
-                      ),
-                    ),
-                  ),
-                  child: Center(
-                    child: CircularProgressIndicator(
-                      color: context.colors.primary.normal,
                     ),
                   ),
                 ),

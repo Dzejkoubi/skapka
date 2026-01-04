@@ -38,16 +38,13 @@ class _LoadingFloatingLogoState extends State<LoadingFloatingLogo>
 
     return FadeTransition(
       opacity: Tween(begin: 0.2, end: 1.0).animate(curvedAnimation),
-      child: ScaleTransition(
-        scale: Tween(begin: 0.8, end: 1.0).animate(curvedAnimation),
-        child: SlideTransition(
-          position: Tween(
-            begin: const Offset(0, 0.2),
-            end: Offset.zero,
-          ).animate(curvedAnimation),
-          child: SvgPicture.asset(
-            'assets/images/logos/scout-logo-white-without-text.svg',
-          ),
+      child: SlideTransition(
+        position: Tween(
+          begin: const Offset(0, 0.2),
+          end: Offset.zero,
+        ).animate(curvedAnimation),
+        child: SvgPicture.asset(
+          'assets/images/logos/scout-logo-white-without-text.svg',
         ),
       ),
     );

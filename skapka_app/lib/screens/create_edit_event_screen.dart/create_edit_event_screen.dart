@@ -5,8 +5,6 @@ import 'package:provider/provider.dart';
 import 'package:skapka_app/app/l10n/l10n_extension.dart';
 import 'package:skapka_app/app/router/router.gr.dart';
 import 'package:skapka_app/app/theme/app_spacing.dart';
-import 'package:skapka_app/app/theme/app_color_theme.dart';
-import 'package:skapka_app/app/theme/app_text_theme.dart';
 import 'package:skapka_app/models/dependents/dependent_model.dart';
 import 'package:skapka_app/models/event_model.dart';
 import 'package:skapka_app/models/event_participant_model.dart';
@@ -15,6 +13,7 @@ import 'package:skapka_app/models/patrol_model.dart';
 import 'package:skapka_app/models/troop_model.dart';
 import 'package:skapka_app/providers/account_provider.dart';
 import 'package:skapka_app/providers/events_provider.dart';
+import 'package:skapka_app/providers/loading_provider.dart';
 import 'package:skapka_app/providers/units_provider.dart';
 import 'package:skapka_app/utils/event_utils.dart';
 import 'package:skapka_app/screens/create_edit_event_screen.dart/widgets/event_instructions_container.dart';
@@ -25,7 +24,7 @@ import 'package:skapka_app/widgets/forms/form_with_details.dart';
 import 'package:skapka_app/widgets/appbar/appbar.dart';
 import 'package:skapka_app/widgets/dialogs/bottom_dialog.dart';
 import 'package:skapka_app/widgets/dialogs/large_dialog.dart';
-import 'package:skapka_app/widgets/loading_floating_logo.dart';
+import 'package:skapka_app/widgets/loading_floating_logo/loading_floating_logo.dart';
 import 'package:skapka_app/widgets/wrappers/screen_wrapper.dart';
 import 'package:skapka_app/screens/create_edit_event_screen.dart/widgets/event_date_selector.dart';
 import 'package:skapka_app/screens/create_edit_event_screen.dart/widgets/create_edit_event_speed_dial.dart';
@@ -166,6 +165,18 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
   _ProcessingType _processingType = _ProcessingType.none;
   bool get _isProcessing => _processingType != _ProcessingType.none;
 
+  void _setProcessingType(_ProcessingType type) {
+    setState(() {
+      _processingType = type;
+    });
+
+    if (type != _ProcessingType.none) {
+      context.read<LoadingProvider>().show(text: _getProcessingText(context));
+    } else {
+      context.read<LoadingProvider>().hide();
+    }
+  }
+
   // Tracks if data loading is complete
   bool _isInitialized = false;
   // Future for initial data fetching
@@ -298,7 +309,7 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
   // Creating new event
   Future<void> _createNewEvent({required bool asDraft}) async {
     setState(() {
-      _processingType = _ProcessingType.creating;
+      _setProcessingType(_ProcessingType.creating);
     });
     try {
       final newEvent = editedEvent.copyWith(isDraft: asDraft);
@@ -351,18 +362,14 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
       }
     } finally {
       if (mounted) {
-        setState(() {
-          _processingType = _ProcessingType.none;
-        });
+        _setProcessingType(_ProcessingType.none);
       }
     }
   }
 
   // Saving edited event
   Future<void> _saveEditedEvent({required bool asDraft}) async {
-    setState(() {
-      _processingType = _ProcessingType.editing;
-    });
+    _setProcessingType(_ProcessingType.editing);
     try {
       final updatedEvent = editedEvent.copyWith(isDraft: asDraft);
       await _supabaseService.editEventDetails(updatedEvent, _accountProvider);
@@ -424,18 +431,14 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
       }
     } finally {
       if (mounted) {
-        setState(() {
-          _processingType = _ProcessingType.none;
-        });
+        _setProcessingType(_ProcessingType.none);
       }
     }
   }
 
   // Deleting event
   Future<void> _deleteEvent() async {
-    setState(() {
-      _processingType = _ProcessingType.deleting;
-    });
+    _setProcessingType(_ProcessingType.deleting);
     try {
       await _supabaseService.deleteEvent(eventId!);
       if (kDebugMode) {
@@ -466,9 +469,7 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
       }
     } finally {
       if (mounted) {
-        setState(() {
-          _processingType = _ProcessingType.none;
-        });
+        _setProcessingType(_ProcessingType.none);
       }
     }
   }
@@ -758,26 +759,6 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
                       fabKey: dialOpenNotifier.hashCode,
                       openCloseDial: dialOpenNotifier,
                     ),
-                    if (_isProcessing)
-                      Container(
-                        color: context.colors.shadow.shadow10,
-                        child: Center(
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              const LoadingFloatingLogo(),
-                              const SizedBox(height: AppSpacing.medium),
-                              Text(
-                                _getProcessingText(context),
-                                style: AppTextTheme.titleMedium(context)
-                                    .copyWith(
-                                      color: context.colors.text.normalReversed,
-                                    ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
                   ],
                 );
               },

@@ -12,7 +12,7 @@ import 'package:skapka_app/providers/account_provider.dart';
 import 'package:skapka_app/providers/dependents_provider.dart';
 import 'package:skapka_app/providers/events_provider.dart';
 import 'package:skapka_app/providers/units_provider.dart';
-import 'package:skapka_app/widgets/loading_floating_logo.dart';
+import 'package:skapka_app/widgets/loading_floating_logo/loading_floating_logo.dart';
 import 'package:skapka_app/services/auth_service.dart';
 import 'package:skapka_app/services/supabase_service.dart';
 

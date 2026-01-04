@@ -126,6 +126,7 @@ class ShadowColorCategory {
   final Color shadow16;
   final Color shadow18;
   final Color shadow20;
+  final Color shadow50;
 
   const ShadowColorCategory({
     required this.shadow8,
@@ -135,6 +136,7 @@ class ShadowColorCategory {
     required this.shadow16,
     required this.shadow18,
     required this.shadow20,
+    required this.shadow50,
   });
 }
 
@@ -243,6 +245,7 @@ class _AppColorThemes {
       shadow16: Color(0x29000000), // 16% opacity black
       shadow18: Color(0x2E000000), // 18% opacity black
       shadow20: Color(0x33000000), // 20% opacity black
+      shadow50: Color(0x80000000), // 50% opacity black
     ),
     gradient: GradientColorCategory(
       grey0: Color(0x00FCFCFC), // 0% opacity white
@@ -311,6 +314,7 @@ class _AppColorThemes {
       shadow16: Color(0x29FFFFFF), // 16% opacity white
       shadow18: Color(0x2EFFFFFF), // 18% opacity white
       shadow20: Color(0x33FFFFFF), // 20% opacity white
+      shadow50: Color(0x80000000), // 50% opacity black
     ),
     gradient: GradientColorCategory(
       grey0: Color(0x00262626), // 0% opacity white

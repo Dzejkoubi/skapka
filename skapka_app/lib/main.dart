@@ -11,7 +11,9 @@ import 'package:flutter/material.dart';
 import 'package:skapka_app/providers/dependents_provider.dart';
 import 'package:skapka_app/providers/account_provider.dart';
 import 'package:skapka_app/providers/events_provider.dart';
+import 'package:skapka_app/providers/loading_provider.dart';
 import 'package:skapka_app/providers/units_provider.dart';
+import 'package:skapka_app/widgets/loading_overlay.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 void main() async {
@@ -50,6 +52,7 @@ class App extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => DependentsProvider()),
         ChangeNotifierProvider(create: (context) => EventsProvider()),
         ChangeNotifierProvider(create: (context) => UnitsProvider()),
+        ChangeNotifierProvider(create: (context) => LoadingProvider()),
       ],
 
       child: Builder(
@@ -66,7 +69,21 @@ class App extends StatelessWidget {
             builder: (context, child) {
               // Sync the theme whenever the app rebuilds
               AppColorTheme.updateTheme(Theme.of(context).brightness);
-              return child ?? const SizedBox.shrink();
+              return Stack(
+                children: [
+                  child ?? const SizedBox.shrink(),
+                  Consumer<LoadingProvider>(
+                    builder: (context, loadingProvider, child) {
+                      if (loadingProvider.isLoading) {
+                        return LoadingOverlay(
+                          loadingText: loadingProvider.loadingText,
+                        );
+                      }
+                      return const SizedBox.shrink();
+                    },
+                  ),
+                ],
+              );
             },
 
             localizationsDelegates: const [

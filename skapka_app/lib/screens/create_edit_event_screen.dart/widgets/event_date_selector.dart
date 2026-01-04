@@ -35,16 +35,15 @@ class EventDateSelector extends StatelessWidget {
   Future<void> _selectDateTime(
     BuildContext context,
     DateTime? initialDate,
-    Function(DateTime) onSelected,
-  ) async {
-    final DateTime now = DateTime(
-      DateTime.now().year,
-      DateTime.now().month,
-      DateTime.now().day,
-      0,
-      0,
-    );
-    final DateTime effectiveInitialDate = initialDate ?? now;
+    Function(DateTime) onSelected, {
+    bool isEndDate = false,
+  }) async {
+    final DateTime now = DateTime.now();
+    final DateTime defaultDate = isEndDate
+        ? DateTime(now.year, now.month, now.day, 23, 59)
+        : DateTime(now.year, now.month, now.day, 0, 0);
+
+    final DateTime effectiveInitialDate = initialDate ?? defaultDate;
 
     if (defaultTargetPlatform == TargetPlatform.iOS) {
       DateTime tempDate = effectiveInitialDate;
@@ -174,7 +173,12 @@ class EventDateSelector extends StatelessWidget {
             context,
             context.localizations.create_edit_event_screen_event_sign_up_to,
             closeSignUp,
-            () => _selectDateTime(context, closeSignUp, onCloseSignUpChanged),
+            () => _selectDateTime(
+              context,
+              closeSignUp,
+              onCloseSignUpChanged,
+              isEndDate: true,
+            ),
           ),
           Divider(
             color: context.colors.background.medium,
@@ -191,7 +195,12 @@ class EventDateSelector extends StatelessWidget {
             context,
             context.localizations.create_edit_event_screen_event_to_hint,
             endDate,
-            () => _selectDateTime(context, endDate, onEndDateChanged),
+            () => _selectDateTime(
+              context,
+              endDate,
+              onEndDateChanged,
+              isEndDate: false,
+            ),
           ),
         ],
       ),

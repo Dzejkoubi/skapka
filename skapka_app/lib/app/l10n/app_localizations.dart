@@ -1220,6 +1220,12 @@ abstract class AppLocalizations {
     String new_status,
   );
 
+  /// No description provided for @live_events_screen_cannot_change_status_past_signup_deadline.
+  ///
+  /// In cs, this message translates to:
+  /// **'Nelze změnit stav přihlášení na výpravu po vypršení datumu přihlašování.'**
+  String get live_events_screen_cannot_change_status_past_signup_deadline;
+
   /// No description provided for @category_settings_screen.
   ///
   /// In cs, this message translates to:

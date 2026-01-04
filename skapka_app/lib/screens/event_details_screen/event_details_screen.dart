@@ -54,7 +54,7 @@ class EventDetailsScreen extends StatelessWidget {
                   builder: (context, provider, child) {
                     return Padding(
                       padding: const EdgeInsets.only(
-                        bottom: AppSpacing.bottomSpace + AppSpacing.large,
+                        bottom: AppSpacing.bottomSpace + AppSpacing.xxLarge,
                       ),
                       child: Column(
                         spacing: AppSpacing.large,
@@ -125,54 +125,66 @@ class EventDetailsScreen extends StatelessWidget {
                                   ),
                               ],
                             ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              EventTimeInfo(
-                                event: event,
-                                eventTimeType: eventTimeType,
-                              ),
-                              if (event.targetPatrolsIds != null &&
-                                  event.targetPatrolsIds!.isNotEmpty) ...[
-                                SizedBox(height: AppSpacing.small),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      AppLocalizations.of(
-                                        context,
-                                      )!.event_box_target_patrols_text,
-                                      style: AppTextTheme.bodySmall(context)
-                                          .copyWith(
-                                            color: context.colors.text.muted,
+                          Container(
+                            padding: EdgeInsets.all(AppSpacing.small),
+                            decoration: AppDecorations.primaryContainer(
+                              context,
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                EventTimeInfo(
+                                  event: event,
+                                  eventTimeType: eventTimeType,
+                                ),
+                                if (event.targetPatrolsIds != null &&
+                                    event.targetPatrolsIds!.isNotEmpty) ...[
+                                  SizedBox(height: AppSpacing.small),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        AppLocalizations.of(
+                                          context,
+                                        )!.event_box_target_patrols_text,
+                                        style: AppTextTheme.bodySmall(context)
+                                            .copyWith(
+                                              color: context.colors.text.muted,
+                                            ),
+                                      ),
+                                      Expanded(
+                                        child: SingleChildScrollView(
+                                          scrollDirection: Axis.horizontal,
+                                          reverse: true,
+                                          child: Text(
+                                            unitsProvider.patrols
+                                                .where(
+                                                  (patrol) => event
+                                                      .targetPatrolsIds!
+                                                      .contains(
+                                                        patrol.patrolId,
+                                                      ),
+                                                )
+                                                .map((patrol) => patrol.name)
+                                                .join(', '),
+                                            style:
+                                                AppTextTheme.bodySmall(
+                                                  context,
+                                                ).copyWith(
+                                                  color: context
+                                                      .colors
+                                                      .text
+                                                      .normal,
+                                                ),
                                           ),
-                                    ),
-                                    Expanded(
-                                      child: SingleChildScrollView(
-                                        scrollDirection: Axis.horizontal,
-                                        reverse: true,
-                                        child: Text(
-                                          unitsProvider.patrols
-                                              .where(
-                                                (patrol) => event
-                                                    .targetPatrolsIds!
-                                                    .contains(patrol.patrolId),
-                                              )
-                                              .map((patrol) => patrol.name)
-                                              .join(', '),
-                                          style: AppTextTheme.bodySmall(context)
-                                              .copyWith(
-                                                color:
-                                                    context.colors.text.normal,
-                                              ),
                                         ),
                                       ),
-                                    ),
-                                  ],
-                                ),
+                                    ],
+                                  ),
+                                ],
                               ],
-                            ],
+                            ),
                           ),
                           Column(
                             spacing: AppSpacing.medium,

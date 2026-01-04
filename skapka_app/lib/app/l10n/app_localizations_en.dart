@@ -688,6 +688,10 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get live_events_screen_cannot_change_status_past_signup_deadline =>
+      'Cannot change participation status for an event after the signup deadline has passed.';
+
+  @override
   String get category_settings_screen => '--- SETTINGS SCREEN ---';
 
   @override

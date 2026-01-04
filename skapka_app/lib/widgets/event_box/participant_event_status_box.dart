@@ -1,7 +1,9 @@
 import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:gaimon/gaimon.dart';
 import 'package:provider/provider.dart';
+import 'package:skapka_app/app/l10n/l10n_extension.dart';
 import 'package:skapka_app/app/theme/app_color_theme.dart';
 import 'package:skapka_app/app/theme/app_gradients.dart';
 import 'package:skapka_app/app/theme/app_radius.dart';
@@ -32,28 +34,37 @@ class ParticipantEventStatusBox extends StatelessWidget {
   Widget build(BuildContext context) {
     final config = _getConfig(context);
     return GestureDetector(
+      behavior: HitTestBehavior.opaque,
       onTap: isEnabled
           ? () {
-              showDialog(
-                context: context,
-                builder: (builder) {
-                  return ChangeParticipantEventStatusDialog(
-                    dependent: dependent,
-                    eventModel: eventModel,
-                    oldStatus: status,
-                    dependentsProvider: context.read<DependentsProvider>(),
-                  );
-                },
-              );
+              Gaimon.success();
+              if (context.mounted) {
+                showDialog(
+                  context: context,
+                  useRootNavigator: true,
+                  builder: (builder) {
+                    return ChangeParticipantEventStatusDialog(
+                      dependent: dependent,
+                      eventModel: eventModel,
+                      oldStatus: status,
+                      dependentsProvider: context.read<DependentsProvider>(),
+                    );
+                  },
+                );
+              }
             }
-          : () {
+          : () => {
+              Gaimon.error(),
+
               BottomDialog.show(
                 context,
                 type: BottomDialogType.negative,
-                description:
-                    'Nelze změnit stav přihlášení na výpravu po vypršení datumu přihlašování',
-              );
+                description: context
+                    .localizations
+                    .live_events_screen_cannot_change_status_past_signup_deadline,
+              ),
             },
+
       child: Container(
         decoration: ShapeDecoration(
           shadows: [config.boxShadow],

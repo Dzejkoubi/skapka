@@ -685,6 +685,10 @@ class AppLocalizationsCs extends AppLocalizations {
   }
 
   @override
+  String get live_events_screen_cannot_change_status_past_signup_deadline =>
+      'Nelze změnit stav přihlášení na výpravu po vypršení datumu přihlašování.';
+
+  @override
   String get category_settings_screen => '--- NASTAVENÍ ---';
 
   @override

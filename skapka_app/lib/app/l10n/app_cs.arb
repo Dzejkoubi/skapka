@@ -245,6 +245,7 @@
             }
         }
     },
+    "live_events_screen_cannot_change_status_past_signup_deadline": "Nelze změnit stav přihlášení na výpravu po vypršení datumu přihlašování.",
     
 
 

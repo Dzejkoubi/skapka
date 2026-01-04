@@ -87,16 +87,17 @@ class _ChangeParticipantEventStatusDialogState
             );
           }),
         );
-
-        BottomDialog.show(
-          context,
-          type: BottomDialogType.positive,
-          description: context.localizations
-              .live_events_screen_change_dependent_status_dialog_success(
-                widget.dependent.dependentDetails?.name ?? '',
-                statusText,
-              ),
-        );
+        if (mounted) {
+          BottomDialog.show(
+            context,
+            type: BottomDialogType.positive,
+            description: context.localizations
+                .live_events_screen_change_dependent_status_dialog_success(
+                  widget.dependent.dependentDetails?.name ?? '',
+                  statusText,
+                ),
+          );
+        }
       }
     } catch (e) {
       if (mounted) {

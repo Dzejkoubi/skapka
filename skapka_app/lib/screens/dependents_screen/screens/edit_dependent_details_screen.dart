@@ -84,7 +84,7 @@ class _EditDependentDetailsScreenState
         BottomDialog.show(
           context,
           type: BottomDialogType.positive,
-          description: context.localizations.save,
+          description: context.localizations.dependents_screen_save_success,
         );
 
         context.router.pop();
@@ -108,7 +108,9 @@ class _EditDependentDetailsScreenState
       builder: (context) => LargeDialog(
         type: LargeDialogType.basic,
         title: context.localizations.save,
-        description: 'Máte neuložené změny. Chcete je uložit?',
+        description: context
+            .localizations
+            .dependents_screen_unsaved_changes_dialog_description,
         primaryButtonText: context.localizations.save,
         secondaryButtonText: context.localizations.cancel,
         onPrimaryPressed: () {
@@ -297,30 +299,20 @@ class _EditDependentDetailsScreenState
                       children: [
                         Column(
                           spacing: AppSpacing.xxSmall,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  context
-                                      .localizations
-                                      .dependents_screen_depents_details_other_notes,
-                                  textAlign: TextAlign.center,
-                                  style: AppTextTheme.titleMedium(context),
-                                ),
-                              ],
+                            Text(
+                              context
+                                  .localizations
+                                  .dependents_screen_depents_details_other_notes,
+                              style: AppTextTheme.titleMedium(context),
                             ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  textAlign: TextAlign.center,
-                                  context
-                                      .localizations
-                                      .dependents_screen_depents_details_other_notes_description,
-                                  style: AppTextTheme.labelLarge(context),
-                                ),
-                              ],
+                            Text(
+                              textAlign: TextAlign.center,
+                              context
+                                  .localizations
+                                  .dependents_screen_depents_details_other_notes_description,
+                              style: AppTextTheme.labelLarge(context),
                             ),
                           ],
                         ),

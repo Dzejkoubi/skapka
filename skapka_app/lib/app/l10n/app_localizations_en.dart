@@ -779,6 +779,10 @@ class AppLocalizationsEn extends AppLocalizations {
       'Details were successfully saved 💾.';
 
   @override
+  String get dependents_screen_save_error =>
+      'Failed to save details. Please try again. 💾.';
+
+  @override
   String get dependents_screen_unsaved_changes_dialog_title => 'Save changes?';
 
   @override

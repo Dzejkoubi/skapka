@@ -770,11 +770,15 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get dependents_screen_depents_details_other_notes_description =>
-      'Zde prosím napiš cokoliv co bychom ještě měli vědět. ';
+      'Zde prosím napiš cokoliv jiného, co bychom ještě měli vědět. ';
 
   @override
   String get dependents_screen_save_success =>
       'Detaily byly úspěšně uloženy 💾.';
+
+  @override
+  String get dependents_screen_save_error =>
+      'Nepodařilo se uložit detaily. Zkus to prosím znovu. 💾.';
 
   @override
   String get dependents_screen_unsaved_changes_dialog_title => 'Uložit změny?';

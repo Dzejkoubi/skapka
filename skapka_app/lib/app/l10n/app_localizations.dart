@@ -1373,7 +1373,7 @@ abstract class AppLocalizations {
   /// No description provided for @dependents_screen_depents_details_other_notes_description.
   ///
   /// In cs, this message translates to:
-  /// **'Zde prosím napiš cokoliv co bychom ještě měli vědět. '**
+  /// **'Zde prosím napiš cokoliv jiného, co bychom ještě měli vědět. '**
   String get dependents_screen_depents_details_other_notes_description;
 
   /// No description provided for @dependents_screen_save_success.
@@ -1381,6 +1381,12 @@ abstract class AppLocalizations {
   /// In cs, this message translates to:
   /// **'Detaily byly úspěšně uloženy 💾.'**
   String get dependents_screen_save_success;
+
+  /// No description provided for @dependents_screen_save_error.
+  ///
+  /// In cs, this message translates to:
+  /// **'Nepodařilo se uložit detaily. Zkus to prosím znovu. 💾.'**
+  String get dependents_screen_save_error;
 
   /// No description provided for @dependents_screen_unsaved_changes_dialog_title.
   ///

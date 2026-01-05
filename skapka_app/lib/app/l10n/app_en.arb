@@ -274,6 +274,7 @@
     "dependents_screen_depents_details_other_notes": "Other notes",
     "dependents_screen_depents_details_other_notes_description": "Here you can write anything else we should know.",
     "dependents_screen_save_success": "Details were successfully saved 💾.",
+     "dependents_screen_save_error": "Failed to save details. Please try again. 💾.",
     "dependents_screen_unsaved_changes_dialog_title": "Save changes?",
     "dependents_screen_unsaved_changes_dialog_description": "You have unsaved changes. Do you want to save them before leaving?",
     "dependents_screen_unsaved_changes_dialog_save": "Save",

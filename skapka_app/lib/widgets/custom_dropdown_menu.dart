@@ -95,8 +95,11 @@ class CustomDropdownMenu<T> extends StatelessWidget {
           context.colors.background.light,
         ),
         surfaceTintColor: WidgetStateProperty.all(Colors.transparent),
+        elevation: WidgetStateProperty.all(8),
+        shadowColor: WidgetStateProperty.all(context.colors.shadow.shadow10),
         shape: WidgetStateProperty.all(
           SmoothRectangleBorder(
+            side: BorderSide(color: context.colors.background.medium, width: 1),
             borderRadius: SmoothBorderRadius(
               cornerRadius: AppRadius.medium,
               cornerSmoothing: AppRadius.smoothNormal,

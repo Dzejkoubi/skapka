@@ -736,12 +736,11 @@ class AppLocalizationsEn extends AppLocalizations {
       'This School Year Event Attendance';
 
   @override
-  String get dependents_screen_dependent_notes => 'Edit Details';
+  String get dependents_screen_dependent_notes_button_text => 'Edit Details';
 
   @override
-  String dependents_screen_dependent_description(Object name_surname) {
-    return 'If you want, you can write something about the person $name_surname here. Details will only be visible to administrators and leaders. It helps with organizing events.';
-  }
+  String get dependents_screen_dependent_description =>
+      'Important information and needs. Accessible only to leaders for smooth event management.';
 
   @override
   String get dependents_screen_depents_details_has_gluten_allergy =>

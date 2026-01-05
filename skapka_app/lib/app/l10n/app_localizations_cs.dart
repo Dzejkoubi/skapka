@@ -734,12 +734,11 @@ class AppLocalizationsCs extends AppLocalizations {
       'Účast na výpravách v tomto školním roce';
 
   @override
-  String get dependents_screen_dependent_notes => 'Upravit detaily';
+  String get dependents_screen_dependent_notes_button_text => 'Upravit detaily';
 
   @override
-  String dependents_screen_dependent_description(Object name_surname) {
-    return 'Pokud chceš, můžeš sem napsat něco o osobě $name_surname. Detaily uvidí pouze administrátoři a vedoucí. Pomůže to při organizaci výprav.';
-  }
+  String get dependents_screen_dependent_description =>
+      'Důležité informace a potřeby. Přístupné jen vedení pro hladký průběh výprav.';
 
   @override
   String get dependents_screen_depents_details_has_gluten_allergy =>

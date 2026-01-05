@@ -77,7 +77,9 @@ class DependentBox extends StatelessWidget {
             children: [
               MainButton.outlined(
                 variant: ButtonStylesVariants.normal,
-                text: context.localizations.dependents_screen_dependent_notes,
+                text: context
+                    .localizations
+                    .dependents_screen_dependent_notes_button_text,
                 onPressed: () {
                   context.router.push(
                     EditDependentDetailsRoute(dependent: dependent),

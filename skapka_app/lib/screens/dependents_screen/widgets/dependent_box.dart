@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:skapka_app/app/l10n/l10n_extension.dart';
 import 'package:skapka_app/app/router/router.gr.dart';
 import 'package:skapka_app/app/theme/app_decorations.dart';
 import 'package:skapka_app/app/theme/app_spacing.dart';
@@ -37,7 +38,7 @@ class DependentBox extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    'Nickname: ',
+                    context.localizations.dependents_screen_dependent_nickname,
                     style: AppTextTheme.bodySmall(
                       context,
                     ).copyWith(fontWeight: FontWeight.bold),
@@ -52,7 +53,10 @@ class DependentBox extends StatelessWidget {
               // Patrol
               Row(
                 children: [
-                  Text('Patrol: ', style: AppTextTheme.bodySmall(context)),
+                  Text(
+                    context.localizations.dependents_screen_dependent_patrol,
+                    style: AppTextTheme.bodySmall(context),
+                  ),
                   SizedBox(width: AppSpacing.small),
                   Text(
                     dependent.dependentDetails?.patrolId != null
@@ -73,7 +77,9 @@ class DependentBox extends StatelessWidget {
             children: [
               MainButton.outlined(
                 variant: ButtonStylesVariants.normal,
-                text: 'Upravit detaily',
+                text: context
+                    .localizations
+                    .dependents_screen_dependent_notes_button_text,
                 onPressed: () {
                   context.router.push(
                     EditDependentDetailsRoute(dependent: dependent),

@@ -699,19 +699,19 @@ abstract class AppLocalizations {
   /// No description provided for @event_box_event_multiple_days_start_text.
   ///
   /// In cs, this message translates to:
-  /// **'Od: '**
+  /// **'Sraz v: '**
   String get event_box_event_multiple_days_start_text;
 
   /// No description provided for @event_box_event_multiple_days_end_text.
   ///
   /// In cs, this message translates to:
-  /// **'Do: '**
+  /// **'Očekávaný konec: '**
   String get event_box_event_multiple_days_end_text;
 
   /// No description provided for @event_box_event_single_day_text.
   ///
   /// In cs, this message translates to:
-  /// **'Kdy: '**
+  /// **'Sraz-Konec: '**
   String get event_box_event_single_day_text;
 
   /// No description provided for @event_box_target_patrols_text.
@@ -995,13 +995,13 @@ abstract class AppLocalizations {
   /// No description provided for @create_edit_event_screen_event_from_hint.
   ///
   /// In cs, this message translates to:
-  /// **'Od'**
+  /// **'Sraz v: '**
   String get create_edit_event_screen_event_from_hint;
 
   /// No description provided for @create_edit_event_screen_event_to_hint.
   ///
   /// In cs, this message translates to:
-  /// **'Do'**
+  /// **'Očekávaný konec: '**
   String get create_edit_event_screen_event_to_hint;
 
   /// No description provided for @create_edit_event_screen_select_participants_text.
@@ -1157,7 +1157,7 @@ abstract class AppLocalizations {
   /// No description provided for @create_edit_event_screen_validation_error_start_after_end.
   ///
   /// In cs, this message translates to:
-  /// **'Začátek výpravy musí být před koncem výpravy.'**
+  /// **'Začátek výpravy musí být před očekávaným koncem výpravy.'**
   String get create_edit_event_screen_validation_error_start_after_end;
 
   /// No description provided for @create_edit_event_screen_creating_event_progress_text.

@@ -4,6 +4,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:skapka_app/app/l10n/app_localizations.dart';
+import 'package:skapka_app/app/l10n/l10n_extension.dart';
 import 'package:skapka_app/app/router/router.gr.dart';
 import 'package:skapka_app/app/theme/app_color_theme.dart';
 import 'package:skapka_app/app/theme/app_spacing.dart';
@@ -106,15 +107,15 @@ class AccountNotApprovedScreen extends StatelessWidget {
                         context: context,
                         builder: (_) => LargeDialog(
                           type: LargeDialogType.negative,
-                          title: AppLocalizations.of(
-                            context,
-                          )!.account_not_approved_screen_logout_dialog_title,
-                          description: AppLocalizations.of(
-                            context,
-                          )!.account_not_approved_screen_logout_dialog_description,
-                          primaryButtonText: AppLocalizations.of(
-                            context,
-                          )!.account_not_approved_screen_logout_dialog_primary_button_text,
+                          title: context
+                              .localizations
+                              .account_not_approved_screen_logout_dialog_title,
+                          description: context
+                              .localizations
+                              .account_not_approved_screen_logout_dialog_description,
+                          primaryButtonText: context
+                              .localizations
+                              .account_not_approved_screen_logout_dialog_primary_button_text,
                           onPrimaryPressed: () async {
                             try {
                               await authService.signOut();
@@ -142,9 +143,7 @@ class AccountNotApprovedScreen extends StatelessWidget {
                               }
                             }
                           },
-                          secondaryButtonText: AppLocalizations.of(
-                            context,
-                          )!.cancel,
+                          secondaryButtonText: context.localizations.cancel,
                           onSecondaryPressed: () {
                             Navigator.of(context).pop();
                           },
@@ -170,15 +169,15 @@ class AccountNotApprovedScreen extends StatelessWidget {
                         context: context,
                         builder: (_) => LargeDialog(
                           type: LargeDialogType.negative,
-                          title: AppLocalizations.of(
-                            context,
-                          )!.account_not_approved_screen_delete_account_dialog_title,
-                          description: AppLocalizations.of(
-                            context,
-                          )!.account_not_approved_screen_delete_account_dialog_description,
-                          primaryButtonText: AppLocalizations.of(
-                            context,
-                          )!.account_not_approved_screen_delete_account_dialog_primary_button_text,
+                          title: context
+                              .localizations
+                              .account_not_approved_screen_delete_account_dialog_title,
+                          description: context
+                              .localizations
+                              .account_not_approved_screen_delete_account_dialog_description,
+                          primaryButtonText: context
+                              .localizations
+                              .account_not_approved_screen_delete_account_dialog_primary_button_text,
                           onPrimaryPressed: () async {
                             try {
                               await authService.deleteAccount();
@@ -206,9 +205,7 @@ class AccountNotApprovedScreen extends StatelessWidget {
                               }
                             }
                           },
-                          secondaryButtonText: AppLocalizations.of(
-                            context,
-                          )!.cancel,
+                          secondaryButtonText: context.localizations.cancel,
                           onSecondaryPressed: () {
                             Navigator.of(context).pop();
                           },

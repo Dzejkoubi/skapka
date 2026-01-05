@@ -199,9 +199,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     variant: ButtonStylesVariants.white,
                     text: _isLoading
                         ? context.localizations.loading
-                        : AppLocalizations.of(
-                            context,
-                          )!.login_screen_login_button_text,
+                        : context.localizations.login_screen_login_button_text,
                     onPressed: _handleLogin,
                   ),
                 ),

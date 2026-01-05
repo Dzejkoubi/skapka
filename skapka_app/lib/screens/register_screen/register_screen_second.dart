@@ -223,9 +223,9 @@ class _RegisterScreenSecondState extends State<RegisterScreenSecond> {
                     variant: ButtonStylesVariants.white,
                     text: _isLoading
                         ? context.localizations.loading
-                        : AppLocalizations.of(
-                            context,
-                          )!.register_screen_2_register_button_text,
+                        : context
+                              .localizations
+                              .register_screen_2_register_button_text,
                     onPressed: () => _handleRegisterButtonPressed(),
                   ),
                 ),

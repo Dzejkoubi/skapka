@@ -352,13 +352,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get event_box_sign_up_end_date_text => 'Sign-up ends on: ';
 
   @override
-  String get event_box_event_multiple_days_start_text => 'From: ';
+  String get event_box_event_multiple_days_start_text => 'Meeting time: ';
 
   @override
-  String get event_box_event_multiple_days_end_text => 'To: ';
+  String get event_box_event_multiple_days_end_text => 'Leaving time: ';
 
   @override
-  String get event_box_event_single_day_text => 'When: ';
+  String get event_box_event_single_day_text => 'Meet-End: ';
 
   @override
   String get event_box_target_patrols_text => 'Patrols: ';
@@ -538,10 +538,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get create_edit_event_screen_event_sign_up_to => 'Sign-up to';
 
   @override
-  String get create_edit_event_screen_event_from_hint => 'From';
+  String get create_edit_event_screen_event_from_hint => 'Meeting Time:  ';
 
   @override
-  String get create_edit_event_screen_event_to_hint => 'To';
+  String get create_edit_event_screen_event_to_hint => 'Leaving Time:  ';
 
   @override
   String get create_edit_event_screen_select_participants_text =>

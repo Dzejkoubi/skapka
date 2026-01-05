@@ -350,13 +350,13 @@ class AppLocalizationsCs extends AppLocalizations {
   String get event_box_sign_up_end_date_text => 'Přihlašování do: ';
 
   @override
-  String get event_box_event_multiple_days_start_text => 'Od: ';
+  String get event_box_event_multiple_days_start_text => 'Sraz v: ';
 
   @override
-  String get event_box_event_multiple_days_end_text => 'Do: ';
+  String get event_box_event_multiple_days_end_text => 'Očekávaný konec: ';
 
   @override
-  String get event_box_event_single_day_text => 'Kdy: ';
+  String get event_box_event_single_day_text => 'Sraz-Konec: ';
 
   @override
   String get event_box_target_patrols_text => 'Družinky: ';
@@ -536,10 +536,10 @@ class AppLocalizationsCs extends AppLocalizations {
   String get create_edit_event_screen_event_sign_up_to => 'Přihlašování do';
 
   @override
-  String get create_edit_event_screen_event_from_hint => 'Od';
+  String get create_edit_event_screen_event_from_hint => 'Sraz v: ';
 
   @override
-  String get create_edit_event_screen_event_to_hint => 'Do';
+  String get create_edit_event_screen_event_to_hint => 'Očekávaný konec: ';
 
   @override
   String get create_edit_event_screen_select_participants_text =>
@@ -629,7 +629,7 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get create_edit_event_screen_validation_error_start_after_end =>
-      'Začátek výpravy musí být před koncem výpravy.';
+      'Začátek výpravy musí být před očekávaným koncem výpravy.';
 
   @override
   String get create_edit_event_screen_creating_event_progress_text =>

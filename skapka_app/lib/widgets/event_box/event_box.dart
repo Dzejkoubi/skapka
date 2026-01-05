@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
 import 'package:gaimon/gaimon.dart';
-import 'package:skapka_app/app/l10n/app_localizations.dart';
 import 'package:skapka_app/app/l10n/l10n_extension.dart';
 import 'package:skapka_app/app/router/router.gr.dart';
 import 'package:skapka_app/app/theme/app_color_theme.dart';
@@ -141,9 +140,8 @@ class EventBox extends StatelessWidget {
                       },
                       child: Text.rich(
                         TextSpan(
-                          text: AppLocalizations.of(
-                            context,
-                          )!.event_box_photos_link_text,
+                          text:
+                              context.localizations.event_box_photos_link_text,
                           style: AppTextTheme.labelLarge(context).copyWith(
                             color: context.colors.secondary.normal,
                             decoration: TextDecoration.underline,

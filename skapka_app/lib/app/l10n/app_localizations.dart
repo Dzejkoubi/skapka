@@ -1364,23 +1364,17 @@ abstract class AppLocalizations {
   /// **'Je plavec'**
   String get dependents_screen_depents_details_is_swimmer;
 
-  /// No description provided for @dependents_screen_depents_details_other_medical_notes.
-  ///
-  /// In cs, this message translates to:
-  /// **'Jiné zdravotní poznámky'**
-  String get dependents_screen_depents_details_other_medical_notes;
-
-  /// No description provided for @dependents_screen_depents_details_other_dietary_notes.
-  ///
-  /// In cs, this message translates to:
-  /// **'Jiné dietní poznámky'**
-  String get dependents_screen_depents_details_other_dietary_notes;
-
   /// No description provided for @dependents_screen_depents_details_other_notes.
   ///
   /// In cs, this message translates to:
-  /// **'Jiné poznámky'**
+  /// **'Něco jiného'**
   String get dependents_screen_depents_details_other_notes;
+
+  /// No description provided for @dependents_screen_depents_details_other_notes_description.
+  ///
+  /// In cs, this message translates to:
+  /// **'Zde prosím napiš cokoliv co bychom ještě měli vědět. '**
+  String get dependents_screen_depents_details_other_notes_description;
 
   /// No description provided for @dependents_screen_save_success.
   ///

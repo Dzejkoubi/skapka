@@ -348,8 +348,6 @@ class SupabaseService {
       'is_claustrophobic': notes.isClaustrophobic,
       'has_epilepsy': notes.hasEpilepsy,
       'is_swimmer': notes.isSwimmer,
-      'medical_note': notes.medicalNote,
-      'dietary_note': notes.dietaryNote,
       'other_note': notes.otherNote,
     });
   }

@@ -769,15 +769,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get dependents_screen_depents_details_is_swimmer => 'Is swimmer';
 
   @override
-  String get dependents_screen_depents_details_other_medical_notes =>
-      'Other medical notes';
-
-  @override
-  String get dependents_screen_depents_details_other_dietary_notes =>
-      'Other dietary notes';
-
-  @override
   String get dependents_screen_depents_details_other_notes => 'Other notes';
+
+  @override
+  String get dependents_screen_depents_details_other_notes_description =>
+      'Here you can write anything else we should know.';
 
   @override
   String get dependents_screen_save_success =>

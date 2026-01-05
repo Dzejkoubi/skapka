@@ -767,15 +767,11 @@ class AppLocalizationsCs extends AppLocalizations {
   String get dependents_screen_depents_details_is_swimmer => 'Je plavec';
 
   @override
-  String get dependents_screen_depents_details_other_medical_notes =>
-      'Jiné zdravotní poznámky';
+  String get dependents_screen_depents_details_other_notes => 'Něco jiného';
 
   @override
-  String get dependents_screen_depents_details_other_dietary_notes =>
-      'Jiné dietní poznámky';
-
-  @override
-  String get dependents_screen_depents_details_other_notes => 'Jiné poznámky';
+  String get dependents_screen_depents_details_other_notes_description =>
+      'Zde prosím napiš cokoliv co bychom ještě měli vědět. ';
 
   @override
   String get dependents_screen_save_success =>

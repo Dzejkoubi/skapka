@@ -1,5 +1,5 @@
 name: skapka_app
-description: "A new Flutter project."
+description: "Skapka - scout app to help parents sign up their children for events."
 publish_to: 'none'
 version: 0.1.0
 
@@ -31,6 +31,8 @@ dependencies:
   flutter_markdown_plus: ^1.0.7
   custom_sliding_segmented_control: ^1.8.5
   loader_overlay: ^5.0.0
+  country_flags: ^4.1.1
+  package_info_plus: ^9.0.0
 
 
 dev_dependencies:

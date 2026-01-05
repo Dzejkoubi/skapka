@@ -1424,6 +1424,18 @@ abstract class AppLocalizations {
   /// **'Nastavení'**
   String get settings_screen_title;
 
+  /// No description provided for @settings_screen_admin_panel_box_title.
+  ///
+  /// In cs, this message translates to:
+  /// **'Admin Panel'**
+  String get settings_screen_admin_panel_box_title;
+
+  /// No description provided for @settings_screen_send_notification_box_title.
+  ///
+  /// In cs, this message translates to:
+  /// **'Poslat oznámení'**
+  String get settings_screen_send_notification_box_title;
+
   /// No description provided for @settings_screen_change_signout_button_text.
   ///
   /// In cs, this message translates to:
@@ -1435,6 +1447,66 @@ abstract class AppLocalizations {
   /// In cs, this message translates to:
   /// **'Smazat účet'**
   String get settings_screen_change_delete_account_button_text;
+
+  /// No description provided for @settings_screen_app_motive_dropdown_title.
+  ///
+  /// In cs, this message translates to:
+  /// **'Motiv aplikace'**
+  String get settings_screen_app_motive_dropdown_title;
+
+  /// No description provided for @settings_screen_app_motive_light.
+  ///
+  /// In cs, this message translates to:
+  /// **'Světlý'**
+  String get settings_screen_app_motive_light;
+
+  /// No description provided for @settings_screen_app_motive_dark.
+  ///
+  /// In cs, this message translates to:
+  /// **'Tmavý'**
+  String get settings_screen_app_motive_dark;
+
+  /// No description provided for @settings_screen_app_motive_system.
+  ///
+  /// In cs, this message translates to:
+  /// **'Systém'**
+  String get settings_screen_app_motive_system;
+
+  /// No description provided for @settings_screen_app_language_dropdown_title.
+  ///
+  /// In cs, this message translates to:
+  /// **'Jazyk aplikace'**
+  String get settings_screen_app_language_dropdown_title;
+
+  /// No description provided for @settings_screen_app_language_czech.
+  ///
+  /// In cs, this message translates to:
+  /// **'Čeština'**
+  String get settings_screen_app_language_czech;
+
+  /// No description provided for @settings_screen_app_language_english.
+  ///
+  /// In cs, this message translates to:
+  /// **'Angličtina'**
+  String get settings_screen_app_language_english;
+
+  /// No description provided for @settings_screen_app_version_title.
+  ///
+  /// In cs, this message translates to:
+  /// **'Verze aplikace: '**
+  String get settings_screen_app_version_title;
+
+  /// No description provided for @category_admin_panel_screen.
+  ///
+  /// In cs, this message translates to:
+  /// **'--- ADMIN PANEL ---'**
+  String get category_admin_panel_screen;
+
+  /// No description provided for @admin_panel_screen_title.
+  ///
+  /// In cs, this message translates to:
+  /// **'Admin Panel'**
+  String get admin_panel_screen_title;
 }
 
 class _AppLocalizationsDelegate

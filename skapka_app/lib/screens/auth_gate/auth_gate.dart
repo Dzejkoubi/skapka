@@ -72,7 +72,7 @@ class _AuthGateState extends State<AuthGate> {
     await loadAppData(account.accountId, account.groupId);
 
     if (mounted) {
-      context.router.replace(const NavbarDashboard());
+      context.router.replace(const SettingsRoute());
     }
   }
 

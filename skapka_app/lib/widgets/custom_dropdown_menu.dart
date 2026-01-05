@@ -16,6 +16,7 @@ class CustomDropdownMenu<T> extends StatelessWidget {
   final Widget? leadingIcon;
   final Widget? label;
   final double? width;
+  final EdgeInsets? expandedInsets;
 
   const CustomDropdownMenu({
     required this.dropdownMenuEntries,
@@ -26,6 +27,7 @@ class CustomDropdownMenu<T> extends StatelessWidget {
     this.leadingIcon,
     this.label,
     this.width,
+    this.expandedInsets,
     super.key,
   });
 
@@ -52,6 +54,7 @@ class CustomDropdownMenu<T> extends StatelessWidget {
 
     return DropdownMenu<T>(
       width: width,
+      expandedInsets: expandedInsets,
       initialSelection: initialSelection,
       controller: controller,
       hintText: hintText,

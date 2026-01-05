@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:skapka_app/app/router/guards/admin_guard.dart';
 import 'package:skapka_app/app/router/guards/leader_guard.dart';
 import 'package:skapka_app/app/router/router.gr.dart';
 // To generate the router file, run:
@@ -53,6 +54,8 @@ class AppRouter extends RootStackRouter {
     ),
 
     // Development and showcase routes
+    AutoRoute(page: AdminPanelRoute.page, guards: [AdminGuard()]),
+    AutoRoute(page: SendNotificationRoute.page),
     AutoRoute(page: ButtonThemeShowcaseRoute.page),
     AutoRoute(page: SquircleShowcaseRoute.page),
     AutoRoute(page: LargeDialogShowcaseRoute.page),

@@ -238,7 +238,9 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
   Future<void> fetchGroupDependentsAndLeaders(String groupId) async {
     _groupDependents = await _supabaseService.getGroupDependents(
       groupId,
-      excludeArchived: false,
+      excludeArchived:
+          !(widget.eventTimeType ==
+              EventTimeType.past), // If event is past, inlcude archived
     );
     _groupLeaders = await _supabaseService.getGroupLeaders(groupId);
   }

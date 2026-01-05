@@ -65,8 +65,9 @@ class EventDetailsScreen extends StatelessWidget {
                             Column(
                               spacing: AppSpacing.small,
                               children: [
-                                for (var dependent
-                                    in dependentsProvider.dependents)
+                                for (var dependent in provider.dependents.where(
+                                  (d) => d.dependentDetails?.isArchived != true,
+                                ))
                                   Builder(
                                     builder: (context) {
                                       final participation = dependentsProvider
@@ -89,6 +90,7 @@ class EventDetailsScreen extends StatelessWidget {
                                           event.closeSignUp!.isAfter(
                                             DateTime.now(),
                                           );
+                                      // Allow changing status only if the event is live and the sign-up deadline has not passed
 
                                       return GestureDetector(
                                         onTap: isEnabled

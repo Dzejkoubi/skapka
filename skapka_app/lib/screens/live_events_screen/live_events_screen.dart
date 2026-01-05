@@ -60,7 +60,9 @@ class LiveEventsScreen extends StatelessWidget {
                           child: Column(
                             spacing: AppSpacing.xLarge,
                             children: [
-                              for (var dependent in provider.dependents)
+                              for (var dependent in provider.dependents.where(
+                                (d) => d.dependentDetails?.isArchived != true,
+                              ))
                                 Builder(
                                   builder: (context) {
                                     final participation = provider

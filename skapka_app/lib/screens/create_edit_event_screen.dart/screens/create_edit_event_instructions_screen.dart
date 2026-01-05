@@ -69,6 +69,7 @@ class _CreateEditEventInstructionsScreenState
   @override
   Widget build(BuildContext context) {
     return ScreenWrapper(
+      padding: EdgeInsets.zero,
       appBar: Appbar(
         showBackChevron: true,
         showSettingsIcon: false,
@@ -80,58 +81,56 @@ class _CreateEditEventInstructionsScreenState
           context.router.pop();
         },
       ),
-      body: SafeArea(
-        child: Column(
-          children: [
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
+      body: Column(
+        children: [
+          SizedBox(height: Appbar.topBarHeight + Appbar.bottomRadius),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              spacing: AppSpacing.small,
+              children: [
+                SizedBox(width: AppSpacing.xLarge),
+                MainButton.outlined(
+                  text: 'H1',
+                  onPressed: () => _insertMarkdown('# '),
+                ),
+                MainButton.outlined(
+                  text: 'H2',
+                  onPressed: () => _insertMarkdown('## '),
+                ),
+                MainButton.outlined(
+                  text: 'H3',
+                  onPressed: () => _insertMarkdown('### '),
+                ),
+                MainButton.outlined(
+                  text: 'B',
+                  onPressed: () => _insertMarkdown('**', suffix: '**'),
+                ),
+                MainButton.outlined(
+                  text: 'List',
+                  onPressed: () => _insertMarkdown('* '),
+                ),
+                SizedBox(width: AppSpacing.xLarge),
+              ],
+            ),
+          ),
+          const SizedBox(height: AppSpacing.large),
+          Expanded(
+            child: Padding(
               padding: const EdgeInsets.symmetric(
-                horizontal: AppSpacing.medium,
-                vertical: AppSpacing.small,
+                horizontal: AppSpacing.xLarge,
               ),
-              child: Row(
-                spacing: AppSpacing.small,
-                children: [
-                  MainButton.outlined(
-                    text: 'H1',
-                    onPressed: () => _insertMarkdown('# '),
-                  ),
-                  MainButton.outlined(
-                    text: 'H2',
-                    onPressed: () => _insertMarkdown('## '),
-                  ),
-                  MainButton.outlined(
-                    text: 'H3',
-                    onPressed: () => _insertMarkdown('### '),
-                  ),
-                  MainButton.outlined(
-                    text: 'B',
-                    onPressed: () => _insertMarkdown('**', suffix: '**'),
-                  ),
-                  MainButton.outlined(
-                    text: 'List',
-                    onPressed: () => _insertMarkdown('* '),
-                  ),
-                ],
+              child: CustomTextField(
+                controller: _controller,
+                hintText: context
+                    .localizations
+                    .create_edit_event_screen_instructions_hint,
+                maxLines: null,
+                expands: true,
               ),
             ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: AppSpacing.medium,
-                ),
-                child: CustomTextField(
-                  controller: _controller,
-                  hintText: context
-                      .localizations
-                      .create_edit_event_screen_instructions_hint,
-                  maxLines: null,
-                  expands: true,
-                ),
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

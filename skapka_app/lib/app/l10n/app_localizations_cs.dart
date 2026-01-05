@@ -734,12 +734,11 @@ class AppLocalizationsCs extends AppLocalizations {
       'Účast na výpravách v tomto školním roce';
 
   @override
-  String get dependents_screen_dependent_notes => 'Upravit detaily';
+  String get dependents_screen_dependent_notes_button_text => 'Upravit detaily';
 
   @override
-  String dependents_screen_dependent_description(Object name_surname) {
-    return 'Pokud chceš, můžeš sem napsat něco o osobě $name_surname. Detaily uvidí pouze administrátoři a vedoucí. Pomůže to při organizaci výprav.';
-  }
+  String get dependents_screen_dependent_description =>
+      'Důležité informace a potřeby. Přístupné jen vedení pro hladký průběh výprav.';
 
   @override
   String get dependents_screen_depents_details_has_gluten_allergy =>
@@ -767,19 +766,19 @@ class AppLocalizationsCs extends AppLocalizations {
   String get dependents_screen_depents_details_is_swimmer => 'Je plavec';
 
   @override
-  String get dependents_screen_depents_details_other_medical_notes =>
-      'Jiné zdravotní poznámky';
+  String get dependents_screen_depents_details_other_notes => 'Něco jiného';
 
   @override
-  String get dependents_screen_depents_details_other_dietary_notes =>
-      'Jiné dietní poznámky';
-
-  @override
-  String get dependents_screen_depents_details_other_notes => 'Jiné poznámky';
+  String get dependents_screen_depents_details_other_notes_description =>
+      'Zde prosím napiš cokoliv jiného, co bychom ještě měli vědět. ';
 
   @override
   String get dependents_screen_save_success =>
       'Detaily byly úspěšně uloženy 💾.';
+
+  @override
+  String get dependents_screen_save_error =>
+      'Nepodařilo se uložit detaily. Zkus to prosím znovu. 💾.';
 
   @override
   String get dependents_screen_unsaved_changes_dialog_title => 'Uložit změny?';

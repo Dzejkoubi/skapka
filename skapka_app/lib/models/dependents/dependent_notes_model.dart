@@ -11,8 +11,6 @@ class DependentNotesModel {
   final bool? isSwimmer;
 
   // Text Details
-  final String? medicalNote;
-  final String? dietaryNote;
   final String? otherNote;
 
   DependentNotesModel({
@@ -23,8 +21,6 @@ class DependentNotesModel {
     this.isClaustrophobic,
     this.hasEpilepsy,
     this.isSwimmer,
-    this.medicalNote,
-    this.dietaryNote,
     this.otherNote,
   });
 
@@ -37,8 +33,6 @@ class DependentNotesModel {
       isClaustrophobic: json['is_claustrophobic'] as bool?,
       hasEpilepsy: json['has_epilepsy'] as bool?,
       isSwimmer: json['is_swimmer'] as bool?,
-      medicalNote: json['medical_note'] as String?,
-      dietaryNote: json['dietary_note'] as String?,
       otherNote: json['other_note'] as String?,
     );
   }

@@ -73,7 +73,7 @@ class DependentBox extends StatelessWidget {
           ),
           // Edit dependent's details button
           Row(
-            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               MainButton.outlined(
                 variant: ButtonStylesVariants.normal,

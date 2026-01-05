@@ -736,12 +736,11 @@ class AppLocalizationsEn extends AppLocalizations {
       'This School Year Event Attendance';
 
   @override
-  String get dependents_screen_dependent_notes => 'Edit Details';
+  String get dependents_screen_dependent_notes_button_text => 'Edit Details';
 
   @override
-  String dependents_screen_dependent_description(Object name_surname) {
-    return 'If you want, you can write something about the person $name_surname here. Details will only be visible to administrators and leaders. It helps with organizing events.';
-  }
+  String get dependents_screen_dependent_description =>
+      'Important information and needs. Accessible only to leaders for smooth event management.';
 
   @override
   String get dependents_screen_depents_details_has_gluten_allergy =>
@@ -769,19 +768,19 @@ class AppLocalizationsEn extends AppLocalizations {
   String get dependents_screen_depents_details_is_swimmer => 'Is swimmer';
 
   @override
-  String get dependents_screen_depents_details_other_medical_notes =>
-      'Other medical notes';
-
-  @override
-  String get dependents_screen_depents_details_other_dietary_notes =>
-      'Other dietary notes';
-
-  @override
   String get dependents_screen_depents_details_other_notes => 'Other notes';
+
+  @override
+  String get dependents_screen_depents_details_other_notes_description =>
+      'Here you can write anything else we should know.';
 
   @override
   String get dependents_screen_save_success =>
       'Details were successfully saved 💾.';
+
+  @override
+  String get dependents_screen_save_error =>
+      'Failed to save details. Please try again. 💾.';
 
   @override
   String get dependents_screen_unsaved_changes_dialog_title => 'Save changes?';

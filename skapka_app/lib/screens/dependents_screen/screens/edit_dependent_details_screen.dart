@@ -1,27 +1,28 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:skapka_app/app/l10n/l10n_extension.dart';
 import 'package:skapka_app/app/theme/app_color_theme.dart';
-import 'package:skapka_app/app/theme/app_decorations.dart';
+import 'package:skapka_app/app/theme/app_radius.dart';
 import 'package:skapka_app/app/theme/app_spacing.dart';
 import 'package:skapka_app/app/theme/app_text_theme.dart';
 import 'package:skapka_app/models/dependents/account_dependent_model.dart';
 import 'package:skapka_app/models/dependents/dependent_notes_model.dart';
-import 'package:skapka_app/providers/account_provider.dart';
 import 'package:skapka_app/providers/dependents_provider.dart';
 import 'package:skapka_app/providers/loading_provider.dart';
 import 'package:skapka_app/services/supabase_service.dart';
 import 'package:skapka_app/widgets/appbar/appbar.dart';
-import 'package:skapka_app/widgets/buttons/main_button.dart';
+import 'package:skapka_app/widgets/custom_dropdown_menu.dart';
 import 'package:skapka_app/widgets/dialogs/bottom_dialog.dart';
 import 'package:skapka_app/widgets/dialogs/large_dialog.dart';
 import 'package:skapka_app/widgets/forms/custom_text_field.dart';
 import 'package:skapka_app/widgets/wrappers/screen_wrapper.dart';
+import 'package:provider/provider.dart';
 
 @RoutePage()
 class EditDependentDetailsScreen extends StatefulWidget {
   final AccountDependentModel dependent;
+
   const EditDependentDetailsScreen({super.key, required this.dependent});
 
   @override
@@ -31,115 +32,73 @@ class EditDependentDetailsScreen extends StatefulWidget {
 
 class _EditDependentDetailsScreenState
     extends State<EditDependentDetailsScreen> {
+  late DependentNotesModel _originalNotes;
+  // Services and providers
   final SupabaseService _supabaseService = SupabaseService();
-  late final TextEditingController _medicalNoteController;
-  late final TextEditingController _dietaryNoteController;
+  late final loadingProvider = context.read<LoadingProvider>();
+  late final dependentsProvider = context.read<DependentsProvider>();
+
+  // State variables for 3-state bools (true/false/null)
+  bool? _hasGlutenAllergy;
+  bool? _hasLactoseIntolerance;
+  bool? _hasNutAllergy;
+  bool? _hasAsthma;
+  bool? _isClaustrophobic;
+  bool? _hasEpilepsy;
+  bool? _isSwimmer;
+
+  // Controllers for text notes
   late final TextEditingController _otherNoteController;
 
-  bool _hasGlutenAllergy = false;
-  bool _hasLactoseIntolerance = false;
-  bool _hasNutAllergy = false;
-  bool _hasAsthma = false;
-  bool _isClaustrophobic = false;
-  bool _hasEpilepsy = false;
-  bool _isSwimmer = false;
-
-  bool _allowPop = false;
-
   bool get _hasChanges {
-    final notes = widget.dependent.dependentDetails?.notes;
-
-    if (_medicalNoteController.text != (notes?.medicalNote ?? '')) return true;
-    if (_dietaryNoteController.text != (notes?.dietaryNote ?? '')) return true;
-    if (_otherNoteController.text != (notes?.otherNote ?? '')) return true;
-
-    if (_hasGlutenAllergy != (notes?.hasGlutenAllergy ?? false)) return true;
-    if (_hasLactoseIntolerance != (notes?.hasLactoseIntolerance ?? false)) {
-      return true;
-    }
-    if (_hasNutAllergy != (notes?.hasNutAllergy ?? false)) return true;
-    if (_hasAsthma != (notes?.hasAsthma ?? false)) return true;
-    if (_isClaustrophobic != (notes?.isClaustrophobic ?? false)) return true;
-    if (_hasEpilepsy != (notes?.hasEpilepsy ?? false)) return true;
-    if (_isSwimmer != (notes?.isSwimmer ?? false)) return true;
-
-    return false;
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    final notes = widget.dependent.dependentDetails?.notes;
-    _medicalNoteController = TextEditingController(text: notes?.medicalNote);
-    _dietaryNoteController = TextEditingController(text: notes?.dietaryNote);
-    _otherNoteController = TextEditingController(text: notes?.otherNote);
-
-    _hasGlutenAllergy = notes?.hasGlutenAllergy ?? false;
-    _hasLactoseIntolerance = notes?.hasLactoseIntolerance ?? false;
-    _hasNutAllergy = notes?.hasNutAllergy ?? false;
-    _hasAsthma = notes?.hasAsthma ?? false;
-    _isClaustrophobic = notes?.isClaustrophobic ?? false;
-    _hasEpilepsy = notes?.hasEpilepsy ?? false;
-    _isSwimmer = notes?.isSwimmer ?? false;
-  }
-
-  @override
-  void dispose() {
-    _medicalNoteController.dispose();
-    _dietaryNoteController.dispose();
-    _otherNoteController.dispose();
-    super.dispose();
+    return _hasGlutenAllergy != _originalNotes.hasGlutenAllergy ||
+        _hasLactoseIntolerance != _originalNotes.hasLactoseIntolerance ||
+        _hasNutAllergy != _originalNotes.hasNutAllergy ||
+        _hasAsthma != _originalNotes.hasAsthma ||
+        _isClaustrophobic != _originalNotes.isClaustrophobic ||
+        _hasEpilepsy != _originalNotes.hasEpilepsy ||
+        _isSwimmer != _originalNotes.isSwimmer ||
+        _otherNoteController.text.trim() != (_originalNotes.otherNote ?? '');
   }
 
   Future<void> _saveChanges() async {
-    context.read<LoadingProvider>().show();
+    loadingProvider.show();
     try {
-      final notes = DependentNotesModel(
-        hasGlutenAllergy: _hasGlutenAllergy,
-        hasLactoseIntolerance: _hasLactoseIntolerance,
-        hasNutAllergy: _hasNutAllergy,
-        hasAsthma: _hasAsthma,
-        isClaustrophobic: _isClaustrophobic,
-        hasEpilepsy: _hasEpilepsy,
-        isSwimmer: _isSwimmer,
-        medicalNote: _medicalNoteController.text,
-        dietaryNote: _dietaryNoteController.text,
-        otherNote: _otherNoteController.text,
-      );
-
       await _supabaseService.updateDependentNotes(
         dependentId: widget.dependent.dependentId,
-        notes: notes,
+        notes: editedNotes,
       );
 
-      if (mounted) {
-        // Refresh dependents
-        final accountProvider = context.read<AccountProvider>();
-        final dependentsProvider = context.read<DependentsProvider>();
-        final dependents = await _supabaseService.getAccountDependents(
-          accountProvider.accountId,
-        );
-        dependentsProvider.setDependents(dependents);
+      final freshNotes = await _supabaseService.getDependentNotes(
+        widget.dependent.dependentId,
+      );
 
-        if (mounted) {
-          context.read<LoadingProvider>().hide();
-          context.router.pop();
-          BottomDialog.show(
-            context,
-            type: BottomDialogType.positive,
-            description: context.localizations.dependents_screen_save_success,
-          );
-        }
+      if (freshNotes != null) {
+        dependentsProvider.updateDependentNotes(
+          widget.dependent.dependentId,
+          freshNotes,
+        );
+      }
+
+      if (mounted) {
+        BottomDialog.show(
+          context,
+          type: BottomDialogType.positive,
+          description: context.localizations.dependents_screen_save_success,
+        );
+
+        context.router.pop();
       }
     } catch (e) {
       if (mounted) {
-        context.read<LoadingProvider>().hide();
         BottomDialog.show(
           context,
           type: BottomDialogType.negative,
           description: context.localizations.generic_error,
         );
       }
+    } finally {
+      loadingProvider.hide();
     }
   }
 
@@ -148,204 +107,259 @@ class _EditDependentDetailsScreenState
       context: context,
       builder: (context) => LargeDialog(
         type: LargeDialogType.basic,
-        title: context
-            .localizations
-            .dependents_screen_unsaved_changes_dialog_title,
+        title: context.localizations.save,
         description: context
             .localizations
             .dependents_screen_unsaved_changes_dialog_description,
-        primaryButtonText:
-            context.localizations.dependents_screen_unsaved_changes_dialog_save,
-        secondaryButtonText: context
-            .localizations
-            .dependents_screen_unsaved_changes_dialog_discard,
+        primaryButtonText: context.localizations.save,
+        secondaryButtonText: context.localizations.cancel,
         onPrimaryPressed: () {
           Navigator.of(context).pop();
           _saveChanges();
         },
         onSecondaryPressed: () {
-          Navigator.of(context).pop();
-          setState(() => _allowPop = true);
-          WidgetsBinding.instance.addPostFrameCallback((_) {
-            context.router.pop();
-          });
+          context.router.pop();
+          context.router.pop();
         },
       ),
     );
   }
 
-  Widget _buildSwitchTile(
-    String title,
-    bool value,
-    ValueChanged<bool> onChanged,
-  ) {
-    return Container(
-      decoration: AppDecorations.primaryContainer(context),
-      padding: const EdgeInsets.symmetric(
-        horizontal: AppSpacing.small,
-        vertical: AppSpacing.xSmall,
+  @override
+  void initState() {
+    super.initState();
+    _originalNotes =
+        widget.dependent.dependentDetails?.notes ?? DependentNotesModel();
+
+    // Initialize state variables
+    _hasGlutenAllergy = _originalNotes.hasGlutenAllergy;
+    _hasLactoseIntolerance = _originalNotes.hasLactoseIntolerance;
+    _hasNutAllergy = _originalNotes.hasNutAllergy;
+    _hasAsthma = _originalNotes.hasAsthma;
+    _isClaustrophobic = _originalNotes.isClaustrophobic;
+    _hasEpilepsy = _originalNotes.hasEpilepsy;
+    _isSwimmer = _originalNotes.isSwimmer;
+
+    _otherNoteController = TextEditingController(
+      text: _originalNotes.otherNote,
+    );
+  }
+
+  DependentNotesModel get editedNotes => DependentNotesModel(
+    hasGlutenAllergy: _hasGlutenAllergy,
+    hasLactoseIntolerance: _hasLactoseIntolerance,
+    hasNutAllergy: _hasNutAllergy,
+    hasAsthma: _hasAsthma,
+    isClaustrophobic: _isClaustrophobic,
+    hasEpilepsy: _hasEpilepsy,
+    isSwimmer: _isSwimmer,
+    otherNote: _otherNoteController.text.trim(),
+  );
+
+  List<DropdownMenuEntry<bool?>> get _threeStateEntries => [
+    DropdownMenuEntry(
+      value: true,
+      label: context.localizations.yes,
+      labelWidget: Text(
+        context.localizations.yes,
+        style: AppTextTheme.bodyMedium(context),
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    ),
+    DropdownMenuEntry(
+      value: false,
+      label: context.localizations.no,
+      labelWidget: Text(
+        context.localizations.no,
+        style: AppTextTheme.bodyMedium(context),
+      ),
+    ),
+    DropdownMenuEntry(
+      value: null,
+      label: '-',
+      labelWidget: Text('-', style: AppTextTheme.bodyMedium(context)),
+    ),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return PopScope(
+      canPop: !_hasChanges,
+      onPopInvokedWithResult: (didPop, result) async {
+        if (didPop) return;
+        await _showUnsavedChangesDialog();
+      },
+      child: Stack(
         children: [
-          Expanded(child: Text(title, style: AppTextTheme.bodyMedium(context))),
-          Switch.adaptive(
-            value: value,
-            onChanged: onChanged,
-            activeColor: context.colors.primary.normal,
+          ScreenWrapper(
+            appBar: Appbar(
+              showBackChevron: true,
+              screenName: context
+                  .localizations
+                  .dependents_screen_dependent_notes_button_text,
+              showSettingsIcon: false,
+              onBackPressed: () async {
+                if (_hasChanges) {
+                  await _showUnsavedChangesDialog();
+                } else {
+                  context.router.pop();
+                }
+              },
+            ),
+            body: SingleChildScrollView(
+              child: SafeArea(
+                child: Column(
+                  spacing: AppSpacing.large,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          textAlign: TextAlign.center,
+                          widget.dependent.dependentDetails != null
+                              ? '${widget.dependent.dependentDetails!.name} ${widget.dependent.dependentDetails!.surname}'
+                              : '',
+                          style: AppTextTheme.titleMedium(context),
+                        ),
+                        Text(
+                          textAlign: TextAlign.center,
+                          context
+                              .localizations
+                              .dependents_screen_dependent_description,
+                          style: AppTextTheme.labelLarge(context),
+                        ),
+                      ],
+                    ),
+                    Container(
+                      decoration: ShapeDecoration(
+                        color: context.colors.background.light,
+                        shape: SmoothRectangleBorder(
+                          side: BorderSide(
+                            color: context.colors.background.medium,
+                            width: 1.0,
+                          ),
+                          borderRadius: SmoothBorderRadius(
+                            cornerRadius: AppRadius.large,
+                            cornerSmoothing: AppRadius.smoothNormal,
+                          ),
+                        ),
+                      ),
+                      padding: EdgeInsets.all(AppSpacing.medium),
+                      child: Column(
+                        spacing: AppSpacing.small,
+                        children: [
+                          _buildDropdownSection(
+                            label: "Alergie na lepek",
+                            value: _hasGlutenAllergy,
+                            onSelected: (val) =>
+                                setState(() => _hasGlutenAllergy = val),
+                          ),
+                          _buildDropdownSection(
+                            label: "Intolerance laktózy",
+                            value: _hasLactoseIntolerance,
+                            onSelected: (val) =>
+                                setState(() => _hasLactoseIntolerance = val),
+                          ),
+                          _buildDropdownSection(
+                            label: "Alergie na ořechy",
+                            value: _hasNutAllergy,
+                            onSelected: (val) =>
+                                setState(() => _hasNutAllergy = val),
+                          ),
+                          _buildDropdownSection(
+                            label: "Astma",
+                            value: _hasAsthma,
+                            onSelected: (val) =>
+                                setState(() => _hasAsthma = val),
+                          ),
+                          _buildDropdownSection(
+                            label: "Klaustrofobie",
+                            value: _isClaustrophobic,
+                            onSelected: (val) =>
+                                setState(() => _isClaustrophobic = val),
+                          ),
+                          _buildDropdownSection(
+                            label: "Epilepsie",
+                            value: _hasEpilepsy,
+                            onSelected: (val) =>
+                                setState(() => _hasEpilepsy = val),
+                          ),
+                          _buildDropdownSection(
+                            label: "Plavec",
+                            value: _isSwimmer,
+                            onSelected: (val) =>
+                                setState(() => _isSwimmer = val),
+                          ),
+                        ],
+                      ),
+                    ),
+                    // Textová pole pro poznámky
+                    Column(
+                      spacing: AppSpacing.medium,
+                      children: [
+                        Column(
+                          spacing: AppSpacing.xxSmall,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              context
+                                  .localizations
+                                  .dependents_screen_depents_details_other_notes,
+                              style: AppTextTheme.titleMedium(context),
+                            ),
+                            Text(
+                              textAlign: TextAlign.center,
+                              context
+                                  .localizations
+                                  .dependents_screen_depents_details_other_notes_description,
+                              style: AppTextTheme.labelLarge(context),
+                            ),
+                          ],
+                        ),
+                        CustomTextField(
+                          controller: _otherNoteController,
+                          hintText: context
+                              .localizations
+                              .dependents_screen_depents_details_other_notes,
+                          maxLines: 8,
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: AppSpacing.bottomSpace),
+                  ],
+                ),
+              ),
+            ),
           ),
         ],
       ),
     );
   }
 
-  Widget _buildSectionTitle(String title) {
-    return Padding(
-      padding: const EdgeInsets.only(
-        top: AppSpacing.medium,
-        bottom: AppSpacing.small,
+  Widget _buildDropdownSection({
+    required String label,
+    required bool? value,
+    required ValueChanged<bool?> onSelected,
+  }) {
+    return SizedBox(
+      width: double.infinity,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(label, style: AppTextTheme.labelLarge(context)),
+          CustomDropdownMenu<bool?>(
+            initialSelection: value,
+            dropdownMenuEntries: _threeStateEntries,
+            onSelected: onSelected,
+          ),
+        ],
       ),
-      child: Text(title, style: AppTextTheme.titleSmall(context)),
     );
   }
 
   @override
-  Widget build(BuildContext context) {
-    return PopScope(
-      canPop: _allowPop || !_hasChanges,
-      onPopInvoked: (didPop) async {
-        if (didPop) return;
-        await _showUnsavedChangesDialog();
-      },
-      child: ScreenWrapper(
-        appBar: Appbar(
-          showBackChevron: true,
-          showSettingsIcon: false,
-          screenName: context.localizations.dependents_screen_dependent_notes,
-        ),
-        body: SingleChildScrollView(
-          child: SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.all(AppSpacing.medium),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    context.localizations.dependents_screen_dependent_description(
-                      '${widget.dependent.dependentDetails?.name} ${widget.dependent.dependentDetails?.surname}',
-                    ),
-                    style: AppTextTheme.bodyMedium(
-                      context,
-                    ).copyWith(color: context.colors.text.muted),
-                  ),
-                  const SizedBox(height: AppSpacing.medium),
-
-                  // Health Flags
-                  _buildSwitchTile(
-                    context
-                        .localizations
-                        .dependents_screen_depents_details_has_gluten_allergy,
-                    _hasGlutenAllergy,
-                    (v) => setState(() => _hasGlutenAllergy = v),
-                  ),
-                  const SizedBox(height: AppSpacing.small),
-                  _buildSwitchTile(
-                    context
-                        .localizations
-                        .dependents_screen_depents_details_has_lactose_intolerance,
-                    _hasLactoseIntolerance,
-                    (v) => setState(() => _hasLactoseIntolerance = v),
-                  ),
-                  const SizedBox(height: AppSpacing.small),
-                  _buildSwitchTile(
-                    context
-                        .localizations
-                        .dependents_screen_depents_details_has_nut_allergy,
-                    _hasNutAllergy,
-                    (v) => setState(() => _hasNutAllergy = v),
-                  ),
-                  const SizedBox(height: AppSpacing.small),
-                  _buildSwitchTile(
-                    context
-                        .localizations
-                        .dependents_screen_depents_details_has_asthma,
-                    _hasAsthma,
-                    (v) => setState(() => _hasAsthma = v),
-                  ),
-                  const SizedBox(height: AppSpacing.small),
-                  _buildSwitchTile(
-                    context
-                        .localizations
-                        .dependents_screen_depents_details_is_claustrophobic,
-                    _isClaustrophobic,
-                    (v) => setState(() => _isClaustrophobic = v),
-                  ),
-                  const SizedBox(height: AppSpacing.small),
-                  _buildSwitchTile(
-                    context
-                        .localizations
-                        .dependents_screen_depents_details_has_epilepsy,
-                    _hasEpilepsy,
-                    (v) => setState(() => _hasEpilepsy = v),
-                  ),
-                  const SizedBox(height: AppSpacing.small),
-                  _buildSwitchTile(
-                    context
-                        .localizations
-                        .dependents_screen_depents_details_is_swimmer,
-                    _isSwimmer,
-                    (v) => setState(() => _isSwimmer = v),
-                  ),
-
-                  // Notes
-                  _buildSectionTitle(
-                    context
-                        .localizations
-                        .dependents_screen_depents_details_other_medical_notes,
-                  ),
-                  CustomTextField(
-                    controller: _medicalNoteController,
-                    hintText: context
-                        .localizations
-                        .dependents_screen_depents_details_other_medical_notes,
-                    maxLines: 3,
-                  ),
-
-                  _buildSectionTitle(
-                    context
-                        .localizations
-                        .dependents_screen_depents_details_other_dietary_notes,
-                  ),
-                  CustomTextField(
-                    controller: _dietaryNoteController,
-                    hintText: context
-                        .localizations
-                        .dependents_screen_depents_details_other_dietary_notes,
-                    maxLines: 3,
-                  ),
-
-                  _buildSectionTitle(
-                    context
-                        .localizations
-                        .dependents_screen_depents_details_other_notes,
-                  ),
-                  CustomTextField(
-                    controller: _otherNoteController,
-                    hintText: context
-                        .localizations
-                        .dependents_screen_depents_details_other_notes,
-                    maxLines: 3,
-                  ),
-
-                  const SizedBox(
-                    height: AppSpacing.bottomSpace + AppSpacing.large,
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
+  void dispose() {
+    _otherNoteController.dispose();
+    super.dispose();
   }
 }

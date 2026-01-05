@@ -1310,17 +1310,17 @@ abstract class AppLocalizations {
   /// **'Účast na výpravách v tomto školním roce'**
   String get dependents_screen_dependent_this_school_year_event_attendance;
 
-  /// No description provided for @dependents_screen_dependent_notes.
+  /// No description provided for @dependents_screen_dependent_notes_button_text.
   ///
   /// In cs, this message translates to:
   /// **'Upravit detaily'**
-  String get dependents_screen_dependent_notes;
+  String get dependents_screen_dependent_notes_button_text;
 
   /// No description provided for @dependents_screen_dependent_description.
   ///
   /// In cs, this message translates to:
-  /// **'Pokud chceš, můžeš sem napsat něco o osobě {name_surname}. Detaily uvidí pouze administrátoři a vedoucí. Pomůže to při organizaci výprav.'**
-  String dependents_screen_dependent_description(Object name_surname);
+  /// **'Důležité informace a potřeby. Přístupné jen vedení pro hladký průběh výprav.'**
+  String get dependents_screen_dependent_description;
 
   /// No description provided for @dependents_screen_depents_details_has_gluten_allergy.
   ///
@@ -1364,29 +1364,29 @@ abstract class AppLocalizations {
   /// **'Je plavec'**
   String get dependents_screen_depents_details_is_swimmer;
 
-  /// No description provided for @dependents_screen_depents_details_other_medical_notes.
-  ///
-  /// In cs, this message translates to:
-  /// **'Jiné zdravotní poznámky'**
-  String get dependents_screen_depents_details_other_medical_notes;
-
-  /// No description provided for @dependents_screen_depents_details_other_dietary_notes.
-  ///
-  /// In cs, this message translates to:
-  /// **'Jiné dietní poznámky'**
-  String get dependents_screen_depents_details_other_dietary_notes;
-
   /// No description provided for @dependents_screen_depents_details_other_notes.
   ///
   /// In cs, this message translates to:
-  /// **'Jiné poznámky'**
+  /// **'Něco jiného'**
   String get dependents_screen_depents_details_other_notes;
+
+  /// No description provided for @dependents_screen_depents_details_other_notes_description.
+  ///
+  /// In cs, this message translates to:
+  /// **'Zde prosím napiš cokoliv jiného, co bychom ještě měli vědět. '**
+  String get dependents_screen_depents_details_other_notes_description;
 
   /// No description provided for @dependents_screen_save_success.
   ///
   /// In cs, this message translates to:
   /// **'Detaily byly úspěšně uloženy 💾.'**
   String get dependents_screen_save_success;
+
+  /// No description provided for @dependents_screen_save_error.
+  ///
+  /// In cs, this message translates to:
+  /// **'Nepodařilo se uložit detaily. Zkus to prosím znovu. 💾.'**
+  String get dependents_screen_save_error;
 
   /// No description provided for @dependents_screen_unsaved_changes_dialog_title.
   ///

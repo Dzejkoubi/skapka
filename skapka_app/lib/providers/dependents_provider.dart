@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:skapka_app/models/dependents/account_dependent_model.dart';
+import 'package:skapka_app/models/dependents/dependent_notes_model.dart';
 import 'package:skapka_app/models/event_participant_model.dart';
 
 class DependentsProvider extends ChangeNotifier {
@@ -42,5 +43,21 @@ class DependentsProvider extends ChangeNotifier {
     _dependents.clear();
     _participation.clear();
     notifyListeners();
+  }
+
+  void updateDependentNotes(String dependentId, DependentNotesModel notes) {
+    final index = _dependents.indexWhere((d) => d.dependentId == dependentId);
+    if (index != -1) {
+      final dependent = _dependents[index];
+      if (dependent.dependentDetails != null) {
+        final updatedDetails = dependent.dependentDetails!.copyWith(
+          notes: notes,
+        );
+        _dependents[index] = dependent.copyWith(
+          dependentDetails: updatedDetails,
+        );
+        notifyListeners();
+      }
+    }
   }
 }

@@ -34,7 +34,7 @@ class CustomTextField extends StatelessWidget {
       decoration: InputDecoration(
         enabledBorder: OutlineInputBorder(
           borderRadius: SmoothBorderRadius(
-            cornerRadius: AppRadius.medium,
+            cornerRadius: AppRadius.large,
             cornerSmoothing: AppRadius.smoothNormal,
           ),
           borderSide: BorderSide(

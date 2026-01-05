@@ -21,24 +21,24 @@ class DependentBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: AppDecorations.primaryContainer(context),
-      padding: EdgeInsets.all(AppSpacing.medium),
-      child: Column(
-        spacing: AppSpacing.medium,
-        children: [
-          Text(
-            '${dependent.dependentDetails?.name} ${dependent.dependentDetails?.surname}',
-            style: AppTextTheme.titleSmall(context),
-          ),
-          Column(
+    return Column(
+      children: [
+        Text(
+          '${dependent.dependentDetails?.name} ${dependent.dependentDetails?.surname}',
+          style: AppTextTheme.titleMedium(context),
+        ),
+        Container(height: AppSpacing.medium),
+        Container(
+          decoration: AppDecorations.primaryContainer(context),
+          padding: EdgeInsets.all(AppSpacing.medium),
+          child: Column(
             spacing: AppSpacing.xSmall,
             children: [
               // Nickname
               Row(
                 children: [
                   Text(
-                    context.localizations.dependents_screen_dependent_nickname,
+                    '${context.localizations.dependents_screen_dependent_nickname}:',
                     style: AppTextTheme.bodySmall(
                       context,
                     ).copyWith(fontWeight: FontWeight.bold),
@@ -54,7 +54,7 @@ class DependentBox extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    context.localizations.dependents_screen_dependent_patrol,
+                    '${context.localizations.dependents_screen_dependent_patrol}:',
                     style: AppTextTheme.bodySmall(context),
                   ),
                   SizedBox(width: AppSpacing.small),
@@ -69,27 +69,27 @@ class DependentBox extends StatelessWidget {
                   ),
                 ],
               ),
-            ],
-          ),
-          // Edit dependent's details button
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              MainButton.outlined(
-                variant: ButtonStylesVariants.normal,
-                text: context
-                    .localizations
-                    .dependents_screen_dependent_notes_button_text,
-                onPressed: () {
-                  context.router.push(
-                    EditDependentDetailsRoute(dependent: dependent),
-                  );
-                },
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  MainButton.outlined(
+                    variant: ButtonStylesVariants.normal,
+                    text: context
+                        .localizations
+                        .dependents_screen_dependent_notes_button_text,
+                    onPressed: () {
+                      context.router.push(
+                        EditDependentDetailsRoute(dependent: dependent),
+                      );
+                    },
+                  ),
+                ],
               ),
             ],
           ),
-        ],
-      ),
+        ),
+        Container(height: AppSpacing.xSmall),
+      ],
     );
   }
 }

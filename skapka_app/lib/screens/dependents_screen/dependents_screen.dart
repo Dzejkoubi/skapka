@@ -25,15 +25,20 @@ class DependentsScreen extends StatelessWidget {
                 bottom: AppSpacing.bottomSpace + AppSpacing.large,
               ),
               child: Column(
-                mainAxisSize: MainAxisSize.min,
-                spacing: AppSpacing.large,
                 children: [
-                  for (var dependent in provider.dependents) ...[
-                    DependentBox(
-                      dependent: dependent,
-                      unitsProvider: unitsProvider,
-                    ),
-                  ],
+                  Column(
+                    mainAxisSize: MainAxisSize.min,
+                    spacing: AppSpacing.large,
+                    children: [
+                      for (var dependent in provider.dependents) ...[
+                        DependentBox(
+                          dependent: dependent,
+                          unitsProvider: unitsProvider,
+                        ),
+                      ],
+                    ],
+                  ),
+                  SizedBox(height: AppSpacing.small),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

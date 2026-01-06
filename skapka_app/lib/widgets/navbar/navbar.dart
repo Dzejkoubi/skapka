@@ -23,6 +23,7 @@ class Navbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Color barColor = context.colors.secondary.normal;
     return Stack(
       alignment: Alignment.bottomCenter,
       children: [
@@ -36,7 +37,7 @@ class Navbar extends StatelessWidget {
                   child: Container(
                     height: bottomRadius,
                     width: bottomRadius,
-                    color: context.colors.primary.normal,
+                    color: barColor,
                   ),
                 ),
                 Expanded(child: Container(color: Colors.transparent)),
@@ -45,13 +46,13 @@ class Navbar extends StatelessWidget {
                   child: Container(
                     height: bottomRadius,
                     width: bottomRadius,
-                    color: context.colors.primary.normal,
+                    color: barColor,
                   ),
                 ),
               ],
             ),
             Container(
-              color: context.colors.primary.normal,
+              color: barColor,
               height: barHeight,
               child: Row(
                 children: [

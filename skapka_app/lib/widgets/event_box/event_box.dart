@@ -143,7 +143,7 @@ class EventBox extends StatelessWidget {
                           text:
                               context.localizations.event_box_photos_link_text,
                           style: AppTextTheme.labelLarge(context).copyWith(
-                            color: context.colors.secondary.normal,
+                            color: context.colors.primary.normal,
                             decoration: TextDecoration.underline,
                           ),
                         ),

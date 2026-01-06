@@ -8,10 +8,12 @@ import 'package:skapka_app/app/router/router.dart';
 import 'package:skapka_app/app/theme/app_color_theme.dart';
 import 'package:skapka_app/app/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
+import 'package:skapka_app/app/theme/app_theme_data.dart';
 import 'package:skapka_app/providers/dependents_provider.dart';
 import 'package:skapka_app/providers/account_provider.dart';
 import 'package:skapka_app/providers/events_provider.dart';
 import 'package:skapka_app/providers/loading_provider.dart';
+import 'package:skapka_app/providers/theme_provider.dart';
 import 'package:skapka_app/providers/units_provider.dart';
 import 'package:skapka_app/widgets/loading_overlay.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -53,10 +55,12 @@ class App extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => EventsProvider()),
         ChangeNotifierProvider(create: (context) => UnitsProvider()),
         ChangeNotifierProvider(create: (context) => LoadingProvider()),
+        ChangeNotifierProvider(create: (context) => ThemeProvider()),
       ],
 
       child: Builder(
         builder: (context) {
+          final themeProvider = Provider.of<ThemeProvider>(context);
           return MaterialApp.router(
             debugShowCheckedModeBanner: kDebugMode
                 ? true
@@ -64,11 +68,14 @@ class App extends StatelessWidget {
             title: 'Skapka',
 
             routerConfig: _appRouter.config(),
+            theme: AppThemeData.lightTheme,
+            darkTheme: AppThemeData.darkTheme,
+            themeMode: themeProvider.themeMode,
 
             // Add builder to sync theme with AppColorTheme
             builder: (context, child) {
               // Sync the theme whenever the app rebuilds
-              AppColorTheme.updateTheme(Theme.of(context).brightness);
+
               return Stack(
                 children: [
                   child ?? const SizedBox.shrink(),

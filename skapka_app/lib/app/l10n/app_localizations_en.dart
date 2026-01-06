@@ -815,25 +815,25 @@ class AppLocalizationsEn extends AppLocalizations {
       'Delete Account';
 
   @override
-  String get settings_screen_app_motive_dropdown_title => 'Motiv aplikace';
+  String get settings_screen_app_motive_dropdown_title => 'App Theme';
 
   @override
-  String get settings_screen_app_motive_light => 'Světlý';
+  String get settings_screen_app_motive_light => 'Light';
 
   @override
-  String get settings_screen_app_motive_dark => 'Tmavý';
+  String get settings_screen_app_motive_dark => 'Dark';
 
   @override
-  String get settings_screen_app_motive_system => 'Systém';
+  String get settings_screen_app_motive_system => 'System';
 
   @override
-  String get settings_screen_app_language_dropdown_title => 'Jazyk aplikace';
+  String get settings_screen_app_language_dropdown_title => 'App Language';
 
   @override
-  String get settings_screen_app_language_czech => 'Čeština';
+  String get settings_screen_app_language_czech => 'Czech';
 
   @override
-  String get settings_screen_app_language_english => 'Angličtina';
+  String get settings_screen_app_language_english => 'English';
 
   @override
   String get settings_screen_app_version_title => 'App Version: ';

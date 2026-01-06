@@ -135,10 +135,13 @@ class ParticipantEventStatusBox extends StatelessWidget {
     } else {
       return _ParticipantStatusBoxConfig(
         borderGradient: LinearGradient(
-          colors: [context.colors.text.muted, context.colors.text.muted],
+          colors: [
+            context.colors.text.mutedLight,
+            context.colors.text.mutedLight,
+          ],
         ),
-        backgroundColor: context.colors.text.muted,
-        iconColor: context.colors.text.normal,
+        backgroundColor: context.colors.text.mutedLight,
+        iconColor: context.colors.text.normalLight,
         svgAssetPath: iconPath,
         boxShadow: AppShadow.outerXSmall(context),
       );

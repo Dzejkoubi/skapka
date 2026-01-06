@@ -134,8 +134,9 @@ class _ChangeParticipantEventStatusDialogState
   @override
   Widget build(BuildContext context) {
     final borderGradientColor = switch (widget.oldStatus) {
-      EventParticipantStatus.notSpecified =>
-        AppGradients.secondaryPrimaryGradient(context),
+      EventParticipantStatus.notSpecified => AppGradients.primaryGradient(
+        context,
+      ),
       EventParticipantStatus.signedUp => AppGradients.successGradient(context),
       EventParticipantStatus.excused => AppGradients.errorGradient(context),
     };

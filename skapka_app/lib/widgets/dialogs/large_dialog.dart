@@ -191,8 +191,8 @@ class _LargeDialogState extends State<LargeDialog> {
     switch (widget.type) {
       case LargeDialogType.basic:
         return _DialogConfig(
-          borderGradient: AppGradients.secondaryPrimaryGradient(context),
-          backgroundColor: context.colors.secondary.normal,
+          borderGradient: AppGradients.primaryGradient(context),
+          backgroundColor: context.colors.primary.normal,
           contentColor: context.colors.text.normalLight,
           buttonVariant: ButtonStylesVariants.white,
           svgIconPath: null,

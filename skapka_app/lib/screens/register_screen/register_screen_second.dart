@@ -161,7 +161,9 @@ class _RegisterScreenSecondState extends State<RegisterScreenSecond> {
                     SvgPicture.asset('assets/images/shapes/shape-3.svg'),
                     Text(
                       context.localizations.register_screen_title,
-                      style: AppTextTheme.displayLarge(context),
+                      style: AppTextTheme.displayLarge(
+                        context,
+                      ).copyWith(color: context.colors.text.normalDark),
                     ),
                   ],
                 ),
@@ -191,6 +193,7 @@ class _RegisterScreenSecondState extends State<RegisterScreenSecond> {
                             _passwordError = null;
                           });
                         },
+                        blueBackGroundColorMode: true,
                       ),
                       // Surname input field
                       CustomForm(
@@ -208,6 +211,7 @@ class _RegisterScreenSecondState extends State<RegisterScreenSecond> {
                             _confirmPasswordError = null;
                           });
                         },
+                        blueBackGroundColorMode: true,
                       ),
 
                       // Email input field
@@ -226,7 +230,9 @@ class _RegisterScreenSecondState extends State<RegisterScreenSecond> {
                         : context
                               .localizations
                               .register_screen_2_register_button_text,
-                    onPressed: () => _handleRegisterButtonPressed(),
+                    onPressed: !_isLoading
+                        ? () => _handleRegisterButtonPressed()
+                        : null,
                   ),
                 ),
 

@@ -800,8 +800,44 @@ class AppLocalizationsCs extends AppLocalizations {
   String get settings_screen_title => 'Nastavení';
 
   @override
+  String get settings_screen_admin_panel_box_title => 'Admin Panel';
+
+  @override
+  String get settings_screen_send_notification_box_title => 'Poslat oznámení';
+
+  @override
   String get settings_screen_change_signout_button_text => 'Odhlásit se';
 
   @override
   String get settings_screen_change_delete_account_button_text => 'Smazat účet';
+
+  @override
+  String get settings_screen_app_motive_dropdown_title => 'Motiv aplikace';
+
+  @override
+  String get settings_screen_app_motive_light => 'Světlý';
+
+  @override
+  String get settings_screen_app_motive_dark => 'Tmavý';
+
+  @override
+  String get settings_screen_app_motive_system => 'Systém';
+
+  @override
+  String get settings_screen_app_language_dropdown_title => 'Jazyk aplikace';
+
+  @override
+  String get settings_screen_app_language_czech => 'Čeština';
+
+  @override
+  String get settings_screen_app_language_english => 'Angličtina';
+
+  @override
+  String get settings_screen_app_version_title => 'Verze aplikace: ';
+
+  @override
+  String get category_admin_panel_screen => '--- ADMIN PANEL ---';
+
+  @override
+  String get admin_panel_screen_title => 'Admin Panel';
 }

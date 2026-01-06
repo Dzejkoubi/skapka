@@ -802,9 +802,45 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settings_screen_title => 'Settings';
 
   @override
+  String get settings_screen_admin_panel_box_title => 'Admin Panel';
+
+  @override
+  String get settings_screen_send_notification_box_title => 'Send Notification';
+
+  @override
   String get settings_screen_change_signout_button_text => 'Sign Out';
 
   @override
   String get settings_screen_change_delete_account_button_text =>
       'Delete Account';
+
+  @override
+  String get settings_screen_app_motive_dropdown_title => 'App Theme';
+
+  @override
+  String get settings_screen_app_motive_light => 'Light';
+
+  @override
+  String get settings_screen_app_motive_dark => 'Dark';
+
+  @override
+  String get settings_screen_app_motive_system => 'System';
+
+  @override
+  String get settings_screen_app_language_dropdown_title => 'App Language';
+
+  @override
+  String get settings_screen_app_language_czech => 'Czech';
+
+  @override
+  String get settings_screen_app_language_english => 'English';
+
+  @override
+  String get settings_screen_app_version_title => 'App Version: ';
+
+  @override
+  String get category_admin_panel_screen => '--- ADMIN PANEL ---';
+
+  @override
+  String get admin_panel_screen_title => 'Admin Panel';
 }

@@ -111,7 +111,7 @@ class ParticipantEventStatusBox extends StatelessWidget {
     if (isEnabled) {
       return switch (status) {
         EventParticipantStatus.notSpecified => _ParticipantStatusBoxConfig(
-          borderGradient: AppGradients.secondaryPrimaryGradient(context),
+          borderGradient: AppGradients.primaryGradient(context),
           backgroundColor: context.colors.primary.normal,
           iconColor: context.colors.text.normalLight,
           svgAssetPath: iconPath,
@@ -136,12 +136,12 @@ class ParticipantEventStatusBox extends StatelessWidget {
       return _ParticipantStatusBoxConfig(
         borderGradient: LinearGradient(
           colors: [
-            context.colors.text.mutedReversed,
-            context.colors.text.mutedReversed,
+            context.colors.text.mutedLight,
+            context.colors.text.mutedLight,
           ],
         ),
-        backgroundColor: context.colors.background.mediumLight,
-        iconColor: context.colors.text.mutedReversed,
+        backgroundColor: context.colors.text.mutedLight,
+        iconColor: context.colors.text.normalLight,
         svgAssetPath: iconPath,
         boxShadow: AppShadow.outerXSmall(context),
       );

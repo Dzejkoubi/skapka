@@ -21,6 +21,7 @@ class CustomForm extends StatefulWidget {
   final int? characterLimit;
   final String? errorText;
   final double cornerSmoothing;
+  final bool? blueBackGroundColorMode;
   const CustomForm({
     super.key,
     this.isActive = true,
@@ -36,6 +37,7 @@ class CustomForm extends StatefulWidget {
     this.characterLimit,
     this.errorText,
     this.cornerSmoothing = AppRadius.smoothNormal,
+    this.blueBackGroundColorMode,
   });
 
   @override
@@ -85,7 +87,9 @@ class _CustomFormState extends State<CustomForm> {
             ),
             counterText: '',
             filled: true,
-            fillColor: context.colors.background.mediumLight,
+            fillColor: widget.blueBackGroundColorMode == true
+                ? context.colors.text.normalLight
+                : context.colors.background.lightX,
             errorText: widget.errorText,
             errorStyle: AppTextTheme.bodySmall(
               context,
@@ -100,7 +104,9 @@ class _CustomFormState extends State<CustomForm> {
               borderSide: BorderSide(
                 color: hasError
                     ? context.colors.error.normal
-                    : context.colors.background.medium,
+                    : widget.blueBackGroundColorMode == true
+                    ? context.colors.text.mutedLight
+                    : context.colors.background.mediumLight,
                 width: 1,
               ),
             ),
@@ -161,7 +167,7 @@ class _CustomFormState extends State<CustomForm> {
     return AppTextTheme.bodyMedium(context).copyWith(
       color: isDisabled
           ? context.colors.text.muted
-          : context.colors.text.normal,
+          : context.colors.text.normalDark,
     );
   }
 
@@ -203,7 +209,9 @@ class _CustomFormState extends State<CustomForm> {
 
     return AppTextTheme.bodySmall(context).copyWith(
       color: labelColor,
-      backgroundColor: context.colors.background.mediumLight,
+      backgroundColor: widget.blueBackGroundColorMode == true
+          ? context.colors.text.normalLight
+          : context.colors.background.lightX,
     );
   }
 

@@ -250,7 +250,7 @@ class WhiteButtonStyleVariantConfig implements MainButtonStyleVariantConfig {
       return context.colors.text.mutedLight;
     }
     if (state == ButtonState.pressed) return context.colors.text.mutedLight;
-    return context.colors.background.lightX;
+    return context.colors.text.normalLight;
   }
 
   @override

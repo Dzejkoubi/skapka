@@ -140,7 +140,7 @@ class _EventsExpansionTileState extends State<EventsExpansionTile> {
     switch (widget.type) {
       case EventTimeType.future:
         return _EventsExpansionTileConfig(
-          borderColor: context.colors.secondary.light,
+          borderColor: context.colors.primary.light,
           backgroundColor: context.colors.background.light,
           title: AppLocalizations.of(
             context,

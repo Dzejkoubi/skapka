@@ -33,13 +33,14 @@ class Appbar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Color barColor = context.colors.secondary.normal;
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
         Container(
           width: double.infinity,
           height: topBarHeight,
-          color: context.colors.primary.normal,
+          color: barColor,
           padding: const EdgeInsets.symmetric(horizontal: AppSpacing.medium),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -47,6 +48,7 @@ class Appbar extends StatelessWidget implements PreferredSizeWidget {
               if (showBackChevron)
                 GestureDetector(
                   onTap: () {
+                    Gaimon.rigid();
                     if (onBackPressed != null) {
                       onBackPressed!();
                     } else if (backChevronCanPop &&
@@ -116,7 +118,7 @@ class Appbar extends StatelessWidget implements PreferredSizeWidget {
               child: Container(
                 height: bottomRadius,
                 width: bottomRadius,
-                color: context.colors.primary.normal,
+                color: barColor,
               ),
             ),
             Expanded(child: Container(color: Colors.transparent)),
@@ -125,7 +127,7 @@ class Appbar extends StatelessWidget implements PreferredSizeWidget {
               child: Container(
                 height: bottomRadius,
                 width: bottomRadius,
-                color: context.colors.primary.normal,
+                color: barColor,
               ),
             ),
           ],

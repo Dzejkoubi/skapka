@@ -110,9 +110,9 @@ class BottomDialog {
     switch (type) {
       case BottomDialogType.basic:
         return _DialogConfig(
-          borderGradient: AppGradients.secondaryPrimaryGradient(context),
+          borderGradient: AppGradients.primaryGradient(context),
           textColor: context.colors.text.normalLight,
-          backgroundColor: context.colors.secondary.normal,
+          backgroundColor: context.colors.primary.normal,
         );
       case BottomDialogType.positive:
         return _DialogConfig(

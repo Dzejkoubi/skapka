@@ -216,9 +216,9 @@ class _AppColorThemes {
       light20: Color(0x332A67B2),
     ),
     secondary: SecondaryColorCategory(
-      dark: Color(0xFF336DA3),
-      normal: Color(0xFF3979B5),
-      light: Color(0xFF4587C4),
+      dark: Color(0xFF204F88),
+      normal: Color(0xFF255C9E),
+      light: Color(0xFF2A67B2),
     ),
     success: SuccessColorCategory(
       dark: Color(0xFF6D8F29),
@@ -260,12 +260,12 @@ class _AppColorThemes {
   /// Dark theme colors
   static const dark = _AppColorTheme(
     background: BackgroundColorCategory(
-      bgDark: Color(0xFF000000),
-      bgMediumDark: Color(0xFF020508),
-      medium: Color(0xFF050C15),
-      mediumLight: Color(0xFF0A182A),
-      light: Color(0xFF0E243E),
-      lightX: Color(0xFF133053),
+      bgDark: Color(0xFF333333),
+      bgMediumDark: Color(0xFF4D4D4D),
+      medium: Color(0xFF666666),
+      mediumLight: Color(0xFF808080),
+      light: Color(0xFF1A1A1A),
+      lightX: Color(0xFF262626),
     ),
     text: TextColorCategory(
       normalLight: Color(0xFFFCFCFC),
@@ -285,9 +285,9 @@ class _AppColorThemes {
       light20: Color(0x33225490),
     ),
     secondary: SecondaryColorCategory(
-      dark: Color(0xFF254E74),
-      normal: Color(0xFF2B5B88),
-      light: Color(0xFF31689B),
+      dark: Color(0xFF0A1829),
+      normal: Color(0xFF133053),
+      light: Color(0xFF3178CE),
     ),
     success: SuccessColorCategory(
       dark: Color(0xFF6D8F29),

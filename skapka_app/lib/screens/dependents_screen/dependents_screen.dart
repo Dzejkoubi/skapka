@@ -30,12 +30,14 @@ class DependentsScreen extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     spacing: AppSpacing.large,
                     children: [
-                      for (var dependent in provider.dependents) ...[
+                      // Display only non-archived dependents
+                      for (var dependent in provider.dependents.where(
+                        (d) => d.dependentDetails?.isArchived != true,
+                      ))
                         DependentBox(
                           dependent: dependent,
                           unitsProvider: unitsProvider,
                         ),
-                      ],
                     ],
                   ),
                   SizedBox(height: AppSpacing.small),

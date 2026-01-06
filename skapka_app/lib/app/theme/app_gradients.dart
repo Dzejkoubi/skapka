@@ -7,12 +7,11 @@ class AppGradients {
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
   );
-  static Gradient secondaryPrimaryGradient(BuildContext context) =>
-      LinearGradient(
-        colors: [context.colors.secondary.light, context.colors.primary.dark],
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-      );
+  static Gradient primaryGradient(BuildContext context) => LinearGradient(
+    colors: [context.colors.primary.light, context.colors.primary.dark],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
   static Gradient successGradient(BuildContext context) => LinearGradient(
     colors: [context.colors.success.dark, context.colors.success.light],
     begin: Alignment.topLeft,

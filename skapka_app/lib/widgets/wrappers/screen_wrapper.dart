@@ -36,7 +36,7 @@ class ScreenWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ColorfulSafeArea(
-      color: context.colors.primary.normal,
+      color: context.colors.secondary.normal,
       bottom: bottomNavigationBar != null,
       child: Scaffold(
         backgroundColor: context.colors.background.light,

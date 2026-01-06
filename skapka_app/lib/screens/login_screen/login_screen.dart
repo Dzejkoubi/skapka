@@ -143,7 +143,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     SvgPicture.asset('assets/images/shapes/shape-1.svg'),
                     Text(
                       context.localizations.login_screen_title,
-                      style: AppTextTheme.displayLarge(context),
+                      style: AppTextTheme.displayLarge(
+                        context,
+                      ).copyWith(color: context.colors.text.normalDark),
                     ),
                   ],
                 ),
@@ -169,6 +171,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             _emailError = null;
                           });
                         },
+                        blueBackGroundColorMode: true,
                       ),
                       SizedBox(height: AppSpacing.medium),
                       CustomForm(
@@ -186,6 +189,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             _passwordError = null;
                           });
                         },
+                        blueBackGroundColorMode: true,
                       ),
                     ],
                   ),
@@ -200,7 +204,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     text: _isLoading
                         ? context.localizations.loading
                         : context.localizations.login_screen_login_button_text,
-                    onPressed: _handleLogin,
+                    onPressed: !_isLoading ? _handleLogin : null,
                   ),
                 ),
 

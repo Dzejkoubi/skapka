@@ -1,8 +1,10 @@
 import 'package:country_flags/country_flags.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:skapka_app/app/l10n/l10n_extension.dart';
 import 'package:skapka_app/app/theme/app_spacing.dart';
 import 'package:skapka_app/app/theme/app_text_theme.dart';
+import 'package:skapka_app/providers/language_provider.dart';
 import 'package:skapka_app/widgets/custom_dropdown_menu.dart';
 
 class SetAppLanguageDropdownMenu extends StatelessWidget {
@@ -10,6 +12,7 @@ class SetAppLanguageDropdownMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final languageProvider = Provider.of<LanguageProvider>(context);
     return Column(
       spacing: AppSpacing.medium,
       children: [
@@ -17,12 +20,18 @@ class SetAppLanguageDropdownMenu extends StatelessWidget {
           context.localizations.settings_screen_app_language_dropdown_title,
           style: AppTextTheme.titleMedium(context),
         ),
-        // Settings for app motive
+        // Settings for app language
         CustomDropdownMenu(
+          onSelected: (locale) {
+            if (locale != null) {
+              languageProvider.setLocale(Locale(locale));
+            }
+          },
           expandedInsets: EdgeInsets.zero,
+          initialSelection: languageProvider.locale?.languageCode,
           dropdownMenuEntries: [
             DropdownMenuEntry(
-              value: 'cestina',
+              value: 'cs',
               label: context.localizations.settings_screen_app_language_czech,
               labelWidget: Text(
                 context.localizations.settings_screen_app_language_czech,
@@ -38,7 +47,7 @@ class SetAppLanguageDropdownMenu extends StatelessWidget {
               ),
             ),
             DropdownMenuEntry(
-              value: 'anglictina',
+              value: 'en',
               label: context.localizations.settings_screen_app_language_english,
               labelWidget: Text(
                 context.localizations.settings_screen_app_language_english,

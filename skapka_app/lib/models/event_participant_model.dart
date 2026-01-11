@@ -55,6 +55,7 @@ class EventParticipantModel {
     String? groupId,
     EventParticipantStatus? status,
     String? note,
+    bool? hasAttended,
   }) {
     return EventParticipantModel(
       eventId: eventId ?? this.eventId,

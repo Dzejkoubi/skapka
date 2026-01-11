@@ -71,45 +71,123 @@ class ScreenWrapper extends StatelessWidget {
               child: RotationTransition(turns: animation, child: child),
             );
           },
-          child: speedDialChildren != null
-              ? SpeedDial(
-                  key: ValueKey(fabKey ?? speedDialChildren.hashCode),
-                  openCloseDial: openCloseDial,
-                  animationCurve: Curves.elasticInOut,
-                  onOpen: () => Gaimon.soft(),
-                  onClose: () => Gaimon.soft(),
-                  backgroundColor: context.colors.background.light,
-                  foregroundColor: context.colors.primary.light,
-                  shape: SmoothRectangleBorder(
-                    side: BorderSide(
-                      color: context.colors.primary.light,
-                      width: 2,
-                    ),
-                    borderRadius: SmoothBorderRadius(
-                      cornerRadius: AppRadius.medium,
-                      cornerSmoothing: AppRadius.smoothNormal,
-                    ),
-                  ),
-                  activeChild: SvgPicture.asset(
-                    'assets/icons/plus.svg',
-                    width: AppSizes.iconSizeSmall,
-                    height: AppSizes.iconSizeSmall,
-                    colorFilter: ColorFilter.mode(
-                      context.colors.primary.normal,
-                      BlendMode.srcIn,
-                    ),
-                  ),
-                  children: speedDialChildren!,
-                  child: SvgPicture.asset(
-                    'assets/icons/plus.svg',
-                    width: AppSizes.iconSizeSmall,
-                    height: AppSizes.iconSizeSmall,
-                    colorFilter: ColorFilter.mode(
-                      context.colors.primary.normal,
-                      BlendMode.srcIn,
-                    ),
-                  ),
-                )
+          child: speedDialChildren != null && speedDialChildren!.isNotEmpty
+              ? (speedDialChildren!.length == 1
+                    ? (speedDialChildren!.first.label != null ||
+                              speedDialChildren!.first.labelWidget != null
+                          ? FloatingActionButton.extended(
+                              key: ValueKey(
+                                fabKey ?? speedDialChildren.hashCode,
+                              ),
+                              heroTag: null,
+                              onPressed: () {
+                                Gaimon.selection();
+                                speedDialChildren!.first.onTap?.call();
+                              },
+                              label:
+                                  speedDialChildren!.first.labelWidget ??
+                                  Text(
+                                    speedDialChildren!.first.label!,
+                                    style: TextStyle(
+                                      color:
+                                          speedDialChildren!
+                                              .first
+                                              .foregroundColor ??
+                                          context.colors.primary.light,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                              icon: speedDialChildren!.first.child,
+                              backgroundColor:
+                                  speedDialChildren!.first.backgroundColor ??
+                                  context.colors.background.light,
+                              foregroundColor:
+                                  speedDialChildren!.first.foregroundColor ??
+                                  context.colors.primary.light,
+                              elevation:
+                                  speedDialChildren!.first.elevation ?? 6,
+                              shape:
+                                  speedDialChildren!.first.shape ??
+                                  SmoothRectangleBorder(
+                                    side: BorderSide(
+                                      color: context.colors.primary.light,
+                                      width: 2,
+                                    ),
+                                    borderRadius: SmoothBorderRadius(
+                                      cornerRadius: AppRadius.medium,
+                                      cornerSmoothing: AppRadius.smoothNormal,
+                                    ),
+                                  ),
+                            )
+                          : FloatingActionButton(
+                              key: ValueKey(
+                                fabKey ?? speedDialChildren.hashCode,
+                              ),
+                              heroTag: null,
+                              onPressed: () {
+                                Gaimon.selection();
+                                speedDialChildren!.first.onTap?.call();
+                              },
+                              backgroundColor:
+                                  speedDialChildren!.first.backgroundColor ??
+                                  context.colors.background.light,
+                              foregroundColor:
+                                  speedDialChildren!.first.foregroundColor ??
+                                  context.colors.primary.light,
+                              elevation:
+                                  speedDialChildren!.first.elevation ?? 6,
+                              shape:
+                                  speedDialChildren!.first.shape ??
+                                  SmoothRectangleBorder(
+                                    side: BorderSide(
+                                      color: context.colors.primary.light,
+                                      width: 2,
+                                    ),
+                                    borderRadius: SmoothBorderRadius(
+                                      cornerRadius: AppRadius.medium,
+                                      cornerSmoothing: AppRadius.smoothNormal,
+                                    ),
+                                  ),
+                              child: speedDialChildren!.first.child,
+                            ))
+                    : SpeedDial(
+                        key: ValueKey(fabKey ?? speedDialChildren.hashCode),
+                        openCloseDial: openCloseDial,
+                        animationCurve: Curves.elasticInOut,
+                        onOpen: () => Gaimon.soft(),
+                        onClose: () => Gaimon.soft(),
+                        backgroundColor: context.colors.background.light,
+                        foregroundColor: context.colors.primary.light,
+                        shape: SmoothRectangleBorder(
+                          side: BorderSide(
+                            color: context.colors.primary.light,
+                            width: 2,
+                          ),
+                          borderRadius: SmoothBorderRadius(
+                            cornerRadius: AppRadius.medium,
+                            cornerSmoothing: AppRadius.smoothNormal,
+                          ),
+                        ),
+                        activeChild: SvgPicture.asset(
+                          'assets/icons/plus.svg',
+                          width: AppSizes.iconSizeSmall,
+                          height: AppSizes.iconSizeSmall,
+                          colorFilter: ColorFilter.mode(
+                            context.colors.primary.normal,
+                            BlendMode.srcIn,
+                          ),
+                        ),
+                        children: speedDialChildren!,
+                        child: SvgPicture.asset(
+                          'assets/icons/plus.svg',
+                          width: AppSizes.iconSizeSmall,
+                          height: AppSizes.iconSizeSmall,
+                          colorFilter: ColorFilter.mode(
+                            context.colors.primary.normal,
+                            BlendMode.srcIn,
+                          ),
+                        ),
+                      ))
               : const SizedBox.shrink(),
         ),
         floatingActionButtonLocation: floatingActionButtonLocation,

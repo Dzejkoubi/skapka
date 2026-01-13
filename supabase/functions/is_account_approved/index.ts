@@ -13,8 +13,12 @@ Deno.serve(async (req) => {
 
   try {
     // Parse variables from the request and initialize the Supabase client
-    const body = await req.json();
+    const body = await req.json().catch(() => null);
+    if (!body || !body.account_id) {
+      return createErrorResponse("Missing account_id in request body", 400);
+    }
     const { account_id } = body;
+
     const supabase = getSupabaseClient(req);
 
     const { data, error } = await supabase.from("accounts").select(
@@ -22,6 +26,7 @@ Deno.serve(async (req) => {
     ).eq("account_id", account_id).single();
 
     if (error) {
+      console.error("Error fetching account approval status:", error);
       return createErrorResponse(
         "Failed to fetch account approval status",
         500,

@@ -6,13 +6,17 @@ import {
   createInternalServerErrorResponse,
   createSuccessResponse,
 } from "@shared/response.ts";
-import { getSupabaseClient } from "@shared/supabaseClient.ts";
 
 console.log("Function started executing");
 
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response("ok", { headers: corsHeaders });
+  }
+
+  // Only allow GET requests after check for OPTIONS
+  if (!req.method || req.method !== "GET") {
+    return new Response("Method not allowed", { status: 405 });
   }
 
   try {
@@ -35,6 +39,7 @@ Deno.serve(async (req) => {
     formData.append("__VIEWSTATE", Deno.env.get("VIEW_STATE") || "");
     formData.append("ctl00$Content$txtUserName", username);
     formData.append("ctl00$Content$txtPassword", password);
+    // The button name and value to simulate form submission
     formData.append("ctl00$Content$BtnLogin", "Login");
 
     const loginResponse = await fetch(`${skautisApiBaseUrl}Login/`, {

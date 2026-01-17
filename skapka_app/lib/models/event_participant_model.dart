@@ -1,6 +1,14 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+part 'event_participant_model.freezed.dart';
+part 'event_participant_model.g.dart';
+
 enum EventParticipantStatus {
+  @JsonValue('signed_up')
   signedUp('signed_up'),
+  @JsonValue('excused')
   excused('excused'),
+  @JsonValue('not_specified')
   notSpecified('not_specified');
 
   final String value;
@@ -14,54 +22,18 @@ enum EventParticipantStatus {
   }
 }
 
-class EventParticipantModel {
-  final String eventId;
-  final String dependentId;
-  final String groupId;
-  final EventParticipantStatus status;
-  final String note;
-
-  EventParticipantModel({
-    required this.eventId,
-    required this.dependentId,
-    required this.groupId,
-    required this.status,
-    required this.note,
-  });
-
-  factory EventParticipantModel.fromJson(Map<String, dynamic> json) {
-    return EventParticipantModel(
-      eventId: json['event_id'] as String,
-      dependentId: json['dependent_id'] as String,
-      groupId: json['group_id'] as String,
-      status: EventParticipantStatus.fromString(json['status'] as String),
-      note: json['note'] as String? ?? '',
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'event_id': eventId,
-      'dependent_id': dependentId,
-      'group_id': groupId,
-      'status': status.value, // Returns snake_case string
-      'note': note,
-    };
-  }
-
-  EventParticipantModel copyWith({
-    String? eventId,
-    String? dependentId,
-    String? groupId,
-    EventParticipantStatus? status,
+@freezed
+abstract class EventParticipantModel with _$EventParticipantModel {
+  @JsonSerializable(fieldRename: FieldRename.snake)
+  const factory EventParticipantModel({
+    required String eventId,
+    required String dependentId,
+    required String groupId,
+    required EventParticipantStatus status,
+    @Default(true) bool? hasAttended,
     String? note,
-  }) {
-    return EventParticipantModel(
-      eventId: eventId ?? this.eventId,
-      dependentId: dependentId ?? this.dependentId,
-      groupId: groupId ?? this.groupId,
-      status: status ?? this.status,
-      note: note ?? this.note,
-    );
-  }
+  }) = _EventParticipantModel;
+
+  factory EventParticipantModel.fromJson(Map<String, dynamic> json) =>
+      _$EventParticipantModelFromJson(json);
 }

@@ -21,7 +21,7 @@ class CustomForm extends StatefulWidget {
   final int? characterLimit;
   final String? errorText;
   final double cornerSmoothing;
-  final bool? blueBackGroundColorMode;
+  final bool blueBackGroundColorMode;
   const CustomForm({
     super.key,
     this.isActive = true,
@@ -37,7 +37,7 @@ class CustomForm extends StatefulWidget {
     this.characterLimit,
     this.errorText,
     this.cornerSmoothing = AppRadius.smoothNormal,
-    this.blueBackGroundColorMode,
+    this.blueBackGroundColorMode = false,
   });
 
   @override
@@ -167,7 +167,9 @@ class _CustomFormState extends State<CustomForm> {
     return AppTextTheme.bodyMedium(context).copyWith(
       color: isDisabled
           ? context.colors.text.muted
-          : context.colors.text.normalDark,
+          : widget.blueBackGroundColorMode
+          ? context.colors.text.normalDark
+          : context.colors.text.normal,
     );
   }
 

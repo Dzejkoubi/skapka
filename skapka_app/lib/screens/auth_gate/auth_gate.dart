@@ -15,6 +15,7 @@ import 'package:skapka_app/providers/units_provider.dart';
 import 'package:skapka_app/widgets/loading_floating_logo/loading_floating_logo.dart';
 import 'package:skapka_app/services/auth_service.dart';
 import 'package:skapka_app/services/supabase_service.dart';
+import 'package:skapka_app/models/dependents/account_dependent_model.dart';
 
 @RoutePage()
 class AuthGate extends StatefulWidget {
@@ -121,25 +122,57 @@ class _AuthGateState extends State<AuthGate> {
       listen: false,
     );
 
-    final dependents = await supabaseService.getAccountDependents(accountId);
+    // 1. Fetch relations (IDs and isMainDependent flag)
+    final accountDependentsRelations = await supabaseService
+        .getAccountDependentRelations(accountId);
 
     dependentsProvider.clear();
-    for (var ad in dependents) {
+
+    // 2. Iterate through relations to fetch full details
+    for (var relation in accountDependentsRelations) {
+      final dependentId = relation.dependentId;
+
       final results = await Future.wait([
-        supabaseService.getDependentDetail(ad.dependentId),
-        supabaseService.getDependentNotes(ad.dependentId),
-        supabaseService.getDependentParticipation(ad.dependentId),
+        supabaseService.getDependentDetail(dependentId),
+        supabaseService.getDependentNotes(dependentId),
+        supabaseService.getDependentParticipation(dependentId),
       ]);
 
       final detail = results[0] as DependentModel?;
       final notes = results[1] as DependentNotesModel?;
       final participation = results[2] as List<EventParticipantModel>;
 
+      // 3. Construct the full AccountDependentModel
       if (detail != null && mounted) {
-        dependentsProvider.addDependent(
-          ad.copyWith(dependentDetails: detail.copyWith(notes: notes)),
+        final fullDependent = AccountDependentModel(
+          dependentId: detail.dependentId,
+          isLeader: detail.isLeader,
+          name: detail.name,
+          surname: detail.surname,
+          nickname: detail.nickname,
+          born: detail.born,
+          sex: detail.sex,
+          parent1Email: detail.parent1Email,
+          parent1Phone: detail.parent1Phone,
+          parent2Email: detail.parent2Email,
+          parent2Phone: detail.parent2Phone,
+          contactEmail: detail.contactEmail,
+          contactPhone: detail.contactPhone,
+          troopId: detail.troopId,
+          patrolId: detail.patrolId,
+          isArchived: detail.isArchived,
+          secretCode: detail.secretCode,
+          createdAt: detail.createdAt,
+          groupId: detail.groupId,
+          skautisId: detail.skautisId,
+          notes:
+              notes ??
+              DependentNotesModel.empty(), // Use fetched notes or empty
+          isMainDependent: relation.isMainDependent,
         );
-        dependentsProvider.setParticipation(ad.dependentId, participation);
+
+        dependentsProvider.addDependent(fullDependent);
+        dependentsProvider.setParticipation(dependentId, participation);
       }
     }
   }

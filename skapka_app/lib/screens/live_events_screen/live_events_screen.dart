@@ -61,7 +61,7 @@ class LiveEventsScreen extends StatelessWidget {
                             spacing: AppSpacing.xLarge,
                             children: [
                               for (var dependent in provider.dependents.where(
-                                (d) => d.dependentDetails?.isArchived != true,
+                                (d) => d.isArchived != true,
                               ))
                                 Builder(
                                   builder: (context) {

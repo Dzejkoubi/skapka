@@ -32,7 +32,7 @@ class DependentsScreen extends StatelessWidget {
                     children: [
                       // Display only non-archived dependents
                       for (var dependent in provider.dependents.where(
-                        (d) => d.dependentDetails?.isArchived != true,
+                        (d) => d.isArchived != true,
                       ))
                         DependentBox(
                           dependent: dependent,

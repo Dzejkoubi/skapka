@@ -61,12 +61,13 @@ class EventDetailsScreen extends StatelessWidget {
                       child: Column(
                         spacing: AppSpacing.large,
                         children: [
-                          if (dependentsProvider.dependents.isNotEmpty)
+                          if (dependentsProvider.dependents.isNotEmpty &&
+                              eventTimeType == EventTimeType.live)
                             Column(
                               spacing: AppSpacing.small,
                               children: [
                                 for (var dependent in provider.dependents.where(
-                                  (d) => d.dependentDetails?.isArchived != true,
+                                  (d) => d.isArchived != true,
                                 ))
                                   Builder(
                                     builder: (context) {
@@ -144,7 +145,7 @@ class EventDetailsScreen extends StatelessWidget {
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
                                               Text(
-                                                '${dependent.dependentDetails?.name} ${dependent.dependentDetails?.surname}',
+                                                '${dependent.name} ${dependent.surname}',
                                                 style:
                                                     AppTextTheme.bodyLarge(
                                                       context,

@@ -1,30 +1,21 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:skapka_app/models/dependents/dependent_model.dart';
 
-class LeaderDependentModel extends DependentModel {
-  final List<String>? leaderOfPatrolId;
+part 'leader_dependent_model.freezed.dart';
+part 'leader_dependent_model.g.dart';
 
-  LeaderDependentModel({
+@freezed
+abstract class LeaderDependentModel with _$LeaderDependentModel {
+  const LeaderDependentModel._();
+
+  @JsonSerializable(fieldRename: FieldRename.snake)
+  factory LeaderDependentModel({
     required DependentModel dependent,
-    this.leaderOfPatrolId,
-  }) : super(
-         dependentId: dependent.dependentId,
-         name: dependent.name,
-         surname: dependent.surname,
-         nickname: dependent.nickname,
-         born: dependent.born,
-         sex: dependent.sex,
-         parent1Email: dependent.parent1Email,
-         parent1Phone: dependent.parent1Phone,
-         parent2Email: dependent.parent2Email,
-         parent2Phone: dependent.parent2Phone,
-         contactEmail: dependent.contactEmail,
-         contactPhone: dependent.contactPhone,
-         groupId: dependent.groupId,
-         troopId: dependent.troopId,
-         patrolId: dependent.patrolId,
-         isArchived: dependent.isArchived,
-         secretCode: dependent.secretCode,
-         createdAt: dependent.createdAt,
-         notes: dependent.notes,
-       );
+    required List<String> leaderOfPatrolId,
+  }) = _LeaderDependentModel;
+
+  factory LeaderDependentModel.fromJson(Map<String, dynamic> json) =>
+      _$LeaderDependentModelFromJson(json);
+
+  bool get is18plus => dependent.is18plus;
 }

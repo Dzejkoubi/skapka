@@ -64,7 +64,7 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
     endDate: _endDate,
     meetingPlace: _meetingPlaceController.text,
     photoAlbumLink: _photoAlbumLinkController.text,
-    groupId: groupId,
+    groupId: _accountProvider.groupId,
     targetPatrolsIds: targetPatrolIds,
     lastEditedBy: lastEditedBy,
     isDraft: isDraft,
@@ -158,7 +158,6 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
   final TextEditingController _meetingPlaceController = TextEditingController();
   final TextEditingController _photoAlbumLinkController =
       TextEditingController();
-  String? groupId;
   String? lastEditedBy;
   bool isDraft = true;
 
@@ -203,23 +202,7 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
     _initializationFuture = fetchRequiredData();
 
     // Setting values from the original event to initialize edited event
-    originalEvent =
-        widget.event ??
-        EventModel(
-          eventId: '',
-          title: '',
-          instructions: null,
-          openSignUp: null,
-          closeSignUp: null,
-          startDate: null,
-          endDate: null,
-          meetingPlace: '',
-          photoAlbumLink: '',
-          groupId: null,
-          targetPatrolsIds: [],
-          lastEditedBy: null,
-          isDraft: true,
-        );
+    originalEvent = widget.event ?? EventModel.empty();
     eventId = widget.event?.eventId;
     _eventTitleController.text = widget.event?.title ?? '';
     _instructions = widget.event?.instructions;
@@ -229,7 +212,6 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
     _endDate = widget.event?.endDate;
     _meetingPlaceController.text = widget.event?.meetingPlace ?? '';
     _photoAlbumLinkController.text = widget.event?.photoAlbumLink ?? '';
-    groupId = widget.event?.groupId;
     lastEditedBy = widget.event?.lastEditedBy;
     isDraft = widget.event?.isDraft ?? true;
   }
@@ -249,7 +231,7 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
   Future<void> fetchEventParticipants(String eventId) async {
     _originalEventParticipants = await _supabaseService.getEventParticipants(
       eventId,
-      groupId!,
+      _accountProvider.groupId,
     );
     _editedEventParticipants = List.from(_originalEventParticipants);
     if (kDebugMode) {
@@ -321,13 +303,14 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
       );
 
       // Update local eventId
-      eventId = createdEvent.eventId;
+      String eventId = createdEvent.eventId;
+      print('New event created with ID: $eventId');
 
       // Save participants
       for (final participant in _editedEventParticipants) {
         final p = participant.copyWith(
-          eventId: createdEvent.eventId,
-          groupId: groupId,
+          eventId: eventId,
+          groupId: _accountProvider.groupId,
         );
         await _supabaseService.addEventParticipant(p);
       }
@@ -389,7 +372,7 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
         // Ensure correct eventId and groupId
         final p = participant.copyWith(
           eventId: updatedEvent.eventId,
-          groupId: groupId,
+          groupId: _accountProvider.groupId,
         );
         await _supabaseService.addEventParticipant(p);
       }

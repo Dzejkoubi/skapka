@@ -52,7 +52,7 @@ class ParticipantRow extends StatelessWidget {
                 height: AppSizes.iconSizeSmall,
               ),
             ),
-          if (dependent.isArchived ?? false)
+          if (dependent.isArchived)
             Padding(
               padding: const EdgeInsets.only(left: AppSpacing.small),
               child: SvgPicture.asset(

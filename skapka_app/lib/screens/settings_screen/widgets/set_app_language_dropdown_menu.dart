@@ -28,7 +28,7 @@ class SetAppLanguageDropdownMenu extends StatelessWidget {
             }
           },
           expandedInsets: EdgeInsets.zero,
-          initialSelection: languageProvider.locale?.languageCode,
+          initialSelection: languageProvider.locale.languageCode,
           dropdownMenuEntries: [
             DropdownMenuEntry(
               value: 'cs',

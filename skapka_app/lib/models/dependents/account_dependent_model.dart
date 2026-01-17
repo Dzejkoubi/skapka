@@ -1,37 +1,39 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:skapka_app/models/dependents/dependent_notes_model.dart';
 import 'package:skapka_app/models/dependents/dependent_model.dart';
 
-class AccountDependentModel {
-  final String dependentId;
-  final bool isMainDependent;
-  final DependentModel? dependentDetails;
+part 'account_dependent_model.freezed.dart';
+part 'account_dependent_model.g.dart';
 
-  AccountDependentModel({
-    required this.dependentId,
-    required this.isMainDependent,
-    this.dependentDetails,
-  });
+// Dependent model that has isMainDependent field to indicate if it's the main dependent for the account
+@freezed
+abstract class AccountDependentModel with _$AccountDependentModel {
+  @JsonSerializable(fieldRename: FieldRename.snake)
+  factory AccountDependentModel({
+    required String dependentId,
+    required bool isLeader,
+    required String name,
+    required String surname,
+    String? nickname,
+    DateTime? born,
+    required SexEnum sex,
+    String? parent1Email,
+    String? parent1Phone,
+    String? parent2Email,
+    String? parent2Phone,
+    String? contactEmail,
+    String? contactPhone,
+    String? troopId,
+    String? patrolId,
+    required bool isArchived,
+    String? secretCode,
+    required DateTime createdAt,
+    required String groupId,
+    required int skautisId,
+    required DependentNotesModel notes,
+    required bool isMainDependent,
+  }) = _AccountDependentModel;
 
-  factory AccountDependentModel.fromJson(Map<String, dynamic> json) {
-    return AccountDependentModel(
-      dependentId: json["dependent_id"] as String,
-      isMainDependent: json["is_main_dependent"] as bool? ?? false,
-      dependentDetails: json["dependent_details"] != null
-          ? DependentModel.fromJson(
-              json["dependent_details"] as Map<String, dynamic>,
-            )
-          : null,
-    );
-  }
-
-  AccountDependentModel copyWith({
-    String? dependentId,
-    bool? isMainDependent,
-    DependentModel? dependentDetails,
-  }) {
-    return AccountDependentModel(
-      dependentId: dependentId ?? this.dependentId,
-      isMainDependent: isMainDependent ?? this.isMainDependent,
-      dependentDetails: dependentDetails ?? this.dependentDetails,
-    );
-  }
+  factory AccountDependentModel.fromJson(Map<String, dynamic> json) =>
+      _$AccountDependentModelFromJson(json);
 }

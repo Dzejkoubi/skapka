@@ -28,7 +28,7 @@ class DependentBox extends StatelessWidget {
         spacing: AppSpacing.medium,
         children: [
           Text(
-            '${dependent.dependentDetails?.name} ${dependent.dependentDetails?.surname}',
+            '${dependent.name} ${dependent.surname}',
             style: AppTextTheme.titleSmall(context),
           ),
           Column(
@@ -45,7 +45,7 @@ class DependentBox extends StatelessWidget {
                   ),
                   SizedBox(width: AppSpacing.small),
                   Text(
-                    dependent.dependentDetails?.nickname ?? '-',
+                    dependent.nickname ?? '-',
                     style: AppTextTheme.bodySmallBold(context),
                   ),
                 ],
@@ -59,9 +59,9 @@ class DependentBox extends StatelessWidget {
                   ),
                   SizedBox(width: AppSpacing.small),
                   Text(
-                    dependent.dependentDetails?.patrolId != null
+                    dependent.patrolId != null
                         ? unitsProvider.getPatrolNameById(
-                                dependent.dependentDetails!.patrolId!,
+                                dependent.patrolId!,
                               ) ??
                               '-'
                         : '-',

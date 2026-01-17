@@ -1,6 +1,6 @@
 // lib/services/supabase_service.dart
 import 'package:skapka_app/models/account_model.dart';
-import 'package:skapka_app/models/dependents/account_dependent_model.dart';
+import 'package:skapka_app/models/dependents/account_dependent_relation_model.dart';
 import 'package:skapka_app/models/dependents/dependent_model.dart';
 import 'package:skapka_app/models/dependents/dependent_notes_model.dart';
 import 'package:skapka_app/models/event_model.dart';
@@ -72,7 +72,7 @@ class SupabaseService {
     return GroupModel.fromJson(response);
   }
 
-  Future<List<AccountDependentModel>> getAccountDependents(
+  Future<List<AccountDependentRelationModel>> getAccountDependentRelations(
     String accountId,
   ) async {
     final response = await _supabaseClient
@@ -80,9 +80,8 @@ class SupabaseService {
         .select()
         .eq('account_id', accountId);
     return (response as List)
-        .map<AccountDependentModel>(
-          (json) =>
-              AccountDependentModel.fromJson(json as Map<String, dynamic>),
+        .map<AccountDependentRelationModel>(
+          (json) => AccountDependentRelationModel.fromJson(json),
         )
         .toList();
   }
@@ -94,6 +93,7 @@ class SupabaseService {
         .eq('dependent_id', dependentId)
         .maybeSingle();
     if (response == null) return null;
+
     return DependentModel.fromJson(response);
   }
 
@@ -167,7 +167,8 @@ class SupabaseService {
       patrol_id,
       is_archived,
       created_at,
-      group_id
+      group_id,
+      skautis_id
     ''')
         .eq('group_id', groupId);
 
@@ -176,7 +177,9 @@ class SupabaseService {
     }
 
     final response = await query;
-    return response.map((json) => DependentModel.fromJson(json)).toList();
+    return response
+        .map<DependentModel>((json) => DependentModel.fromJson(json))
+        .toList();
   }
 
   // Get event_participants that are invited to given event with their statuses
@@ -248,6 +251,11 @@ class SupabaseService {
     EventModel event,
     AccountProvider accountProvider,
   ) async {
+    // Validate we have a group ID
+    if (accountProvider.groupId.isEmpty) {
+      throw const FormatException("Cannot create event: Group ID is missing.");
+    }
+
     final response = await _supabaseClient
         .from('events')
         .insert({
@@ -260,13 +268,15 @@ class SupabaseService {
           'meeting_place': event.meetingPlace,
           'photo_album_link': event.photoAlbumLink,
           'group_id': accountProvider.groupId,
-          'target_patrols': event.targetPatrolsIds,
+          // Filter out any empty strings from target_patrols to prevent UUID errors
+          'target_patrols': event.targetPatrolsIds
+              ?.where((id) => id.isNotEmpty)
+              .toList(),
           'last_edited_by': accountProvider.accountId,
           'is_draft': event.isDraft,
         })
         .select()
-        .single();
-
+        .single(); // This returns the created event with the new UUID
     return EventModel.fromJson(response);
   }
 

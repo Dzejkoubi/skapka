@@ -27,7 +27,7 @@ class DependentView extends StatelessWidget {
     return Column(
       children: [
         Text(
-          '${dependentModel.dependentDetails!.name} ${dependentModel.dependentDetails!.surname}',
+          '${dependentModel.name} ${dependentModel.surname}',
           style: AppTextTheme.titleMedium(context),
           textAlign: TextAlign.center,
         ),
@@ -38,7 +38,7 @@ class DependentView extends StatelessWidget {
                   SomethingIsMissingWidget(
                     subtitle: context.localizations
                         .live_events_screen_no_live_events_view_subtitle(
-                          dependentModel.dependentDetails!.name,
+                          dependentModel.name,
                         ),
                   ),
                 ],

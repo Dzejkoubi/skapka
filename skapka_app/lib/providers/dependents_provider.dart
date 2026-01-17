@@ -49,15 +49,9 @@ class DependentsProvider extends ChangeNotifier {
     final index = _dependents.indexWhere((d) => d.dependentId == dependentId);
     if (index != -1) {
       final dependent = _dependents[index];
-      if (dependent.dependentDetails != null) {
-        final updatedDetails = dependent.dependentDetails!.copyWith(
-          notes: notes,
-        );
-        _dependents[index] = dependent.copyWith(
-          dependentDetails: updatedDetails,
-        );
-        notifyListeners();
-      }
+      final updatedDetails = dependent.copyWith(notes: notes);
+      _dependents[index] = updatedDetails;
+      notifyListeners();
     }
   }
 }

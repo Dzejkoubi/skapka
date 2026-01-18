@@ -84,13 +84,11 @@ class _CreateEditEventParticipantsScreenState
         _groupDependentChildren.add(dependent);
       }
     }
-    if (kDebugMode) {
-      print(
-        'Fetched ${widget.groupDependents.length} dependents: '
-        '${_groupDependentLeaders.length} leaders and '
-        '${_groupDependentChildren.length} children.',
-      );
-    }
+    debugPrint(
+      'Fetched ${widget.groupDependents.length} dependents: '
+      '${_groupDependentLeaders.length} leaders and '
+      '${_groupDependentChildren.length} children.',
+    );
   }
 
   @override
@@ -143,11 +141,7 @@ class _CreateEditEventParticipantsScreenState
                 .localizations
                 .create_edit_participants_screen_dial_limit,
             onPressed: () {
-              if (kDebugMode) {
-                print(
-                  'Set Participant Limit',
-                ); // TODO: implement set participant limit
-              }
+              debugPrint('Limit Participants');
             },
           ),
         ),
@@ -160,9 +154,7 @@ class _CreateEditEventParticipantsScreenState
                 .localizations
                 .create_edit_participants_screen_dial_print,
             onPressed: () {
-              if (kDebugMode) {
-                print('Print List'); // TODO: implement print list
-              }
+              debugPrint('Print Participants');
             },
           ),
         ),

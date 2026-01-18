@@ -29,9 +29,7 @@ class EventsProvider extends ChangeNotifier {
   void setEvents(List<EventModel> events) {
     clear();
     _events.addAll(events);
-    if (kDebugMode) {
-      print('Events set: ${_events.length} events loaded.');
-    }
+    debugPrint('Events set: ${_events.length} events loaded.');
     notifyListeners();
   }
 

@@ -76,9 +76,7 @@ class WelcomeScreen extends StatelessWidget {
                       )!.welcome_screen_songbook_button_text,
 
                       onPressed: () {
-                        if (kDebugMode) {
-                          print('songbook button pressed');
-                        }
+                        debugPrint('Songbook button pressed');
                       },
                     ),
                   ],

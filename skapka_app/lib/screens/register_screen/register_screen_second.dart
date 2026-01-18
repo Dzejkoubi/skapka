@@ -89,9 +89,7 @@ class _RegisterScreenSecondState extends State<RegisterScreenSecond> {
           context.router.replaceAll([const AuthGate()]);
         }
       } on AuthException catch (e) {
-        if (kDebugMode) {
-          print(e);
-        }
+        debugPrint(e.message);
         if (mounted) {
           String errorMessage;
           if (e.code == 'user_already_exists') {
@@ -119,9 +117,7 @@ class _RegisterScreenSecondState extends State<RegisterScreenSecond> {
           );
         }
       } catch (e) {
-        if (kDebugMode) {
-          print(e);
-        }
+        debugPrint(e.toString());
         if (mounted) {
           BottomDialog.show(
             context,

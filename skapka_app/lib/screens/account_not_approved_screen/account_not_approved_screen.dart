@@ -244,9 +244,7 @@ class AccountNotApprovedScreen extends StatelessWidget {
             context,
           )!.account_not_approved_screen_notify_administrator_dialog_primary_button_text,
           onPrimaryPressed: () {
-            if (kDebugMode) {
-              print('Notify administrator button pressed');
-            }
+            debugPrint('Notify administrator button pressed');
           },
         ),
       );

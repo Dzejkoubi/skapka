@@ -79,9 +79,7 @@ class _LoginScreenState extends State<LoginScreen> {
         }
       } on AuthException catch (e) {
         if (mounted) {
-          if (kDebugMode) {
-            print('AuthException during login: ${e.toString()}');
-          }
+          debugPrint('AuthException during login: ${e.toString()}');
 
           String errorMessage;
           if (e.code == 'invalid_login_credentials') {
@@ -103,9 +101,7 @@ class _LoginScreenState extends State<LoginScreen> {
           );
         }
       } catch (e) {
-        if (kDebugMode) {
-          print('Unexpected error during login: $e');
-        }
+        debugPrint('Unexpected error during login: $e');
         if (mounted) {
           BottomDialog.show(
             context,

@@ -134,10 +134,7 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
 
   String get targetPatrolNames {
     final patrolIds = targetPatrolIds;
-
-    if (kDebugMode) {
-      print('Found patrol IDs for signed up dependents: $patrolIds');
-    }
+    debugPrint('Found patrol IDs for signed up dependents: $patrolIds');
 
     final names = _groupPatrols
         .where((p) => patrolIds.contains(p.patrolId))
@@ -234,11 +231,10 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
       _accountProvider.groupId,
     );
     _editedEventParticipants = List.from(_originalEventParticipants);
-    if (kDebugMode) {
-      print(
-        'Fetched ${_originalEventParticipants.length} participants for event $eventId.',
-      );
-    }
+
+    debugPrint(
+      'Fetched ${_originalEventParticipants.length} participants for event $eventId.',
+    );
   }
 
   List<EventParticipantModel> get deleteParticipants =>
@@ -304,7 +300,7 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
 
       // Update local eventId
       String eventId = createdEvent.eventId;
-      print('New event created with ID: $eventId');
+      debugPrint('New event created with ID: $eventId');
 
       // Save participants
       for (final participant in _editedEventParticipants) {
@@ -317,12 +313,9 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
 
       // Sync original participants
       _originalEventParticipants = List.from(_editedEventParticipants);
-
-      if (kDebugMode) {
-        print(
-          'Event ${createdEvent.eventId} created successfully as ${asDraft ? 'draft' : 'published'}.',
-        );
-      }
+      debugPrint(
+        'Event ${createdEvent.eventId} created successfully as ${asDraft ? 'draft' : 'published'}.',
+      );
       if (mounted) {
         BottomDialog.show(
           context,
@@ -334,9 +327,7 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
         await _loadEventsAfterSuccess(event: createdEvent);
       }
     } catch (e) {
-      if (kDebugMode) {
-        print('Error creating event: $e');
-      }
+      debugPrint('Error creating event: $e');
       if (mounted) {
         BottomDialog.show(
           context,
@@ -363,10 +354,8 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
       final participantsToAdd = addParticipants;
       final participantsToDelete = deleteParticipants;
 
-      if (kDebugMode) {
-        print('Adding ${participantsToAdd.length} participants');
-        print('Deleting ${participantsToDelete.length} participants');
-      }
+      debugPrint('Adding ${participantsToAdd.length} participants');
+      debugPrint('Deleting ${participantsToDelete.length} participants');
 
       for (final participant in participantsToAdd) {
         // Ensure correct eventId and groupId
@@ -387,11 +376,9 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
       // Sync original participants
       _originalEventParticipants = List.from(_editedEventParticipants);
 
-      if (kDebugMode) {
-        print(
-          'Event ${updatedEvent.eventId} saved successfully as ${asDraft ? 'draft' : 'published'}.',
-        );
-      }
+      debugPrint(
+        'Event ${updatedEvent.eventId} saved successfully as ${asDraft ? 'draft' : 'published'}.',
+      );
 
       if (mounted) {
         BottomDialog.show(
@@ -403,9 +390,7 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
         await _loadEventsAfterSuccess(event: updatedEvent);
       }
     } catch (e) {
-      if (kDebugMode) {
-        print('Error saving event: $e');
-      }
+      debugPrint('Error saving event: $e');
       if (mounted) {
         BottomDialog.show(
           context,
@@ -426,9 +411,7 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
     _setProcessingType(_ProcessingType.deleting);
     try {
       await _supabaseService.deleteEvent(eventId!);
-      if (kDebugMode) {
-        print('Event $eventId deleted successfully.');
-      }
+      debugPrint('Event $eventId deleted successfully.');
       if (mounted) {
         BottomDialog.show(
           context,
@@ -440,9 +423,7 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
         await _loadEventsAfterSuccess();
       }
     } catch (e) {
-      if (kDebugMode) {
-        print('Error deleting event: $e');
-      }
+      debugPrint('Error deleting event: $e');
       if (mounted) {
         BottomDialog.show(
           context,
@@ -696,11 +677,11 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
                         event: widget.event,
                         eventTimeType: widget.eventTimeType,
                         onDelete: () {
-                          if (kDebugMode) print('User confirmed delete event');
+                          debugPrint('User confirmed delete event');
                           _deleteEvent();
                         },
                         onPublish: () {
-                          if (kDebugMode) print('User confirmed publish event');
+                          debugPrint('User confirmed publish event');
                           final error = _validateEvent();
                           if (error != null) {
                             BottomDialog.show(
@@ -717,9 +698,7 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
                           }
                         },
                         onUnpublish: () {
-                          if (kDebugMode) {
-                            print('User confirmed unpublish event');
-                          }
+                          debugPrint('User confirmed unpublish event');
                           if (eventId == null) {
                             _createNewEvent(asDraft: true);
                           } else {
@@ -727,11 +706,9 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
                           }
                         },
                         onSave: ({required bool asDraft}) {
-                          if (kDebugMode) {
-                            print(
-                              'User confirmed save event (asDraft: $asDraft)',
-                            );
-                          }
+                          debugPrint(
+                            'User confirmed save event (asDraft: $asDraft)',
+                          );
                           final error = _validateEvent();
                           if (error != null) {
                             BottomDialog.show(

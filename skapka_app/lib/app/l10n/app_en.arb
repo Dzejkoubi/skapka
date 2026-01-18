@@ -296,5 +296,15 @@
     "settings_screen_app_version_title": "App Version: ",
 
     "category_admin_panel_screen": "--- ADMIN PANEL ---",
-    "admin_panel_screen_title": "Admin Panel"
+    "admin_panel_screen_title": "Admin Panel",
+    "admin_panel_screen_accounts_management_title": "Accounts & Dependents",
+    "admin_panel_screen_button_approve_accounts": "Approve Accounts",
+    "admin_panel_screen_button_edit_leaders": "Edit Leaders",
+    "admin_panel_screen_button_edit_permissions": "Edit Permissions",
+    "admin_panel_screen_button_connect_dependents": "Connect Dependents",
+    "admin_panel_screen_button_dependent_codes": "Dependent Codes",
+    "admin_panel_screen_data_management_title": "Data",
+    "admin_panel_screen_button_skautis_sync": "SkautIS sync",
+    "admin_panel_screen_notification_title": "Notification",
+    "admin_panel_screen_button_send_notification": "Send Notification"
 }

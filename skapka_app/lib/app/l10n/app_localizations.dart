@@ -1507,6 +1507,88 @@ abstract class AppLocalizations {
   /// In cs, this message translates to:
   /// **'Admin Panel'**
   String get admin_panel_screen_title;
+
+  /// No description provided for @admin_panel_screen_db_warnings_expansion_tile_title.
+  ///
+  /// In cs, this message translates to:
+  /// **'Varování'**
+  String get admin_panel_screen_db_warnings_expansion_tile_title;
+
+  /// No description provided for @admin_panel_screen_db_warning_account_does_not_have_parent_email_filled_in.
+  ///
+  /// In cs, this message translates to:
+  /// **'Podúčet {accountNameSurname} nemá vyplněný e-mail rodiče.'**
+  String
+  admin_panel_screen_db_warning_account_does_not_have_parent_email_filled_in(
+    String accountNameSurname,
+  );
+
+  /// No description provided for @admin_panel_screen_db_warning_account_does_not_have_parent_email_filled_in_copy_account_id.
+  ///
+  /// In cs, this message translates to:
+  /// **'Id účtu zkopírováno do schránky.'**
+  String
+  get admin_panel_screen_db_warning_account_does_not_have_parent_email_filled_in_copy_account_id;
+
+  /// No description provided for @admin_panel_screen_accounts_management_title.
+  ///
+  /// In cs, this message translates to:
+  /// **'Účty & Podúčty'**
+  String get admin_panel_screen_accounts_management_title;
+
+  /// No description provided for @admin_panel_screen_button_approve_accounts.
+  ///
+  /// In cs, this message translates to:
+  /// **'Potvrdit účty'**
+  String get admin_panel_screen_button_approve_accounts;
+
+  /// No description provided for @admin_panel_screen_button_edit_leaders.
+  ///
+  /// In cs, this message translates to:
+  /// **'Upravit vedoucí'**
+  String get admin_panel_screen_button_edit_leaders;
+
+  /// No description provided for @admin_panel_screen_button_edit_permissions.
+  ///
+  /// In cs, this message translates to:
+  /// **'Upravit práva'**
+  String get admin_panel_screen_button_edit_permissions;
+
+  /// No description provided for @admin_panel_screen_button_connect_dependents.
+  ///
+  /// In cs, this message translates to:
+  /// **'Připojit podúčty'**
+  String get admin_panel_screen_button_connect_dependents;
+
+  /// No description provided for @admin_panel_screen_button_dependent_codes.
+  ///
+  /// In cs, this message translates to:
+  /// **'Kódy podúčtů'**
+  String get admin_panel_screen_button_dependent_codes;
+
+  /// No description provided for @admin_panel_screen_data_management_title.
+  ///
+  /// In cs, this message translates to:
+  /// **'Data'**
+  String get admin_panel_screen_data_management_title;
+
+  /// No description provided for @admin_panel_screen_button_skautis_sync.
+  ///
+  /// In cs, this message translates to:
+  /// **'SkautIS sync'**
+  String get admin_panel_screen_button_skautis_sync;
+
+  /// No description provided for @admin_panel_screen_notification_title.
+  ///
+  /// In cs, this message translates to:
+  /// **'Oznámení'**
+  String get admin_panel_screen_notification_title;
+
+  /// No description provided for @admin_panel_screen_button_send_notification.
+  ///
+  /// In cs, this message translates to:
+  /// **'Poslat oznámení'**
+  String get admin_panel_screen_button_send_notification;
 }
 
 class _AppLocalizationsDelegate

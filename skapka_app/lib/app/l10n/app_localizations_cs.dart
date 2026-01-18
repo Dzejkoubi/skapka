@@ -840,4 +840,50 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get admin_panel_screen_title => 'Admin Panel';
+
+  @override
+  String get admin_panel_screen_db_warnings_expansion_tile_title => 'Varování';
+
+  @override
+  String
+  admin_panel_screen_db_warning_account_does_not_have_parent_email_filled_in(
+    String accountNameSurname,
+  ) {
+    return 'Podúčet $accountNameSurname nemá vyplněný e-mail rodiče.';
+  }
+
+  @override
+  String
+  get admin_panel_screen_db_warning_account_does_not_have_parent_email_filled_in_copy_account_id =>
+      'Id účtu zkopírováno do schránky.';
+
+  @override
+  String get admin_panel_screen_accounts_management_title => 'Účty & Podúčty';
+
+  @override
+  String get admin_panel_screen_button_approve_accounts => 'Potvrdit účty';
+
+  @override
+  String get admin_panel_screen_button_edit_leaders => 'Upravit vedoucí';
+
+  @override
+  String get admin_panel_screen_button_edit_permissions => 'Upravit práva';
+
+  @override
+  String get admin_panel_screen_button_connect_dependents => 'Připojit podúčty';
+
+  @override
+  String get admin_panel_screen_button_dependent_codes => 'Kódy podúčtů';
+
+  @override
+  String get admin_panel_screen_data_management_title => 'Data';
+
+  @override
+  String get admin_panel_screen_button_skautis_sync => 'SkautIS sync';
+
+  @override
+  String get admin_panel_screen_notification_title => 'Oznámení';
+
+  @override
+  String get admin_panel_screen_button_send_notification => 'Poslat oznámení';
 }

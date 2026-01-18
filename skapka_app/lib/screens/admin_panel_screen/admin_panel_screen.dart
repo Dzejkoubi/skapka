@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:skapka_app/app/l10n/l10n_extension.dart';
+import 'package:skapka_app/app/theme/app_spacing.dart';
 import 'package:skapka_app/widgets/appbar/appbar.dart';
 import 'package:skapka_app/widgets/wrappers/screen_wrapper.dart';
 
@@ -16,7 +17,27 @@ class AdminPanelScreen extends StatelessWidget {
         showSettingsIcon: false,
         screenName: context.localizations.admin_panel_screen_title,
       ),
-      body: const Placeholder(),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.only(
+            bottom: AppSpacing.bottomSpace + AppSpacing.large,
+          ),
+          child: Column(
+            spacing: AppSpacing.large,
+            children: [
+              // Notifications expansion tile
+
+              // Account editing expansion tile
+
+              // Skautis management expansion tile
+
+              // Notification settings expansion tile
+
+              // Edit server driven content expansion tile
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

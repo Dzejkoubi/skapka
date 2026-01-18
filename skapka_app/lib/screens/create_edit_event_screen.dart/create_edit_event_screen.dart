@@ -504,9 +504,103 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
 
   bool _forcePop = false;
 
+  void _debugPrintChanges() {
+    if (!kDebugMode) return;
+
+    final oldE = originalEvent;
+    final newE = editedEvent;
+
+    debugPrint('--- CHANGE DETECTION DEBUG TABLE ---');
+    debugPrint(
+      '${"Field".padRight(20)} | ${"Old Value".padRight(30)} | ${"New Value".padRight(30)} | Changed',
+    );
+    debugPrint('-' * 100);
+
+    void printDiff(String name, dynamic oldVal, dynamic newVal, bool changed) {
+      final oldStr = (oldVal?.toString() ?? 'null')
+          .replaceAll('\n', ' ')
+          .trim();
+      final newStr = (newVal?.toString() ?? 'null')
+          .replaceAll('\n', ' ')
+          .trim();
+      final o = oldStr.length > 28 ? '${oldStr.substring(0, 25)}...' : oldStr;
+      final n = newStr.length > 28 ? '${newStr.substring(0, 25)}...' : newStr;
+
+      debugPrint(
+        '${name.padRight(20)} | ${o.padRight(30)} | ${n.padRight(30)} | $changed',
+      );
+    }
+
+    printDiff('Title', oldE.title, newE.title, oldE.title != newE.title);
+    printDiff(
+      'Instructions',
+      oldE.instructions,
+      newE.instructions,
+      oldE.instructions != newE.instructions,
+    );
+    printDiff(
+      'Open Sign Up',
+      oldE.openSignUp,
+      newE.openSignUp,
+      oldE.openSignUp != newE.openSignUp,
+    );
+    printDiff(
+      'Close Sign Up',
+      oldE.closeSignUp,
+      newE.closeSignUp,
+      oldE.closeSignUp != newE.closeSignUp,
+    );
+    printDiff(
+      'Start Date',
+      oldE.startDate,
+      newE.startDate,
+      oldE.startDate != newE.startDate,
+    );
+    printDiff(
+      'End Date',
+      oldE.endDate,
+      newE.endDate,
+      oldE.endDate != newE.endDate,
+    );
+    printDiff(
+      'Meeting Place',
+      oldE.meetingPlace,
+      newE.meetingPlace,
+      oldE.meetingPlace != newE.meetingPlace,
+    );
+    printDiff(
+      'Photo Link',
+      oldE.photoAlbumLink,
+      newE.photoAlbumLink,
+      oldE.photoAlbumLink != newE.photoAlbumLink,
+    );
+    printDiff(
+      'Draft Status',
+      oldE.isDraft,
+      newE.isDraft,
+      oldE.isDraft != newE.isDraft,
+    );
+
+    final participantsChanged = !listEquals(
+      _originalEventParticipants,
+      _editedEventParticipants,
+    );
+    printDiff(
+      'Participants',
+      '${_originalEventParticipants.length} count',
+      '${_editedEventParticipants.length} count',
+      participantsChanged,
+    );
+
+    debugPrint('-' * 100);
+  }
+
   bool get _hasUnsavedChanges {
     if (!_isInitialized) return false;
-    return originalEvent != editedEvent ||
+    _debugPrintChanges();
+    // Exclude targetPatrolsIds from event model comparison as it is derived from participants
+    return originalEvent.copyWith(targetPatrolsIds: []) !=
+            editedEvent.copyWith(targetPatrolsIds: []) ||
         !listEquals(_originalEventParticipants, _editedEventParticipants);
   }
 

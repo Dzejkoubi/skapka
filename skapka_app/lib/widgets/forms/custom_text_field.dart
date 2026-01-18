@@ -29,6 +29,9 @@ class CustomTextField extends StatelessWidget {
       textAlignVertical: TextAlignVertical.top,
       textAlign: TextAlign.start,
       onChanged: onChanged,
+      onTapOutside: (PointerDownEvent event) {
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
       cursorColor: context.colors.primary.dark,
       style: AppTextTheme.bodyMedium(context),
       decoration: InputDecoration(

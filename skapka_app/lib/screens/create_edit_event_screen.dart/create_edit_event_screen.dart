@@ -12,6 +12,7 @@ import 'package:skapka_app/models/leader_model.dart';
 import 'package:skapka_app/models/patrol_model.dart';
 import 'package:skapka_app/models/troop_model.dart';
 import 'package:skapka_app/providers/account_provider.dart';
+import 'package:skapka_app/providers/admin_panel_provider.dart';
 import 'package:skapka_app/providers/events_provider.dart';
 import 'package:skapka_app/providers/loading_provider.dart';
 import 'package:skapka_app/providers/units_provider.dart';
@@ -216,11 +217,15 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
   /// Fetch and divide group dependents into leaders, children, and 18+ dependents and store them locally
   Future<void> fetchGroupDependentsAndLeaders(String groupId) async {
     _groupDependents = await _supabaseService.getGroupDependents(
-      groupId,
+      groupId: groupId,
       excludeArchived:
           !(widget.eventTimeType ==
               EventTimeType.past), // If event is past, inlcude archived
     );
+    // For Admin Panel - to save fetching if the user goes to the admin panel later
+    if (mounted && _groupDependents.isNotEmpty) {
+      context.read<AdminPanelProvider>().setGroupDependents(_groupDependents);
+    }
     _groupLeaders = await _supabaseService.getGroupLeaders(groupId);
   }
 

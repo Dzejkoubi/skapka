@@ -7,7 +7,9 @@ import 'package:provider/provider.dart';
 import 'package:skapka_app/app/router/router.dart';
 import 'package:skapka_app/app/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
+import 'package:skapka_app/app/router/router.gr.dart';
 import 'package:skapka_app/app/theme/app_theme_data.dart';
+import 'package:skapka_app/providers/admin_panel_provider.dart';
 import 'package:skapka_app/providers/dependents_provider.dart';
 import 'package:skapka_app/providers/account_provider.dart';
 import 'package:skapka_app/providers/events_provider.dart';
@@ -57,6 +59,7 @@ class App extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => LoadingProvider()),
         ChangeNotifierProvider(create: (context) => ThemeProvider()),
         ChangeNotifierProvider(create: (context) => LanguageProvider()),
+        ChangeNotifierProvider(create: (context) => AdminPanelProvider()),
       ],
 
       child: Builder(

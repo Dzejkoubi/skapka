@@ -50,7 +50,7 @@ class _AuthGateState extends State<AuthGate> {
     final account = await supabaseService.getAccountDetails(session.user.id);
     if (account == null) {
       if (!mounted) return;
-      context.router.replace(const SettingsRoute());
+      context.router.replace(const WelcomeRoute());
       return;
     }
 
@@ -73,7 +73,7 @@ class _AuthGateState extends State<AuthGate> {
     await loadAppData(account.accountId, account.groupId);
 
     if (mounted) {
-      context.router.replace(const SettingsRoute());
+      context.router.replace(const AdminPanelRoute());
     }
   }
 
@@ -122,59 +122,60 @@ class _AuthGateState extends State<AuthGate> {
       listen: false,
     );
 
-    // 1. Fetch relations (IDs and isMainDependent flag)
-    final accountDependentsRelations = await supabaseService
-        .getAccountDependentRelations(accountId);
-
+    // 1. Fetch relations first
+    final relations = await supabaseService.getAccountDependentRelations(
+      accountId,
+    );
     dependentsProvider.clear();
 
-    // 2. Iterate through relations to fetch full details
-    for (var relation in accountDependentsRelations) {
-      final dependentId = relation.dependentId;
+    // 2. Map relations to a list of Futures and run them in parallel
+    await Future.wait(
+      relations.map((relation) async {
+        final dependentId = relation.dependentId;
 
-      final results = await Future.wait([
-        supabaseService.getDependentDetail(dependentId),
-        supabaseService.getDependentNotes(dependentId),
-        supabaseService.getDependentParticipation(dependentId),
-      ]);
+        // Fetch all specific details for dependent in parallel
+        final results = await Future.wait([
+          supabaseService.getDependentDetail(dependentId),
+          supabaseService.getDependentNotes(dependentId),
+          supabaseService.getDependentParticipation(dependentId),
+        ]);
 
-      final detail = results[0] as DependentModel?;
-      final notes = results[1] as DependentNotesModel?;
-      final participation = results[2] as List<EventParticipantModel>;
+        final detail = results[0] as DependentModel?;
+        final notes = results[1] as DependentNotesModel?;
+        final participation = results[2] as List<EventParticipantModel>;
 
-      // 3. Construct the full AccountDependentModel
-      if (detail != null && mounted) {
-        final fullDependent = AccountDependentModel(
-          dependentId: detail.dependentId,
-          isLeader: detail.isLeader,
-          name: detail.name,
-          surname: detail.surname,
-          nickname: detail.nickname,
-          born: detail.born,
-          sex: detail.sex,
-          parent1Email: detail.parent1Email,
-          parent1Phone: detail.parent1Phone,
-          parent2Email: detail.parent2Email,
-          parent2Phone: detail.parent2Phone,
-          contactEmail: detail.contactEmail,
-          contactPhone: detail.contactPhone,
-          troopId: detail.troopId,
-          patrolId: detail.patrolId,
-          isArchived: detail.isArchived,
-          secretCode: detail.secretCode,
-          createdAt: detail.createdAt,
-          groupId: detail.groupId,
-          skautisId: detail.skautisId,
-          notes:
-              notes ??
-              DependentNotesModel.empty(), // Use fetched notes or empty
-          isMainDependent: relation.isMainDependent,
-        );
+        if (detail != null && mounted) {
+          final fullDependent = AccountDependentModel(
+            dependentId: detail.dependentId,
+            isLeader: detail.isLeader,
+            name: detail.name,
+            surname: detail.surname,
+            nickname: detail.nickname,
+            born: detail.born,
+            sex: detail.sex,
+            parent1Email: detail.parent1Email,
+            parent1Phone: detail.parent1Phone,
+            parent2Email: detail.parent2Email,
+            parent2Phone: detail.parent2Phone,
+            contactEmail: detail.contactEmail,
+            contactPhone: detail.contactPhone,
+            troopId: detail.troopId,
+            patrolId: detail.patrolId,
+            isArchived: detail.isArchived,
+            secretCode: detail.secretCode,
+            createdAt: detail.createdAt,
+            groupId: detail.groupId,
+            skautisId: detail.skautisId,
+            notes: notes ?? DependentNotesModel.empty(),
+            isMainDependent: relation.isMainDependent,
+          );
 
-        dependentsProvider.addDependent(fullDependent);
-        dependentsProvider.setParticipation(dependentId, participation);
-      }
-    }
+          // Thread-safe update to provider
+          dependentsProvider.addDependent(fullDependent);
+          dependentsProvider.setParticipation(dependentId, participation);
+        }
+      }),
+    );
   }
 
   /// Fetches events for the group starting from the current school year

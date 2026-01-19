@@ -845,11 +845,35 @@ class AppLocalizationsCs extends AppLocalizations {
   String get admin_panel_screen_db_warnings_expansion_tile_title => 'Varování';
 
   @override
+  String get admin_panel_screen_db_warning_no_warnings_subtitle =>
+      'Žádná varování k zobrazení.';
+
+  @override
   String
-  admin_panel_screen_db_warning_account_does_not_have_parent_email_filled_in(
-    String accountNameSurname,
+  admin_panel_screen_db_warning_account_does_not_have_some_contact_filled_in(
+    String account_name_surname,
+    String missing_parent_email,
+    String missing_parent_phone,
+    String missing_personal_email,
+    String missing_personal_phone,
   ) {
-    return 'Podúčet $accountNameSurname nemá vyplněný e-mail rodiče.';
+    String _temp0 = intl.Intl.selectLogic(missing_parent_phone, {
+      'true': 'email a telefon rodiče',
+      'other': 'email rodiče',
+    });
+    String _temp1 = intl.Intl.selectLogic(missing_parent_phone, {
+      'true': 'telefon rodiče',
+      'other': '',
+    });
+    String _temp2 = intl.Intl.selectLogic(missing_parent_email, {
+      'true': '$_temp0',
+      'other': '$_temp1',
+    });
+    String _temp3 = intl.Intl.selectLogic(missing_personal_email, {
+      'true': 'email a telefon',
+      'other': '$_temp2',
+    });
+    return 'Podúčet $account_name_surname nemá vyplněný $_temp3.';
   }
 
   @override

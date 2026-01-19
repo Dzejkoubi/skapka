@@ -143,8 +143,8 @@ class SupabaseService {
   }
 
   // Get all active dependents in given group
-  Future<List<DependentModel>> getGroupDependents(
-    String groupId, {
+  Future<List<DependentModel>> getGroupDependents({
+    required String groupId,
     bool excludeArchived = true,
   }) async {
     var query = _supabaseClient

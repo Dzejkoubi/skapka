@@ -1514,13 +1514,23 @@ abstract class AppLocalizations {
   /// **'Varování'**
   String get admin_panel_screen_db_warnings_expansion_tile_title;
 
-  /// No description provided for @admin_panel_screen_db_warning_account_does_not_have_parent_email_filled_in.
+  /// No description provided for @admin_panel_screen_db_warning_no_warnings_subtitle.
   ///
   /// In cs, this message translates to:
-  /// **'Podúčet {accountNameSurname} nemá vyplněný e-mail rodiče.'**
+  /// **'Žádná varování k zobrazení.'**
+  String get admin_panel_screen_db_warning_no_warnings_subtitle;
+
+  /// No description provided for @admin_panel_screen_db_warning_account_does_not_have_some_contact_filled_in.
+  ///
+  /// In cs, this message translates to:
+  /// **'Podúčet {account_name_surname} nemá vyplněný {missing_personal_email, select, true{email a telefon} other{{missing_parent_email, select, true{{missing_parent_phone, select, true{email a telefon rodiče} other{email rodiče}}} other{{missing_parent_phone, select, true{telefon rodiče} other{}}}}}}.'**
   String
-  admin_panel_screen_db_warning_account_does_not_have_parent_email_filled_in(
-    String accountNameSurname,
+  admin_panel_screen_db_warning_account_does_not_have_some_contact_filled_in(
+    String account_name_surname,
+    String missing_parent_email,
+    String missing_parent_phone,
+    String missing_personal_email,
+    String missing_personal_phone,
   );
 
   /// No description provided for @admin_panel_screen_db_warning_account_does_not_have_parent_email_filled_in_copy_account_id.

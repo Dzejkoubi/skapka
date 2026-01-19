@@ -10,17 +10,17 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i23;
-import 'package:collection/collection.dart' as _i31;
-import 'package:flutter/foundation.dart' as _i25;
+import 'package:collection/collection.dart' as _i30;
+import 'package:flutter/foundation.dart' as _i31;
 import 'package:flutter/material.dart' as _i24;
 import 'package:skapka_app/models/dependents/account_dependent_model.dart'
     as _i33;
-import 'package:skapka_app/models/dependents/dependent_model.dart' as _i26;
+import 'package:skapka_app/models/dependents/dependent_model.dart' as _i25;
 import 'package:skapka_app/models/event_model.dart' as _i32;
-import 'package:skapka_app/models/event_participant_model.dart' as _i30;
-import 'package:skapka_app/models/leader_model.dart' as _i29;
-import 'package:skapka_app/models/patrol_model.dart' as _i27;
-import 'package:skapka_app/models/troop_model.dart' as _i28;
+import 'package:skapka_app/models/event_participant_model.dart' as _i29;
+import 'package:skapka_app/models/leader_model.dart' as _i28;
+import 'package:skapka_app/models/patrol_model.dart' as _i26;
+import 'package:skapka_app/models/troop_model.dart' as _i27;
 import 'package:skapka_app/providers/units_provider.dart' as _i34;
 import 'package:skapka_app/screens/account_not_approved_screen/account_not_approved_screen.dart'
     as _i1;
@@ -211,12 +211,12 @@ class CreateEditEventInstructionsRouteArgs {
 class CreateEditEventParticipantsRoute
     extends _i23.PageRouteInfo<CreateEditEventParticipantsRouteArgs> {
   CreateEditEventParticipantsRoute({
-    _i25.Key? key,
-    required List<_i26.DependentModel> groupDependents,
-    required List<_i27.PatrolModel> groupPatrols,
-    required List<_i28.TroopModel> groupTroops,
-    required List<_i29.LeaderModel> groupLeaders,
-    required List<_i30.EventParticipantModel> initialParticipants,
+    _i24.Key? key,
+    required List<_i25.DependentModel> groupDependents,
+    required List<_i26.PatrolModel> groupPatrols,
+    required List<_i27.TroopModel> groupTroops,
+    required List<_i28.LeaderModel> groupLeaders,
+    required List<_i29.EventParticipantModel> initialParticipants,
     List<_i23.PageRouteInfo>? children,
   }) : super(
          CreateEditEventParticipantsRoute.name,
@@ -259,17 +259,17 @@ class CreateEditEventParticipantsRouteArgs {
     required this.initialParticipants,
   });
 
-  final _i25.Key? key;
+  final _i24.Key? key;
 
-  final List<_i26.DependentModel> groupDependents;
+  final List<_i25.DependentModel> groupDependents;
 
-  final List<_i27.PatrolModel> groupPatrols;
+  final List<_i26.PatrolModel> groupPatrols;
 
-  final List<_i28.TroopModel> groupTroops;
+  final List<_i27.TroopModel> groupTroops;
 
-  final List<_i29.LeaderModel> groupLeaders;
+  final List<_i28.LeaderModel> groupLeaders;
 
-  final List<_i30.EventParticipantModel> initialParticipants;
+  final List<_i29.EventParticipantModel> initialParticipants;
 
   @override
   String toString() {
@@ -281,23 +281,23 @@ class CreateEditEventParticipantsRouteArgs {
     if (identical(this, other)) return true;
     if (other is! CreateEditEventParticipantsRouteArgs) return false;
     return key == other.key &&
-        const _i31.ListEquality<_i26.DependentModel>().equals(
+        const _i30.ListEquality<_i25.DependentModel>().equals(
           groupDependents,
           other.groupDependents,
         ) &&
-        const _i31.ListEquality<_i27.PatrolModel>().equals(
+        const _i30.ListEquality<_i26.PatrolModel>().equals(
           groupPatrols,
           other.groupPatrols,
         ) &&
-        const _i31.ListEquality<_i28.TroopModel>().equals(
+        const _i30.ListEquality<_i27.TroopModel>().equals(
           groupTroops,
           other.groupTroops,
         ) &&
-        const _i31.ListEquality<_i29.LeaderModel>().equals(
+        const _i30.ListEquality<_i28.LeaderModel>().equals(
           groupLeaders,
           other.groupLeaders,
         ) &&
-        const _i31.ListEquality<_i30.EventParticipantModel>().equals(
+        const _i30.ListEquality<_i29.EventParticipantModel>().equals(
           initialParticipants,
           other.initialParticipants,
         );
@@ -306,11 +306,11 @@ class CreateEditEventParticipantsRouteArgs {
   @override
   int get hashCode =>
       key.hashCode ^
-      const _i31.ListEquality<_i26.DependentModel>().hash(groupDependents) ^
-      const _i31.ListEquality<_i27.PatrolModel>().hash(groupPatrols) ^
-      const _i31.ListEquality<_i28.TroopModel>().hash(groupTroops) ^
-      const _i31.ListEquality<_i29.LeaderModel>().hash(groupLeaders) ^
-      const _i31.ListEquality<_i30.EventParticipantModel>().hash(
+      const _i30.ListEquality<_i25.DependentModel>().hash(groupDependents) ^
+      const _i30.ListEquality<_i26.PatrolModel>().hash(groupPatrols) ^
+      const _i30.ListEquality<_i27.TroopModel>().hash(groupTroops) ^
+      const _i30.ListEquality<_i28.LeaderModel>().hash(groupLeaders) ^
+      const _i30.ListEquality<_i29.EventParticipantModel>().hash(
         initialParticipants,
       );
 }
@@ -320,10 +320,10 @@ class CreateEditEventParticipantsRouteArgs {
 class CreateEditEventRoute
     extends _i23.PageRouteInfo<CreateEditEventRouteArgs> {
   CreateEditEventRoute({
-    _i25.Key? key,
+    _i31.Key? key,
     _i32.EventModel? event,
     _i32.EventTimeType? eventTimeType,
-    List<_i30.EventParticipantModel>? eventParticipants,
+    List<_i29.EventParticipantModel>? eventParticipants,
     List<_i23.PageRouteInfo>? children,
   }) : super(
          CreateEditEventRoute.name,
@@ -362,13 +362,13 @@ class CreateEditEventRouteArgs {
     this.eventParticipants,
   });
 
-  final _i25.Key? key;
+  final _i31.Key? key;
 
   final _i32.EventModel? event;
 
   final _i32.EventTimeType? eventTimeType;
 
-  final List<_i30.EventParticipantModel>? eventParticipants;
+  final List<_i29.EventParticipantModel>? eventParticipants;
 
   @override
   String toString() {
@@ -382,7 +382,7 @@ class CreateEditEventRouteArgs {
     return key == other.key &&
         event == other.event &&
         eventTimeType == other.eventTimeType &&
-        const _i31.ListEquality<_i30.EventParticipantModel>().equals(
+        const _i30.ListEquality<_i29.EventParticipantModel>().equals(
           eventParticipants,
           other.eventParticipants,
         );
@@ -393,7 +393,7 @@ class CreateEditEventRouteArgs {
       key.hashCode ^
       event.hashCode ^
       eventTimeType.hashCode ^
-      const _i31.ListEquality<_i30.EventParticipantModel>().hash(
+      const _i30.ListEquality<_i29.EventParticipantModel>().hash(
         eventParticipants,
       );
 }
@@ -640,7 +640,7 @@ class RegisterRouteFirst extends _i23.PageRouteInfo<void> {
 /// [_i18.RegisterScreenSecond]
 class RegisterRouteSecond extends _i23.PageRouteInfo<RegisterRouteSecondArgs> {
   RegisterRouteSecond({
-    _i25.Key? key,
+    _i24.Key? key,
     required String email,
     required String name,
     required String surname,
@@ -680,7 +680,7 @@ class RegisterRouteSecondArgs {
     required this.surname,
   });
 
-  final _i25.Key? key;
+  final _i24.Key? key;
 
   final String email;
 

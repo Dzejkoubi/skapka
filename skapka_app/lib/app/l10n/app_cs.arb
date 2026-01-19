@@ -297,14 +297,27 @@
     "category_admin_panel_screen": "--- ADMIN PANEL ---",
     "admin_panel_screen_title": "Admin Panel",
     "admin_panel_screen_db_warnings_expansion_tile_title": "Varování",
-    "admin_panel_screen_db_warning_account_does_not_have_parent_email_filled_in": "Podúčet {accountNameSurname} nemá vyplněný e-mail rodiče.",
-    "@admin_panel_screen_db_warning_account_does_not_have_parent_email_filled_in": {
+    "admin_panel_screen_db_warning_no_warnings_subtitle": "Žádná varování k zobrazení.",
+    "admin_panel_screen_db_warning_account_does_not_have_some_contact_filled_in": "Podúčet {account_name_surname} nemá vyplněný {missing_personal_email, select, true{email a telefon} other{{missing_parent_email, select, true{{missing_parent_phone, select, true{email a telefon rodiče} other{email rodiče}}} other{{missing_parent_phone, select, true{telefon rodiče} other{}}}}}}.",
+    "@admin_panel_screen_db_warning_account_does_not_have_some_contact_filled_in": {
         "placeholders": {
-            "accountNameSurname": {
+            "account_name_surname": {
+                "type": "String"
+            },
+            "missing_parent_email": {
+                "type": "String"
+            },
+            "missing_parent_phone": {
+                "type": "String"
+            },
+            "missing_personal_email": {
+                "type": "String"
+            },
+            "missing_personal_phone": {
                 "type": "String"
             }
         }
-    },    
+    },
     "admin_panel_screen_db_warning_account_does_not_have_parent_email_filled_in_copy_account_id": "Id účtu zkopírováno do schránky.",
     "admin_panel_screen_accounts_management_title": "Účty & Podúčty",
     "admin_panel_screen_button_approve_accounts": "Potvrdit účty",

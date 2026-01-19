@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:gaimon/gaimon.dart';
 import 'package:skapka_app/app/theme/app_color_theme.dart';
+import 'package:skapka_app/app/theme/app_sizes.dart';
 import 'package:skapka_app/app/theme/app_spacing.dart';
 import 'package:skapka_app/app/theme/app_text_theme.dart';
 import 'package:skapka_app/app/theme/app_radius.dart';
 import 'package:figma_squircle/figma_squircle.dart';
 
-class BasicExpansionTile extends StatelessWidget {
+class BasicExpansionTile extends StatefulWidget {
   final Widget child;
   final Color? customBorderColor;
   final String title;
@@ -19,10 +22,17 @@ class BasicExpansionTile extends StatelessWidget {
   });
 
   @override
+  State<BasicExpansionTile> createState() => _BasicExpansionTileState();
+}
+
+class _BasicExpansionTileState extends State<BasicExpansionTile> {
+  bool _isExpanded = false;
+
+  @override
   Widget build(BuildContext context) {
     final border = SmoothRectangleBorder(
       side: BorderSide(
-        color: customBorderColor ?? context.colors.background.medium,
+        color: widget.customBorderColor ?? context.colors.background.medium,
         width: 1.5,
       ),
       borderRadius: SmoothBorderRadius(
@@ -34,19 +44,47 @@ class BasicExpansionTile extends StatelessWidget {
     return Theme(
       data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
       child: ExpansionTile(
-        expandedCrossAxisAlignment: expandedCrossAxisAlignment,
+        onExpansionChanged: (value) {
+          // If new state opened
+          if (value == true && !_isExpanded) {
+            Gaimon.soft();
+          }
+          // If new state closed
+          else if (value == false && _isExpanded) {
+            Gaimon.rigid();
+          }
+          setState(() {
+            _isExpanded = value;
+          });
+        },
+        expandedCrossAxisAlignment: widget.expandedCrossAxisAlignment,
         shape: border,
         collapsedShape: border,
         backgroundColor: context.colors.background.light,
         collapsedBackgroundColor: context.colors.background.light,
         title: Row(
-          children: [Text(title, style: AppTextTheme.titleMedium(context))],
+          children: [
+            Text(widget.title, style: AppTextTheme.titleMedium(context)),
+          ],
+        ),
+
+        trailing: AnimatedRotation(
+          turns: _isExpanded ? 0 : 0.5,
+          duration: const Duration(milliseconds: 200),
+          child: SvgPicture.asset(
+            'assets/icons/chevron-up.svg',
+            colorFilter: ColorFilter.mode(
+              context.colors.text.normal,
+              BlendMode.srcIn,
+            ),
+            width: AppSizes.iconSizeSmall,
+          ),
         ),
         childrenPadding: const EdgeInsets.symmetric(
           horizontal: AppSpacing.small,
           vertical: AppSpacing.small,
         ),
-        children: [child],
+        children: [widget.child],
       ),
     );
   }

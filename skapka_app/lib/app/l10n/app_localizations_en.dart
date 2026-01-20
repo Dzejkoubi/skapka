@@ -892,6 +892,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get admin_panel_screen_button_approve_accounts => 'Approve Accounts';
 
   @override
+  String get admin_panel_screen_button_approve_accounts_search_field_hint =>
+      'Search by surname...';
+
+  @override
   String admin_panel_screen_account_approval_change_success(
     String name_surname,
     String status,
@@ -910,14 +914,44 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get admin_panel_screen_button_approve_accounts_search_field_hint =>
-      'Search by surname...';
-
-  @override
   String get admin_panel_screen_button_edit_leaders => 'Edit Leaders';
 
   @override
-  String get admin_panel_screen_button_edit_permissions => 'Edit Permissions';
+  String get admin_panel_screen_button_edit_rights => 'Edit Permissions';
+
+  @override
+  String get admin_panel_screen_button_edit_rights_search_field_hint =>
+      'Search by surname...';
+
+  @override
+  String get admin_panel_screen_button_edit_rights_right_level_1 =>
+      '1 - Default';
+
+  @override
+  String get admin_panel_screen_button_edit_rights_right_level_2 =>
+      '2 - Leader';
+
+  @override
+  String get admin_panel_screen_button_edit_rights_right_level_3 => '3 - Admin';
+
+  @override
+  String admin_panel_screen_button_edit_rights_change_success(
+    String name_surname,
+    String status,
+  ) {
+    String _temp0 = intl.Intl.selectLogic(status, {
+      '1': ' to default',
+      '2': ' to leader',
+      '3': ' to admin',
+      'other': '',
+    });
+    return 'Account $name_surname rights were successfully changed$_temp0.';
+  }
+
+  @override
+  String admin_panel_screen_button_edit_rights_error(String name_surname) {
+    return 'Account rights $name_surname could not be updated. Please try again.';
+  }
 
   @override
   String get admin_panel_screen_button_connect_dependents =>

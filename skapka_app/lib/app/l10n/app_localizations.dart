@@ -1552,6 +1552,12 @@ abstract class AppLocalizations {
   /// **'Potvrdit účty'**
   String get admin_panel_screen_button_approve_accounts;
 
+  /// No description provided for @admin_panel_screen_button_approve_accounts_search_field_hint.
+  ///
+  /// In cs, this message translates to:
+  /// **'Vyhledat podle příjmení...'**
+  String get admin_panel_screen_button_approve_accounts_search_field_hint;
+
   /// No description provided for @admin_panel_screen_account_approval_change_success.
   ///
   /// In cs, this message translates to:
@@ -1567,23 +1573,56 @@ abstract class AppLocalizations {
   /// **'Účet {name_surname} se nepodařilo potvrdit. Zkus to prosím znovu.'**
   String admin_panel_screen_button_approve_accounts_error(String name_surname);
 
-  /// No description provided for @admin_panel_screen_button_approve_accounts_search_field_hint.
-  ///
-  /// In cs, this message translates to:
-  /// **'Vyhledat podle příjmení...'**
-  String get admin_panel_screen_button_approve_accounts_search_field_hint;
-
   /// No description provided for @admin_panel_screen_button_edit_leaders.
   ///
   /// In cs, this message translates to:
   /// **'Upravit vedoucí'**
   String get admin_panel_screen_button_edit_leaders;
 
-  /// No description provided for @admin_panel_screen_button_edit_permissions.
+  /// No description provided for @admin_panel_screen_button_edit_rights.
   ///
   /// In cs, this message translates to:
   /// **'Upravit práva'**
-  String get admin_panel_screen_button_edit_permissions;
+  String get admin_panel_screen_button_edit_rights;
+
+  /// No description provided for @admin_panel_screen_button_edit_rights_search_field_hint.
+  ///
+  /// In cs, this message translates to:
+  /// **'Vyhledat podle příjmení...'**
+  String get admin_panel_screen_button_edit_rights_search_field_hint;
+
+  /// No description provided for @admin_panel_screen_button_edit_rights_right_level_1.
+  ///
+  /// In cs, this message translates to:
+  /// **'1 - Výchozí'**
+  String get admin_panel_screen_button_edit_rights_right_level_1;
+
+  /// No description provided for @admin_panel_screen_button_edit_rights_right_level_2.
+  ///
+  /// In cs, this message translates to:
+  /// **'2 - Vedoucí'**
+  String get admin_panel_screen_button_edit_rights_right_level_2;
+
+  /// No description provided for @admin_panel_screen_button_edit_rights_right_level_3.
+  ///
+  /// In cs, this message translates to:
+  /// **'3 - Admin'**
+  String get admin_panel_screen_button_edit_rights_right_level_3;
+
+  /// No description provided for @admin_panel_screen_button_edit_rights_change_success.
+  ///
+  /// In cs, this message translates to:
+  /// **'Práva účtu {name_surname} byla úspěšně změněna{status, select, 1{ na výchozí} 2{ na vedoucího} 3{ na administrátora} other{}}.'**
+  String admin_panel_screen_button_edit_rights_change_success(
+    String name_surname,
+    String status,
+  );
+
+  /// No description provided for @admin_panel_screen_button_edit_rights_error.
+  ///
+  /// In cs, this message translates to:
+  /// **'Práva účtu {name_surname} se nepodařilo změnit. Zkus to prosím znovu.'**
+  String admin_panel_screen_button_edit_rights_error(String name_surname);
 
   /// No description provided for @admin_panel_screen_button_connect_dependents.
   ///

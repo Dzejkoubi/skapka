@@ -11,7 +11,7 @@ _LeaderModel _$LeaderModelFromJson(Map<String, dynamic> json) => _LeaderModel(
   patrolId: json['patrol_id'] as String,
   groupId: json['group_id'] as String,
 );
-// ignore: unused_element
+
 Map<String, dynamic> _$LeaderModelToJson(_LeaderModel instance) =>
     <String, dynamic>{
       'dependent_id': instance.dependentId,

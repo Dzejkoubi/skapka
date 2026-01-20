@@ -266,12 +266,16 @@ class AdminPanelScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           MainButton.outlined(
-                            onPressed: () {},
+                            onPressed: () {
+                              context.router.push(
+                                const EditAccountRightsRoute(),
+                              );
+                            },
                             type: ButtonType.textIcon,
                             iconAsset: 'assets/icons/license.svg',
                             text: context
                                 .localizations
-                                .admin_panel_screen_button_edit_permissions,
+                                .admin_panel_screen_button_edit_rights,
                             expandToFillWidth: false,
                           ),
                         ],

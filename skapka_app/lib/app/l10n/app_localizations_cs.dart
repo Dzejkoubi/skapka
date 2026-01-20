@@ -888,6 +888,10 @@ class AppLocalizationsCs extends AppLocalizations {
   String get admin_panel_screen_button_approve_accounts => 'Potvrdit účty';
 
   @override
+  String get admin_panel_screen_button_approve_accounts_search_field_hint =>
+      'Vyhledat podle příjmení...';
+
+  @override
   String admin_panel_screen_account_approval_change_success(
     String name_surname,
     String status,
@@ -906,14 +910,44 @@ class AppLocalizationsCs extends AppLocalizations {
   }
 
   @override
-  String get admin_panel_screen_button_approve_accounts_search_field_hint =>
-      'Vyhledat podle příjmení...';
-
-  @override
   String get admin_panel_screen_button_edit_leaders => 'Upravit vedoucí';
 
   @override
-  String get admin_panel_screen_button_edit_permissions => 'Upravit práva';
+  String get admin_panel_screen_button_edit_rights => 'Upravit práva';
+
+  @override
+  String get admin_panel_screen_button_edit_rights_search_field_hint =>
+      'Vyhledat podle příjmení...';
+
+  @override
+  String get admin_panel_screen_button_edit_rights_right_level_1 =>
+      '1 - Výchozí';
+
+  @override
+  String get admin_panel_screen_button_edit_rights_right_level_2 =>
+      '2 - Vedoucí';
+
+  @override
+  String get admin_panel_screen_button_edit_rights_right_level_3 => '3 - Admin';
+
+  @override
+  String admin_panel_screen_button_edit_rights_change_success(
+    String name_surname,
+    String status,
+  ) {
+    String _temp0 = intl.Intl.selectLogic(status, {
+      '1': ' na výchozí',
+      '2': ' na vedoucího',
+      '3': ' na administrátora',
+      'other': '',
+    });
+    return 'Práva účtu $name_surname byla úspěšně změněna$_temp0.';
+  }
+
+  @override
+  String admin_panel_screen_button_edit_rights_error(String name_surname) {
+    return 'Práva účtu $name_surname se nepodařilo změnit. Zkus to prosím znovu.';
+  }
 
   @override
   String get admin_panel_screen_button_connect_dependents => 'Připojit podúčty';

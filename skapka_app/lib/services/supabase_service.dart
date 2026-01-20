@@ -402,4 +402,20 @@ class SupabaseService {
         .update({'is_approved': isApproved})
         .eq('account_id', accountId);
   }
+
+  Future<void> updateAccountRights(String accountId, int newRights) async {
+    if (newRights == 3) {
+      throw ArgumentError(
+        'Rights value 3 is reserved for the admin and can be assigned only manually in the database.',
+      );
+    } else if (newRights < 0 || newRights > 2) {
+      throw ArgumentError(
+        'Invalid rights value: $newRights. Must be between 0 and 2.',
+      );
+    }
+    await _supabaseClient
+        .from('accounts')
+        .update({'rights': newRights})
+        .eq('account_id', accountId);
+  }
 }

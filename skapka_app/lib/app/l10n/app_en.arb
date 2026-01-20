@@ -322,6 +322,26 @@
     "admin_panel_screen_db_warning_account_does_not_have_parent_email_filled_in_copy_account_id": "Account ID copied to clipboard.",
     "admin_panel_screen_accounts_management_title": "Accounts & Dependents",
     "admin_panel_screen_button_approve_accounts": "Approve Accounts",
+    "admin_panel_screen_account_approval_change_success": "Account {name_surname} was successfully {status, select, approved{approved} disapproved{disapproved} other{updated}}.",
+    "@admin_panel_screen_account_approval_change_success": {
+        "placeholders": {
+            "name_surname": {
+                "type": "String"
+            },
+            "status": {
+                "type": "String"
+            }
+        }
+    },
+    "admin_panel_screen_button_approve_accounts_error": "Account {name_surname} could not be approved. Please try again.",
+    "@admin_panel_screen_button_approve_accounts_error": {
+        "placeholders": {
+            "name_surname": {
+                "type": "String"
+            }
+        }
+    },
+    "admin_panel_screen_button_approve_accounts_search_field_hint": "Search by surname...",
     "admin_panel_screen_button_edit_leaders": "Edit Leaders",
     "admin_panel_screen_button_edit_permissions": "Edit Permissions",
     "admin_panel_screen_button_connect_dependents": "Connect Dependents",
@@ -329,5 +349,15 @@
     "admin_panel_screen_data_management_title": "Data",
     "admin_panel_screen_button_skautis_sync": "SkautIS sync",
     "admin_panel_screen_notification_title": "Notification",
-    "admin_panel_screen_button_send_notification": "Send Notification"
+    "admin_panel_screen_button_send_notification": "Send Notification",
+    "general_success": "Success",
+    "general_saved": "Changes saved successfully",
+    "general_save": "Save",
+    "general_close": "Close",
+    "general_discard": "Discard",
+    "general_continue": "Continue",
+    "general_cancel": "Cancel",
+    "general_unsaved_changes": "Unsaved changes",
+    "general_unsaved_changes_description": "You have unsaved changes. Do you want to discard them?",
+    "error_unknown": "Unknown error"
 }

@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:skapka_app/app/l10n/l10n_extension.dart';
+import 'package:skapka_app/app/router/router.gr.dart';
 import 'package:skapka_app/app/theme/app_color_theme.dart';
 import 'package:skapka_app/app/theme/app_decorations.dart';
 import 'package:skapka_app/app/theme/app_spacing.dart';
@@ -235,7 +236,9 @@ class AdminPanelScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           MainButton.filled(
-                            onPressed: () {},
+                            onPressed: () {
+                              context.router.push(const ApproveAccountsRoute());
+                            },
                             type: ButtonType.textIcon,
                             iconAsset: 'assets/icons/check.svg',
                             text: context

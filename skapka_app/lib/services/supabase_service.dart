@@ -15,7 +15,6 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 class SupabaseService {
   final _supabaseClient = Supabase.instance.client;
 
-  // Edit account details
   Future<AccountModel> editAccountDetails({
     required String accountId,
     required String name,
@@ -37,7 +36,6 @@ class SupabaseService {
     return AccountModel.fromJson(response);
   }
 
-  // Check if logged account is approved
   Future<bool> isLoggedAccountApproved() async {
     final user = _supabaseClient.auth.currentUser;
     if (user != null) {
@@ -50,7 +48,7 @@ class SupabaseService {
     return false;
   }
 
-  // Get account details
+  // Table accounts
   Future<AccountModel?> getAccountDetails(String accountId) async {
     final response = await _supabaseClient
         .from('accounts')
@@ -62,6 +60,7 @@ class SupabaseService {
     return AccountModel.fromJson(response);
   }
 
+  // Table groups
   Future<GroupModel> getAccountGroupDetail(String groupId) async {
     final response = await _supabaseClient
         .from('groups')
@@ -72,6 +71,7 @@ class SupabaseService {
     return GroupModel.fromJson(response);
   }
 
+  // Table accounts_dependents
   Future<List<AccountDependentRelationModel>> getAccountDependentRelations(
     String accountId,
   ) async {
@@ -86,6 +86,7 @@ class SupabaseService {
         .toList();
   }
 
+  // Table dependents
   Future<DependentModel?> getDependentDetail(String dependentId) async {
     final response = await _supabaseClient
         .from('dependents')
@@ -97,6 +98,7 @@ class SupabaseService {
     return DependentModel.fromJson(response);
   }
 
+  // Table dependent_notes
   Future<DependentNotesModel?> getDependentNotes(String dependentId) async {
     final response = await _supabaseClient
         .from('dependent_notes')
@@ -142,7 +144,7 @@ class SupabaseService {
         .toList();
   }
 
-  // Get all active dependents in given group
+  // Table dependents
   Future<List<DependentModel>> getGroupDependents({
     required String groupId,
     bool excludeArchived = true,
@@ -182,7 +184,38 @@ class SupabaseService {
         .toList();
   }
 
-  // Get event_participants that are invited to given event with their statuses
+  // Table accounts
+  Future<List<AccountModel>> getGroupAccounts(
+    String groupId, {
+    bool onlyNotApproved = false,
+    String? surnameSearchQuery,
+  }) async {
+    var query = _supabaseClient
+        .from('accounts')
+        .select()
+        .eq('group_id', groupId);
+
+    if (onlyNotApproved) {
+      query = query.eq('is_approved', false);
+    }
+
+    if (surnameSearchQuery != null && surnameSearchQuery.isNotEmpty) {
+      query = query.ilike('surname', '%$surnameSearchQuery%');
+    }
+    final response = await query;
+    return (response as List)
+        .map<AccountModel>((json) => AccountModel.fromJson(json))
+        .toList();
+  }
+
+  Future<void> changeAccountApproval(String accountId, bool isApproved) async {
+    await _supabaseClient
+        .from('accounts')
+        .update({'is_approved': isApproved})
+        .eq('account_id', accountId);
+  }
+
+  // Table event_participants filtered by event_id
   Future<List<EventParticipantModel>> getEventParticipants(
     String eventId,
     String groupId,
@@ -199,7 +232,7 @@ class SupabaseService {
         .toList();
   }
 
-  // Get event_participants for given dependent
+  // Table event_participants filtered by dependent_id
   Future<List<EventParticipantModel>> getDependentParticipation(
     String dependentId,
   ) async {
@@ -214,7 +247,7 @@ class SupabaseService {
         .toList();
   }
 
-  // Get group troops
+  // Table troops
   Future<List<TroopModel>> getGroupTroops(String groupId) async {
     final response = await _supabaseClient
         .from('troops')
@@ -225,7 +258,7 @@ class SupabaseService {
         .toList();
   }
 
-  // Get group patrols
+  // Table patrols
   Future<List<PatrolModel>> getGroupPatrols(String groupId) async {
     final response = await _supabaseClient
         .from('patrols')
@@ -236,7 +269,7 @@ class SupabaseService {
         .toList();
   }
 
-  // Get groups leaders
+  // Table patrols_leaders
   Future<List<LeaderModel>> getGroupLeaders(String groupId) async {
     final response = await _supabaseClient
         .from('patrols_leaders')
@@ -247,6 +280,7 @@ class SupabaseService {
         .toList();
   }
 
+  // Table events
   Future<EventModel> createEvent(
     EventModel event,
     AccountProvider accountProvider,
@@ -280,7 +314,6 @@ class SupabaseService {
     return EventModel.fromJson(response);
   }
 
-  // Edit event details
   Future<void> editEventDetails(
     EventModel event,
     AccountProvider accountProvider,
@@ -304,12 +337,11 @@ class SupabaseService {
         .eq('event_id', event.eventId);
   }
 
-  // Delete event
   Future<void> deleteEvent(String eventId) async {
     await _supabaseClient.from('events').delete().eq('event_id', eventId);
   }
 
-  // Add event participant
+  // New row into event_participants
   Future<void> addEventParticipant(EventParticipantModel participant) async {
     await _supabaseClient.from('event_participants').insert({
       'event_id': participant.eventId,
@@ -319,7 +351,6 @@ class SupabaseService {
     });
   }
 
-  // Remove event participant
   Future<void> removeEventParticipant({
     required String eventId,
     required String dependentId,
@@ -331,7 +362,6 @@ class SupabaseService {
         .eq('dependent_id', dependentId);
   }
 
-  // Update dependent event participation status
   Future<void> updateDependentEventParticipationStatus({
     required String eventId,
     required String dependentId,
@@ -344,7 +374,7 @@ class SupabaseService {
         .eq('dependent_id', dependentId);
   }
 
-  // Update dependent notes
+  // Table dependent_notes
   Future<void> updateDependentNotes({
     required String dependentId,
     required DependentNotesModel notes,
@@ -360,5 +390,16 @@ class SupabaseService {
       'is_swimmer': notes.isSwimmer,
       'other_note': notes.otherNote,
     });
+  }
+
+  // Batch update account approval status
+  Future<void> updateAccountApprovalStatus(
+    String accountId,
+    bool isApproved,
+  ) async {
+    await _supabaseClient
+        .from('accounts')
+        .update({'is_approved': isApproved})
+        .eq('account_id', accountId);
   }
 }

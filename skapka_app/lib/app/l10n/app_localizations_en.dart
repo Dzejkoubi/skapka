@@ -892,6 +892,28 @@ class AppLocalizationsEn extends AppLocalizations {
   String get admin_panel_screen_button_approve_accounts => 'Approve Accounts';
 
   @override
+  String admin_panel_screen_account_approval_change_success(
+    String name_surname,
+    String status,
+  ) {
+    String _temp0 = intl.Intl.selectLogic(status, {
+      'approved': 'approved',
+      'disapproved': 'disapproved',
+      'other': 'updated',
+    });
+    return 'Account $name_surname was successfully $_temp0.';
+  }
+
+  @override
+  String admin_panel_screen_button_approve_accounts_error(String name_surname) {
+    return 'Account $name_surname could not be approved. Please try again.';
+  }
+
+  @override
+  String get admin_panel_screen_button_approve_accounts_search_field_hint =>
+      'Search by surname...';
+
+  @override
   String get admin_panel_screen_button_edit_leaders => 'Edit Leaders';
 
   @override
@@ -915,4 +937,35 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get admin_panel_screen_button_send_notification => 'Send Notification';
+
+  @override
+  String get general_success => 'Success';
+
+  @override
+  String get general_saved => 'Changes saved successfully';
+
+  @override
+  String get general_save => 'Save';
+
+  @override
+  String get general_close => 'Close';
+
+  @override
+  String get general_discard => 'Discard';
+
+  @override
+  String get general_continue => 'Continue';
+
+  @override
+  String get general_cancel => 'Cancel';
+
+  @override
+  String get general_unsaved_changes => 'Unsaved changes';
+
+  @override
+  String get general_unsaved_changes_description =>
+      'You have unsaved changes. Do you want to discard them?';
+
+  @override
+  String get error_unknown => 'Unknown error';
 }

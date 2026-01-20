@@ -387,6 +387,8 @@ class AppColorTheme {
 /// Extension to easily access and update colors from BuildContext
 extension AppColorThemeExtension on BuildContext {
   /// Get colors (ensures theme is synced)
+
+  // ignore: library_private_types_in_public_api
   _AppColorTheme get colors {
     final brightness = Theme.of(this).brightness;
     AppColorTheme.updateTheme(brightness);

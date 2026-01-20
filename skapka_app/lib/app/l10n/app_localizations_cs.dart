@@ -888,6 +888,28 @@ class AppLocalizationsCs extends AppLocalizations {
   String get admin_panel_screen_button_approve_accounts => 'Potvrdit účty';
 
   @override
+  String admin_panel_screen_account_approval_change_success(
+    String name_surname,
+    String status,
+  ) {
+    String _temp0 = intl.Intl.selectLogic(status, {
+      'approved': 'potvrzen',
+      'disapproved': 'zamítnut',
+      'other': 'aktualizován',
+    });
+    return 'Účet $name_surname byl úspěšně $_temp0.';
+  }
+
+  @override
+  String admin_panel_screen_button_approve_accounts_error(String name_surname) {
+    return 'Účet $name_surname se nepodařilo potvrdit. Zkus to prosím znovu.';
+  }
+
+  @override
+  String get admin_panel_screen_button_approve_accounts_search_field_hint =>
+      'Vyhledat podle příjmení...';
+
+  @override
   String get admin_panel_screen_button_edit_leaders => 'Upravit vedoucí';
 
   @override
@@ -910,4 +932,35 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get admin_panel_screen_button_send_notification => 'Poslat oznámení';
+
+  @override
+  String get general_success => 'Úspěch';
+
+  @override
+  String get general_saved => 'Změny úspěšně uloženy';
+
+  @override
+  String get general_save => 'Uložit';
+
+  @override
+  String get general_close => 'Zavřít';
+
+  @override
+  String get general_discard => 'Zahodit';
+
+  @override
+  String get general_continue => 'Pokračovat';
+
+  @override
+  String get general_cancel => 'Zrušit';
+
+  @override
+  String get general_unsaved_changes => 'Neuložené změny';
+
+  @override
+  String get general_unsaved_changes_description =>
+      'Máte neuložené změny. Chcete je zahodit?';
+
+  @override
+  String get error_unknown => 'Neznámá chyba';
 }

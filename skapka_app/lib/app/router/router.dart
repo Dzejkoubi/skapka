@@ -59,5 +59,8 @@ class AppRouter extends RootStackRouter {
     AutoRoute(page: ButtonThemeShowcaseRoute.page),
     AutoRoute(page: SquircleShowcaseRoute.page),
     AutoRoute(page: LargeDialogShowcaseRoute.page),
+
+    // Admin panel screens
+    AutoRoute(page: ApproveAccountsRoute.page, guards: [AdminGuard()]),
   ];
 }

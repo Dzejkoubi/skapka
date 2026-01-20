@@ -7,7 +7,6 @@ import 'package:provider/provider.dart';
 import 'package:skapka_app/app/router/router.dart';
 import 'package:skapka_app/app/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
-import 'package:skapka_app/app/router/router.gr.dart';
 import 'package:skapka_app/app/theme/app_theme_data.dart';
 import 'package:skapka_app/providers/admin_panel_provider.dart';
 import 'package:skapka_app/providers/dependents_provider.dart';

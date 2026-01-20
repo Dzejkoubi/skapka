@@ -1552,6 +1552,27 @@ abstract class AppLocalizations {
   /// **'Potvrdit účty'**
   String get admin_panel_screen_button_approve_accounts;
 
+  /// No description provided for @admin_panel_screen_account_approval_change_success.
+  ///
+  /// In cs, this message translates to:
+  /// **'Účet {name_surname} byl úspěšně {status, select, approved{potvrzen} disapproved{zamítnut} other{aktualizován}}.'**
+  String admin_panel_screen_account_approval_change_success(
+    String name_surname,
+    String status,
+  );
+
+  /// No description provided for @admin_panel_screen_button_approve_accounts_error.
+  ///
+  /// In cs, this message translates to:
+  /// **'Účet {name_surname} se nepodařilo potvrdit. Zkus to prosím znovu.'**
+  String admin_panel_screen_button_approve_accounts_error(String name_surname);
+
+  /// No description provided for @admin_panel_screen_button_approve_accounts_search_field_hint.
+  ///
+  /// In cs, this message translates to:
+  /// **'Vyhledat podle příjmení...'**
+  String get admin_panel_screen_button_approve_accounts_search_field_hint;
+
   /// No description provided for @admin_panel_screen_button_edit_leaders.
   ///
   /// In cs, this message translates to:
@@ -1599,6 +1620,66 @@ abstract class AppLocalizations {
   /// In cs, this message translates to:
   /// **'Poslat oznámení'**
   String get admin_panel_screen_button_send_notification;
+
+  /// No description provided for @general_success.
+  ///
+  /// In cs, this message translates to:
+  /// **'Úspěch'**
+  String get general_success;
+
+  /// No description provided for @general_saved.
+  ///
+  /// In cs, this message translates to:
+  /// **'Změny úspěšně uloženy'**
+  String get general_saved;
+
+  /// No description provided for @general_save.
+  ///
+  /// In cs, this message translates to:
+  /// **'Uložit'**
+  String get general_save;
+
+  /// No description provided for @general_close.
+  ///
+  /// In cs, this message translates to:
+  /// **'Zavřít'**
+  String get general_close;
+
+  /// No description provided for @general_discard.
+  ///
+  /// In cs, this message translates to:
+  /// **'Zahodit'**
+  String get general_discard;
+
+  /// No description provided for @general_continue.
+  ///
+  /// In cs, this message translates to:
+  /// **'Pokračovat'**
+  String get general_continue;
+
+  /// No description provided for @general_cancel.
+  ///
+  /// In cs, this message translates to:
+  /// **'Zrušit'**
+  String get general_cancel;
+
+  /// No description provided for @general_unsaved_changes.
+  ///
+  /// In cs, this message translates to:
+  /// **'Neuložené změny'**
+  String get general_unsaved_changes;
+
+  /// No description provided for @general_unsaved_changes_description.
+  ///
+  /// In cs, this message translates to:
+  /// **'Máte neuložené změny. Chcete je zahodit?'**
+  String get general_unsaved_changes_description;
+
+  /// No description provided for @error_unknown.
+  ///
+  /// In cs, this message translates to:
+  /// **'Neznámá chyba'**
+  String get error_unknown;
 }
 
 class _AppLocalizationsDelegate

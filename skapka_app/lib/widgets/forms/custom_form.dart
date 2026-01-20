@@ -22,6 +22,8 @@ class CustomForm extends StatefulWidget {
   final String? errorText;
   final double cornerSmoothing;
   final bool blueBackGroundColorMode;
+  final ValueChanged<String>? onChanged;
+
   const CustomForm({
     super.key,
     this.isActive = true,
@@ -38,6 +40,7 @@ class CustomForm extends StatefulWidget {
     this.errorText,
     this.cornerSmoothing = AppRadius.smoothNormal,
     this.blueBackGroundColorMode = false,
+    this.onChanged,
   });
 
   @override
@@ -63,6 +66,7 @@ class _CustomFormState extends State<CustomForm> {
         child: TextField(
           enabled: widget.isActive,
           controller: widget.controller,
+          onChanged: widget.onChanged,
           obscureText: widget.obscureText,
           keyboardType: widget.keyboardType,
           autofillHints: widget.autofillHints,

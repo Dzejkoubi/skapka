@@ -299,7 +299,7 @@
     "admin_panel_screen_title": "Admin Panel",
     "admin_panel_screen_db_warnings_expansion_tile_title": "Warnings",
     "admin_panel_screen_db_warning_no_warnings_subtitle": "No warnings found.",
-    "admin_panel_screen_db_warning_account_does_not_have_some_contact_filled_in": "Podúčet {account_name_surname} nemá vyplněný {missing_personal_email, select, true{email a telefon} other{{missing_parent_email, select, true{{missing_parent_phone, select, true{email a telefon rodiče} other{email rodiče}}} other{{missing_parent_phone, select, true{telefon rodiče} other{}}}}}}.",
+    "admin_panel_screen_db_warning_account_does_not_have_some_contact_filled_in": "Dependent {account_name_surname} does not have {missing_personal_email, select, true{{missing_personal_phone, select, true{their email and phone} other{their email}}} other{{missing_personal_phone, select, true{their phone} other{{missing_parent_email, select, true{{missing_parent_phone, select, true{parent's email and phone} other{parent's email}}} other{{missing_parent_phone, select, true{parent's phone} other{}}}}}}}}.",
     "@admin_panel_screen_db_warning_account_does_not_have_some_contact_filled_in": {
         "placeholders": {
             "account_name_surname": {

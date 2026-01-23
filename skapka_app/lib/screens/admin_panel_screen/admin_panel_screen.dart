@@ -25,33 +25,6 @@ class AdminPanelScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SupabaseService supabaseService = SupabaseService();
-    AccountProvider accountProvider = context.read<AccountProvider>();
-    initializeGroupDependents({
-      required BuildContext context,
-      required AdminPanelProvider adminPanelProvider,
-      bool autoFetch = false,
-    }) async {
-      try {
-        debugPrint('Initializing group dependents for Admin Panel');
-        if (adminPanelProvider.groupDependents.isEmpty || autoFetch) {
-          List<DependentModel> dependents = await supabaseService
-              .getGroupDependents(groupId: accountProvider.groupId);
-          adminPanelProvider.setGroupDependents(dependents);
-        }
-      } catch (e) {
-        debugPrint('Error initializing group dependents: $e');
-        if (context.mounted) {
-          BottomDialog.show(
-            context,
-            type: BottomDialogType.negative,
-            description: context.localizations.generic_error,
-          );
-        }
-        rethrow;
-      }
-    }
-
     return ScreenWrapper(
       appBar: Appbar(
         showBackChevron: true,
@@ -68,161 +41,7 @@ class AdminPanelScreen extends StatelessWidget {
               spacing: AppSpacing.large,
               children: [
                 // DB warnings expansion tile
-                Consumer<AdminPanelProvider>(
-                  builder: (context, adminProvider, child) => BasicExpansionTile(
-                    title: context
-                        .localizations
-                        .admin_panel_screen_db_warnings_expansion_tile_title,
-                    customBorderColor: AppColorTheme.error.normal,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      spacing: AppSpacing.small,
-                      children: [
-                        // Warnings list
-                        FutureBuilder(
-                          future: initializeGroupDependents(
-                            context: context,
-                            adminPanelProvider: adminProvider,
-                          ),
-                          builder: (context, asyncSnapshot) {
-                            if (asyncSnapshot.connectionState ==
-                                ConnectionState.waiting) {
-                              return const LoadingRotatingLogo();
-                            } else if (asyncSnapshot.hasError) {
-                              return Text(
-                                context.localizations.error,
-                                style: AppTextTheme.bodyMedium(context),
-                              );
-                            } else {
-                              final dependents = adminProvider.groupDependents;
-                              final warningWidgets = <Widget>[];
-
-                              for (final dependent in dependents) {
-                                if (dependent.isArchived) continue;
-
-                                bool missingPersonalEmail = false;
-                                bool missingPersonalPhone = false;
-                                bool missingParentEmail = false;
-                                bool missingParentPhone = false;
-                                bool hasWarning = false;
-
-                                // If the user is a leader, show normal (personal) contact warnings.
-                                // If the user is NOT a leader (dependent), show parent contact warnings.
-                                // Note: Logic inverted based on user requirement (isLeader check acts as !isLeader).
-                                if (!dependent.isLeader) {
-                                  if (dependent.contactEmail == null ||
-                                      dependent.contactEmail!.isEmpty) {
-                                    missingPersonalEmail = true;
-                                    hasWarning = true;
-                                  }
-                                  if (dependent.contactPhone == null ||
-                                      dependent.contactPhone!.isEmpty) {
-                                    missingPersonalPhone = true;
-                                    hasWarning = true;
-                                  }
-                                } else {
-                                  if (dependent.parent1Email == null ||
-                                      dependent.parent1Email!.isEmpty) {
-                                    missingParentEmail = true;
-                                    hasWarning = true;
-                                  }
-                                  if (dependent.parent1Phone == null ||
-                                      dependent.parent1Phone!.isEmpty) {
-                                    missingParentPhone = true;
-                                    hasWarning = true;
-                                  }
-                                }
-
-                                if (hasWarning) {
-                                  warningWidgets.add(
-                                    Container(
-                                      decoration:
-                                          AppDecorations.primaryContainer(
-                                            context,
-                                            borderColor:
-                                                AppColorTheme.error.normal,
-                                          ),
-                                      padding: const EdgeInsets.all(
-                                        AppSpacing.xSmall,
-                                      ),
-
-                                      child: Row(
-                                        children: [
-                                          Expanded(
-                                            child: SingleChildScrollView(
-                                              scrollDirection: Axis.horizontal,
-                                              child: Text(
-                                                context.localizations
-                                                    .admin_panel_screen_db_warning_account_does_not_have_some_contact_filled_in(
-                                                      '${dependent.name} ${dependent.surname}',
-                                                      missingPersonalEmail
-                                                          .toString(),
-                                                      missingPersonalPhone
-                                                          .toString(),
-                                                      missingParentEmail
-                                                          .toString(),
-                                                      missingParentPhone
-                                                          .toString(),
-                                                    ),
-                                                style: AppTextTheme.bodyMedium(
-                                                  context,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  );
-                                }
-                              }
-
-                              if (warningWidgets.isEmpty) {
-                                return Center(
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                      vertical: AppSpacing.small,
-                                    ),
-                                    child: Text(
-                                      context
-                                          .localizations
-                                          .admin_panel_screen_db_warning_no_warnings_subtitle,
-                                      style: AppTextTheme.bodyMedium(context),
-                                    ),
-                                  ),
-                                );
-                              }
-
-                              return Column(
-                                spacing: AppSpacing.small,
-                                children: warningWidgets,
-                              );
-                            }
-                          },
-                        ),
-                        // Reload warnings button
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            MainButton.filled(
-                              variant: ButtonStylesVariants.destructive,
-                              text: '',
-                              type: ButtonType.icon,
-                              onPressed: () {
-                                initializeGroupDependents(
-                                  context: context,
-                                  adminPanelProvider: adminProvider,
-                                  autoFetch: true,
-                                );
-                              },
-                              iconAsset: 'assets/icons/reload.svg',
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+                MissingDependentContactWarningBox(),
 
                 // Account editing expansion tile
                 BasicExpansionTile(
@@ -366,6 +185,185 @@ class AdminPanelScreen extends StatelessWidget {
               ],
             ),
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class MissingDependentContactWarningBox extends StatelessWidget {
+  const MissingDependentContactWarningBox({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    SupabaseService supabaseService = SupabaseService();
+    AccountProvider accountProvider = context.read<AccountProvider>();
+    initializeGroupDependents({
+      required BuildContext context,
+      required AdminPanelProvider adminPanelProvider,
+      bool autoFetch = false,
+    }) async {
+      try {
+        debugPrint('Initializing group dependents for Admin Panel');
+        if (adminPanelProvider.groupDependents.isEmpty || autoFetch) {
+          List<DependentModel> dependents = await supabaseService
+              .getGroupDependents(groupId: accountProvider.groupId);
+          adminPanelProvider.setGroupDependents(dependents);
+        }
+      } catch (e) {
+        debugPrint('Error initializing group dependents: $e');
+        if (context.mounted) {
+          BottomDialog.show(
+            context,
+            type: BottomDialogType.negative,
+            description: context.localizations.generic_error,
+          );
+        }
+        rethrow;
+      }
+    }
+
+    return Consumer<AdminPanelProvider>(
+      builder: (context, adminProvider, child) => BasicExpansionTile(
+        title: context
+            .localizations
+            .admin_panel_screen_db_warnings_expansion_tile_title,
+        customBorderColor: AppColorTheme.error.normal,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          spacing: AppSpacing.small,
+          children: [
+            // Warnings list
+            FutureBuilder(
+              future: initializeGroupDependents(
+                context: context,
+                adminPanelProvider: adminProvider,
+              ),
+              builder: (context, asyncSnapshot) {
+                if (asyncSnapshot.connectionState == ConnectionState.waiting) {
+                  return const LoadingRotatingLogo();
+                } else if (asyncSnapshot.hasError) {
+                  return Text(
+                    context.localizations.error,
+                    style: AppTextTheme.bodyMedium(context),
+                  );
+                } else {
+                  final dependents = adminProvider.groupDependents;
+                  final warningWidgets = <Widget>[];
+
+                  for (final dependent in dependents) {
+                    if (dependent.isArchived) continue;
+
+                    bool missingPersonalEmail = false;
+                    bool missingPersonalPhone = false;
+                    bool missingParentEmail = false;
+                    bool missingParentPhone = false;
+                    bool hasWarning = false;
+
+                    // If the user is a leader, show normal (personal) contact warnings.
+                    // If the user is NOT a leader (dependent), show parent contact warnings.
+                    // Note: Logic inverted based on user requirement (isLeader check acts as !isLeader).
+                    if (dependent.isLeader) {
+                      if (dependent.contactEmail == null ||
+                          dependent.contactEmail!.isEmpty) {
+                        missingPersonalEmail = true;
+                        hasWarning = true;
+                      }
+                      if (dependent.contactPhone == null ||
+                          dependent.contactPhone!.isEmpty) {
+                        missingPersonalPhone = true;
+                        hasWarning = true;
+                      }
+                    } else {
+                      if (dependent.parent1Email == null ||
+                          dependent.parent1Email!.isEmpty) {
+                        missingParentEmail = true;
+                        hasWarning = true;
+                      }
+                      if (dependent.parent1Phone == null ||
+                          dependent.parent1Phone!.isEmpty) {
+                        missingParentPhone = true;
+                        hasWarning = true;
+                      }
+                    }
+
+                    if (hasWarning) {
+                      warningWidgets.add(
+                        Container(
+                          decoration: AppDecorations.primaryContainer(
+                            context,
+                            borderColor: AppColorTheme.error.normal,
+                          ),
+                          padding: const EdgeInsets.all(AppSpacing.xSmall),
+
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child: Text(
+                                    context.localizations
+                                        .admin_panel_screen_db_warning_account_does_not_have_some_contact_filled_in(
+                                          '${dependent.name} ${dependent.surname}',
+                                          missingParentEmail.toString(),
+                                          missingParentPhone.toString(),
+                                          missingPersonalEmail.toString(),
+                                          missingPersonalPhone.toString(),
+                                        ),
+                                    style: AppTextTheme.bodyMedium(context),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    }
+                  }
+
+                  if (warningWidgets.isEmpty) {
+                    return Center(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: AppSpacing.small,
+                        ),
+                        child: Text(
+                          context
+                              .localizations
+                              .admin_panel_screen_db_warning_no_warnings_subtitle,
+                          style: AppTextTheme.bodyMedium(context),
+                        ),
+                      ),
+                    );
+                  }
+
+                  return Column(
+                    spacing: AppSpacing.small,
+                    children: warningWidgets,
+                  );
+                }
+              },
+            ),
+            // Reload warnings button
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                MainButton.filled(
+                  variant: ButtonStylesVariants.destructive,
+                  text: '',
+                  type: ButtonType.icon,
+                  onPressed: () {
+                    initializeGroupDependents(
+                      context: context,
+                      adminPanelProvider: adminProvider,
+                      autoFetch: true,
+                    );
+                  },
+                  iconAsset: 'assets/icons/reload.svg',
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );

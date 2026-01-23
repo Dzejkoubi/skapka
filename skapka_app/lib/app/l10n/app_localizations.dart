@@ -1523,7 +1523,7 @@ abstract class AppLocalizations {
   /// No description provided for @admin_panel_screen_db_warning_account_does_not_have_some_contact_filled_in.
   ///
   /// In cs, this message translates to:
-  /// **'Podúčet {account_name_surname} nemá vyplněný {missing_personal_email, select, true{email a telefon} other{{missing_parent_email, select, true{{missing_parent_phone, select, true{email a telefon rodiče} other{email rodiče}}} other{{missing_parent_phone, select, true{telefon rodiče} other{}}}}}}.'**
+  /// **'Podúčet {account_name_surname} nemá vyplněný {missing_personal_email, select, true{{missing_personal_phone, select, true{svůj email a telefon} other{svůj email}}} other{{missing_personal_phone, select, true{svůj telefon} other{{missing_parent_email, select, true{{missing_parent_phone, select, true{email a telefon rodiče} other{email rodiče}}} other{{missing_parent_phone, select, true{telefon rodiče} other{}}}}}}}}.'**
   String
   admin_panel_screen_db_warning_account_does_not_have_some_contact_filled_in(
     String account_name_surname,

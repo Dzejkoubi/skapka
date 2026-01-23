@@ -860,23 +860,31 @@ class AppLocalizationsEn extends AppLocalizations {
     String missing_personal_email,
     String missing_personal_phone,
   ) {
-    String _temp0 = intl.Intl.selectLogic(missing_parent_phone, {
-      'true': 'email a telefon rodiče',
-      'other': 'email rodiče',
+    String _temp0 = intl.Intl.selectLogic(missing_personal_phone, {
+      'true': 'their email and phone',
+      'other': 'their email',
     });
     String _temp1 = intl.Intl.selectLogic(missing_parent_phone, {
-      'true': 'telefon rodiče',
+      'true': 'parent\'s email and phone',
+      'other': 'parent\'s email',
+    });
+    String _temp2 = intl.Intl.selectLogic(missing_parent_phone, {
+      'true': 'parent\'s phone',
       'other': '',
     });
-    String _temp2 = intl.Intl.selectLogic(missing_parent_email, {
-      'true': '$_temp0',
-      'other': '$_temp1',
-    });
-    String _temp3 = intl.Intl.selectLogic(missing_personal_email, {
-      'true': 'email a telefon',
+    String _temp3 = intl.Intl.selectLogic(missing_parent_email, {
+      'true': '$_temp1',
       'other': '$_temp2',
     });
-    return 'Podúčet $account_name_surname nemá vyplněný $_temp3.';
+    String _temp4 = intl.Intl.selectLogic(missing_personal_phone, {
+      'true': 'their phone',
+      'other': '$_temp3',
+    });
+    String _temp5 = intl.Intl.selectLogic(missing_personal_email, {
+      'true': '$_temp0',
+      'other': '$_temp4',
+    });
+    return 'Dependent $account_name_surname does not have $_temp5.';
   }
 
   @override

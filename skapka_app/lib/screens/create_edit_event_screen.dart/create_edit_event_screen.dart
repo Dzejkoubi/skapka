@@ -227,6 +227,10 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
       context.read<AdminPanelProvider>().setGroupDependents(_groupDependents);
     }
     _groupLeaders = await _supabaseService.getGroupLeaders(groupId);
+    // For Admin Panel - to save fetching if the user goes to the admin panel later
+    if (mounted && _groupLeaders.isNotEmpty) {
+      context.read<AdminPanelProvider>().setGroupLeaders(_groupLeaders);
+    }
   }
 
   /// Fetch event participants and store them locally

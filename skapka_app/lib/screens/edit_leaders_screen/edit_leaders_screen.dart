@@ -11,6 +11,12 @@ class EditLeadersScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // I need group dependents(saved in admin panel provider), Group them by is_leader to the top and i also need rows from dependents_leaders table,those leaders that have also dependent leaders table entry should be at the top of the list
+    // Get depndets from admin panel provider or supabase service
+    // Get leaders from admin panel provider or supabase service
+    // Create list of dependents sorted by is_leader and those that are also in leaders table at the top
+    // Leaders show leader badge, if leader is also in dependents_leaders table, show special badge
+    // Leader cannot have dependent leaders assigned without being a leader himself
     return ScreenWrapper(
       appBar: Appbar(
         showBackChevron: true,

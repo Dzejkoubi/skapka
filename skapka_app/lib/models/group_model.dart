@@ -10,7 +10,7 @@ abstract class GroupModel with _$GroupModel {
     required groupId,
     required skautisId,
     required String name,
-    required int number,
+    required String number,
   }) = _GroupModel;
 
   factory GroupModel.fromJson(Map<String, dynamic> json) {

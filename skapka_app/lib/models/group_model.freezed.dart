@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$GroupModel {
 
- dynamic get groupId; dynamic get skautisId; String get name; int get number;
+ dynamic get groupId; dynamic get skautisId; String get name; String get number;
 /// Create a copy of GroupModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -45,7 +45,7 @@ abstract mixin class $GroupModelCopyWith<$Res>  {
   factory $GroupModelCopyWith(GroupModel value, $Res Function(GroupModel) _then) = _$GroupModelCopyWithImpl;
 @useResult
 $Res call({
- dynamic groupId, dynamic skautisId, String name, int number
+ dynamic groupId, dynamic skautisId, String name, String number
 });
 
 
@@ -68,7 +68,7 @@ groupId: freezed == groupId ? _self.groupId : groupId // ignore: cast_nullable_t
 as dynamic,skautisId: freezed == skautisId ? _self.skautisId : skautisId // ignore: cast_nullable_to_non_nullable
 as dynamic,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,number: null == number ? _self.number : number // ignore: cast_nullable_to_non_nullable
-as int,
+as String,
   ));
 }
 
@@ -153,7 +153,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( dynamic groupId,  dynamic skautisId,  String name,  int number)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( dynamic groupId,  dynamic skautisId,  String name,  String number)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _GroupModel() when $default != null:
 return $default(_that.groupId,_that.skautisId,_that.name,_that.number);case _:
@@ -174,7 +174,7 @@ return $default(_that.groupId,_that.skautisId,_that.name,_that.number);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( dynamic groupId,  dynamic skautisId,  String name,  int number)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( dynamic groupId,  dynamic skautisId,  String name,  String number)  $default,) {final _that = this;
 switch (_that) {
 case _GroupModel():
 return $default(_that.groupId,_that.skautisId,_that.name,_that.number);case _:
@@ -194,7 +194,7 @@ return $default(_that.groupId,_that.skautisId,_that.name,_that.number);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( dynamic groupId,  dynamic skautisId,  String name,  int number)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( dynamic groupId,  dynamic skautisId,  String name,  String number)?  $default,) {final _that = this;
 switch (_that) {
 case _GroupModel() when $default != null:
 return $default(_that.groupId,_that.skautisId,_that.name,_that.number);case _:
@@ -215,7 +215,7 @@ class _GroupModel implements GroupModel {
 @override final  dynamic groupId;
 @override final  dynamic skautisId;
 @override final  String name;
-@override final  int number;
+@override final  String number;
 
 /// Create a copy of GroupModel
 /// with the given fields replaced by the non-null parameter values.
@@ -247,7 +247,7 @@ abstract mixin class _$GroupModelCopyWith<$Res> implements $GroupModelCopyWith<$
   factory _$GroupModelCopyWith(_GroupModel value, $Res Function(_GroupModel) _then) = __$GroupModelCopyWithImpl;
 @override @useResult
 $Res call({
- dynamic groupId, dynamic skautisId, String name, int number
+ dynamic groupId, dynamic skautisId, String name, String number
 });
 
 
@@ -270,7 +270,7 @@ groupId: freezed == groupId ? _self.groupId : groupId // ignore: cast_nullable_t
 as dynamic,skautisId: freezed == skautisId ? _self.skautisId : skautisId // ignore: cast_nullable_to_non_nullable
 as dynamic,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,number: null == number ? _self.number : number // ignore: cast_nullable_to_non_nullable
-as int,
+as String,
   ));
 }
 

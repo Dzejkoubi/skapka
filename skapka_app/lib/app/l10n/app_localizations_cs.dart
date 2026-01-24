@@ -112,6 +112,10 @@ class AppLocalizationsCs extends AppLocalizations {
   String get welcome_screen_songbook_button_text => 'Zpěvník';
 
   @override
+  String get welcome_screen_no_internet_connection =>
+      'Žádné připojení k internetu. Zkontroluj prosím své WiFi nebo mobilní data.';
+
+  @override
   String get category_login_screen => '--- PŘIHLÁŠENÍ ---';
 
   @override
@@ -843,6 +847,10 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get admin_panel_screen_db_warnings_expansion_tile_title => 'Varování';
+
+  @override
+  String get admin_panel_screen_db_warnings_error_loading_warnings =>
+      'Nepodařilo se načíst podúčty, ze kterých nebylo možné získat varování. Zkus to prosím znovu.';
 
   @override
   String get admin_panel_screen_db_warning_no_warnings_subtitle =>

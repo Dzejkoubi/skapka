@@ -302,6 +302,12 @@ abstract class AppLocalizations {
   /// **'Zpěvník'**
   String get welcome_screen_songbook_button_text;
 
+  /// No description provided for @welcome_screen_no_internet_connection.
+  ///
+  /// In cs, this message translates to:
+  /// **'Žádné připojení k internetu. Zkontroluj prosím své WiFi nebo mobilní data.'**
+  String get welcome_screen_no_internet_connection;
+
   /// No description provided for @category_login_screen.
   ///
   /// In cs, this message translates to:
@@ -1513,6 +1519,12 @@ abstract class AppLocalizations {
   /// In cs, this message translates to:
   /// **'Varování'**
   String get admin_panel_screen_db_warnings_expansion_tile_title;
+
+  /// No description provided for @admin_panel_screen_db_warnings_error_loading_warnings.
+  ///
+  /// In cs, this message translates to:
+  /// **'Nepodařilo se načíst podúčty, ze kterých nebylo možné získat varování. Zkus to prosím znovu.'**
+  String get admin_panel_screen_db_warnings_error_loading_warnings;
 
   /// No description provided for @admin_panel_screen_db_warning_no_warnings_subtitle.
   ///

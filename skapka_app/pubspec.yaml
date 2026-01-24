@@ -37,6 +37,7 @@ dependencies:
   freezed_annotation: ^3.1.0
   json_annotation: ^4.9.0
   toggle_switch: ^2.3.0
+  connectivity_plus: ^7.0.0
 
 
 dev_dependencies:
@@ -58,7 +59,7 @@ flutter:
     - assets/images/shapes/
     - assets/icons/
     - assets/icons/navbar/
-    - assets/app_icon/
+    - assets/images/app_icon/
     - .env
   fonts:
     - family: TheMixC5

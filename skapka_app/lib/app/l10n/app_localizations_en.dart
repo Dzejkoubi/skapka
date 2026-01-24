@@ -111,6 +111,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get welcome_screen_songbook_button_text => 'Songbook';
 
   @override
+  String get welcome_screen_no_internet_connection =>
+      'No internet connection. Please check your WiFi or mobile data.';
+
+  @override
   String get category_login_screen => '--- LOGIN SCREEN ---';
 
   @override
@@ -846,6 +850,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get admin_panel_screen_db_warnings_expansion_tile_title => 'Warnings';
+
+  @override
+  String get admin_panel_screen_db_warnings_error_loading_warnings =>
+      'Failed to load dependents from which warnings could not be retrieved. Please try again.';
 
   @override
   String get admin_panel_screen_db_warning_no_warnings_subtitle =>

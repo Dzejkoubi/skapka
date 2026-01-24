@@ -11,6 +11,7 @@ import 'package:skapka_app/app/theme/main_button_theme.dart';
 import 'package:skapka_app/models/dependents/dependent_model.dart';
 import 'package:skapka_app/providers/account_provider.dart';
 import 'package:skapka_app/providers/admin_panel_provider.dart';
+import 'package:skapka_app/screens/admin_panel_screen/widgets/skautis_sync_dialog.dart';
 import 'package:skapka_app/services/supabase_service.dart';
 import 'package:skapka_app/widgets/appbar/appbar.dart';
 import 'package:skapka_app/widgets/basic_expansion_tile.dart';
@@ -151,7 +152,12 @@ class AdminPanelScreen extends StatelessWidget {
                             text: context
                                 .localizations
                                 .admin_panel_screen_button_skautis_sync,
-                            onPressed: () {},
+                            onPressed: () {
+                              showDialog(
+                                context: context,
+                                builder: (_) => const SkautisSyncDialog(),
+                              );
+                            },
                           ),
                         ],
                       ),
@@ -193,38 +199,54 @@ class AdminPanelScreen extends StatelessWidget {
   }
 }
 
-class MissingDependentContactWarningBox extends StatelessWidget {
+class MissingDependentContactWarningBox extends StatefulWidget {
   const MissingDependentContactWarningBox({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    SupabaseService supabaseService = SupabaseService();
-    AccountProvider accountProvider = context.read<AccountProvider>();
-    initializeGroupDependents({
-      required BuildContext context,
-      required AdminPanelProvider adminPanelProvider,
-      bool autoFetch = false,
-    }) async {
-      try {
-        debugPrint('Initializing group dependents for Admin Panel');
-        if (adminPanelProvider.groupDependents.isEmpty || autoFetch) {
-          List<DependentModel> dependents = await supabaseService
-              .getGroupDependents(groupId: accountProvider.groupId);
+  State<MissingDependentContactWarningBox> createState() =>
+      _MissingDependentContactWarningBoxState();
+}
+
+class _MissingDependentContactWarningBoxState
+    extends State<MissingDependentContactWarningBox> {
+  late Future<void> _initializationFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    _initializationFuture = _initializeGroupDependents();
+  }
+
+  Future<void> _initializeGroupDependents({bool autoFetch = false}) async {
+    try {
+      debugPrint('Initializing group dependents for Admin Panel');
+      // Using read to avoid listening inside the async method
+      final adminPanelProvider = context.read<AdminPanelProvider>();
+      final accountProvider = context.read<AccountProvider>();
+      final supabaseService = SupabaseService();
+
+      if (adminPanelProvider.groupDependents.isEmpty || autoFetch) {
+        List<DependentModel> dependents = await supabaseService
+            .getGroupDependents(groupId: accountProvider.groupId);
+        if (mounted) {
           adminPanelProvider.setGroupDependents(dependents);
         }
-      } catch (e) {
-        debugPrint('Error initializing group dependents: $e');
-        if (context.mounted) {
-          BottomDialog.show(
-            context,
-            type: BottomDialogType.negative,
-            description: context.localizations.generic_error,
-          );
-        }
-        rethrow;
       }
+    } catch (e) {
+      debugPrint('Error initializing group dependents: $e');
+      if (mounted) {
+        BottomDialog.show(
+          context,
+          type: BottomDialogType.negative,
+          description: context.localizations.generic_error,
+        );
+      }
+      rethrow;
     }
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return Consumer<AdminPanelProvider>(
       builder: (context, adminProvider, child) => BasicExpansionTile(
         title: context
@@ -237,10 +259,7 @@ class MissingDependentContactWarningBox extends StatelessWidget {
           children: [
             // Warnings list
             FutureBuilder(
-              future: initializeGroupDependents(
-                context: context,
-                adminPanelProvider: adminProvider,
-              ),
+              future: _initializationFuture,
               builder: (context, asyncSnapshot) {
                 if (asyncSnapshot.connectionState == ConnectionState.waiting) {
                   return const LoadingRotatingLogo();
@@ -355,11 +374,11 @@ class MissingDependentContactWarningBox extends StatelessWidget {
                   text: '',
                   type: ButtonType.icon,
                   onPressed: () {
-                    initializeGroupDependents(
-                      context: context,
-                      adminPanelProvider: adminProvider,
-                      autoFetch: true,
-                    );
+                    setState(() {
+                      _initializationFuture = _initializeGroupDependents(
+                        autoFetch: true,
+                      );
+                    });
                   },
                   iconAsset: 'assets/icons/reload.svg',
                 ),

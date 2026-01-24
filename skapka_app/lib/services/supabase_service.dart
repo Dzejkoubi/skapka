@@ -418,4 +418,34 @@ class SupabaseService {
         .update({'rights': newRights})
         .eq('account_id', accountId);
   }
+
+  // Patrol leader management
+  Future<void> addPatrolLeader({
+    required String dependentId,
+    required String patrolId,
+    required String groupId,
+  }) async {
+    await _supabaseClient.from('patrols_leaders').insert({
+      'dependent_id': dependentId,
+      'patrol_id': patrolId,
+      'group_id': groupId,
+    });
+  }
+
+  Future<void> removePatrolLeader(String dependentId, String patrolId) async {
+    await _supabaseClient
+        .from('patrols_leaders')
+        .delete()
+        .eq('dependent_id', dependentId)
+        .eq('patrol_id', patrolId);
+  }
+
+  Future<void> skautisSync({
+    required String skautisToken,
+    required String groupId,
+  }) async {
+    await _supabaseClient.functions.invoke(
+      'skautis_sync?token=$skautisToken&group_id=$groupId',
+    );
+  }
 }

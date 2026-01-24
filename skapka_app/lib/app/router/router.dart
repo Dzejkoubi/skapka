@@ -64,5 +64,6 @@ class AppRouter extends RootStackRouter {
     AutoRoute(page: ApproveAccountsRoute.page, guards: [AdminGuard()]),
     AutoRoute(page: EditAccountRightsRoute.page, guards: [AdminGuard()]),
     AutoRoute(page: EditLeadersRoute.page, guards: [AdminGuard()]),
+    AutoRoute(page: SetPatrolLeaderRoute.page, guards: [AdminGuard()]),
   ];
 }

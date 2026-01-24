@@ -928,6 +928,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get admin_panel_screen_button_edit_rights => 'Edit Permissions';
 
   @override
+  String get admin_panel_screen_button_edit_rights_cant_change_admin_rights =>
+      'Administrator rights can only be changed in Supabase.';
+
+  @override
   String get admin_panel_screen_button_edit_rights_search_field_hint =>
       'Search by surname...';
 

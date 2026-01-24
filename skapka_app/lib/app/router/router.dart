@@ -63,5 +63,6 @@ class AppRouter extends RootStackRouter {
     // Admin panel screens
     AutoRoute(page: ApproveAccountsRoute.page, guards: [AdminGuard()]),
     AutoRoute(page: EditAccountRightsRoute.page, guards: [AdminGuard()]),
+    AutoRoute(page: EditLeadersRoute.page, guards: [AdminGuard()]),
   ];
 }

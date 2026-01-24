@@ -84,19 +84,39 @@ class EditAccountRightsScreen extends StatelessWidget {
               spacing: AppSpacing.large,
               children: [
                 // Search bar for accounts
-                CustomForm(
-                  showSuffixIcon: false,
-                  controller: TextEditingController(),
-                  onChanged: (String value) {
-                    // Update provider and debounce the actual fetch
-                    adminProvider.setSurnameSearchQueryDebounced(
-                      value,
-                      loadGroupAccounts,
-                    );
-                  },
-                  labelText: context
-                      .localizations
-                      .admin_panel_screen_button_edit_rights_search_field_hint,
+                Column(
+                  spacing: AppSpacing.small,
+                  children: [
+                    CustomForm(
+                      showSuffixIcon: false,
+                      controller: TextEditingController(),
+                      onChanged: (String value) {
+                        // Update provider and debounce the actual fetch
+                        adminProvider.setSurnameSearchQueryDebounced(
+                          value,
+                          loadGroupAccounts,
+                        );
+                      },
+                      labelText: context
+                          .localizations
+                          .admin_panel_screen_button_edit_rights_search_field_hint,
+                    ),
+                    Selector<AdminPanelProvider, String>(
+                      selector: (_, provider) => provider.surnameSearchQuery,
+                      builder: (context, surnameSearchQuery, __) {
+                        if (surnameSearchQuery.isEmpty) {
+                          return Text(
+                            context
+                                .localizations
+                                .admin_panel_screen_button_edit_rights_cant_change_admin_rights,
+                            style: AppTextTheme.bodySmall(context),
+                            textAlign: TextAlign.center,
+                          );
+                        }
+                        return const SizedBox.shrink();
+                      },
+                    ),
+                  ],
                 ),
                 // List of accounts to approve
                 FutureBuilder(

@@ -1585,6 +1585,12 @@ abstract class AppLocalizations {
   /// **'Upravit práva'**
   String get admin_panel_screen_button_edit_rights;
 
+  /// No description provided for @admin_panel_screen_button_edit_rights_cant_change_admin_rights.
+  ///
+  /// In cs, this message translates to:
+  /// **'Práva administrátora lze změnit pouze v Supabase.'**
+  String get admin_panel_screen_button_edit_rights_cant_change_admin_rights;
+
   /// No description provided for @admin_panel_screen_button_edit_rights_search_field_hint.
   ///
   /// In cs, this message translates to:

@@ -924,6 +924,10 @@ class AppLocalizationsCs extends AppLocalizations {
   String get admin_panel_screen_button_edit_rights => 'Upravit práva';
 
   @override
+  String get admin_panel_screen_button_edit_rights_cant_change_admin_rights =>
+      'Práva administrátora lze změnit pouze v Supabase.';
+
+  @override
   String get admin_panel_screen_button_edit_rights_search_field_hint =>
       'Vyhledat podle příjmení...';
 

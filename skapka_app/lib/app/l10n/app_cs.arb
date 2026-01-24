@@ -343,6 +343,7 @@
     },
     "admin_panel_screen_button_edit_leaders": "Upravit vedoucí",
     "admin_panel_screen_button_edit_rights": "Upravit práva",
+    "admin_panel_screen_button_edit_rights_cant_change_admin_rights": "Práva administrátora lze změnit pouze v Supabase.",
     "admin_panel_screen_button_edit_rights_search_field_hint": "Vyhledat podle příjmení...",
     "admin_panel_screen_button_edit_rights_right_level_1": "1 - Výchozí",
     "admin_panel_screen_button_edit_rights_right_level_2": "2 - Vedoucí",

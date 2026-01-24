@@ -344,6 +344,7 @@
     },
     "admin_panel_screen_button_edit_leaders": "Edit Leaders",
     "admin_panel_screen_button_edit_rights": "Edit Permissions",
+    "admin_panel_screen_button_edit_rights_cant_change_admin_rights": "Administrator rights can only be changed in Supabase.",
     "admin_panel_screen_button_edit_rights_search_field_hint": "Search by surname...",
     "admin_panel_screen_button_edit_rights_right_level_1": "1 - Default",
     "admin_panel_screen_button_edit_rights_right_level_2": "2 - Leader",

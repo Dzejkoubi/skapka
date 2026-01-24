@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$TroopModel {
 
- String get troopId; String get name; int get number; String get groupId; int get skautisId;
+ String get troopId; String get name; String get groupId; int get skautisId;
 /// Create a copy of TroopModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $TroopModelCopyWith<TroopModel> get copyWith => _$TroopModelCopyWithImpl<TroopMo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is TroopModel&&(identical(other.troopId, troopId) || other.troopId == troopId)&&(identical(other.name, name) || other.name == name)&&(identical(other.number, number) || other.number == number)&&(identical(other.groupId, groupId) || other.groupId == groupId)&&(identical(other.skautisId, skautisId) || other.skautisId == skautisId));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is TroopModel&&(identical(other.troopId, troopId) || other.troopId == troopId)&&(identical(other.name, name) || other.name == name)&&(identical(other.groupId, groupId) || other.groupId == groupId)&&(identical(other.skautisId, skautisId) || other.skautisId == skautisId));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,troopId,name,number,groupId,skautisId);
+int get hashCode => Object.hash(runtimeType,troopId,name,groupId,skautisId);
 
 @override
 String toString() {
-  return 'TroopModel(troopId: $troopId, name: $name, number: $number, groupId: $groupId, skautisId: $skautisId)';
+  return 'TroopModel(troopId: $troopId, name: $name, groupId: $groupId, skautisId: $skautisId)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $TroopModelCopyWith<$Res>  {
   factory $TroopModelCopyWith(TroopModel value, $Res Function(TroopModel) _then) = _$TroopModelCopyWithImpl;
 @useResult
 $Res call({
- String troopId, String name, int number, String groupId, int skautisId
+ String troopId, String name, String groupId, int skautisId
 });
 
 
@@ -65,12 +65,11 @@ class _$TroopModelCopyWithImpl<$Res>
 
 /// Create a copy of TroopModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? troopId = null,Object? name = null,Object? number = null,Object? groupId = null,Object? skautisId = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? troopId = null,Object? name = null,Object? groupId = null,Object? skautisId = null,}) {
   return _then(_self.copyWith(
 troopId: null == troopId ? _self.troopId : troopId // ignore: cast_nullable_to_non_nullable
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
-as String,number: null == number ? _self.number : number // ignore: cast_nullable_to_non_nullable
-as int,groupId: null == groupId ? _self.groupId : groupId // ignore: cast_nullable_to_non_nullable
+as String,groupId: null == groupId ? _self.groupId : groupId // ignore: cast_nullable_to_non_nullable
 as String,skautisId: null == skautisId ? _self.skautisId : skautisId // ignore: cast_nullable_to_non_nullable
 as int,
   ));
@@ -157,10 +156,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String troopId,  String name,  int number,  String groupId,  int skautisId)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String troopId,  String name,  String groupId,  int skautisId)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _TroopModel() when $default != null:
-return $default(_that.troopId,_that.name,_that.number,_that.groupId,_that.skautisId);case _:
+return $default(_that.troopId,_that.name,_that.groupId,_that.skautisId);case _:
   return orElse();
 
 }
@@ -178,10 +177,10 @@ return $default(_that.troopId,_that.name,_that.number,_that.groupId,_that.skauti
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String troopId,  String name,  int number,  String groupId,  int skautisId)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String troopId,  String name,  String groupId,  int skautisId)  $default,) {final _that = this;
 switch (_that) {
 case _TroopModel():
-return $default(_that.troopId,_that.name,_that.number,_that.groupId,_that.skautisId);case _:
+return $default(_that.troopId,_that.name,_that.groupId,_that.skautisId);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -198,10 +197,10 @@ return $default(_that.troopId,_that.name,_that.number,_that.groupId,_that.skauti
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String troopId,  String name,  int number,  String groupId,  int skautisId)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String troopId,  String name,  String groupId,  int skautisId)?  $default,) {final _that = this;
 switch (_that) {
 case _TroopModel() when $default != null:
-return $default(_that.troopId,_that.name,_that.number,_that.groupId,_that.skautisId);case _:
+return $default(_that.troopId,_that.name,_that.groupId,_that.skautisId);case _:
   return null;
 
 }
@@ -213,12 +212,11 @@ return $default(_that.troopId,_that.name,_that.number,_that.groupId,_that.skauti
 
 @JsonSerializable(fieldRename: FieldRename.snake)
 class _TroopModel implements TroopModel {
-  const _TroopModel({required this.troopId, required this.name, required this.number, required this.groupId, required this.skautisId});
+  const _TroopModel({required this.troopId, required this.name, required this.groupId, required this.skautisId});
   factory _TroopModel.fromJson(Map<String, dynamic> json) => _$TroopModelFromJson(json);
 
 @override final  String troopId;
 @override final  String name;
-@override final  int number;
 @override final  String groupId;
 @override final  int skautisId;
 
@@ -235,16 +233,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TroopModel&&(identical(other.troopId, troopId) || other.troopId == troopId)&&(identical(other.name, name) || other.name == name)&&(identical(other.number, number) || other.number == number)&&(identical(other.groupId, groupId) || other.groupId == groupId)&&(identical(other.skautisId, skautisId) || other.skautisId == skautisId));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TroopModel&&(identical(other.troopId, troopId) || other.troopId == troopId)&&(identical(other.name, name) || other.name == name)&&(identical(other.groupId, groupId) || other.groupId == groupId)&&(identical(other.skautisId, skautisId) || other.skautisId == skautisId));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,troopId,name,number,groupId,skautisId);
+int get hashCode => Object.hash(runtimeType,troopId,name,groupId,skautisId);
 
 @override
 String toString() {
-  return 'TroopModel(troopId: $troopId, name: $name, number: $number, groupId: $groupId, skautisId: $skautisId)';
+  return 'TroopModel(troopId: $troopId, name: $name, groupId: $groupId, skautisId: $skautisId)';
 }
 
 
@@ -255,7 +253,7 @@ abstract mixin class _$TroopModelCopyWith<$Res> implements $TroopModelCopyWith<$
   factory _$TroopModelCopyWith(_TroopModel value, $Res Function(_TroopModel) _then) = __$TroopModelCopyWithImpl;
 @override @useResult
 $Res call({
- String troopId, String name, int number, String groupId, int skautisId
+ String troopId, String name, String groupId, int skautisId
 });
 
 
@@ -272,12 +270,11 @@ class __$TroopModelCopyWithImpl<$Res>
 
 /// Create a copy of TroopModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? troopId = null,Object? name = null,Object? number = null,Object? groupId = null,Object? skautisId = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? troopId = null,Object? name = null,Object? groupId = null,Object? skautisId = null,}) {
   return _then(_TroopModel(
 troopId: null == troopId ? _self.troopId : troopId // ignore: cast_nullable_to_non_nullable
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
-as String,number: null == number ? _self.number : number // ignore: cast_nullable_to_non_nullable
-as int,groupId: null == groupId ? _self.groupId : groupId // ignore: cast_nullable_to_non_nullable
+as String,groupId: null == groupId ? _self.groupId : groupId // ignore: cast_nullable_to_non_nullable
 as String,skautisId: null == skautisId ? _self.skautisId : skautisId // ignore: cast_nullable_to_non_nullable
 as int,
   ));

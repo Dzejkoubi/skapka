@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$GroupModel {
 
- dynamic get groupId; dynamic get skautisId; String get name; String get number;
+ dynamic get groupId; dynamic get skautisId; String get name;
 /// Create a copy of GroupModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $GroupModelCopyWith<GroupModel> get copyWith => _$GroupModelCopyWithImpl<GroupMo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is GroupModel&&const DeepCollectionEquality().equals(other.groupId, groupId)&&const DeepCollectionEquality().equals(other.skautisId, skautisId)&&(identical(other.name, name) || other.name == name)&&(identical(other.number, number) || other.number == number));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is GroupModel&&const DeepCollectionEquality().equals(other.groupId, groupId)&&const DeepCollectionEquality().equals(other.skautisId, skautisId)&&(identical(other.name, name) || other.name == name));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(groupId),const DeepCollectionEquality().hash(skautisId),name,number);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(groupId),const DeepCollectionEquality().hash(skautisId),name);
 
 @override
 String toString() {
-  return 'GroupModel(groupId: $groupId, skautisId: $skautisId, name: $name, number: $number)';
+  return 'GroupModel(groupId: $groupId, skautisId: $skautisId, name: $name)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $GroupModelCopyWith<$Res>  {
   factory $GroupModelCopyWith(GroupModel value, $Res Function(GroupModel) _then) = _$GroupModelCopyWithImpl;
 @useResult
 $Res call({
- dynamic groupId, dynamic skautisId, String name, String number
+ dynamic groupId, dynamic skautisId, String name
 });
 
 
@@ -62,12 +62,11 @@ class _$GroupModelCopyWithImpl<$Res>
 
 /// Create a copy of GroupModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? groupId = freezed,Object? skautisId = freezed,Object? name = null,Object? number = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? groupId = freezed,Object? skautisId = freezed,Object? name = null,}) {
   return _then(_self.copyWith(
 groupId: freezed == groupId ? _self.groupId : groupId // ignore: cast_nullable_to_non_nullable
 as dynamic,skautisId: freezed == skautisId ? _self.skautisId : skautisId // ignore: cast_nullable_to_non_nullable
 as dynamic,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
-as String,number: null == number ? _self.number : number // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }
@@ -153,10 +152,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( dynamic groupId,  dynamic skautisId,  String name,  String number)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( dynamic groupId,  dynamic skautisId,  String name)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _GroupModel() when $default != null:
-return $default(_that.groupId,_that.skautisId,_that.name,_that.number);case _:
+return $default(_that.groupId,_that.skautisId,_that.name);case _:
   return orElse();
 
 }
@@ -174,10 +173,10 @@ return $default(_that.groupId,_that.skautisId,_that.name,_that.number);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( dynamic groupId,  dynamic skautisId,  String name,  String number)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( dynamic groupId,  dynamic skautisId,  String name)  $default,) {final _that = this;
 switch (_that) {
 case _GroupModel():
-return $default(_that.groupId,_that.skautisId,_that.name,_that.number);case _:
+return $default(_that.groupId,_that.skautisId,_that.name);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -194,10 +193,10 @@ return $default(_that.groupId,_that.skautisId,_that.name,_that.number);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( dynamic groupId,  dynamic skautisId,  String name,  String number)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( dynamic groupId,  dynamic skautisId,  String name)?  $default,) {final _that = this;
 switch (_that) {
 case _GroupModel() when $default != null:
-return $default(_that.groupId,_that.skautisId,_that.name,_that.number);case _:
+return $default(_that.groupId,_that.skautisId,_that.name);case _:
   return null;
 
 }
@@ -209,13 +208,12 @@ return $default(_that.groupId,_that.skautisId,_that.name,_that.number);case _:
 
 @JsonSerializable(fieldRename: FieldRename.snake)
 class _GroupModel implements GroupModel {
-  const _GroupModel({required this.groupId, required this.skautisId, required this.name, required this.number});
+  const _GroupModel({required this.groupId, required this.skautisId, required this.name});
   
 
 @override final  dynamic groupId;
 @override final  dynamic skautisId;
 @override final  String name;
-@override final  String number;
 
 /// Create a copy of GroupModel
 /// with the given fields replaced by the non-null parameter values.
@@ -227,16 +225,16 @@ _$GroupModelCopyWith<_GroupModel> get copyWith => __$GroupModelCopyWithImpl<_Gro
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _GroupModel&&const DeepCollectionEquality().equals(other.groupId, groupId)&&const DeepCollectionEquality().equals(other.skautisId, skautisId)&&(identical(other.name, name) || other.name == name)&&(identical(other.number, number) || other.number == number));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _GroupModel&&const DeepCollectionEquality().equals(other.groupId, groupId)&&const DeepCollectionEquality().equals(other.skautisId, skautisId)&&(identical(other.name, name) || other.name == name));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(groupId),const DeepCollectionEquality().hash(skautisId),name,number);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(groupId),const DeepCollectionEquality().hash(skautisId),name);
 
 @override
 String toString() {
-  return 'GroupModel(groupId: $groupId, skautisId: $skautisId, name: $name, number: $number)';
+  return 'GroupModel(groupId: $groupId, skautisId: $skautisId, name: $name)';
 }
 
 
@@ -247,7 +245,7 @@ abstract mixin class _$GroupModelCopyWith<$Res> implements $GroupModelCopyWith<$
   factory _$GroupModelCopyWith(_GroupModel value, $Res Function(_GroupModel) _then) = __$GroupModelCopyWithImpl;
 @override @useResult
 $Res call({
- dynamic groupId, dynamic skautisId, String name, String number
+ dynamic groupId, dynamic skautisId, String name
 });
 
 
@@ -264,12 +262,11 @@ class __$GroupModelCopyWithImpl<$Res>
 
 /// Create a copy of GroupModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? groupId = freezed,Object? skautisId = freezed,Object? name = null,Object? number = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? groupId = freezed,Object? skautisId = freezed,Object? name = null,}) {
   return _then(_GroupModel(
 groupId: freezed == groupId ? _self.groupId : groupId // ignore: cast_nullable_to_non_nullable
 as dynamic,skautisId: freezed == skautisId ? _self.skautisId : skautisId // ignore: cast_nullable_to_non_nullable
 as dynamic,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
-as String,number: null == number ? _self.number : number // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }

@@ -9,7 +9,6 @@ abstract class TroopModel with _$TroopModel {
   const factory TroopModel({
     required String troopId,
     required String name,
-    required int number,
     required String groupId,
     required int skautisId,
   }) = _TroopModel;

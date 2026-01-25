@@ -47,6 +47,7 @@ class _CreateEditEventParticipantsScreenState
     extends State<CreateEditEventParticipantsScreen> {
   int _activeSwitcherIndex = 0;
   late List<EventParticipantModel> _selectedParticipants;
+  late List<TroopModel> _nonEmptyTroops;
 
   void onChanged(int index) {
     setState(() {
@@ -62,6 +63,27 @@ class _CreateEditEventParticipantsScreenState
     super.initState();
     _selectedParticipants = List.from(widget.initialParticipants);
     _separateDependents();
+    _filterNonEmptyTroops();
+  }
+
+  void _filterNonEmptyTroops() {
+    _nonEmptyTroops = widget.groupTroops.where((troop) {
+      final troopPatrols = widget.groupPatrols
+          .where((patrol) => patrol.troopId == troop.troopId)
+          .toList();
+      final troopPatrolIds = troopPatrols.map((p) => p.patrolId).toSet();
+
+      final troopLeaderIds = widget.groupLeaders
+          .where((l) => troopPatrolIds.contains(l.patrolId))
+          .map((l) => l.dependentId)
+          .toSet();
+
+      return widget.groupDependents.any((d) {
+        final isMember = troopPatrolIds.contains(d.patrolId);
+        final isLeader = troopLeaderIds.contains(d.dependentId);
+        return isMember || isLeader;
+      });
+    }).toList();
   }
 
   void _separateDependents() {
@@ -112,7 +134,7 @@ class _CreateEditEventParticipantsScreenState
                   SizedBox(width: AppSpacing.xLarge),
                   ContentSwitcher(
                     items: [
-                      ...widget.groupTroops.map((troop) => troop.name),
+                      ..._nonEmptyTroops.map((troop) => troop.name),
                       context
                           .localizations
                           .create_edit_participants_screen_leaders,
@@ -162,7 +184,7 @@ class _CreateEditEventParticipantsScreenState
   }
 
   Widget _buildContent(int activeIndex) {
-    if (activeIndex == widget.groupTroops.length) {
+    if (activeIndex == _nonEmptyTroops.length) {
       // Leaders tab
       final allLeaderIds = _groupDependentLeaders
           .map((l) => l.dependent.dependentId)
@@ -273,7 +295,7 @@ class _CreateEditEventParticipantsScreenState
         ],
       );
     } else {
-      final selectedTroop = widget.groupTroops[activeIndex];
+      final selectedTroop = _nonEmptyTroops[activeIndex];
 
       final troopPatrols = widget.groupPatrols
           .where((patrol) => patrol.troopId == selectedTroop.troopId)

@@ -118,20 +118,6 @@ class AdminPanelScreen extends StatelessWidget {
                           ),
                         ],
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          MainButton.outlined(
-                            onPressed: () {},
-                            type: ButtonType.textIcon,
-                            iconAsset: 'assets/icons/eye-off.svg',
-                            text: context
-                                .localizations
-                                .admin_panel_screen_button_dependent_codes,
-                            expandToFillWidth: false,
-                          ),
-                        ],
-                      ),
                     ],
                   ),
                 ),
@@ -184,7 +170,11 @@ class AdminPanelScreen extends StatelessWidget {
                             text: context
                                 .localizations
                                 .admin_panel_screen_button_send_notification,
-                            onPressed: () {},
+                            onPressed: () {
+                              context.router.push(
+                                const SendNotificationRoute(),
+                              );
+                            },
                           ),
                         ],
                       ),

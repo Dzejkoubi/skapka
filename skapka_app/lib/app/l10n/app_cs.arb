@@ -507,8 +507,6 @@
       }
     }
   },
-  "category_admin_panel_screen_dependent_codes": "--- ADMIN PANEL - DEPENDENT CODES ---",
-  "admin_panel_screen_button_dependent_codes": "Kódy podúčtů",
   "category_admin_panel_screen_skautis_sync": "--- ADMIN PANEL - SKAUTIS SYNC ---",
   "admin_panel_screen_data_management_title": "Data",
   "admin_panel_screen_button_skautis_sync": "SkautIS synchronizace",

@@ -1150,13 +1150,6 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get category_admin_panel_screen_dependent_codes =>
-      '--- ADMIN PANEL - DEPENDENT CODES ---';
-
-  @override
-  String get admin_panel_screen_button_dependent_codes => 'Dependent Codes';
-
-  @override
   String get category_admin_panel_screen_skautis_sync =>
       '--- ADMIN PANEL - SKAUTIS SYNC ---';
 

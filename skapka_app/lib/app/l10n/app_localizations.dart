@@ -1874,18 +1874,6 @@ abstract class AppLocalizations {
     String account_name_surname,
   );
 
-  /// No description provided for @category_admin_panel_screen_dependent_codes.
-  ///
-  /// In cs, this message translates to:
-  /// **'--- ADMIN PANEL - DEPENDENT CODES ---'**
-  String get category_admin_panel_screen_dependent_codes;
-
-  /// No description provided for @admin_panel_screen_button_dependent_codes.
-  ///
-  /// In cs, this message translates to:
-  /// **'Kódy podúčtů'**
-  String get admin_panel_screen_button_dependent_codes;
-
   /// No description provided for @category_admin_panel_screen_skautis_sync.
   ///
   /// In cs, this message translates to:

@@ -785,7 +785,7 @@ class SendNotificationRoute extends _i27.PageRouteInfo<void> {
 class SetPatrolLeaderRoute
     extends _i27.PageRouteInfo<SetPatrolLeaderRouteArgs> {
   SetPatrolLeaderRoute({
-    _i28.Key? key,
+    _i35.Key? key,
     required _i29.DependentModel dependent,
     List<_i27.PageRouteInfo>? children,
   }) : super(
@@ -811,7 +811,7 @@ class SetPatrolLeaderRoute
 class SetPatrolLeaderRouteArgs {
   const SetPatrolLeaderRouteArgs({this.key, required this.dependent});
 
-  final _i28.Key? key;
+  final _i35.Key? key;
 
   final _i29.DependentModel dependent;
 

@@ -1,4 +1,13 @@
 
 
-export const SKAUTIS_URL = Deno.env.get('SKAUTIS_API_BASE_URL') ?? '';
+export const SKAUTIS_URL = Deno.env.get('SKAUTIS_API_BASE_URL');
+if(!SKAUTIS_URL) {
+	throw new Error(`SKAUTIS_API_BASE_URL environment variable is not set. 
+		Did you specify it in .env file and is it correctly loaded?`);
+}
+
 export const SKAUTIS_ORGANIZATION_UNIT_API = SKAUTIS_URL + '/JunakWebservice/OrganizationUnit.asmx';
+export const SKAUTIS_LOGIN_VIEWSTATE = '/wEPDwULLTE3NDE5NjM1NjAPFgIeE1ZhbGlkYXRlUmVxdWVzdE1vZGUCARYCZg9kFgICAw9kFgYCAQ8WAh4JaW5uZXJodG1sBSpza2F1dElTIHDFmWlobCYjMjI1O8WhZW4mIzIzNzsgZG8gYXBsaWthY2VkAgIPFgIfAQUYc2thdXRJUyAoVEVTVE9WQUMmIzIwNTspZAIDD2QWBAIFDw8WAh4ETW9kZQspaEp1bmFrLlV0aWxzLkNvbnRyb2xzLkZvcm1Nb2RlLCBKdW5hay5VdGlscywgVmVyc2lvbj0xLjAuOTUwNC4yNDIwMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1udWxsAGQWCAIBDw8WBB4IQ3NzQ2xhc3MFGWZvcm0tY29udHJvbCBmb3JtLWNvbnRyb2weBF8hU0ICAmRkAgMPDxYEHwMFGWZvcm0tY29udHJvbCBmb3JtLWNvbnRyb2wfBAICZGQCBQ8WAh4HVmlzaWJsZWhkAgcPZBYCAgEPDxYGHwMFD2J0biBidG4tcHJpbWFyeR4ESWNvbgUSZmFzIGZhLXNpZ24taW4tYWx0HwQCAmRkAggPZBYCAgEPFgIfBWhkZBiyoDzthceA30e4kNVQSFLyXs4NK01BroKj0k/4UeiaupOalx4OupJX9Q6vMGd8Hxd0ZyTs+zQAhu25wxpDW7I=';
+
+const id = Deno.env.get('SKAUTIS_UNIT_ID');
+export const UNIT_ID = id ? parseInt(id) : null;

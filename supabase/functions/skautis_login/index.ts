@@ -1,9 +1,6 @@
-import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import {
 	corsHeaders,
 	createBadRequestResponse,
-	createErrorResponse,
-	createInternalServerErrorResponse,
 	createSuccessResponse,
 } from "@shared/response.ts";
 import { skautisLogin } from "@shared/skautis.ts";
@@ -26,7 +23,7 @@ Deno.serve(async (req) => {
 		const password = url.searchParams.get("password");
 		
 		if (!username || !password) {
-		  return createBadRequestResponse("Username and password are required");
+			return createBadRequestResponse("Username and password are required");
 		}
 		
 		const token = await skautisLogin(username, password);

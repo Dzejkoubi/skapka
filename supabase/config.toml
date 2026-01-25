@@ -359,13 +359,13 @@ entrypoint = "./functions/skautis_login/index.ts"
 # For example, if you want to serve static HTML pages in your function:
 # static_files = [ "./functions/skautis_login/*.html" ]
 
-[functions.get_group_data]
+[functions.skautis_sync]
 enabled = true
 verify_jwt = false
-import_map = "./functions/get_group_data/deno.json"
+import_map = "./functions/skautis_sync/deno.json"
 # Uncomment to specify a custom file path to the entrypoint.
 # Supported file extensions are: .ts, .js, .mjs, .jsx, .tsx
-entrypoint = "./functions/get_group_data/index.ts"
+entrypoint = "./functions/skautis_sync/index.ts"
 # Specifies static files to be bundled with the function. Supports glob patterns.
 # For example, if you want to serve static HTML pages in your function:
-# static_files = [ "./functions/get_group_data/*.html" ]
+# static_files = [ "./functions/skautis_sync/*.html" ]

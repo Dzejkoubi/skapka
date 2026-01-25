@@ -1,6 +1,9 @@
 # Supabase
 .branches
 .temp
+database.types.ts
+seed.sql
+migrations/
 
 # dotenvx
 .env.keys

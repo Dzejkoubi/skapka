@@ -9,6 +9,23 @@ export type SkautisAPI = {
 		};
 		res: Unit[];
 	},
+	'MembershipAll': {
+		req: {
+			ID_Login: string;
+			ID_Unit: number;
+			ID_Person?: number;
+			ID_MembershipType?: string;
+			ID_MembershipCategory?: string;
+			LastName?: string;
+			IdentificationCode?: string;
+			OnlyDirectMember?: boolean;
+			IsSts?: boolean;
+			ShowLowerUnits?: boolean;
+			ShowHistory?: boolean;
+			IsValid?: boolean;
+		};
+		res: Membership[];
+	},
 	'PersonAll': {
 		req: {
 			ID_Login: string;
@@ -33,9 +50,9 @@ export type SkautisAPI = {
 			ID_Login: string;
 			ID: number;
 		},
-		res: Person;
+		res: PersonDetail;
 	},
-	'PersonContactAllParents': {
+	'PersonContactAllParent': {
 		req: {
 			ID_Login: string;
 			ID_Person: number;
@@ -51,6 +68,29 @@ export interface Unit {
 	SortName: string;
 	RegistrationNumber: string;
 	ID_UnitParent: number | null;
+}
+
+export interface Membership {
+	ID?: number | null;
+	ID_Unit?: number | null;
+	Unit?: string;
+	RegistrationNumber?: string;
+	ID_Person?: number | null;
+	Person?: string;
+	IdentificationCode?: string;
+	Birthday?: string | null;
+	ID_MembershipReason?: string | null;
+	MembershipReason?: string | null;
+	ValidFrom?: string | null;
+	ValidTo?: string | null;
+	ID_MembershipType?: string | null;
+	MembershipType?: string | null;
+	ID_MembershipCategory?: string | null;
+	MembershipCategory?: string | null;
+	CanRenew?: boolean | null;
+	IsLegacyMemberRead?: boolean | null;
+	DateAccepted?: string | null;
+	IsAccepted?: boolean | null;
 }
 
 export interface Person {

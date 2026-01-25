@@ -254,12 +254,7 @@ class _AuthGateState extends State<AuthGate> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: context.colors.primary.light,
-      body: Center(
-        child: GestureDetector(
-          onTap: () => AuthService().signOut(),
-          child: LoadingFloatingLogo(),
-        ),
-      ),
+      body: Center(child: LoadingFloatingLogo()),
     );
   }
 }

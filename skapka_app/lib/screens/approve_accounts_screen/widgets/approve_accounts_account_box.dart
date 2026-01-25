@@ -20,10 +20,7 @@ class ApproveAccountsAccountBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: AppDecorations.primaryContainer(context),
-      padding: const EdgeInsets.symmetric(
-        horizontal: AppSpacing.small,
-        vertical: AppSpacing.small,
-      ),
+      padding: const EdgeInsets.only(left: AppSpacing.small),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

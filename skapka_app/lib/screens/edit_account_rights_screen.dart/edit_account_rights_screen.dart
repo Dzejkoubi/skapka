@@ -2,17 +2,15 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:skapka_app/app/l10n/l10n_extension.dart';
-import 'package:skapka_app/app/theme/app_decorations.dart';
 import 'package:skapka_app/app/theme/app_spacing.dart';
 import 'package:skapka_app/app/theme/app_text_theme.dart';
 import 'package:skapka_app/models/account_model.dart';
 import 'package:skapka_app/providers/account_provider.dart';
 import 'package:skapka_app/providers/admin_panel_provider.dart';
 import 'package:skapka_app/providers/loading_provider.dart';
+import 'package:skapka_app/screens/edit_account_rights_screen.dart/widgets/edit_account_rights_account_box.dart';
 import 'package:skapka_app/services/supabase_service.dart';
 import 'package:skapka_app/widgets/appbar/appbar.dart';
-import 'package:skapka_app/widgets/custom_dropdown_menu.dart';
-import 'package:skapka_app/widgets/dialogs/bottom_dialog.dart';
 import 'package:skapka_app/widgets/forms/custom_form.dart';
 import 'package:skapka_app/widgets/loading_floating_logo/loading_rotating_logo.dart';
 import 'package:skapka_app/widgets/wrappers/screen_wrapper.dart';
@@ -37,39 +35,6 @@ class EditAccountRightsScreen extends StatelessWidget {
       // If new accounts are the same as current, do not update(this also solves issue if any of the lists is empty)
       if (context.mounted && (accounts != adminProvider.groupAccounts)) {
         adminProvider.setGroupAccounts(accounts);
-      }
-    }
-
-    updateAccountRights(AccountModel account, int newRights) async {
-      loadingProvider.show();
-      try {
-        await supabaseService.updateAccountRights(account.accountId, newRights);
-        await loadGroupAccounts();
-        if (context.mounted) {
-          BottomDialog.show(
-            context,
-            type: BottomDialogType.positive,
-            description: context.localizations
-                .admin_panel_screen_button_edit_rights_change_success(
-                  "${account.name} ${account.surname}",
-                  newRights.toString(),
-                ),
-          );
-        }
-      } catch (e) {
-        if (context.mounted) {
-          debugPrint('Error updating account rights: $e');
-          BottomDialog.show(
-            context,
-            type: BottomDialogType.negative,
-            description: context.localizations
-                .admin_panel_screen_button_edit_rights_error(
-                  "${account.name} ${account.surname}",
-                ),
-          );
-        }
-      } finally {
-        loadingProvider.hide();
       }
     }
 
@@ -152,62 +117,11 @@ class EditAccountRightsScreen extends StatelessWidget {
                               (a) => (a.rights == 2),
                             ),
                           ])
-                            Container(
-                              decoration: AppDecorations.primaryContainer(
-                                context,
-                              ),
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: AppSpacing.medium,
-                                vertical: AppSpacing.small,
-                              ),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Expanded(
-                                    child: SingleChildScrollView(
-                                      scrollDirection: Axis.horizontal,
-                                      child: Text(
-                                        '${account.name} ${account.surname}',
-                                        style: AppTextTheme.bodyMedium(context),
-                                      ),
-                                    ),
-                                  ),
-                                  CustomDropdownMenu(
-                                    width: 100,
-                                    dropdownMenuEntries: [
-                                      DropdownMenuEntry(
-                                        value: 1,
-                                        label: '1',
-                                        labelWidget: Text(
-                                          context
-                                              .localizations
-                                              .admin_panel_screen_button_edit_rights_right_level_1,
-                                          style: AppTextTheme.bodyMedium(
-                                            context,
-                                          ),
-                                        ),
-                                      ),
-                                      DropdownMenuEntry(
-                                        value: 2,
-                                        label: '2',
-                                        labelWidget: Text(
-                                          context
-                                              .localizations
-                                              .admin_panel_screen_button_edit_rights_right_level_2,
-                                          style: AppTextTheme.bodyMedium(
-                                            context,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                    initialSelection: account.rights,
-                                    onSelected: (value) {
-                                      updateAccountRights(account, value!);
-                                    },
-                                  ),
-                                ],
-                              ),
+                            EditAccountRightsAccountBox(
+                              account: account,
+                              loadingProvider: loadingProvider,
+                              supabaseService: supabaseService,
+                              loadGroupAccounts: loadGroupAccounts,
                             ),
                         ],
                       ),

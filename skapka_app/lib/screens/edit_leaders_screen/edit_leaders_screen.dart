@@ -184,7 +184,9 @@ class EditLeadersScreen extends StatelessWidget {
                                   },
                                 ),
                               ),
-                            Divider(color: context.colors.background.medium),
+                            if (leaderDependents.isNotEmpty &&
+                                regularDependents.isNotEmpty)
+                              Divider(color: context.colors.background.medium),
                             if (regularDependents.isNotEmpty)
                               ...regularDependents.map(
                                 (dependent) => EditLeadersLeaderBox(

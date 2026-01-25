@@ -48,6 +48,28 @@ class AppLocalizationsEn extends AppLocalizations {
   String get error => 'Error';
 
   @override
+  String get success => 'Success';
+
+  @override
+  String get saved => 'Changes saved successfully';
+
+  @override
+  String get close => 'Close';
+
+  @override
+  String get discard => 'Discard';
+
+  @override
+  String get continue_ => 'Continue';
+
+  @override
+  String get unsaved_changes => 'Unsaved changes';
+
+  @override
+  String get unsaved_changes_description =>
+      'You have unsaved changes. Do you want to discard them?';
+
+  @override
   String get generic_error => 'Something went wrong. Please try again.';
 
   @override
@@ -849,6 +871,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get admin_panel_screen_title => 'Admin Panel';
 
   @override
+  String get category_admin_panel_screen_warnings =>
+      '--- ADMIN PANEL - WARNINGS ---';
+
+  @override
   String get admin_panel_screen_db_warnings_expansion_tile_title => 'Warnings';
 
   @override
@@ -905,11 +931,14 @@ class AppLocalizationsEn extends AppLocalizations {
       'Accounts & Dependents';
 
   @override
-  String get admin_panel_screen_button_approve_accounts => 'Approve Accounts';
+  String get admin_panel_screen_search_field_hint => 'Search by surname...';
 
   @override
-  String get admin_panel_screen_button_approve_accounts_search_field_hint =>
-      'Search by surname...';
+  String get category_admin_panel_screen_approve_accounts =>
+      '--- ADMIN PANEL - APPROVE ACCOUNTS ---';
+
+  @override
+  String get admin_panel_screen_button_approve_accounts => 'Approve Accounts';
 
   @override
   String admin_panel_screen_account_approval_change_success(
@@ -930,67 +959,11 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get category_admin_panel_screen_edit_leaders =>
+      '--- ADMIN PANEL - EDIT LEADERS ---';
+
+  @override
   String get admin_panel_screen_button_edit_leaders => 'Edit Leaders';
-
-  @override
-  String get admin_panel_screen_button_edit_rights => 'Edit Permissions';
-
-  @override
-  String get admin_panel_screen_button_edit_rights_cant_change_admin_rights =>
-      'Administrator rights can only be changed in Supabase.';
-
-  @override
-  String get admin_panel_screen_button_edit_rights_search_field_hint =>
-      'Search by surname...';
-
-  @override
-  String get admin_panel_screen_button_edit_rights_right_level_1 =>
-      '1 - Default';
-
-  @override
-  String get admin_panel_screen_button_edit_rights_right_level_2 =>
-      '2 - Leader';
-
-  @override
-  String get admin_panel_screen_button_edit_rights_right_level_3 => '3 - Admin';
-
-  @override
-  String admin_panel_screen_button_edit_rights_change_success(
-    String name_surname,
-    String status,
-  ) {
-    String _temp0 = intl.Intl.selectLogic(status, {
-      '1': ' to default',
-      '2': ' to leader',
-      '3': ' to admin',
-      'other': '',
-    });
-    return 'Account $name_surname rights were successfully changed$_temp0.';
-  }
-
-  @override
-  String admin_panel_screen_button_edit_rights_error(String name_surname) {
-    return 'Account rights $name_surname could not be updated. Please try again.';
-  }
-
-  @override
-  String get admin_panel_screen_button_connect_dependents =>
-      'Connect Dependents';
-
-  @override
-  String get admin_panel_screen_button_dependent_codes => 'Dependent Codes';
-
-  @override
-  String get admin_panel_screen_data_management_title => 'Data';
-
-  @override
-  String get admin_panel_screen_button_skautis_sync => 'SkautIS sync';
-
-  @override
-  String get admin_panel_screen_notification_title => 'Notification';
-
-  @override
-  String get admin_panel_screen_button_send_notification => 'Send Notification';
 
   @override
   String admin_panel_screen_set_patrol_leaders_title(String name_surname) {
@@ -1040,41 +1013,70 @@ class AppLocalizationsEn extends AppLocalizations {
       'Failed to update leader status.';
 
   @override
-  String get admin_panel_screen_edit_leaders_section_leaders => 'Leaders';
+  String get category_admin_panel_screen_edit_account_rights =>
+      '--- ADMIN PANEL - EDIT ACCOUNT RIGHTS ---';
 
   @override
-  String get admin_panel_screen_edit_leaders_section_dependents => 'Dependents';
+  String get admin_panel_screen_button_edit_rights => 'Edit rights';
 
   @override
-  String get general_success => 'Success';
+  String get admin_panel_screen_button_edit_rights_cant_change_admin_rights =>
+      'Administrator rights can only be changed in Supabase.';
 
   @override
-  String get general_saved => 'Changes saved successfully';
+  String get admin_panel_screen_button_edit_rights_search_field_hint =>
+      'Search by surname...';
 
   @override
-  String get general_save => 'Save';
+  String get admin_panel_screen_button_edit_rights_right_level_1 =>
+      '1 - Default';
 
   @override
-  String get general_close => 'Close';
+  String get admin_panel_screen_button_edit_rights_right_level_2 =>
+      '2 - Leader';
 
   @override
-  String get general_discard => 'Discard';
+  String get admin_panel_screen_button_edit_rights_right_level_3 => '3 - Admin';
 
   @override
-  String get general_continue => 'Continue';
+  String admin_panel_screen_button_edit_rights_change_success(
+    String name_surname,
+    String status,
+  ) {
+    String _temp0 = intl.Intl.selectLogic(status, {
+      '1': ' to default',
+      '2': ' to leader',
+      '3': ' to admin',
+      'other': '',
+    });
+    return 'Account $name_surname rights were successfully changed$_temp0.';
+  }
 
   @override
-  String get general_cancel => 'Cancel';
+  String admin_panel_screen_button_edit_rights_error(String name_surname) {
+    return 'Account rights $name_surname could not be updated. Please try again.';
+  }
 
   @override
-  String get general_unsaved_changes => 'Unsaved changes';
+  String get category_admin_panel_screen_connect_accounts_with_dependents =>
+      '--- ADMIN PANEL - CONNECT ACCOUNTS WITH DEPENDENTS ---';
 
   @override
-  String get general_unsaved_changes_description =>
-      'You have unsaved changes. Do you want to discard them?';
+  String get admin_panel_screen_button_connect_dependents =>
+      'Connect Dependents';
 
   @override
-  String get error_unknown => 'Unknown error';
+  String get admin_panel_screen_button_dependent_codes => 'Dependent Codes';
+
+  @override
+  String get category_admin_panel_screen_skautis_sync =>
+      '--- ADMIN PANEL - SKAUTIS SYNC ---';
+
+  @override
+  String get admin_panel_screen_data_management_title => 'Data';
+
+  @override
+  String get admin_panel_screen_button_skautis_sync => 'SkautIS sync';
 
   @override
   String get admin_panel_screen_skautis_sync_description =>
@@ -1094,4 +1096,14 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get admin_panel_screen_skautis_sync_error_description =>
       'Error syncing with SkautIS';
+
+  @override
+  String get category_admin_panel_screen_notifications =>
+      '--- ADMIN PANEL - NOTIFICATIONS ---';
+
+  @override
+  String get admin_panel_screen_notification_title => 'Notification';
+
+  @override
+  String get admin_panel_screen_button_send_notification => 'Send Notification';
 }

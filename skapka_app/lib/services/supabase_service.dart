@@ -86,6 +86,21 @@ class SupabaseService {
         .toList();
   }
 
+  // Get all account_dependent relations for a group
+
+  Future<List<AccountDependentRelationModel>>
+  getAccountDependentRelationsByGroup({required String groupId}) async {
+    final response = await _supabaseClient
+        .from('accounts_dependents')
+        .select()
+        .eq('group_id', groupId);
+    return (response as List)
+        .map<AccountDependentRelationModel>(
+          (json) => AccountDependentRelationModel.fromJson(json),
+        )
+        .toList();
+  }
+
   // Table dependents
   Future<DependentModel?> getDependentDetail(String dependentId) async {
     final response = await _supabaseClient

@@ -89,7 +89,7 @@ class EditLeadersScreen extends StatelessWidget {
                   },
                   labelText: context
                       .localizations
-                      .admin_panel_screen_button_approve_accounts_search_field_hint,
+                      .admin_panel_screen_search_field_hint,
                 ),
                 FutureBuilder(
                   future: loadData(),

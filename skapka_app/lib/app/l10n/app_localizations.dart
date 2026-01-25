@@ -176,6 +176,48 @@ abstract class AppLocalizations {
   /// **'Chyba'**
   String get error;
 
+  /// No description provided for @success.
+  ///
+  /// In cs, this message translates to:
+  /// **'Úspěch'**
+  String get success;
+
+  /// No description provided for @saved.
+  ///
+  /// In cs, this message translates to:
+  /// **'Změny úspěšně uloženy'**
+  String get saved;
+
+  /// No description provided for @close.
+  ///
+  /// In cs, this message translates to:
+  /// **'Zavřít'**
+  String get close;
+
+  /// No description provided for @discard.
+  ///
+  /// In cs, this message translates to:
+  /// **'Zahodit'**
+  String get discard;
+
+  /// No description provided for @continue_.
+  ///
+  /// In cs, this message translates to:
+  /// **'Pokračovat'**
+  String get continue_;
+
+  /// No description provided for @unsaved_changes.
+  ///
+  /// In cs, this message translates to:
+  /// **'Neuložené změny'**
+  String get unsaved_changes;
+
+  /// No description provided for @unsaved_changes_description.
+  ///
+  /// In cs, this message translates to:
+  /// **'Máte neuložené změny. Chcete je zahodit?'**
+  String get unsaved_changes_description;
+
   /// No description provided for @generic_error.
   ///
   /// In cs, this message translates to:
@@ -1514,6 +1556,12 @@ abstract class AppLocalizations {
   /// **'Admin Panel'**
   String get admin_panel_screen_title;
 
+  /// No description provided for @category_admin_panel_screen_warnings.
+  ///
+  /// In cs, this message translates to:
+  /// **'--- ADMIN PANEL - VAROVÁNÍ ---'**
+  String get category_admin_panel_screen_warnings;
+
   /// No description provided for @admin_panel_screen_db_warnings_expansion_tile_title.
   ///
   /// In cs, this message translates to:
@@ -1558,17 +1606,23 @@ abstract class AppLocalizations {
   /// **'Účty & Podúčty'**
   String get admin_panel_screen_accounts_management_title;
 
+  /// No description provided for @admin_panel_screen_search_field_hint.
+  ///
+  /// In cs, this message translates to:
+  /// **'Vyhledat podle příjmení...'**
+  String get admin_panel_screen_search_field_hint;
+
+  /// No description provided for @category_admin_panel_screen_approve_accounts.
+  ///
+  /// In cs, this message translates to:
+  /// **'--- ADMIN PANEL - POTVRZOVÁNÍ ÚČTŮ ---'**
+  String get category_admin_panel_screen_approve_accounts;
+
   /// No description provided for @admin_panel_screen_button_approve_accounts.
   ///
   /// In cs, this message translates to:
   /// **'Potvrdit účty'**
   String get admin_panel_screen_button_approve_accounts;
-
-  /// No description provided for @admin_panel_screen_button_approve_accounts_search_field_hint.
-  ///
-  /// In cs, this message translates to:
-  /// **'Vyhledat podle příjmení...'**
-  String get admin_panel_screen_button_approve_accounts_search_field_hint;
 
   /// No description provided for @admin_panel_screen_account_approval_change_success.
   ///
@@ -1585,98 +1639,17 @@ abstract class AppLocalizations {
   /// **'Účet {name_surname} se nepodařilo potvrdit. Zkus to prosím znovu.'**
   String admin_panel_screen_button_approve_accounts_error(String name_surname);
 
+  /// No description provided for @category_admin_panel_screen_edit_leaders.
+  ///
+  /// In cs, this message translates to:
+  /// **'--- ADMIN PANEL - UPRAVIT VEDOUCÍ ---'**
+  String get category_admin_panel_screen_edit_leaders;
+
   /// No description provided for @admin_panel_screen_button_edit_leaders.
   ///
   /// In cs, this message translates to:
   /// **'Upravit vedoucí'**
   String get admin_panel_screen_button_edit_leaders;
-
-  /// No description provided for @admin_panel_screen_button_edit_rights.
-  ///
-  /// In cs, this message translates to:
-  /// **'Upravit práva'**
-  String get admin_panel_screen_button_edit_rights;
-
-  /// No description provided for @admin_panel_screen_button_edit_rights_cant_change_admin_rights.
-  ///
-  /// In cs, this message translates to:
-  /// **'Práva administrátora lze změnit pouze v Supabase.'**
-  String get admin_panel_screen_button_edit_rights_cant_change_admin_rights;
-
-  /// No description provided for @admin_panel_screen_button_edit_rights_search_field_hint.
-  ///
-  /// In cs, this message translates to:
-  /// **'Vyhledat podle příjmení...'**
-  String get admin_panel_screen_button_edit_rights_search_field_hint;
-
-  /// No description provided for @admin_panel_screen_button_edit_rights_right_level_1.
-  ///
-  /// In cs, this message translates to:
-  /// **'1 - Výchozí'**
-  String get admin_panel_screen_button_edit_rights_right_level_1;
-
-  /// No description provided for @admin_panel_screen_button_edit_rights_right_level_2.
-  ///
-  /// In cs, this message translates to:
-  /// **'2 - Vedoucí'**
-  String get admin_panel_screen_button_edit_rights_right_level_2;
-
-  /// No description provided for @admin_panel_screen_button_edit_rights_right_level_3.
-  ///
-  /// In cs, this message translates to:
-  /// **'3 - Admin'**
-  String get admin_panel_screen_button_edit_rights_right_level_3;
-
-  /// No description provided for @admin_panel_screen_button_edit_rights_change_success.
-  ///
-  /// In cs, this message translates to:
-  /// **'Práva účtu {name_surname} byla úspěšně změněna{status, select, 1{ na výchozí} 2{ na vedoucího} 3{ na administrátora} other{}}.'**
-  String admin_panel_screen_button_edit_rights_change_success(
-    String name_surname,
-    String status,
-  );
-
-  /// No description provided for @admin_panel_screen_button_edit_rights_error.
-  ///
-  /// In cs, this message translates to:
-  /// **'Práva účtu {name_surname} se nepodařilo změnit. Zkus to prosím znovu.'**
-  String admin_panel_screen_button_edit_rights_error(String name_surname);
-
-  /// No description provided for @admin_panel_screen_button_connect_dependents.
-  ///
-  /// In cs, this message translates to:
-  /// **'Připojit podúčty'**
-  String get admin_panel_screen_button_connect_dependents;
-
-  /// No description provided for @admin_panel_screen_button_dependent_codes.
-  ///
-  /// In cs, this message translates to:
-  /// **'Kódy podúčtů'**
-  String get admin_panel_screen_button_dependent_codes;
-
-  /// No description provided for @admin_panel_screen_data_management_title.
-  ///
-  /// In cs, this message translates to:
-  /// **'Data'**
-  String get admin_panel_screen_data_management_title;
-
-  /// No description provided for @admin_panel_screen_button_skautis_sync.
-  ///
-  /// In cs, this message translates to:
-  /// **'SkautIS sync'**
-  String get admin_panel_screen_button_skautis_sync;
-
-  /// No description provided for @admin_panel_screen_notification_title.
-  ///
-  /// In cs, this message translates to:
-  /// **'Oznámení'**
-  String get admin_panel_screen_notification_title;
-
-  /// No description provided for @admin_panel_screen_button_send_notification.
-  ///
-  /// In cs, this message translates to:
-  /// **'Poslat oznámení'**
-  String get admin_panel_screen_button_send_notification;
 
   /// No description provided for @admin_panel_screen_set_patrol_leaders_title.
   ///
@@ -1738,77 +1711,98 @@ abstract class AppLocalizations {
   /// **'Nepodařilo se aktualizovat status vedoucího.'**
   String get admin_panel_screen_edit_leaders_update_error;
 
-  /// No description provided for @admin_panel_screen_edit_leaders_section_leaders.
+  /// No description provided for @category_admin_panel_screen_edit_account_rights.
   ///
   /// In cs, this message translates to:
-  /// **'Vedoucí'**
-  String get admin_panel_screen_edit_leaders_section_leaders;
+  /// **'--- ADMIN PANEL - UPRAVIT PRÁVA ÚČTŮ ---'**
+  String get category_admin_panel_screen_edit_account_rights;
 
-  /// No description provided for @admin_panel_screen_edit_leaders_section_dependents.
+  /// No description provided for @admin_panel_screen_button_edit_rights.
   ///
   /// In cs, this message translates to:
-  /// **'Ostatní'**
-  String get admin_panel_screen_edit_leaders_section_dependents;
+  /// **'Upravit práva'**
+  String get admin_panel_screen_button_edit_rights;
 
-  /// No description provided for @general_success.
+  /// No description provided for @admin_panel_screen_button_edit_rights_cant_change_admin_rights.
   ///
   /// In cs, this message translates to:
-  /// **'Úspěch'**
-  String get general_success;
+  /// **'Práva administrátora lze změnit pouze v Supabase.'**
+  String get admin_panel_screen_button_edit_rights_cant_change_admin_rights;
 
-  /// No description provided for @general_saved.
+  /// No description provided for @admin_panel_screen_button_edit_rights_search_field_hint.
   ///
   /// In cs, this message translates to:
-  /// **'Změny úspěšně uloženy'**
-  String get general_saved;
+  /// **'Vyhledat podle příjmení...'**
+  String get admin_panel_screen_button_edit_rights_search_field_hint;
 
-  /// No description provided for @general_save.
+  /// No description provided for @admin_panel_screen_button_edit_rights_right_level_1.
   ///
   /// In cs, this message translates to:
-  /// **'Uložit'**
-  String get general_save;
+  /// **'1 - Výchozí'**
+  String get admin_panel_screen_button_edit_rights_right_level_1;
 
-  /// No description provided for @general_close.
+  /// No description provided for @admin_panel_screen_button_edit_rights_right_level_2.
   ///
   /// In cs, this message translates to:
-  /// **'Zavřít'**
-  String get general_close;
+  /// **'2 - Vedoucí'**
+  String get admin_panel_screen_button_edit_rights_right_level_2;
 
-  /// No description provided for @general_discard.
+  /// No description provided for @admin_panel_screen_button_edit_rights_right_level_3.
   ///
   /// In cs, this message translates to:
-  /// **'Zahodit'**
-  String get general_discard;
+  /// **'3 - Admin'**
+  String get admin_panel_screen_button_edit_rights_right_level_3;
 
-  /// No description provided for @general_continue.
+  /// No description provided for @admin_panel_screen_button_edit_rights_change_success.
   ///
   /// In cs, this message translates to:
-  /// **'Pokračovat'**
-  String get general_continue;
+  /// **'Práva účtu {name_surname} byla úspěšně změněna{status, select, 1{ na výchozí} 2{ na vedoucího} 3{ na administrátora} other{}}.'**
+  String admin_panel_screen_button_edit_rights_change_success(
+    String name_surname,
+    String status,
+  );
 
-  /// No description provided for @general_cancel.
+  /// No description provided for @admin_panel_screen_button_edit_rights_error.
   ///
   /// In cs, this message translates to:
-  /// **'Zrušit'**
-  String get general_cancel;
+  /// **'Práva účtu {name_surname} se nepodařilo změnit. Zkus to prosím znovu.'**
+  String admin_panel_screen_button_edit_rights_error(String name_surname);
 
-  /// No description provided for @general_unsaved_changes.
+  /// No description provided for @category_admin_panel_screen_connect_accounts_with_dependents.
   ///
   /// In cs, this message translates to:
-  /// **'Neuložené změny'**
-  String get general_unsaved_changes;
+  /// **'--- ADMIN PANEL - PŘIPOJIT ÚČTY S PODÚČTY ---'**
+  String get category_admin_panel_screen_connect_accounts_with_dependents;
 
-  /// No description provided for @general_unsaved_changes_description.
+  /// No description provided for @admin_panel_screen_button_connect_dependents.
   ///
   /// In cs, this message translates to:
-  /// **'Máte neuložené změny. Chcete je zahodit?'**
-  String get general_unsaved_changes_description;
+  /// **'Připojit podúčty'**
+  String get admin_panel_screen_button_connect_dependents;
 
-  /// No description provided for @error_unknown.
+  /// No description provided for @admin_panel_screen_button_dependent_codes.
   ///
   /// In cs, this message translates to:
-  /// **'Neznámá chyba'**
-  String get error_unknown;
+  /// **'Kódy podúčtů'**
+  String get admin_panel_screen_button_dependent_codes;
+
+  /// No description provided for @category_admin_panel_screen_skautis_sync.
+  ///
+  /// In cs, this message translates to:
+  /// **'--- ADMIN PANEL - SKAUTIS SYNC ---'**
+  String get category_admin_panel_screen_skautis_sync;
+
+  /// No description provided for @admin_panel_screen_data_management_title.
+  ///
+  /// In cs, this message translates to:
+  /// **'Data'**
+  String get admin_panel_screen_data_management_title;
+
+  /// No description provided for @admin_panel_screen_button_skautis_sync.
+  ///
+  /// In cs, this message translates to:
+  /// **'SkautIS synchronizace'**
+  String get admin_panel_screen_button_skautis_sync;
 
   /// No description provided for @admin_panel_screen_skautis_sync_description.
   ///
@@ -1839,6 +1833,24 @@ abstract class AppLocalizations {
   /// In cs, this message translates to:
   /// **'Chyba při synchronizaci se SkautIS'**
   String get admin_panel_screen_skautis_sync_error_description;
+
+  /// No description provided for @category_admin_panel_screen_notifications.
+  ///
+  /// In cs, this message translates to:
+  /// **'--- ADMIN PANEL - NOTIFICATIONS ---'**
+  String get category_admin_panel_screen_notifications;
+
+  /// No description provided for @admin_panel_screen_notification_title.
+  ///
+  /// In cs, this message translates to:
+  /// **'Notification'**
+  String get admin_panel_screen_notification_title;
+
+  /// No description provided for @admin_panel_screen_button_send_notification.
+  ///
+  /// In cs, this message translates to:
+  /// **'Send Notification'**
+  String get admin_panel_screen_button_send_notification;
 }
 
 class _AppLocalizationsDelegate

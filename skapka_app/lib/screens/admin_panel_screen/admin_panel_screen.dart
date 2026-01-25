@@ -106,7 +106,9 @@ class AdminPanelScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           MainButton.outlined(
-                            onPressed: () {},
+                            onPressed: () => context.router.push(
+                              const ConnectAccountDependentsRoute(),
+                            ),
                             type: ButtonType.textIcon,
                             iconAsset: 'assets/icons/user-plus.svg',
                             text: context

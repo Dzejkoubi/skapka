@@ -59,7 +59,7 @@ class SkautisSyncDialog extends StatelessWidget {
                   onPressed: () => context.router.pop(),
                 ),
                 MainButton.filled(
-                  text: context.localizations.general_continue,
+                  text: context.localizations.continue_,
                   onPressed: () async {
                     if (tokenController.text.isEmpty) return;
 

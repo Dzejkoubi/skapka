@@ -48,6 +48,28 @@ class AppLocalizationsCs extends AppLocalizations {
   String get error => 'Chyba';
 
   @override
+  String get success => 'Úspěch';
+
+  @override
+  String get saved => 'Změny úspěšně uloženy';
+
+  @override
+  String get close => 'Zavřít';
+
+  @override
+  String get discard => 'Zahodit';
+
+  @override
+  String get continue_ => 'Pokračovat';
+
+  @override
+  String get unsaved_changes => 'Neuložené změny';
+
+  @override
+  String get unsaved_changes_description =>
+      'Máte neuložené změny. Chcete je zahodit?';
+
+  @override
   String get generic_error => 'Něco se pokazilo. Zkus to prosím znovu.';
 
   @override
@@ -846,6 +868,10 @@ class AppLocalizationsCs extends AppLocalizations {
   String get admin_panel_screen_title => 'Admin Panel';
 
   @override
+  String get category_admin_panel_screen_warnings =>
+      '--- ADMIN PANEL - VAROVÁNÍ ---';
+
+  @override
   String get admin_panel_screen_db_warnings_expansion_tile_title => 'Varování';
 
   @override
@@ -901,11 +927,15 @@ class AppLocalizationsCs extends AppLocalizations {
   String get admin_panel_screen_accounts_management_title => 'Účty & Podúčty';
 
   @override
-  String get admin_panel_screen_button_approve_accounts => 'Potvrdit účty';
+  String get admin_panel_screen_search_field_hint =>
+      'Vyhledat podle příjmení...';
 
   @override
-  String get admin_panel_screen_button_approve_accounts_search_field_hint =>
-      'Vyhledat podle příjmení...';
+  String get category_admin_panel_screen_approve_accounts =>
+      '--- ADMIN PANEL - POTVRZOVÁNÍ ÚČTŮ ---';
+
+  @override
+  String get admin_panel_screen_button_approve_accounts => 'Potvrdit účty';
 
   @override
   String admin_panel_screen_account_approval_change_success(
@@ -926,66 +956,11 @@ class AppLocalizationsCs extends AppLocalizations {
   }
 
   @override
+  String get category_admin_panel_screen_edit_leaders =>
+      '--- ADMIN PANEL - UPRAVIT VEDOUCÍ ---';
+
+  @override
   String get admin_panel_screen_button_edit_leaders => 'Upravit vedoucí';
-
-  @override
-  String get admin_panel_screen_button_edit_rights => 'Upravit práva';
-
-  @override
-  String get admin_panel_screen_button_edit_rights_cant_change_admin_rights =>
-      'Práva administrátora lze změnit pouze v Supabase.';
-
-  @override
-  String get admin_panel_screen_button_edit_rights_search_field_hint =>
-      'Vyhledat podle příjmení...';
-
-  @override
-  String get admin_panel_screen_button_edit_rights_right_level_1 =>
-      '1 - Výchozí';
-
-  @override
-  String get admin_panel_screen_button_edit_rights_right_level_2 =>
-      '2 - Vedoucí';
-
-  @override
-  String get admin_panel_screen_button_edit_rights_right_level_3 => '3 - Admin';
-
-  @override
-  String admin_panel_screen_button_edit_rights_change_success(
-    String name_surname,
-    String status,
-  ) {
-    String _temp0 = intl.Intl.selectLogic(status, {
-      '1': ' na výchozí',
-      '2': ' na vedoucího',
-      '3': ' na administrátora',
-      'other': '',
-    });
-    return 'Práva účtu $name_surname byla úspěšně změněna$_temp0.';
-  }
-
-  @override
-  String admin_panel_screen_button_edit_rights_error(String name_surname) {
-    return 'Práva účtu $name_surname se nepodařilo změnit. Zkus to prosím znovu.';
-  }
-
-  @override
-  String get admin_panel_screen_button_connect_dependents => 'Připojit podúčty';
-
-  @override
-  String get admin_panel_screen_button_dependent_codes => 'Kódy podúčtů';
-
-  @override
-  String get admin_panel_screen_data_management_title => 'Data';
-
-  @override
-  String get admin_panel_screen_button_skautis_sync => 'SkautIS sync';
-
-  @override
-  String get admin_panel_screen_notification_title => 'Oznámení';
-
-  @override
-  String get admin_panel_screen_button_send_notification => 'Poslat oznámení';
 
   @override
   String admin_panel_screen_set_patrol_leaders_title(String name_surname) {
@@ -1035,41 +1010,69 @@ class AppLocalizationsCs extends AppLocalizations {
       'Nepodařilo se aktualizovat status vedoucího.';
 
   @override
-  String get admin_panel_screen_edit_leaders_section_leaders => 'Vedoucí';
+  String get category_admin_panel_screen_edit_account_rights =>
+      '--- ADMIN PANEL - UPRAVIT PRÁVA ÚČTŮ ---';
 
   @override
-  String get admin_panel_screen_edit_leaders_section_dependents => 'Ostatní';
+  String get admin_panel_screen_button_edit_rights => 'Upravit práva';
 
   @override
-  String get general_success => 'Úspěch';
+  String get admin_panel_screen_button_edit_rights_cant_change_admin_rights =>
+      'Práva administrátora lze změnit pouze v Supabase.';
 
   @override
-  String get general_saved => 'Změny úspěšně uloženy';
+  String get admin_panel_screen_button_edit_rights_search_field_hint =>
+      'Vyhledat podle příjmení...';
 
   @override
-  String get general_save => 'Uložit';
+  String get admin_panel_screen_button_edit_rights_right_level_1 =>
+      '1 - Výchozí';
 
   @override
-  String get general_close => 'Zavřít';
+  String get admin_panel_screen_button_edit_rights_right_level_2 =>
+      '2 - Vedoucí';
 
   @override
-  String get general_discard => 'Zahodit';
+  String get admin_panel_screen_button_edit_rights_right_level_3 => '3 - Admin';
 
   @override
-  String get general_continue => 'Pokračovat';
+  String admin_panel_screen_button_edit_rights_change_success(
+    String name_surname,
+    String status,
+  ) {
+    String _temp0 = intl.Intl.selectLogic(status, {
+      '1': ' na výchozí',
+      '2': ' na vedoucího',
+      '3': ' na administrátora',
+      'other': '',
+    });
+    return 'Práva účtu $name_surname byla úspěšně změněna$_temp0.';
+  }
 
   @override
-  String get general_cancel => 'Zrušit';
+  String admin_panel_screen_button_edit_rights_error(String name_surname) {
+    return 'Práva účtu $name_surname se nepodařilo změnit. Zkus to prosím znovu.';
+  }
 
   @override
-  String get general_unsaved_changes => 'Neuložené změny';
+  String get category_admin_panel_screen_connect_accounts_with_dependents =>
+      '--- ADMIN PANEL - PŘIPOJIT ÚČTY S PODÚČTY ---';
 
   @override
-  String get general_unsaved_changes_description =>
-      'Máte neuložené změny. Chcete je zahodit?';
+  String get admin_panel_screen_button_connect_dependents => 'Připojit podúčty';
 
   @override
-  String get error_unknown => 'Neznámá chyba';
+  String get admin_panel_screen_button_dependent_codes => 'Kódy podúčtů';
+
+  @override
+  String get category_admin_panel_screen_skautis_sync =>
+      '--- ADMIN PANEL - SKAUTIS SYNC ---';
+
+  @override
+  String get admin_panel_screen_data_management_title => 'Data';
+
+  @override
+  String get admin_panel_screen_button_skautis_sync => 'SkautIS synchronizace';
 
   @override
   String get admin_panel_screen_skautis_sync_description =>
@@ -1089,4 +1092,14 @@ class AppLocalizationsCs extends AppLocalizations {
   @override
   String get admin_panel_screen_skautis_sync_error_description =>
       'Chyba při synchronizaci se SkautIS';
+
+  @override
+  String get category_admin_panel_screen_notifications =>
+      '--- ADMIN PANEL - NOTIFICATIONS ---';
+
+  @override
+  String get admin_panel_screen_notification_title => 'Notification';
+
+  @override
+  String get admin_panel_screen_button_send_notification => 'Send Notification';
 }

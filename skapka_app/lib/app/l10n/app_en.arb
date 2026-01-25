@@ -13,6 +13,13 @@
   "save": "Save",
   "load_more": "Load more",
   "error": "Error",
+  "success": "Success",
+  "saved": "Changes saved successfully",
+  "close": "Close",
+  "discard": "Discard",
+  "continue_": "Continue",
+  "unsaved_changes": "Unsaved changes",
+  "unsaved_changes_description": "You have unsaved changes. Do you want to discard them?",
   "generic_error": "Something went wrong. Please try again.",
   "something_is_missing_title_1": "Quiet on the front... 🤫",
   "something_is_missing_title_2": "Nothing to see here... 🤷‍♂️",
@@ -282,6 +289,7 @@
   "settings_screen_app_version_title": "App Version: ",
   "category_admin_panel_screen": "--- ADMIN PANEL ---",
   "admin_panel_screen_title": "Admin Panel",
+  "category_admin_panel_screen_warnings": "--- ADMIN PANEL - WARNINGS ---",
   "admin_panel_screen_db_warnings_expansion_tile_title": "Warnings",
   "admin_panel_screen_db_warnings_error_loading_warnings": "Failed to load dependents from which warnings could not be retrieved. Please try again.",
   "admin_panel_screen_db_warning_no_warnings_subtitle": "No warnings found.",
@@ -307,8 +315,9 @@
   },
   "admin_panel_screen_db_warning_account_does_not_have_parent_email_filled_in_copy_account_id": "Account ID copied to clipboard.",
   "admin_panel_screen_accounts_management_title": "Accounts & Dependents",
+  "admin_panel_screen_search_field_hint": "Search by surname...",
+  "category_admin_panel_screen_approve_accounts": "--- ADMIN PANEL - APPROVE ACCOUNTS ---",
   "admin_panel_screen_button_approve_accounts": "Approve Accounts",
-  "admin_panel_screen_button_approve_accounts_search_field_hint": "Search by surname...",
   "admin_panel_screen_account_approval_change_success": "Account {name_surname} was successfully {status, select, approved{approved} disapproved{disapproved} other{updated}}.",
   "@admin_panel_screen_account_approval_change_success": {
     "placeholders": {
@@ -328,38 +337,8 @@
       }
     }
   },
+  "category_admin_panel_screen_edit_leaders": "--- ADMIN PANEL - EDIT LEADERS ---",
   "admin_panel_screen_button_edit_leaders": "Edit Leaders",
-  "admin_panel_screen_button_edit_rights": "Edit Permissions",
-  "admin_panel_screen_button_edit_rights_cant_change_admin_rights": "Administrator rights can only be changed in Supabase.",
-  "admin_panel_screen_button_edit_rights_search_field_hint": "Search by surname...",
-  "admin_panel_screen_button_edit_rights_right_level_1": "1 - Default",
-  "admin_panel_screen_button_edit_rights_right_level_2": "2 - Leader",
-  "admin_panel_screen_button_edit_rights_right_level_3": "3 - Admin",
-  "admin_panel_screen_button_edit_rights_change_success": "Account {name_surname} rights were successfully changed{status, select, 1{ to default} 2{ to leader} 3{ to admin} other{}}.",
-  "@admin_panel_screen_button_edit_rights_change_success": {
-    "placeholders": {
-      "name_surname": {
-        "type": "String"
-      },
-      "status": {
-        "type": "String"
-      }
-    }
-  },
-  "admin_panel_screen_button_edit_rights_error": "Account rights {name_surname} could not be updated. Please try again.",
-  "@admin_panel_screen_button_edit_rights_error": {
-    "placeholders": {
-      "name_surname": {
-        "type": "String"
-      }
-    }
-  },
-  "admin_panel_screen_button_connect_dependents": "Connect Dependents",
-  "admin_panel_screen_button_dependent_codes": "Dependent Codes",
-  "admin_panel_screen_data_management_title": "Data",
-  "admin_panel_screen_button_skautis_sync": "SkautIS sync",
-  "admin_panel_screen_notification_title": "Notification",
-  "admin_panel_screen_button_send_notification": "Send Notification",
   "admin_panel_screen_set_patrol_leaders_title": "Set Patrols for {name_surname}",
   "@admin_panel_screen_set_patrol_leaders_title": {
     "placeholders": {
@@ -410,21 +389,45 @@
     }
   },
   "admin_panel_screen_edit_leaders_update_error": "Failed to update leader status.",
-  "admin_panel_screen_edit_leaders_section_leaders": "Leaders",
-  "admin_panel_screen_edit_leaders_section_dependents": "Dependents",
-  "general_success": "Success",
-  "general_saved": "Changes saved successfully",
-  "general_save": "Save",
-  "general_close": "Close",
-  "general_discard": "Discard",
-  "general_continue": "Continue",
-  "general_cancel": "Cancel",
-  "general_unsaved_changes": "Unsaved changes",
-  "general_unsaved_changes_description": "You have unsaved changes. Do you want to discard them?",
-  "error_unknown": "Unknown error",
+  "category_admin_panel_screen_edit_account_rights": "--- ADMIN PANEL - EDIT ACCOUNT RIGHTS ---",
+  "admin_panel_screen_button_edit_rights": "Edit rights",
+  "admin_panel_screen_button_edit_rights_cant_change_admin_rights": "Administrator rights can only be changed in Supabase.",
+  "admin_panel_screen_button_edit_rights_search_field_hint": "Search by surname...",
+  "admin_panel_screen_button_edit_rights_right_level_1": "1 - Default",
+  "admin_panel_screen_button_edit_rights_right_level_2": "2 - Leader",
+  "admin_panel_screen_button_edit_rights_right_level_3": "3 - Admin",
+  "admin_panel_screen_button_edit_rights_change_success": "Account {name_surname} rights were successfully changed{status, select, 1{ to default} 2{ to leader} 3{ to admin} other{}}.",
+  "@admin_panel_screen_button_edit_rights_change_success": {
+    "placeholders": {
+      "name_surname": {
+        "type": "String"
+      },
+      "status": {
+        "type": "String"
+      }
+    }
+  },
+  "admin_panel_screen_button_edit_rights_error": "Account rights {name_surname} could not be updated. Please try again.",
+  "@admin_panel_screen_button_edit_rights_error": {
+    "placeholders": {
+      "name_surname": {
+        "type": "String"
+      }
+    }
+  },
+  "category_admin_panel_screen_connect_accounts_with_dependents": "--- ADMIN PANEL - CONNECT ACCOUNTS WITH DEPENDENTS ---",
+  "admin_panel_screen_button_connect_dependents": "Connect Dependents",
+  "category_admin_panel_screen_dependent_codes": "--- ADMIN PANEL - DEPENDENT CODES ---",
+  "admin_panel_screen_button_dependent_codes": "Dependent Codes",
+  "category_admin_panel_screen_skautis_sync": "--- ADMIN PANEL - SKAUTIS SYNC ---",
+  "admin_panel_screen_data_management_title": "Data",
+  "admin_panel_screen_button_skautis_sync": "SkautIS sync",
   "admin_panel_screen_skautis_sync_description": "Enter SkautIS token to sync data:",
   "admin_panel_screen_skautis_sync_token_hint": "SkautIS Token",
   "admin_panel_screen_skautis_sync_progress": "Syncing with SkautIS...",
   "admin_panel_screen_skautis_sync_success_description": "SkautIS sync successful",
-  "admin_panel_screen_skautis_sync_error_description": "Error syncing with SkautIS"
+  "admin_panel_screen_skautis_sync_error_description": "Error syncing with SkautIS",
+  "category_admin_panel_screen_notifications": "--- ADMIN PANEL - NOTIFICATIONS ---",
+  "admin_panel_screen_notification_title": "Notification",
+  "admin_panel_screen_button_send_notification": "Send Notification"
 }

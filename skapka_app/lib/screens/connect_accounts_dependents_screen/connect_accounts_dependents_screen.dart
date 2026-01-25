@@ -7,6 +7,7 @@ import 'package:skapka_app/app/router/router.gr.dart';
 import 'package:skapka_app/app/theme/app_spacing.dart';
 import 'package:skapka_app/app/theme/app_text_theme.dart';
 import 'package:skapka_app/app/theme/main_button_theme.dart';
+import 'package:skapka_app/models/account_model.dart';
 import 'package:skapka_app/models/dependents/account_dependent_model.dart';
 import 'package:skapka_app/models/dependents/dependent_notes_model.dart';
 import 'package:skapka_app/providers/account_provider.dart';
@@ -15,6 +16,7 @@ import 'package:skapka_app/providers/loading_provider.dart';
 import 'package:skapka_app/services/supabase_service.dart';
 import 'package:skapka_app/widgets/appbar/appbar.dart';
 import 'package:skapka_app/widgets/buttons/main_button.dart';
+import 'package:skapka_app/widgets/dialogs/bottom_dialog.dart';
 import 'package:skapka_app/widgets/dialogs/large_dialog.dart';
 import 'package:skapka_app/widgets/forms/custom_form.dart';
 import 'package:skapka_app/widgets/loading_floating_logo/loading_rotating_logo.dart';
@@ -37,11 +39,11 @@ class ConnectAccountsDependentsScreen extends StatelessWidget {
     // Show list of accounts with their dependents underneath with bin icon to remove connection
     // Plus icon next to the account name surname to open screen with list of dependents to connect
 
-    loadData() async {
+    loadData({bool forceRefresh = false}) async {
       final groupId = accountProvider.groupId;
 
       try {
-        if (adminProvider.groupDependents.isEmpty) {
+        if (adminProvider.groupDependents.isEmpty || forceRefresh) {
           final dependents = await supabaseService.getGroupDependents(
             groupId: groupId,
           );
@@ -53,7 +55,7 @@ class ConnectAccountsDependentsScreen extends StatelessWidget {
             adminProvider.setGroupDependents(dependents);
           }
         }
-        if (adminProvider.groupAccounts.isEmpty) {
+        if (adminProvider.groupAccounts.isEmpty || forceRefresh) {
           final accounts = await supabaseService.getGroupAccounts(groupId);
           debugPrint(
             'EditLeadersScreen: Fetched ${accounts.length} accounts from DB',
@@ -63,7 +65,8 @@ class ConnectAccountsDependentsScreen extends StatelessWidget {
             adminProvider.setGroupAccounts(accounts);
           }
         }
-        if (adminProvider.groupAccountsDependentsRelations.isEmpty) {
+        if (adminProvider.groupAccountsDependentsRelations.isEmpty ||
+            forceRefresh) {
           final accountDependentsRelations = await supabaseService
               .getAccountDependentRelationsByGroup(groupId: groupId);
           debugPrint(
@@ -84,6 +87,47 @@ class ConnectAccountsDependentsScreen extends StatelessWidget {
         }
       } catch (e) {
         debugPrint('Error loading data in EditLeadersScreen: $e');
+      }
+    }
+
+    void disconnectDependentFromAccount(
+      AccountDependentModel dependent,
+      AccountModel account,
+      AdminPanelProvider adminProvider,
+      SupabaseService supabaseService,
+      LoadingProvider loadingProvider,
+      BuildContext context,
+    ) async {
+      try {
+        loadingProvider.show();
+        await supabaseService.disconnectDependentFromAccount(
+          dependentId: dependent.dependentId,
+          accountId: account.accountId,
+        );
+        await loadData(forceRefresh: true);
+        if (context.mounted) {
+          context.pop();
+          BottomDialog.show(
+            context,
+            type: BottomDialogType.positive,
+            description: context.localizations
+                .admin_panel_screen_connect_accounts_dependents_delete_connection_success(
+                  '${dependent.name} ${dependent.surname}',
+                  '${account.name} ${account.surname}',
+                ),
+          );
+        }
+      } catch (e) {
+        debugPrint('Error disconnecting dependent from account: $e');
+        if (context.mounted) {
+          BottomDialog.show(
+            context,
+            type: BottomDialogType.negative,
+            description: context.localizations.generic_error,
+          );
+        }
+      } finally {
+        loadingProvider.hide();
       }
     }
 
@@ -249,7 +293,32 @@ class ConnectAccountsDependentsScreen extends StatelessWidget {
                                                     secondaryButtonText: context
                                                         .localizations
                                                         .cancel,
-                                                    onPrimaryPressed: () {},
+                                                    onPrimaryPressed: () {
+                                                      if (dependent
+                                                          .isMainDependent) {
+                                                        context.pop();
+                                                        BottomDialog.show(
+                                                          context,
+                                                          type: BottomDialogType
+                                                              .negative,
+                                                          description: context
+                                                              .localizations
+                                                              .admin_panel_screen_connect_accounts_dependents_delete_connection_error_main_dependent(
+                                                                '${dependent.name} ${dependent.surname}',
+                                                                '${account.name} ${account.surname}',
+                                                              ),
+                                                        );
+                                                      } else {
+                                                        disconnectDependentFromAccount(
+                                                          dependent,
+                                                          account,
+                                                          adminProvider,
+                                                          supabaseService,
+                                                          loadingProvider,
+                                                          context,
+                                                        );
+                                                      }
+                                                    },
                                                     onSecondaryPressed: () {
                                                       context.pop();
                                                     },

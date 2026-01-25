@@ -1808,6 +1808,16 @@ abstract class AppLocalizations {
     String dependent_name_surname,
   );
 
+  /// No description provided for @admin_panel_screen_connect_accounts_dependents_delete_connection_error_main_dependent.
+  ///
+  /// In cs, this message translates to:
+  /// **'Nelze odstranit propojení hlavního podúčtu {dependent_name_surname} z účtu {account_name_surname}.'**
+  String
+  admin_panel_screen_connect_accounts_dependents_delete_connection_error_main_dependent(
+    String account_name_surname,
+    String dependent_name_surname,
+  );
+
   /// No description provided for @admin_panel_screen_connect_accounts_dependents_delete_connection_error.
   ///
   /// In cs, this message translates to:

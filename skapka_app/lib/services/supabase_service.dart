@@ -477,4 +477,47 @@ class SupabaseService {
         .update({'is_leader': false})
         .eq('dependent_id', dependentId);
   }
+
+  Future<void> connectDependentToAccount({
+    required String accountId,
+    required String dependentId,
+    required String groupId,
+  }) async {
+    await _supabaseClient.from('accounts_dependents').insert({
+      'account_id': accountId,
+      'dependent_id': dependentId,
+      'group_id': groupId,
+      'is_main_dependent': false,
+    });
+  }
+
+  Future<void> disconnectDependentFromAccount({
+    required String accountId,
+    required String dependentId,
+  }) async {
+    await _supabaseClient
+        .from('accounts_dependents')
+        .delete()
+        .eq('account_id', accountId)
+        .eq('dependent_id', dependentId);
+  }
+
+  Future<void> setMainDependent({
+    required String accountId,
+    required String dependentId,
+  }) async {
+    // First, unset any existing main dependent for the account
+    await _supabaseClient
+        .from('accounts_dependents')
+        .update({'is_main_dependent': false})
+        .eq('account_id', accountId)
+        .eq('is_main_dependent', true);
+
+    // Then, set the new main dependent
+    await _supabaseClient
+        .from('accounts_dependents')
+        .update({'is_main_dependent': true})
+        .eq('account_id', accountId)
+        .eq('dependent_id', dependentId);
+  }
 }

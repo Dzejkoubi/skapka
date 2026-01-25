@@ -1086,6 +1086,15 @@ class AppLocalizationsCs extends AppLocalizations {
   }
 
   @override
+  String
+  admin_panel_screen_connect_accounts_dependents_delete_connection_error_main_dependent(
+    String account_name_surname,
+    String dependent_name_surname,
+  ) {
+    return 'Nelze odstranit propojení hlavního podúčtu $dependent_name_surname z účtu $account_name_surname.';
+  }
+
+  @override
   String admin_panel_screen_connect_accounts_dependents_delete_connection_error(
     String account_name_surname,
     String dependent_name_surname,

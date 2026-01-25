@@ -440,6 +440,17 @@
       }
     }
   },
+  "admin_panel_screen_connect_accounts_dependents_delete_connection_error_main_dependent": "Nelze odstranit propojení hlavního podúčtu {dependent_name_surname} z účtu {account_name_surname}.",
+  "@admin_panel_screen_connect_accounts_dependents_delete_connection_error_main_dependent": {
+    "placeholders": {
+      "account_name_surname": {
+        "type": "String"
+      },
+      "dependent_name_surname": {
+        "type": "String"
+      }
+    }
+  },
   "admin_panel_screen_connect_accounts_dependents_delete_connection_error": "Nepodařilo se odstranit propojení mezi účtem {account_name_surname} a podúčtem {dependent_name_surname}. Zkus to prosím znovu.",
   "@admin_panel_screen_connect_accounts_dependents_delete_connection_error": {
     "placeholders": {

@@ -1105,14 +1105,14 @@ class AppLocalizationsCs extends AppLocalizations {
   @override
   String
   get admin_panel_screen_connect_accounts_dependents_add_connection_button_text =>
-      'Přidat podúčet';
+      'Upravit';
 
   @override
   String
   admin_panel_screen_connect_accounts_dependents_add_connection_screen_title(
     Object account_name_surname,
   ) {
-    return '$account_name_surname – Přidat podúčty';
+    return '$account_name_surname – Upravit podúčty';
   }
 
   @override
@@ -1129,6 +1129,24 @@ class AppLocalizationsCs extends AppLocalizations {
     String account_name_surname,
   ) {
     return 'Nepodařilo se připojit závislou osobu $dependent_name_surname k účtu $account_name_surname. Zkus to prosím znovu.';
+  }
+
+  @override
+  String
+  admin_panel_screen_connect_accounts_dependents_set_main_dependent_success(
+    String dependent_name_surname,
+    String account_name_surname,
+  ) {
+    return 'Závislá osoba $dependent_name_surname byla nastavena jako hlavní pro účet $account_name_surname.';
+  }
+
+  @override
+  String
+  admin_panel_screen_connect_accounts_dependents_unset_main_dependent_success(
+    String dependent_name_surname,
+    String account_name_surname,
+  ) {
+    return 'Závislá osoba $dependent_name_surname již není hlavní pro účet $account_name_surname.';
   }
 
   @override

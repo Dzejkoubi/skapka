@@ -1830,14 +1830,14 @@ abstract class AppLocalizations {
   /// No description provided for @admin_panel_screen_connect_accounts_dependents_add_connection_button_text.
   ///
   /// In cs, this message translates to:
-  /// **'Přidat podúčet'**
+  /// **'Upravit'**
   String
   get admin_panel_screen_connect_accounts_dependents_add_connection_button_text;
 
   /// No description provided for @admin_panel_screen_connect_accounts_dependents_add_connection_screen_title.
   ///
   /// In cs, this message translates to:
-  /// **'{account_name_surname} – Přidat podúčty'**
+  /// **'{account_name_surname} – Upravit podúčty'**
   String
   admin_panel_screen_connect_accounts_dependents_add_connection_screen_title(
     Object account_name_surname,
@@ -1857,6 +1857,26 @@ abstract class AppLocalizations {
   /// In cs, this message translates to:
   /// **'Nepodařilo se připojit závislou osobu {dependent_name_surname} k účtu {account_name_surname}. Zkus to prosím znovu.'**
   String admin_panel_screen_connect_accounts_dependents_add_connection_error(
+    String dependent_name_surname,
+    String account_name_surname,
+  );
+
+  /// No description provided for @admin_panel_screen_connect_accounts_dependents_set_main_dependent_success.
+  ///
+  /// In cs, this message translates to:
+  /// **'Závislá osoba {dependent_name_surname} byla nastavena jako hlavní pro účet {account_name_surname}.'**
+  String
+  admin_panel_screen_connect_accounts_dependents_set_main_dependent_success(
+    String dependent_name_surname,
+    String account_name_surname,
+  );
+
+  /// No description provided for @admin_panel_screen_connect_accounts_dependents_unset_main_dependent_success.
+  ///
+  /// In cs, this message translates to:
+  /// **'Závislá osoba {dependent_name_surname} již není hlavní pro účet {account_name_surname}.'**
+  String
+  admin_panel_screen_connect_accounts_dependents_unset_main_dependent_success(
     String dependent_name_surname,
     String account_name_surname,
   );

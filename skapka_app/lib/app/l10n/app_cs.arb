@@ -462,8 +462,8 @@
       }
     }
   },
-  "admin_panel_screen_connect_accounts_dependents_add_connection_button_text": "Přidat podúčet",
-  "admin_panel_screen_connect_accounts_dependents_add_connection_screen_title": "{account_name_surname} – Přidat podúčty",
+  "admin_panel_screen_connect_accounts_dependents_add_connection_button_text": "Upravit",
+  "admin_panel_screen_connect_accounts_dependents_add_connection_screen_title": "{account_name_surname} – Upravit podúčty",
   "admin_panel_screen_connect_accounts_dependents_add_connection_success": "Závislá osoba {dependent_name_surname} byla úspěšně připojena k účtu {account_name_surname}.",
   "@admin_panel_screen_connect_accounts_dependents_add_connection_success": {
     "placeholders": {
@@ -477,6 +477,28 @@
   },
   "admin_panel_screen_connect_accounts_dependents_add_connection_error": "Nepodařilo se připojit závislou osobu {dependent_name_surname} k účtu {account_name_surname}. Zkus to prosím znovu.",
   "@admin_panel_screen_connect_accounts_dependents_add_connection_error": {
+    "placeholders": {
+      "dependent_name_surname": {
+        "type": "String"
+      },
+      "account_name_surname": {
+        "type": "String"
+      }
+    }
+  },
+  "admin_panel_screen_connect_accounts_dependents_set_main_dependent_success": "Závislá osoba {dependent_name_surname} byla nastavena jako hlavní pro účet {account_name_surname}.",
+  "@admin_panel_screen_connect_accounts_dependents_set_main_dependent_success": {
+    "placeholders": {
+      "dependent_name_surname": {
+        "type": "String"
+      },
+      "account_name_surname": {
+        "type": "String"
+      }
+    }
+  },
+  "admin_panel_screen_connect_accounts_dependents_unset_main_dependent_success": "Závislá osoba {dependent_name_surname} již není hlavní pro účet {account_name_surname}.",
+  "@admin_panel_screen_connect_accounts_dependents_unset_main_dependent_success": {
     "placeholders": {
       "dependent_name_surname": {
         "type": "String"

@@ -522,4 +522,15 @@ class SupabaseService {
         .eq('account_id', accountId)
         .eq('dependent_id', dependentId);
   }
+
+  Future<void> unsetMainDependent({
+    required String accountId,
+    required String dependentId,
+  }) async {
+    await _supabaseClient
+        .from('accounts_dependents')
+        .update({'is_main_dependent': false})
+        .eq('account_id', accountId)
+        .eq('dependent_id', dependentId);
+  }
 }

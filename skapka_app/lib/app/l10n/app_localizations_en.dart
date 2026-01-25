@@ -1110,14 +1110,14 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String
   get admin_panel_screen_connect_accounts_dependents_add_connection_button_text =>
-      'Přidat podúčet';
+      'Edit';
 
   @override
   String
   admin_panel_screen_connect_accounts_dependents_add_connection_screen_title(
     Object account_name_surname,
   ) {
-    return '$account_name_surname - Add Dependent';
+    return '$account_name_surname - Edit Dependents';
   }
 
   @override
@@ -1134,6 +1134,24 @@ class AppLocalizationsEn extends AppLocalizations {
     String account_name_surname,
   ) {
     return 'Failed to connect dependent $dependent_name_surname to account $account_name_surname. Please try again.';
+  }
+
+  @override
+  String
+  admin_panel_screen_connect_accounts_dependents_set_main_dependent_success(
+    String dependent_name_surname,
+    String account_name_surname,
+  ) {
+    return 'Dependent $dependent_name_surname was set as main for account $account_name_surname.';
+  }
+
+  @override
+  String
+  admin_panel_screen_connect_accounts_dependents_unset_main_dependent_success(
+    String dependent_name_surname,
+    String account_name_surname,
+  ) {
+    return 'Dependent $dependent_name_surname is no longer main for account $account_name_surname.';
   }
 
   @override

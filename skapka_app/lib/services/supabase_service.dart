@@ -203,7 +203,7 @@ class SupabaseService {
   Future<List<AccountModel>> getGroupAccounts(
     String groupId, {
     bool onlyNotApproved = false,
-    String? surnameSearchQuery,
+    String? searchQuery,
   }) async {
     var query = _supabaseClient
         .from('accounts')
@@ -214,8 +214,10 @@ class SupabaseService {
       query = query.eq('is_approved', false);
     }
 
-    if (surnameSearchQuery != null && surnameSearchQuery.isNotEmpty) {
-      query = query.ilike('surname', '%$surnameSearchQuery%');
+    if (searchQuery != null && searchQuery.isNotEmpty) {
+      query = query.or(
+        'name.ilike.%$searchQuery%,surname.ilike.%$searchQuery%',
+      );
     }
     final response = await query;
     return (response as List)

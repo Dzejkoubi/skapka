@@ -32,7 +32,6 @@ class ApproveAccountsScreen extends StatelessWidget {
         List<AccountModel> accounts = await supabaseService.getGroupAccounts(
           accountProvider.groupId,
           onlyNotApproved: false,
-          surnameSearchQuery: adminProvider.surnameSearchQuery,
         );
         debugPrint(
           'ApproveAccountsScreen: Fetched ${accounts.length} accounts from DB',
@@ -106,7 +105,7 @@ class ApproveAccountsScreen extends StatelessWidget {
 
     return PopScope(
       onPopInvokedWithResult: (didPop, result) {
-        adminProvider.clearSurnameSearchQuery();
+        adminProvider.clearSearchQuery();
       },
       child: ScreenWrapper(
         appBar: Appbar(
@@ -129,11 +128,7 @@ class ApproveAccountsScreen extends StatelessWidget {
                     showSuffixIcon: false,
                     controller: TextEditingController(),
                     onChanged: (String value) {
-                      // Update provider and debounce the actual fetch
-                      adminProvider.setSurnameSearchQueryDebounced(
-                        value,
-                        loadGroupAccounts,
-                      );
+                      adminProvider.setSearchQuery(value);
                     },
                     labelText: context
                         .localizations
@@ -148,25 +143,36 @@ class ApproveAccountsScreen extends StatelessWidget {
                         return const CenteredLoadingRotatingLogo();
                       }
                       return Consumer<AdminPanelProvider>(
-                        builder: (context, adminProvider, child) => Column(
-                          spacing: AppSpacing.medium,
-                          children: [
-                            // Show accounts that are not approved first
-                            for (var account in [
-                              ...adminProvider.groupAccounts.where(
-                                (a) => !a.isApproved,
-                              ),
-                              ...adminProvider.groupAccounts.where(
-                                (a) => a.isApproved,
-                              ),
-                            ])
-                              ApproveAccountsAccountBox(
-                                account: account,
-                                updateAccountApprovalStatus:
-                                    updateAccountApprovalStatus,
-                              ),
-                          ],
-                        ),
+                        builder: (context, adminProvider, child) {
+                          final query = adminProvider.searchQuery.toLowerCase();
+                          final filteredAccounts = adminProvider.groupAccounts
+                              .where((a) {
+                                if (query.isEmpty) return true;
+                                final fullName = '${a.name} ${a.surname}'
+                                    .toLowerCase();
+                                final reversedName = '${a.surname} ${a.name}'
+                                    .toLowerCase();
+                                return fullName.contains(query) ||
+                                    reversedName.contains(query);
+                              })
+                              .toList();
+
+                          return Column(
+                            spacing: AppSpacing.medium,
+                            children: [
+                              // Show accounts that are not approved first
+                              for (var account in [
+                                ...filteredAccounts.where((a) => !a.isApproved),
+                                ...filteredAccounts.where((a) => a.isApproved),
+                              ])
+                                ApproveAccountsAccountBox(
+                                  account: account,
+                                  updateAccountApprovalStatus:
+                                      updateAccountApprovalStatus,
+                                ),
+                            ],
+                          );
+                        },
                       );
                     },
                   ),

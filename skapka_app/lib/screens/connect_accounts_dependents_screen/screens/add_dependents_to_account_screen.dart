@@ -158,7 +158,7 @@ class _AddDependentsToAccountScreenState
 
     return PopScope(
       onPopInvokedWithResult: (didPop, result) {
-        widget.adminProvider.clearSurnameSearchQuery();
+        widget.adminProvider.clearSearchQuery();
       },
       child: ScreenWrapper(
         appBar: Appbar(

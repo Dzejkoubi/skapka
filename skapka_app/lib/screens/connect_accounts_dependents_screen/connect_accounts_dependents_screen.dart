@@ -126,7 +126,7 @@ class ConnectAccountsDependentsScreen extends StatelessWidget {
 
     return PopScope(
       onPopInvokedWithResult: (didPop, result) {
-        adminProvider.clearSurnameSearchQuery();
+        adminProvider.clearSearchQuery();
       },
       child: ScreenWrapper(
         appBar: Appbar(
@@ -152,11 +152,7 @@ class ConnectAccountsDependentsScreen extends StatelessWidget {
                         showSuffixIcon: false,
                         controller: TextEditingController(),
                         onChanged: (String value) {
-                          // Update provider and debounce the actual fetch
-                          adminProvider.setSurnameSearchQueryDebounced(
-                            value,
-                            loadData,
-                          );
+                          adminProvider.setSearchQuery(value);
                         },
                         labelText: context
                             .localizations
@@ -178,7 +174,7 @@ class ConnectAccountsDependentsScreen extends StatelessWidget {
                           children: [
                             ...adminProvider.groupAccounts
                                 .where((account) {
-                                  final query = adminProvider.surnameSearchQuery
+                                  final query = adminProvider.searchQuery
                                       .toLowerCase();
                                   final name = account.name.toLowerCase();
                                   final surname = account.surname.toLowerCase();

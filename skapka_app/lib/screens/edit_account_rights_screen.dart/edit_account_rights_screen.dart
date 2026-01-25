@@ -30,7 +30,6 @@ class EditAccountRightsScreen extends StatelessWidget {
       List<AccountModel> accounts = await supabaseService.getGroupAccounts(
         accountProvider.groupId,
         onlyNotApproved: false,
-        surnameSearchQuery: adminProvider.surnameSearchQuery,
       );
       // If new accounts are the same as current, do not update(this also solves issue if any of the lists is empty)
       if (context.mounted && (accounts != adminProvider.groupAccounts)) {
@@ -40,7 +39,7 @@ class EditAccountRightsScreen extends StatelessWidget {
 
     return PopScope(
       onPopInvokedWithResult: (didPop, result) {
-        adminProvider.clearSurnameSearchQuery();
+        adminProvider.clearSearchQuery();
       },
       child: ScreenWrapper(
         appBar: Appbar(
@@ -65,18 +64,14 @@ class EditAccountRightsScreen extends StatelessWidget {
                         showSuffixIcon: false,
                         controller: TextEditingController(),
                         onChanged: (String value) {
-                          // Update provider and debounce the actual fetch
-                          adminProvider.setSurnameSearchQueryDebounced(
-                            value,
-                            loadGroupAccounts,
-                          );
+                          adminProvider.setSearchQuery(value);
                         },
                         labelText: context
                             .localizations
                             .admin_panel_screen_search_field_hint,
                       ),
                       Selector<AdminPanelProvider, String>(
-                        selector: (_, provider) => provider.surnameSearchQuery,
+                        selector: (_, provider) => provider.searchQuery,
                         builder: (context, surnameSearchQuery, __) {
                           if (surnameSearchQuery.isEmpty) {
                             return Column(
@@ -106,26 +101,41 @@ class EditAccountRightsScreen extends StatelessWidget {
                         return const CenteredLoadingRotatingLogo();
                       }
                       return Consumer<AdminPanelProvider>(
-                        builder: (context, adminProvider, child) => Column(
-                          spacing: AppSpacing.medium,
-                          children: [
-                            // Show accounts that have rights 0, 1, 2 in this order
-                            for (var account in [
-                              ...adminProvider.groupAccounts.where(
-                                (a) => (a.rights == 1),
-                              ),
-                              ...adminProvider.groupAccounts.where(
-                                (a) => (a.rights == 2),
-                              ),
-                            ])
-                              EditAccountRightsAccountBox(
-                                account: account,
-                                loadingProvider: loadingProvider,
-                                supabaseService: supabaseService,
-                                loadGroupAccounts: loadGroupAccounts,
-                              ),
-                          ],
-                        ),
+                        builder: (context, adminProvider, child) {
+                          final query = adminProvider.searchQuery.toLowerCase();
+                          final filteredAccounts = adminProvider.groupAccounts
+                              .where((a) {
+                                if (query.isEmpty) return true;
+                                final fullName = '${a.name} ${a.surname}'
+                                    .toLowerCase();
+                                final reversedName = '${a.surname} ${a.name}'
+                                    .toLowerCase();
+                                return fullName.contains(query) ||
+                                    reversedName.contains(query);
+                              })
+                              .toList();
+
+                          return Column(
+                            spacing: AppSpacing.medium,
+                            children: [
+                              // Show accounts that have rights 0, 1, 2 in this order
+                              for (var account in [
+                                ...filteredAccounts.where(
+                                  (a) => (a.rights == 1),
+                                ),
+                                ...filteredAccounts.where(
+                                  (a) => (a.rights == 2),
+                                ),
+                              ])
+                                EditAccountRightsAccountBox(
+                                  account: account,
+                                  loadingProvider: loadingProvider,
+                                  supabaseService: supabaseService,
+                                  loadGroupAccounts: loadGroupAccounts,
+                                ),
+                            ],
+                          );
+                        },
                       );
                     },
                   ),

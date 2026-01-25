@@ -13,7 +13,7 @@ class AdminPanelProvider extends ChangeNotifier {
   List<AccountModel> _groupAccounts = [];
   List<LeaderModel> _groupLeaders = [];
   List<AccountDependentRelationModel> _groupAccountsDependentsRelations = [];
-  String _surnameSearchQuery = '';
+  String _searchQuery = '';
   Timer? _debounce;
 
   List<DependentModel> get groupDependents => _groupDependents;
@@ -23,7 +23,7 @@ class AdminPanelProvider extends ChangeNotifier {
   List<LeaderModel> get groupLeaders => _groupLeaders;
   List<AccountDependentRelationModel> get groupAccountsDependentsRelations =>
       _groupAccountsDependentsRelations;
-  String get surnameSearchQuery => _surnameSearchQuery;
+  String get searchQuery => _searchQuery;
 
   void setGroupDependents(List<DependentModel> dependents) {
     _groupDependents = dependents;
@@ -54,24 +54,13 @@ class AdminPanelProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setSurnameSearchQuery(String query) {
-    _surnameSearchQuery = query;
+  void setSearchQuery(String query) {
+    _searchQuery = query;
     notifyListeners();
   }
 
-  void setSurnameSearchQueryDebounced(String query, VoidCallback? onDebounced) {
-    _surnameSearchQuery = query;
-    notifyListeners();
-
-    // Cancel any existing debounce timer
-    _debounce?.cancel();
-    _debounce = Timer(const Duration(milliseconds: 300), () {
-      if (onDebounced != null) onDebounced();
-    });
-  }
-
-  void clearSurnameSearchQuery() {
-    _surnameSearchQuery = '';
+  void clearSearchQuery() {
+    _searchQuery = '';
     notifyListeners();
   }
 
@@ -80,7 +69,7 @@ class AdminPanelProvider extends ChangeNotifier {
     _groupAccounts = [];
     _groupLeaders = [];
     _groupAccountsDependentsRelations = [];
-    _surnameSearchQuery = '';
+    _searchQuery = '';
     notifyListeners();
   }
 

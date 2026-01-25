@@ -59,7 +59,7 @@ class EditLeadersScreen extends StatelessWidget {
 
     return PopScope(
       onPopInvokedWithResult: (didPop, result) {
-        adminProvider.clearSurnameSearchQuery();
+        adminProvider.clearSearchQuery();
       },
       child: ScreenWrapper(
         appBar: Appbar(
@@ -82,10 +82,7 @@ class EditLeadersScreen extends StatelessWidget {
                     controller: TextEditingController(),
                     onChanged: (String value) {
                       // Update provider and debounce the actual fetch
-                      adminProvider.setSurnameSearchQueryDebounced(
-                        value,
-                        () async {},
-                      );
+                      adminProvider.setSearchQuery(value);
                     },
                     labelText: context
                         .localizations
@@ -100,8 +97,7 @@ class EditLeadersScreen extends StatelessWidget {
                       }
                       return Consumer<AdminPanelProvider>(
                         builder: (context, adminProvider, child) {
-                          final query = adminProvider.surnameSearchQuery
-                              .toLowerCase();
+                          final query = adminProvider.searchQuery.toLowerCase();
                           final dependents = adminProvider.groupDependents
                               .where((d) {
                                 if (query.isEmpty) return true;

@@ -1,16 +1,16 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:provider/provider.dart';
 import 'package:skapka_app/app/l10n/l10n_extension.dart';
-import 'package:skapka_app/app/theme/app_decorations.dart';
 import 'package:skapka_app/app/theme/app_spacing.dart';
-import 'package:skapka_app/app/theme/app_text_theme.dart';
 import 'package:skapka_app/models/account_model.dart';
 import 'package:skapka_app/providers/account_provider.dart';
 import 'package:skapka_app/providers/admin_panel_provider.dart';
+import 'package:skapka_app/providers/loading_provider.dart';
+import 'package:skapka_app/screens/approve_accounts_screen/widgets/approve_accounts_account_box.dart';
 import 'package:skapka_app/services/supabase_service.dart';
 import 'package:skapka_app/widgets/appbar/appbar.dart';
-import 'package:skapka_app/widgets/buttons/switch_button.dart';
 import 'package:skapka_app/widgets/dialogs/bottom_dialog.dart';
 import 'package:skapka_app/widgets/forms/custom_form.dart';
 import 'package:skapka_app/widgets/loading_floating_logo/loading_rotating_logo.dart';
@@ -25,20 +25,51 @@ class ApproveAccountsScreen extends StatelessWidget {
     final AdminPanelProvider adminProvider = context.read<AdminPanelProvider>();
     final AccountProvider accountProvider = context.read<AccountProvider>();
     final SupabaseService supabaseService = SupabaseService();
+    final LoadingProvider loadingProvider = context.read<LoadingProvider>();
 
     loadGroupAccounts() async {
-      List<AccountModel> accounts = await supabaseService.getGroupAccounts(
-        accountProvider.groupId,
-        onlyNotApproved: false,
-        surnameSearchQuery: adminProvider.surnameSearchQuery,
-      );
-      // If new accounts are the same as current, do not update(this also solves issue if any of the lists is empty)
-      if (context.mounted && (accounts != adminProvider.groupAccounts)) {
-        adminProvider.setGroupAccounts(accounts);
+      try {
+        List<AccountModel> accounts = await supabaseService.getGroupAccounts(
+          accountProvider.groupId,
+          onlyNotApproved: false,
+          surnameSearchQuery: adminProvider.surnameSearchQuery,
+        );
+        debugPrint(
+          'ApproveAccountsScreen: Fetched ${accounts.length} accounts from DB',
+        );
+
+        // If new accounts are the same as current, do not update(this also solves issue if any of the lists is empty)
+        if (context.mounted) {
+          debugPrint(
+            'ApproveAccountsScreen: Current provider accounts: ${adminProvider.groupAccounts.length}',
+          );
+          // Use listEquals to check content equality instead of reference equality
+          if (!listEquals(accounts, adminProvider.groupAccounts)) {
+            debugPrint(
+              'ApproveAccountsScreen: Updating provider with new data',
+            );
+            adminProvider.setGroupAccounts(accounts);
+          }
+          // } else {
+          //   debugPrint(
+          //     'ApproveAccountsScreen: Data identical, skipping provider update',
+          //   );
+          // }
+        }
+      } catch (e) {
+        debugPrint('ApproveAccountsScreen error: $e');
+        if (context.mounted) {
+          BottomDialog.show(
+            context,
+            type: BottomDialogType.negative,
+            description: context.localizations.generic_error,
+          );
+        }
       }
     }
 
     updateAccountApprovalStatus(AccountModel account, bool isApproved) async {
+      loadingProvider.show();
       try {
         await supabaseService.changeAccountApproval(
           account.accountId,
@@ -68,11 +99,17 @@ class ApproveAccountsScreen extends StatelessWidget {
                 ),
           );
         }
+      } finally {
+        loadingProvider.hide();
       }
     }
 
     return ScreenWrapper(
       appBar: Appbar(
+        onBackPressed: () {
+          adminProvider.clearSurnameSearchQuery();
+          context.router.pop();
+        },
         showBackChevron: true,
         showSettingsIcon: false,
         screenName:
@@ -108,7 +145,14 @@ class ApproveAccountsScreen extends StatelessWidget {
                   builder: (context, asyncSnapshot) {
                     if (asyncSnapshot.connectionState ==
                         ConnectionState.waiting) {
-                      return const LoadingRotatingLogo();
+                      return Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(height: AppSpacing.medium),
+                          LoadingRotatingLogo(),
+                          SizedBox(height: AppSpacing.medium),
+                        ],
+                      );
                     }
                     return Consumer<AdminPanelProvider>(
                       builder: (context, adminProvider, child) => Column(
@@ -123,34 +167,10 @@ class ApproveAccountsScreen extends StatelessWidget {
                               (a) => a.isApproved,
                             ),
                           ])
-                            Container(
-                              decoration: AppDecorations.primaryContainer(
-                                context,
-                              ),
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: AppSpacing.medium,
-                                vertical: AppSpacing.small,
-                              ),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Expanded(
-                                    child: Text(
-                                      '${account.name} ${account.surname}',
-                                      style: AppTextTheme.bodyMedium(context),
-                                    ),
-                                  ),
-                                  SwitchButton(
-                                    value: account.isApproved,
-                                    onChanged: (value) async =>
-                                        await updateAccountApprovalStatus(
-                                          account,
-                                          value,
-                                        ),
-                                  ),
-                                ],
-                              ),
+                            ApproveAccountsAccountBox(
+                              account: account,
+                              updateAccountApprovalStatus:
+                                  updateAccountApprovalStatus,
                             ),
                         ],
                       ),

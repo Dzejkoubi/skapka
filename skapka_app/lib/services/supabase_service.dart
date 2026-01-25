@@ -448,4 +448,18 @@ class SupabaseService {
       'skautis_sync?token=$skautisToken&group_id=$groupId',
     );
   }
+
+  Future<void> addLeaderStatus(String dependentId) async {
+    await _supabaseClient
+        .from('dependents')
+        .update({'is_leader': true})
+        .eq('dependent_id', dependentId);
+  }
+
+  Future<void> removeLeaderStatus(String dependentId) async {
+    await _supabaseClient
+        .from('dependents')
+        .update({'is_leader': false})
+        .eq('dependent_id', dependentId);
+  }
 }

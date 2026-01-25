@@ -26,7 +26,9 @@ class SwitchButton extends StatelessWidget {
             iconAsset: 'assets/icons/check.svg',
             activeBackgroundColor: context.colors.success.normal,
             activeIconColor: context.colors.text.normalDark,
-            onTap: () => onChanged(true),
+            onTap: () {
+              if (!value) onChanged(true);
+            },
           ),
           const SizedBox(width: 4),
           _SwitchOption(
@@ -34,7 +36,9 @@ class SwitchButton extends StatelessWidget {
             iconAsset: 'assets/icons/x.svg',
             activeBackgroundColor: context.colors.error.normal,
             activeIconColor: context.colors.text.normalLight,
-            onTap: () => onChanged(false),
+            onTap: () {
+              if (value) onChanged(false);
+            },
           ),
         ],
       ),

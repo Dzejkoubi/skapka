@@ -16,8 +16,6 @@ import 'package:flutter/material.dart' as _i28;
 import 'package:skapka_app/models/dependents/account_dependent_model.dart'
     as _i37;
 import 'package:skapka_app/models/dependents/dependent_model.dart' as _i29;
-import 'package:skapka_app/models/dependents/leader_dependent_model.dart'
-    as _i39;
 import 'package:skapka_app/models/event_model.dart' as _i36;
 import 'package:skapka_app/models/event_participant_model.dart' as _i33;
 import 'package:skapka_app/models/leader_model.dart' as _i32;
@@ -787,15 +785,12 @@ class SendNotificationRoute extends _i27.PageRouteInfo<void> {
 class SetPatrolLeaderRoute
     extends _i27.PageRouteInfo<SetPatrolLeaderRouteArgs> {
   SetPatrolLeaderRoute({
-    required _i39.LeaderDependentModel leaderDependent,
-    required _i28.Key? key,
+    _i28.Key? key,
+    required _i29.DependentModel dependent,
     List<_i27.PageRouteInfo>? children,
   }) : super(
          SetPatrolLeaderRoute.name,
-         args: SetPatrolLeaderRouteArgs(
-           leaderDependent: leaderDependent,
-           key: key,
-         ),
+         args: SetPatrolLeaderRouteArgs(key: key, dependent: dependent),
          initialChildren: children,
        );
 
@@ -806,37 +801,34 @@ class SetPatrolLeaderRoute
     builder: (data) {
       final args = data.argsAs<SetPatrolLeaderRouteArgs>();
       return _i23.SetPatrolLeaderScreen(
-        leaderDependent: args.leaderDependent,
         key: args.key,
+        dependent: args.dependent,
       );
     },
   );
 }
 
 class SetPatrolLeaderRouteArgs {
-  const SetPatrolLeaderRouteArgs({
-    required this.leaderDependent,
-    required this.key,
-  });
-
-  final _i39.LeaderDependentModel leaderDependent;
+  const SetPatrolLeaderRouteArgs({this.key, required this.dependent});
 
   final _i28.Key? key;
 
+  final _i29.DependentModel dependent;
+
   @override
   String toString() {
-    return 'SetPatrolLeaderRouteArgs{leaderDependent: $leaderDependent, key: $key}';
+    return 'SetPatrolLeaderRouteArgs{key: $key, dependent: $dependent}';
   }
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
     if (other is! SetPatrolLeaderRouteArgs) return false;
-    return leaderDependent == other.leaderDependent && key == other.key;
+    return key == other.key && dependent == other.dependent;
   }
 
   @override
-  int get hashCode => leaderDependent.hashCode ^ key.hashCode;
+  int get hashCode => key.hashCode ^ dependent.hashCode;
 }
 
 /// generated route for

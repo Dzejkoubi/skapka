@@ -66,7 +66,10 @@ class ContentSwitcher extends StatelessWidget {
         ),
         duration: const Duration(milliseconds: 250),
         curve: Curves.easeInOut,
-        onValueChanged: (value) => onChanged(value),
+        onValueChanged: (value) {
+          if (value == selectedIndex) return;
+          onChanged(value);
+        },
         padding: AppSpacing.xSmall,
       ),
     );

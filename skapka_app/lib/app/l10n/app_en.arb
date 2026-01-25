@@ -360,6 +360,58 @@
   "admin_panel_screen_button_skautis_sync": "SkautIS sync",
   "admin_panel_screen_notification_title": "Notification",
   "admin_panel_screen_button_send_notification": "Send Notification",
+  "admin_panel_screen_set_patrol_leaders_title": "Set Patrols for {name_surname}",
+  "@admin_panel_screen_set_patrol_leaders_title": {
+    "placeholders": {
+      "name_surname": {
+        "type": "String"
+      }
+    }
+  },
+  "admin_panel_screen_set_patrol_leaders_assigned": "Assigned {name_surname} as leader of {patrol_name}",
+  "@admin_panel_screen_set_patrol_leaders_assigned": {
+    "placeholders": {
+      "name_surname": {
+        "type": "String"
+      },
+      "patrol_name": {
+        "type": "String"
+      }
+    }
+  },
+  "admin_panel_screen_set_patrol_leaders_removed": "Removed {name_surname} as leader of {patrol_name}",
+  "@admin_panel_screen_set_patrol_leaders_removed": {
+    "placeholders": {
+      "name_surname": {
+        "type": "String"
+      },
+      "patrol_name": {
+        "type": "String"
+      }
+    }
+  },
+  "admin_panel_screen_set_patrol_leaders_error": "Failed to update patrol leader assignment.",
+  "admin_panel_screen_set_patrol_leaders_loading_error": "Failed to load leaders",
+  "admin_panel_screen_edit_leaders_remove_error_assigned_patrols": "Cannot remove as leader because they have assigned patrols.",
+  "admin_panel_screen_edit_leaders_status_removed": "Removed leader status for {name_surname}",
+  "@admin_panel_screen_edit_leaders_status_removed": {
+    "placeholders": {
+      "name_surname": {
+        "type": "String"
+      }
+    }
+  },
+  "admin_panel_screen_edit_leaders_status_added": "Added leader status for {name_surname}",
+  "@admin_panel_screen_edit_leaders_status_added": {
+    "placeholders": {
+      "name_surname": {
+        "type": "String"
+      }
+    }
+  },
+  "admin_panel_screen_edit_leaders_update_error": "Failed to update leader status.",
+  "admin_panel_screen_edit_leaders_section_leaders": "Leaders",
+  "admin_panel_screen_edit_leaders_section_dependents": "Dependents",
   "general_success": "Success",
   "general_saved": "Changes saved successfully",
   "general_save": "Save",
@@ -369,5 +421,10 @@
   "general_cancel": "Cancel",
   "general_unsaved_changes": "Unsaved changes",
   "general_unsaved_changes_description": "You have unsaved changes. Do you want to discard them?",
-  "error_unknown": "Unknown error"
+  "error_unknown": "Unknown error",
+  "admin_panel_screen_skautis_sync_description": "Enter SkautIS token to sync data:",
+  "admin_panel_screen_skautis_sync_token_hint": "SkautIS Token",
+  "admin_panel_screen_skautis_sync_progress": "Syncing with SkautIS...",
+  "admin_panel_screen_skautis_sync_success_description": "SkautIS sync successful",
+  "admin_panel_screen_skautis_sync_error_description": "Error syncing with SkautIS"
 }

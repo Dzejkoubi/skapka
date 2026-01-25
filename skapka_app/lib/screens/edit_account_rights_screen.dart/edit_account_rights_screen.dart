@@ -8,6 +8,7 @@ import 'package:skapka_app/app/theme/app_text_theme.dart';
 import 'package:skapka_app/models/account_model.dart';
 import 'package:skapka_app/providers/account_provider.dart';
 import 'package:skapka_app/providers/admin_panel_provider.dart';
+import 'package:skapka_app/providers/loading_provider.dart';
 import 'package:skapka_app/services/supabase_service.dart';
 import 'package:skapka_app/widgets/appbar/appbar.dart';
 import 'package:skapka_app/widgets/custom_dropdown_menu.dart';
@@ -25,6 +26,7 @@ class EditAccountRightsScreen extends StatelessWidget {
     final AdminPanelProvider adminProvider = context.read<AdminPanelProvider>();
     final AccountProvider accountProvider = context.read<AccountProvider>();
     final SupabaseService supabaseService = SupabaseService();
+    final LoadingProvider loadingProvider = context.read<LoadingProvider>();
 
     loadGroupAccounts() async {
       List<AccountModel> accounts = await supabaseService.getGroupAccounts(
@@ -39,6 +41,7 @@ class EditAccountRightsScreen extends StatelessWidget {
     }
 
     updateAccountRights(AccountModel account, int newRights) async {
+      loadingProvider.show();
       try {
         await supabaseService.updateAccountRights(account.accountId, newRights);
         await loadGroupAccounts();
@@ -65,11 +68,17 @@ class EditAccountRightsScreen extends StatelessWidget {
                 ),
           );
         }
+      } finally {
+        loadingProvider.hide();
       }
     }
 
     return ScreenWrapper(
       appBar: Appbar(
+        onBackPressed: () {
+          adminProvider.clearSurnameSearchQuery();
+          context.router.pop();
+        },
         showBackChevron: true,
         showSettingsIcon: false,
         screenName: context.localizations.admin_panel_screen_button_edit_rights,
@@ -85,7 +94,6 @@ class EditAccountRightsScreen extends StatelessWidget {
               children: [
                 // Search bar for accounts
                 Column(
-                  spacing: AppSpacing.small,
                   children: [
                     CustomForm(
                       showSuffixIcon: false,
@@ -105,12 +113,17 @@ class EditAccountRightsScreen extends StatelessWidget {
                       selector: (_, provider) => provider.surnameSearchQuery,
                       builder: (context, surnameSearchQuery, __) {
                         if (surnameSearchQuery.isEmpty) {
-                          return Text(
-                            context
-                                .localizations
-                                .admin_panel_screen_button_edit_rights_cant_change_admin_rights,
-                            style: AppTextTheme.bodySmall(context),
-                            textAlign: TextAlign.center,
+                          return Column(
+                            children: [
+                              const SizedBox(height: AppSpacing.xSmall),
+                              Text(
+                                context
+                                    .localizations
+                                    .admin_panel_screen_button_edit_rights_cant_change_admin_rights,
+                                style: AppTextTheme.bodySmall(context),
+                                textAlign: TextAlign.center,
+                              ),
+                            ],
                           );
                         }
                         return const SizedBox.shrink();

@@ -1678,6 +1678,78 @@ abstract class AppLocalizations {
   /// **'Poslat oznámení'**
   String get admin_panel_screen_button_send_notification;
 
+  /// No description provided for @admin_panel_screen_set_patrol_leaders_title.
+  ///
+  /// In cs, this message translates to:
+  /// **'Přiřadit družinu pro {name_surname}'**
+  String admin_panel_screen_set_patrol_leaders_title(String name_surname);
+
+  /// No description provided for @admin_panel_screen_set_patrol_leaders_assigned.
+  ///
+  /// In cs, this message translates to:
+  /// **'{name_surname} přiřazen jako vedoucí družiny {patrol_name}'**
+  String admin_panel_screen_set_patrol_leaders_assigned(
+    String name_surname,
+    String patrol_name,
+  );
+
+  /// No description provided for @admin_panel_screen_set_patrol_leaders_removed.
+  ///
+  /// In cs, this message translates to:
+  /// **'{name_surname} odebrán jako vedoucí družiny {patrol_name}'**
+  String admin_panel_screen_set_patrol_leaders_removed(
+    String name_surname,
+    String patrol_name,
+  );
+
+  /// No description provided for @admin_panel_screen_set_patrol_leaders_error.
+  ///
+  /// In cs, this message translates to:
+  /// **'Nepodařilo se aktualizovat vedoucího družiny.'**
+  String get admin_panel_screen_set_patrol_leaders_error;
+
+  /// No description provided for @admin_panel_screen_set_patrol_leaders_loading_error.
+  ///
+  /// In cs, this message translates to:
+  /// **'Nepodařilo se načíst vedoucí'**
+  String get admin_panel_screen_set_patrol_leaders_loading_error;
+
+  /// No description provided for @admin_panel_screen_edit_leaders_remove_error_assigned_patrols.
+  ///
+  /// In cs, this message translates to:
+  /// **'Nelze odebrat vedoucího, protože má přiřazené družiny.'**
+  String get admin_panel_screen_edit_leaders_remove_error_assigned_patrols;
+
+  /// No description provided for @admin_panel_screen_edit_leaders_status_removed.
+  ///
+  /// In cs, this message translates to:
+  /// **'Odebrán status vedoucího pro {name_surname}'**
+  String admin_panel_screen_edit_leaders_status_removed(String name_surname);
+
+  /// No description provided for @admin_panel_screen_edit_leaders_status_added.
+  ///
+  /// In cs, this message translates to:
+  /// **'Přidán status vedoucího pro {name_surname}'**
+  String admin_panel_screen_edit_leaders_status_added(String name_surname);
+
+  /// No description provided for @admin_panel_screen_edit_leaders_update_error.
+  ///
+  /// In cs, this message translates to:
+  /// **'Nepodařilo se aktualizovat status vedoucího.'**
+  String get admin_panel_screen_edit_leaders_update_error;
+
+  /// No description provided for @admin_panel_screen_edit_leaders_section_leaders.
+  ///
+  /// In cs, this message translates to:
+  /// **'Vedoucí'**
+  String get admin_panel_screen_edit_leaders_section_leaders;
+
+  /// No description provided for @admin_panel_screen_edit_leaders_section_dependents.
+  ///
+  /// In cs, this message translates to:
+  /// **'Ostatní'**
+  String get admin_panel_screen_edit_leaders_section_dependents;
+
   /// No description provided for @general_success.
   ///
   /// In cs, this message translates to:
@@ -1737,6 +1809,36 @@ abstract class AppLocalizations {
   /// In cs, this message translates to:
   /// **'Neznámá chyba'**
   String get error_unknown;
+
+  /// No description provided for @admin_panel_screen_skautis_sync_description.
+  ///
+  /// In cs, this message translates to:
+  /// **'Zadej SkautIS token pro synchronizaci dat:'**
+  String get admin_panel_screen_skautis_sync_description;
+
+  /// No description provided for @admin_panel_screen_skautis_sync_token_hint.
+  ///
+  /// In cs, this message translates to:
+  /// **'SkautIS Token'**
+  String get admin_panel_screen_skautis_sync_token_hint;
+
+  /// No description provided for @admin_panel_screen_skautis_sync_progress.
+  ///
+  /// In cs, this message translates to:
+  /// **'Synchronizuji s SkautIS...'**
+  String get admin_panel_screen_skautis_sync_progress;
+
+  /// No description provided for @admin_panel_screen_skautis_sync_success_description.
+  ///
+  /// In cs, this message translates to:
+  /// **'Synchronizace se SkautIS byla úspěšná'**
+  String get admin_panel_screen_skautis_sync_success_description;
+
+  /// No description provided for @admin_panel_screen_skautis_sync_error_description.
+  ///
+  /// In cs, this message translates to:
+  /// **'Chyba při synchronizaci se SkautIS'**
+  String get admin_panel_screen_skautis_sync_error_description;
 }
 
 class _AppLocalizationsDelegate

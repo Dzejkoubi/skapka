@@ -199,54 +199,41 @@ class AdminPanelScreen extends StatelessWidget {
   }
 }
 
-class MissingDependentContactWarningBox extends StatefulWidget {
+class MissingDependentContactWarningBox extends StatelessWidget {
   const MissingDependentContactWarningBox({super.key});
 
   @override
-  State<MissingDependentContactWarningBox> createState() =>
-      _MissingDependentContactWarningBoxState();
-}
-
-class _MissingDependentContactWarningBoxState
-    extends State<MissingDependentContactWarningBox> {
-  late Future<void> _initializationFuture;
-
-  @override
-  void initState() {
-    super.initState();
-    _initializationFuture = _initializeGroupDependents();
-  }
-
-  Future<void> _initializeGroupDependents({bool autoFetch = false}) async {
-    try {
-      debugPrint('Initializing group dependents for Admin Panel');
-      // Using read to avoid listening inside the async method
-      final adminPanelProvider = context.read<AdminPanelProvider>();
-      final accountProvider = context.read<AccountProvider>();
-      final supabaseService = SupabaseService();
-
-      if (adminPanelProvider.groupDependents.isEmpty || autoFetch) {
-        List<DependentModel> dependents = await supabaseService
-            .getGroupDependents(groupId: accountProvider.groupId);
-        if (mounted) {
+  Widget build(BuildContext context) {
+    SupabaseService supabaseService = SupabaseService();
+    AccountProvider accountProvider = context.read<AccountProvider>();
+    initializeGroupDependents({
+      required BuildContext context,
+      required AdminPanelProvider adminPanelProvider,
+      bool autoFetch = false,
+    }) async {
+      try {
+        // Rebuilds may double log, but DB fetch occurs once.(future builder inside Consumer-setGroupDependents calls NotifyListeners)
+        if (adminPanelProvider.groupDependents.isEmpty || autoFetch) {
+          debugPrint('Fetching group dependents for Admin Panel warnings');
+          List<DependentModel> dependents = await supabaseService
+              .getGroupDependents(groupId: accountProvider.groupId);
           adminPanelProvider.setGroupDependents(dependents);
         }
+      } catch (e) {
+        debugPrint('Error initializing group dependents: $e');
+        if (context.mounted) {
+          BottomDialog.show(
+            context,
+            type: BottomDialogType.negative,
+            description: context
+                .localizations
+                .admin_panel_screen_db_warnings_error_loading_warnings,
+          );
+        }
+        rethrow;
       }
-    } catch (e) {
-      debugPrint('Error initializing group dependents: $e');
-      if (mounted) {
-        BottomDialog.show(
-          context,
-          type: BottomDialogType.negative,
-          description: context.localizations.generic_error,
-        );
-      }
-      rethrow;
     }
-  }
 
-  @override
-  Widget build(BuildContext context) {
     return Consumer<AdminPanelProvider>(
       builder: (context, adminProvider, child) => BasicExpansionTile(
         title: context
@@ -259,10 +246,22 @@ class _MissingDependentContactWarningBoxState
           children: [
             // Warnings list
             FutureBuilder(
-              future: _initializationFuture,
+              future: initializeGroupDependents(
+                context: context,
+                adminPanelProvider: adminProvider,
+                autoFetch: false,
+              ),
               builder: (context, asyncSnapshot) {
                 if (asyncSnapshot.connectionState == ConnectionState.waiting) {
-                  return const LoadingRotatingLogo();
+                  return Center(
+                    child: Column(
+                      children: [
+                        SizedBox(height: AppSpacing.medium),
+                        const LoadingRotatingLogo(),
+                        SizedBox(height: AppSpacing.medium),
+                      ],
+                    ),
+                  );
                 } else if (asyncSnapshot.hasError) {
                   return Text(
                     context.localizations.error,
@@ -373,12 +372,12 @@ class _MissingDependentContactWarningBoxState
                   variant: ButtonStylesVariants.destructive,
                   text: '',
                   type: ButtonType.icon,
-                  onPressed: () {
-                    setState(() {
-                      _initializationFuture = _initializeGroupDependents(
-                        autoFetch: true,
-                      );
-                    });
+                  onPressed: () async {
+                    await initializeGroupDependents(
+                      context: context,
+                      adminPanelProvider: adminProvider,
+                      autoFetch: true,
+                    );
                   },
                   iconAsset: 'assets/icons/reload.svg',
                 ),

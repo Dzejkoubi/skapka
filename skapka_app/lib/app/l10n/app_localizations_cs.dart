@@ -988,6 +988,59 @@ class AppLocalizationsCs extends AppLocalizations {
   String get admin_panel_screen_button_send_notification => 'Poslat oznámení';
 
   @override
+  String admin_panel_screen_set_patrol_leaders_title(String name_surname) {
+    return 'Přiřadit družinu pro $name_surname';
+  }
+
+  @override
+  String admin_panel_screen_set_patrol_leaders_assigned(
+    String name_surname,
+    String patrol_name,
+  ) {
+    return '$name_surname přiřazen jako vedoucí družiny $patrol_name';
+  }
+
+  @override
+  String admin_panel_screen_set_patrol_leaders_removed(
+    String name_surname,
+    String patrol_name,
+  ) {
+    return '$name_surname odebrán jako vedoucí družiny $patrol_name';
+  }
+
+  @override
+  String get admin_panel_screen_set_patrol_leaders_error =>
+      'Nepodařilo se aktualizovat vedoucího družiny.';
+
+  @override
+  String get admin_panel_screen_set_patrol_leaders_loading_error =>
+      'Nepodařilo se načíst vedoucí';
+
+  @override
+  String get admin_panel_screen_edit_leaders_remove_error_assigned_patrols =>
+      'Nelze odebrat vedoucího, protože má přiřazené družiny.';
+
+  @override
+  String admin_panel_screen_edit_leaders_status_removed(String name_surname) {
+    return 'Odebrán status vedoucího pro $name_surname';
+  }
+
+  @override
+  String admin_panel_screen_edit_leaders_status_added(String name_surname) {
+    return 'Přidán status vedoucího pro $name_surname';
+  }
+
+  @override
+  String get admin_panel_screen_edit_leaders_update_error =>
+      'Nepodařilo se aktualizovat status vedoucího.';
+
+  @override
+  String get admin_panel_screen_edit_leaders_section_leaders => 'Vedoucí';
+
+  @override
+  String get admin_panel_screen_edit_leaders_section_dependents => 'Ostatní';
+
+  @override
   String get general_success => 'Úspěch';
 
   @override
@@ -1017,4 +1070,23 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get error_unknown => 'Neznámá chyba';
+
+  @override
+  String get admin_panel_screen_skautis_sync_description =>
+      'Zadej SkautIS token pro synchronizaci dat:';
+
+  @override
+  String get admin_panel_screen_skautis_sync_token_hint => 'SkautIS Token';
+
+  @override
+  String get admin_panel_screen_skautis_sync_progress =>
+      'Synchronizuji s SkautIS...';
+
+  @override
+  String get admin_panel_screen_skautis_sync_success_description =>
+      'Synchronizace se SkautIS byla úspěšná';
+
+  @override
+  String get admin_panel_screen_skautis_sync_error_description =>
+      'Chyba při synchronizaci se SkautIS';
 }

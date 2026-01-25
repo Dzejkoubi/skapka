@@ -360,6 +360,58 @@
   "admin_panel_screen_button_skautis_sync": "SkautIS sync",
   "admin_panel_screen_notification_title": "Oznámení",
   "admin_panel_screen_button_send_notification": "Poslat oznámení",
+  "admin_panel_screen_set_patrol_leaders_title": "Přiřadit družinu pro {name_surname}",
+  "@admin_panel_screen_set_patrol_leaders_title": {
+    "placeholders": {
+      "name_surname": {
+        "type": "String"
+      }
+    }
+  },
+  "admin_panel_screen_set_patrol_leaders_assigned": "{name_surname} přiřazen jako vedoucí družiny {patrol_name}",
+  "@admin_panel_screen_set_patrol_leaders_assigned": {
+    "placeholders": {
+      "name_surname": {
+        "type": "String"
+      },
+      "patrol_name": {
+        "type": "String"
+      }
+    }
+  },
+  "admin_panel_screen_set_patrol_leaders_removed": "{name_surname} odebrán jako vedoucí družiny {patrol_name}",
+  "@admin_panel_screen_set_patrol_leaders_removed": {
+    "placeholders": {
+      "name_surname": {
+        "type": "String"
+      },
+      "patrol_name": {
+        "type": "String"
+      }
+    }
+  },
+  "admin_panel_screen_set_patrol_leaders_error": "Nepodařilo se aktualizovat vedoucího družiny.",
+  "admin_panel_screen_set_patrol_leaders_loading_error": "Nepodařilo se načíst vedoucí",
+  "admin_panel_screen_edit_leaders_remove_error_assigned_patrols": "Nelze odebrat vedoucího, protože má přiřazené družiny.",
+  "admin_panel_screen_edit_leaders_status_removed": "Odebrán status vedoucího pro {name_surname}",
+  "@admin_panel_screen_edit_leaders_status_removed": {
+    "placeholders": {
+      "name_surname": {
+        "type": "String"
+      }
+    }
+  },
+  "admin_panel_screen_edit_leaders_status_added": "Přidán status vedoucího pro {name_surname}",
+  "@admin_panel_screen_edit_leaders_status_added": {
+    "placeholders": {
+      "name_surname": {
+        "type": "String"
+      }
+    }
+  },
+  "admin_panel_screen_edit_leaders_update_error": "Nepodařilo se aktualizovat status vedoucího.",
+  "admin_panel_screen_edit_leaders_section_leaders": "Vedoucí",
+  "admin_panel_screen_edit_leaders_section_dependents": "Ostatní",
   "general_success": "Úspěch",
   "general_saved": "Změny úspěšně uloženy",
   "general_save": "Uložit",
@@ -369,5 +421,10 @@
   "general_cancel": "Zrušit",
   "general_unsaved_changes": "Neuložené změny",
   "general_unsaved_changes_description": "Máte neuložené změny. Chcete je zahodit?",
-  "error_unknown": "Neznámá chyba"
+  "error_unknown": "Neznámá chyba",
+  "admin_panel_screen_skautis_sync_description": "Zadej SkautIS token pro synchronizaci dat:",
+  "admin_panel_screen_skautis_sync_token_hint": "SkautIS Token",
+  "admin_panel_screen_skautis_sync_progress": "Synchronizuji s SkautIS...",
+  "admin_panel_screen_skautis_sync_success_description": "Synchronizace se SkautIS byla úspěšná",
+  "admin_panel_screen_skautis_sync_error_description": "Chyba při synchronizaci se SkautIS"
 }

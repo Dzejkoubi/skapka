@@ -48,6 +48,11 @@ class AdminPanelProvider extends ChangeNotifier {
     });
   }
 
+  void clearSurnameSearchQuery() {
+    _surnameSearchQuery = '';
+    notifyListeners();
+  }
+
   void clear() {
     _groupDependents = [];
     _groupAccounts = [];

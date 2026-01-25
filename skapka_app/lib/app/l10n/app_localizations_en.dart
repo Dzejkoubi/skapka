@@ -993,6 +993,59 @@ class AppLocalizationsEn extends AppLocalizations {
   String get admin_panel_screen_button_send_notification => 'Send Notification';
 
   @override
+  String admin_panel_screen_set_patrol_leaders_title(String name_surname) {
+    return 'Set Patrols for $name_surname';
+  }
+
+  @override
+  String admin_panel_screen_set_patrol_leaders_assigned(
+    String name_surname,
+    String patrol_name,
+  ) {
+    return 'Assigned $name_surname as leader of $patrol_name';
+  }
+
+  @override
+  String admin_panel_screen_set_patrol_leaders_removed(
+    String name_surname,
+    String patrol_name,
+  ) {
+    return 'Removed $name_surname as leader of $patrol_name';
+  }
+
+  @override
+  String get admin_panel_screen_set_patrol_leaders_error =>
+      'Failed to update patrol leader assignment.';
+
+  @override
+  String get admin_panel_screen_set_patrol_leaders_loading_error =>
+      'Failed to load leaders';
+
+  @override
+  String get admin_panel_screen_edit_leaders_remove_error_assigned_patrols =>
+      'Cannot remove as leader because they have assigned patrols.';
+
+  @override
+  String admin_panel_screen_edit_leaders_status_removed(String name_surname) {
+    return 'Removed leader status for $name_surname';
+  }
+
+  @override
+  String admin_panel_screen_edit_leaders_status_added(String name_surname) {
+    return 'Added leader status for $name_surname';
+  }
+
+  @override
+  String get admin_panel_screen_edit_leaders_update_error =>
+      'Failed to update leader status.';
+
+  @override
+  String get admin_panel_screen_edit_leaders_section_leaders => 'Leaders';
+
+  @override
+  String get admin_panel_screen_edit_leaders_section_dependents => 'Dependents';
+
+  @override
   String get general_success => 'Success';
 
   @override
@@ -1022,4 +1075,23 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get error_unknown => 'Unknown error';
+
+  @override
+  String get admin_panel_screen_skautis_sync_description =>
+      'Enter SkautIS token to sync data:';
+
+  @override
+  String get admin_panel_screen_skautis_sync_token_hint => 'SkautIS Token';
+
+  @override
+  String get admin_panel_screen_skautis_sync_progress =>
+      'Syncing with SkautIS...';
+
+  @override
+  String get admin_panel_screen_skautis_sync_success_description =>
+      'SkautIS sync successful';
+
+  @override
+  String get admin_panel_screen_skautis_sync_error_description =>
+      'Error syncing with SkautIS';
 }

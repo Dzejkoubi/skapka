@@ -37,13 +37,15 @@ class SkautisSyncDialog extends StatelessWidget {
             ),
             const SizedBox(height: AppSpacing.medium),
             Text(
-              'Enter SkautIS token to sync data:',
+              context.localizations.admin_panel_screen_skautis_sync_description,
               style: AppTextTheme.bodyMedium(context),
             ),
             const SizedBox(height: AppSpacing.medium),
             CustomForm(
               controller: tokenController,
-              labelText: 'SkautIS Token',
+              labelText: context
+                  .localizations
+                  .admin_panel_screen_skautis_sync_token_hint,
               showSuffixIcon: false,
             ),
             const SizedBox(height: AppSpacing.large),
@@ -67,7 +69,11 @@ class SkautisSyncDialog extends StatelessWidget {
                     final router = context.router;
 
                     try {
-                      loadingProvider.show(text: 'Syncing with SkautIS...');
+                      loadingProvider.show(
+                        text: context
+                            .localizations
+                            .admin_panel_screen_skautis_sync_progress,
+                      );
 
                       await supabaseService.skautisSync(
                         skautisToken: tokenController.text,
@@ -80,7 +86,9 @@ class SkautisSyncDialog extends StatelessWidget {
                         BottomDialog.show(
                           context,
                           type: BottomDialogType.positive,
-                          description: 'SkautIS sync successful',
+                          description: context
+                              .localizations
+                              .admin_panel_screen_skautis_sync_success_description,
                         );
                         router.pop();
                       }
@@ -92,7 +100,9 @@ class SkautisSyncDialog extends StatelessWidget {
                         BottomDialog.show(
                           context,
                           type: BottomDialogType.negative,
-                          description: 'Error syncing with SkautIS',
+                          description: context
+                              .localizations
+                              .admin_panel_screen_skautis_sync_error_description,
                         );
                       }
                     }

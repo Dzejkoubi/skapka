@@ -67,17 +67,17 @@ class WelcomeScreen extends StatelessWidget {
                         context.router.push(const RegisterRouteFirst());
                       },
                     ),
-                    MainButton.text(
-                      type: ButtonType.text,
-                      variant: ButtonStylesVariants.white,
-                      text: AppLocalizations.of(
-                        context,
-                      )!.welcome_screen_songbook_button_text,
+                    // MainButton.text(
+                    //   type: ButtonType.text,
+                    //   variant: ButtonStylesVariants.white,
+                    //   text: AppLocalizations.of(
+                    //     context,
+                    //   )!.welcome_screen_songbook_button_text,
 
-                      onPressed: () {
-                        debugPrint('Songbook button pressed');
-                      },
-                    ),
+                    //   onPressed: () {
+                    //     debugPrint('Songbook button pressed');
+                    //   },
+                    // ), // TODO: Uncomment when songbook is ready
                   ],
                 ),
               ),

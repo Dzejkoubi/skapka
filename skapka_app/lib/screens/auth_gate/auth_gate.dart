@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:skapka_app/app/l10n/l10n_extension.dart';
 import 'package:skapka_app/app/router/router.gr.dart';
 import 'package:skapka_app/app/theme/app_color_theme.dart';
 import 'package:skapka_app/models/patrol_model.dart';
@@ -12,9 +14,12 @@ import 'package:skapka_app/providers/account_provider.dart';
 import 'package:skapka_app/providers/dependents_provider.dart';
 import 'package:skapka_app/providers/events_provider.dart';
 import 'package:skapka_app/providers/units_provider.dart';
+import 'package:skapka_app/widgets/dialogs/bottom_dialog.dart';
 import 'package:skapka_app/widgets/loading_floating_logo/loading_floating_logo.dart';
 import 'package:skapka_app/services/auth_service.dart';
 import 'package:skapka_app/services/supabase_service.dart';
+import 'package:skapka_app/models/dependents/account_dependent_model.dart';
+import 'dart:async';
 
 @RoutePage()
 class AuthGate extends StatefulWidget {
@@ -25,31 +30,73 @@ class AuthGate extends StatefulWidget {
 }
 
 class _AuthGateState extends State<AuthGate> {
+  StreamSubscription<List<ConnectivityResult>>? _connectivitySubscription;
+
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) => _checkAuth());
   }
 
+  @override
+  void dispose() {
+    _connectivitySubscription?.cancel();
+    super.dispose();
+  }
+
+  bool _hasConnection(List<ConnectivityResult> results) {
+    return results.any(
+      (result) =>
+          result == ConnectivityResult.mobile ||
+          result == ConnectivityResult.wifi ||
+          result == ConnectivityResult.ethernet,
+    );
+  }
+
   Future<void> _checkAuth() async {
     if (!mounted) return;
+
+    // Check connectivity first
+    final connectivityResult = await Connectivity().checkConnectivity();
+    if (!_hasConnection(connectivityResult)) {
+      if (mounted) {
+        BottomDialog.show(
+          context,
+          type: BottomDialogType.negative,
+          description:
+              context.localizations.welcome_screen_no_internet_connection,
+        );
+      }
+
+      // Listen for connectivity changes to retry
+      _connectivitySubscription?.cancel();
+      _connectivitySubscription = Connectivity().onConnectivityChanged.listen((
+        results,
+      ) {
+        if (_hasConnection(results)) {
+          _connectivitySubscription?.cancel();
+          _checkAuth(); // Retry auth check
+        }
+      });
+      return;
+    }
 
     final authService = AuthService();
     final supabaseService = SupabaseService();
     final session = authService.currentSession;
 
     // 1. Check if user is logged in
-    if (session == null) {
+    if (session == null && mounted) {
       context.router.replace(const WelcomeRoute());
       return;
     }
 
     // 2. Fetch basic account details
 
-    final account = await supabaseService.getAccountDetails(session.user.id);
+    final account = await supabaseService.getAccountDetails(session!.user.id);
     if (account == null) {
       if (!mounted) return;
-      context.router.replace(const SettingsRoute());
+      context.router.replace(const WelcomeRoute());
       return;
     }
 
@@ -121,27 +168,60 @@ class _AuthGateState extends State<AuthGate> {
       listen: false,
     );
 
-    final dependents = await supabaseService.getAccountDependents(accountId);
-
+    // 1. Fetch relations first
+    final relations = await supabaseService.getAccountDependentRelations(
+      accountId,
+    );
     dependentsProvider.clear();
-    for (var ad in dependents) {
-      final results = await Future.wait([
-        supabaseService.getDependentDetail(ad.dependentId),
-        supabaseService.getDependentNotes(ad.dependentId),
-        supabaseService.getDependentParticipation(ad.dependentId),
-      ]);
 
-      final detail = results[0] as DependentModel?;
-      final notes = results[1] as DependentNotesModel?;
-      final participation = results[2] as List<EventParticipantModel>;
+    // 2. Map relations to a list of Futures and run them in parallel
+    await Future.wait(
+      relations.map((relation) async {
+        final dependentId = relation.dependentId;
 
-      if (detail != null && mounted) {
-        dependentsProvider.addDependent(
-          ad.copyWith(dependentDetails: detail.copyWith(notes: notes)),
-        );
-        dependentsProvider.setParticipation(ad.dependentId, participation);
-      }
-    }
+        // Fetch all specific details for dependent in parallel
+        final results = await Future.wait([
+          supabaseService.getDependentDetail(dependentId),
+          supabaseService.getDependentNotes(dependentId),
+          supabaseService.getDependentParticipation(dependentId),
+        ]);
+
+        final detail = results[0] as DependentModel?;
+        final notes = results[1] as DependentNotesModel?;
+        final participation = results[2] as List<EventParticipantModel>;
+
+        if (detail != null && mounted) {
+          final fullDependent = AccountDependentModel(
+            dependentId: detail.dependentId,
+            isLeader: detail.isLeader,
+            name: detail.name,
+            surname: detail.surname,
+            nickname: detail.nickname,
+            born: detail.born,
+            sex: detail.sex,
+            parent1Email: detail.parent1Email,
+            parent1Phone: detail.parent1Phone,
+            parent2Email: detail.parent2Email,
+            parent2Phone: detail.parent2Phone,
+            contactEmail: detail.contactEmail,
+            contactPhone: detail.contactPhone,
+            troopId: detail.troopId,
+            patrolId: detail.patrolId,
+            isArchived: detail.isArchived,
+            secretCode: detail.secretCode,
+            createdAt: detail.createdAt,
+            groupId: detail.groupId,
+            skautisId: detail.skautisId,
+            notes: notes ?? DependentNotesModel.empty(),
+            isMainDependent: relation.isMainDependent,
+          );
+
+          // Thread-safe update to provider
+          dependentsProvider.addDependent(fullDependent);
+          dependentsProvider.setParticipation(dependentId, participation);
+        }
+      }),
+    );
   }
 
   /// Fetches events for the group starting from the current school year

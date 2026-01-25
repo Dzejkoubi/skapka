@@ -13,7 +13,7 @@ bool isDependentArchived(BuildContext context, String dependentId) {
   );
 
   if (dependentIndex != -1) {
-    return dependents[dependentIndex].dependentDetails?.isArchived ?? false;
+    return dependents[dependentIndex].isArchived;
   }
 
   return false;

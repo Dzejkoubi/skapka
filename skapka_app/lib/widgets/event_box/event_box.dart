@@ -81,6 +81,7 @@ class EventBox extends StatelessWidget {
             ),
             child: Column(
               children: [
+                SizedBox(height: AppSpacing.small),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -92,7 +93,7 @@ class EventBox extends StatelessWidget {
                             right: AppSpacing.xxLarge + AppSpacing.small,
                           ),
                           child: Text(
-                            event.title ?? '',
+                            event.title,
                             style: AppTextTheme.titleSmall(context),
                             maxLines: 1,
                           ),

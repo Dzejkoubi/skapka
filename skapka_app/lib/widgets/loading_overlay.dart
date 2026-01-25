@@ -26,7 +26,7 @@ class LoadingOverlay extends StatelessWidget {
                       loadingText ?? '',
                       style: AppTextTheme.titleSmall(
                         context,
-                      ).copyWith(color: context.colors.text.normalReversed),
+                      ).copyWith(color: context.colors.text.normalLight),
                     ),
                   ],
                 ),

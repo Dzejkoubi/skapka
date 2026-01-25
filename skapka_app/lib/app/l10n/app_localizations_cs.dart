@@ -48,6 +48,28 @@ class AppLocalizationsCs extends AppLocalizations {
   String get error => 'Chyba';
 
   @override
+  String get success => 'Úspěch';
+
+  @override
+  String get saved => 'Změny úspěšně uloženy';
+
+  @override
+  String get close => 'Zavřít';
+
+  @override
+  String get discard => 'Zahodit';
+
+  @override
+  String get continue_ => 'Pokračovat';
+
+  @override
+  String get unsaved_changes => 'Neuložené změny';
+
+  @override
+  String get unsaved_changes_description =>
+      'Máte neuložené změny. Chcete je zahodit?';
+
+  @override
   String get generic_error => 'Něco se pokazilo. Zkus to prosím znovu.';
 
   @override
@@ -110,6 +132,10 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get welcome_screen_songbook_button_text => 'Zpěvník';
+
+  @override
+  String get welcome_screen_no_internet_connection =>
+      'Žádné připojení k internetu. Zkontroluj prosím své WiFi nebo mobilní data.';
 
   @override
   String get category_login_screen => '--- PŘIHLÁŠENÍ ---';
@@ -840,4 +866,320 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get admin_panel_screen_title => 'Admin Panel';
+
+  @override
+  String get category_admin_panel_screen_warnings =>
+      '--- ADMIN PANEL - VAROVÁNÍ ---';
+
+  @override
+  String get admin_panel_screen_db_warnings_expansion_tile_title => 'Varování';
+
+  @override
+  String get admin_panel_screen_db_warnings_error_loading_warnings =>
+      'Nepodařilo se načíst podúčty, ze kterých nebylo možné získat varování. Zkus to prosím znovu.';
+
+  @override
+  String get admin_panel_screen_db_warning_no_warnings_subtitle =>
+      'Žádná varování k zobrazení.';
+
+  @override
+  String
+  admin_panel_screen_db_warning_account_does_not_have_some_contact_filled_in(
+    String account_name_surname,
+    String missing_parent_email,
+    String missing_parent_phone,
+    String missing_personal_email,
+    String missing_personal_phone,
+  ) {
+    String _temp0 = intl.Intl.selectLogic(missing_personal_phone, {
+      'true': 'svůj email a telefon',
+      'other': 'svůj email',
+    });
+    String _temp1 = intl.Intl.selectLogic(missing_parent_phone, {
+      'true': 'email a telefon rodiče',
+      'other': 'email rodiče',
+    });
+    String _temp2 = intl.Intl.selectLogic(missing_parent_phone, {
+      'true': 'telefon rodiče',
+      'other': '',
+    });
+    String _temp3 = intl.Intl.selectLogic(missing_parent_email, {
+      'true': '$_temp1',
+      'other': '$_temp2',
+    });
+    String _temp4 = intl.Intl.selectLogic(missing_personal_phone, {
+      'true': 'svůj telefon',
+      'other': '$_temp3',
+    });
+    String _temp5 = intl.Intl.selectLogic(missing_personal_email, {
+      'true': '$_temp0',
+      'other': '$_temp4',
+    });
+    return 'Podúčet $account_name_surname nemá vyplněný $_temp5.';
+  }
+
+  @override
+  String get admin_panel_screen_accounts_management_title => 'Účty & Podúčty';
+
+  @override
+  String get admin_panel_screen_search_field_hint =>
+      'Vyhledat podle jména nebo příjmení...';
+
+  @override
+  String get category_admin_panel_screen_approve_accounts =>
+      '--- ADMIN PANEL - POTVRZOVÁNÍ ÚČTŮ ---';
+
+  @override
+  String get admin_panel_screen_button_approve_accounts => 'Potvrdit účty';
+
+  @override
+  String admin_panel_screen_account_approval_change_success(
+    String name_surname,
+    String status,
+  ) {
+    String _temp0 = intl.Intl.selectLogic(status, {
+      'approved': 'potvrzen',
+      'disapproved': 'zamítnut',
+      'other': 'aktualizován',
+    });
+    return 'Účet $name_surname byl úspěšně $_temp0.';
+  }
+
+  @override
+  String admin_panel_screen_button_approve_accounts_error(String name_surname) {
+    return 'Účet $name_surname se nepodařilo potvrdit. Zkus to prosím znovu.';
+  }
+
+  @override
+  String get category_admin_panel_screen_edit_leaders =>
+      '--- ADMIN PANEL - UPRAVIT VEDOUCÍ ---';
+
+  @override
+  String get admin_panel_screen_button_edit_leaders => 'Upravit vedoucí';
+
+  @override
+  String admin_panel_screen_set_patrol_leaders_title(String name_surname) {
+    return 'Přiřadit družinu pro $name_surname';
+  }
+
+  @override
+  String admin_panel_screen_set_patrol_leaders_assigned(
+    String name_surname,
+    String patrol_name,
+  ) {
+    return '$name_surname přiřazen jako vedoucí družiny $patrol_name';
+  }
+
+  @override
+  String admin_panel_screen_set_patrol_leaders_removed(
+    String name_surname,
+    String patrol_name,
+  ) {
+    return '$name_surname odebrán jako vedoucí družiny $patrol_name';
+  }
+
+  @override
+  String get admin_panel_screen_set_patrol_leaders_error =>
+      'Nepodařilo se aktualizovat vedoucího družiny.';
+
+  @override
+  String get admin_panel_screen_set_patrol_leaders_loading_error =>
+      'Nepodařilo se načíst vedoucí';
+
+  @override
+  String get admin_panel_screen_edit_leaders_remove_error_assigned_patrols =>
+      'Nelze odebrat vedoucího, protože má přiřazené družiny.';
+
+  @override
+  String admin_panel_screen_edit_leaders_status_removed(String name_surname) {
+    return 'Odebrán status vedoucího pro $name_surname';
+  }
+
+  @override
+  String admin_panel_screen_edit_leaders_status_added(String name_surname) {
+    return 'Přidán status vedoucího pro $name_surname';
+  }
+
+  @override
+  String get admin_panel_screen_edit_leaders_update_error =>
+      'Nepodařilo se aktualizovat status vedoucího.';
+
+  @override
+  String get category_admin_panel_screen_edit_account_rights =>
+      '--- ADMIN PANEL - UPRAVIT PRÁVA ÚČTŮ ---';
+
+  @override
+  String get admin_panel_screen_button_edit_rights => 'Upravit práva';
+
+  @override
+  String get admin_panel_screen_button_edit_rights_cant_change_admin_rights =>
+      'Práva administrátora lze změnit pouze v Supabase.';
+
+  @override
+  String get admin_panel_screen_button_edit_rights_right_level_1 =>
+      '1 - Výchozí';
+
+  @override
+  String get admin_panel_screen_button_edit_rights_right_level_2 =>
+      '2 - Vedoucí';
+
+  @override
+  String get admin_panel_screen_button_edit_rights_right_level_3 => '3 - Admin';
+
+  @override
+  String admin_panel_screen_button_edit_rights_change_success(
+    String name_surname,
+    String status,
+  ) {
+    String _temp0 = intl.Intl.selectLogic(status, {
+      '1': ' na výchozí',
+      '2': ' na vedoucího',
+      '3': ' na administrátora',
+      'other': '',
+    });
+    return 'Práva účtu $name_surname byla úspěšně změněna$_temp0.';
+  }
+
+  @override
+  String admin_panel_screen_button_edit_rights_error(String name_surname) {
+    return 'Práva účtu $name_surname se nepodařilo změnit. Zkus to prosím znovu.';
+  }
+
+  @override
+  String get category_admin_panel_screen_connect_accounts_with_dependents =>
+      '--- ADMIN PANEL - PŘIPOJIT ÚČTY S PODÚČTY ---';
+
+  @override
+  String get admin_panel_screen_button_connect_dependents => 'Připojit podúčty';
+
+  @override
+  String
+  get admin_panel_screen_connect_accounts_dependents_delete_connection_dialog_title =>
+      'Smazat spojení';
+
+  @override
+  String
+  admin_panel_screen_connect_accounts_dependents_delete_connection_dialog_subtitle(
+    String account_name_surname,
+    String dependent_name_surname,
+  ) {
+    return 'Opravdu chceš odstranit propojení mezi účtem $account_name_surname a podúčtem $dependent_name_surname?';
+  }
+
+  @override
+  String
+  get admin_panel_screen_connect_accounts_dependents_delete_connection_dialog_primary_button_text =>
+      'Odstranit propojení';
+
+  @override
+  String
+  admin_panel_screen_connect_accounts_dependents_delete_connection_success(
+    String account_name_surname,
+    String dependent_name_surname,
+  ) {
+    return 'Propojení mezi účtem $account_name_surname a podúčtem $dependent_name_surname bylo úspěšně odstraněno.';
+  }
+
+  @override
+  String
+  admin_panel_screen_connect_accounts_dependents_delete_connection_error_main_dependent(
+    String account_name_surname,
+    String dependent_name_surname,
+  ) {
+    return 'Nelze odstranit propojení hlavního podúčtu $dependent_name_surname z účtu $account_name_surname.';
+  }
+
+  @override
+  String admin_panel_screen_connect_accounts_dependents_delete_connection_error(
+    String account_name_surname,
+    String dependent_name_surname,
+  ) {
+    return 'Nepodařilo se odstranit propojení mezi účtem $account_name_surname a podúčtem $dependent_name_surname. Zkus to prosím znovu.';
+  }
+
+  @override
+  String
+  get admin_panel_screen_connect_accounts_dependents_add_connection_button_text =>
+      'Upravit';
+
+  @override
+  String
+  admin_panel_screen_connect_accounts_dependents_add_connection_screen_title(
+    Object account_name_surname,
+  ) {
+    return '$account_name_surname – Upravit podúčty';
+  }
+
+  @override
+  String admin_panel_screen_connect_accounts_dependents_add_connection_success(
+    String dependent_name_surname,
+    String account_name_surname,
+  ) {
+    return 'Závislá osoba $dependent_name_surname byla úspěšně připojena k účtu $account_name_surname.';
+  }
+
+  @override
+  String admin_panel_screen_connect_accounts_dependents_add_connection_error(
+    String dependent_name_surname,
+    String account_name_surname,
+  ) {
+    return 'Nepodařilo se připojit závislou osobu $dependent_name_surname k účtu $account_name_surname. Zkus to prosím znovu.';
+  }
+
+  @override
+  String
+  admin_panel_screen_connect_accounts_dependents_set_main_dependent_success(
+    String dependent_name_surname,
+    String account_name_surname,
+  ) {
+    return 'Závislá osoba $dependent_name_surname byla nastavena jako hlavní pro účet $account_name_surname.';
+  }
+
+  @override
+  String
+  admin_panel_screen_connect_accounts_dependents_unset_main_dependent_success(
+    String dependent_name_surname,
+    String account_name_surname,
+  ) {
+    return 'Závislá osoba $dependent_name_surname již není hlavní pro účet $account_name_surname.';
+  }
+
+  @override
+  String get category_admin_panel_screen_skautis_sync =>
+      '--- ADMIN PANEL - SKAUTIS SYNC ---';
+
+  @override
+  String get admin_panel_screen_data_management_title => 'Data';
+
+  @override
+  String get admin_panel_screen_button_skautis_sync => 'SkautIS synchronizace';
+
+  @override
+  String get admin_panel_screen_skautis_sync_description =>
+      'Zadej SkautIS token pro synchronizaci dat:';
+
+  @override
+  String get admin_panel_screen_skautis_sync_token_hint => 'SkautIS Token';
+
+  @override
+  String get admin_panel_screen_skautis_sync_progress =>
+      'Synchronizuji s SkautIS...';
+
+  @override
+  String get admin_panel_screen_skautis_sync_success_description =>
+      'Synchronizace se SkautIS byla úspěšná';
+
+  @override
+  String get admin_panel_screen_skautis_sync_error_description =>
+      'Chyba při synchronizaci se SkautIS';
+
+  @override
+  String get category_admin_panel_screen_notifications =>
+      '--- ADMIN PANEL - NOTIFICATIONS ---';
+
+  @override
+  String get admin_panel_screen_notification_title => 'Notification';
+
+  @override
+  String get admin_panel_screen_button_send_notification => 'Send Notification';
 }

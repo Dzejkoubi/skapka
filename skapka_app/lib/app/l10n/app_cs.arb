@@ -1,299 +1,521 @@
 {
-    "@@locale": "cs",
-    "language": "Čeština",
-
-    "category_common": "--- SPOLEČNÉ ---",
-    "yes": "Ano",
-    "no": "Ne",
-    "cancel": "Zrušit",
-    "loading": "Načítání...",
-    "back" : "Zpět",
-    "common_copied_to_clipboard": "Zkopírováno do schránky 📋",
-    "create": "Vytvořit",
-    "edit": "Upravit",
-    "save": "Uložit",
-    "load_more": "Načíst další",
-    "error": "Chyba",
-    "generic_error": "Něco se pokazilo. Zkus to prosím znovu.",
-    "something_is_missing_title_1": "Ticho po pěšině... 🤫",
-    "something_is_missing_title_2": "Kde nic, tu nic... 🤷‍♂️",
-    "something_is_missing_title_3": "Tady chcípl pes... 🐕",
-    "something_is_missing_title_4": "Pusto a prázdno... 🏜️",
-    "something_is_missing_title_5": "Vymeteno... 🧹",
-    "something_is_missing_title_6": "Ani noha... 👣",
-    "something_is_missing_title_7": "Široko daleko ani živáčka... 🔭",
-    "something_is_missing_title_8": "Tady lišky dávají dobrou noc... 🦊",
-    "something_is_missing_title_9": "Pusto prázdno... 🕳️",
-    "something_is_missing_title_10": "Zeje to tu prázdnotou... 💨",
-
-    "category_navigation": "--- NAVIGACE ---",
-    "navbar_dependents": "Osoby",
-    "navbar_events": "Výpravy",
-    "navbar_calendar": "Kalendář",
-    "navbar_info": "Informace",
-    
-    "category_welcome_screen": "--- UVÍTACÍ OBRAZOVKA ---",
-    "welcome_screen_title": "Vítej ve\nSkapce 👋",
-    "welcome_screen_login_button_text": "Přihlásit se",
-    "welcome_screen_register_button_text": "Registrovat se",
-    "welcome_screen_songbook_button_text": "Zpěvník",
-
-    "category_login_screen": "--- PŘIHLÁŠENÍ ---",
-    "login_screen_title": "Přihlášení",
-    "login_screen_email_hint": "E-mail",
-    "login_screen_password_hint": "Heslo",
-    "login_screen_forgot_password_text": "Zapomněl si heslo?",
-    "login_screen_login_button_text": "Přihlásit se",
-    "login_screen_login_error_password_empty": "Nezapomeň na heslo.",
-    "login_screen_login_error_password_too_short": "Heslo musí mít alespoň 8 znaků.",
-    "login_screen_login_error_invalid_credentials": "Neplatné přihlašovací údaje.",
-    "login_screen_login_error_email_not_confirmed": "E-mailová adresa není potvrzena. Zkontroluj prosím svou schránku.",
-    "login_screen_login_error_email_empty": "Nezapomněl/a si na email?",
-    "login_screen_login_error_email_invalid": "Pozor, takhle přece nevypadá e-mail.",
-    "login_screen_login_success": "Přihlášení proběhlo úspěšně! 🎉",
-    "login_screen_login_error_generic": "Něco se nepovedlo. Zkus to prosím znovu.",
-    
-    "category_register_screen": "--- REGISTRACE ---",
-    "register_screen_title": "Registrace",
-    "register_screen_1_name_hint": "Jméno",
-    "register_screen_1_surname_hint": "Příjmení",
-    "register_screen_1_email_hint": "E-mail",
-    "register_screen_1_next_button_text": "Další",
-    "register_screen_1_error_invalid_name": "Jméno může obsahovat jen písmena a pomlčky.",
-    "register_screen_1_error_empty_name": "Nemáš snad jméno?",
-    "register_screen_1_error_invalid_surname": "Příjmení může obsahovat jen písmena a pomlčky.",
-    "register_screen_1_error_empty_surname": "A co příjmení?",
-    "register_screen_1_error_email_empty": "Nezapomněl/a si na email?",
-    "register_screen_1_error_email_invalid": "Pozor, takhle přece nevypadá e-mail.",
-    "register_screen_2_password_hint": "Heslo",
-    "register_screen_2_confirm_password_hint": "Potvrď heslo",
-    "register_screen_2_register_button_text": "Registrovat",
-    "register_screen_2_error_passwords_do_not_match": "Hesla se neshodují.",
-    "register_screen_2_registration_success": "Registrace proběhla úspěšně! 🎊",
-    "register_screen_2_registration_error_email_used": "Tento e-mail je již použit. Zkus se přihlásit nebo použij jiný e-mail.",
-    "register_screen_2_registration_error_rate_limit": "Příliš mnoho pokusů. Zkus to prosím později.",
-    "register_screen_2_registration_error_weak_password": "Heslo je příliš slabé.",
-    "register_screen_2_registration_error_generic": "Registrace se nezdařila. Zkus to prosím znovu.",
-
-    "category_account_not_approved_screen": "--- OBRAZOVKA NESCHVÁLENÉHO ÚČTU ---",
-    "account_not_approved_screen_title": "Účet ještě nebyl schválen",
-    "account_not_approved_screen_text": "Administrátor musí tvůj účet{name_surname}nejdřív schválit, než se budeš moct přihlásit. Jakmile to udělá, přijde ti e-mail.",
-    "@account_not_approved_screen_text": {
-        "placeholders": {
-            "name_surname": {
-                "type": "String"
-            }
-        }
-    },
-    "account_not_approved_screen_notify_administrator_button_text": "Upozornit administrátora",
-    "account_not_approved_screen_notify_administrator_dialog_title": "Upozornit administrátora",
-    "account_not_approved_screen_notify_administrator_dialog_description": "Tento krok upozorní administrátora emailem. Lze poslat jednou za den.",
-    "account_not_approved_screen_notify_administrator_dialog_primary_button_text": "Poslat upozornění",
-    "account_not_approved_screen_notify_administrator_button_error_dialog": "Upozornění lze poslat jen jednou za 24 hodin. Zkus to později.",
-    "account_not_approved_screen_notify_success": "Administrátor byl upozorněn. 📧",
-    "account_not_approved_screen_notify_error": "Nepodařilo se upozornit administrátora. Zkus to prosím později.",
-    "account_not_approved_screen_logout_button_text": "Odhlásit se",
-    "account_not_approved_screen_logout_dialog_title": "Odhlásit se",
-    "account_not_approved_screen_logout_dialog_description": "Opravdu se chceš odhlásit ze svého účtu?",
-    "account_not_approved_screen_logout_dialog_primary_button_text": "Odhlásit se",
-    "account_not_approved_screen_logout_success": "Odhlášení proběhlo úspěšně.",
-    "account_not_approved_screen_logout_error": "Odhlášení se nezdařilo. Zkus to prosím znovu.",
-    "account_not_approved_screen_delete_account_button_text": "Smazat účet",
-    "account_not_approved_screen_delete_account_dialog_title": "Smazat účet",
-    "account_not_approved_screen_delete_account_dialog_description": "Opravdu chceš smazat svůj účet? Tuto akci nelze vrátit zpět.",
-    "account_not_approved_screen_delete_account_dialog_primary_button_text": "Smazat účet",
-    "account_not_approved_screen_delete_success": "Tvůj účet byl smazán. 👋",
-    "account_not_approved_screen_delete_error": "Smazání účtu se nezdařilo. Zkus to prosím později.",
-
-    "category_events_screen": "--- VÝPRAVY ---",
-    "events_screen_title": "Výpravy",
-    "events_screen_no_events_text": "{username} aktuálně nemá žádnou aktivní výpravu.",
-    "@events_screen_no_events_text": {
-        "placeholders": {
-            "version": {
-                "type": "String"
-            }
-        }
-    },
-
-    "category_event_box_widget": "--- WIDGET VÝPRAVY ---",
-    "event_box_number_of_kids_text": "{number_of_kids} dětí",
-    "@event_box_number_of_kids_text": {
-        "placeholders": {
-            "number_of_kids": {
-                "type": "int"
-            }
-        }
-    },
-    "event_box_photos_link_text": "Fotky",
-    "event_box_sign_up_start_date_text" : "Přihlašování od: ",
-    "event_box_sign_up_end_date_text" : "Přihlašování do: ",
-    "event_box_event_multiple_days_start_text" : "Sraz v: ",
-    "event_box_event_multiple_days_end_text" : "Očekávaný konec: ",
-    "event_box_event_single_day_text" : "Sraz-Konec: ",
-    "event_box_target_patrols_text": "Družinky: ",
-    "event_box_open_error_event_not_live": "Nelze zobrazit detail výpravy, na kterou se nelze přihlašovat.",
-
-    "category_calendar_screen": "--- KALENDÁŘ ---",
-    "calendar_screen_title": "Kalendář",
-    "calendar_screen_speed_dial_add_google_calendar": "Google kalendář",
-    "calendar_screen_event_expansion_tile_future_title": "Nadcházející",
-    "calendar_screen_event_expansion_tile_future_no_events_subtitle": "Zdá se, že nejsou žádné nadcházející výpravy.",
-    "calendar_screen_event_expansion_tile_live_title": "Aktuální",
-    "calendar_screen_event_expansion_tile_live_no_events_subtitle": "Zdá se, že nejsou žádné aktuální výpravy.",
-    "calendar_screen_event_expansion_tile_past_title": "Proběhlé",
-    "calendar_screen_event_expansion_tile_past_no_events_subtitle": "Zdá se, že nejsou žádné proběhlé výpravy.",
-    "calendar_screen_event_expansion_tile_draft_title": "Koncepty",
-    "calendar_screen_event_expansion_tile_draft_no_events_subtitle": "Zdá se, že nejsou žádné koncepty.",
-
-    "category_create_edit_event_screen": "--- VYTVOŘIT/UPRAVIT VÝPRAVU ---",
-    "create_edit_event_screen_title_create": "Vytvořit výpravu",
-    "create_edit_event_screen_title_edit": "Upravit výpravu",
-    "create_edit_event_screen_save_event_dialog_title": "Uložit jako koncept",
-    "create_edit_event_screen_save_event_dialog_description": "Chceš uložit tuto výpravu jako koncept? Výprava se zveřejní až po kliknutí na tlačítko zveřejnit. Můžeš ji upravit později.",
-    "create_edit_event_screen_save_event_dialog_primary_button_text": "Uložit jako koncept",
-    "create_edit_event_screen_save_changes_dialog_title": "Uložit změny",
-    "create_edit_event_screen_save_changes_dialog_description": "Opravdu chceš uložit změny v této výpravě?",
-    "create_edit_event_screen_speed_dial_publish_event_text": "Zveřejnit",
-    "create_edit_event_screen_publish_event_dialog_title": "Zveřejnit výpravu",
-    "create_edit_event_screen_publish_event_dialog_description": "Opravdu chceš zveřejnit tuto výpravu? Výprava se přidá do kalendáře a až nadejde čas přihlašování, budou se moct pozvaní účastníci přihlašovat.",
-    "create_edit_event_screen_publish_event_dialog_primary_button_text": "Zveřejnit",
-    "create_edit_event_screen_speed_dial_unpublish_event_text": "Zrušit zveřejnění",
-    "create_edit_event_screen_unpublish_event_dialog_title": "Zrušit zveřejnění výpravy",
-    "create_edit_event_screen_unpublish_event_dialog_description": "Opravdu chceš zrušit zveřejnění této výpravy? Účastníci se nebudou moct dál přihlašovat a výprava se odstraní z kalendáře.",
-    "create_edit_event_screen_unpublish_event_dialog_primary_button_text": "Zrušit zveřejnění",
-    "create_edit_event_screen_speed_dial_delete_event_text": "Smazat",
-    "create_edit_event_screen_delete_event_dialog_title": "Smazat výpravu",
-    "create_edit_event_screen_delete_event_dialog_description": "Opravdu chceš smazat tuto výpravu? Tuto akci nelze vrátit zpět.",
-    "create_edit_event_screen_delete_event_dialog_primary_button_text": "Smazat",
-    "create_edit_event_screen_delete_event_error_past_event_admin_only": "Pouze administrátoři mohou mazat nebo zrušit publikování minulých výprav.",
-    "create_edit_event_screen_delete_event_error_event_not_created": "Nelze smazat výpravu, která ještě nebyla vytvořena.",
-    "create_edit_event_screen_delete_event_error_not_rights": "Nemáš oprávnění mazat výpravy.",
-    "create_edit_event_screen_delete_event_error_generic": "Smazání výpravy se nezdařilo. Zkus to prosím znovu.",
-    "create_edit_event_screen_delete_event_success": "Výprava byla úspěšně smazána🥳.",
-    "create_edit_event_screen_go_back_without_saving_dialog_title": "Zahodit změny",
-    "create_edit_event_screen_go_back_without_saving_dialog_description": "Opravdu chceš odejít bez uložení změn? Veškeré neuložené změny budou ztraceny.",
-    "create_edit_event_screen_go_back_without_saving_dialog_primary_button_text": "Zahodit",
-    "create_edit_event_screen_event_title_hint": "Název výpravy",
-    "create_edit_event_screen_event_title_error_empty": "Název výpravy nemůže být prázdný.",
-    "create_edit_event_screen_event_title_error_too_long": "Název výpravy nemůže přesáhnout 50 znaků.",
-    "create_edit_event_screen_event_sign_up_from": "Přihlašování od",
-    "create_edit_event_screen_event_sign_up_to": "Přihlašování do",
-    "create_edit_event_screen_event_from_hint": "Sraz v: ",
-    "create_edit_event_screen_event_to_hint": "Očekávaný konec: ",
-    "create_edit_event_screen_select_participants_text": "Vybrat účastníky",
-    "create_edit_participants_screen_title": "Vybrat účastníky",
-    "create_edit_participants_screen_leaders": "Vedoucí",
-    "create_edit_participants_screen_kids": "Děti",
-    "create_edit_participants_screen_select_all": "Vybrat všechny",
-    "create_edit_participants_screen_dial_print": "Vytisknout seznam",
-    "create_edit_participants_screen_dial_limit": "Limit účastníků",
-    "create_edit_event_screen_total_participants_text": "Pozvaní účastníci",
-    "create_edit_event_screen_total_signed_up_participants_text": "Přihlášení účastníci",
-    "create_edit_event_screen_signed_up_leaders": "Přihlášení vedoucí",
-    "create_edit_event_screen_invited_leaders": "Pozvaní vedoucí",
-    "create_edit_event_screen_signed_up_18_plus": "Přihlášení 18+",
-    "create_edit_event_screen_invited_18_plus": "Pozvaní 18+",
-    "create_edit_event_screen_troops": "Družinky",
-    "create_edit_event_screen_instructions_text": "Pokyny",
-    "create_edit_instructions_screen_title": "Pokyny výpravy",
-    "create_edit_event_screen_instructions_hint": "Sem napiš pokyny (Markdown podporován)...",
-    "create_edit_event_screen_meeting_place_text": "Místo srazu",
-    "create_edit_event_screen_meeting_place_description": "Adresa či jméno, které může uživatel vyhledat v mapách. Pokud nevyplníš, místo srazu nebude zobrazeno.",
-    "create_edit_event_screen_photo_album_link_text": "Odkaz na fotoalbum",
-    "create_edit_event_screen_photo_album_link_description": "Odkaz na sdílenené fotoalbum z výpravy. Pokud nevyplníš, odkaz na fotoalbum nebude zobrazen.",
-    "create_edit_event_screen_validation_error_title_empty": "Prosím zadej název výpravy.",
-    "create_edit_event_screen_validation_error_dates_empty": "Prosím vyplň všechna data.",
-    "create_edit_event_screen_validation_error_signup_start_after_end": "Začátek přihlašování musí být před koncem přihlašování.",
-    "create_edit_event_screen_validation_error_signup_end_after_start": "Konec přihlašování musí být před začátkem výpravy.",
-    "create_edit_event_screen_validation_error_start_after_end": "Začátek výpravy musí být před očekávaným koncem výpravy.",
-    "create_edit_event_screen_creating_event_progress_text": "Vytvářím výpravu...",
-    "create_edit_event_screen_editing_event_progress_text": "Upravuji výpravu...",
-    "create_edit_event_screen_deleting_event_progress_text": "Mažu výprava...",
-    "create_edit_event_screen_creating_event_success": "Výprava byla úspěšně vytvořena🥳.",
-    "create_edit_event_screen_creating_event_error_generic": "Vytvoření výpravy se nezdařilo. Zkus to prosím znovu.",
-    "create_edit_event_screen_save_success": "Výprava byla úspěšně uložena🥳.",
-    "create_edit_event_screen_save_error_generic": "Nepodařilo se uložit výpravu. Zkus to prosím znovu.",
-
-    "category_live_events_screen": "--- PŘIHLAŠOVACÍ VÝPRAVY ---",
-    "live_events_screen_no_dependents_view_subtitle": "Zdá se, že momentálně nemáš žádné osoby, které by se mohly přihlašovat na výpravy.",
-    "live_events_screen_no_live_events_view_subtitle": "Osoba {dependent_name} momentálně nemá žádné výpravy k přihlášení.",
-    "@live_events_screen_no_live_events_view_subtitle": {
-        "placeholders": {
-            "dependent_name": {
-                "type": "String"
-            }
-        }
-    },
-
-    "live_events_screen_change_dependent_status_dialog_title": "Změnit stav účasti",
-    "live_events_screen_change_dependent_status_dialog_description": "Změnit stav účasti osoby {dependent_name} na výpravě {event_name}.",
-    "@live_events_screen_change_dependent_status_dialog_description": {
-        "placeholders": {
-            "dependent_name": {
-                "type": "String"
-            },
-            "event_name": {
-                "type": "String"
-            }
-        }
-    },
-    "live_events_screen_change_dependent_status_dialog_no_response": "Bez odpovědi",
-    "live_events_screen_change_dependent_status_dialog_signed_up": "Přihlásit",
-    "live_events_screen_change_dependent_status_dialog_excused": "Omluvit",
-    "live_events_screen_change_dependent_status_dialog_loading": "Probíhá změna stavu účasti...",
-    "live_events_screen_change_dependent_status_dialog_error": "Nepodařilo se změnit stav účasti. Zkus to prosím znovu.",
-    "live_events_screen_change_dependent_status_dialog_success": "Stav osoby {dependent_name} byl úspěšně změněn na {new_status}.",
-    "@live_events_screen_change_dependent_status_dialog_success": {
-        "placeholders": {
-            "dependent_name": {
-                "type": "String"
-            },
-            "new_status": {
-                "type": "String"
-            }
-        }
-    },
-    "live_events_screen_cannot_change_status_past_signup_deadline": "Nelze změnit stav přihlášení na výpravu po vypršení datumu přihlašování.",
-    
-    "category_dependents_screen": "--- DEPENDENTS SCREEN ---",
-    "dependents_screen_add_dependent_button_text": "Přidat",
-    "dependents_screen_dependent_nickname": "Přezdívka",
-    "dependents_screen_dependent_patrol": "Družina",
-    "dependents_screen_dependent_this_school_year_event_attendance": "Účast na výpravách v tomto školním roce",
-    "dependents_screen_dependent_notes_button_text": "Upravit detaily",
-    "dependents_screen_dependent_description": "Důležité informace a potřeby. Přístupné jen vedení pro hladký průběh výprav.",
-    "dependents_screen_depents_details_has_gluten_allergy": "Má alergii na lepek",
-    "dependents_screen_depents_details_has_lactose_intolerance": "Má alergii na laktózu",
-    "dependents_screen_depents_details_has_nut_allergy": "Má alergii na ořechy",
-    "dependents_screen_depents_details_is_claustrophobic": "Má klaustrofobii",
-    "dependents_screen_depents_details_has_epilepsy": "Má epilepsii",
-    "dependents_screen_depents_details_has_asthma": "Má astma",
-    "dependents_screen_depents_details_is_swimmer": "Je plavec",
-    "dependents_screen_depents_details_other_notes": "Něco jiného",
-    "dependents_screen_depents_details_other_notes_description": "Zde prosím napiš cokoliv jiného, co bychom ještě měli vědět. ",
-    "dependents_screen_save_success": "Detaily byly úspěšně uloženy 💾.",
-    "dependents_screen_save_error": "Nepodařilo se uložit detaily. Zkus to prosím znovu. 💾.",
-    "dependents_screen_unsaved_changes_dialog_title": "Uložit změny?",
-    "dependents_screen_unsaved_changes_dialog_description": "Máš neuložené změny. Chceš je před odchodem uložit?",
-    "dependents_screen_unsaved_changes_dialog_save": "Uložit",
-    "dependents_screen_unsaved_changes_dialog_discard": "Zahodit",
-
-    "category_settings_screen": "--- NASTAVENÍ ---",
-    "settings_screen_title": "Nastavení",
-    "settings_screen_admin_panel_box_title": "Admin Panel",
-    "settings_screen_send_notification_box_title": "Poslat oznámení",
-    "settings_screen_change_signout_button_text": "Odhlásit se",
-    "settings_screen_change_delete_account_button_text": "Smazat účet",
-    "settings_screen_app_motive_dropdown_title": "Motiv aplikace",
-    "settings_screen_app_motive_light": "Světlý",
-    "settings_screen_app_motive_dark": "Tmavý",
-    "settings_screen_app_motive_system": "Systém",
-    "settings_screen_app_language_dropdown_title": "Jazyk aplikace",
-    "settings_screen_app_language_czech": "Čeština",
-    "settings_screen_app_language_english": "Angličtina",
-    "settings_screen_app_version_title": "Verze aplikace: ",
-
-    "category_admin_panel_screen": "--- ADMIN PANEL ---",
-    "admin_panel_screen_title": "Admin Panel"
+  "@@locale": "cs",
+  "language": "Čeština",
+  "category_common": "--- SPOLEČNÉ ---",
+  "yes": "Ano",
+  "no": "Ne",
+  "cancel": "Zrušit",
+  "loading": "Načítání...",
+  "back": "Zpět",
+  "common_copied_to_clipboard": "Zkopírováno do schránky 📋",
+  "create": "Vytvořit",
+  "edit": "Upravit",
+  "save": "Uložit",
+  "load_more": "Načíst další",
+  "error": "Chyba",
+  "success": "Úspěch",
+  "saved": "Změny úspěšně uloženy",
+  "close": "Zavřít",
+  "discard": "Zahodit",
+  "continue_": "Pokračovat",
+  "unsaved_changes": "Neuložené změny",
+  "unsaved_changes_description": "Máte neuložené změny. Chcete je zahodit?",
+  "generic_error": "Něco se pokazilo. Zkus to prosím znovu.",
+  "something_is_missing_title_1": "Ticho po pěšině... 🤫",
+  "something_is_missing_title_2": "Kde nic, tu nic... 🤷‍♂️",
+  "something_is_missing_title_3": "Tady chcípl pes... 🐕",
+  "something_is_missing_title_4": "Pusto a prázdno... 🏜️",
+  "something_is_missing_title_5": "Vymeteno... 🧹",
+  "something_is_missing_title_6": "Ani noha... 👣",
+  "something_is_missing_title_7": "Široko daleko ani živáčka... 🔭",
+  "something_is_missing_title_8": "Tady lišky dávají dobrou noc... 🦊",
+  "something_is_missing_title_9": "Pusto prázdno... 🕳️",
+  "something_is_missing_title_10": "Zeje to tu prázdnotou... 💨",
+  "category_navigation": "--- NAVIGACE ---",
+  "navbar_dependents": "Osoby",
+  "navbar_events": "Výpravy",
+  "navbar_calendar": "Kalendář",
+  "navbar_info": "Informace",
+  "category_welcome_screen": "--- UVÍTACÍ OBRAZOVKA ---",
+  "welcome_screen_title": "Vítej ve\nSkapce 👋",
+  "welcome_screen_login_button_text": "Přihlásit se",
+  "welcome_screen_register_button_text": "Registrovat se",
+  "welcome_screen_songbook_button_text": "Zpěvník",
+  "welcome_screen_no_internet_connection": "Žádné připojení k internetu. Zkontroluj prosím své WiFi nebo mobilní data.",
+  "category_login_screen": "--- PŘIHLÁŠENÍ ---",
+  "login_screen_title": "Přihlášení",
+  "login_screen_email_hint": "E-mail",
+  "login_screen_password_hint": "Heslo",
+  "login_screen_forgot_password_text": "Zapomněl si heslo?",
+  "login_screen_login_button_text": "Přihlásit se",
+  "login_screen_login_error_password_empty": "Nezapomeň na heslo.",
+  "login_screen_login_error_password_too_short": "Heslo musí mít alespoň 8 znaků.",
+  "login_screen_login_error_invalid_credentials": "Neplatné přihlašovací údaje.",
+  "login_screen_login_error_email_not_confirmed": "E-mailová adresa není potvrzena. Zkontroluj prosím svou schránku.",
+  "login_screen_login_error_email_empty": "Nezapomněl/a si na email?",
+  "login_screen_login_error_email_invalid": "Pozor, takhle přece nevypadá e-mail.",
+  "login_screen_login_success": "Přihlášení proběhlo úspěšně! 🎉",
+  "login_screen_login_error_generic": "Něco se nepovedlo. Zkus to prosím znovu.",
+  "category_register_screen": "--- REGISTRACE ---",
+  "register_screen_title": "Registrace",
+  "register_screen_1_name_hint": "Jméno",
+  "register_screen_1_surname_hint": "Příjmení",
+  "register_screen_1_email_hint": "E-mail",
+  "register_screen_1_next_button_text": "Další",
+  "register_screen_1_error_invalid_name": "Jméno může obsahovat jen písmena a pomlčky.",
+  "register_screen_1_error_empty_name": "Nemáš snad jméno?",
+  "register_screen_1_error_invalid_surname": "Příjmení může obsahovat jen písmena a pomlčky.",
+  "register_screen_1_error_empty_surname": "A co příjmení?",
+  "register_screen_1_error_email_empty": "Nezapomněl/a si na email?",
+  "register_screen_1_error_email_invalid": "Pozor, takhle přece nevypadá e-mail.",
+  "register_screen_2_password_hint": "Heslo",
+  "register_screen_2_confirm_password_hint": "Potvrď heslo",
+  "register_screen_2_register_button_text": "Registrovat",
+  "register_screen_2_error_passwords_do_not_match": "Hesla se neshodují.",
+  "register_screen_2_registration_success": "Registrace proběhla úspěšně! 🎊",
+  "register_screen_2_registration_error_email_used": "Tento e-mail je již použit. Zkus se přihlásit nebo použij jiný e-mail.",
+  "register_screen_2_registration_error_rate_limit": "Příliš mnoho pokusů. Zkus to prosím později.",
+  "register_screen_2_registration_error_weak_password": "Heslo je příliš slabé.",
+  "register_screen_2_registration_error_generic": "Registrace se nezdařila. Zkus to prosím znovu.",
+  "category_account_not_approved_screen": "--- OBRAZOVKA NESCHVÁLENÉHO ÚČTU ---",
+  "account_not_approved_screen_title": "Účet ještě nebyl schválen",
+  "account_not_approved_screen_text": "Administrátor musí tvůj účet{name_surname}nejdřív schválit, než se budeš moct přihlásit. Jakmile to udělá, přijde ti e-mail.",
+  "@account_not_approved_screen_text": {
+    "placeholders": {
+      "name_surname": {
+        "type": "String"
+      }
+    }
+  },
+  "account_not_approved_screen_notify_administrator_button_text": "Upozornit administrátora",
+  "account_not_approved_screen_notify_administrator_dialog_title": "Upozornit administrátora",
+  "account_not_approved_screen_notify_administrator_dialog_description": "Tento krok upozorní administrátora emailem. Lze poslat jednou za den.",
+  "account_not_approved_screen_notify_administrator_dialog_primary_button_text": "Poslat upozornění",
+  "account_not_approved_screen_notify_administrator_button_error_dialog": "Upozornění lze poslat jen jednou za 24 hodin. Zkus to později.",
+  "account_not_approved_screen_notify_success": "Administrátor byl upozorněn. 📧",
+  "account_not_approved_screen_notify_error": "Nepodařilo se upozornit administrátora. Zkus to prosím později.",
+  "account_not_approved_screen_logout_button_text": "Odhlásit se",
+  "account_not_approved_screen_logout_dialog_title": "Odhlásit se",
+  "account_not_approved_screen_logout_dialog_description": "Opravdu se chceš odhlásit ze svého účtu?",
+  "account_not_approved_screen_logout_dialog_primary_button_text": "Odhlásit se",
+  "account_not_approved_screen_logout_success": "Odhlášení proběhlo úspěšně.",
+  "account_not_approved_screen_logout_error": "Odhlášení se nezdařilo. Zkus to prosím znovu.",
+  "account_not_approved_screen_delete_account_button_text": "Smazat účet",
+  "account_not_approved_screen_delete_account_dialog_title": "Smazat účet",
+  "account_not_approved_screen_delete_account_dialog_description": "Opravdu chceš smazat svůj účet? Tuto akci nelze vrátit zpět.",
+  "account_not_approved_screen_delete_account_dialog_primary_button_text": "Smazat účet",
+  "account_not_approved_screen_delete_success": "Tvůj účet byl smazán. 👋",
+  "account_not_approved_screen_delete_error": "Smazání účtu se nezdařilo. Zkus to prosím později.",
+  "category_events_screen": "--- VÝPRAVY ---",
+  "events_screen_title": "Výpravy",
+  "events_screen_no_events_text": "{username} aktuálně nemá žádnou aktivní výpravu.",
+  "@events_screen_no_events_text": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "category_event_box_widget": "--- WIDGET VÝPRAVY ---",
+  "event_box_number_of_kids_text": "{number_of_kids} dětí",
+  "@event_box_number_of_kids_text": {
+    "placeholders": {
+      "number_of_kids": {
+        "type": "int"
+      }
+    }
+  },
+  "event_box_photos_link_text": "Fotky",
+  "event_box_sign_up_start_date_text": "Přihlašování od: ",
+  "event_box_sign_up_end_date_text": "Přihlašování do: ",
+  "event_box_event_multiple_days_start_text": "Sraz v: ",
+  "event_box_event_multiple_days_end_text": "Očekávaný konec: ",
+  "event_box_event_single_day_text": "Sraz-Konec: ",
+  "event_box_target_patrols_text": "Družinky: ",
+  "event_box_open_error_event_not_live": "Nelze zobrazit detail výpravy, na kterou se nelze přihlašovat.",
+  "category_calendar_screen": "--- KALENDÁŘ ---",
+  "calendar_screen_title": "Kalendář",
+  "calendar_screen_speed_dial_add_google_calendar": "Google kalendář",
+  "calendar_screen_event_expansion_tile_future_title": "Nadcházející",
+  "calendar_screen_event_expansion_tile_future_no_events_subtitle": "Zdá se, že nejsou žádné nadcházející výpravy.",
+  "calendar_screen_event_expansion_tile_live_title": "Aktuální",
+  "calendar_screen_event_expansion_tile_live_no_events_subtitle": "Zdá se, že nejsou žádné aktuální výpravy.",
+  "calendar_screen_event_expansion_tile_past_title": "Proběhlé",
+  "calendar_screen_event_expansion_tile_past_no_events_subtitle": "Zdá se, že nejsou žádné proběhlé výpravy.",
+  "calendar_screen_event_expansion_tile_draft_title": "Koncepty",
+  "calendar_screen_event_expansion_tile_draft_no_events_subtitle": "Zdá se, že nejsou žádné koncepty.",
+  "category_create_edit_event_screen": "--- VYTVOŘIT/UPRAVIT VÝPRAVU ---",
+  "create_edit_event_screen_title_create": "Vytvořit výpravu",
+  "create_edit_event_screen_title_edit": "Upravit výpravu",
+  "create_edit_event_screen_save_event_dialog_title": "Uložit jako koncept",
+  "create_edit_event_screen_save_event_dialog_description": "Chceš uložit tuto výpravu jako koncept? Výprava se zveřejní až po kliknutí na tlačítko zveřejnit. Můžeš ji upravit později.",
+  "create_edit_event_screen_save_event_dialog_primary_button_text": "Uložit jako koncept",
+  "create_edit_event_screen_save_changes_dialog_title": "Uložit změny",
+  "create_edit_event_screen_save_changes_dialog_description": "Opravdu chceš uložit změny v této výpravě?",
+  "create_edit_event_screen_speed_dial_publish_event_text": "Zveřejnit",
+  "create_edit_event_screen_publish_event_dialog_title": "Zveřejnit výpravu",
+  "create_edit_event_screen_publish_event_dialog_description": "Opravdu chceš zveřejnit tuto výpravu? Výprava se přidá do kalendáře a až nadejde čas přihlašování, budou se moct pozvaní účastníci přihlašovat.",
+  "create_edit_event_screen_publish_event_dialog_primary_button_text": "Zveřejnit",
+  "create_edit_event_screen_speed_dial_unpublish_event_text": "Zrušit zveřejnění",
+  "create_edit_event_screen_unpublish_event_dialog_title": "Zrušit zveřejnění výpravy",
+  "create_edit_event_screen_unpublish_event_dialog_description": "Opravdu chceš zrušit zveřejnění této výpravy? Účastníci se nebudou moct dál přihlašovat a výprava se odstraní z kalendáře.",
+  "create_edit_event_screen_unpublish_event_dialog_primary_button_text": "Zrušit zveřejnění",
+  "create_edit_event_screen_speed_dial_delete_event_text": "Smazat",
+  "create_edit_event_screen_delete_event_dialog_title": "Smazat výpravu",
+  "create_edit_event_screen_delete_event_dialog_description": "Opravdu chceš smazat tuto výpravu? Tuto akci nelze vrátit zpět.",
+  "create_edit_event_screen_delete_event_dialog_primary_button_text": "Smazat",
+  "create_edit_event_screen_delete_event_error_past_event_admin_only": "Pouze administrátoři mohou mazat nebo zrušit publikování minulých výprav.",
+  "create_edit_event_screen_delete_event_error_event_not_created": "Nelze smazat výpravu, která ještě nebyla vytvořena.",
+  "create_edit_event_screen_delete_event_error_not_rights": "Nemáš oprávnění mazat výpravy.",
+  "create_edit_event_screen_delete_event_error_generic": "Smazání výpravy se nezdařilo. Zkus to prosím znovu.",
+  "create_edit_event_screen_delete_event_success": "Výprava byla úspěšně smazána🥳.",
+  "create_edit_event_screen_go_back_without_saving_dialog_title": "Zahodit změny",
+  "create_edit_event_screen_go_back_without_saving_dialog_description": "Opravdu chceš odejít bez uložení změn? Veškeré neuložené změny budou ztraceny.",
+  "create_edit_event_screen_go_back_without_saving_dialog_primary_button_text": "Zahodit",
+  "create_edit_event_screen_event_title_hint": "Název výpravy",
+  "create_edit_event_screen_event_title_error_empty": "Název výpravy nemůže být prázdný.",
+  "create_edit_event_screen_event_title_error_too_long": "Název výpravy nemůže přesáhnout 50 znaků.",
+  "create_edit_event_screen_event_sign_up_from": "Přihlašování od",
+  "create_edit_event_screen_event_sign_up_to": "Přihlašování do",
+  "create_edit_event_screen_event_from_hint": "Sraz v: ",
+  "create_edit_event_screen_event_to_hint": "Očekávaný konec: ",
+  "create_edit_event_screen_select_participants_text": "Vybrat účastníky",
+  "create_edit_participants_screen_title": "Vybrat účastníky",
+  "create_edit_participants_screen_leaders": "Vedoucí",
+  "create_edit_participants_screen_kids": "Děti",
+  "create_edit_participants_screen_select_all": "Vybrat všechny",
+  "create_edit_participants_screen_dial_print": "Vytisknout seznam",
+  "create_edit_participants_screen_dial_limit": "Limit účastníků",
+  "create_edit_event_screen_total_participants_text": "Pozvaní účastníci",
+  "create_edit_event_screen_total_signed_up_participants_text": "Přihlášení účastníci",
+  "create_edit_event_screen_signed_up_leaders": "Přihlášení vedoucí",
+  "create_edit_event_screen_invited_leaders": "Pozvaní vedoucí",
+  "create_edit_event_screen_signed_up_18_plus": "Přihlášení 18+",
+  "create_edit_event_screen_invited_18_plus": "Pozvaní 18+",
+  "create_edit_event_screen_troops": "Družinky",
+  "create_edit_event_screen_instructions_text": "Pokyny",
+  "create_edit_instructions_screen_title": "Pokyny výpravy",
+  "create_edit_event_screen_instructions_hint": "Sem napiš pokyny (Markdown podporován)...",
+  "create_edit_event_screen_meeting_place_text": "Místo srazu",
+  "create_edit_event_screen_meeting_place_description": "Adresa či jméno, které může uživatel vyhledat v mapách. Pokud nevyplníš, místo srazu nebude zobrazeno.",
+  "create_edit_event_screen_photo_album_link_text": "Odkaz na fotoalbum",
+  "create_edit_event_screen_photo_album_link_description": "Odkaz na sdílenené fotoalbum z výpravy. Pokud nevyplníš, odkaz na fotoalbum nebude zobrazen.",
+  "create_edit_event_screen_validation_error_title_empty": "Prosím zadej název výpravy.",
+  "create_edit_event_screen_validation_error_dates_empty": "Prosím vyplň všechna data.",
+  "create_edit_event_screen_validation_error_signup_start_after_end": "Začátek přihlašování musí být před koncem přihlašování.",
+  "create_edit_event_screen_validation_error_signup_end_after_start": "Konec přihlašování musí být před začátkem výpravy.",
+  "create_edit_event_screen_validation_error_start_after_end": "Začátek výpravy musí být před očekávaným koncem výpravy.",
+  "create_edit_event_screen_creating_event_progress_text": "Vytvářím výpravu...",
+  "create_edit_event_screen_editing_event_progress_text": "Upravuji výpravu...",
+  "create_edit_event_screen_deleting_event_progress_text": "Mažu výprava...",
+  "create_edit_event_screen_creating_event_success": "Výprava byla úspěšně vytvořena🥳.",
+  "create_edit_event_screen_creating_event_error_generic": "Vytvoření výpravy se nezdařilo. Zkus to prosím znovu.",
+  "create_edit_event_screen_save_success": "Výprava byla úspěšně uložena🥳.",
+  "create_edit_event_screen_save_error_generic": "Nepodařilo se uložit výpravu. Zkus to prosím znovu.",
+  "category_live_events_screen": "--- PŘIHLAŠOVACÍ VÝPRAVY ---",
+  "live_events_screen_no_dependents_view_subtitle": "Zdá se, že momentálně nemáš žádné osoby, které by se mohly přihlašovat na výpravy.",
+  "live_events_screen_no_live_events_view_subtitle": "Osoba {dependent_name} momentálně nemá žádné výpravy k přihlášení.",
+  "@live_events_screen_no_live_events_view_subtitle": {
+    "placeholders": {
+      "dependent_name": {
+        "type": "String"
+      }
+    }
+  },
+  "live_events_screen_change_dependent_status_dialog_title": "Změnit stav účasti",
+  "live_events_screen_change_dependent_status_dialog_description": "Změnit stav účasti osoby {dependent_name} na výpravě {event_name}.",
+  "@live_events_screen_change_dependent_status_dialog_description": {
+    "placeholders": {
+      "dependent_name": {
+        "type": "String"
+      },
+      "event_name": {
+        "type": "String"
+      }
+    }
+  },
+  "live_events_screen_change_dependent_status_dialog_no_response": "Bez odpovědi",
+  "live_events_screen_change_dependent_status_dialog_signed_up": "Přihlásit",
+  "live_events_screen_change_dependent_status_dialog_excused": "Omluvit",
+  "live_events_screen_change_dependent_status_dialog_loading": "Probíhá změna stavu účasti...",
+  "live_events_screen_change_dependent_status_dialog_error": "Nepodařilo se změnit stav účasti. Zkus to prosím znovu.",
+  "live_events_screen_change_dependent_status_dialog_success": "Stav osoby {dependent_name} byl úspěšně změněn na {new_status}.",
+  "@live_events_screen_change_dependent_status_dialog_success": {
+    "placeholders": {
+      "dependent_name": {
+        "type": "String"
+      },
+      "new_status": {
+        "type": "String"
+      }
+    }
+  },
+  "live_events_screen_cannot_change_status_past_signup_deadline": "Nelze změnit stav přihlášení na výpravu po vypršení datumu přihlašování.",
+  "category_dependents_screen": "--- DEPENDENTS SCREEN ---",
+  "dependents_screen_add_dependent_button_text": "Přidat",
+  "dependents_screen_dependent_nickname": "Přezdívka",
+  "dependents_screen_dependent_patrol": "Družina",
+  "dependents_screen_dependent_this_school_year_event_attendance": "Účast na výpravách v tomto školním roce",
+  "dependents_screen_dependent_notes_button_text": "Upravit detaily",
+  "dependents_screen_dependent_description": "Důležité informace a potřeby. Přístupné jen vedení pro hladký průběh výprav.",
+  "dependents_screen_depents_details_has_gluten_allergy": "Má alergii na lepek",
+  "dependents_screen_depents_details_has_lactose_intolerance": "Má alergii na laktózu",
+  "dependents_screen_depents_details_has_nut_allergy": "Má alergii na ořechy",
+  "dependents_screen_depents_details_is_claustrophobic": "Má klaustrofobii",
+  "dependents_screen_depents_details_has_epilepsy": "Má epilepsii",
+  "dependents_screen_depents_details_has_asthma": "Má astma",
+  "dependents_screen_depents_details_is_swimmer": "Je plavec",
+  "dependents_screen_depents_details_other_notes": "Něco jiného",
+  "dependents_screen_depents_details_other_notes_description": "Zde prosím napiš cokoliv jiného, co bychom ještě měli vědět. ",
+  "dependents_screen_save_success": "Detaily byly úspěšně uloženy 💾.",
+  "dependents_screen_save_error": "Nepodařilo se uložit detaily. Zkus to prosím znovu. 💾.",
+  "dependents_screen_unsaved_changes_dialog_title": "Uložit změny?",
+  "dependents_screen_unsaved_changes_dialog_description": "Máš neuložené změny. Chceš je před odchodem uložit?",
+  "dependents_screen_unsaved_changes_dialog_save": "Uložit",
+  "dependents_screen_unsaved_changes_dialog_discard": "Zahodit",
+  "category_settings_screen": "--- NASTAVENÍ ---",
+  "settings_screen_title": "Nastavení",
+  "settings_screen_admin_panel_box_title": "Admin Panel",
+  "settings_screen_send_notification_box_title": "Poslat oznámení",
+  "settings_screen_change_signout_button_text": "Odhlásit se",
+  "settings_screen_change_delete_account_button_text": "Smazat účet",
+  "settings_screen_app_motive_dropdown_title": "Motiv aplikace",
+  "settings_screen_app_motive_light": "Světlý",
+  "settings_screen_app_motive_dark": "Tmavý",
+  "settings_screen_app_motive_system": "Systém",
+  "settings_screen_app_language_dropdown_title": "Jazyk aplikace",
+  "settings_screen_app_language_czech": "Čeština",
+  "settings_screen_app_language_english": "Angličtina",
+  "settings_screen_app_version_title": "Verze aplikace: ",
+  "category_admin_panel_screen": "--- ADMIN PANEL ---",
+  "admin_panel_screen_title": "Admin Panel",
+  "category_admin_panel_screen_warnings": "--- ADMIN PANEL - VAROVÁNÍ ---",
+  "admin_panel_screen_db_warnings_expansion_tile_title": "Varování",
+  "admin_panel_screen_db_warnings_error_loading_warnings": "Nepodařilo se načíst podúčty, ze kterých nebylo možné získat varování. Zkus to prosím znovu.",
+  "admin_panel_screen_db_warning_no_warnings_subtitle": "Žádná varování k zobrazení.",
+  "admin_panel_screen_db_warning_account_does_not_have_some_contact_filled_in": "Podúčet {account_name_surname} nemá vyplněný {missing_personal_email, select, true{{missing_personal_phone, select, true{svůj email a telefon} other{svůj email}}} other{{missing_personal_phone, select, true{svůj telefon} other{{missing_parent_email, select, true{{missing_parent_phone, select, true{email a telefon rodiče} other{email rodiče}}} other{{missing_parent_phone, select, true{telefon rodiče} other{}}}}}}}}.",
+  "@admin_panel_screen_db_warning_account_does_not_have_some_contact_filled_in": {
+    "placeholders": {
+      "account_name_surname": {
+        "type": "String"
+      },
+      "missing_parent_email": {
+        "type": "String"
+      },
+      "missing_parent_phone": {
+        "type": "String"
+      },
+      "missing_personal_email": {
+        "type": "String"
+      },
+      "missing_personal_phone": {
+        "type": "String"
+      }
+    }
+  },
+  "admin_panel_screen_accounts_management_title": "Účty & Podúčty",
+  "admin_panel_screen_search_field_hint": "Vyhledat podle jména nebo příjmení...",
+  "category_admin_panel_screen_approve_accounts": "--- ADMIN PANEL - POTVRZOVÁNÍ ÚČTŮ ---",
+  "admin_panel_screen_button_approve_accounts": "Potvrdit účty",
+  "admin_panel_screen_account_approval_change_success": "Účet {name_surname} byl úspěšně {status, select, approved{potvrzen} disapproved{zamítnut} other{aktualizován}}.",
+  "@admin_panel_screen_account_approval_change_success": {
+    "placeholders": {
+      "name_surname": {
+        "type": "String"
+      },
+      "status": {
+        "type": "String"
+      }
+    }
+  },
+  "admin_panel_screen_button_approve_accounts_error": "Účet {name_surname} se nepodařilo potvrdit. Zkus to prosím znovu.",
+  "@admin_panel_screen_button_approve_accounts_error": {
+    "placeholders": {
+      "name_surname": {
+        "type": "String"
+      }
+    }
+  },
+  "category_admin_panel_screen_edit_leaders": "--- ADMIN PANEL - UPRAVIT VEDOUCÍ ---",
+  "admin_panel_screen_button_edit_leaders": "Upravit vedoucí",
+  "admin_panel_screen_set_patrol_leaders_title": "Přiřadit družinu pro {name_surname}",
+  "@admin_panel_screen_set_patrol_leaders_title": {
+    "placeholders": {
+      "name_surname": {
+        "type": "String"
+      }
+    }
+  },
+  "admin_panel_screen_set_patrol_leaders_assigned": "{name_surname} přiřazen jako vedoucí družiny {patrol_name}",
+  "@admin_panel_screen_set_patrol_leaders_assigned": {
+    "placeholders": {
+      "name_surname": {
+        "type": "String"
+      },
+      "patrol_name": {
+        "type": "String"
+      }
+    }
+  },
+  "admin_panel_screen_set_patrol_leaders_removed": "{name_surname} odebrán jako vedoucí družiny {patrol_name}",
+  "@admin_panel_screen_set_patrol_leaders_removed": {
+    "placeholders": {
+      "name_surname": {
+        "type": "String"
+      },
+      "patrol_name": {
+        "type": "String"
+      }
+    }
+  },
+  "admin_panel_screen_set_patrol_leaders_error": "Nepodařilo se aktualizovat vedoucího družiny.",
+  "admin_panel_screen_set_patrol_leaders_loading_error": "Nepodařilo se načíst vedoucí",
+  "admin_panel_screen_edit_leaders_remove_error_assigned_patrols": "Nelze odebrat vedoucího, protože má přiřazené družiny.",
+  "admin_panel_screen_edit_leaders_status_removed": "Odebrán status vedoucího pro {name_surname}",
+  "@admin_panel_screen_edit_leaders_status_removed": {
+    "placeholders": {
+      "name_surname": {
+        "type": "String"
+      }
+    }
+  },
+  "admin_panel_screen_edit_leaders_status_added": "Přidán status vedoucího pro {name_surname}",
+  "@admin_panel_screen_edit_leaders_status_added": {
+    "placeholders": {
+      "name_surname": {
+        "type": "String"
+      }
+    }
+  },
+  "admin_panel_screen_edit_leaders_update_error": "Nepodařilo se aktualizovat status vedoucího.",
+  "category_admin_panel_screen_edit_account_rights": "--- ADMIN PANEL - UPRAVIT PRÁVA ÚČTŮ ---",
+  "admin_panel_screen_button_edit_rights": "Upravit práva",
+  "admin_panel_screen_button_edit_rights_cant_change_admin_rights": "Práva administrátora lze změnit pouze v Supabase.",
+  "admin_panel_screen_button_edit_rights_right_level_1": "1 - Výchozí",
+  "admin_panel_screen_button_edit_rights_right_level_2": "2 - Vedoucí",
+  "admin_panel_screen_button_edit_rights_right_level_3": "3 - Admin",
+  "admin_panel_screen_button_edit_rights_change_success": "Práva účtu {name_surname} byla úspěšně změněna{status, select, 1{ na výchozí} 2{ na vedoucího} 3{ na administrátora} other{}}.",
+  "@admin_panel_screen_button_edit_rights_change_success": {
+    "placeholders": {
+      "name_surname": {
+        "type": "String"
+      },
+      "status": {
+        "type": "String"
+      }
+    }
+  },
+  "admin_panel_screen_button_edit_rights_error": "Práva účtu {name_surname} se nepodařilo změnit. Zkus to prosím znovu.",
+  "@admin_panel_screen_button_edit_rights_error": {
+    "placeholders": {
+      "name_surname": {
+        "type": "String"
+      }
+    }
+  },
+  "category_admin_panel_screen_connect_accounts_with_dependents": "--- ADMIN PANEL - PŘIPOJIT ÚČTY S PODÚČTY ---",
+  "admin_panel_screen_button_connect_dependents": "Připojit podúčty",
+  "admin_panel_screen_connect_accounts_dependents_delete_connection_dialog_title": "Smazat spojení",
+  "admin_panel_screen_connect_accounts_dependents_delete_connection_dialog_subtitle": "Opravdu chceš odstranit propojení mezi účtem {account_name_surname} a podúčtem {dependent_name_surname}?",
+  "@admin_panel_screen_connect_accounts_dependents_delete_connection_dialog_subtitle": {
+    "placeholders": {
+      "account_name_surname": {
+        "type": "String"
+      },
+      "dependent_name_surname": {
+        "type": "String"
+      }
+    }
+  },
+  "admin_panel_screen_connect_accounts_dependents_delete_connection_dialog_primary_button_text": "Odstranit propojení",
+  "admin_panel_screen_connect_accounts_dependents_delete_connection_success": "Propojení mezi účtem {account_name_surname} a podúčtem {dependent_name_surname} bylo úspěšně odstraněno.",
+  "@admin_panel_screen_connect_accounts_dependents_delete_connection_success": {
+    "placeholders": {
+      "account_name_surname": {
+        "type": "String"
+      },
+      "dependent_name_surname": {
+        "type": "String"
+      }
+    }
+  },
+  "admin_panel_screen_connect_accounts_dependents_delete_connection_error_main_dependent": "Nelze odstranit propojení hlavního podúčtu {dependent_name_surname} z účtu {account_name_surname}.",
+  "@admin_panel_screen_connect_accounts_dependents_delete_connection_error_main_dependent": {
+    "placeholders": {
+      "account_name_surname": {
+        "type": "String"
+      },
+      "dependent_name_surname": {
+        "type": "String"
+      }
+    }
+  },
+  "admin_panel_screen_connect_accounts_dependents_delete_connection_error": "Nepodařilo se odstranit propojení mezi účtem {account_name_surname} a podúčtem {dependent_name_surname}. Zkus to prosím znovu.",
+  "@admin_panel_screen_connect_accounts_dependents_delete_connection_error": {
+    "placeholders": {
+      "account_name_surname": {
+        "type": "String"
+      },
+      "dependent_name_surname": {
+        "type": "String"
+      }
+    }
+  },
+  "admin_panel_screen_connect_accounts_dependents_add_connection_button_text": "Upravit",
+  "admin_panel_screen_connect_accounts_dependents_add_connection_screen_title": "{account_name_surname} – Upravit podúčty",
+  "admin_panel_screen_connect_accounts_dependents_add_connection_success": "Závislá osoba {dependent_name_surname} byla úspěšně připojena k účtu {account_name_surname}.",
+  "@admin_panel_screen_connect_accounts_dependents_add_connection_success": {
+    "placeholders": {
+      "dependent_name_surname": {
+        "type": "String"
+      },
+      "account_name_surname": {
+        "type": "String"
+      }
+    }
+  },
+  "admin_panel_screen_connect_accounts_dependents_add_connection_error": "Nepodařilo se připojit závislou osobu {dependent_name_surname} k účtu {account_name_surname}. Zkus to prosím znovu.",
+  "@admin_panel_screen_connect_accounts_dependents_add_connection_error": {
+    "placeholders": {
+      "dependent_name_surname": {
+        "type": "String"
+      },
+      "account_name_surname": {
+        "type": "String"
+      }
+    }
+  },
+  "admin_panel_screen_connect_accounts_dependents_set_main_dependent_success": "Závislá osoba {dependent_name_surname} byla nastavena jako hlavní pro účet {account_name_surname}.",
+  "@admin_panel_screen_connect_accounts_dependents_set_main_dependent_success": {
+    "placeholders": {
+      "dependent_name_surname": {
+        "type": "String"
+      },
+      "account_name_surname": {
+        "type": "String"
+      }
+    }
+  },
+  "admin_panel_screen_connect_accounts_dependents_unset_main_dependent_success": "Závislá osoba {dependent_name_surname} již není hlavní pro účet {account_name_surname}.",
+  "@admin_panel_screen_connect_accounts_dependents_unset_main_dependent_success": {
+    "placeholders": {
+      "dependent_name_surname": {
+        "type": "String"
+      },
+      "account_name_surname": {
+        "type": "String"
+      }
+    }
+  },
+  "category_admin_panel_screen_skautis_sync": "--- ADMIN PANEL - SKAUTIS SYNC ---",
+  "admin_panel_screen_data_management_title": "Data",
+  "admin_panel_screen_button_skautis_sync": "SkautIS synchronizace",
+  "admin_panel_screen_skautis_sync_description": "Zadej SkautIS token pro synchronizaci dat:",
+  "admin_panel_screen_skautis_sync_token_hint": "SkautIS Token",
+  "admin_panel_screen_skautis_sync_progress": "Synchronizuji s SkautIS...",
+  "admin_panel_screen_skautis_sync_success_description": "Synchronizace se SkautIS byla úspěšná",
+  "admin_panel_screen_skautis_sync_error_description": "Chyba při synchronizaci se SkautIS",
+  "category_admin_panel_screen_notifications": "--- ADMIN PANEL - NOTIFICATIONS ---",
+  "admin_panel_screen_notification_title": "Notification",
+  "admin_panel_screen_button_send_notification": "Send Notification"
 }

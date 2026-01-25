@@ -1,12 +1,18 @@
-class GroupModel {
-  final String name;
-  final int number;
-  GroupModel({required this.name, required this.number});
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+part 'group_model.freezed.dart';
+part 'group_model.g.dart';
+
+@freezed
+abstract class GroupModel with _$GroupModel {
+  @JsonSerializable(fieldRename: FieldRename.snake)
+  const factory GroupModel({
+    required groupId,
+    required skautisId,
+    required String name,
+  }) = _GroupModel;
 
   factory GroupModel.fromJson(Map<String, dynamic> json) {
-    return GroupModel(
-      name: json['name'] as String,
-      number: json['number'] as int,
-    );
+    return _$GroupModelFromJson(json);
   }
 }

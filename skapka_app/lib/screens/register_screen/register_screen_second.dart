@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:skapka_app/app/l10n/app_localizations.dart';
@@ -89,9 +88,7 @@ class _RegisterScreenSecondState extends State<RegisterScreenSecond> {
           context.router.replaceAll([const AuthGate()]);
         }
       } on AuthException catch (e) {
-        if (kDebugMode) {
-          print(e);
-        }
+        debugPrint(e.message);
         if (mounted) {
           String errorMessage;
           if (e.code == 'user_already_exists') {
@@ -119,9 +116,7 @@ class _RegisterScreenSecondState extends State<RegisterScreenSecond> {
           );
         }
       } catch (e) {
-        if (kDebugMode) {
-          print(e);
-        }
+        debugPrint(e.toString());
         if (mounted) {
           BottomDialog.show(
             context,

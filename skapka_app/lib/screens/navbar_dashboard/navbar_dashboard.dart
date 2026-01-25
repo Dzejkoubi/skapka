@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:provider/provider.dart';
@@ -87,11 +86,9 @@ class NavbarDashboard extends StatelessWidget {
                       context,
                     )!.calendar_screen_speed_dial_add_google_calendar,
                     onPressed: () {
-                      if (kDebugMode) {
-                        print(
-                          'Add Google Calendar',
-                        ); // TODO: implement add Google Calendar
-                      }
+                      debugPrint(
+                        'Add Google Calendar',
+                      ); // TODO: implement add Google Calendar
                     },
                   ),
                 ),

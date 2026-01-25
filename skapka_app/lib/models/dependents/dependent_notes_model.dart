@@ -1,39 +1,38 @@
-class DependentNotesModel {
-  // Dietary Flags
-  final bool? hasGlutenAllergy;
-  final bool? hasLactoseIntolerance;
-  final bool? hasNutAllergy;
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  // Medical Flags
-  final bool? hasAsthma;
-  final bool? isClaustrophobic;
-  final bool? hasEpilepsy;
-  final bool? isSwimmer;
+part 'dependent_notes_model.freezed.dart';
+part 'dependent_notes_model.g.dart';
 
-  // Text Details
-  final String? otherNote;
+@freezed
+abstract class DependentNotesModel with _$DependentNotesModel {
+  @JsonSerializable(fieldRename: FieldRename.snake)
+  const factory DependentNotesModel({
+    // Dietary Flags
+    bool? hasGlutenAllergy,
+    bool? hasLactoseIntolerance,
+    bool? hasNutAllergy,
+    // Medical Flags
+    bool? hasAsthma,
+    bool? isClaustrophobic,
+    bool? hasEpilepsy,
+    bool? isSwimmer,
+    // Text Details
+    String? otherNote,
+  }) = _DependentNotesModel;
 
-  DependentNotesModel({
-    this.hasGlutenAllergy,
-    this.hasLactoseIntolerance,
-    this.hasNutAllergy,
-    this.hasAsthma,
-    this.isClaustrophobic,
-    this.hasEpilepsy,
-    this.isSwimmer,
-    this.otherNote,
-  });
+  factory DependentNotesModel.fromJson(Map<String, dynamic> json) =>
+      _$DependentNotesModelFromJson(json);
 
-  factory DependentNotesModel.fromJson(Map<String, dynamic> json) {
+  factory DependentNotesModel.empty() {
     return DependentNotesModel(
-      hasGlutenAllergy: json['has_gluten_allergy'] as bool?,
-      hasLactoseIntolerance: json['has_lactose_intolerance'] as bool?,
-      hasNutAllergy: json['has_nut_allergy'] as bool?,
-      hasAsthma: json['has_asthma'] as bool?,
-      isClaustrophobic: json['is_claustrophobic'] as bool?,
-      hasEpilepsy: json['has_epilepsy'] as bool?,
-      isSwimmer: json['is_swimmer'] as bool?,
-      otherNote: json['other_note'] as String?,
+      hasGlutenAllergy: null,
+      hasLactoseIntolerance: null,
+      hasNutAllergy: null,
+      hasAsthma: null,
+      isClaustrophobic: null,
+      hasEpilepsy: null,
+      isSwimmer: null,
+      otherNote: '',
     );
   }
 }

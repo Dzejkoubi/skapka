@@ -22,7 +22,6 @@ class AccountProvider extends ChangeNotifier {
 
   // Group getters
   String? get groupName => _group?.name;
-  int? get groupNumber => _group?.number;
 
   void setAccount(AccountModel newAccount) {
     _account = newAccount;

@@ -104,7 +104,7 @@ class PatrolExpansionTile extends StatelessWidget {
                         EventParticipantModel(
                           groupId: dependent.groupId,
                           eventId: eventId,
-                          dependentId: dependent.dependentId!,
+                          dependentId: dependent.dependentId,
                           status: EventParticipantStatus.notSpecified,
                           note: '',
                         ),
@@ -174,7 +174,7 @@ class PatrolExpansionTile extends StatelessWidget {
             EventParticipantModel(
               groupId: dependent.groupId,
               eventId: '',
-              dependentId: dependent.dependentId!,
+              dependentId: dependent.dependentId,
               status: EventParticipantStatus.notSpecified,
               note: '',
             ),

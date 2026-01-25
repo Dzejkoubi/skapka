@@ -128,8 +128,7 @@ class _EditDependentDetailsScreenState
   @override
   void initState() {
     super.initState();
-    _originalNotes =
-        widget.dependent.dependentDetails?.notes ?? DependentNotesModel();
+    _originalNotes = widget.dependent.notes;
 
     // Initialize state variables
     _hasGlutenAllergy = _originalNotes.hasGlutenAllergy;
@@ -216,9 +215,7 @@ class _EditDependentDetailsScreenState
                       children: [
                         Text(
                           textAlign: TextAlign.center,
-                          widget.dependent.dependentDetails != null
-                              ? '${widget.dependent.dependentDetails!.name} ${widget.dependent.dependentDetails!.surname}'
-                              : '',
+                          '${widget.dependent.name} ${widget.dependent.surname}',
                           style: AppTextTheme.titleMedium(context),
                         ),
                         Text(

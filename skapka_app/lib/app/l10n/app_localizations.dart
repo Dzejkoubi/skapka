@@ -176,6 +176,48 @@ abstract class AppLocalizations {
   /// **'Chyba'**
   String get error;
 
+  /// No description provided for @success.
+  ///
+  /// In cs, this message translates to:
+  /// **'Úspěch'**
+  String get success;
+
+  /// No description provided for @saved.
+  ///
+  /// In cs, this message translates to:
+  /// **'Změny úspěšně uloženy'**
+  String get saved;
+
+  /// No description provided for @close.
+  ///
+  /// In cs, this message translates to:
+  /// **'Zavřít'**
+  String get close;
+
+  /// No description provided for @discard.
+  ///
+  /// In cs, this message translates to:
+  /// **'Zahodit'**
+  String get discard;
+
+  /// No description provided for @continue_.
+  ///
+  /// In cs, this message translates to:
+  /// **'Pokračovat'**
+  String get continue_;
+
+  /// No description provided for @unsaved_changes.
+  ///
+  /// In cs, this message translates to:
+  /// **'Neuložené změny'**
+  String get unsaved_changes;
+
+  /// No description provided for @unsaved_changes_description.
+  ///
+  /// In cs, this message translates to:
+  /// **'Máte neuložené změny. Chcete je zahodit?'**
+  String get unsaved_changes_description;
+
   /// No description provided for @generic_error.
   ///
   /// In cs, this message translates to:
@@ -301,6 +343,12 @@ abstract class AppLocalizations {
   /// In cs, this message translates to:
   /// **'Zpěvník'**
   String get welcome_screen_songbook_button_text;
+
+  /// No description provided for @welcome_screen_no_internet_connection.
+  ///
+  /// In cs, this message translates to:
+  /// **'Žádné připojení k internetu. Zkontroluj prosím své WiFi nebo mobilní data.'**
+  String get welcome_screen_no_internet_connection;
 
   /// No description provided for @category_login_screen.
   ///
@@ -1507,6 +1555,390 @@ abstract class AppLocalizations {
   /// In cs, this message translates to:
   /// **'Admin Panel'**
   String get admin_panel_screen_title;
+
+  /// No description provided for @category_admin_panel_screen_warnings.
+  ///
+  /// In cs, this message translates to:
+  /// **'--- ADMIN PANEL - VAROVÁNÍ ---'**
+  String get category_admin_panel_screen_warnings;
+
+  /// No description provided for @admin_panel_screen_db_warnings_expansion_tile_title.
+  ///
+  /// In cs, this message translates to:
+  /// **'Varování'**
+  String get admin_panel_screen_db_warnings_expansion_tile_title;
+
+  /// No description provided for @admin_panel_screen_db_warnings_error_loading_warnings.
+  ///
+  /// In cs, this message translates to:
+  /// **'Nepodařilo se načíst podúčty, ze kterých nebylo možné získat varování. Zkus to prosím znovu.'**
+  String get admin_panel_screen_db_warnings_error_loading_warnings;
+
+  /// No description provided for @admin_panel_screen_db_warning_no_warnings_subtitle.
+  ///
+  /// In cs, this message translates to:
+  /// **'Žádná varování k zobrazení.'**
+  String get admin_panel_screen_db_warning_no_warnings_subtitle;
+
+  /// No description provided for @admin_panel_screen_db_warning_account_does_not_have_some_contact_filled_in.
+  ///
+  /// In cs, this message translates to:
+  /// **'Podúčet {account_name_surname} nemá vyplněný {missing_personal_email, select, true{{missing_personal_phone, select, true{svůj email a telefon} other{svůj email}}} other{{missing_personal_phone, select, true{svůj telefon} other{{missing_parent_email, select, true{{missing_parent_phone, select, true{email a telefon rodiče} other{email rodiče}}} other{{missing_parent_phone, select, true{telefon rodiče} other{}}}}}}}}.'**
+  String
+  admin_panel_screen_db_warning_account_does_not_have_some_contact_filled_in(
+    String account_name_surname,
+    String missing_parent_email,
+    String missing_parent_phone,
+    String missing_personal_email,
+    String missing_personal_phone,
+  );
+
+  /// No description provided for @admin_panel_screen_accounts_management_title.
+  ///
+  /// In cs, this message translates to:
+  /// **'Účty & Podúčty'**
+  String get admin_panel_screen_accounts_management_title;
+
+  /// No description provided for @admin_panel_screen_search_field_hint.
+  ///
+  /// In cs, this message translates to:
+  /// **'Vyhledat podle jména nebo příjmení...'**
+  String get admin_panel_screen_search_field_hint;
+
+  /// No description provided for @category_admin_panel_screen_approve_accounts.
+  ///
+  /// In cs, this message translates to:
+  /// **'--- ADMIN PANEL - POTVRZOVÁNÍ ÚČTŮ ---'**
+  String get category_admin_panel_screen_approve_accounts;
+
+  /// No description provided for @admin_panel_screen_button_approve_accounts.
+  ///
+  /// In cs, this message translates to:
+  /// **'Potvrdit účty'**
+  String get admin_panel_screen_button_approve_accounts;
+
+  /// No description provided for @admin_panel_screen_account_approval_change_success.
+  ///
+  /// In cs, this message translates to:
+  /// **'Účet {name_surname} byl úspěšně {status, select, approved{potvrzen} disapproved{zamítnut} other{aktualizován}}.'**
+  String admin_panel_screen_account_approval_change_success(
+    String name_surname,
+    String status,
+  );
+
+  /// No description provided for @admin_panel_screen_button_approve_accounts_error.
+  ///
+  /// In cs, this message translates to:
+  /// **'Účet {name_surname} se nepodařilo potvrdit. Zkus to prosím znovu.'**
+  String admin_panel_screen_button_approve_accounts_error(String name_surname);
+
+  /// No description provided for @category_admin_panel_screen_edit_leaders.
+  ///
+  /// In cs, this message translates to:
+  /// **'--- ADMIN PANEL - UPRAVIT VEDOUCÍ ---'**
+  String get category_admin_panel_screen_edit_leaders;
+
+  /// No description provided for @admin_panel_screen_button_edit_leaders.
+  ///
+  /// In cs, this message translates to:
+  /// **'Upravit vedoucí'**
+  String get admin_panel_screen_button_edit_leaders;
+
+  /// No description provided for @admin_panel_screen_set_patrol_leaders_title.
+  ///
+  /// In cs, this message translates to:
+  /// **'Přiřadit družinu pro {name_surname}'**
+  String admin_panel_screen_set_patrol_leaders_title(String name_surname);
+
+  /// No description provided for @admin_panel_screen_set_patrol_leaders_assigned.
+  ///
+  /// In cs, this message translates to:
+  /// **'{name_surname} přiřazen jako vedoucí družiny {patrol_name}'**
+  String admin_panel_screen_set_patrol_leaders_assigned(
+    String name_surname,
+    String patrol_name,
+  );
+
+  /// No description provided for @admin_panel_screen_set_patrol_leaders_removed.
+  ///
+  /// In cs, this message translates to:
+  /// **'{name_surname} odebrán jako vedoucí družiny {patrol_name}'**
+  String admin_panel_screen_set_patrol_leaders_removed(
+    String name_surname,
+    String patrol_name,
+  );
+
+  /// No description provided for @admin_panel_screen_set_patrol_leaders_error.
+  ///
+  /// In cs, this message translates to:
+  /// **'Nepodařilo se aktualizovat vedoucího družiny.'**
+  String get admin_panel_screen_set_patrol_leaders_error;
+
+  /// No description provided for @admin_panel_screen_set_patrol_leaders_loading_error.
+  ///
+  /// In cs, this message translates to:
+  /// **'Nepodařilo se načíst vedoucí'**
+  String get admin_panel_screen_set_patrol_leaders_loading_error;
+
+  /// No description provided for @admin_panel_screen_edit_leaders_remove_error_assigned_patrols.
+  ///
+  /// In cs, this message translates to:
+  /// **'Nelze odebrat vedoucího, protože má přiřazené družiny.'**
+  String get admin_panel_screen_edit_leaders_remove_error_assigned_patrols;
+
+  /// No description provided for @admin_panel_screen_edit_leaders_status_removed.
+  ///
+  /// In cs, this message translates to:
+  /// **'Odebrán status vedoucího pro {name_surname}'**
+  String admin_panel_screen_edit_leaders_status_removed(String name_surname);
+
+  /// No description provided for @admin_panel_screen_edit_leaders_status_added.
+  ///
+  /// In cs, this message translates to:
+  /// **'Přidán status vedoucího pro {name_surname}'**
+  String admin_panel_screen_edit_leaders_status_added(String name_surname);
+
+  /// No description provided for @admin_panel_screen_edit_leaders_update_error.
+  ///
+  /// In cs, this message translates to:
+  /// **'Nepodařilo se aktualizovat status vedoucího.'**
+  String get admin_panel_screen_edit_leaders_update_error;
+
+  /// No description provided for @category_admin_panel_screen_edit_account_rights.
+  ///
+  /// In cs, this message translates to:
+  /// **'--- ADMIN PANEL - UPRAVIT PRÁVA ÚČTŮ ---'**
+  String get category_admin_panel_screen_edit_account_rights;
+
+  /// No description provided for @admin_panel_screen_button_edit_rights.
+  ///
+  /// In cs, this message translates to:
+  /// **'Upravit práva'**
+  String get admin_panel_screen_button_edit_rights;
+
+  /// No description provided for @admin_panel_screen_button_edit_rights_cant_change_admin_rights.
+  ///
+  /// In cs, this message translates to:
+  /// **'Práva administrátora lze změnit pouze v Supabase.'**
+  String get admin_panel_screen_button_edit_rights_cant_change_admin_rights;
+
+  /// No description provided for @admin_panel_screen_button_edit_rights_right_level_1.
+  ///
+  /// In cs, this message translates to:
+  /// **'1 - Výchozí'**
+  String get admin_panel_screen_button_edit_rights_right_level_1;
+
+  /// No description provided for @admin_panel_screen_button_edit_rights_right_level_2.
+  ///
+  /// In cs, this message translates to:
+  /// **'2 - Vedoucí'**
+  String get admin_panel_screen_button_edit_rights_right_level_2;
+
+  /// No description provided for @admin_panel_screen_button_edit_rights_right_level_3.
+  ///
+  /// In cs, this message translates to:
+  /// **'3 - Admin'**
+  String get admin_panel_screen_button_edit_rights_right_level_3;
+
+  /// No description provided for @admin_panel_screen_button_edit_rights_change_success.
+  ///
+  /// In cs, this message translates to:
+  /// **'Práva účtu {name_surname} byla úspěšně změněna{status, select, 1{ na výchozí} 2{ na vedoucího} 3{ na administrátora} other{}}.'**
+  String admin_panel_screen_button_edit_rights_change_success(
+    String name_surname,
+    String status,
+  );
+
+  /// No description provided for @admin_panel_screen_button_edit_rights_error.
+  ///
+  /// In cs, this message translates to:
+  /// **'Práva účtu {name_surname} se nepodařilo změnit. Zkus to prosím znovu.'**
+  String admin_panel_screen_button_edit_rights_error(String name_surname);
+
+  /// No description provided for @category_admin_panel_screen_connect_accounts_with_dependents.
+  ///
+  /// In cs, this message translates to:
+  /// **'--- ADMIN PANEL - PŘIPOJIT ÚČTY S PODÚČTY ---'**
+  String get category_admin_panel_screen_connect_accounts_with_dependents;
+
+  /// No description provided for @admin_panel_screen_button_connect_dependents.
+  ///
+  /// In cs, this message translates to:
+  /// **'Připojit podúčty'**
+  String get admin_panel_screen_button_connect_dependents;
+
+  /// No description provided for @admin_panel_screen_connect_accounts_dependents_delete_connection_dialog_title.
+  ///
+  /// In cs, this message translates to:
+  /// **'Smazat spojení'**
+  String
+  get admin_panel_screen_connect_accounts_dependents_delete_connection_dialog_title;
+
+  /// No description provided for @admin_panel_screen_connect_accounts_dependents_delete_connection_dialog_subtitle.
+  ///
+  /// In cs, this message translates to:
+  /// **'Opravdu chceš odstranit propojení mezi účtem {account_name_surname} a podúčtem {dependent_name_surname}?'**
+  String
+  admin_panel_screen_connect_accounts_dependents_delete_connection_dialog_subtitle(
+    String account_name_surname,
+    String dependent_name_surname,
+  );
+
+  /// No description provided for @admin_panel_screen_connect_accounts_dependents_delete_connection_dialog_primary_button_text.
+  ///
+  /// In cs, this message translates to:
+  /// **'Odstranit propojení'**
+  String
+  get admin_panel_screen_connect_accounts_dependents_delete_connection_dialog_primary_button_text;
+
+  /// No description provided for @admin_panel_screen_connect_accounts_dependents_delete_connection_success.
+  ///
+  /// In cs, this message translates to:
+  /// **'Propojení mezi účtem {account_name_surname} a podúčtem {dependent_name_surname} bylo úspěšně odstraněno.'**
+  String
+  admin_panel_screen_connect_accounts_dependents_delete_connection_success(
+    String account_name_surname,
+    String dependent_name_surname,
+  );
+
+  /// No description provided for @admin_panel_screen_connect_accounts_dependents_delete_connection_error_main_dependent.
+  ///
+  /// In cs, this message translates to:
+  /// **'Nelze odstranit propojení hlavního podúčtu {dependent_name_surname} z účtu {account_name_surname}.'**
+  String
+  admin_panel_screen_connect_accounts_dependents_delete_connection_error_main_dependent(
+    String account_name_surname,
+    String dependent_name_surname,
+  );
+
+  /// No description provided for @admin_panel_screen_connect_accounts_dependents_delete_connection_error.
+  ///
+  /// In cs, this message translates to:
+  /// **'Nepodařilo se odstranit propojení mezi účtem {account_name_surname} a podúčtem {dependent_name_surname}. Zkus to prosím znovu.'**
+  String admin_panel_screen_connect_accounts_dependents_delete_connection_error(
+    String account_name_surname,
+    String dependent_name_surname,
+  );
+
+  /// No description provided for @admin_panel_screen_connect_accounts_dependents_add_connection_button_text.
+  ///
+  /// In cs, this message translates to:
+  /// **'Upravit'**
+  String
+  get admin_panel_screen_connect_accounts_dependents_add_connection_button_text;
+
+  /// No description provided for @admin_panel_screen_connect_accounts_dependents_add_connection_screen_title.
+  ///
+  /// In cs, this message translates to:
+  /// **'{account_name_surname} – Upravit podúčty'**
+  String
+  admin_panel_screen_connect_accounts_dependents_add_connection_screen_title(
+    Object account_name_surname,
+  );
+
+  /// No description provided for @admin_panel_screen_connect_accounts_dependents_add_connection_success.
+  ///
+  /// In cs, this message translates to:
+  /// **'Závislá osoba {dependent_name_surname} byla úspěšně připojena k účtu {account_name_surname}.'**
+  String admin_panel_screen_connect_accounts_dependents_add_connection_success(
+    String dependent_name_surname,
+    String account_name_surname,
+  );
+
+  /// No description provided for @admin_panel_screen_connect_accounts_dependents_add_connection_error.
+  ///
+  /// In cs, this message translates to:
+  /// **'Nepodařilo se připojit závislou osobu {dependent_name_surname} k účtu {account_name_surname}. Zkus to prosím znovu.'**
+  String admin_panel_screen_connect_accounts_dependents_add_connection_error(
+    String dependent_name_surname,
+    String account_name_surname,
+  );
+
+  /// No description provided for @admin_panel_screen_connect_accounts_dependents_set_main_dependent_success.
+  ///
+  /// In cs, this message translates to:
+  /// **'Závislá osoba {dependent_name_surname} byla nastavena jako hlavní pro účet {account_name_surname}.'**
+  String
+  admin_panel_screen_connect_accounts_dependents_set_main_dependent_success(
+    String dependent_name_surname,
+    String account_name_surname,
+  );
+
+  /// No description provided for @admin_panel_screen_connect_accounts_dependents_unset_main_dependent_success.
+  ///
+  /// In cs, this message translates to:
+  /// **'Závislá osoba {dependent_name_surname} již není hlavní pro účet {account_name_surname}.'**
+  String
+  admin_panel_screen_connect_accounts_dependents_unset_main_dependent_success(
+    String dependent_name_surname,
+    String account_name_surname,
+  );
+
+  /// No description provided for @category_admin_panel_screen_skautis_sync.
+  ///
+  /// In cs, this message translates to:
+  /// **'--- ADMIN PANEL - SKAUTIS SYNC ---'**
+  String get category_admin_panel_screen_skautis_sync;
+
+  /// No description provided for @admin_panel_screen_data_management_title.
+  ///
+  /// In cs, this message translates to:
+  /// **'Data'**
+  String get admin_panel_screen_data_management_title;
+
+  /// No description provided for @admin_panel_screen_button_skautis_sync.
+  ///
+  /// In cs, this message translates to:
+  /// **'SkautIS synchronizace'**
+  String get admin_panel_screen_button_skautis_sync;
+
+  /// No description provided for @admin_panel_screen_skautis_sync_description.
+  ///
+  /// In cs, this message translates to:
+  /// **'Zadej SkautIS token pro synchronizaci dat:'**
+  String get admin_panel_screen_skautis_sync_description;
+
+  /// No description provided for @admin_panel_screen_skautis_sync_token_hint.
+  ///
+  /// In cs, this message translates to:
+  /// **'SkautIS Token'**
+  String get admin_panel_screen_skautis_sync_token_hint;
+
+  /// No description provided for @admin_panel_screen_skautis_sync_progress.
+  ///
+  /// In cs, this message translates to:
+  /// **'Synchronizuji s SkautIS...'**
+  String get admin_panel_screen_skautis_sync_progress;
+
+  /// No description provided for @admin_panel_screen_skautis_sync_success_description.
+  ///
+  /// In cs, this message translates to:
+  /// **'Synchronizace se SkautIS byla úspěšná'**
+  String get admin_panel_screen_skautis_sync_success_description;
+
+  /// No description provided for @admin_panel_screen_skautis_sync_error_description.
+  ///
+  /// In cs, this message translates to:
+  /// **'Chyba při synchronizaci se SkautIS'**
+  String get admin_panel_screen_skautis_sync_error_description;
+
+  /// No description provided for @category_admin_panel_screen_notifications.
+  ///
+  /// In cs, this message translates to:
+  /// **'--- ADMIN PANEL - NOTIFICATIONS ---'**
+  String get category_admin_panel_screen_notifications;
+
+  /// No description provided for @admin_panel_screen_notification_title.
+  ///
+  /// In cs, this message translates to:
+  /// **'Notification'**
+  String get admin_panel_screen_notification_title;
+
+  /// No description provided for @admin_panel_screen_button_send_notification.
+  ///
+  /// In cs, this message translates to:
+  /// **'Send Notification'**
+  String get admin_panel_screen_button_send_notification;
 }
 
 class _AppLocalizationsDelegate

@@ -12,6 +12,7 @@ import 'package:skapka_app/models/leader_model.dart';
 import 'package:skapka_app/models/patrol_model.dart';
 import 'package:skapka_app/models/troop_model.dart';
 import 'package:skapka_app/providers/account_provider.dart';
+import 'package:skapka_app/providers/admin_panel_provider.dart';
 import 'package:skapka_app/providers/events_provider.dart';
 import 'package:skapka_app/providers/loading_provider.dart';
 import 'package:skapka_app/providers/units_provider.dart';
@@ -64,7 +65,7 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
     endDate: _endDate,
     meetingPlace: _meetingPlaceController.text,
     photoAlbumLink: _photoAlbumLinkController.text,
-    groupId: groupId,
+    groupId: _accountProvider.groupId,
     targetPatrolsIds: targetPatrolIds,
     lastEditedBy: lastEditedBy,
     isDraft: isDraft,
@@ -134,10 +135,7 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
 
   String get targetPatrolNames {
     final patrolIds = targetPatrolIds;
-
-    if (kDebugMode) {
-      print('Found patrol IDs for signed up dependents: $patrolIds');
-    }
+    debugPrint('Found patrol IDs for signed up dependents: $patrolIds');
 
     final names = _groupPatrols
         .where((p) => patrolIds.contains(p.patrolId))
@@ -158,7 +156,6 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
   final TextEditingController _meetingPlaceController = TextEditingController();
   final TextEditingController _photoAlbumLinkController =
       TextEditingController();
-  String? groupId;
   String? lastEditedBy;
   bool isDraft = true;
 
@@ -203,23 +200,7 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
     _initializationFuture = fetchRequiredData();
 
     // Setting values from the original event to initialize edited event
-    originalEvent =
-        widget.event ??
-        EventModel(
-          eventId: '',
-          title: '',
-          instructions: null,
-          openSignUp: null,
-          closeSignUp: null,
-          startDate: null,
-          endDate: null,
-          meetingPlace: '',
-          photoAlbumLink: '',
-          groupId: null,
-          targetPatrolsIds: [],
-          lastEditedBy: null,
-          isDraft: true,
-        );
+    originalEvent = widget.event ?? EventModel.empty();
     eventId = widget.event?.eventId;
     _eventTitleController.text = widget.event?.title ?? '';
     _instructions = widget.event?.instructions;
@@ -229,7 +210,6 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
     _endDate = widget.event?.endDate;
     _meetingPlaceController.text = widget.event?.meetingPlace ?? '';
     _photoAlbumLinkController.text = widget.event?.photoAlbumLink ?? '';
-    groupId = widget.event?.groupId;
     lastEditedBy = widget.event?.lastEditedBy;
     isDraft = widget.event?.isDraft ?? true;
   }
@@ -237,26 +217,33 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
   /// Fetch and divide group dependents into leaders, children, and 18+ dependents and store them locally
   Future<void> fetchGroupDependentsAndLeaders(String groupId) async {
     _groupDependents = await _supabaseService.getGroupDependents(
-      groupId,
+      groupId: groupId,
       excludeArchived:
           !(widget.eventTimeType ==
               EventTimeType.past), // If event is past, inlcude archived
     );
+    // For Admin Panel - to save fetching if the user goes to the admin panel later
+    if (mounted && _groupDependents.isNotEmpty) {
+      context.read<AdminPanelProvider>().setGroupDependents(_groupDependents);
+    }
     _groupLeaders = await _supabaseService.getGroupLeaders(groupId);
+    // For Admin Panel - to save fetching if the user goes to the admin panel later
+    if (mounted && _groupLeaders.isNotEmpty) {
+      context.read<AdminPanelProvider>().setGroupLeaders(_groupLeaders);
+    }
   }
 
   /// Fetch event participants and store them locally
   Future<void> fetchEventParticipants(String eventId) async {
     _originalEventParticipants = await _supabaseService.getEventParticipants(
       eventId,
-      groupId!,
+      _accountProvider.groupId,
     );
     _editedEventParticipants = List.from(_originalEventParticipants);
-    if (kDebugMode) {
-      print(
-        'Fetched ${_originalEventParticipants.length} participants for event $eventId.',
-      );
-    }
+
+    debugPrint(
+      'Fetched ${_originalEventParticipants.length} participants for event $eventId.',
+    );
   }
 
   List<EventParticipantModel> get deleteParticipants =>
@@ -321,25 +308,23 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
       );
 
       // Update local eventId
-      eventId = createdEvent.eventId;
+      String eventId = createdEvent.eventId;
+      debugPrint('New event created with ID: $eventId');
 
       // Save participants
       for (final participant in _editedEventParticipants) {
         final p = participant.copyWith(
-          eventId: createdEvent.eventId,
-          groupId: groupId,
+          eventId: eventId,
+          groupId: _accountProvider.groupId,
         );
         await _supabaseService.addEventParticipant(p);
       }
 
       // Sync original participants
       _originalEventParticipants = List.from(_editedEventParticipants);
-
-      if (kDebugMode) {
-        print(
-          'Event ${createdEvent.eventId} created successfully as ${asDraft ? 'draft' : 'published'}.',
-        );
-      }
+      debugPrint(
+        'Event ${createdEvent.eventId} created successfully as ${asDraft ? 'draft' : 'published'}.',
+      );
       if (mounted) {
         BottomDialog.show(
           context,
@@ -351,9 +336,7 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
         await _loadEventsAfterSuccess(event: createdEvent);
       }
     } catch (e) {
-      if (kDebugMode) {
-        print('Error creating event: $e');
-      }
+      debugPrint('Error creating event: $e');
       if (mounted) {
         BottomDialog.show(
           context,
@@ -380,16 +363,14 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
       final participantsToAdd = addParticipants;
       final participantsToDelete = deleteParticipants;
 
-      if (kDebugMode) {
-        print('Adding ${participantsToAdd.length} participants');
-        print('Deleting ${participantsToDelete.length} participants');
-      }
+      debugPrint('Adding ${participantsToAdd.length} participants');
+      debugPrint('Deleting ${participantsToDelete.length} participants');
 
       for (final participant in participantsToAdd) {
         // Ensure correct eventId and groupId
         final p = participant.copyWith(
           eventId: updatedEvent.eventId,
-          groupId: groupId,
+          groupId: _accountProvider.groupId,
         );
         await _supabaseService.addEventParticipant(p);
       }
@@ -404,11 +385,9 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
       // Sync original participants
       _originalEventParticipants = List.from(_editedEventParticipants);
 
-      if (kDebugMode) {
-        print(
-          'Event ${updatedEvent.eventId} saved successfully as ${asDraft ? 'draft' : 'published'}.',
-        );
-      }
+      debugPrint(
+        'Event ${updatedEvent.eventId} saved successfully as ${asDraft ? 'draft' : 'published'}.',
+      );
 
       if (mounted) {
         BottomDialog.show(
@@ -420,9 +399,7 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
         await _loadEventsAfterSuccess(event: updatedEvent);
       }
     } catch (e) {
-      if (kDebugMode) {
-        print('Error saving event: $e');
-      }
+      debugPrint('Error saving event: $e');
       if (mounted) {
         BottomDialog.show(
           context,
@@ -443,9 +420,7 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
     _setProcessingType(_ProcessingType.deleting);
     try {
       await _supabaseService.deleteEvent(eventId!);
-      if (kDebugMode) {
-        print('Event $eventId deleted successfully.');
-      }
+      debugPrint('Event $eventId deleted successfully.');
       if (mounted) {
         BottomDialog.show(
           context,
@@ -457,9 +432,7 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
         await _loadEventsAfterSuccess();
       }
     } catch (e) {
-      if (kDebugMode) {
-        print('Error deleting event: $e');
-      }
+      debugPrint('Error deleting event: $e');
       if (mounted) {
         BottomDialog.show(
           context,
@@ -540,9 +513,103 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
 
   bool _forcePop = false;
 
+  void _debugPrintChanges() {
+    if (!kDebugMode) return;
+
+    final oldE = originalEvent;
+    final newE = editedEvent;
+
+    debugPrint('--- CHANGE DETECTION DEBUG TABLE ---');
+    debugPrint(
+      '${"Field".padRight(20)} | ${"Old Value".padRight(30)} | ${"New Value".padRight(30)} | Changed',
+    );
+    debugPrint('-' * 100);
+
+    void printDiff(String name, dynamic oldVal, dynamic newVal, bool changed) {
+      final oldStr = (oldVal?.toString() ?? 'null')
+          .replaceAll('\n', ' ')
+          .trim();
+      final newStr = (newVal?.toString() ?? 'null')
+          .replaceAll('\n', ' ')
+          .trim();
+      final o = oldStr.length > 28 ? '${oldStr.substring(0, 25)}...' : oldStr;
+      final n = newStr.length > 28 ? '${newStr.substring(0, 25)}...' : newStr;
+
+      debugPrint(
+        '${name.padRight(20)} | ${o.padRight(30)} | ${n.padRight(30)} | $changed',
+      );
+    }
+
+    printDiff('Title', oldE.title, newE.title, oldE.title != newE.title);
+    printDiff(
+      'Instructions',
+      oldE.instructions,
+      newE.instructions,
+      oldE.instructions != newE.instructions,
+    );
+    printDiff(
+      'Open Sign Up',
+      oldE.openSignUp,
+      newE.openSignUp,
+      oldE.openSignUp != newE.openSignUp,
+    );
+    printDiff(
+      'Close Sign Up',
+      oldE.closeSignUp,
+      newE.closeSignUp,
+      oldE.closeSignUp != newE.closeSignUp,
+    );
+    printDiff(
+      'Start Date',
+      oldE.startDate,
+      newE.startDate,
+      oldE.startDate != newE.startDate,
+    );
+    printDiff(
+      'End Date',
+      oldE.endDate,
+      newE.endDate,
+      oldE.endDate != newE.endDate,
+    );
+    printDiff(
+      'Meeting Place',
+      oldE.meetingPlace,
+      newE.meetingPlace,
+      oldE.meetingPlace != newE.meetingPlace,
+    );
+    printDiff(
+      'Photo Link',
+      oldE.photoAlbumLink,
+      newE.photoAlbumLink,
+      oldE.photoAlbumLink != newE.photoAlbumLink,
+    );
+    printDiff(
+      'Draft Status',
+      oldE.isDraft,
+      newE.isDraft,
+      oldE.isDraft != newE.isDraft,
+    );
+
+    final participantsChanged = !listEquals(
+      _originalEventParticipants,
+      _editedEventParticipants,
+    );
+    printDiff(
+      'Participants',
+      '${_originalEventParticipants.length} count',
+      '${_editedEventParticipants.length} count',
+      participantsChanged,
+    );
+
+    debugPrint('-' * 100);
+  }
+
   bool get _hasUnsavedChanges {
     if (!_isInitialized) return false;
-    return originalEvent != editedEvent ||
+    _debugPrintChanges();
+    // Exclude targetPatrolsIds from event model comparison as it is derived from participants
+    return originalEvent.copyWith(targetPatrolsIds: []) !=
+            editedEvent.copyWith(targetPatrolsIds: []) ||
         !listEquals(_originalEventParticipants, _editedEventParticipants);
   }
 
@@ -713,11 +780,11 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
                         event: widget.event,
                         eventTimeType: widget.eventTimeType,
                         onDelete: () {
-                          if (kDebugMode) print('User confirmed delete event');
+                          debugPrint('User confirmed delete event');
                           _deleteEvent();
                         },
                         onPublish: () {
-                          if (kDebugMode) print('User confirmed publish event');
+                          debugPrint('User confirmed publish event');
                           final error = _validateEvent();
                           if (error != null) {
                             BottomDialog.show(
@@ -734,9 +801,7 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
                           }
                         },
                         onUnpublish: () {
-                          if (kDebugMode) {
-                            print('User confirmed unpublish event');
-                          }
+                          debugPrint('User confirmed unpublish event');
                           if (eventId == null) {
                             _createNewEvent(asDraft: true);
                           } else {
@@ -744,11 +809,9 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
                           }
                         },
                         onSave: ({required bool asDraft}) {
-                          if (kDebugMode) {
-                            print(
-                              'User confirmed save event (asDraft: $asDraft)',
-                            );
-                          }
+                          debugPrint(
+                            'User confirmed save event (asDraft: $asDraft)',
+                          );
                           final error = _validateEvent();
                           if (error != null) {
                             BottomDialog.show(

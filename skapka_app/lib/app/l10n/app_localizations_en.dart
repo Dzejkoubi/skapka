@@ -48,6 +48,28 @@ class AppLocalizationsEn extends AppLocalizations {
   String get error => 'Error';
 
   @override
+  String get success => 'Success';
+
+  @override
+  String get saved => 'Changes saved successfully';
+
+  @override
+  String get close => 'Close';
+
+  @override
+  String get discard => 'Discard';
+
+  @override
+  String get continue_ => 'Continue';
+
+  @override
+  String get unsaved_changes => 'Unsaved changes';
+
+  @override
+  String get unsaved_changes_description =>
+      'You have unsaved changes. Do you want to discard them?';
+
+  @override
   String get generic_error => 'Something went wrong. Please try again.';
 
   @override
@@ -109,6 +131,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get welcome_screen_songbook_button_text => 'Songbook';
+
+  @override
+  String get welcome_screen_no_internet_connection =>
+      'No internet connection. Please check your WiFi or mobile data.';
 
   @override
   String get category_login_screen => '--- LOGIN SCREEN ---';
@@ -843,4 +869,322 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get admin_panel_screen_title => 'Admin Panel';
+
+  @override
+  String get category_admin_panel_screen_warnings =>
+      '--- ADMIN PANEL - WARNINGS ---';
+
+  @override
+  String get admin_panel_screen_db_warnings_expansion_tile_title => 'Warnings';
+
+  @override
+  String get admin_panel_screen_db_warnings_error_loading_warnings =>
+      'Failed to load dependents from which warnings could not be retrieved. Please try again.';
+
+  @override
+  String get admin_panel_screen_db_warning_no_warnings_subtitle =>
+      'No warnings found.';
+
+  @override
+  String
+  admin_panel_screen_db_warning_account_does_not_have_some_contact_filled_in(
+    String account_name_surname,
+    String missing_parent_email,
+    String missing_parent_phone,
+    String missing_personal_email,
+    String missing_personal_phone,
+  ) {
+    String _temp0 = intl.Intl.selectLogic(missing_personal_phone, {
+      'true': 'their email and phone',
+      'other': 'their email',
+    });
+    String _temp1 = intl.Intl.selectLogic(missing_parent_phone, {
+      'true': 'parent\'s email and phone',
+      'other': 'parent\'s email',
+    });
+    String _temp2 = intl.Intl.selectLogic(missing_parent_phone, {
+      'true': 'parent\'s phone',
+      'other': '',
+    });
+    String _temp3 = intl.Intl.selectLogic(missing_parent_email, {
+      'true': '$_temp1',
+      'other': '$_temp2',
+    });
+    String _temp4 = intl.Intl.selectLogic(missing_personal_phone, {
+      'true': 'their phone',
+      'other': '$_temp3',
+    });
+    String _temp5 = intl.Intl.selectLogic(missing_personal_email, {
+      'true': '$_temp0',
+      'other': '$_temp4',
+    });
+    return 'Dependent $account_name_surname does not have $_temp5.';
+  }
+
+  @override
+  String get admin_panel_screen_accounts_management_title =>
+      'Accounts & Dependents';
+
+  @override
+  String get admin_panel_screen_search_field_hint =>
+      'Search by name or surname...';
+
+  @override
+  String get category_admin_panel_screen_approve_accounts =>
+      '--- ADMIN PANEL - APPROVE ACCOUNTS ---';
+
+  @override
+  String get admin_panel_screen_button_approve_accounts => 'Approve Accounts';
+
+  @override
+  String admin_panel_screen_account_approval_change_success(
+    String name_surname,
+    String status,
+  ) {
+    String _temp0 = intl.Intl.selectLogic(status, {
+      'approved': 'approved',
+      'disapproved': 'disapproved',
+      'other': 'updated',
+    });
+    return 'Account $name_surname was successfully $_temp0.';
+  }
+
+  @override
+  String admin_panel_screen_button_approve_accounts_error(String name_surname) {
+    return 'Account $name_surname could not be approved. Please try again.';
+  }
+
+  @override
+  String get category_admin_panel_screen_edit_leaders =>
+      '--- ADMIN PANEL - EDIT LEADERS ---';
+
+  @override
+  String get admin_panel_screen_button_edit_leaders => 'Edit Leaders';
+
+  @override
+  String admin_panel_screen_set_patrol_leaders_title(String name_surname) {
+    return 'Set Patrols for $name_surname';
+  }
+
+  @override
+  String admin_panel_screen_set_patrol_leaders_assigned(
+    String name_surname,
+    String patrol_name,
+  ) {
+    return 'Assigned $name_surname as leader of $patrol_name';
+  }
+
+  @override
+  String admin_panel_screen_set_patrol_leaders_removed(
+    String name_surname,
+    String patrol_name,
+  ) {
+    return 'Removed $name_surname as leader of $patrol_name';
+  }
+
+  @override
+  String get admin_panel_screen_set_patrol_leaders_error =>
+      'Failed to update patrol leader assignment.';
+
+  @override
+  String get admin_panel_screen_set_patrol_leaders_loading_error =>
+      'Failed to load leaders';
+
+  @override
+  String get admin_panel_screen_edit_leaders_remove_error_assigned_patrols =>
+      'Cannot remove as leader because they have assigned patrols.';
+
+  @override
+  String admin_panel_screen_edit_leaders_status_removed(String name_surname) {
+    return 'Removed leader status for $name_surname';
+  }
+
+  @override
+  String admin_panel_screen_edit_leaders_status_added(String name_surname) {
+    return 'Added leader status for $name_surname';
+  }
+
+  @override
+  String get admin_panel_screen_edit_leaders_update_error =>
+      'Failed to update leader status.';
+
+  @override
+  String get category_admin_panel_screen_edit_account_rights =>
+      '--- ADMIN PANEL - EDIT ACCOUNT RIGHTS ---';
+
+  @override
+  String get admin_panel_screen_button_edit_rights => 'Edit rights';
+
+  @override
+  String get admin_panel_screen_button_edit_rights_cant_change_admin_rights =>
+      'Administrator rights can only be changed in Supabase.';
+
+  @override
+  String get admin_panel_screen_button_edit_rights_right_level_1 =>
+      '1 - Default';
+
+  @override
+  String get admin_panel_screen_button_edit_rights_right_level_2 =>
+      '2 - Leader';
+
+  @override
+  String get admin_panel_screen_button_edit_rights_right_level_3 => '3 - Admin';
+
+  @override
+  String admin_panel_screen_button_edit_rights_change_success(
+    String name_surname,
+    String status,
+  ) {
+    String _temp0 = intl.Intl.selectLogic(status, {
+      '1': ' to default',
+      '2': ' to leader',
+      '3': ' to admin',
+      'other': '',
+    });
+    return 'Account $name_surname rights were successfully changed$_temp0.';
+  }
+
+  @override
+  String admin_panel_screen_button_edit_rights_error(String name_surname) {
+    return 'Account rights $name_surname could not be updated. Please try again.';
+  }
+
+  @override
+  String get category_admin_panel_screen_connect_accounts_with_dependents =>
+      '--- ADMIN PANEL - CONNECT ACCOUNTS WITH DEPENDENTS ---';
+
+  @override
+  String get admin_panel_screen_button_connect_dependents =>
+      'Connect Dependents';
+
+  @override
+  String
+  get admin_panel_screen_connect_accounts_dependents_delete_connection_dialog_title =>
+      'Delete Connection';
+
+  @override
+  String
+  admin_panel_screen_connect_accounts_dependents_delete_connection_dialog_subtitle(
+    String account_name_surname,
+    String dependent_name_surname,
+  ) {
+    return 'Are you sure you want to delete the connection between account $account_name_surname and dependent $dependent_name_surname?';
+  }
+
+  @override
+  String
+  get admin_panel_screen_connect_accounts_dependents_delete_connection_dialog_primary_button_text =>
+      'Delete Connection';
+
+  @override
+  String
+  admin_panel_screen_connect_accounts_dependents_delete_connection_success(
+    String account_name_surname,
+    String dependent_name_surname,
+  ) {
+    return 'Connection between account $account_name_surname and dependent $dependent_name_surname was successfully deleted.';
+  }
+
+  @override
+  String
+  admin_panel_screen_connect_accounts_dependents_delete_connection_error_main_dependent(
+    String account_name_surname,
+    String dependent_name_surname,
+  ) {
+    return 'Nelze odstranit propojení hlavního podúčtu $dependent_name_surname z účtu $account_name_surname.';
+  }
+
+  @override
+  String admin_panel_screen_connect_accounts_dependents_delete_connection_error(
+    String account_name_surname,
+    String dependent_name_surname,
+  ) {
+    return 'Failed to delete connection between account $account_name_surname and dependent $dependent_name_surname. Please try again.';
+  }
+
+  @override
+  String
+  get admin_panel_screen_connect_accounts_dependents_add_connection_button_text =>
+      'Edit';
+
+  @override
+  String
+  admin_panel_screen_connect_accounts_dependents_add_connection_screen_title(
+    Object account_name_surname,
+  ) {
+    return '$account_name_surname - Edit Dependents';
+  }
+
+  @override
+  String admin_panel_screen_connect_accounts_dependents_add_connection_success(
+    String dependent_name_surname,
+    String account_name_surname,
+  ) {
+    return 'Connected dependent $dependent_name_surname to account $account_name_surname.';
+  }
+
+  @override
+  String admin_panel_screen_connect_accounts_dependents_add_connection_error(
+    String dependent_name_surname,
+    String account_name_surname,
+  ) {
+    return 'Failed to connect dependent $dependent_name_surname to account $account_name_surname. Please try again.';
+  }
+
+  @override
+  String
+  admin_panel_screen_connect_accounts_dependents_set_main_dependent_success(
+    String dependent_name_surname,
+    String account_name_surname,
+  ) {
+    return 'Dependent $dependent_name_surname was set as main for account $account_name_surname.';
+  }
+
+  @override
+  String
+  admin_panel_screen_connect_accounts_dependents_unset_main_dependent_success(
+    String dependent_name_surname,
+    String account_name_surname,
+  ) {
+    return 'Dependent $dependent_name_surname is no longer main for account $account_name_surname.';
+  }
+
+  @override
+  String get category_admin_panel_screen_skautis_sync =>
+      '--- ADMIN PANEL - SKAUTIS SYNC ---';
+
+  @override
+  String get admin_panel_screen_data_management_title => 'Data';
+
+  @override
+  String get admin_panel_screen_button_skautis_sync => 'SkautIS sync';
+
+  @override
+  String get admin_panel_screen_skautis_sync_description =>
+      'Enter SkautIS token to sync data:';
+
+  @override
+  String get admin_panel_screen_skautis_sync_token_hint => 'SkautIS Token';
+
+  @override
+  String get admin_panel_screen_skautis_sync_progress =>
+      'Syncing with SkautIS...';
+
+  @override
+  String get admin_panel_screen_skautis_sync_success_description =>
+      'SkautIS sync successful';
+
+  @override
+  String get admin_panel_screen_skautis_sync_error_description =>
+      'Error syncing with SkautIS';
+
+  @override
+  String get category_admin_panel_screen_notifications =>
+      '--- ADMIN PANEL - NOTIFICATIONS ---';
+
+  @override
+  String get admin_panel_screen_notification_title => 'Notification';
+
+  @override
+  String get admin_panel_screen_button_send_notification => 'Send Notification';
 }

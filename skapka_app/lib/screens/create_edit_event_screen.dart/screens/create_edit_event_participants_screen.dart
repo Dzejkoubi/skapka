@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:figma_squircle/figma_squircle.dart';
@@ -48,6 +47,7 @@ class _CreateEditEventParticipantsScreenState
     extends State<CreateEditEventParticipantsScreen> {
   int _activeSwitcherIndex = 0;
   late List<EventParticipantModel> _selectedParticipants;
+  late List<TroopModel> _nonEmptyTroops;
 
   void onChanged(int index) {
     setState(() {
@@ -63,6 +63,27 @@ class _CreateEditEventParticipantsScreenState
     super.initState();
     _selectedParticipants = List.from(widget.initialParticipants);
     _separateDependents();
+    _filterNonEmptyTroops();
+  }
+
+  void _filterNonEmptyTroops() {
+    _nonEmptyTroops = widget.groupTroops.where((troop) {
+      final troopPatrols = widget.groupPatrols
+          .where((patrol) => patrol.troopId == troop.troopId)
+          .toList();
+      final troopPatrolIds = troopPatrols.map((p) => p.patrolId).toSet();
+
+      final troopLeaderIds = widget.groupLeaders
+          .where((l) => troopPatrolIds.contains(l.patrolId))
+          .map((l) => l.dependentId)
+          .toSet();
+
+      return widget.groupDependents.any((d) {
+        final isMember = troopPatrolIds.contains(d.patrolId);
+        final isLeader = troopLeaderIds.contains(d.dependentId);
+        return isMember || isLeader;
+      });
+    }).toList();
   }
 
   void _separateDependents() {
@@ -84,13 +105,11 @@ class _CreateEditEventParticipantsScreenState
         _groupDependentChildren.add(dependent);
       }
     }
-    if (kDebugMode) {
-      print(
-        'Fetched ${widget.groupDependents.length} dependents: '
-        '${_groupDependentLeaders.length} leaders and '
-        '${_groupDependentChildren.length} children.',
-      );
-    }
+    debugPrint(
+      'Fetched ${widget.groupDependents.length} dependents: '
+      '${_groupDependentLeaders.length} leaders and '
+      '${_groupDependentChildren.length} children.',
+    );
   }
 
   @override
@@ -115,7 +134,7 @@ class _CreateEditEventParticipantsScreenState
                   SizedBox(width: AppSpacing.xLarge),
                   ContentSwitcher(
                     items: [
-                      ...widget.groupTroops.map((troop) => troop.name),
+                      ..._nonEmptyTroops.map((troop) => troop.name),
                       context
                           .localizations
                           .create_edit_participants_screen_leaders,
@@ -143,11 +162,7 @@ class _CreateEditEventParticipantsScreenState
                 .localizations
                 .create_edit_participants_screen_dial_limit,
             onPressed: () {
-              if (kDebugMode) {
-                print(
-                  'Set Participant Limit',
-                ); // TODO: implement set participant limit
-              }
+              debugPrint('Limit Participants');
             },
           ),
         ),
@@ -160,9 +175,7 @@ class _CreateEditEventParticipantsScreenState
                 .localizations
                 .create_edit_participants_screen_dial_print,
             onPressed: () {
-              if (kDebugMode) {
-                print('Print List'); // TODO: implement print list
-              }
+              debugPrint('Print Participants');
             },
           ),
         ),
@@ -171,10 +184,10 @@ class _CreateEditEventParticipantsScreenState
   }
 
   Widget _buildContent(int activeIndex) {
-    if (activeIndex == widget.groupTroops.length) {
+    if (activeIndex == _nonEmptyTroops.length) {
       // Leaders tab
       final allLeaderIds = _groupDependentLeaders
-          .map((l) => l.dependentId)
+          .map((l) => l.dependent.dependentId)
           .toSet();
       final selectedLeaderIds = _selectedParticipants
           .map((p) => p.dependentId)
@@ -211,15 +224,16 @@ class _CreateEditEventParticipantsScreenState
                       if (!areAllSelected) {
                         for (var leader in _groupDependentLeaders) {
                           if (!_selectedParticipants.any(
-                            (p) => p.dependentId == leader.dependentId,
+                            (p) =>
+                                p.dependentId == leader.dependent.dependentId,
                           )) {
                             _selectedParticipants.add(
                               EventParticipantModel(
-                                groupId: leader.groupId,
+                                groupId: leader.dependent.groupId,
                                 eventId: widget.initialParticipants.isNotEmpty
                                     ? widget.initialParticipants.first.eventId
                                     : '',
-                                dependentId: leader.dependentId!,
+                                dependentId: leader.dependent.dependentId,
                                 status: EventParticipantStatus.notSpecified,
                                 note: '',
                               ),
@@ -246,30 +260,30 @@ class _CreateEditEventParticipantsScreenState
           ),
           ..._groupDependentLeaders.map((leader) {
             final isSelected = _selectedParticipants.any(
-              (p) => p.dependentId == leader.dependentId,
+              (p) => p.dependentId == leader.dependent.dependentId,
             );
             return Column(
               children: [
                 ParticipantRow(
-                  dependent: leader,
+                  dependent: leader.dependent,
                   isSelected: isSelected,
                   onChanged: (value) {
                     setState(() {
                       if (value == true) {
                         _selectedParticipants.add(
                           EventParticipantModel(
-                            groupId: leader.groupId,
+                            groupId: leader.dependent.groupId,
                             eventId: widget.initialParticipants.isNotEmpty
                                 ? widget.initialParticipants.first.eventId
                                 : '',
-                            dependentId: leader.dependentId!,
+                            dependentId: leader.dependent.dependentId,
                             status: EventParticipantStatus.notSpecified,
                             note: '',
                           ),
                         );
                       } else {
                         _selectedParticipants.removeWhere(
-                          (p) => p.dependentId == leader.dependentId,
+                          (p) => p.dependentId == leader.dependent.dependentId,
                         );
                       }
                     });
@@ -281,7 +295,7 @@ class _CreateEditEventParticipantsScreenState
         ],
       );
     } else {
-      final selectedTroop = widget.groupTroops[activeIndex];
+      final selectedTroop = _nonEmptyTroops[activeIndex];
 
       final troopPatrols = widget.groupPatrols
           .where((patrol) => patrol.troopId == selectedTroop.troopId)
@@ -348,7 +362,7 @@ class _CreateEditEventParticipantsScreenState
                                 eventId: widget.initialParticipants.isNotEmpty
                                     ? widget.initialParticipants.first.eventId
                                     : '',
-                                dependentId: dependent.dependentId!,
+                                dependentId: dependent.dependentId,
                                 status: EventParticipantStatus.notSpecified,
                                 note: '',
                               ),

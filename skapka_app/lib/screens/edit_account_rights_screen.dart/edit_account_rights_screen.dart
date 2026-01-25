@@ -72,7 +72,7 @@ class EditAccountRightsScreen extends StatelessWidget {
                       },
                       labelText: context
                           .localizations
-                          .admin_panel_screen_button_edit_rights_search_field_hint,
+                          .admin_panel_screen_search_field_hint,
                     ),
                     Selector<AdminPanelProvider, String>(
                       selector: (_, provider) => provider.surnameSearchQuery,

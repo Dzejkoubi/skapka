@@ -928,7 +928,7 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get admin_panel_screen_search_field_hint =>
-      'Vyhledat podle příjmení...';
+      'Vyhledat podle jména nebo příjmení...';
 
   @override
   String get category_admin_panel_screen_approve_accounts =>
@@ -1021,10 +1021,6 @@ class AppLocalizationsCs extends AppLocalizations {
       'Práva administrátora lze změnit pouze v Supabase.';
 
   @override
-  String get admin_panel_screen_button_edit_rights_search_field_hint =>
-      'Vyhledat podle příjmení...';
-
-  @override
   String get admin_panel_screen_button_edit_rights_right_level_1 =>
       '1 - Výchozí';
 
@@ -1060,6 +1056,75 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get admin_panel_screen_button_connect_dependents => 'Připojit podúčty';
+
+  @override
+  String
+  get admin_panel_screen_connect_accounts_dependents_delete_connection_dialog_title =>
+      'Smazat spojení';
+
+  @override
+  String
+  admin_panel_screen_connect_accounts_dependents_delete_connection_dialog_subtitle(
+    String account_name_surname,
+    String dependent_name_surname,
+  ) {
+    return 'Opravdu chceš odstranit propojení mezi účtem $account_name_surname a podúčtem $dependent_name_surname?';
+  }
+
+  @override
+  String
+  get admin_panel_screen_connect_accounts_dependents_delete_connection_dialog_primary_button_text =>
+      'Odstranit propojení';
+
+  @override
+  String
+  admin_panel_screen_connect_accounts_dependents_delete_connection_success(
+    String account_name_surname,
+    String dependent_name_surname,
+  ) {
+    return 'Propojení mezi účtem $account_name_surname a podúčtem $dependent_name_surname bylo úspěšně odstraněno.';
+  }
+
+  @override
+  String admin_panel_screen_connect_accounts_dependents_delete_connection_error(
+    String account_name_surname,
+    String dependent_name_surname,
+  ) {
+    return 'Nepodařilo se odstranit propojení mezi účtem $account_name_surname a podúčtem $dependent_name_surname. Zkus to prosím znovu.';
+  }
+
+  @override
+  String
+  get admin_panel_screen_connect_accounts_dependents_add_connection_button_text =>
+      'Přidat podúčet';
+
+  @override
+  String
+  admin_panel_screen_connect_accounts_dependents_add_connection_screen_title(
+    Object account_name_surname,
+  ) {
+    return '$account_name_surname – Přidat závislou osobu';
+  }
+
+  @override
+  String admin_panel_screen_connect_accounts_dependents_add_connection_success(
+    String dependent_name_surname,
+    String account_name_surname,
+  ) {
+    return 'Závislá osoba $dependent_name_surname byla úspěšně připojena k účtu $account_name_surname.';
+  }
+
+  @override
+  String admin_panel_screen_connect_accounts_dependents_add_connection_error(
+    String dependent_name_surname,
+    String account_name_surname,
+  ) {
+    return 'Nepodařilo se připojit závislou osobu $dependent_name_surname k účtu $account_name_surname. Zkus to prosím znovu.';
+  }
+
+  @override
+  String get category_admin_panel_screen_dependent_codes =>
+      '--- ADMIN PANEL - DEPENDENT CODES ---';
 
   @override
   String get admin_panel_screen_button_dependent_codes => 'Kódy podúčtů';

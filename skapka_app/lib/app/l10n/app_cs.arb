@@ -315,7 +315,7 @@
   },
   "admin_panel_screen_db_warning_account_does_not_have_parent_email_filled_in_copy_account_id": "Id účtu zkopírováno do schránky.",
   "admin_panel_screen_accounts_management_title": "Účty & Podúčty",
-  "admin_panel_screen_search_field_hint": "Vyhledat podle příjmení...",
+  "admin_panel_screen_search_field_hint": "Vyhledat podle jména nebo příjmení...",
   "category_admin_panel_screen_approve_accounts": "--- ADMIN PANEL - POTVRZOVÁNÍ ÚČTŮ ---",
   "admin_panel_screen_button_approve_accounts": "Potvrdit účty",
   "admin_panel_screen_account_approval_change_success": "Účet {name_surname} byl úspěšně {status, select, approved{potvrzen} disapproved{zamítnut} other{aktualizován}}.",
@@ -392,7 +392,6 @@
   "category_admin_panel_screen_edit_account_rights": "--- ADMIN PANEL - UPRAVIT PRÁVA ÚČTŮ ---",
   "admin_panel_screen_button_edit_rights": "Upravit práva",
   "admin_panel_screen_button_edit_rights_cant_change_admin_rights": "Práva administrátora lze změnit pouze v Supabase.",
-  "admin_panel_screen_button_edit_rights_search_field_hint": "Vyhledat podle příjmení...",
   "admin_panel_screen_button_edit_rights_right_level_1": "1 - Výchozí",
   "admin_panel_screen_button_edit_rights_right_level_2": "2 - Vedoucí",
   "admin_panel_screen_button_edit_rights_right_level_3": "3 - Admin",
@@ -417,6 +416,66 @@
   },
   "category_admin_panel_screen_connect_accounts_with_dependents": "--- ADMIN PANEL - PŘIPOJIT ÚČTY S PODÚČTY ---",
   "admin_panel_screen_button_connect_dependents": "Připojit podúčty",
+  "admin_panel_screen_connect_accounts_dependents_delete_connection_dialog_title": "Smazat spojení",
+  "admin_panel_screen_connect_accounts_dependents_delete_connection_dialog_subtitle": "Opravdu chceš odstranit propojení mezi účtem {account_name_surname} a podúčtem {dependent_name_surname}?",
+  "@admin_panel_screen_connect_accounts_dependents_delete_connection_dialog_subtitle": {
+    "placeholders": {
+      "account_name_surname": {
+        "type": "String"
+      },
+      "dependent_name_surname": {
+        "type": "String"
+      }
+    }
+  },
+  "admin_panel_screen_connect_accounts_dependents_delete_connection_dialog_primary_button_text": "Odstranit propojení",
+  "admin_panel_screen_connect_accounts_dependents_delete_connection_success": "Propojení mezi účtem {account_name_surname} a podúčtem {dependent_name_surname} bylo úspěšně odstraněno.",
+  "@admin_panel_screen_connect_accounts_dependents_delete_connection_success": {
+    "placeholders": {
+      "account_name_surname": {
+        "type": "String"
+      },
+      "dependent_name_surname": {
+        "type": "String"
+      }
+    }
+  },
+  "admin_panel_screen_connect_accounts_dependents_delete_connection_error": "Nepodařilo se odstranit propojení mezi účtem {account_name_surname} a podúčtem {dependent_name_surname}. Zkus to prosím znovu.",
+  "@admin_panel_screen_connect_accounts_dependents_delete_connection_error": {
+    "placeholders": {
+      "account_name_surname": {
+        "type": "String"
+      },
+      "dependent_name_surname": {
+        "type": "String"
+      }
+    }
+  },
+  "admin_panel_screen_connect_accounts_dependents_add_connection_button_text": "Přidat podúčet",
+  "admin_panel_screen_connect_accounts_dependents_add_connection_screen_title": "{account_name_surname} – Přidat závislou osobu",
+  "admin_panel_screen_connect_accounts_dependents_add_connection_success": "Závislá osoba {dependent_name_surname} byla úspěšně připojena k účtu {account_name_surname}.",
+  "@admin_panel_screen_connect_accounts_dependents_add_connection_success": {
+    "placeholders": {
+      "dependent_name_surname": {
+        "type": "String"
+      },
+      "account_name_surname": {
+        "type": "String"
+      }
+    }
+  },
+  "admin_panel_screen_connect_accounts_dependents_add_connection_error": "Nepodařilo se připojit závislou osobu {dependent_name_surname} k účtu {account_name_surname}. Zkus to prosím znovu.",
+  "@admin_panel_screen_connect_accounts_dependents_add_connection_error": {
+    "placeholders": {
+      "dependent_name_surname": {
+        "type": "String"
+      },
+      "account_name_surname": {
+        "type": "String"
+      }
+    }
+  },
+  "category_admin_panel_screen_dependent_codes": "--- ADMIN PANEL - DEPENDENT CODES ---",
   "admin_panel_screen_button_dependent_codes": "Kódy podúčtů",
   "category_admin_panel_screen_skautis_sync": "--- ADMIN PANEL - SKAUTIS SYNC ---",
   "admin_panel_screen_data_management_title": "Data",

@@ -1609,7 +1609,7 @@ abstract class AppLocalizations {
   /// No description provided for @admin_panel_screen_search_field_hint.
   ///
   /// In cs, this message translates to:
-  /// **'Vyhledat podle příjmení...'**
+  /// **'Vyhledat podle jména nebo příjmení...'**
   String get admin_panel_screen_search_field_hint;
 
   /// No description provided for @category_admin_panel_screen_approve_accounts.
@@ -1729,12 +1729,6 @@ abstract class AppLocalizations {
   /// **'Práva administrátora lze změnit pouze v Supabase.'**
   String get admin_panel_screen_button_edit_rights_cant_change_admin_rights;
 
-  /// No description provided for @admin_panel_screen_button_edit_rights_search_field_hint.
-  ///
-  /// In cs, this message translates to:
-  /// **'Vyhledat podle příjmení...'**
-  String get admin_panel_screen_button_edit_rights_search_field_hint;
-
   /// No description provided for @admin_panel_screen_button_edit_rights_right_level_1.
   ///
   /// In cs, this message translates to:
@@ -1779,6 +1773,89 @@ abstract class AppLocalizations {
   /// In cs, this message translates to:
   /// **'Připojit podúčty'**
   String get admin_panel_screen_button_connect_dependents;
+
+  /// No description provided for @admin_panel_screen_connect_accounts_dependents_delete_connection_dialog_title.
+  ///
+  /// In cs, this message translates to:
+  /// **'Smazat spojení'**
+  String
+  get admin_panel_screen_connect_accounts_dependents_delete_connection_dialog_title;
+
+  /// No description provided for @admin_panel_screen_connect_accounts_dependents_delete_connection_dialog_subtitle.
+  ///
+  /// In cs, this message translates to:
+  /// **'Opravdu chceš odstranit propojení mezi účtem {account_name_surname} a podúčtem {dependent_name_surname}?'**
+  String
+  admin_panel_screen_connect_accounts_dependents_delete_connection_dialog_subtitle(
+    String account_name_surname,
+    String dependent_name_surname,
+  );
+
+  /// No description provided for @admin_panel_screen_connect_accounts_dependents_delete_connection_dialog_primary_button_text.
+  ///
+  /// In cs, this message translates to:
+  /// **'Odstranit propojení'**
+  String
+  get admin_panel_screen_connect_accounts_dependents_delete_connection_dialog_primary_button_text;
+
+  /// No description provided for @admin_panel_screen_connect_accounts_dependents_delete_connection_success.
+  ///
+  /// In cs, this message translates to:
+  /// **'Propojení mezi účtem {account_name_surname} a podúčtem {dependent_name_surname} bylo úspěšně odstraněno.'**
+  String
+  admin_panel_screen_connect_accounts_dependents_delete_connection_success(
+    String account_name_surname,
+    String dependent_name_surname,
+  );
+
+  /// No description provided for @admin_panel_screen_connect_accounts_dependents_delete_connection_error.
+  ///
+  /// In cs, this message translates to:
+  /// **'Nepodařilo se odstranit propojení mezi účtem {account_name_surname} a podúčtem {dependent_name_surname}. Zkus to prosím znovu.'**
+  String admin_panel_screen_connect_accounts_dependents_delete_connection_error(
+    String account_name_surname,
+    String dependent_name_surname,
+  );
+
+  /// No description provided for @admin_panel_screen_connect_accounts_dependents_add_connection_button_text.
+  ///
+  /// In cs, this message translates to:
+  /// **'Přidat podúčet'**
+  String
+  get admin_panel_screen_connect_accounts_dependents_add_connection_button_text;
+
+  /// No description provided for @admin_panel_screen_connect_accounts_dependents_add_connection_screen_title.
+  ///
+  /// In cs, this message translates to:
+  /// **'{account_name_surname} – Přidat závislou osobu'**
+  String
+  admin_panel_screen_connect_accounts_dependents_add_connection_screen_title(
+    Object account_name_surname,
+  );
+
+  /// No description provided for @admin_panel_screen_connect_accounts_dependents_add_connection_success.
+  ///
+  /// In cs, this message translates to:
+  /// **'Závislá osoba {dependent_name_surname} byla úspěšně připojena k účtu {account_name_surname}.'**
+  String admin_panel_screen_connect_accounts_dependents_add_connection_success(
+    String dependent_name_surname,
+    String account_name_surname,
+  );
+
+  /// No description provided for @admin_panel_screen_connect_accounts_dependents_add_connection_error.
+  ///
+  /// In cs, this message translates to:
+  /// **'Nepodařilo se připojit závislou osobu {dependent_name_surname} k účtu {account_name_surname}. Zkus to prosím znovu.'**
+  String admin_panel_screen_connect_accounts_dependents_add_connection_error(
+    String dependent_name_surname,
+    String account_name_surname,
+  );
+
+  /// No description provided for @category_admin_panel_screen_dependent_codes.
+  ///
+  /// In cs, this message translates to:
+  /// **'--- ADMIN PANEL - DEPENDENT CODES ---'**
+  String get category_admin_panel_screen_dependent_codes;
 
   /// No description provided for @admin_panel_screen_button_dependent_codes.
   ///

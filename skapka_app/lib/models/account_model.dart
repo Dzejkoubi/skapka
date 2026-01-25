@@ -12,8 +12,8 @@ abstract class AccountModel with _$AccountModel {
     @Default(0) int rights,
     required String groupId,
     @Default(false) bool isApproved,
-    String? name,
-    String? surname,
+    required String name,
+    required String surname,
   }) = _AccountModel;
 
   factory AccountModel.fromJson(Map<String, dynamic> json) =>

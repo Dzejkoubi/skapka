@@ -13,8 +13,8 @@ _AccountModel _$AccountModelFromJson(Map<String, dynamic> json) =>
       rights: (json['rights'] as num?)?.toInt() ?? 0,
       groupId: json['group_id'] as String,
       isApproved: json['is_approved'] as bool? ?? false,
-      name: json['name'] as String?,
-      surname: json['surname'] as String?,
+      name: json['name'] as String,
+      surname: json['surname'] as String,
     );
 
 Map<String, dynamic> _$AccountModelToJson(_AccountModel instance) =>

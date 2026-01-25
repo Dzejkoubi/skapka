@@ -9,7 +9,7 @@ abstract class AccountDependentRelationModel
   factory AccountDependentRelationModel({
     required String accountId,
     required String dependentId,
-    @Default(false) bool isMainDependent,
+    required bool isMainDependent,
   }) = _AccountDependentRelationModel;
 
   factory AccountDependentRelationModel.fromJson(Map<String, dynamic> json) =>

@@ -11,7 +11,7 @@ _AccountDependentRelationModel _$AccountDependentRelationModelFromJson(
 ) => _AccountDependentRelationModel(
   accountId: json['account_id'] as String,
   dependentId: json['dependent_id'] as String,
-  isMainDependent: json['is_main_dependent'] as bool? ?? false,
+  isMainDependent: json['is_main_dependent'] as bool,
 );
 
 Map<String, dynamic> _$AccountDependentRelationModelToJson(

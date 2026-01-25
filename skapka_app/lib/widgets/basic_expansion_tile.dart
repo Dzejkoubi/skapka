@@ -62,10 +62,13 @@ class _BasicExpansionTileState extends State<BasicExpansionTile> {
         collapsedShape: border,
         backgroundColor: context.colors.background.light,
         collapsedBackgroundColor: context.colors.background.light,
-        title: Row(
-          children: [
-            Text(widget.title, style: AppTextTheme.titleMedium(context)),
-          ],
+        title: SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: [
+              Text(widget.title, style: AppTextTheme.titleMedium(context)),
+            ],
+          ),
         ),
 
         trailing: AnimatedRotation(

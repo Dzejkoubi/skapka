@@ -315,7 +315,7 @@
   },
   "admin_panel_screen_db_warning_account_does_not_have_parent_email_filled_in_copy_account_id": "Account ID copied to clipboard.",
   "admin_panel_screen_accounts_management_title": "Accounts & Dependents",
-  "admin_panel_screen_search_field_hint": "Search by surname...",
+  "admin_panel_screen_search_field_hint": "Search by name or surname...",
   "category_admin_panel_screen_approve_accounts": "--- ADMIN PANEL - APPROVE ACCOUNTS ---",
   "admin_panel_screen_button_approve_accounts": "Approve Accounts",
   "admin_panel_screen_account_approval_change_success": "Account {name_surname} was successfully {status, select, approved{approved} disapproved{disapproved} other{updated}}.",
@@ -392,7 +392,6 @@
   "category_admin_panel_screen_edit_account_rights": "--- ADMIN PANEL - EDIT ACCOUNT RIGHTS ---",
   "admin_panel_screen_button_edit_rights": "Edit rights",
   "admin_panel_screen_button_edit_rights_cant_change_admin_rights": "Administrator rights can only be changed in Supabase.",
-  "admin_panel_screen_button_edit_rights_search_field_hint": "Search by surname...",
   "admin_panel_screen_button_edit_rights_right_level_1": "1 - Default",
   "admin_panel_screen_button_edit_rights_right_level_2": "2 - Leader",
   "admin_panel_screen_button_edit_rights_right_level_3": "3 - Admin",
@@ -417,6 +416,65 @@
   },
   "category_admin_panel_screen_connect_accounts_with_dependents": "--- ADMIN PANEL - CONNECT ACCOUNTS WITH DEPENDENTS ---",
   "admin_panel_screen_button_connect_dependents": "Connect Dependents",
+  "admin_panel_screen_connect_accounts_dependents_delete_connection_dialog_title": "Delete Connection",
+  "admin_panel_screen_connect_accounts_dependents_delete_connection_dialog_subtitle": "Are you sure you want to delete the connection between account {account_name_surname} and dependent {dependent_name_surname}?",
+  "@admin_panel_screen_connect_accounts_dependents_delete_connection_dialog_subtitle": {
+    "placeholders": {
+      "account_name_surname": {
+        "type": "String"
+      },
+      "dependent_name_surname": {
+        "type": "String"
+      }
+    }
+  },
+  "admin_panel_screen_connect_accounts_dependents_delete_connection_dialog_primary_button_text": "Delete Connection",
+  "admin_panel_screen_connect_accounts_dependents_delete_connection_success": "Connection between account {account_name_surname} and dependent {dependent_name_surname} was successfully deleted.",
+  "@admin_panel_screen_connect_accounts_dependents_delete_connection_success": {
+    "placeholders": {
+      "account_name_surname": {
+        "type": "String"
+      },
+      "dependent_name_surname": {
+        "type": "String"
+      }
+    }
+  },
+  "admin_panel_screen_connect_accounts_dependents_delete_connection_error": "Failed to delete connection between account {account_name_surname} and dependent {dependent_name_surname}. Please try again.",
+  "@admin_panel_screen_connect_accounts_dependents_delete_connection_error": {
+    "placeholders": {
+      "account_name_surname": {
+        "type": "String"
+      },
+      "dependent_name_surname": {
+        "type": "String"
+      }
+    }
+  },
+  "admin_panel_screen_connect_accounts_dependents_add_connection_button_text": "Přidat podúčet",
+  "admin_panel_screen_connect_accounts_dependents_add_connection_screen_title": "{account_name_surname} - Add Dependent",
+  "admin_panel_screen_connect_accounts_dependents_add_connection_success": "Connected dependent {dependent_name_surname} to account {account_name_surname}.",
+  "@admin_panel_screen_connect_accounts_dependents_add_connection_success": {
+    "placeholders": {
+      "dependent_name_surname": {
+        "type": "String"
+      },
+      "account_name_surname": {
+        "type": "String"
+      }
+    }
+  },
+  "admin_panel_screen_connect_accounts_dependents_add_connection_error": "Failed to connect dependent {dependent_name_surname} to account {account_name_surname}. Please try again.",
+  "@admin_panel_screen_connect_accounts_dependents_add_connection_error": {
+    "placeholders": {
+      "dependent_name_surname": {
+        "type": "String"
+      },
+      "account_name_surname": {
+        "type": "String"
+      }
+    }
+  },
   "category_admin_panel_screen_dependent_codes": "--- ADMIN PANEL - DEPENDENT CODES ---",
   "admin_panel_screen_button_dependent_codes": "Dependent Codes",
   "category_admin_panel_screen_skautis_sync": "--- ADMIN PANEL - SKAUTIS SYNC ---",

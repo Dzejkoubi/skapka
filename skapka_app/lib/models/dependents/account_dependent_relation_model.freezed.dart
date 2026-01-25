@@ -211,12 +211,12 @@ return $default(_that.accountId,_that.dependentId,_that.isMainDependent);case _:
 
 @JsonSerializable(fieldRename: FieldRename.snake)
 class _AccountDependentRelationModel implements AccountDependentRelationModel {
-   _AccountDependentRelationModel({required this.accountId, required this.dependentId, this.isMainDependent = false});
+   _AccountDependentRelationModel({required this.accountId, required this.dependentId, required this.isMainDependent});
   factory _AccountDependentRelationModel.fromJson(Map<String, dynamic> json) => _$AccountDependentRelationModelFromJson(json);
 
 @override final  String accountId;
 @override final  String dependentId;
-@override@JsonKey() final  bool isMainDependent;
+@override final  bool isMainDependent;
 
 /// Create a copy of AccountDependentRelationModel
 /// with the given fields replaced by the non-null parameter values.

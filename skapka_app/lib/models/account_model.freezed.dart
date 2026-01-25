@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$AccountModel {
 
- String get accountId; DateTime get createdAt; int get rights; String get groupId; bool get isApproved; String? get name; String? get surname;
+ String get accountId; DateTime get createdAt; int get rights; String get groupId; bool get isApproved; String get name; String get surname;
 /// Create a copy of AccountModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +48,7 @@ abstract mixin class $AccountModelCopyWith<$Res>  {
   factory $AccountModelCopyWith(AccountModel value, $Res Function(AccountModel) _then) = _$AccountModelCopyWithImpl;
 @useResult
 $Res call({
- String accountId, DateTime createdAt, int rights, String groupId, bool isApproved, String? name, String? surname
+ String accountId, DateTime createdAt, int rights, String groupId, bool isApproved, String name, String surname
 });
 
 
@@ -65,16 +65,16 @@ class _$AccountModelCopyWithImpl<$Res>
 
 /// Create a copy of AccountModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? accountId = null,Object? createdAt = null,Object? rights = null,Object? groupId = null,Object? isApproved = null,Object? name = freezed,Object? surname = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? accountId = null,Object? createdAt = null,Object? rights = null,Object? groupId = null,Object? isApproved = null,Object? name = null,Object? surname = null,}) {
   return _then(_self.copyWith(
 accountId: null == accountId ? _self.accountId : accountId // ignore: cast_nullable_to_non_nullable
 as String,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as DateTime,rights: null == rights ? _self.rights : rights // ignore: cast_nullable_to_non_nullable
 as int,groupId: null == groupId ? _self.groupId : groupId // ignore: cast_nullable_to_non_nullable
 as String,isApproved: null == isApproved ? _self.isApproved : isApproved // ignore: cast_nullable_to_non_nullable
-as bool,name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
-as String?,surname: freezed == surname ? _self.surname : surname // ignore: cast_nullable_to_non_nullable
-as String?,
+as bool,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String,surname: null == surname ? _self.surname : surname // ignore: cast_nullable_to_non_nullable
+as String,
   ));
 }
 
@@ -159,7 +159,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String accountId,  DateTime createdAt,  int rights,  String groupId,  bool isApproved,  String? name,  String? surname)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String accountId,  DateTime createdAt,  int rights,  String groupId,  bool isApproved,  String name,  String surname)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _AccountModel() when $default != null:
 return $default(_that.accountId,_that.createdAt,_that.rights,_that.groupId,_that.isApproved,_that.name,_that.surname);case _:
@@ -180,7 +180,7 @@ return $default(_that.accountId,_that.createdAt,_that.rights,_that.groupId,_that
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String accountId,  DateTime createdAt,  int rights,  String groupId,  bool isApproved,  String? name,  String? surname)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String accountId,  DateTime createdAt,  int rights,  String groupId,  bool isApproved,  String name,  String surname)  $default,) {final _that = this;
 switch (_that) {
 case _AccountModel():
 return $default(_that.accountId,_that.createdAt,_that.rights,_that.groupId,_that.isApproved,_that.name,_that.surname);case _:
@@ -200,7 +200,7 @@ return $default(_that.accountId,_that.createdAt,_that.rights,_that.groupId,_that
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String accountId,  DateTime createdAt,  int rights,  String groupId,  bool isApproved,  String? name,  String? surname)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String accountId,  DateTime createdAt,  int rights,  String groupId,  bool isApproved,  String name,  String surname)?  $default,) {final _that = this;
 switch (_that) {
 case _AccountModel() when $default != null:
 return $default(_that.accountId,_that.createdAt,_that.rights,_that.groupId,_that.isApproved,_that.name,_that.surname);case _:
@@ -215,7 +215,7 @@ return $default(_that.accountId,_that.createdAt,_that.rights,_that.groupId,_that
 
 @JsonSerializable(fieldRename: FieldRename.snake)
 class _AccountModel implements AccountModel {
-  const _AccountModel({required this.accountId, required this.createdAt, this.rights = 0, required this.groupId, this.isApproved = false, this.name, this.surname});
+  const _AccountModel({required this.accountId, required this.createdAt, this.rights = 0, required this.groupId, this.isApproved = false, required this.name, required this.surname});
   factory _AccountModel.fromJson(Map<String, dynamic> json) => _$AccountModelFromJson(json);
 
 @override final  String accountId;
@@ -223,8 +223,8 @@ class _AccountModel implements AccountModel {
 @override@JsonKey() final  int rights;
 @override final  String groupId;
 @override@JsonKey() final  bool isApproved;
-@override final  String? name;
-@override final  String? surname;
+@override final  String name;
+@override final  String surname;
 
 /// Create a copy of AccountModel
 /// with the given fields replaced by the non-null parameter values.
@@ -259,7 +259,7 @@ abstract mixin class _$AccountModelCopyWith<$Res> implements $AccountModelCopyWi
   factory _$AccountModelCopyWith(_AccountModel value, $Res Function(_AccountModel) _then) = __$AccountModelCopyWithImpl;
 @override @useResult
 $Res call({
- String accountId, DateTime createdAt, int rights, String groupId, bool isApproved, String? name, String? surname
+ String accountId, DateTime createdAt, int rights, String groupId, bool isApproved, String name, String surname
 });
 
 
@@ -276,16 +276,16 @@ class __$AccountModelCopyWithImpl<$Res>
 
 /// Create a copy of AccountModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? accountId = null,Object? createdAt = null,Object? rights = null,Object? groupId = null,Object? isApproved = null,Object? name = freezed,Object? surname = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? accountId = null,Object? createdAt = null,Object? rights = null,Object? groupId = null,Object? isApproved = null,Object? name = null,Object? surname = null,}) {
   return _then(_AccountModel(
 accountId: null == accountId ? _self.accountId : accountId // ignore: cast_nullable_to_non_nullable
 as String,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as DateTime,rights: null == rights ? _self.rights : rights // ignore: cast_nullable_to_non_nullable
 as int,groupId: null == groupId ? _self.groupId : groupId // ignore: cast_nullable_to_non_nullable
 as String,isApproved: null == isApproved ? _self.isApproved : isApproved // ignore: cast_nullable_to_non_nullable
-as bool,name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
-as String?,surname: freezed == surname ? _self.surname : surname // ignore: cast_nullable_to_non_nullable
-as String?,
+as bool,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String,surname: null == surname ? _self.surname : surname // ignore: cast_nullable_to_non_nullable
+as String,
   ));
 }
 

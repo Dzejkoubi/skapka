@@ -931,7 +931,8 @@ class AppLocalizationsEn extends AppLocalizations {
       'Accounts & Dependents';
 
   @override
-  String get admin_panel_screen_search_field_hint => 'Search by surname...';
+  String get admin_panel_screen_search_field_hint =>
+      'Search by name or surname...';
 
   @override
   String get category_admin_panel_screen_approve_accounts =>
@@ -1024,10 +1025,6 @@ class AppLocalizationsEn extends AppLocalizations {
       'Administrator rights can only be changed in Supabase.';
 
   @override
-  String get admin_panel_screen_button_edit_rights_search_field_hint =>
-      'Search by surname...';
-
-  @override
   String get admin_panel_screen_button_edit_rights_right_level_1 =>
       '1 - Default';
 
@@ -1064,6 +1061,75 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get admin_panel_screen_button_connect_dependents =>
       'Connect Dependents';
+
+  @override
+  String
+  get admin_panel_screen_connect_accounts_dependents_delete_connection_dialog_title =>
+      'Delete Connection';
+
+  @override
+  String
+  admin_panel_screen_connect_accounts_dependents_delete_connection_dialog_subtitle(
+    String account_name_surname,
+    String dependent_name_surname,
+  ) {
+    return 'Are you sure you want to delete the connection between account $account_name_surname and dependent $dependent_name_surname?';
+  }
+
+  @override
+  String
+  get admin_panel_screen_connect_accounts_dependents_delete_connection_dialog_primary_button_text =>
+      'Delete Connection';
+
+  @override
+  String
+  admin_panel_screen_connect_accounts_dependents_delete_connection_success(
+    String account_name_surname,
+    String dependent_name_surname,
+  ) {
+    return 'Connection between account $account_name_surname and dependent $dependent_name_surname was successfully deleted.';
+  }
+
+  @override
+  String admin_panel_screen_connect_accounts_dependents_delete_connection_error(
+    String account_name_surname,
+    String dependent_name_surname,
+  ) {
+    return 'Failed to delete connection between account $account_name_surname and dependent $dependent_name_surname. Please try again.';
+  }
+
+  @override
+  String
+  get admin_panel_screen_connect_accounts_dependents_add_connection_button_text =>
+      'Přidat podúčet';
+
+  @override
+  String
+  admin_panel_screen_connect_accounts_dependents_add_connection_screen_title(
+    Object account_name_surname,
+  ) {
+    return '$account_name_surname - Add Dependent';
+  }
+
+  @override
+  String admin_panel_screen_connect_accounts_dependents_add_connection_success(
+    String dependent_name_surname,
+    String account_name_surname,
+  ) {
+    return 'Connected dependent $dependent_name_surname to account $account_name_surname.';
+  }
+
+  @override
+  String admin_panel_screen_connect_accounts_dependents_add_connection_error(
+    String dependent_name_surname,
+    String account_name_surname,
+  ) {
+    return 'Failed to connect dependent $dependent_name_surname to account $account_name_surname. Please try again.';
+  }
+
+  @override
+  String get category_admin_panel_screen_dependent_codes =>
+      '--- ADMIN PANEL - DEPENDENT CODES ---';
 
   @override
   String get admin_panel_screen_button_dependent_codes => 'Dependent Codes';

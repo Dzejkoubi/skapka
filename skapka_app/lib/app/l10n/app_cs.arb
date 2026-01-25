@@ -507,6 +507,9 @@
       }
     }
   },
+  "category_info_screen": "--- INFO SCREEN ---",
+  "category_info_screen_title": "Brzy...",
+  "category_info_screen_subtitle": "Ústavičně pracujeme, aby si mohl/a vidět informace o tvém středisku. Brzy budou k dispozici!",
   "category_admin_panel_screen_skautis_sync": "--- ADMIN PANEL - SKAUTIS SYNC ---",
   "admin_panel_screen_data_management_title": "Data",
   "admin_panel_screen_button_skautis_sync": "SkautIS synchronizace",

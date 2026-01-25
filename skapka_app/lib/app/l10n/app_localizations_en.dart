@@ -1150,6 +1150,16 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get category_info_screen => '--- INFO SCREEN ---';
+
+  @override
+  String get category_info_screen_title => 'Soon...';
+
+  @override
+  String get category_info_screen_subtitle =>
+      'We are constantly working so you can see information about your center. It will be available soon!';
+
+  @override
   String get category_admin_panel_screen_skautis_sync =>
       '--- ADMIN PANEL - SKAUTIS SYNC ---';
 

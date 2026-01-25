@@ -46,11 +46,13 @@ class AuthService {
   // For now, we'll assume a Supabase Edge Function or RPC is used,
   // or we just sign them out if self-deletion isn't enabled directly in client SDK.
   Future<void> deleteAccount() async {
-    // Example: await _supabaseClient.functions.invoke('delete-user');
-    // Or if you have a specific RPC:
-    // await _supabaseClient.rpc('delete_user_account');
-
-    // For safety, we often just sign out if no backend logic is ready yet.
+    final userId = currentUser?.id;
+    if (userId != null) {
+      await _supabaseClient.functions.invoke(
+        'delete_account',
+        body: {'account_id': userId},
+      );
+    }
     await signOut();
   }
 }

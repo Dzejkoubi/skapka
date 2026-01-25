@@ -1874,6 +1874,24 @@ abstract class AppLocalizations {
     String account_name_surname,
   );
 
+  /// No description provided for @category_info_screen.
+  ///
+  /// In cs, this message translates to:
+  /// **'--- INFO SCREEN ---'**
+  String get category_info_screen;
+
+  /// No description provided for @category_info_screen_title.
+  ///
+  /// In cs, this message translates to:
+  /// **'Brzy...'**
+  String get category_info_screen_title;
+
+  /// No description provided for @category_info_screen_subtitle.
+  ///
+  /// In cs, this message translates to:
+  /// **'Ústavičně pracujeme, aby si mohl/a vidět informace o tvém středisku. Brzy budou k dispozici!'**
+  String get category_info_screen_subtitle;
+
   /// No description provided for @category_admin_panel_screen_skautis_sync.
   ///
   /// In cs, this message translates to:

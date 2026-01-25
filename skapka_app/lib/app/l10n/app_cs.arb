@@ -463,7 +463,7 @@
     }
   },
   "admin_panel_screen_connect_accounts_dependents_add_connection_button_text": "Přidat podúčet",
-  "admin_panel_screen_connect_accounts_dependents_add_connection_screen_title": "{account_name_surname} – Přidat závislou osobu",
+  "admin_panel_screen_connect_accounts_dependents_add_connection_screen_title": "{account_name_surname} – Přidat podúčty",
   "admin_panel_screen_connect_accounts_dependents_add_connection_success": "Závislá osoba {dependent_name_surname} byla úspěšně připojena k účtu {account_name_surname}.",
   "@admin_panel_screen_connect_accounts_dependents_add_connection_success": {
     "placeholders": {

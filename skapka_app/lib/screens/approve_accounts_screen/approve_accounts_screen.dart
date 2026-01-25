@@ -13,7 +13,7 @@ import 'package:skapka_app/services/supabase_service.dart';
 import 'package:skapka_app/widgets/appbar/appbar.dart';
 import 'package:skapka_app/widgets/dialogs/bottom_dialog.dart';
 import 'package:skapka_app/widgets/forms/custom_form.dart';
-import 'package:skapka_app/widgets/loading_floating_logo/loading_rotating_logo.dart';
+import 'package:skapka_app/widgets/loading_floating_logo/centered_loading_rotating_logo.dart';
 import 'package:skapka_app/widgets/wrappers/screen_wrapper.dart';
 
 @RoutePage()
@@ -104,80 +104,74 @@ class ApproveAccountsScreen extends StatelessWidget {
       }
     }
 
-    return ScreenWrapper(
-      appBar: Appbar(
-        onBackPressed: () {
-          adminProvider.clearSurnameSearchQuery();
-          context.router.pop();
-        },
-        showBackChevron: true,
-        showSettingsIcon: false,
-        screenName:
-            context.localizations.admin_panel_screen_button_approve_accounts,
-      ),
-      body: SingleChildScrollView(
-        child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.only(
-              bottom: AppSpacing.bottomSpace + AppSpacing.xxLarge,
-            ),
-            child: Column(
-              spacing: AppSpacing.large,
-              children: [
-                // Search bar for accounts
-                CustomForm(
-                  showSuffixIcon: false,
-                  controller: TextEditingController(),
-                  onChanged: (String value) {
-                    // Update provider and debounce the actual fetch
-                    adminProvider.setSurnameSearchQueryDebounced(
-                      value,
-                      loadGroupAccounts,
-                    );
-                  },
-                  labelText: context
-                      .localizations
-                      .admin_panel_screen_search_field_hint,
-                ),
-                // List of accounts to approve
-                FutureBuilder(
-                  future: loadGroupAccounts(),
-                  builder: (context, asyncSnapshot) {
-                    if (asyncSnapshot.connectionState ==
-                        ConnectionState.waiting) {
-                      return Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SizedBox(height: AppSpacing.medium),
-                          LoadingRotatingLogo(),
-                          SizedBox(height: AppSpacing.medium),
-                        ],
+    return PopScope(
+      onPopInvokedWithResult: (didPop, result) {
+        adminProvider.clearSurnameSearchQuery();
+      },
+      child: ScreenWrapper(
+        appBar: Appbar(
+          showBackChevron: true,
+          showSettingsIcon: false,
+          screenName:
+              context.localizations.admin_panel_screen_button_approve_accounts,
+        ),
+        body: SingleChildScrollView(
+          child: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.only(
+                bottom: AppSpacing.bottomSpace + AppSpacing.xxLarge,
+              ),
+              child: Column(
+                spacing: AppSpacing.large,
+                children: [
+                  // Search bar for accounts
+                  CustomForm(
+                    showSuffixIcon: false,
+                    controller: TextEditingController(),
+                    onChanged: (String value) {
+                      // Update provider and debounce the actual fetch
+                      adminProvider.setSurnameSearchQueryDebounced(
+                        value,
+                        loadGroupAccounts,
                       );
-                    }
-                    return Consumer<AdminPanelProvider>(
-                      builder: (context, adminProvider, child) => Column(
-                        spacing: AppSpacing.medium,
-                        children: [
-                          // Show accounts that are not approved first
-                          for (var account in [
-                            ...adminProvider.groupAccounts.where(
-                              (a) => !a.isApproved,
-                            ),
-                            ...adminProvider.groupAccounts.where(
-                              (a) => a.isApproved,
-                            ),
-                          ])
-                            ApproveAccountsAccountBox(
-                              account: account,
-                              updateAccountApprovalStatus:
-                                  updateAccountApprovalStatus,
-                            ),
-                        ],
-                      ),
-                    );
-                  },
-                ),
-              ],
+                    },
+                    labelText: context
+                        .localizations
+                        .admin_panel_screen_search_field_hint,
+                  ),
+                  // List of accounts to approve
+                  FutureBuilder(
+                    future: loadGroupAccounts(),
+                    builder: (context, asyncSnapshot) {
+                      if (asyncSnapshot.connectionState ==
+                          ConnectionState.waiting) {
+                        return const CenteredLoadingRotatingLogo();
+                      }
+                      return Consumer<AdminPanelProvider>(
+                        builder: (context, adminProvider, child) => Column(
+                          spacing: AppSpacing.medium,
+                          children: [
+                            // Show accounts that are not approved first
+                            for (var account in [
+                              ...adminProvider.groupAccounts.where(
+                                (a) => !a.isApproved,
+                              ),
+                              ...adminProvider.groupAccounts.where(
+                                (a) => a.isApproved,
+                              ),
+                            ])
+                              ApproveAccountsAccountBox(
+                                account: account,
+                                updateAccountApprovalStatus:
+                                    updateAccountApprovalStatus,
+                              ),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
         ),

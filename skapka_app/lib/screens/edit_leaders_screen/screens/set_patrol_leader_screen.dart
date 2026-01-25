@@ -16,7 +16,7 @@ import 'package:skapka_app/services/supabase_service.dart';
 import 'package:skapka_app/widgets/appbar/appbar.dart';
 import 'package:skapka_app/widgets/buttons/switch_button.dart';
 import 'package:skapka_app/widgets/dialogs/bottom_dialog.dart';
-import 'package:skapka_app/widgets/loading_floating_logo/loading_rotating_logo.dart';
+import 'package:skapka_app/widgets/loading_floating_logo/centered_loading_rotating_logo.dart';
 import 'package:skapka_app/widgets/wrappers/screen_wrapper.dart';
 
 @RoutePage()
@@ -131,7 +131,7 @@ class SetPatrolLeaderScreen extends StatelessWidget {
                   builder: (context, asyncSnapshot) {
                     if (asyncSnapshot.connectionState ==
                         ConnectionState.waiting) {
-                      return const LoadingRotatingLogo();
+                      return const CenteredLoadingRotatingLogo();
                     }
                     return Consumer<AdminPanelProvider>(
                       builder: (context, adminProvider, child) {

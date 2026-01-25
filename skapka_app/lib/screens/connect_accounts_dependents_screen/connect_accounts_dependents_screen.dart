@@ -19,7 +19,7 @@ import 'package:skapka_app/widgets/buttons/main_button.dart';
 import 'package:skapka_app/widgets/dialogs/bottom_dialog.dart';
 import 'package:skapka_app/widgets/dialogs/large_dialog.dart';
 import 'package:skapka_app/widgets/forms/custom_form.dart';
-import 'package:skapka_app/widgets/loading_floating_logo/loading_rotating_logo.dart';
+import 'package:skapka_app/widgets/loading_floating_logo/centered_loading_rotating_logo.dart';
 import 'package:skapka_app/widgets/wrappers/screen_wrapper.dart';
 import 'package:skapka_app/widgets/basic_expansion_tile.dart';
 
@@ -33,11 +33,6 @@ class ConnectAccountsDependentsScreen extends StatelessWidget {
     final AccountProvider accountProvider = context.read<AccountProvider>();
     final SupabaseService supabaseService = SupabaseService();
     final LoadingProvider loadingProvider = context.read<LoadingProvider>();
-    // Load or fetch group accounts from Supabase
-    // Load or fetch dependents from Supabase
-    // Load or fetch account_dependents connections from Supabase
-    // Show list of accounts with their dependents underneath with bin icon to remove connection
-    // Plus icon next to the account name surname to open screen with list of dependents to connect
 
     loadData({bool forceRefresh = false}) async {
       final groupId = accountProvider.groupId;
@@ -77,11 +72,9 @@ class ConnectAccountsDependentsScreen extends StatelessWidget {
                 adminProvider.groupAccountsDependentsRelations,
                 accountDependentsRelations,
               )) {
-            for (var d in accountDependentsRelations) {
-              debugPrint(
-                'AccountDependentRelation: AccountId=${d.accountId}, DependentId=${d.dependentId}, isMainDependent=${d.isMainDependent}',
-              );
-            }
+            debugPrint(
+              'Fetched ${accountDependentsRelations.length} account_dependents relations.',
+            );
             adminProvider.setGroupAccountDependents(accountDependentsRelations);
           }
         }
@@ -131,236 +124,251 @@ class ConnectAccountsDependentsScreen extends StatelessWidget {
       }
     }
 
-    return ScreenWrapper(
-      appBar: Appbar(
-        onBackPressed: () {
-          adminProvider.clearSurnameSearchQuery();
-          context.router.pop();
-        },
-        showBackChevron: true,
-        showSettingsIcon: false,
-        screenName:
-            context.localizations.admin_panel_screen_button_connect_dependents,
-      ),
-      body: SingleChildScrollView(
-        child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.only(
-              bottom: AppSpacing.bottomSpace + AppSpacing.xxLarge,
-            ),
-            child: Column(
-              spacing: AppSpacing.large,
-              children: [
-                // Search bar for accounts
-                Column(
-                  children: [
-                    CustomForm(
-                      showSuffixIcon: false,
-                      controller: TextEditingController(),
-                      onChanged: (String value) {
-                        // Update provider and debounce the actual fetch
-                        adminProvider.setSurnameSearchQueryDebounced(
-                          value,
-                          loadData,
-                        );
-                      },
-                      labelText: context
-                          .localizations
-                          .admin_panel_screen_search_field_hint,
-                    ),
-                  ],
-                ),
-                // List of accounts to approve
-                FutureBuilder(
-                  future: loadData(),
-                  builder: (context, asyncSnapshot) {
-                    if (asyncSnapshot.connectionState ==
-                        ConnectionState.waiting) {
-                      return const LoadingRotatingLogo();
-                    }
-                    return Consumer<AdminPanelProvider>(
-                      builder: (context, adminProvider, child) => Column(
-                        spacing: AppSpacing.medium,
-                        children: [
-                          ...adminProvider.groupAccounts
-                              .where((account) {
-                                final query = adminProvider.surnameSearchQuery
-                                    .toLowerCase();
-                                final name = account.name.toLowerCase();
-                                final surname = account.surname.toLowerCase();
-                                return name.contains(query) ||
-                                    surname.contains(query);
-                              })
-                              .map((account) {
-                                final relations = adminProvider
-                                    .groupAccountsDependentsRelations
-                                    .where(
-                                      (relation) =>
-                                          relation.accountId ==
-                                          account.accountId,
-                                    );
-
-                                final accountDependents = relations.map((
-                                  relation,
-                                ) {
-                                  final dependent = adminProvider
-                                      .groupDependents
+    return PopScope(
+      onPopInvokedWithResult: (didPop, result) {
+        adminProvider.clearSurnameSearchQuery();
+      },
+      child: ScreenWrapper(
+        appBar: Appbar(
+          showBackChevron: true,
+          showSettingsIcon: false,
+          screenName: context
+              .localizations
+              .admin_panel_screen_button_connect_dependents,
+        ),
+        body: SingleChildScrollView(
+          child: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.only(
+                bottom: AppSpacing.bottomSpace + AppSpacing.xxLarge,
+              ),
+              child: Column(
+                spacing: AppSpacing.large,
+                children: [
+                  // Search bar for accounts
+                  Column(
+                    children: [
+                      CustomForm(
+                        showSuffixIcon: false,
+                        controller: TextEditingController(),
+                        onChanged: (String value) {
+                          // Update provider and debounce the actual fetch
+                          adminProvider.setSurnameSearchQueryDebounced(
+                            value,
+                            loadData,
+                          );
+                        },
+                        labelText: context
+                            .localizations
+                            .admin_panel_screen_search_field_hint,
+                      ),
+                    ],
+                  ),
+                  // List of accounts to approve
+                  FutureBuilder(
+                    future: loadData(),
+                    builder: (context, asyncSnapshot) {
+                      if (asyncSnapshot.connectionState ==
+                          ConnectionState.waiting) {
+                        return const CenteredLoadingRotatingLogo();
+                      }
+                      return Consumer<AdminPanelProvider>(
+                        builder: (context, adminProvider, child) => Column(
+                          spacing: AppSpacing.medium,
+                          children: [
+                            ...adminProvider.groupAccounts
+                                .where((account) {
+                                  final query = adminProvider.surnameSearchQuery
+                                      .toLowerCase();
+                                  final name = account.name.toLowerCase();
+                                  final surname = account.surname.toLowerCase();
+                                  return name.contains(query) ||
+                                      surname.contains(query);
+                                })
+                                .map((account) {
+                                  final relations = adminProvider
+                                      .groupAccountsDependentsRelations
                                       .where(
-                                        (d) =>
-                                            d.dependentId ==
-                                            relation.dependentId,
-                                      )
-                                      .firstOrNull;
+                                        (relation) =>
+                                            relation.accountId ==
+                                            account.accountId,
+                                      );
 
-                                  if (dependent == null) return null;
+                                  final accountDependents = relations.map((
+                                    relation,
+                                  ) {
+                                    final dependent = adminProvider
+                                        .groupDependents
+                                        .where(
+                                          (d) =>
+                                              d.dependentId ==
+                                              relation.dependentId,
+                                        )
+                                        .firstOrNull;
 
-                                  return AccountDependentModel(
-                                    dependentId: dependent.dependentId,
-                                    isLeader: dependent.isLeader,
-                                    name: dependent.name,
-                                    surname: dependent.surname,
-                                    nickname: dependent.nickname,
-                                    born: dependent.born,
-                                    sex: dependent.sex,
-                                    parent1Email: dependent.parent1Email,
-                                    parent1Phone: dependent.parent1Phone,
-                                    parent2Email: dependent.parent2Email,
-                                    parent2Phone: dependent.parent2Phone,
-                                    contactEmail: dependent.contactEmail,
-                                    contactPhone: dependent.contactPhone,
-                                    troopId: dependent.troopId,
-                                    patrolId: dependent.patrolId,
-                                    isArchived: dependent.isArchived,
-                                    secretCode: dependent.secretCode,
-                                    createdAt: dependent.createdAt,
-                                    groupId: dependent.groupId,
-                                    skautisId: dependent.skautisId,
-                                    notes: const DependentNotesModel(),
-                                    isMainDependent: relation.isMainDependent,
-                                  );
-                                }).whereType<AccountDependentModel>();
-                                return BasicExpansionTile(
-                                  title:
-                                      '${account.name} ${account.surname} (${accountDependents.length})',
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      ...accountDependents.map(
-                                        (dependent) => Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            SingleChildScrollView(
-                                              scrollDirection: Axis.horizontal,
-                                              child: Text(
-                                                '${dependent.name} ${dependent.surname}',
-                                                style: AppTextTheme.bodyLarge(
-                                                  context,
+                                    if (dependent == null) return null;
+
+                                    return AccountDependentModel(
+                                      dependentId: dependent.dependentId,
+                                      isLeader: dependent.isLeader,
+                                      name: dependent.name,
+                                      surname: dependent.surname,
+                                      nickname: dependent.nickname,
+                                      born: dependent.born,
+                                      sex: dependent.sex,
+                                      parent1Email: dependent.parent1Email,
+                                      parent1Phone: dependent.parent1Phone,
+                                      parent2Email: dependent.parent2Email,
+                                      parent2Phone: dependent.parent2Phone,
+                                      contactEmail: dependent.contactEmail,
+                                      contactPhone: dependent.contactPhone,
+                                      troopId: dependent.troopId,
+                                      patrolId: dependent.patrolId,
+                                      isArchived: dependent.isArchived,
+                                      secretCode: dependent.secretCode,
+                                      createdAt: dependent.createdAt,
+                                      groupId: dependent.groupId,
+                                      skautisId: dependent.skautisId,
+                                      notes: const DependentNotesModel(),
+                                      isMainDependent: relation.isMainDependent,
+                                    );
+                                  }).whereType<AccountDependentModel>();
+                                  return BasicExpansionTile(
+                                    title:
+                                        '${account.name} ${account.surname} (${accountDependents.length})',
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        ...accountDependents.map(
+                                          (dependent) => Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              SingleChildScrollView(
+                                                scrollDirection:
+                                                    Axis.horizontal,
+                                                child: Text(
+                                                  '${dependent.name} ${dependent.surname}',
+                                                  style: AppTextTheme.bodyLarge(
+                                                    context,
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                            SizedBox(width: AppSpacing.medium),
-                                            MainButton(
-                                              style: ButtonStyleTypes.text,
-                                              text: '',
-                                              type: ButtonType.icon,
-                                              variant: ButtonStylesVariants
-                                                  .destructive,
-                                              state: dependent.isMainDependent
-                                                  ? ButtonState.disabled
-                                                  : ButtonState.released,
-                                              iconAsset:
-                                                  'assets/icons/trash.svg',
-                                              onPressed: () => showDialog(
-                                                context: context,
-                                                builder: (_) {
-                                                  return LargeDialog(
-                                                    type: LargeDialogType
-                                                        .negative,
-                                                    title: context
-                                                        .localizations
-                                                        .admin_panel_screen_connect_accounts_dependents_delete_connection_dialog_title,
-                                                    description: context
-                                                        .localizations
-                                                        .admin_panel_screen_connect_accounts_dependents_delete_connection_dialog_subtitle(
-                                                          '${dependent.name} ${dependent.surname}',
-                                                          '${account.name} ${account.surname}',
-                                                        ),
-                                                    primaryButtonText: context
-                                                        .localizations
-                                                        .admin_panel_screen_connect_accounts_dependents_delete_connection_dialog_title,
-                                                    secondaryButtonText: context
-                                                        .localizations
-                                                        .cancel,
-                                                    onPrimaryPressed: () {
-                                                      if (dependent
-                                                          .isMainDependent) {
-                                                        context.pop();
-                                                        BottomDialog.show(
-                                                          context,
-                                                          type: BottomDialogType
-                                                              .negative,
-                                                          description: context
-                                                              .localizations
-                                                              .admin_panel_screen_connect_accounts_dependents_delete_connection_error_main_dependent(
-                                                                '${dependent.name} ${dependent.surname}',
-                                                                '${account.name} ${account.surname}',
-                                                              ),
-                                                        );
-                                                      } else {
-                                                        disconnectDependentFromAccount(
-                                                          dependent,
-                                                          account,
-                                                          adminProvider,
-                                                          supabaseService,
-                                                          loadingProvider,
-                                                          context,
-                                                        );
-                                                      }
-                                                    },
-                                                    onSecondaryPressed: () {
-                                                      context.pop();
-                                                    },
-                                                  );
-                                                },
+                                              SizedBox(
+                                                width: AppSpacing.medium,
                                               ),
-                                            ),
-                                          ],
+                                              MainButton(
+                                                style: ButtonStyleTypes.text,
+                                                text: '',
+                                                type: ButtonType.icon,
+                                                variant: ButtonStylesVariants
+                                                    .destructive,
+                                                state: dependent.isMainDependent
+                                                    ? ButtonState.disabled
+                                                    : ButtonState.released,
+                                                iconAsset:
+                                                    'assets/icons/trash.svg',
+                                                onPressed: () => showDialog(
+                                                  context: context,
+                                                  builder: (_) {
+                                                    return LargeDialog(
+                                                      type: LargeDialogType
+                                                          .negative,
+                                                      title: context
+                                                          .localizations
+                                                          .admin_panel_screen_connect_accounts_dependents_delete_connection_dialog_title,
+                                                      description: context
+                                                          .localizations
+                                                          .admin_panel_screen_connect_accounts_dependents_delete_connection_dialog_subtitle(
+                                                            '${dependent.name} ${dependent.surname}',
+                                                            '${account.name} ${account.surname}',
+                                                          ),
+                                                      primaryButtonText: context
+                                                          .localizations
+                                                          .admin_panel_screen_connect_accounts_dependents_delete_connection_dialog_title,
+                                                      secondaryButtonText:
+                                                          context
+                                                              .localizations
+                                                              .cancel,
+                                                      onPrimaryPressed: () {
+                                                        if (dependent
+                                                            .isMainDependent) {
+                                                          context.pop();
+                                                          BottomDialog.show(
+                                                            context,
+                                                            type:
+                                                                BottomDialogType
+                                                                    .negative,
+                                                            description: context
+                                                                .localizations
+                                                                .admin_panel_screen_connect_accounts_dependents_delete_connection_error_main_dependent(
+                                                                  '${dependent.name} ${dependent.surname}',
+                                                                  '${account.name} ${account.surname}',
+                                                                ),
+                                                          );
+                                                        } else {
+                                                          disconnectDependentFromAccount(
+                                                            dependent,
+                                                            account,
+                                                            adminProvider,
+                                                            supabaseService,
+                                                            loadingProvider,
+                                                            context,
+                                                          );
+                                                        }
+                                                      },
+                                                      onSecondaryPressed: () {
+                                                        context.pop();
+                                                      },
+                                                    );
+                                                  },
+                                                ),
+                                              ),
+                                            ],
+                                          ),
                                         ),
-                                      ),
-                                      SizedBox(height: AppSpacing.medium),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          MainButton(
-                                            style: ButtonStyleTypes.outlined,
-                                            variant:
-                                                ButtonStylesVariants.normal,
-                                            text: context
-                                                .localizations
-                                                .admin_panel_screen_connect_accounts_dependents_add_connection_button_text,
-                                            onPressed: () =>
-                                                context.router.push(
+                                        SizedBox(height: AppSpacing.medium),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            MainButton(
+                                              style: ButtonStyleTypes.outlined,
+                                              variant:
+                                                  ButtonStylesVariants.normal,
+                                              text: context
+                                                  .localizations
+                                                  .admin_panel_screen_connect_accounts_dependents_add_connection_button_text,
+                                              onPressed: () async {
+                                                await context.router.push(
                                                   AddDependentsToAccountRoute(
                                                     adminProvider:
                                                         adminProvider,
+                                                    account: account,
+                                                    alreadyConnectedDependents:
+                                                        accountDependents
+                                                            .toList(),
                                                   ),
-                                                ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                );
-                              }),
-                        ],
-                      ),
-                    );
-                  },
-                ),
-              ],
+                                                );
+                                                await loadData(
+                                                  forceRefresh: true,
+                                                );
+                                              },
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                }),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
         ),

@@ -1837,7 +1837,7 @@ abstract class AppLocalizations {
   /// No description provided for @admin_panel_screen_connect_accounts_dependents_add_connection_screen_title.
   ///
   /// In cs, this message translates to:
-  /// **'{account_name_surname} – Přidat závislou osobu'**
+  /// **'{account_name_surname} – Přidat podúčty'**
   String
   admin_panel_screen_connect_accounts_dependents_add_connection_screen_title(
     Object account_name_surname,

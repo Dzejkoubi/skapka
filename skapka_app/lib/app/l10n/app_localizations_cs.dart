@@ -1112,7 +1112,7 @@ class AppLocalizationsCs extends AppLocalizations {
   admin_panel_screen_connect_accounts_dependents_add_connection_screen_title(
     Object account_name_surname,
   ) {
-    return '$account_name_surname – Přidat závislou osobu';
+    return '$account_name_surname – Přidat podúčty';
   }
 
   @override

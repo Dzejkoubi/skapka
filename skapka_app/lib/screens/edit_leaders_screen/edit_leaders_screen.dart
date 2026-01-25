@@ -12,7 +12,7 @@ import 'package:skapka_app/screens/edit_leaders_screen/widgets/edit_leaders_lead
 import 'package:skapka_app/services/supabase_service.dart';
 import 'package:skapka_app/widgets/appbar/appbar.dart';
 import 'package:skapka_app/widgets/forms/custom_form.dart';
-import 'package:skapka_app/widgets/loading_floating_logo/loading_rotating_logo.dart';
+import 'package:skapka_app/widgets/loading_floating_logo/centered_loading_rotating_logo.dart';
 import 'package:skapka_app/widgets/wrappers/screen_wrapper.dart';
 
 @RoutePage()
@@ -57,154 +57,148 @@ class EditLeadersScreen extends StatelessWidget {
       }
     }
 
-    return ScreenWrapper(
-      appBar: Appbar(
-        onBackPressed: () {
-          adminProvider.clearSurnameSearchQuery();
-          context.router.pop();
-        },
-        showBackChevron: true,
-        showSettingsIcon: false,
-        screenName:
-            context.localizations.admin_panel_screen_button_edit_leaders,
-      ),
-      body: SingleChildScrollView(
-        child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.only(
-              bottom: AppSpacing.bottomSpace + AppSpacing.xxLarge,
-            ),
-            child: Column(
-              spacing: AppSpacing.large,
-              children: [
-                CustomForm(
-                  showSuffixIcon: false,
-                  controller: TextEditingController(),
-                  onChanged: (String value) {
-                    // Update provider and debounce the actual fetch
-                    adminProvider.setSurnameSearchQueryDebounced(
-                      value,
-                      () async {},
-                    );
-                  },
-                  labelText: context
-                      .localizations
-                      .admin_panel_screen_search_field_hint,
-                ),
-                FutureBuilder(
-                  future: loadData(),
-                  builder: (context, asyncSnapshot) {
-                    if (asyncSnapshot.connectionState ==
-                        ConnectionState.waiting) {
-                      return SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.5,
-                        child: Center(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SizedBox(height: AppSpacing.medium),
-                              LoadingRotatingLogo(),
-                              SizedBox(height: AppSpacing.medium),
-                            ],
-                          ),
-                        ),
+    return PopScope(
+      onPopInvokedWithResult: (didPop, result) {
+        adminProvider.clearSurnameSearchQuery();
+      },
+      child: ScreenWrapper(
+        appBar: Appbar(
+          showBackChevron: true,
+          showSettingsIcon: false,
+          screenName:
+              context.localizations.admin_panel_screen_button_edit_leaders,
+        ),
+        body: SingleChildScrollView(
+          child: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.only(
+                bottom: AppSpacing.bottomSpace + AppSpacing.xxLarge,
+              ),
+              child: Column(
+                spacing: AppSpacing.large,
+                children: [
+                  CustomForm(
+                    showSuffixIcon: false,
+                    controller: TextEditingController(),
+                    onChanged: (String value) {
+                      // Update provider and debounce the actual fetch
+                      adminProvider.setSurnameSearchQueryDebounced(
+                        value,
+                        () async {},
                       );
-                    }
-                    return Consumer<AdminPanelProvider>(
-                      builder: (context, adminProvider, child) {
-                        final query = adminProvider.surnameSearchQuery
-                            .toLowerCase();
-                        final dependents = adminProvider.groupDependents.where((
-                          d,
-                        ) {
-                          if (query.isEmpty) return true;
-                          final fullName = '${d.name} ${d.surname}'
+                    },
+                    labelText: context
+                        .localizations
+                        .admin_panel_screen_search_field_hint,
+                  ),
+                  FutureBuilder(
+                    future: loadData(),
+                    builder: (context, asyncSnapshot) {
+                      if (asyncSnapshot.connectionState ==
+                          ConnectionState.waiting) {
+                        return CenteredLoadingRotatingLogo();
+                      }
+                      return Consumer<AdminPanelProvider>(
+                        builder: (context, adminProvider, child) {
+                          final query = adminProvider.surnameSearchQuery
                               .toLowerCase();
-                          final reversedName = '${d.surname} ${d.name}'
-                              .toLowerCase();
-                          return fullName.contains(query) ||
-                              reversedName.contains(query);
-                        }).toList();
+                          final dependents = adminProvider.groupDependents
+                              .where((d) {
+                                if (query.isEmpty) return true;
+                                final fullName = '${d.name} ${d.surname}'
+                                    .toLowerCase();
+                                final reversedName = '${d.surname} ${d.name}'
+                                    .toLowerCase();
+                                return fullName.contains(query) ||
+                                    reversedName.contains(query);
+                              })
+                              .toList();
 
-                        final leaders = adminProvider.groupLeaders;
+                          final leaders = adminProvider.groupLeaders;
 
-                        final Set<String> dependentIdsWithLeader = leaders
-                            .map((leader) => leader.dependentId)
-                            .toSet();
+                          final Set<String> dependentIdsWithLeader = leaders
+                              .map((leader) => leader.dependentId)
+                              .toSet();
 
-                        final leaderDependents = dependents
-                            .where((d) => d.isLeader)
-                            .map((d) {
-                              // Find all patrols this dependent is a leader of
-                              final leaderOfPatrols = leaders
-                                  .where((l) => l.dependentId == d.dependentId)
-                                  .map((l) => l.patrolId)
-                                  .toList();
+                          final leaderDependents = dependents
+                              .where((d) => d.isLeader)
+                              .map((d) {
+                                // Find all patrols this dependent is a leader of
+                                final leaderOfPatrols = leaders
+                                    .where(
+                                      (l) => l.dependentId == d.dependentId,
+                                    )
+                                    .map((l) => l.patrolId)
+                                    .toList();
 
-                              return LeaderDependentModel(
-                                dependent: d,
-                                leaderOfPatrolId: leaderOfPatrols,
-                              );
-                            })
-                            .toList();
+                                return LeaderDependentModel(
+                                  dependent: d,
+                                  leaderOfPatrolId: leaderOfPatrols,
+                                );
+                              })
+                              .toList();
 
-                        // Sort leaders: first those who have a leader entry (assigned patrols), then others
-                        leaderDependents.sort((a, b) {
-                          // Check if leader has entry in leaders table (has assigned patrols)
-                          final aHasLeadersEntry = dependentIdsWithLeader
-                              .contains(a.dependent.dependentId);
-                          final bHasLeadersEntry = dependentIdsWithLeader
-                              .contains(b.dependent.dependentId);
+                          // Sort leaders: first those who have a leader entry (assigned patrols), then others
+                          leaderDependents.sort((a, b) {
+                            // Check if leader has entry in leaders table (has assigned patrols)
+                            final aHasLeadersEntry = dependentIdsWithLeader
+                                .contains(a.dependent.dependentId);
+                            final bHasLeadersEntry = dependentIdsWithLeader
+                                .contains(b.dependent.dependentId);
 
-                          if (aHasLeadersEntry && !bHasLeadersEntry) return -1;
-                          if (!aHasLeadersEntry && bHasLeadersEntry) return 1;
-                          return a.dependent.surname.compareTo(
-                            b.dependent.surname,
+                            if (aHasLeadersEntry && !bHasLeadersEntry)
+                              return -1;
+                            if (!aHasLeadersEntry && bHasLeadersEntry) return 1;
+                            return a.dependent.surname.compareTo(
+                              b.dependent.surname,
+                            );
+                          });
+
+                          final regularDependents = dependents
+                              .where((d) => !d.isLeader)
+                              .toList();
+                          regularDependents.sort(
+                            (a, b) => a.surname.compareTo(b.surname),
                           );
-                        });
 
-                        final regularDependents = dependents
-                            .where((d) => !d.isLeader)
-                            .toList();
-                        regularDependents.sort(
-                          (a, b) => a.surname.compareTo(b.surname),
-                        );
-
-                        return Column(
-                          spacing: AppSpacing.medium,
-                          children: [
-                            if (leaderDependents.isNotEmpty)
-                              ...leaderDependents.map(
-                                (leader) => EditLeadersLeaderBox(
-                                  leader: leader,
-                                  onRefresh: () {
-                                    adminProvider.groupDependents.clear();
-                                    adminProvider.groupLeaders.clear();
-                                    loadData();
-                                  },
+                          return Column(
+                            spacing: AppSpacing.medium,
+                            children: [
+                              if (leaderDependents.isNotEmpty)
+                                ...leaderDependents.map(
+                                  (leader) => EditLeadersLeaderBox(
+                                    leader: leader,
+                                    onRefresh: () {
+                                      adminProvider.groupDependents.clear();
+                                      adminProvider.groupLeaders.clear();
+                                      loadData();
+                                    },
+                                  ),
                                 ),
-                              ),
-                            if (leaderDependents.isNotEmpty &&
-                                regularDependents.isNotEmpty)
-                              Divider(color: context.colors.background.medium),
-                            if (regularDependents.isNotEmpty)
-                              ...regularDependents.map(
-                                (dependent) => EditLeadersLeaderBox(
-                                  dependent: dependent,
-                                  onRefresh: () {
-                                    adminProvider.groupDependents.clear();
-                                    adminProvider.groupLeaders.clear();
-                                    loadData();
-                                  },
+                              if (leaderDependents.isNotEmpty &&
+                                  regularDependents.isNotEmpty)
+                                Divider(
+                                  color: context.colors.background.medium,
                                 ),
-                              ),
-                          ],
-                        );
-                      },
-                    );
-                  },
-                ),
-              ],
+                              if (regularDependents.isNotEmpty)
+                                ...regularDependents.map(
+                                  (dependent) => EditLeadersLeaderBox(
+                                    dependent: dependent,
+                                    onRefresh: () {
+                                      adminProvider.groupDependents.clear();
+                                      adminProvider.groupLeaders.clear();
+                                      loadData();
+                                    },
+                                  ),
+                                ),
+                            ],
+                          );
+                        },
+                      );
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
         ),

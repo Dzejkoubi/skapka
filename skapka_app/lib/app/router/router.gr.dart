@@ -10,19 +10,20 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i29;
-import 'package:collection/collection.dart' as _i37;
-import 'package:flutter/foundation.dart' as _i38;
-import 'package:flutter/material.dart' as _i31;
+import 'package:collection/collection.dart' as _i34;
+import 'package:flutter/foundation.dart' as _i40;
+import 'package:flutter/material.dart' as _i33;
+import 'package:skapka_app/models/account_model.dart' as _i31;
 import 'package:skapka_app/models/dependents/account_dependent_model.dart'
-    as _i40;
-import 'package:skapka_app/models/dependents/dependent_model.dart' as _i32;
-import 'package:skapka_app/models/event_model.dart' as _i39;
-import 'package:skapka_app/models/event_participant_model.dart' as _i36;
-import 'package:skapka_app/models/leader_model.dart' as _i35;
-import 'package:skapka_app/models/patrol_model.dart' as _i33;
-import 'package:skapka_app/models/troop_model.dart' as _i34;
+    as _i32;
+import 'package:skapka_app/models/dependents/dependent_model.dart' as _i35;
+import 'package:skapka_app/models/event_model.dart' as _i41;
+import 'package:skapka_app/models/event_participant_model.dart' as _i39;
+import 'package:skapka_app/models/leader_model.dart' as _i38;
+import 'package:skapka_app/models/patrol_model.dart' as _i36;
+import 'package:skapka_app/models/troop_model.dart' as _i37;
 import 'package:skapka_app/providers/admin_panel_provider.dart' as _i30;
-import 'package:skapka_app/providers/units_provider.dart' as _i41;
+import 'package:skapka_app/providers/units_provider.dart' as _i42;
 import 'package:skapka_app/screens/account_not_approved_screen/account_not_approved_screen.dart'
     as _i1;
 import 'package:skapka_app/screens/admin_panel_screen/admin_panel_screen.dart'
@@ -98,12 +99,16 @@ class AddDependentsToAccountRoute
     extends _i29.PageRouteInfo<AddDependentsToAccountRouteArgs> {
   AddDependentsToAccountRoute({
     required _i30.AdminPanelProvider adminProvider,
-    _i31.Key? key,
+    required _i31.AccountModel account,
+    required List<_i32.AccountDependentModel> alreadyConnectedDependents,
+    _i33.Key? key,
     List<_i29.PageRouteInfo>? children,
   }) : super(
          AddDependentsToAccountRoute.name,
          args: AddDependentsToAccountRouteArgs(
            adminProvider: adminProvider,
+           account: account,
+           alreadyConnectedDependents: alreadyConnectedDependents,
            key: key,
          ),
          initialChildren: children,
@@ -117,6 +122,8 @@ class AddDependentsToAccountRoute
       final args = data.argsAs<AddDependentsToAccountRouteArgs>();
       return _i2.AddDependentsToAccountScreen(
         adminProvider: args.adminProvider,
+        account: args.account,
+        alreadyConnectedDependents: args.alreadyConnectedDependents,
         key: args.key,
       );
     },
@@ -126,27 +133,45 @@ class AddDependentsToAccountRoute
 class AddDependentsToAccountRouteArgs {
   const AddDependentsToAccountRouteArgs({
     required this.adminProvider,
+    required this.account,
+    required this.alreadyConnectedDependents,
     this.key,
   });
 
   final _i30.AdminPanelProvider adminProvider;
 
-  final _i31.Key? key;
+  final _i31.AccountModel account;
+
+  final List<_i32.AccountDependentModel> alreadyConnectedDependents;
+
+  final _i33.Key? key;
 
   @override
   String toString() {
-    return 'AddDependentsToAccountRouteArgs{adminProvider: $adminProvider, key: $key}';
+    return 'AddDependentsToAccountRouteArgs{adminProvider: $adminProvider, account: $account, alreadyConnectedDependents: $alreadyConnectedDependents, key: $key}';
   }
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
     if (other is! AddDependentsToAccountRouteArgs) return false;
-    return adminProvider == other.adminProvider && key == other.key;
+    return adminProvider == other.adminProvider &&
+        account == other.account &&
+        const _i34.ListEquality<_i32.AccountDependentModel>().equals(
+          alreadyConnectedDependents,
+          other.alreadyConnectedDependents,
+        ) &&
+        key == other.key;
   }
 
   @override
-  int get hashCode => adminProvider.hashCode ^ key.hashCode;
+  int get hashCode =>
+      adminProvider.hashCode ^
+      account.hashCode ^
+      const _i34.ListEquality<_i32.AccountDependentModel>().hash(
+        alreadyConnectedDependents,
+      ) ^
+      key.hashCode;
 }
 
 /// generated route for
@@ -250,7 +275,7 @@ class ConnectAccountsDependentsRoute extends _i29.PageRouteInfo<void> {
 class CreateEditEventInstructionsRoute
     extends _i29.PageRouteInfo<CreateEditEventInstructionsRouteArgs> {
   CreateEditEventInstructionsRoute({
-    _i31.Key? key,
+    _i33.Key? key,
     String? initialInstructions,
     required dynamic Function(String) onSave,
     List<_i29.PageRouteInfo>? children,
@@ -286,7 +311,7 @@ class CreateEditEventInstructionsRouteArgs {
     required this.onSave,
   });
 
-  final _i31.Key? key;
+  final _i33.Key? key;
 
   final String? initialInstructions;
 
@@ -313,12 +338,12 @@ class CreateEditEventInstructionsRouteArgs {
 class CreateEditEventParticipantsRoute
     extends _i29.PageRouteInfo<CreateEditEventParticipantsRouteArgs> {
   CreateEditEventParticipantsRoute({
-    _i31.Key? key,
-    required List<_i32.DependentModel> groupDependents,
-    required List<_i33.PatrolModel> groupPatrols,
-    required List<_i34.TroopModel> groupTroops,
-    required List<_i35.LeaderModel> groupLeaders,
-    required List<_i36.EventParticipantModel> initialParticipants,
+    _i33.Key? key,
+    required List<_i35.DependentModel> groupDependents,
+    required List<_i36.PatrolModel> groupPatrols,
+    required List<_i37.TroopModel> groupTroops,
+    required List<_i38.LeaderModel> groupLeaders,
+    required List<_i39.EventParticipantModel> initialParticipants,
     List<_i29.PageRouteInfo>? children,
   }) : super(
          CreateEditEventParticipantsRoute.name,
@@ -361,17 +386,17 @@ class CreateEditEventParticipantsRouteArgs {
     required this.initialParticipants,
   });
 
-  final _i31.Key? key;
+  final _i33.Key? key;
 
-  final List<_i32.DependentModel> groupDependents;
+  final List<_i35.DependentModel> groupDependents;
 
-  final List<_i33.PatrolModel> groupPatrols;
+  final List<_i36.PatrolModel> groupPatrols;
 
-  final List<_i34.TroopModel> groupTroops;
+  final List<_i37.TroopModel> groupTroops;
 
-  final List<_i35.LeaderModel> groupLeaders;
+  final List<_i38.LeaderModel> groupLeaders;
 
-  final List<_i36.EventParticipantModel> initialParticipants;
+  final List<_i39.EventParticipantModel> initialParticipants;
 
   @override
   String toString() {
@@ -383,23 +408,23 @@ class CreateEditEventParticipantsRouteArgs {
     if (identical(this, other)) return true;
     if (other is! CreateEditEventParticipantsRouteArgs) return false;
     return key == other.key &&
-        const _i37.ListEquality<_i32.DependentModel>().equals(
+        const _i34.ListEquality<_i35.DependentModel>().equals(
           groupDependents,
           other.groupDependents,
         ) &&
-        const _i37.ListEquality<_i33.PatrolModel>().equals(
+        const _i34.ListEquality<_i36.PatrolModel>().equals(
           groupPatrols,
           other.groupPatrols,
         ) &&
-        const _i37.ListEquality<_i34.TroopModel>().equals(
+        const _i34.ListEquality<_i37.TroopModel>().equals(
           groupTroops,
           other.groupTroops,
         ) &&
-        const _i37.ListEquality<_i35.LeaderModel>().equals(
+        const _i34.ListEquality<_i38.LeaderModel>().equals(
           groupLeaders,
           other.groupLeaders,
         ) &&
-        const _i37.ListEquality<_i36.EventParticipantModel>().equals(
+        const _i34.ListEquality<_i39.EventParticipantModel>().equals(
           initialParticipants,
           other.initialParticipants,
         );
@@ -408,11 +433,11 @@ class CreateEditEventParticipantsRouteArgs {
   @override
   int get hashCode =>
       key.hashCode ^
-      const _i37.ListEquality<_i32.DependentModel>().hash(groupDependents) ^
-      const _i37.ListEquality<_i33.PatrolModel>().hash(groupPatrols) ^
-      const _i37.ListEquality<_i34.TroopModel>().hash(groupTroops) ^
-      const _i37.ListEquality<_i35.LeaderModel>().hash(groupLeaders) ^
-      const _i37.ListEquality<_i36.EventParticipantModel>().hash(
+      const _i34.ListEquality<_i35.DependentModel>().hash(groupDependents) ^
+      const _i34.ListEquality<_i36.PatrolModel>().hash(groupPatrols) ^
+      const _i34.ListEquality<_i37.TroopModel>().hash(groupTroops) ^
+      const _i34.ListEquality<_i38.LeaderModel>().hash(groupLeaders) ^
+      const _i34.ListEquality<_i39.EventParticipantModel>().hash(
         initialParticipants,
       );
 }
@@ -422,10 +447,10 @@ class CreateEditEventParticipantsRouteArgs {
 class CreateEditEventRoute
     extends _i29.PageRouteInfo<CreateEditEventRouteArgs> {
   CreateEditEventRoute({
-    _i38.Key? key,
-    _i39.EventModel? event,
-    _i39.EventTimeType? eventTimeType,
-    List<_i36.EventParticipantModel>? eventParticipants,
+    _i40.Key? key,
+    _i41.EventModel? event,
+    _i41.EventTimeType? eventTimeType,
+    List<_i39.EventParticipantModel>? eventParticipants,
     List<_i29.PageRouteInfo>? children,
   }) : super(
          CreateEditEventRoute.name,
@@ -464,13 +489,13 @@ class CreateEditEventRouteArgs {
     this.eventParticipants,
   });
 
-  final _i38.Key? key;
+  final _i40.Key? key;
 
-  final _i39.EventModel? event;
+  final _i41.EventModel? event;
 
-  final _i39.EventTimeType? eventTimeType;
+  final _i41.EventTimeType? eventTimeType;
 
-  final List<_i36.EventParticipantModel>? eventParticipants;
+  final List<_i39.EventParticipantModel>? eventParticipants;
 
   @override
   String toString() {
@@ -484,7 +509,7 @@ class CreateEditEventRouteArgs {
     return key == other.key &&
         event == other.event &&
         eventTimeType == other.eventTimeType &&
-        const _i37.ListEquality<_i36.EventParticipantModel>().equals(
+        const _i34.ListEquality<_i39.EventParticipantModel>().equals(
           eventParticipants,
           other.eventParticipants,
         );
@@ -495,7 +520,7 @@ class CreateEditEventRouteArgs {
       key.hashCode ^
       event.hashCode ^
       eventTimeType.hashCode ^
-      const _i37.ListEquality<_i36.EventParticipantModel>().hash(
+      const _i34.ListEquality<_i39.EventParticipantModel>().hash(
         eventParticipants,
       );
 }
@@ -537,8 +562,8 @@ class EditAccountRightsRoute extends _i29.PageRouteInfo<void> {
 class EditDependentDetailsRoute
     extends _i29.PageRouteInfo<EditDependentDetailsRouteArgs> {
   EditDependentDetailsRoute({
-    _i31.Key? key,
-    required _i40.AccountDependentModel dependent,
+    _i33.Key? key,
+    required _i32.AccountDependentModel dependent,
     List<_i29.PageRouteInfo>? children,
   }) : super(
          EditDependentDetailsRoute.name,
@@ -563,9 +588,9 @@ class EditDependentDetailsRoute
 class EditDependentDetailsRouteArgs {
   const EditDependentDetailsRouteArgs({this.key, required this.dependent});
 
-  final _i31.Key? key;
+  final _i33.Key? key;
 
-  final _i40.AccountDependentModel dependent;
+  final _i32.AccountDependentModel dependent;
 
   @override
   String toString() {
@@ -603,10 +628,10 @@ class EditLeadersRoute extends _i29.PageRouteInfo<void> {
 /// [_i16.EventDetailsScreen]
 class EventDetailsRoute extends _i29.PageRouteInfo<EventDetailsRouteArgs> {
   EventDetailsRoute({
-    _i31.Key? key,
-    required _i39.EventModel event,
-    required _i39.EventTimeType eventTimeType,
-    required _i41.UnitsProvider unitsProvider,
+    _i33.Key? key,
+    required _i41.EventModel event,
+    required _i41.EventTimeType eventTimeType,
+    required _i42.UnitsProvider unitsProvider,
     List<_i29.PageRouteInfo>? children,
   }) : super(
          EventDetailsRoute.name,
@@ -643,13 +668,13 @@ class EventDetailsRouteArgs {
     required this.unitsProvider,
   });
 
-  final _i31.Key? key;
+  final _i33.Key? key;
 
-  final _i39.EventModel event;
+  final _i41.EventModel event;
 
-  final _i39.EventTimeType eventTimeType;
+  final _i41.EventTimeType eventTimeType;
 
-  final _i41.UnitsProvider unitsProvider;
+  final _i42.UnitsProvider unitsProvider;
 
   @override
   String toString() {
@@ -774,7 +799,7 @@ class RegisterRouteFirst extends _i29.PageRouteInfo<void> {
 /// [_i23.RegisterScreenSecond]
 class RegisterRouteSecond extends _i29.PageRouteInfo<RegisterRouteSecondArgs> {
   RegisterRouteSecond({
-    _i31.Key? key,
+    _i33.Key? key,
     required String email,
     required String name,
     required String surname,
@@ -814,7 +839,7 @@ class RegisterRouteSecondArgs {
     required this.surname,
   });
 
-  final _i31.Key? key;
+  final _i33.Key? key;
 
   final String email;
 
@@ -863,8 +888,8 @@ class SendNotificationRoute extends _i29.PageRouteInfo<void> {
 class SetPatrolLeaderRoute
     extends _i29.PageRouteInfo<SetPatrolLeaderRouteArgs> {
   SetPatrolLeaderRoute({
-    _i38.Key? key,
-    required _i32.DependentModel dependent,
+    _i40.Key? key,
+    required _i35.DependentModel dependent,
     List<_i29.PageRouteInfo>? children,
   }) : super(
          SetPatrolLeaderRoute.name,
@@ -889,9 +914,9 @@ class SetPatrolLeaderRoute
 class SetPatrolLeaderRouteArgs {
   const SetPatrolLeaderRouteArgs({this.key, required this.dependent});
 
-  final _i38.Key? key;
+  final _i40.Key? key;
 
-  final _i32.DependentModel dependent;
+  final _i35.DependentModel dependent;
 
   @override
   String toString() {

@@ -1593,13 +1593,6 @@ abstract class AppLocalizations {
     String missing_personal_phone,
   );
 
-  /// No description provided for @admin_panel_screen_db_warning_account_does_not_have_parent_email_filled_in_copy_account_id.
-  ///
-  /// In cs, this message translates to:
-  /// **'Id účtu zkopírováno do schránky.'**
-  String
-  get admin_panel_screen_db_warning_account_does_not_have_parent_email_filled_in_copy_account_id;
-
   /// No description provided for @admin_panel_screen_accounts_management_title.
   ///
   /// In cs, this message translates to:

@@ -922,11 +922,6 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String
-  get admin_panel_screen_db_warning_account_does_not_have_parent_email_filled_in_copy_account_id =>
-      'Account ID copied to clipboard.';
-
-  @override
   String get admin_panel_screen_accounts_management_title =>
       'Accounts & Dependents';
 

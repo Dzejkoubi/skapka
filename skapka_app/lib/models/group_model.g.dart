@@ -12,6 +12,7 @@ _GroupModel _$GroupModelFromJson(Map<String, dynamic> json) => _GroupModel(
   name: json['name'] as String,
 );
 
+// ignore: unused_element
 Map<String, dynamic> _$GroupModelToJson(_GroupModel instance) =>
     <String, dynamic>{
       'group_id': instance.groupId,

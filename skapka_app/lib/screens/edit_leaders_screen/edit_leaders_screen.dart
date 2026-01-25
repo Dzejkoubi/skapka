@@ -142,8 +142,9 @@ class EditLeadersScreen extends StatelessWidget {
                             final bHasLeadersEntry = dependentIdsWithLeader
                                 .contains(b.dependent.dependentId);
 
-                            if (aHasLeadersEntry && !bHasLeadersEntry)
+                            if (aHasLeadersEntry && !bHasLeadersEntry) {
                               return -1;
+                            }
                             if (!aHasLeadersEntry && bHasLeadersEntry) return 1;
                             return a.dependent.surname.compareTo(
                               b.dependent.surname,

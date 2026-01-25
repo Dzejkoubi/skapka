@@ -313,7 +313,6 @@
       }
     }
   },
-  "admin_panel_screen_db_warning_account_does_not_have_parent_email_filled_in_copy_account_id": "Account ID copied to clipboard.",
   "admin_panel_screen_accounts_management_title": "Accounts & Dependents",
   "admin_panel_screen_search_field_hint": "Search by name or surname...",
   "category_admin_panel_screen_approve_accounts": "--- ADMIN PANEL - APPROVE ACCOUNTS ---",

@@ -625,11 +625,33 @@ class AppLocalizationsEn extends AppLocalizations {
       'Write instructions here (Markdown supported)...';
 
   @override
-  String get create_edit_event_screen_meeting_place_text => 'Meeting Place';
+  String get create_edit_event_screen_meeting_place_text => 'Meeting place';
 
   @override
-  String get create_edit_event_screen_meeting_place_description =>
-      'Address or name that the user can search for in maps. If you do not fill it in, the meeting place will not be displayed.';
+  String get create_edit_event_screen_leave_place_text => 'Leaving place';
+
+  @override
+  String get create_edit_event_screen_meeting_and_leave_place_text =>
+      'Meeting and leaving place';
+
+  @override
+  String
+  get create_edit_event_screen_meeting_and_leave_place_same_content_switcher =>
+      'Same';
+
+  @override
+  String
+  get create_edit_event_screen_meeting_and_leave_place_different_content_switcher =>
+      'Different';
+
+  @override
+  String
+  get create_edit_event_screen_meeting_and_leave_place_none_content_switcher =>
+      'None';
+
+  @override
+  String get create_edit_event_screen_meeting_and_leave_place_description =>
+      'Address that the user can search for in maps. If you do not specify the place, the meeting and leaving place will not be displayed.';
 
   @override
   String get create_edit_event_screen_photo_album_link_text =>
@@ -658,6 +680,19 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get create_edit_event_screen_validation_error_start_after_end =>
       'Event start must be before event end.';
+
+  @override
+  String
+  get create_edit_event_screen_validation_error_meeting_leaving_place_empty =>
+      'Please fill in the meeting and leaving place.';
+
+  @override
+  String get create_edit_event_screen_validation_error_meeting_place_empty =>
+      'Please fill in the meeting place.';
+
+  @override
+  String get create_edit_event_screen_validation_error_leave_place_empty =>
+      'Please fill in the leaving place.';
 
   @override
   String get create_edit_event_screen_creating_event_progress_text =>

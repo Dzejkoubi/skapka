@@ -626,8 +626,30 @@ class AppLocalizationsCs extends AppLocalizations {
   String get create_edit_event_screen_meeting_place_text => 'Místo srazu';
 
   @override
-  String get create_edit_event_screen_meeting_place_description =>
-      'Adresa či jméno, které může uživatel vyhledat v mapách. Pokud nevyplníš, místo srazu nebude zobrazeno.';
+  String get create_edit_event_screen_leave_place_text => 'Místo odchodu';
+
+  @override
+  String get create_edit_event_screen_meeting_and_leave_place_text =>
+      'Místo srazu a odchodu';
+
+  @override
+  String
+  get create_edit_event_screen_meeting_and_leave_place_same_content_switcher =>
+      'Stejné';
+
+  @override
+  String
+  get create_edit_event_screen_meeting_and_leave_place_different_content_switcher =>
+      'Jiné';
+
+  @override
+  String
+  get create_edit_event_screen_meeting_and_leave_place_none_content_switcher =>
+      'Žádné';
+
+  @override
+  String get create_edit_event_screen_meeting_and_leave_place_description =>
+      'Adresa kterou uživatel vyhledá v mapách. Pokud místo nespecifikuješ, místo srazu a odchodu nebude zobrazeno.';
 
   @override
   String get create_edit_event_screen_photo_album_link_text =>
@@ -656,6 +678,19 @@ class AppLocalizationsCs extends AppLocalizations {
   @override
   String get create_edit_event_screen_validation_error_start_after_end =>
       'Začátek výpravy musí být před očekávaným koncem výpravy.';
+
+  @override
+  String
+  get create_edit_event_screen_validation_error_meeting_leaving_place_empty =>
+      'Prosím vyplň místo srazu a odchodu.';
+
+  @override
+  String get create_edit_event_screen_validation_error_meeting_place_empty =>
+      'Prosím vyplň místo srazu.';
+
+  @override
+  String get create_edit_event_screen_validation_error_leave_place_empty =>
+      'Prosím vyplň místo odchodu.';
 
   @override
   String get create_edit_event_screen_creating_event_progress_text =>

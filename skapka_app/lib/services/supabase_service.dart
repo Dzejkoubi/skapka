@@ -317,6 +317,7 @@ class SupabaseService {
           'start_date': event.startDate?.toIso8601String(),
           'end_date': event.endDate?.toIso8601String(),
           'meeting_place': event.meetingPlace,
+          'leaving_place': event.leavingPlace,
           'photo_album_link': event.photoAlbumLink,
           'group_id': accountProvider.groupId,
           // Filter out any empty strings from target_patrols to prevent UUID errors
@@ -346,6 +347,7 @@ class SupabaseService {
           'start_date': event.startDate?.toIso8601String(),
           'end_date': event.endDate?.toIso8601String(),
           'meeting_place': event.meetingPlace,
+          'leaving_place': event.leavingPlace,
           'photo_album_link': event.photoAlbumLink,
           'target_patrols': event.targetPatrolsIds,
           'last_edited_by': accountProvider.accountId,

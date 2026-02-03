@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:skapka_app/app/l10n/l10n_extension.dart';
 import 'package:skapka_app/app/router/router.gr.dart';
+import 'package:skapka_app/app/theme/app_decorations.dart';
 import 'package:skapka_app/app/theme/app_spacing.dart';
+import 'package:skapka_app/app/theme/app_text_theme.dart';
 import 'package:skapka_app/models/dependents/dependent_model.dart';
 import 'package:skapka_app/models/event_model.dart';
 import 'package:skapka_app/models/event_participant_model.dart';
@@ -21,6 +23,8 @@ import 'package:skapka_app/screens/create_edit_event_screen.dart/widgets/event_i
 import 'package:skapka_app/screens/create_edit_event_screen.dart/widgets/event_participants_container.dart';
 import 'package:skapka_app/screens/create_edit_event_screen.dart/widgets/event_title_form.dart';
 import 'package:skapka_app/services/supabase_service.dart';
+import 'package:skapka_app/widgets/buttons/content_switcher.dart';
+import 'package:skapka_app/widgets/forms/custom_form.dart';
 import 'package:skapka_app/widgets/forms/form_with_details.dart';
 import 'package:skapka_app/widgets/appbar/appbar.dart';
 import 'package:skapka_app/widgets/dialogs/bottom_dialog.dart';
@@ -63,7 +67,14 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
     closeSignUp: _closeSignUp,
     startDate: _startDate,
     endDate: _endDate,
-    meetingPlace: _meetingPlaceController.text,
+    meetingPlace: _meetingLeavingPlaceIndex != 2
+        ? _meetingPlaceController.text
+        : null,
+    leavingPlace: _meetingLeavingPlaceIndex != 2
+        ? (_meetingLeavingPlaceIndex == 1
+              ? _meetingPlaceController.text
+              : _leavingPlaceController.text)
+        : null,
     photoAlbumLink: _photoAlbumLinkController.text,
     groupId: _accountProvider.groupId,
     targetPatrolsIds: targetPatrolIds,
@@ -154,10 +165,12 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
   late DateTime? _startDate;
   late DateTime? _endDate;
   final TextEditingController _meetingPlaceController = TextEditingController();
+  final TextEditingController _leavingPlaceController = TextEditingController();
   final TextEditingController _photoAlbumLinkController =
       TextEditingController();
   String? lastEditedBy;
   bool isDraft = true;
+  late int _meetingLeavingPlaceIndex;
 
   _ProcessingType _processingType = _ProcessingType.none;
   bool get _isProcessing => _processingType != _ProcessingType.none;
@@ -209,9 +222,25 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
     _startDate = widget.event?.startDate;
     _endDate = widget.event?.endDate;
     _meetingPlaceController.text = widget.event?.meetingPlace ?? '';
+    _leavingPlaceController.text = widget.event?.leavingPlace ?? '';
     _photoAlbumLinkController.text = widget.event?.photoAlbumLink ?? '';
     lastEditedBy = widget.event?.lastEditedBy;
     isDraft = widget.event?.isDraft ?? true;
+
+    // Set meeting/leaving switch button active index
+    if (widget.event != null) {
+      if (widget.event!.meetingPlace == widget.event!.leavingPlace &&
+          (widget.event!.meetingPlace?.isNotEmpty ?? false)) {
+        _meetingLeavingPlaceIndex = 1; // Same
+      } else if ((widget.event!.meetingPlace?.isNotEmpty ?? false) ||
+          (widget.event!.leavingPlace?.isNotEmpty ?? false)) {
+        _meetingLeavingPlaceIndex = 0; // Different
+      } else {
+        _meetingLeavingPlaceIndex = 2; // None
+      }
+    } else {
+      _meetingLeavingPlaceIndex = 2; // None
+    }
   }
 
   /// Fetch and divide group dependents into leaders, children, and 18+ dependents and store them locally
@@ -292,6 +321,26 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
           .localizations
           .create_edit_event_screen_validation_error_start_after_end;
     }
+    if (_meetingLeavingPlaceIndex == 1 &&
+        _meetingPlaceController.text.trim().isEmpty) {
+      return context
+          .localizations
+          .create_edit_event_screen_validation_error_meeting_leaving_place_empty;
+    }
+
+    if (_meetingLeavingPlaceIndex == 0) {
+      if (_meetingPlaceController.text.trim().isEmpty) {
+        return context
+            .localizations
+            .create_edit_event_screen_validation_error_meeting_place_empty;
+      }
+      if (_leavingPlaceController.text.trim().isEmpty) {
+        return context
+            .localizations
+            .create_edit_event_screen_validation_error_leave_place_empty;
+      }
+    }
+
     return null;
   }
 
@@ -578,6 +627,12 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
       oldE.meetingPlace != newE.meetingPlace,
     );
     printDiff(
+      'Leaving Place',
+      oldE.leavingPlace,
+      newE.leavingPlace,
+      oldE.leavingPlace != newE.leavingPlace,
+    );
+    printDiff(
       'Photo Link',
       oldE.photoAlbumLink,
       newE.photoAlbumLink,
@@ -750,14 +805,67 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
                                   });
                                 },
                               ),
-                              FormWithDetails(
-                                textController: _meetingPlaceController,
-                                labelText: context
-                                    .localizations
-                                    .create_edit_event_screen_meeting_place_text,
-                                descriptionText: context
-                                    .localizations
-                                    .create_edit_event_screen_meeting_place_description,
+                              Container(
+                                width: double.infinity,
+                                decoration: AppDecorations.primaryContainer(
+                                  context,
+                                ),
+                                padding: EdgeInsets.all(AppSpacing.small),
+                                child: Column(
+                                  spacing: AppSpacing.medium,
+                                  children: [
+                                    Text(
+                                      context
+                                          .localizations
+                                          .create_edit_event_screen_meeting_and_leave_place_text,
+                                      style: AppTextTheme.titleSmall(context),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                    ContentSwitcher(
+                                      items: [
+                                        context
+                                            .localizations
+                                            .create_edit_event_screen_meeting_and_leave_place_different_content_switcher,
+                                        context
+                                            .localizations
+                                            .create_edit_event_screen_meeting_and_leave_place_same_content_switcher,
+                                        context
+                                            .localizations
+                                            .create_edit_event_screen_meeting_and_leave_place_none_content_switcher,
+                                      ],
+                                      selectedIndex: _meetingLeavingPlaceIndex,
+                                      onChanged: (index) {
+                                        setState(() {
+                                          _meetingLeavingPlaceIndex = index;
+                                        });
+                                      },
+                                    ),
+                                    if (_meetingLeavingPlaceIndex != 2)
+                                      CustomForm(
+                                        onSuffixPressed: () =>
+                                            _meetingPlaceController.clear(),
+                                        controller: _meetingPlaceController,
+                                        labelText:
+                                            _meetingLeavingPlaceIndex == 0
+                                            ? context
+                                                  .localizations
+                                                  .create_edit_event_screen_meeting_place_text
+                                            : context
+                                                  .localizations
+                                                  .create_edit_event_screen_meeting_and_leave_place_text,
+                                      ),
+                                    // If meeting place same as leaving place, show one field
+                                    if (_meetingLeavingPlaceIndex == 0)
+                                      CustomForm(
+                                        onSuffixPressed: () =>
+                                            _leavingPlaceController.clear(),
+                                        controller: _leavingPlaceController,
+                                        labelText: context
+                                            .localizations
+                                            .create_edit_event_screen_leave_place_text,
+                                      ),
+                                  ],
+                                ),
                               ),
                               FormWithDetails(
                                 textController: _photoAlbumLinkController,

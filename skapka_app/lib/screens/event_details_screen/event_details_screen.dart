@@ -283,65 +283,326 @@ class EventDetailsScreen extends StatelessWidget {
                                 ),
                               ],
                             ),
-                          if (event.meetingPlace != null &&
-                              event.meetingPlace!.isNotEmpty)
-                            Column(
-                              spacing: AppSpacing.medium,
-                              children: [
-                                Text(
-                                  textAlign: TextAlign.center,
-                                  AppLocalizations.of(
-                                    context,
-                                  )!.create_edit_event_screen_meeting_place_text,
-                                  style: AppTextTheme.titleLarge(context),
-                                ),
-                                Container(
-                                  decoration: AppDecorations.primaryContainer(
-                                    context,
-                                  ),
-                                  padding: EdgeInsets.symmetric(
-                                    horizontal: AppSpacing.small,
-                                    vertical: AppSpacing.xSmall,
-                                  ),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Expanded(
-                                        child: SingleChildScrollView(
-                                          scrollDirection: Axis.horizontal,
-                                          child: Text(
-                                            event.meetingPlace!,
-                                            style: AppTextTheme.bodySmall(
-                                              context,
+                          Builder(
+                            builder: (context) {
+                              final bool hasMeeting =
+                                  event.meetingPlace?.isNotEmpty ?? false;
+                              final bool hasLeaving =
+                                  event.leavingPlace?.isNotEmpty ?? false;
+
+                              if (!hasMeeting && !hasLeaving) {
+                                return const SizedBox.shrink();
+                              }
+
+                              if (hasMeeting && !hasLeaving) {
+                                return Column(
+                                  spacing: AppSpacing.medium,
+                                  children: [
+                                    Text(
+                                      textAlign: TextAlign.center,
+                                      AppLocalizations.of(
+                                        context,
+                                      )!.create_edit_event_screen_meeting_place_text,
+                                      style: AppTextTheme.titleLarge(context),
+                                    ),
+                                    Container(
+                                      decoration:
+                                          AppDecorations.primaryContainer(
+                                            context,
+                                          ),
+                                      padding: EdgeInsets.symmetric(
+                                        horizontal: AppSpacing.small,
+                                        vertical: AppSpacing.xSmall,
+                                      ),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Expanded(
+                                            child: SingleChildScrollView(
+                                              scrollDirection: Axis.horizontal,
+                                              child: Text(
+                                                event.meetingPlace!,
+                                                style: AppTextTheme.bodySmall(
+                                                  context,
+                                                ),
+                                              ),
                                             ),
                                           ),
+                                          MainButton.text(
+                                            type: ButtonType.icon,
+                                            iconAsset: 'assets/icons/copy.svg',
+                                            onPressed: () {
+                                              Clipboard.setData(
+                                                ClipboardData(
+                                                  text: event.meetingPlace!,
+                                                ),
+                                              );
+                                              BottomDialog.show(
+                                                context,
+                                                type: BottomDialogType.basic,
+                                                description: AppLocalizations.of(
+                                                  context,
+                                                )!.common_copied_to_clipboard,
+                                              );
+                                            },
+                                            text: '',
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                );
+                              }
+
+                              if (!hasMeeting && hasLeaving) {
+                                return Column(
+                                  spacing: AppSpacing.medium,
+                                  children: [
+                                    Text(
+                                      textAlign: TextAlign.center,
+                                      AppLocalizations.of(
+                                        context,
+                                      )!.create_edit_event_screen_leave_place_text,
+                                      style: AppTextTheme.titleLarge(context),
+                                    ),
+                                    Container(
+                                      decoration:
+                                          AppDecorations.primaryContainer(
+                                            context,
+                                          ),
+                                      padding: EdgeInsets.symmetric(
+                                        horizontal: AppSpacing.small,
+                                        vertical: AppSpacing.xSmall,
+                                      ),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Expanded(
+                                            child: SingleChildScrollView(
+                                              scrollDirection: Axis.horizontal,
+                                              child: Text(
+                                                event.leavingPlace!,
+                                                style: AppTextTheme.bodySmall(
+                                                  context,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          MainButton.text(
+                                            type: ButtonType.icon,
+                                            iconAsset: 'assets/icons/copy.svg',
+                                            onPressed: () {
+                                              Clipboard.setData(
+                                                ClipboardData(
+                                                  text: event.leavingPlace!,
+                                                ),
+                                              );
+                                              BottomDialog.show(
+                                                context,
+                                                type: BottomDialogType.basic,
+                                                description: AppLocalizations.of(
+                                                  context,
+                                                )!.common_copied_to_clipboard,
+                                              );
+                                            },
+                                            text: '',
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                );
+                              }
+
+                              if (hasMeeting && hasLeaving) {
+                                if (event.meetingPlace == event.leavingPlace) {
+                                  // Same place
+                                  return Column(
+                                    spacing: AppSpacing.medium,
+                                    children: [
+                                      Text(
+                                        textAlign: TextAlign.center,
+                                        AppLocalizations.of(
+                                          context,
+                                        )!.create_edit_event_screen_meeting_and_leave_place_text,
+                                        style: AppTextTheme.titleLarge(context),
+                                      ),
+                                      Container(
+                                        decoration:
+                                            AppDecorations.primaryContainer(
+                                              context,
+                                            ),
+                                        padding: EdgeInsets.symmetric(
+                                          horizontal: AppSpacing.small,
+                                          vertical: AppSpacing.xSmall,
+                                        ),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Expanded(
+                                              child: SingleChildScrollView(
+                                                scrollDirection:
+                                                    Axis.horizontal,
+                                                child: Text(
+                                                  event.meetingPlace!,
+                                                  style: AppTextTheme.bodySmall(
+                                                    context,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            MainButton.text(
+                                              type: ButtonType.icon,
+                                              iconAsset:
+                                                  'assets/icons/copy.svg',
+                                              onPressed: () {
+                                                Clipboard.setData(
+                                                  ClipboardData(
+                                                    text: event.meetingPlace!,
+                                                  ),
+                                                );
+                                                BottomDialog.show(
+                                                  context,
+                                                  type: BottomDialogType.basic,
+                                                  description: AppLocalizations.of(
+                                                    context,
+                                                  )!.common_copied_to_clipboard,
+                                                );
+                                              },
+                                              text: '',
+                                            ),
+                                          ],
                                         ),
                                       ),
-                                      MainButton.text(
-                                        type: ButtonType.icon,
-                                        iconAsset: 'assets/icons/copy.svg',
-                                        onPressed: () {
-                                          Clipboard.setData(
-                                            ClipboardData(
-                                              text: event.meetingPlace!,
-                                            ),
-                                          );
-                                          BottomDialog.show(
-                                            context,
-                                            type: BottomDialogType.basic,
-                                            description: AppLocalizations.of(
+                                    ],
+                                  );
+                                } else {
+                                  // Different places
+                                  return Column(
+                                    spacing: AppSpacing.medium,
+                                    children: [
+                                      // Meeting place
+                                      Text(
+                                        textAlign: TextAlign.center,
+                                        AppLocalizations.of(
+                                          context,
+                                        )!.create_edit_event_screen_meeting_place_text,
+                                        style: AppTextTheme.titleLarge(context),
+                                      ),
+                                      Container(
+                                        decoration:
+                                            AppDecorations.primaryContainer(
                                               context,
-                                            )!.common_copied_to_clipboard,
-                                          );
-                                        },
-                                        text: '',
+                                            ),
+                                        padding: EdgeInsets.symmetric(
+                                          horizontal: AppSpacing.small,
+                                          vertical: AppSpacing.xSmall,
+                                        ),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Expanded(
+                                              child: SingleChildScrollView(
+                                                scrollDirection:
+                                                    Axis.horizontal,
+                                                child: Text(
+                                                  event.meetingPlace!,
+                                                  style: AppTextTheme.bodySmall(
+                                                    context,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            MainButton.text(
+                                              type: ButtonType.icon,
+                                              iconAsset:
+                                                  'assets/icons/copy.svg',
+                                              onPressed: () {
+                                                Clipboard.setData(
+                                                  ClipboardData(
+                                                    text: event.meetingPlace!,
+                                                  ),
+                                                );
+                                                BottomDialog.show(
+                                                  context,
+                                                  type: BottomDialogType.basic,
+                                                  description: AppLocalizations.of(
+                                                    context,
+                                                  )!.common_copied_to_clipboard,
+                                                );
+                                              },
+                                              text: '',
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      // Leaving place
+                                      Text(
+                                        textAlign: TextAlign.center,
+                                        AppLocalizations.of(
+                                          context,
+                                        )!.create_edit_event_screen_leave_place_text,
+                                        style: AppTextTheme.titleLarge(context),
+                                      ),
+                                      Container(
+                                        decoration:
+                                            AppDecorations.primaryContainer(
+                                              context,
+                                            ),
+                                        padding: EdgeInsets.symmetric(
+                                          horizontal: AppSpacing.small,
+                                          vertical: AppSpacing.xSmall,
+                                        ),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Expanded(
+                                              child: SingleChildScrollView(
+                                                scrollDirection:
+                                                    Axis.horizontal,
+                                                child: Text(
+                                                  event.leavingPlace!,
+                                                  style: AppTextTheme.bodySmall(
+                                                    context,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            MainButton.text(
+                                              type: ButtonType.icon,
+                                              iconAsset:
+                                                  'assets/icons/copy.svg',
+                                              onPressed: () {
+                                                Clipboard.setData(
+                                                  ClipboardData(
+                                                    text: event.leavingPlace!,
+                                                  ),
+                                                );
+                                                BottomDialog.show(
+                                                  context,
+                                                  type: BottomDialogType.basic,
+                                                  description: AppLocalizations.of(
+                                                    context,
+                                                  )!.common_copied_to_clipboard,
+                                                );
+                                              },
+                                              text: '',
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ],
-                                  ),
-                                ),
-                              ],
-                            ),
+                                  );
+                                }
+                              }
+                              return const SizedBox.shrink();
+                            },
+                          ),
                         ],
                       ),
                     );

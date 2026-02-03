@@ -1160,11 +1160,44 @@ abstract class AppLocalizations {
   /// **'Místo srazu'**
   String get create_edit_event_screen_meeting_place_text;
 
-  /// No description provided for @create_edit_event_screen_meeting_place_description.
+  /// No description provided for @create_edit_event_screen_leave_place_text.
   ///
   /// In cs, this message translates to:
-  /// **'Adresa či jméno, které může uživatel vyhledat v mapách. Pokud nevyplníš, místo srazu nebude zobrazeno.'**
-  String get create_edit_event_screen_meeting_place_description;
+  /// **'Místo odchodu'**
+  String get create_edit_event_screen_leave_place_text;
+
+  /// No description provided for @create_edit_event_screen_meeting_and_leave_place_text.
+  ///
+  /// In cs, this message translates to:
+  /// **'Místo srazu a odchodu'**
+  String get create_edit_event_screen_meeting_and_leave_place_text;
+
+  /// No description provided for @create_edit_event_screen_meeting_and_leave_place_same_content_switcher.
+  ///
+  /// In cs, this message translates to:
+  /// **'Stejné'**
+  String
+  get create_edit_event_screen_meeting_and_leave_place_same_content_switcher;
+
+  /// No description provided for @create_edit_event_screen_meeting_and_leave_place_different_content_switcher.
+  ///
+  /// In cs, this message translates to:
+  /// **'Jiné'**
+  String
+  get create_edit_event_screen_meeting_and_leave_place_different_content_switcher;
+
+  /// No description provided for @create_edit_event_screen_meeting_and_leave_place_none_content_switcher.
+  ///
+  /// In cs, this message translates to:
+  /// **'Žádné'**
+  String
+  get create_edit_event_screen_meeting_and_leave_place_none_content_switcher;
+
+  /// No description provided for @create_edit_event_screen_meeting_and_leave_place_description.
+  ///
+  /// In cs, this message translates to:
+  /// **'Adresa kterou uživatel vyhledá v mapách. Pokud místo nespecifikuješ, místo srazu a odchodu nebude zobrazeno.'**
+  String get create_edit_event_screen_meeting_and_leave_place_description;
 
   /// No description provided for @create_edit_event_screen_photo_album_link_text.
   ///
@@ -1207,6 +1240,25 @@ abstract class AppLocalizations {
   /// In cs, this message translates to:
   /// **'Začátek výpravy musí být před očekávaným koncem výpravy.'**
   String get create_edit_event_screen_validation_error_start_after_end;
+
+  /// No description provided for @create_edit_event_screen_validation_error_meeting_leaving_place_empty.
+  ///
+  /// In cs, this message translates to:
+  /// **'Prosím vyplň místo srazu a odchodu.'**
+  String
+  get create_edit_event_screen_validation_error_meeting_leaving_place_empty;
+
+  /// No description provided for @create_edit_event_screen_validation_error_meeting_place_empty.
+  ///
+  /// In cs, this message translates to:
+  /// **'Prosím vyplň místo srazu.'**
+  String get create_edit_event_screen_validation_error_meeting_place_empty;
+
+  /// No description provided for @create_edit_event_screen_validation_error_leave_place_empty.
+  ///
+  /// In cs, this message translates to:
+  /// **'Prosím vyplň místo odchodu.'**
+  String get create_edit_event_screen_validation_error_leave_place_empty;
 
   /// No description provided for @create_edit_event_screen_creating_event_progress_text.
   ///

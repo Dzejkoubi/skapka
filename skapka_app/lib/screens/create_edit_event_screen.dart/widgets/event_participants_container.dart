@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:skapka_app/app/l10n/app_localizations.dart';
 import 'package:skapka_app/app/l10n/l10n_extension.dart';
 import 'package:skapka_app/app/router/router.gr.dart';
 import 'package:skapka_app/app/theme/app_color_theme.dart';
@@ -91,9 +90,9 @@ class EventParticipantsContainer extends StatelessWidget {
                   ),
                   Expanded(
                     child: Text(
-                      AppLocalizations.of(
-                        context,
-                      )!.create_edit_event_screen_select_participants_text,
+                      context
+                          .localizations
+                          .create_edit_event_screen_select_participants_text,
                       style: AppTextTheme.titleSmall(context),
                       textAlign: TextAlign.center,
                     ),

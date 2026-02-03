@@ -23,6 +23,7 @@ _EventModel _$EventModelFromJson(Map<String, dynamic> json) => _EventModel(
       ? null
       : DateTime.parse(json['end_date'] as String),
   meetingPlace: json['meeting_place'] as String?,
+  leavingPlace: json['leaving_place'] as String?,
   photoAlbumLink: json['photo_album_link'] as String?,
   groupId: json['group_id'] as String,
   targetPatrolsIds: (json['target_patrols_ids'] as List<dynamic>?)
@@ -42,6 +43,7 @@ Map<String, dynamic> _$EventModelToJson(_EventModel instance) =>
       'start_date': instance.startDate?.toIso8601String(),
       'end_date': instance.endDate?.toIso8601String(),
       'meeting_place': instance.meetingPlace,
+      'leaving_place': instance.leavingPlace,
       'photo_album_link': instance.photoAlbumLink,
       'group_id': instance.groupId,
       'target_patrols_ids': instance.targetPatrolsIds,

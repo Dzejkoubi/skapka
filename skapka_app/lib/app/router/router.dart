@@ -52,6 +52,7 @@ class AppRouter extends RootStackRouter {
       guards: [LeaderGuard()],
       fullscreenDialog: true,
     ),
+    AutoRoute(page: LiveEventAttendanceRoute.page, guards: [LeaderGuard()]),
 
     // Development and showcase routes
     AutoRoute(page: AdminPanelRoute.page, guards: [AdminGuard()]),

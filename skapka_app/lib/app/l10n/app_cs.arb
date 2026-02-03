@@ -1,7 +1,7 @@
 {
   "@@locale": "cs",
   "language": "Čeština",
-  "category_common": "--- SPOLEČNÉ ---",
+  "category_common": "--- COMMON ---",
   "yes": "Ano",
   "no": "Ne",
   "cancel": "Zrušit",
@@ -32,18 +32,18 @@
   "something_is_missing_title_8": "Tady lišky dávají dobrou noc... 🦊",
   "something_is_missing_title_9": "Pusto prázdno... 🕳️",
   "something_is_missing_title_10": "Zeje to tu prázdnotou... 💨",
-  "category_navigation": "--- NAVIGACE ---",
+  "category_navigation": "--- NAVIGATION ---",
   "navbar_dependents": "Osoby",
   "navbar_events": "Výpravy",
   "navbar_calendar": "Kalendář",
   "navbar_info": "Informace",
-  "category_welcome_screen": "--- UVÍTACÍ OBRAZOVKA ---",
+  "category_welcome_screen": "--- WELCOME SCREEN ---",
   "welcome_screen_title": "Vítej ve\nSkapce 👋",
   "welcome_screen_login_button_text": "Přihlásit se",
   "welcome_screen_register_button_text": "Registrovat se",
   "welcome_screen_songbook_button_text": "Zpěvník",
   "welcome_screen_no_internet_connection": "Žádné připojení k internetu. Zkontroluj prosím své WiFi nebo mobilní data.",
-  "category_login_screen": "--- PŘIHLÁŠENÍ ---",
+  "category_login_screen": "--- LOGIN SCREEN ---",
   "login_screen_title": "Přihlášení",
   "login_screen_email_hint": "E-mail",
   "login_screen_password_hint": "Heslo",
@@ -57,7 +57,7 @@
   "login_screen_login_error_email_invalid": "Pozor, takhle přece nevypadá e-mail.",
   "login_screen_login_success": "Přihlášení proběhlo úspěšně! 🎉",
   "login_screen_login_error_generic": "Něco se nepovedlo. Zkus to prosím znovu.",
-  "category_register_screen": "--- REGISTRACE ---",
+  "category_register_screen": "--- REGISTER SCREEN ---",
   "register_screen_title": "Registrace",
   "register_screen_1_name_hint": "Jméno",
   "register_screen_1_surname_hint": "Příjmení",
@@ -78,7 +78,7 @@
   "register_screen_2_registration_error_rate_limit": "Příliš mnoho pokusů. Zkus to prosím později.",
   "register_screen_2_registration_error_weak_password": "Heslo je příliš slabé.",
   "register_screen_2_registration_error_generic": "Registrace se nezdařila. Zkus to prosím znovu.",
-  "category_account_not_approved_screen": "--- OBRAZOVKA NESCHVÁLENÉHO ÚČTU ---",
+  "category_account_not_approved_screen": "--- ACCOUNT NOT APPROVED SCREEN ---",
   "account_not_approved_screen_title": "Účet ještě nebyl schválen",
   "account_not_approved_screen_text": "Administrátor musí tvůj účet{name_surname}nejdřív schválit, než se budeš moct přihlásit. Jakmile to udělá, přijde ti e-mail.",
   "@account_not_approved_screen_text": {
@@ -107,7 +107,7 @@
   "account_not_approved_screen_delete_account_dialog_primary_button_text": "Smazat účet",
   "account_not_approved_screen_delete_success": "Tvůj účet byl smazán. 👋",
   "account_not_approved_screen_delete_error": "Smazání účtu se nezdařilo. Zkus to prosím později.",
-  "category_events_screen": "--- VÝPRAVY ---",
+  "category_events_screen": "--- EVENTS SCREEN ---",
   "events_screen_title": "Výpravy",
   "events_screen_no_events_text": "{username} aktuálně nemá žádnou aktivní výpravu.",
   "@events_screen_no_events_text": {
@@ -117,7 +117,7 @@
       }
     }
   },
-  "category_event_box_widget": "--- WIDGET VÝPRAVY ---",
+  "category_event_box_widget": "--- EVENT BOX WIDGET ---",
   "event_box_number_of_kids_text": "{number_of_kids} dětí",
   "@event_box_number_of_kids_text": {
     "placeholders": {
@@ -134,7 +134,7 @@
   "event_box_event_single_day_text": "Sraz-Konec: ",
   "event_box_target_patrols_text": "Družinky: ",
   "event_box_open_error_event_not_live": "Nelze zobrazit detail výpravy, na kterou se nelze přihlašovat.",
-  "category_calendar_screen": "--- KALENDÁŘ ---",
+  "category_calendar_screen": "--- CALENDAR ---",
   "calendar_screen_title": "Kalendář",
   "calendar_screen_speed_dial_add_google_calendar": "Google kalendář",
   "calendar_screen_event_expansion_tile_future_title": "Nadcházející",
@@ -145,7 +145,7 @@
   "calendar_screen_event_expansion_tile_past_no_events_subtitle": "Zdá se, že nejsou žádné proběhlé výpravy.",
   "calendar_screen_event_expansion_tile_draft_title": "Koncepty",
   "calendar_screen_event_expansion_tile_draft_no_events_subtitle": "Zdá se, že nejsou žádné koncepty.",
-  "category_create_edit_event_screen": "--- VYTVOŘIT/UPRAVIT VÝPRAVU ---",
+  "category_create_edit_event_screen": "--- CREATE/EDIT EVENT SCREEN ---",
   "create_edit_event_screen_title_create": "Vytvořit výpravu",
   "create_edit_event_screen_title_edit": "Upravit výpravu",
   "create_edit_event_screen_save_event_dialog_title": "Uložit jako koncept",
@@ -221,7 +221,8 @@
   "create_edit_event_screen_creating_event_error_generic": "Vytvoření výpravy se nezdařilo. Zkus to prosím znovu.",
   "create_edit_event_screen_save_success": "Výprava byla úspěšně uložena🥳.",
   "create_edit_event_screen_save_error_generic": "Nepodařilo se uložit výpravu. Zkus to prosím znovu.",
-  "category_live_events_screen": "--- PŘIHLAŠOVACÍ VÝPRAVY ---",
+  "category_live_event_participant_attendance": "--- PARTICIPANT ATTENDANCE ---",
+  "category_live_events_screen": "--- LIVE EVENTS ---",
   "live_events_screen_no_dependents_view_subtitle": "Zdá se, že momentálně nemáš žádné osoby, které by se mohly přihlašovat na výpravy.",
   "live_events_screen_no_live_events_view_subtitle": "Osoba {dependent_name} momentálně nemá žádné výpravy k přihlášení.",
   "@live_events_screen_no_live_events_view_subtitle": {
@@ -260,6 +261,9 @@
     }
   },
   "live_events_screen_cannot_change_status_past_signup_deadline": "Nelze změnit stav přihlášení na výpravu po vypršení datumu přihlašování.",
+  "category_live_event_attendance_screen": "--- LIVE EVENTS - ATTENDANCE ---",
+  "live_event_attendance_speed_dial_button": "Docházka",
+  "live_event_attendance_screen_title": "Účast na výpravě",
   "category_dependents_screen": "--- DEPENDENTS SCREEN ---",
   "dependents_screen_add_dependent_button_text": "Přidat",
   "dependents_screen_dependent_nickname": "Přezdívka",
@@ -282,7 +286,10 @@
   "dependents_screen_unsaved_changes_dialog_description": "Máš neuložené změny. Chceš je před odchodem uložit?",
   "dependents_screen_unsaved_changes_dialog_save": "Uložit",
   "dependents_screen_unsaved_changes_dialog_discard": "Zahodit",
-  "category_settings_screen": "--- NASTAVENÍ ---",
+  "category_info_screen": "--- INFO SCREEN ---",
+  "category_info_screen_title": "Brzy...",
+  "category_info_screen_subtitle": "Ústavičně pracujeme, aby si mohl/a vidět informace o tvém středisku. Brzy budou k dispozici!",
+  "category_settings_screen": "--- SETTINGS SCREEN ---",
   "settings_screen_title": "Nastavení",
   "settings_screen_admin_panel_box_title": "Admin Panel",
   "settings_screen_send_notification_box_title": "Poslat oznámení",
@@ -298,7 +305,7 @@
   "settings_screen_app_version_title": "Verze aplikace: ",
   "category_admin_panel_screen": "--- ADMIN PANEL ---",
   "admin_panel_screen_title": "Admin Panel",
-  "category_admin_panel_screen_warnings": "--- ADMIN PANEL - VAROVÁNÍ ---",
+  "category_admin_panel_screen_warnings": "--- ADMIN PANEL - WARNINGS ---",
   "admin_panel_screen_db_warnings_expansion_tile_title": "Varování",
   "admin_panel_screen_db_warnings_error_loading_warnings": "Nepodařilo se načíst podúčty, ze kterých nebylo možné získat varování. Zkus to prosím znovu.",
   "admin_panel_screen_db_warning_no_warnings_subtitle": "Žádná varování k zobrazení.",
@@ -324,7 +331,7 @@
   },
   "admin_panel_screen_accounts_management_title": "Účty & Podúčty",
   "admin_panel_screen_search_field_hint": "Vyhledat podle jména nebo příjmení...",
-  "category_admin_panel_screen_approve_accounts": "--- ADMIN PANEL - POTVRZOVÁNÍ ÚČTŮ ---",
+  "category_admin_panel_screen_approve_accounts": "--- ADMIN PANEL - APPROVE ACCOUNTS ---",
   "admin_panel_screen_button_approve_accounts": "Potvrdit účty",
   "admin_panel_screen_account_approval_change_success": "Účet {name_surname} byl úspěšně {status, select, approved{potvrzen} disapproved{zamítnut} other{aktualizován}}.",
   "@admin_panel_screen_account_approval_change_success": {
@@ -345,7 +352,7 @@
       }
     }
   },
-  "category_admin_panel_screen_edit_leaders": "--- ADMIN PANEL - UPRAVIT VEDOUCÍ ---",
+  "category_admin_panel_screen_edit_leaders": "--- ADMIN PANEL - EDIT LEADERS ---",
   "admin_panel_screen_button_edit_leaders": "Upravit vedoucí",
   "admin_panel_screen_set_patrol_leaders_title": "Přiřadit družinu pro {name_surname}",
   "@admin_panel_screen_set_patrol_leaders_title": {
@@ -397,7 +404,7 @@
     }
   },
   "admin_panel_screen_edit_leaders_update_error": "Nepodařilo se aktualizovat status vedoucího.",
-  "category_admin_panel_screen_edit_account_rights": "--- ADMIN PANEL - UPRAVIT PRÁVA ÚČTŮ ---",
+  "category_admin_panel_screen_edit_account_rights": "--- ADMIN PANEL - EDIT ACCOUNT RIGHTS ---",
   "admin_panel_screen_button_edit_rights": "Upravit práva",
   "admin_panel_screen_button_edit_rights_cant_change_admin_rights": "Práva administrátora lze změnit pouze v Supabase.",
   "admin_panel_screen_button_edit_rights_right_level_1": "1 - Výchozí",
@@ -422,7 +429,7 @@
       }
     }
   },
-  "category_admin_panel_screen_connect_accounts_with_dependents": "--- ADMIN PANEL - PŘIPOJIT ÚČTY S PODÚČTY ---",
+  "category_admin_panel_screen_connect_accounts_with_dependents": "--- ADMIN PANEL - CONNECT ACCOUNTS WITH DEPENDENTS ---",
   "admin_panel_screen_button_connect_dependents": "Připojit podúčty",
   "admin_panel_screen_connect_accounts_dependents_delete_connection_dialog_title": "Smazat spojení",
   "admin_panel_screen_connect_accounts_dependents_delete_connection_dialog_subtitle": "Opravdu chceš odstranit propojení mezi účtem {account_name_surname} a podúčtem {dependent_name_surname}?",
@@ -516,9 +523,6 @@
       }
     }
   },
-  "category_info_screen": "--- INFO SCREEN ---",
-  "category_info_screen_title": "Brzy...",
-  "category_info_screen_subtitle": "Ústavičně pracujeme, aby si mohl/a vidět informace o tvém středisku. Brzy budou k dispozici!",
   "category_admin_panel_screen_skautis_sync": "--- ADMIN PANEL - SKAUTIS SYNC ---",
   "admin_panel_screen_data_management_title": "Data",
   "admin_panel_screen_button_skautis_sync": "SkautIS synchronizace",

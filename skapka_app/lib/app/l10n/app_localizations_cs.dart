@@ -12,7 +12,7 @@ class AppLocalizationsCs extends AppLocalizations {
   String get language => 'Čeština';
 
   @override
-  String get category_common => '--- SPOLEČNÉ ---';
+  String get category_common => '--- COMMON ---';
 
   @override
   String get yes => 'Ano';
@@ -108,7 +108,7 @@ class AppLocalizationsCs extends AppLocalizations {
   String get something_is_missing_title_10 => 'Zeje to tu prázdnotou... 💨';
 
   @override
-  String get category_navigation => '--- NAVIGACE ---';
+  String get category_navigation => '--- NAVIGATION ---';
 
   @override
   String get navbar_dependents => 'Osoby';
@@ -123,7 +123,7 @@ class AppLocalizationsCs extends AppLocalizations {
   String get navbar_info => 'Informace';
 
   @override
-  String get category_welcome_screen => '--- UVÍTACÍ OBRAZOVKA ---';
+  String get category_welcome_screen => '--- WELCOME SCREEN ---';
 
   @override
   String get welcome_screen_title => 'Vítej ve\nSkapce 👋';
@@ -142,7 +142,7 @@ class AppLocalizationsCs extends AppLocalizations {
       'Žádné připojení k internetu. Zkontroluj prosím své WiFi nebo mobilní data.';
 
   @override
-  String get category_login_screen => '--- PŘIHLÁŠENÍ ---';
+  String get category_login_screen => '--- LOGIN SCREEN ---';
 
   @override
   String get login_screen_title => 'Přihlášení';
@@ -190,7 +190,7 @@ class AppLocalizationsCs extends AppLocalizations {
       'Něco se nepovedlo. Zkus to prosím znovu.';
 
   @override
-  String get category_register_screen => '--- REGISTRACE ---';
+  String get category_register_screen => '--- REGISTER SCREEN ---';
 
   @override
   String get register_screen_title => 'Registrace';
@@ -263,7 +263,7 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get category_account_not_approved_screen =>
-      '--- OBRAZOVKA NESCHVÁLENÉHO ÚČTU ---';
+      '--- ACCOUNT NOT APPROVED SCREEN ---';
 
   @override
   String get account_not_approved_screen_title => 'Účet ještě nebyl schválen';
@@ -352,7 +352,7 @@ class AppLocalizationsCs extends AppLocalizations {
       'Smazání účtu se nezdařilo. Zkus to prosím později.';
 
   @override
-  String get category_events_screen => '--- VÝPRAVY ---';
+  String get category_events_screen => '--- EVENTS SCREEN ---';
 
   @override
   String get events_screen_title => 'Výpravy';
@@ -363,7 +363,7 @@ class AppLocalizationsCs extends AppLocalizations {
   }
 
   @override
-  String get category_event_box_widget => '--- WIDGET VÝPRAVY ---';
+  String get category_event_box_widget => '--- EVENT BOX WIDGET ---';
 
   @override
   String event_box_number_of_kids_text(int number_of_kids) {
@@ -396,7 +396,7 @@ class AppLocalizationsCs extends AppLocalizations {
       'Nelze zobrazit detail výpravy, na kterou se nelze přihlašovat.';
 
   @override
-  String get category_calendar_screen => '--- KALENDÁŘ ---';
+  String get category_calendar_screen => '--- CALENDAR ---';
 
   @override
   String get calendar_screen_title => 'Kalendář';
@@ -436,7 +436,7 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get category_create_edit_event_screen =>
-      '--- VYTVOŘIT/UPRAVIT VÝPRAVU ---';
+      '--- CREATE/EDIT EVENT SCREEN ---';
 
   @override
   String get create_edit_event_screen_title_create => 'Vytvořit výpravu';
@@ -725,7 +725,11 @@ class AppLocalizationsCs extends AppLocalizations {
       'Nepodařilo se uložit výpravu. Zkus to prosím znovu.';
 
   @override
-  String get category_live_events_screen => '--- PŘIHLAŠOVACÍ VÝPRAVY ---';
+  String get category_live_event_participant_attendance =>
+      '--- PARTICIPANT ATTENDANCE ---';
+
+  @override
+  String get category_live_events_screen => '--- LIVE EVENTS ---';
 
   @override
   String get live_events_screen_no_dependents_view_subtitle =>
@@ -781,6 +785,16 @@ class AppLocalizationsCs extends AppLocalizations {
   @override
   String get live_events_screen_cannot_change_status_past_signup_deadline =>
       'Nelze změnit stav přihlášení na výpravu po vypršení datumu přihlašování.';
+
+  @override
+  String get category_live_event_attendance_screen =>
+      '--- LIVE EVENTS - ATTENDANCE ---';
+
+  @override
+  String get live_event_attendance_speed_dial_button => 'Docházka';
+
+  @override
+  String get live_event_attendance_screen_title => 'Účast na výpravě';
 
   @override
   String get category_dependents_screen => '--- DEPENDENTS SCREEN ---';
@@ -859,7 +873,17 @@ class AppLocalizationsCs extends AppLocalizations {
   String get dependents_screen_unsaved_changes_dialog_discard => 'Zahodit';
 
   @override
-  String get category_settings_screen => '--- NASTAVENÍ ---';
+  String get category_info_screen => '--- INFO SCREEN ---';
+
+  @override
+  String get category_info_screen_title => 'Brzy...';
+
+  @override
+  String get category_info_screen_subtitle =>
+      'Ústavičně pracujeme, aby si mohl/a vidět informace o tvém středisku. Brzy budou k dispozici!';
+
+  @override
+  String get category_settings_screen => '--- SETTINGS SCREEN ---';
 
   @override
   String get settings_screen_title => 'Nastavení';
@@ -908,7 +932,7 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get category_admin_panel_screen_warnings =>
-      '--- ADMIN PANEL - VAROVÁNÍ ---';
+      '--- ADMIN PANEL - WARNINGS ---';
 
   @override
   String get admin_panel_screen_db_warnings_expansion_tile_title => 'Varování';
@@ -966,7 +990,7 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get category_admin_panel_screen_approve_accounts =>
-      '--- ADMIN PANEL - POTVRZOVÁNÍ ÚČTŮ ---';
+      '--- ADMIN PANEL - APPROVE ACCOUNTS ---';
 
   @override
   String get admin_panel_screen_button_approve_accounts => 'Potvrdit účty';
@@ -991,7 +1015,7 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get category_admin_panel_screen_edit_leaders =>
-      '--- ADMIN PANEL - UPRAVIT VEDOUCÍ ---';
+      '--- ADMIN PANEL - EDIT LEADERS ---';
 
   @override
   String get admin_panel_screen_button_edit_leaders => 'Upravit vedoucí';
@@ -1045,7 +1069,7 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get category_admin_panel_screen_edit_account_rights =>
-      '--- ADMIN PANEL - UPRAVIT PRÁVA ÚČTŮ ---';
+      '--- ADMIN PANEL - EDIT ACCOUNT RIGHTS ---';
 
   @override
   String get admin_panel_screen_button_edit_rights => 'Upravit práva';
@@ -1086,7 +1110,7 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get category_admin_panel_screen_connect_accounts_with_dependents =>
-      '--- ADMIN PANEL - PŘIPOJIT ÚČTY S PODÚČTY ---';
+      '--- ADMIN PANEL - CONNECT ACCOUNTS WITH DEPENDENTS ---';
 
   @override
   String get admin_panel_screen_button_connect_dependents => 'Připojit podúčty';
@@ -1182,16 +1206,6 @@ class AppLocalizationsCs extends AppLocalizations {
   ) {
     return 'Závislá osoba $dependent_name_surname již není hlavní pro účet $account_name_surname.';
   }
-
-  @override
-  String get category_info_screen => '--- INFO SCREEN ---';
-
-  @override
-  String get category_info_screen_title => 'Brzy...';
-
-  @override
-  String get category_info_screen_subtitle =>
-      'Ústavičně pracujeme, aby si mohl/a vidět informace o tvém středisku. Brzy budou k dispozici!';
 
   @override
   String get category_admin_panel_screen_skautis_sync =>

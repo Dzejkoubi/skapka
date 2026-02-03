@@ -1,9 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_markdown_plus/flutter_markdown_plus.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
-import 'package:gaimon/gaimon.dart';
 import 'package:provider/provider.dart';
 import 'package:skapka_app/app/l10n/app_localizations.dart';
 import 'package:skapka_app/app/l10n/l10n_extension.dart';
@@ -12,15 +9,16 @@ import 'package:skapka_app/app/theme/app_color_theme.dart';
 import 'package:skapka_app/app/theme/app_decorations.dart';
 import 'package:skapka_app/app/theme/app_spacing.dart';
 import 'package:skapka_app/app/theme/app_text_theme.dart';
+import 'package:skapka_app/app/theme/main_button_theme.dart';
 import 'package:skapka_app/models/event_model.dart';
 import 'package:skapka_app/providers/dependents_provider.dart';
 import 'package:skapka_app/providers/units_provider.dart';
+import 'package:skapka_app/screens/event_details_screen/widgets/instructions_box.dart';
+import 'package:skapka_app/screens/event_details_screen/widgets/meeting_leaving_place_builder.dart';
+import 'package:skapka_app/screens/event_details_screen/widgets/sign_up_dependents_boxes.dart';
 import 'package:skapka_app/utils/is_user_leader.dart';
 import 'package:skapka_app/widgets/appbar/appbar.dart';
 import 'package:skapka_app/widgets/buttons/main_button.dart';
-import 'package:skapka_app/widgets/dialogs/bottom_dialog.dart';
-import 'package:skapka_app/widgets/dialogs/change_participant_event_status_dialog.dart';
-import 'package:skapka_app/widgets/event_box/participant_event_status_box.dart';
 import 'package:skapka_app/widgets/event_time_info.dart';
 import 'package:skapka_app/widgets/wrappers/screen_wrapper.dart';
 
@@ -63,116 +61,10 @@ class EventDetailsScreen extends StatelessWidget {
                         children: [
                           if (dependentsProvider.dependents.isNotEmpty &&
                               eventTimeType == EventTimeType.live)
-                            Column(
-                              spacing: AppSpacing.small,
-                              children: [
-                                for (var dependent in provider.dependents.where(
-                                  (d) => d.isArchived != true,
-                                ))
-                                  Builder(
-                                    builder: (context) {
-                                      final participation = dependentsProvider
-                                          .getParticipationForDependent(
-                                            dependent.dependentId,
-                                          );
-                                      final eventParticipationList =
-                                          participation.where(
-                                            (p) => p.eventId == event.eventId,
-                                          );
-
-                                      if (eventParticipationList.isEmpty) {
-                                        return const SizedBox.shrink();
-                                      }
-                                      final eventParticipation =
-                                          eventParticipationList.first;
-
-                                      final bool isEnabled =
-                                          eventTimeType == EventTimeType.live &&
-                                          event.closeSignUp!.isAfter(
-                                            DateTime.now(),
-                                          );
-                                      // Allow changing status only if the event is live and the sign-up deadline has not passed
-
-                                      return GestureDetector(
-                                        onTap: isEnabled
-                                            ? () async {
-                                                await Future.delayed(
-                                                  Duration.zero,
-                                                );
-                                                if (context.mounted) {
-                                                  showDialog(
-                                                    context: context,
-                                                    useRootNavigator: true,
-                                                    builder: (builder) {
-                                                      return ChangeParticipantEventStatusDialog(
-                                                        dependent: dependent,
-                                                        eventModel: event,
-                                                        oldStatus:
-                                                            eventParticipation
-                                                                .status,
-                                                        dependentsProvider: context
-                                                            .read<
-                                                              DependentsProvider
-                                                            >(),
-                                                      );
-                                                    },
-                                                  );
-                                                }
-                                                Gaimon.success();
-                                              }
-                                            : () {
-                                                Gaimon.error();
-                                                BottomDialog.show(
-                                                  context,
-                                                  type:
-                                                      BottomDialogType.negative,
-                                                  description: context
-                                                      .localizations
-                                                      .live_events_screen_cannot_change_status_past_signup_deadline,
-                                                );
-                                              },
-                                        child: Container(
-                                          padding: EdgeInsets.symmetric(
-                                            horizontal: AppSpacing.small,
-                                            vertical: AppSpacing.xSmall,
-                                          ),
-                                          decoration:
-                                              AppDecorations.primaryContainer(
-                                                context,
-                                              ),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text(
-                                                '${dependent.name} ${dependent.surname}',
-                                                style:
-                                                    AppTextTheme.bodyLarge(
-                                                      context,
-                                                    ).copyWith(
-                                                      color: context
-                                                          .colors
-                                                          .text
-                                                          .normal,
-                                                    ),
-                                              ),
-                                              AbsorbPointer(
-                                                child:
-                                                    ParticipantEventStatusBox(
-                                                      status: eventParticipation
-                                                          .status,
-                                                      isEnabled: isEnabled,
-                                                      eventModel: event,
-                                                      dependent: dependent,
-                                                    ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                  ),
-                              ],
+                            SignUpDependentsBoxes(
+                              dependentsProvider: dependentsProvider,
+                              event: event,
+                              eventTimeType: eventTimeType,
                             ),
                           Container(
                             padding: EdgeInsets.all(AppSpacing.small),
@@ -237,372 +129,8 @@ class EventDetailsScreen extends StatelessWidget {
                           ),
                           if (event.instructions != null &&
                               event.instructions!.trim().isNotEmpty)
-                            Column(
-                              spacing: AppSpacing.medium,
-                              children: [
-                                Text(
-                                  textAlign: TextAlign.center,
-                                  AppLocalizations.of(
-                                    context,
-                                  )!.create_edit_event_screen_instructions_text,
-                                  style: AppTextTheme.titleLarge(context),
-                                ),
-                                Container(
-                                  decoration: AppDecorations.primaryContainer(
-                                    context,
-                                  ),
-                                  padding: EdgeInsets.all(AppSpacing.small),
-                                  width: double.infinity,
-                                  child: MarkdownBody(
-                                    data: event.instructions!,
-                                    selectable: true,
-                                    styleSheet: MarkdownStyleSheet(
-                                      h1: AppTextTheme.titleMedium(context),
-                                      h2: AppTextTheme.titleSmall(context),
-                                      h3: AppTextTheme.bodyLargeBold(context),
-                                      p: AppTextTheme.bodyMedium(context),
-                                      strong: AppTextTheme.bodyMediumBold(
-                                        context,
-                                      ),
-                                      listBullet: AppTextTheme.bodyMedium(
-                                        context,
-                                      ),
-                                      horizontalRuleDecoration: BoxDecoration(
-                                        border: Border(
-                                          top: BorderSide(
-                                            color: context
-                                                .colors
-                                                .background
-                                                .medium,
-                                            width: 1,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          Builder(
-                            builder: (context) {
-                              final bool hasMeeting =
-                                  event.meetingPlace?.isNotEmpty ?? false;
-                              final bool hasLeaving =
-                                  event.leavingPlace?.isNotEmpty ?? false;
-
-                              if (!hasMeeting && !hasLeaving) {
-                                return const SizedBox.shrink();
-                              }
-
-                              if (hasMeeting && !hasLeaving) {
-                                return Column(
-                                  spacing: AppSpacing.medium,
-                                  children: [
-                                    Text(
-                                      textAlign: TextAlign.center,
-                                      AppLocalizations.of(
-                                        context,
-                                      )!.create_edit_event_screen_meeting_place_text,
-                                      style: AppTextTheme.titleLarge(context),
-                                    ),
-                                    Container(
-                                      decoration:
-                                          AppDecorations.primaryContainer(
-                                            context,
-                                          ),
-                                      padding: EdgeInsets.symmetric(
-                                        horizontal: AppSpacing.small,
-                                        vertical: AppSpacing.xSmall,
-                                      ),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Expanded(
-                                            child: SingleChildScrollView(
-                                              scrollDirection: Axis.horizontal,
-                                              child: Text(
-                                                event.meetingPlace!,
-                                                style: AppTextTheme.bodySmall(
-                                                  context,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                          MainButton.text(
-                                            type: ButtonType.icon,
-                                            iconAsset: 'assets/icons/copy.svg',
-                                            onPressed: () {
-                                              Clipboard.setData(
-                                                ClipboardData(
-                                                  text: event.meetingPlace!,
-                                                ),
-                                              );
-                                              BottomDialog.show(
-                                                context,
-                                                type: BottomDialogType.basic,
-                                                description: AppLocalizations.of(
-                                                  context,
-                                                )!.common_copied_to_clipboard,
-                                              );
-                                            },
-                                            text: '',
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                );
-                              }
-
-                              if (!hasMeeting && hasLeaving) {
-                                return Column(
-                                  spacing: AppSpacing.medium,
-                                  children: [
-                                    Text(
-                                      textAlign: TextAlign.center,
-                                      AppLocalizations.of(
-                                        context,
-                                      )!.create_edit_event_screen_leave_place_text,
-                                      style: AppTextTheme.titleLarge(context),
-                                    ),
-                                    Container(
-                                      decoration:
-                                          AppDecorations.primaryContainer(
-                                            context,
-                                          ),
-                                      padding: EdgeInsets.symmetric(
-                                        horizontal: AppSpacing.small,
-                                        vertical: AppSpacing.xSmall,
-                                      ),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Expanded(
-                                            child: SingleChildScrollView(
-                                              scrollDirection: Axis.horizontal,
-                                              child: Text(
-                                                event.leavingPlace!,
-                                                style: AppTextTheme.bodySmall(
-                                                  context,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                          MainButton.text(
-                                            type: ButtonType.icon,
-                                            iconAsset: 'assets/icons/copy.svg',
-                                            onPressed: () {
-                                              Clipboard.setData(
-                                                ClipboardData(
-                                                  text: event.leavingPlace!,
-                                                ),
-                                              );
-                                              BottomDialog.show(
-                                                context,
-                                                type: BottomDialogType.basic,
-                                                description: AppLocalizations.of(
-                                                  context,
-                                                )!.common_copied_to_clipboard,
-                                              );
-                                            },
-                                            text: '',
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                );
-                              }
-
-                              if (hasMeeting && hasLeaving) {
-                                if (event.meetingPlace == event.leavingPlace) {
-                                  // Same place
-                                  return Column(
-                                    spacing: AppSpacing.medium,
-                                    children: [
-                                      Text(
-                                        textAlign: TextAlign.center,
-                                        AppLocalizations.of(
-                                          context,
-                                        )!.create_edit_event_screen_meeting_and_leave_place_text,
-                                        style: AppTextTheme.titleLarge(context),
-                                      ),
-                                      Container(
-                                        decoration:
-                                            AppDecorations.primaryContainer(
-                                              context,
-                                            ),
-                                        padding: EdgeInsets.symmetric(
-                                          horizontal: AppSpacing.small,
-                                          vertical: AppSpacing.xSmall,
-                                        ),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Expanded(
-                                              child: SingleChildScrollView(
-                                                scrollDirection:
-                                                    Axis.horizontal,
-                                                child: Text(
-                                                  event.meetingPlace!,
-                                                  style: AppTextTheme.bodySmall(
-                                                    context,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                            MainButton.text(
-                                              type: ButtonType.icon,
-                                              iconAsset:
-                                                  'assets/icons/copy.svg',
-                                              onPressed: () {
-                                                Clipboard.setData(
-                                                  ClipboardData(
-                                                    text: event.meetingPlace!,
-                                                  ),
-                                                );
-                                                BottomDialog.show(
-                                                  context,
-                                                  type: BottomDialogType.basic,
-                                                  description: AppLocalizations.of(
-                                                    context,
-                                                  )!.common_copied_to_clipboard,
-                                                );
-                                              },
-                                              text: '',
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  );
-                                } else {
-                                  // Different places
-                                  return Column(
-                                    spacing: AppSpacing.medium,
-                                    children: [
-                                      // Meeting place
-                                      Text(
-                                        textAlign: TextAlign.center,
-                                        AppLocalizations.of(
-                                          context,
-                                        )!.create_edit_event_screen_meeting_place_text,
-                                        style: AppTextTheme.titleLarge(context),
-                                      ),
-                                      Container(
-                                        decoration:
-                                            AppDecorations.primaryContainer(
-                                              context,
-                                            ),
-                                        padding: EdgeInsets.symmetric(
-                                          horizontal: AppSpacing.small,
-                                          vertical: AppSpacing.xSmall,
-                                        ),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Expanded(
-                                              child: SingleChildScrollView(
-                                                scrollDirection:
-                                                    Axis.horizontal,
-                                                child: Text(
-                                                  event.meetingPlace!,
-                                                  style: AppTextTheme.bodySmall(
-                                                    context,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                            MainButton.text(
-                                              type: ButtonType.icon,
-                                              iconAsset:
-                                                  'assets/icons/copy.svg',
-                                              onPressed: () {
-                                                Clipboard.setData(
-                                                  ClipboardData(
-                                                    text: event.meetingPlace!,
-                                                  ),
-                                                );
-                                                BottomDialog.show(
-                                                  context,
-                                                  type: BottomDialogType.basic,
-                                                  description: AppLocalizations.of(
-                                                    context,
-                                                  )!.common_copied_to_clipboard,
-                                                );
-                                              },
-                                              text: '',
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      // Leaving place
-                                      Text(
-                                        textAlign: TextAlign.center,
-                                        AppLocalizations.of(
-                                          context,
-                                        )!.create_edit_event_screen_leave_place_text,
-                                        style: AppTextTheme.titleLarge(context),
-                                      ),
-                                      Container(
-                                        decoration:
-                                            AppDecorations.primaryContainer(
-                                              context,
-                                            ),
-                                        padding: EdgeInsets.symmetric(
-                                          horizontal: AppSpacing.small,
-                                          vertical: AppSpacing.xSmall,
-                                        ),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Expanded(
-                                              child: SingleChildScrollView(
-                                                scrollDirection:
-                                                    Axis.horizontal,
-                                                child: Text(
-                                                  event.leavingPlace!,
-                                                  style: AppTextTheme.bodySmall(
-                                                    context,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                            MainButton.text(
-                                              type: ButtonType.icon,
-                                              iconAsset:
-                                                  'assets/icons/copy.svg',
-                                              onPressed: () {
-                                                Clipboard.setData(
-                                                  ClipboardData(
-                                                    text: event.leavingPlace!,
-                                                  ),
-                                                );
-                                                BottomDialog.show(
-                                                  context,
-                                                  type: BottomDialogType.basic,
-                                                  description: AppLocalizations.of(
-                                                    context,
-                                                  )!.common_copied_to_clipboard,
-                                                );
-                                              },
-                                              text: '',
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  );
-                                }
-                              }
-                              return const SizedBox.shrink();
-                            },
-                          ),
+                            InstructionsBox(event: event),
+                          MeetingLeavingPlaceBuilder(event: event),
                         ],
                       ),
                     );
@@ -613,7 +141,7 @@ class EventDetailsScreen extends StatelessWidget {
             speedDialChildren: isUserLeader(context)
                 ? [
                     SpeedDialChild(
-                      labelWidget: MainButton.filled(
+                      labelWidget: MainButton(
                         text: context.localizations.edit,
                         onPressed: () {
                           dialOpenNotifier.value = false;
@@ -624,8 +152,31 @@ class EventDetailsScreen extends StatelessWidget {
                             ),
                           );
                         },
+                        style:
+                            (eventTimeType == EventTimeType.live ||
+                                eventTimeType == EventTimeType.past)
+                            ? ButtonStyleTypes.outlined
+                            : ButtonStyleTypes.filled,
+                        variant: ButtonStylesVariants.normal,
                       ),
                     ),
+                    if (eventTimeType == EventTimeType.live ||
+                        eventTimeType == EventTimeType.past)
+                      SpeedDialChild(
+                        labelWidget: MainButton(
+                          style: ButtonStyleTypes.filled,
+                          variant: eventTimeType == EventTimeType.live
+                              ? ButtonStylesVariants.success
+                              : ButtonStylesVariants.destructive,
+                          text: context
+                              .localizations
+                              .live_event_attendance_speed_dial_button,
+                          onPressed: () {
+                            dialOpenNotifier.value = false;
+                            context.router.push(LiveEventAttendanceRoute());
+                          },
+                        ),
+                      ),
                   ]
                 : null,
             fabKey: dialOpenNotifier.hashCode,

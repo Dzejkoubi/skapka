@@ -107,7 +107,7 @@ abstract class AppLocalizations {
   /// No description provided for @category_common.
   ///
   /// In cs, this message translates to:
-  /// **'--- SPOLEČNÉ ---'**
+  /// **'--- COMMON ---'**
   String get category_common;
 
   /// No description provided for @yes.
@@ -293,7 +293,7 @@ abstract class AppLocalizations {
   /// No description provided for @category_navigation.
   ///
   /// In cs, this message translates to:
-  /// **'--- NAVIGACE ---'**
+  /// **'--- NAVIGATION ---'**
   String get category_navigation;
 
   /// No description provided for @navbar_dependents.
@@ -323,7 +323,7 @@ abstract class AppLocalizations {
   /// No description provided for @category_welcome_screen.
   ///
   /// In cs, this message translates to:
-  /// **'--- UVÍTACÍ OBRAZOVKA ---'**
+  /// **'--- WELCOME SCREEN ---'**
   String get category_welcome_screen;
 
   /// No description provided for @welcome_screen_title.
@@ -359,7 +359,7 @@ abstract class AppLocalizations {
   /// No description provided for @category_login_screen.
   ///
   /// In cs, this message translates to:
-  /// **'--- PŘIHLÁŠENÍ ---'**
+  /// **'--- LOGIN SCREEN ---'**
   String get category_login_screen;
 
   /// No description provided for @login_screen_title.
@@ -443,7 +443,7 @@ abstract class AppLocalizations {
   /// No description provided for @category_register_screen.
   ///
   /// In cs, this message translates to:
-  /// **'--- REGISTRACE ---'**
+  /// **'--- REGISTER SCREEN ---'**
   String get category_register_screen;
 
   /// No description provided for @register_screen_title.
@@ -569,7 +569,7 @@ abstract class AppLocalizations {
   /// No description provided for @category_account_not_approved_screen.
   ///
   /// In cs, this message translates to:
-  /// **'--- OBRAZOVKA NESCHVÁLENÉHO ÚČTU ---'**
+  /// **'--- ACCOUNT NOT APPROVED SCREEN ---'**
   String get category_account_not_approved_screen;
 
   /// No description provided for @account_not_approved_screen_title.
@@ -705,7 +705,7 @@ abstract class AppLocalizations {
   /// No description provided for @category_events_screen.
   ///
   /// In cs, this message translates to:
-  /// **'--- VÝPRAVY ---'**
+  /// **'--- EVENTS SCREEN ---'**
   String get category_events_screen;
 
   /// No description provided for @events_screen_title.
@@ -723,7 +723,7 @@ abstract class AppLocalizations {
   /// No description provided for @category_event_box_widget.
   ///
   /// In cs, this message translates to:
-  /// **'--- WIDGET VÝPRAVY ---'**
+  /// **'--- EVENT BOX WIDGET ---'**
   String get category_event_box_widget;
 
   /// No description provided for @event_box_number_of_kids_text.
@@ -783,7 +783,7 @@ abstract class AppLocalizations {
   /// No description provided for @category_calendar_screen.
   ///
   /// In cs, this message translates to:
-  /// **'--- KALENDÁŘ ---'**
+  /// **'--- CALENDAR ---'**
   String get category_calendar_screen;
 
   /// No description provided for @calendar_screen_title.
@@ -849,7 +849,7 @@ abstract class AppLocalizations {
   /// No description provided for @category_create_edit_event_screen.
   ///
   /// In cs, this message translates to:
-  /// **'--- VYTVOŘIT/UPRAVIT VÝPRAVU ---'**
+  /// **'--- CREATE/EDIT EVENT SCREEN ---'**
   String get category_create_edit_event_screen;
 
   /// No description provided for @create_edit_event_screen_title_create.
@@ -1308,10 +1308,16 @@ abstract class AppLocalizations {
   /// **'Nepodařilo se uložit výpravu. Zkus to prosím znovu.'**
   String get create_edit_event_screen_save_error_generic;
 
+  /// No description provided for @category_live_event_participant_attendance.
+  ///
+  /// In cs, this message translates to:
+  /// **'--- PARTICIPANT ATTENDANCE ---'**
+  String get category_live_event_participant_attendance;
+
   /// No description provided for @category_live_events_screen.
   ///
   /// In cs, this message translates to:
-  /// **'--- PŘIHLAŠOVACÍ VÝPRAVY ---'**
+  /// **'--- LIVE EVENTS ---'**
   String get category_live_events_screen;
 
   /// No description provided for @live_events_screen_no_dependents_view_subtitle.
@@ -1385,6 +1391,24 @@ abstract class AppLocalizations {
   /// In cs, this message translates to:
   /// **'Nelze změnit stav přihlášení na výpravu po vypršení datumu přihlašování.'**
   String get live_events_screen_cannot_change_status_past_signup_deadline;
+
+  /// No description provided for @category_live_event_attendance_screen.
+  ///
+  /// In cs, this message translates to:
+  /// **'--- LIVE EVENTS - ATTENDANCE ---'**
+  String get category_live_event_attendance_screen;
+
+  /// No description provided for @live_event_attendance_speed_dial_button.
+  ///
+  /// In cs, this message translates to:
+  /// **'Docházka'**
+  String get live_event_attendance_speed_dial_button;
+
+  /// No description provided for @live_event_attendance_screen_title.
+  ///
+  /// In cs, this message translates to:
+  /// **'Účast na výpravě'**
+  String get live_event_attendance_screen_title;
 
   /// No description provided for @category_dependents_screen.
   ///
@@ -1518,10 +1542,28 @@ abstract class AppLocalizations {
   /// **'Zahodit'**
   String get dependents_screen_unsaved_changes_dialog_discard;
 
+  /// No description provided for @category_info_screen.
+  ///
+  /// In cs, this message translates to:
+  /// **'--- INFO SCREEN ---'**
+  String get category_info_screen;
+
+  /// No description provided for @category_info_screen_title.
+  ///
+  /// In cs, this message translates to:
+  /// **'Brzy...'**
+  String get category_info_screen_title;
+
+  /// No description provided for @category_info_screen_subtitle.
+  ///
+  /// In cs, this message translates to:
+  /// **'Ústavičně pracujeme, aby si mohl/a vidět informace o tvém středisku. Brzy budou k dispozici!'**
+  String get category_info_screen_subtitle;
+
   /// No description provided for @category_settings_screen.
   ///
   /// In cs, this message translates to:
-  /// **'--- NASTAVENÍ ---'**
+  /// **'--- SETTINGS SCREEN ---'**
   String get category_settings_screen;
 
   /// No description provided for @settings_screen_title.
@@ -1617,7 +1659,7 @@ abstract class AppLocalizations {
   /// No description provided for @category_admin_panel_screen_warnings.
   ///
   /// In cs, this message translates to:
-  /// **'--- ADMIN PANEL - VAROVÁNÍ ---'**
+  /// **'--- ADMIN PANEL - WARNINGS ---'**
   String get category_admin_panel_screen_warnings;
 
   /// No description provided for @admin_panel_screen_db_warnings_expansion_tile_title.
@@ -1666,7 +1708,7 @@ abstract class AppLocalizations {
   /// No description provided for @category_admin_panel_screen_approve_accounts.
   ///
   /// In cs, this message translates to:
-  /// **'--- ADMIN PANEL - POTVRZOVÁNÍ ÚČTŮ ---'**
+  /// **'--- ADMIN PANEL - APPROVE ACCOUNTS ---'**
   String get category_admin_panel_screen_approve_accounts;
 
   /// No description provided for @admin_panel_screen_button_approve_accounts.
@@ -1693,7 +1735,7 @@ abstract class AppLocalizations {
   /// No description provided for @category_admin_panel_screen_edit_leaders.
   ///
   /// In cs, this message translates to:
-  /// **'--- ADMIN PANEL - UPRAVIT VEDOUCÍ ---'**
+  /// **'--- ADMIN PANEL - EDIT LEADERS ---'**
   String get category_admin_panel_screen_edit_leaders;
 
   /// No description provided for @admin_panel_screen_button_edit_leaders.
@@ -1765,7 +1807,7 @@ abstract class AppLocalizations {
   /// No description provided for @category_admin_panel_screen_edit_account_rights.
   ///
   /// In cs, this message translates to:
-  /// **'--- ADMIN PANEL - UPRAVIT PRÁVA ÚČTŮ ---'**
+  /// **'--- ADMIN PANEL - EDIT ACCOUNT RIGHTS ---'**
   String get category_admin_panel_screen_edit_account_rights;
 
   /// No description provided for @admin_panel_screen_button_edit_rights.
@@ -1816,7 +1858,7 @@ abstract class AppLocalizations {
   /// No description provided for @category_admin_panel_screen_connect_accounts_with_dependents.
   ///
   /// In cs, this message translates to:
-  /// **'--- ADMIN PANEL - PŘIPOJIT ÚČTY S PODÚČTY ---'**
+  /// **'--- ADMIN PANEL - CONNECT ACCOUNTS WITH DEPENDENTS ---'**
   String get category_admin_panel_screen_connect_accounts_with_dependents;
 
   /// No description provided for @admin_panel_screen_button_connect_dependents.
@@ -1931,24 +1973,6 @@ abstract class AppLocalizations {
     String dependent_name_surname,
     String account_name_surname,
   );
-
-  /// No description provided for @category_info_screen.
-  ///
-  /// In cs, this message translates to:
-  /// **'--- INFO SCREEN ---'**
-  String get category_info_screen;
-
-  /// No description provided for @category_info_screen_title.
-  ///
-  /// In cs, this message translates to:
-  /// **'Brzy...'**
-  String get category_info_screen_title;
-
-  /// No description provided for @category_info_screen_subtitle.
-  ///
-  /// In cs, this message translates to:
-  /// **'Ústavičně pracujeme, aby si mohl/a vidět informace o tvém středisku. Brzy budou k dispozici!'**
-  String get category_info_screen_subtitle;
 
   /// No description provided for @category_admin_panel_screen_skautis_sync.
   ///

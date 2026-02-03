@@ -727,6 +727,10 @@ class AppLocalizationsEn extends AppLocalizations {
       'Failed to save event. Please try again.';
 
   @override
+  String get category_live_event_participant_attendance =>
+      '--- PARTICIPANT ATTENDANCE ---';
+
+  @override
   String get category_live_events_screen => '--- LIVE EVENTS ---';
 
   @override
@@ -783,6 +787,16 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get live_events_screen_cannot_change_status_past_signup_deadline =>
       'Cannot change participation status for an event after the signup deadline has passed.';
+
+  @override
+  String get category_live_event_attendance_screen =>
+      '--- LIVE EVENTS - ATTENDANCE ---';
+
+  @override
+  String get live_event_attendance_speed_dial_button => 'Attendance';
+
+  @override
+  String get live_event_attendance_screen_title => 'Event Attendance';
 
   @override
   String get category_dependents_screen => '--- DEPENDENTS SCREEN ---';
@@ -859,6 +873,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get dependents_screen_unsaved_changes_dialog_discard => 'Discard';
+
+  @override
+  String get category_info_screen => '--- INFO SCREEN ---';
+
+  @override
+  String get category_info_screen_title => 'Soon...';
+
+  @override
+  String get category_info_screen_subtitle =>
+      'We are constantly working so you can see information about your center. It will be available soon!';
 
   @override
   String get category_settings_screen => '--- SETTINGS SCREEN ---';
@@ -1187,16 +1211,6 @@ class AppLocalizationsEn extends AppLocalizations {
   ) {
     return 'Dependent $dependent_name_surname is no longer main for account $account_name_surname.';
   }
-
-  @override
-  String get category_info_screen => '--- INFO SCREEN ---';
-
-  @override
-  String get category_info_screen_title => 'Soon...';
-
-  @override
-  String get category_info_screen_subtitle =>
-      'We are constantly working so you can see information about your center. It will be available soon!';
 
   @override
   String get category_admin_panel_screen_skautis_sync =>

@@ -33,6 +33,10 @@ class AppLocalizationsCs extends AppLocalizations {
   String get common_copied_to_clipboard => 'Zkopírováno do schránky 📋';
 
   @override
+  String get common_this_feature_not_implemented =>
+      'Tato funkce ještě není implementována';
+
+  @override
   String get create => 'Vytvořit';
 
   @override

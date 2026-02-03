@@ -11,13 +11,13 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i29;
 import 'package:collection/collection.dart' as _i34;
-import 'package:flutter/foundation.dart' as _i40;
+import 'package:flutter/foundation.dart' as _i41;
 import 'package:flutter/material.dart' as _i33;
 import 'package:skapka_app/models/account_model.dart' as _i31;
 import 'package:skapka_app/models/dependents/account_dependent_model.dart'
     as _i32;
 import 'package:skapka_app/models/dependents/dependent_model.dart' as _i35;
-import 'package:skapka_app/models/event_model.dart' as _i41;
+import 'package:skapka_app/models/event_model.dart' as _i40;
 import 'package:skapka_app/models/event_participant_model.dart' as _i39;
 import 'package:skapka_app/models/leader_model.dart' as _i38;
 import 'package:skapka_app/models/patrol_model.dart' as _i36;
@@ -344,6 +344,7 @@ class CreateEditEventParticipantsRoute
     required List<_i37.TroopModel> groupTroops,
     required List<_i38.LeaderModel> groupLeaders,
     required List<_i39.EventParticipantModel> initialParticipants,
+    required _i40.EventTimeType eventTimeType,
     List<_i29.PageRouteInfo>? children,
   }) : super(
          CreateEditEventParticipantsRoute.name,
@@ -354,6 +355,7 @@ class CreateEditEventParticipantsRoute
            groupTroops: groupTroops,
            groupLeaders: groupLeaders,
            initialParticipants: initialParticipants,
+           eventTimeType: eventTimeType,
          ),
          initialChildren: children,
        );
@@ -371,6 +373,7 @@ class CreateEditEventParticipantsRoute
         groupTroops: args.groupTroops,
         groupLeaders: args.groupLeaders,
         initialParticipants: args.initialParticipants,
+        eventTimeType: args.eventTimeType,
       );
     },
   );
@@ -384,6 +387,7 @@ class CreateEditEventParticipantsRouteArgs {
     required this.groupTroops,
     required this.groupLeaders,
     required this.initialParticipants,
+    required this.eventTimeType,
   });
 
   final _i33.Key? key;
@@ -398,9 +402,11 @@ class CreateEditEventParticipantsRouteArgs {
 
   final List<_i39.EventParticipantModel> initialParticipants;
 
+  final _i40.EventTimeType eventTimeType;
+
   @override
   String toString() {
-    return 'CreateEditEventParticipantsRouteArgs{key: $key, groupDependents: $groupDependents, groupPatrols: $groupPatrols, groupTroops: $groupTroops, groupLeaders: $groupLeaders, initialParticipants: $initialParticipants}';
+    return 'CreateEditEventParticipantsRouteArgs{key: $key, groupDependents: $groupDependents, groupPatrols: $groupPatrols, groupTroops: $groupTroops, groupLeaders: $groupLeaders, initialParticipants: $initialParticipants, eventTimeType: $eventTimeType}';
   }
 
   @override
@@ -427,7 +433,8 @@ class CreateEditEventParticipantsRouteArgs {
         const _i34.ListEquality<_i39.EventParticipantModel>().equals(
           initialParticipants,
           other.initialParticipants,
-        );
+        ) &&
+        eventTimeType == other.eventTimeType;
   }
 
   @override
@@ -439,7 +446,8 @@ class CreateEditEventParticipantsRouteArgs {
       const _i34.ListEquality<_i38.LeaderModel>().hash(groupLeaders) ^
       const _i34.ListEquality<_i39.EventParticipantModel>().hash(
         initialParticipants,
-      );
+      ) ^
+      eventTimeType.hashCode;
 }
 
 /// generated route for
@@ -447,9 +455,9 @@ class CreateEditEventParticipantsRouteArgs {
 class CreateEditEventRoute
     extends _i29.PageRouteInfo<CreateEditEventRouteArgs> {
   CreateEditEventRoute({
-    _i40.Key? key,
-    _i41.EventModel? event,
-    _i41.EventTimeType? eventTimeType,
+    _i41.Key? key,
+    _i40.EventModel? event,
+    _i40.EventTimeType? eventTimeType,
     List<_i39.EventParticipantModel>? eventParticipants,
     List<_i29.PageRouteInfo>? children,
   }) : super(
@@ -489,11 +497,11 @@ class CreateEditEventRouteArgs {
     this.eventParticipants,
   });
 
-  final _i40.Key? key;
+  final _i41.Key? key;
 
-  final _i41.EventModel? event;
+  final _i40.EventModel? event;
 
-  final _i41.EventTimeType? eventTimeType;
+  final _i40.EventTimeType? eventTimeType;
 
   final List<_i39.EventParticipantModel>? eventParticipants;
 
@@ -629,8 +637,8 @@ class EditLeadersRoute extends _i29.PageRouteInfo<void> {
 class EventDetailsRoute extends _i29.PageRouteInfo<EventDetailsRouteArgs> {
   EventDetailsRoute({
     _i33.Key? key,
-    required _i41.EventModel event,
-    required _i41.EventTimeType eventTimeType,
+    required _i40.EventModel event,
+    required _i40.EventTimeType eventTimeType,
     required _i42.UnitsProvider unitsProvider,
     List<_i29.PageRouteInfo>? children,
   }) : super(
@@ -670,9 +678,9 @@ class EventDetailsRouteArgs {
 
   final _i33.Key? key;
 
-  final _i41.EventModel event;
+  final _i40.EventModel event;
 
-  final _i41.EventTimeType eventTimeType;
+  final _i40.EventTimeType eventTimeType;
 
   final _i42.UnitsProvider unitsProvider;
 
@@ -888,7 +896,7 @@ class SendNotificationRoute extends _i29.PageRouteInfo<void> {
 class SetPatrolLeaderRoute
     extends _i29.PageRouteInfo<SetPatrolLeaderRouteArgs> {
   SetPatrolLeaderRoute({
-    _i40.Key? key,
+    _i41.Key? key,
     required _i35.DependentModel dependent,
     List<_i29.PageRouteInfo>? children,
   }) : super(
@@ -914,7 +922,7 @@ class SetPatrolLeaderRoute
 class SetPatrolLeaderRouteArgs {
   const SetPatrolLeaderRouteArgs({this.key, required this.dependent});
 
-  final _i40.Key? key;
+  final _i41.Key? key;
 
   final _i35.DependentModel dependent;
 

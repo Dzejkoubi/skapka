@@ -33,6 +33,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get common_copied_to_clipboard => 'Copied to clipboard 📋';
 
   @override
+  String get common_this_feature_not_implemented =>
+      'This feature is not yet implemented';
+
+  @override
   String get create => 'Create';
 
   @override

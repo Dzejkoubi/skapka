@@ -146,6 +146,12 @@ abstract class AppLocalizations {
   /// **'Zkopírováno do schránky 📋'**
   String get common_copied_to_clipboard;
 
+  /// No description provided for @common_this_feature_not_implemented.
+  ///
+  /// In cs, this message translates to:
+  /// **'Tato funkce ještě není implementována'**
+  String get common_this_feature_not_implemented;
+
   /// No description provided for @create.
   ///
   /// In cs, this message translates to:

@@ -804,6 +804,9 @@ class _CreateEditEventScreenState extends State<CreateEditEventScreen> {
                                         updatedParticipants;
                                   });
                                 },
+                                eventTimeType:
+                                    widget.eventTimeType ??
+                                    EventUtils.getEventTimeType(originalEvent),
                               ),
                               Container(
                                 width: double.infinity,

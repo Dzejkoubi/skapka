@@ -10,6 +10,7 @@ import 'package:skapka_app/app/theme/app_text_theme.dart';
 import 'package:skapka_app/app/theme/main_button_theme.dart';
 import 'package:skapka_app/models/dependents/dependent_model.dart';
 import 'package:skapka_app/models/dependents/leader_dependent_model.dart';
+import 'package:skapka_app/models/event_model.dart';
 import 'package:skapka_app/models/event_participant_model.dart';
 import 'package:skapka_app/models/leader_model.dart';
 import 'package:skapka_app/models/patrol_model.dart';
@@ -18,6 +19,7 @@ import 'package:skapka_app/screens/create_edit_event_screen.dart/screens/widgets
 import 'package:skapka_app/widgets/appbar/appbar.dart';
 import 'package:skapka_app/widgets/buttons/content_switcher.dart';
 import 'package:skapka_app/widgets/buttons/main_button.dart';
+import 'package:skapka_app/widgets/dialogs/bottom_dialog.dart';
 import 'package:skapka_app/widgets/wrappers/screen_wrapper.dart';
 import 'package:skapka_app/screens/create_edit_event_screen.dart/screens/widgets/patrol_expansion_tile.dart';
 
@@ -28,6 +30,7 @@ class CreateEditEventParticipantsScreen extends StatefulWidget {
   final List<TroopModel> groupTroops;
   final List<LeaderModel> groupLeaders;
   final List<EventParticipantModel> initialParticipants;
+  final EventTimeType eventTimeType;
 
   const CreateEditEventParticipantsScreen({
     super.key,
@@ -36,6 +39,7 @@ class CreateEditEventParticipantsScreen extends StatefulWidget {
     required this.groupTroops,
     required this.groupLeaders,
     required this.initialParticipants,
+    required this.eventTimeType,
   });
 
   @override
@@ -90,6 +94,9 @@ class _CreateEditEventParticipantsScreenState
     _groupDependentLeaders.clear();
     _groupDependentChildren.clear();
     for (var dependent in widget.groupDependents) {
+      if (widget.eventTimeType != EventTimeType.past && dependent.isArchived) {
+        continue;
+      }
       if (dependent.isLeader) {
         final ledPatrols = widget.groupLeaders
             .where((l) => l.dependentId == dependent.dependentId)
@@ -127,30 +134,11 @@ class _CreateEditEventParticipantsScreenState
           children: [
             // Content switcher with troops and leaders + top padding and side margins
             SizedBox(height: Appbar.topBarHeight + Appbar.bottomRadius),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: [
-                  SizedBox(width: AppSpacing.xLarge),
-                  ContentSwitcher(
-                    items: [
-                      ..._nonEmptyTroops.map((troop) => troop.name),
-                      context
-                          .localizations
-                          .create_edit_participants_screen_leaders,
-                    ],
-                    selectedIndex: _activeSwitcherIndex,
-                    onChanged: onChanged,
-                  ),
-                  SizedBox(width: AppSpacing.xLarge),
-                ],
-              ),
-            ),
-            const SizedBox(height: AppSpacing.large),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: AppSpacing.xLarge),
-              child: Column(children: [_buildContent(_activeSwitcherIndex)]),
-            ),
+            if (widget.eventTimeType != EventTimeType.past)
+              _buildNotPastParticipants(context),
+            if (widget.eventTimeType == EventTimeType.past)
+              _buildPastParticipants(),
+            SizedBox(height: AppSpacing.bottomSpace + AppSpacing.xxLarge),
           ],
         ),
       ),
@@ -162,7 +150,12 @@ class _CreateEditEventParticipantsScreenState
                 .localizations
                 .create_edit_participants_screen_dial_limit,
             onPressed: () {
-              debugPrint('Limit Participants');
+              BottomDialog.show(
+                context,
+                type: BottomDialogType.basic,
+                description:
+                    context.localizations.common_this_feature_not_implemented,
+              );
             },
           ),
         ),
@@ -175,11 +168,100 @@ class _CreateEditEventParticipantsScreenState
                 .localizations
                 .create_edit_participants_screen_dial_print,
             onPressed: () {
-              debugPrint('Print Participants');
+              BottomDialog.show(
+                context,
+                type: BottomDialogType.basic,
+                description:
+                    context.localizations.common_this_feature_not_implemented,
+              );
             },
           ),
         ),
       ],
+    );
+  }
+
+  Column _buildNotPastParticipants(BuildContext context) {
+    return Column(
+      children: [
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: [
+              SizedBox(width: AppSpacing.xLarge),
+              ContentSwitcher(
+                items: [
+                  ..._nonEmptyTroops.map((troop) => troop.name),
+                  context.localizations.create_edit_participants_screen_leaders,
+                ],
+                selectedIndex: _activeSwitcherIndex,
+                onChanged: onChanged,
+              ),
+              SizedBox(width: AppSpacing.xLarge),
+            ],
+          ),
+        ),
+        const SizedBox(height: AppSpacing.large),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: AppSpacing.xLarge),
+          child: Column(children: [_buildContent(_activeSwitcherIndex)]),
+        ),
+      ],
+    );
+  }
+
+  Padding _buildPastParticipants() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: AppSpacing.xLarge),
+      child: Column(
+        children: [
+          ...() {
+            final sortedDependents =
+                List<DependentModel>.from(widget.groupDependents)..sort((a, b) {
+                  final isA = _selectedParticipants.any(
+                    (p) => p.dependentId == a.dependentId,
+                  );
+                  final isB = _selectedParticipants.any(
+                    (p) => p.dependentId == b.dependentId,
+                  );
+                  if (isA != isB) {
+                    return isA ? -1 : 1;
+                  }
+                  return a.surname.compareTo(b.surname);
+                });
+            return sortedDependents.map((dependent) {
+              final isSelected = _selectedParticipants.any(
+                (p) => p.dependentId == dependent.dependentId,
+              );
+              return ParticipantRow(
+                dependent: dependent,
+                isSelected: isSelected,
+                onChanged: (value) {
+                  setState(() {
+                    if (value == true) {
+                      _selectedParticipants.add(
+                        EventParticipantModel(
+                          groupId: dependent.groupId,
+                          eventId: widget.initialParticipants.isNotEmpty
+                              ? widget.initialParticipants.first.eventId
+                              : '',
+                          dependentId: dependent.dependentId,
+                          status: EventParticipantStatus.notSpecified,
+                          note: '',
+                        ),
+                      );
+                    } else {
+                      _selectedParticipants.removeWhere(
+                        (p) => p.dependentId == dependent.dependentId,
+                      );
+                    }
+                  });
+                },
+              );
+            });
+          }(),
+        ],
+      ),
     );
   }
 

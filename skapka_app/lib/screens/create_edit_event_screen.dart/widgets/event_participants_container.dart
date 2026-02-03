@@ -9,6 +9,7 @@ import 'package:skapka_app/app/theme/app_sizes.dart';
 import 'package:skapka_app/app/theme/app_spacing.dart';
 import 'package:skapka_app/app/theme/app_text_theme.dart';
 import 'package:skapka_app/models/dependents/dependent_model.dart';
+import 'package:skapka_app/models/event_model.dart';
 import 'package:skapka_app/models/event_participant_model.dart';
 import 'package:skapka_app/models/leader_model.dart';
 import 'package:skapka_app/models/patrol_model.dart';
@@ -30,6 +31,7 @@ class EventParticipantsContainer extends StatelessWidget {
   final List<TroopModel> groupTroops;
   final List<EventParticipantModel> initialParticipants;
   final ValueChanged<List<EventParticipantModel>>? onParticipantsChanged;
+  final EventTimeType eventTimeType;
 
   const EventParticipantsContainer({
     super.key,
@@ -47,6 +49,7 @@ class EventParticipantsContainer extends StatelessWidget {
     required this.groupTroops,
     required this.initialParticipants,
     this.onParticipantsChanged,
+    required this.eventTimeType,
   });
 
   @override
@@ -67,6 +70,7 @@ class EventParticipantsContainer extends StatelessWidget {
                   groupPatrols: groupPatrols,
                   groupTroops: groupTroops,
                   initialParticipants: initialParticipants,
+                  eventTimeType: eventTimeType,
                 ),
               );
               if (result != null && result is List<EventParticipantModel>) {

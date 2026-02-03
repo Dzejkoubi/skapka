@@ -54,8 +54,9 @@ class DependentsScreen extends StatelessWidget {
                           BottomDialog.show(
                             context,
                             type: BottomDialogType.basic,
-                            description:
-                                'Tato funkce ještě není implementována',
+                            description: context
+                                .localizations
+                                .common_this_feature_not_implemented,
                           );
                         },
                       ),

@@ -75,7 +75,7 @@ class _RegisterScreenSecondState extends State<RegisterScreenSecond> {
           accountId: authService.currentUser!.id,
           name: widget.name,
           surname: widget.surname,
-          groupId: 'a0e10271-a919-4e9d-91d7-013c0fe6a625',
+          groupId: '809f0ed3-e1de-4bde-bc99-ad90a164e16e',
           isApproved: false,
         );
 

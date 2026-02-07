@@ -809,25 +809,24 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get dependents_screen_depents_details_has_gluten_allergy =>
-      'Has gluten allergy';
+      'Gluten allergy';
 
   @override
   String get dependents_screen_depents_details_has_lactose_intolerance =>
-      'Has lactose intolerance';
+      'Lactose intolerance';
 
   @override
-  String get dependents_screen_depents_details_has_nut_allergy =>
-      'Has nut allergy';
+  String get dependents_screen_depents_details_has_nut_allergy => 'Nut allergy';
 
   @override
   String get dependents_screen_depents_details_is_claustrophobic =>
-      'Is claustrophobic';
+      'Claustrophobic';
 
   @override
-  String get dependents_screen_depents_details_has_epilepsy => 'Has epilepsy';
+  String get dependents_screen_depents_details_has_epilepsy => 'Epilepsy';
 
   @override
-  String get dependents_screen_depents_details_has_asthma => 'Has asthma';
+  String get dependents_screen_depents_details_has_asthma => 'Asthma';
 
   @override
   String get dependents_screen_depents_details_is_swimmer => 'Is swimmer';
@@ -902,6 +901,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get settings_screen_app_version_title => 'App Version: ';
+
+  @override
+  String get category_info_screen => '--- INFO SCREEN ---';
+
+  @override
+  String get info_screen_title => 'Soon...';
+
+  @override
+  String get info_screen_subtitle =>
+      'We are constantly working so you can see information about your center. It will be available soon!';
 
   @override
   String get category_admin_panel_screen => '--- ADMIN PANEL ---';
@@ -1189,16 +1198,6 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get category_info_screen => '--- INFO SCREEN ---';
-
-  @override
-  String get category_info_screen_title => 'Soon...';
-
-  @override
-  String get category_info_screen_subtitle =>
-      'We are constantly working so you can see information about your center. It will be available soon!';
-
-  @override
   String get category_admin_panel_screen_skautis_sync =>
       '--- ADMIN PANEL - SKAUTIS SYNC ---';
 
@@ -1236,4 +1235,11 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get admin_panel_screen_button_send_notification => 'Send Notification';
+
+  @override
+  String get admin_panel_screen_notification_title_soon => 'Soon...';
+
+  @override
+  String get admin_panel_screen_notification_subtitle_soon =>
+      'We are constantly working so you can send notifications. This feature will be available soon!';
 }

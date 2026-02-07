@@ -246,43 +246,57 @@ class _EditDependentDetailsScreenState
                         spacing: AppSpacing.small,
                         children: [
                           _buildDropdownSection(
-                            label: "Alergie na lepek",
+                            label: context
+                                .localizations
+                                .dependents_screen_depents_details_has_gluten_allergy,
                             value: _hasGlutenAllergy,
                             onSelected: (val) =>
                                 setState(() => _hasGlutenAllergy = val),
                           ),
                           _buildDropdownSection(
-                            label: "Intolerance laktózy",
+                            label: context
+                                .localizations
+                                .dependents_screen_depents_details_has_lactose_intolerance,
                             value: _hasLactoseIntolerance,
                             onSelected: (val) =>
                                 setState(() => _hasLactoseIntolerance = val),
                           ),
                           _buildDropdownSection(
-                            label: "Alergie na ořechy",
+                            label: context
+                                .localizations
+                                .dependents_screen_depents_details_has_nut_allergy,
                             value: _hasNutAllergy,
                             onSelected: (val) =>
                                 setState(() => _hasNutAllergy = val),
                           ),
                           _buildDropdownSection(
-                            label: "Astma",
+                            label: context
+                                .localizations
+                                .dependents_screen_depents_details_has_asthma,
                             value: _hasAsthma,
                             onSelected: (val) =>
                                 setState(() => _hasAsthma = val),
                           ),
                           _buildDropdownSection(
-                            label: "Klaustrofobie",
+                            label: context
+                                .localizations
+                                .dependents_screen_depents_details_is_claustrophobic,
                             value: _isClaustrophobic,
                             onSelected: (val) =>
                                 setState(() => _isClaustrophobic = val),
                           ),
                           _buildDropdownSection(
-                            label: "Epilepsie",
+                            label: context
+                                .localizations
+                                .dependents_screen_depents_details_has_epilepsy,
                             value: _hasEpilepsy,
                             onSelected: (val) =>
                                 setState(() => _hasEpilepsy = val),
                           ),
                           _buildDropdownSection(
-                            label: "Plavec",
+                            label: context
+                                .localizations
+                                .dependents_screen_depents_details_is_swimmer,
                             value: _isSwimmer,
                             onSelected: (val) =>
                                 setState(() => _isSwimmer = val),

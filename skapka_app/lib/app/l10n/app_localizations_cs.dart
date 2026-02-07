@@ -807,25 +807,25 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get dependents_screen_depents_details_has_gluten_allergy =>
-      'Má alergii na lepek';
+      'Alergie na lepek';
 
   @override
   String get dependents_screen_depents_details_has_lactose_intolerance =>
-      'Má alergii na laktózu';
+      'Alergie na laktózu';
 
   @override
   String get dependents_screen_depents_details_has_nut_allergy =>
-      'Má alergii na ořechy';
+      'Alergie na ořechy';
 
   @override
   String get dependents_screen_depents_details_is_claustrophobic =>
-      'Má klaustrofobii';
+      'Klaustrofobie';
 
   @override
-  String get dependents_screen_depents_details_has_epilepsy => 'Má epilepsii';
+  String get dependents_screen_depents_details_has_epilepsy => 'Epilepsie';
 
   @override
-  String get dependents_screen_depents_details_has_asthma => 'Má astma';
+  String get dependents_screen_depents_details_has_asthma => 'Astma';
 
   @override
   String get dependents_screen_depents_details_is_swimmer => 'Je plavec';
@@ -899,6 +899,16 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get settings_screen_app_version_title => 'Verze aplikace: ';
+
+  @override
+  String get category_info_screen => '--- INFO SCREEN ---';
+
+  @override
+  String get info_screen_title => 'Brzy...';
+
+  @override
+  String get info_screen_subtitle =>
+      'Ústavičně pracujeme, aby si mohl/a vidět informace o tvém středisku. Brzy budou k dispozici!';
 
   @override
   String get category_admin_panel_screen => '--- ADMIN PANEL ---';
@@ -1184,16 +1194,6 @@ class AppLocalizationsCs extends AppLocalizations {
   }
 
   @override
-  String get category_info_screen => '--- INFO SCREEN ---';
-
-  @override
-  String get category_info_screen_title => 'Brzy...';
-
-  @override
-  String get category_info_screen_subtitle =>
-      'Ústavičně pracujeme, aby si mohl/a vidět informace o tvém středisku. Brzy budou k dispozici!';
-
-  @override
   String get category_admin_panel_screen_skautis_sync =>
       '--- ADMIN PANEL - SKAUTIS SYNC ---';
 
@@ -1231,4 +1231,11 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get admin_panel_screen_button_send_notification => 'Send Notification';
+
+  @override
+  String get admin_panel_screen_notification_title_soon => 'Brzy...';
+
+  @override
+  String get admin_panel_screen_notification_subtitle_soon =>
+      'Ústavičně pracujeme, aby si mohl/a posílat oznámení. Tato funkce bude brzy k dispozici!';
 }

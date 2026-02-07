@@ -267,12 +267,12 @@
   "dependents_screen_dependent_this_school_year_event_attendance": "Účast na výpravách v tomto školním roce",
   "dependents_screen_dependent_notes_button_text": "Upravit detaily",
   "dependents_screen_dependent_description": "Důležité informace a potřeby. Přístupné jen vedení pro hladký průběh výprav.",
-  "dependents_screen_depents_details_has_gluten_allergy": "Má alergii na lepek",
-  "dependents_screen_depents_details_has_lactose_intolerance": "Má alergii na laktózu",
-  "dependents_screen_depents_details_has_nut_allergy": "Má alergii na ořechy",
-  "dependents_screen_depents_details_is_claustrophobic": "Má klaustrofobii",
-  "dependents_screen_depents_details_has_epilepsy": "Má epilepsii",
-  "dependents_screen_depents_details_has_asthma": "Má astma",
+  "dependents_screen_depents_details_has_gluten_allergy": "Alergie na lepek",
+  "dependents_screen_depents_details_has_lactose_intolerance": "Alergie na laktózu",
+  "dependents_screen_depents_details_has_nut_allergy": "Alergie na ořechy",
+  "dependents_screen_depents_details_is_claustrophobic": "Klaustrofobie",
+  "dependents_screen_depents_details_has_epilepsy": "Epilepsie",
+  "dependents_screen_depents_details_has_asthma": "Astma",
   "dependents_screen_depents_details_is_swimmer": "Je plavec",
   "dependents_screen_depents_details_other_notes": "Něco jiného",
   "dependents_screen_depents_details_other_notes_description": "Zde prosím napiš cokoliv jiného, co bychom ještě měli vědět. ",
@@ -296,6 +296,9 @@
   "settings_screen_app_language_czech": "Čeština",
   "settings_screen_app_language_english": "Angličtina",
   "settings_screen_app_version_title": "Verze aplikace: ",
+  "category_info_screen": "--- INFO SCREEN ---",
+  "info_screen_title": "Brzy...",
+  "info_screen_subtitle": "Ústavičně pracujeme, aby si mohl/a vidět informace o tvém středisku. Brzy budou k dispozici!",
   "category_admin_panel_screen": "--- ADMIN PANEL ---",
   "admin_panel_screen_title": "Admin Panel",
   "category_admin_panel_screen_warnings": "--- ADMIN PANEL - VAROVÁNÍ ---",
@@ -516,9 +519,6 @@
       }
     }
   },
-  "category_info_screen": "--- INFO SCREEN ---",
-  "category_info_screen_title": "Brzy...",
-  "category_info_screen_subtitle": "Ústavičně pracujeme, aby si mohl/a vidět informace o tvém středisku. Brzy budou k dispozici!",
   "category_admin_panel_screen_skautis_sync": "--- ADMIN PANEL - SKAUTIS SYNC ---",
   "admin_panel_screen_data_management_title": "Data",
   "admin_panel_screen_button_skautis_sync": "SkautIS synchronizace",
@@ -529,5 +529,7 @@
   "admin_panel_screen_skautis_sync_error_description": "Chyba při synchronizaci se SkautIS",
   "category_admin_panel_screen_notifications": "--- ADMIN PANEL - NOTIFICATIONS ---",
   "admin_panel_screen_notification_title": "Notification",
-  "admin_panel_screen_button_send_notification": "Send Notification"
+  "admin_panel_screen_button_send_notification": "Send Notification",
+  "admin_panel_screen_notification_title_soon": "Brzy...",
+  "admin_panel_screen_notification_subtitle_soon": "Ústavičně pracujeme, aby si mohl/a posílat oznámení. Tato funkce bude brzy k dispozici!"
 }

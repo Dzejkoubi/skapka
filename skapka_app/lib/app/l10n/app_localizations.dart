@@ -1431,37 +1431,37 @@ abstract class AppLocalizations {
   /// No description provided for @dependents_screen_depents_details_has_gluten_allergy.
   ///
   /// In cs, this message translates to:
-  /// **'Má alergii na lepek'**
+  /// **'Alergie na lepek'**
   String get dependents_screen_depents_details_has_gluten_allergy;
 
   /// No description provided for @dependents_screen_depents_details_has_lactose_intolerance.
   ///
   /// In cs, this message translates to:
-  /// **'Má alergii na laktózu'**
+  /// **'Alergie na laktózu'**
   String get dependents_screen_depents_details_has_lactose_intolerance;
 
   /// No description provided for @dependents_screen_depents_details_has_nut_allergy.
   ///
   /// In cs, this message translates to:
-  /// **'Má alergii na ořechy'**
+  /// **'Alergie na ořechy'**
   String get dependents_screen_depents_details_has_nut_allergy;
 
   /// No description provided for @dependents_screen_depents_details_is_claustrophobic.
   ///
   /// In cs, this message translates to:
-  /// **'Má klaustrofobii'**
+  /// **'Klaustrofobie'**
   String get dependents_screen_depents_details_is_claustrophobic;
 
   /// No description provided for @dependents_screen_depents_details_has_epilepsy.
   ///
   /// In cs, this message translates to:
-  /// **'Má epilepsii'**
+  /// **'Epilepsie'**
   String get dependents_screen_depents_details_has_epilepsy;
 
   /// No description provided for @dependents_screen_depents_details_has_asthma.
   ///
   /// In cs, this message translates to:
-  /// **'Má astma'**
+  /// **'Astma'**
   String get dependents_screen_depents_details_has_asthma;
 
   /// No description provided for @dependents_screen_depents_details_is_swimmer.
@@ -1601,6 +1601,24 @@ abstract class AppLocalizations {
   /// In cs, this message translates to:
   /// **'Verze aplikace: '**
   String get settings_screen_app_version_title;
+
+  /// No description provided for @category_info_screen.
+  ///
+  /// In cs, this message translates to:
+  /// **'--- INFO SCREEN ---'**
+  String get category_info_screen;
+
+  /// No description provided for @info_screen_title.
+  ///
+  /// In cs, this message translates to:
+  /// **'Brzy...'**
+  String get info_screen_title;
+
+  /// No description provided for @info_screen_subtitle.
+  ///
+  /// In cs, this message translates to:
+  /// **'Ústavičně pracujeme, aby si mohl/a vidět informace o tvém středisku. Brzy budou k dispozici!'**
+  String get info_screen_subtitle;
 
   /// No description provided for @category_admin_panel_screen.
   ///
@@ -1932,24 +1950,6 @@ abstract class AppLocalizations {
     String account_name_surname,
   );
 
-  /// No description provided for @category_info_screen.
-  ///
-  /// In cs, this message translates to:
-  /// **'--- INFO SCREEN ---'**
-  String get category_info_screen;
-
-  /// No description provided for @category_info_screen_title.
-  ///
-  /// In cs, this message translates to:
-  /// **'Brzy...'**
-  String get category_info_screen_title;
-
-  /// No description provided for @category_info_screen_subtitle.
-  ///
-  /// In cs, this message translates to:
-  /// **'Ústavičně pracujeme, aby si mohl/a vidět informace o tvém středisku. Brzy budou k dispozici!'**
-  String get category_info_screen_subtitle;
-
   /// No description provided for @category_admin_panel_screen_skautis_sync.
   ///
   /// In cs, this message translates to:
@@ -2015,6 +2015,18 @@ abstract class AppLocalizations {
   /// In cs, this message translates to:
   /// **'Send Notification'**
   String get admin_panel_screen_button_send_notification;
+
+  /// No description provided for @admin_panel_screen_notification_title_soon.
+  ///
+  /// In cs, this message translates to:
+  /// **'Brzy...'**
+  String get admin_panel_screen_notification_title_soon;
+
+  /// No description provided for @admin_panel_screen_notification_subtitle_soon.
+  ///
+  /// In cs, this message translates to:
+  /// **'Ústavičně pracujeme, aby si mohl/a posílat oznámení. Tato funkce bude brzy k dispozici!'**
+  String get admin_panel_screen_notification_subtitle_soon;
 }
 
 class _AppLocalizationsDelegate

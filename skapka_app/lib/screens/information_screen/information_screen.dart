@@ -16,12 +16,12 @@ class InformationScreen extends StatelessWidget {
           children: [
             Text(
               textAlign: TextAlign.center,
-              context.localizations.category_info_screen_title,
+              context.localizations.info_screen_title,
               style: AppTextTheme.titleLarge(context),
             ),
             Text(
               textAlign: TextAlign.center,
-              context.localizations.category_info_screen_subtitle,
+              context.localizations.info_screen_subtitle,
               style: AppTextTheme.bodyMedium(context),
             ),
           ],

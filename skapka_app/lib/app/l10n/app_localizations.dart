@@ -2007,13 +2007,13 @@ abstract class AppLocalizations {
   /// No description provided for @admin_panel_screen_notification_title.
   ///
   /// In cs, this message translates to:
-  /// **'Notification'**
+  /// **'Oznámení'**
   String get admin_panel_screen_notification_title;
 
   /// No description provided for @admin_panel_screen_button_send_notification.
   ///
   /// In cs, this message translates to:
-  /// **'Send Notification'**
+  /// **'Odeslat oznámení'**
   String get admin_panel_screen_button_send_notification;
 
   /// No description provided for @admin_panel_screen_notification_title_soon.

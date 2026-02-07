@@ -21,9 +21,17 @@ class EventTimeInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dateFormat = DateFormat('d. M. yyyy');
+    final dateFormat =
+        (eventTimeType == EventTimeType.draft ||
+            eventTimeType == EventTimeType.past)
+        ? DateFormat('d. M. yyyy')
+        : DateFormat('d. M.');
     final timeFormat = DateFormat('HH:mm');
-    final dateTimeFormat = DateFormat('d. M. yyyy HH:mm');
+    final dateTimeFormat =
+        (eventTimeType == EventTimeType.draft ||
+            eventTimeType == EventTimeType.past)
+        ? DateFormat('d. M. yyyy HH:mm')
+        : DateFormat('d. M. HH:mm');
 
     final startDate = event.startDate;
     final endDate = event.endDate;

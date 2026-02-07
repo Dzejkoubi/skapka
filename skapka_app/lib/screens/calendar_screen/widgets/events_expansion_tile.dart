@@ -127,7 +127,6 @@ class _EventsExpansionTileState extends State<EventsExpansionTile> {
                   variant: ButtonStylesVariants.normal,
                   text: AppLocalizations.of(context)!.load_more,
                   onPressed: widget.onLoadMore,
-                  expandToFillWidth: true,
                 ),
               ),
           ],

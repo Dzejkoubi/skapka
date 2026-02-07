@@ -1227,10 +1227,10 @@ class AppLocalizationsCs extends AppLocalizations {
       '--- ADMIN PANEL - NOTIFICATIONS ---';
 
   @override
-  String get admin_panel_screen_notification_title => 'Notification';
+  String get admin_panel_screen_notification_title => 'Oznámení';
 
   @override
-  String get admin_panel_screen_button_send_notification => 'Send Notification';
+  String get admin_panel_screen_button_send_notification => 'Odeslat oznámení';
 
   @override
   String get admin_panel_screen_notification_title_soon => 'Brzy...';

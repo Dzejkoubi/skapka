@@ -64,7 +64,6 @@ class AdminPanelScreen extends StatelessWidget {
                             text: context
                                 .localizations
                                 .admin_panel_screen_button_approve_accounts,
-                            expandToFillWidth: false,
                           ),
                         ],
                       ),
@@ -80,7 +79,6 @@ class AdminPanelScreen extends StatelessWidget {
                             text: context
                                 .localizations
                                 .admin_panel_screen_button_edit_leaders,
-                            expandToFillWidth: false,
                           ),
                         ],
                       ),
@@ -98,7 +96,6 @@ class AdminPanelScreen extends StatelessWidget {
                             text: context
                                 .localizations
                                 .admin_panel_screen_button_edit_rights,
-                            expandToFillWidth: false,
                           ),
                         ],
                       ),
@@ -114,7 +111,6 @@ class AdminPanelScreen extends StatelessWidget {
                             text: context
                                 .localizations
                                 .admin_panel_screen_button_connect_dependents,
-                            expandToFillWidth: false,
                           ),
                         ],
                       ),
@@ -130,24 +126,27 @@ class AdminPanelScreen extends StatelessWidget {
                   expandedCrossAxisAlignment: CrossAxisAlignment.start,
                   child: Column(
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          MainButton.outlined(
-                            type: ButtonType.textIcon,
-                            iconAsset: 'assets/icons/cloud-down.svg',
-                            variant: ButtonStylesVariants.normal,
-                            text: context
-                                .localizations
-                                .admin_panel_screen_button_skautis_sync,
-                            onPressed: () {
-                              showDialog(
-                                context: context,
-                                builder: (_) => const SkautisSyncDialog(),
-                              );
-                            },
-                          ),
-                        ],
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            MainButton.outlined(
+                              type: ButtonType.textIcon,
+                              iconAsset: 'assets/icons/cloud-down.svg',
+                              variant: ButtonStylesVariants.normal,
+                              text: context
+                                  .localizations
+                                  .admin_panel_screen_button_skautis_sync,
+                              onPressed: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (_) => const SkautisSyncDialog(),
+                                );
+                              },
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),

@@ -528,8 +528,8 @@
   "admin_panel_screen_skautis_sync_success_description": "Synchronizace se SkautIS byla úspěšná",
   "admin_panel_screen_skautis_sync_error_description": "Chyba při synchronizaci se SkautIS",
   "category_admin_panel_screen_notifications": "--- ADMIN PANEL - NOTIFICATIONS ---",
-  "admin_panel_screen_notification_title": "Notification",
-  "admin_panel_screen_button_send_notification": "Send Notification",
+  "admin_panel_screen_notification_title": "Oznámení",
+  "admin_panel_screen_button_send_notification": "Odeslat oznámení",
   "admin_panel_screen_notification_title_soon": "Brzy...",
   "admin_panel_screen_notification_subtitle_soon": "Ústavičně pracujeme, aby si mohl/a posílat oznámení. Tato funkce bude brzy k dispozici!"
 }

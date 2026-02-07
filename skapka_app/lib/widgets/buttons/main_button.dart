@@ -19,7 +19,6 @@ class MainButton extends StatefulWidget {
   final String text;
   final VoidCallback? onPressed;
   final String? iconAsset;
-  final bool expandToFillWidth;
 
   const MainButton({
     super.key,
@@ -30,7 +29,6 @@ class MainButton extends StatefulWidget {
     required this.text,
     this.onPressed,
     this.iconAsset,
-    this.expandToFillWidth = false,
   });
 
   // Convenience factory constructors for common button types
@@ -40,7 +38,6 @@ class MainButton extends StatefulWidget {
     ButtonStylesVariants variant = ButtonStylesVariants.normal,
     ButtonType type = ButtonType.text,
     String? iconAsset,
-    bool expandToFillWidth = false,
   }) {
     return MainButton(
       style: ButtonStyleTypes.filled,
@@ -49,7 +46,6 @@ class MainButton extends StatefulWidget {
       onPressed: onPressed,
       type: type,
       iconAsset: iconAsset,
-      expandToFillWidth: expandToFillWidth,
     );
   }
 
@@ -59,7 +55,6 @@ class MainButton extends StatefulWidget {
     ButtonStylesVariants variant = ButtonStylesVariants.normal,
     ButtonType type = ButtonType.text,
     String? iconAsset,
-    bool expandToFillWidth = false,
   }) {
     return MainButton(
       style: ButtonStyleTypes.outlined,
@@ -68,7 +63,6 @@ class MainButton extends StatefulWidget {
       onPressed: onPressed,
       type: type,
       iconAsset: iconAsset,
-      expandToFillWidth: expandToFillWidth,
     );
   }
 
@@ -78,7 +72,6 @@ class MainButton extends StatefulWidget {
     ButtonStylesVariants variant = ButtonStylesVariants.normal,
     ButtonType type = ButtonType.text,
     String? iconAsset,
-    bool expandToFillWidth = false,
   }) {
     return MainButton(
       style: ButtonStyleTypes.text,
@@ -87,7 +80,6 @@ class MainButton extends StatefulWidget {
       onPressed: onPressed,
       type: type,
       iconAsset: iconAsset,
-      expandToFillWidth: expandToFillWidth,
     );
   }
 
@@ -166,7 +158,6 @@ class _MainButtonState extends State<MainButton> {
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 150),
         curve: Curves.easeInOut,
-        width: widget.expandToFillWidth ? double.infinity : null,
         padding: EdgeInsets.symmetric(
           horizontal: horizontalPadding,
           vertical: verticalPadding,

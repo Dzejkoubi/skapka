@@ -357,8 +357,14 @@ class _EditDependentDetailsScreenState
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(label, style: AppTextTheme.labelLarge(context)),
+          Expanded(
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Text(label, style: AppTextTheme.labelLarge(context)),
+            ),
+          ),
           CustomDropdownMenu<bool?>(
+            width: 108,
             initialSelection: value,
             dropdownMenuEntries: _threeStateEntries,
             onSelected: onSelected,

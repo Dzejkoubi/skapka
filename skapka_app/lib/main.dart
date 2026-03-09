@@ -1,4 +1,6 @@
 import 'package:device_preview/device_preview.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -8,6 +10,7 @@ import 'package:skapka_app/app/router/router.dart';
 import 'package:skapka_app/app/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:skapka_app/app/theme/app_theme_data.dart';
+import 'package:skapka_app/firebase_options.dart';
 import 'package:skapka_app/providers/admin_panel_provider.dart';
 import 'package:skapka_app/providers/dependents_provider.dart';
 import 'package:skapka_app/providers/account_provider.dart';
@@ -19,8 +22,18 @@ import 'package:skapka_app/providers/units_provider.dart';
 import 'package:skapka_app/widgets/loading_overlay.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+@pragma('vm:keep')
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  debugPrint('Background FCM message: ${message.messageId}');
+}
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
+  // Register the background handler before runApp
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
   SystemChrome.setEnabledSystemUIMode(
     SystemUiMode.manual,

@@ -1,11 +1,15 @@
+import 'dart:io';
+
 import 'package:auto_route/auto_route.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:provider/provider.dart';
-import 'package:skapka_app/app/l10n/app_localizations.dart';
 import 'package:skapka_app/app/l10n/l10n_extension.dart';
 import 'package:skapka_app/app/router/router.gr.dart';
 import 'package:skapka_app/providers/account_provider.dart';
+import 'package:skapka_app/services/supabase_service.dart';
 import 'package:skapka_app/utils/is_user_leader.dart';
 import 'package:skapka_app/widgets/appbar/appbar.dart';
 import 'package:skapka_app/widgets/buttons/main_button.dart';
@@ -15,8 +19,92 @@ import 'package:skapka_app/widgets/wrappers/screen_wrapper.dart';
 import 'package:skapka_app/widgets/wrappers/widgets/custom_floating_action_button_location.dart';
 
 @RoutePage()
-class NavbarDashboard extends StatelessWidget {
+class NavbarDashboard extends StatefulWidget {
   const NavbarDashboard({super.key});
+
+  @override
+  State<NavbarDashboard> createState() => _NavbarDashboardState();
+}
+
+class _NavbarDashboardState extends State<NavbarDashboard> {
+  @override
+  void initState() {
+    super.initState();
+    _initFcm();
+  }
+
+  Future<void> _initFcm() async {
+    final messaging = FirebaseMessaging.instance;
+
+    // Request permission — shows system dialog on iOS and Android 13+
+    await messaging.requestPermission(alert: true, badge: true, sound: true);
+
+    // Skip APNS token on simulators and web - they do not have one.
+    if (defaultTargetPlatform == TargetPlatform.iOS && !kIsWeb) {
+      final isSimulator = await _isIOSSimulator();
+      if (!isSimulator) {
+        String? apnsToken;
+        for (var i = 0; i < 5; i++) {
+          apnsToken = await messaging.getAPNSToken();
+          if (apnsToken != null) break;
+          await Future.delayed(const Duration(seconds: 1));
+        }
+        if (apnsToken == null) {
+          debugPrint(
+            'Failed to get APNS token after multiple attempts. Notifications may not work on this device.',
+          );
+          return;
+        }
+      }
+    }
+
+    // Get token and save to Supabase
+    await _saveToken(await messaging.getToken());
+
+    // Handle token rotation
+    messaging.onTokenRefresh.listen(_saveToken);
+
+    // Foreground — app is open when notification arrives
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      debugPrint('Foreground FCM: ${message.notification?.title}');
+    });
+
+    // Background tap — user tapped notification while app was backgrounded
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+      _handleNotificationTap(message.data);
+    });
+
+    // Terminated tap — user tapped notification that launched the app from closed state
+    final initialMessage = await messaging.getInitialMessage();
+    if (initialMessage != null) {
+      _handleNotificationTap(initialMessage.data);
+    }
+  }
+
+  Future<bool> _isIOSSimulator() async {
+    // dart:io Platform.environment contains SIMULATOR_DEVICE_NAME when running on a simulator
+    return Platform.environment.containsKey('SIMULATOR_DEVICE_NAME');
+  }
+
+  Future<void> _saveToken(String? token) async {
+    print('trying to save FCM token: $token');
+    if (token == null) {
+      debugPrint('FCM: token is null, skipping save');
+      return;
+    }
+    try {
+      await SupabaseService().saveFcmToken(token);
+    } catch (e) {
+      debugPrint('FCM: failed to save token — $e');
+    }
+  }
+
+  void _handleNotificationTap(Map<String, dynamic> data) {
+    // Navigate based on data payload
+    // e.g. if data contains {'route': 'event', 'id': '123'}
+    // push the relevant AutoRoute here
+    debugPrint('Notification tapped with data: $data');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +112,7 @@ class NavbarDashboard extends StatelessWidget {
       context,
       listen: false,
     );
+
     return ChangeNotifierProvider(
       create: (_) => ValueNotifier<bool>(false),
       child: Builder(
@@ -80,18 +169,16 @@ class NavbarDashboard extends StatelessWidget {
                       },
                     ),
                   ),
-                SpeedDialChild(
-                  labelWidget: MainButton.outlined(
-                    text: AppLocalizations.of(
-                      context,
-                    )!.calendar_screen_speed_dial_add_google_calendar,
-                    onPressed: () {
-                      debugPrint(
-                        'Add Google Calendar',
-                      ); // TODO: implement add Google Calendar
-                    },
-                  ),
-                ),
+                // SpeedDialChild(
+                //   labelWidget: MainButton.outlined(
+                //     text: AppLocalizations.of(
+                //       context,
+                //     )!.calendar_screen_speed_dial_add_google_calendar,
+                //     onPressed: () {
+                //       debugPrint('Add Google Calendar');
+                //     },
+                //   ),
+                // ),
               ],
             ),
             CustomNavBarItemInfo(

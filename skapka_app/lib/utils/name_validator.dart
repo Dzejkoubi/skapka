@@ -11,7 +11,7 @@ String? validateName(
         ? context.localizations.register_screen_1_error_empty_surname
         : context.localizations.register_screen_1_error_empty_name;
   }
-  if (!RegExp(r"^[a-zA-Z'-]+$").hasMatch(value)) {
+  if (!RegExp(r"^[a-zA-ZÀ-ž'-]+$", unicode: true).hasMatch(value)) {
     return isSurname
         ? context.localizations.register_screen_1_error_invalid_surname
         : context.localizations.register_screen_1_error_invalid_name;

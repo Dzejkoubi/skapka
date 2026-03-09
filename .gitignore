@@ -7,3 +7,9 @@ supabase/functions/.env
 skapka_app/untranslated.txt
 
 .env
+skapka_app/ios/Runner/GoogleService-Info.plist
+skapka_app/ios/GoogleService-Info.plist
+skapka_app/android/app/google-services.json
+skapka_app/lib/firebase_options.dart
+skapka_app/firebase.json
+supabase/functions/skapka-6123b-firebase-adminsdk-fbsvc-cefcfa6246.json

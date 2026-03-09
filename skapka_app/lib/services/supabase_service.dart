@@ -1,4 +1,5 @@
 // lib/services/supabase_service.dart
+import 'package:flutter/foundation.dart';
 import 'package:skapka_app/models/account_model.dart';
 import 'package:skapka_app/models/dependents/account_dependent_relation_model.dart';
 import 'package:skapka_app/models/dependents/dependent_model.dart';
@@ -534,5 +535,17 @@ class SupabaseService {
         .update({'is_main_dependent': false})
         .eq('account_id', accountId)
         .eq('dependent_id', dependentId);
+  }
+
+  Future<void> saveFcmToken(String token) async {
+    final userId = _supabaseClient.auth.currentUser?.id;
+    if (userId == null) return;
+
+    final updated = await _supabaseClient
+        .from('accounts')
+        .update({'fcm_token': token})
+        .eq('account_id', userId)
+        .select('account_id');
+    debugPrint('FCM: update affected ${updated.length} row(s)');
   }
 }

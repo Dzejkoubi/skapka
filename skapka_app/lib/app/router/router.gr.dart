@@ -976,16 +976,44 @@ class SquircleShowcaseRoute extends _i29.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i28.WelcomeScreen]
-class WelcomeRoute extends _i29.PageRouteInfo<void> {
-  const WelcomeRoute({List<_i29.PageRouteInfo>? children})
-    : super(WelcomeRoute.name, initialChildren: children);
+class WelcomeRoute extends _i29.PageRouteInfo<WelcomeRouteArgs> {
+  WelcomeRoute({_i33.Key? key, List<_i29.PageRouteInfo>? children})
+    : super(
+        WelcomeRoute.name,
+        args: WelcomeRouteArgs(key: key),
+        initialChildren: children,
+      );
 
   static const String name = 'WelcomeRoute';
 
   static _i29.PageInfo page = _i29.PageInfo(
     name,
     builder: (data) {
-      return const _i28.WelcomeScreen();
+      final args = data.argsAs<WelcomeRouteArgs>(
+        orElse: () => const WelcomeRouteArgs(),
+      );
+      return _i28.WelcomeScreen(key: args.key);
     },
   );
+}
+
+class WelcomeRouteArgs {
+  const WelcomeRouteArgs({this.key});
+
+  final _i33.Key? key;
+
+  @override
+  String toString() {
+    return 'WelcomeRouteArgs{key: $key}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! WelcomeRouteArgs) return false;
+    return key == other.key;
+  }
+
+  @override
+  int get hashCode => key.hashCode;
 }

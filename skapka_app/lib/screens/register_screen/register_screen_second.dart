@@ -8,6 +8,7 @@ import 'package:skapka_app/app/theme/app_color_theme.dart';
 import 'package:skapka_app/app/theme/app_spacing.dart';
 import 'package:skapka_app/app/theme/app_text_theme.dart';
 import 'package:skapka_app/app/theme/main_button_theme.dart';
+import 'package:skapka_app/models/group_model.dart';
 import 'package:skapka_app/services/auth_service.dart';
 import 'package:skapka_app/services/supabase_service.dart';
 import 'package:skapka_app/utils/password_validator.dart';
@@ -71,11 +72,11 @@ class _RegisterScreenSecondState extends State<RegisterScreenSecond> {
           password: _passwordController.text,
         );
 
-        await supabaseService.editAccountDetails(
+        await supabaseService.insertAccount(
           accountId: authService.currentUser!.id,
           name: widget.name,
           surname: widget.surname,
-          groupId: '809f0ed3-e1de-4bde-bc99-ad90a164e16e',
+          groupId: GroupModel.defaultGroupId,
           isApproved: false,
         );
 

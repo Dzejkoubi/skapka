@@ -88,7 +88,7 @@ class _AuthGateState extends State<AuthGate> {
 
     // 1. Check if user is logged in
     if (session == null && mounted) {
-      context.router.replace(const WelcomeRoute());
+      context.router.replace(WelcomeRoute());
       return;
     }
 
@@ -97,7 +97,7 @@ class _AuthGateState extends State<AuthGate> {
     final account = await supabaseService.getAccountDetails(session!.user.id);
     if (account == null) {
       if (!mounted) return;
-      context.router.replace(const WelcomeRoute());
+      context.router.replace(WelcomeRoute());
       return;
     }
 

@@ -8,24 +8,76 @@ import 'package:skapka_app/app/theme/app_spacing.dart';
 import 'package:skapka_app/app/theme/app_text_theme.dart';
 import 'package:skapka_app/app/l10n/app_localizations.dart';
 import 'package:skapka_app/app/theme/main_button_theme.dart';
+import 'package:skapka_app/models/group_model.dart';
+import 'package:skapka_app/services/auth_service.dart';
+import 'package:skapka_app/services/supabase_service.dart';
 import 'package:skapka_app/widgets/buttons/main_button.dart';
-import 'package:skapka_app/widgets/wrappers/scrollable_on_keyboard_screen_wrapper.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 @RoutePage()
 class WelcomeScreen extends StatelessWidget {
-  const WelcomeScreen({super.key});
+  WelcomeScreen({super.key});
+
+  final supabase = Supabase.instance.client;
+
+  /// Handles login process via Google.
+  ///
+  /// Calls [AuthService.googleSignIn] to authenticate user.
+  /// If user is logged in and found in the database, redirect to home screen.
+  Future<void> onGoogleLogin(BuildContext context) async {
+    try {
+      await AuthService().nativeGoogleSignIn();
+    } catch (e) {
+      debugPrint('Google sign-in failed: $e');
+      return;
+    }
+
+    final user = supabase.auth.currentUser;
+    if (user == null) return;
+
+    if (context.mounted) {
+      // Parse name from Supabase user metadata (populated by Google)
+      final displayName = (user.userMetadata?['full_name'] as String?) ?? '';
+      final nameParts = displayName.split(' ');
+      final name = nameParts.isNotEmpty ? nameParts[0] : '';
+      final surname = nameParts.length > 1
+          ? nameParts.sublist(1).join(' ')
+          : '';
+
+      // Only create account record if this is a new user
+      final existingAccount = await SupabaseService().getAccountDetails(
+        user.id,
+      );
+      if (existingAccount == null) {
+        await SupabaseService().insertAccount(
+          accountId: user.id,
+          name: name,
+          surname: surname,
+          groupId: GroupModel.defaultGroupId,
+          isApproved: false,
+        );
+      }
+
+      if (context.mounted) {
+        context.router.push(AuthGate());
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: context.colors.primary.light,
-      body: ScrollableOnKeyboardScreenWrapper(
-        builder: (constraints) {
-          return Column(
+      body: LayoutBuilder(
+        builder: (context, constraints) => SingleChildScrollView(
+          child: ConstrainedBox(
+            constraints: BoxConstraints(minHeight: constraints.maxHeight),
+            child: SafeArea(
+              child: Column(
             children: [
               SizedBox(height: AppSpacing.xLarge),
               SizedBox(
-                height: 256,
+                height: 128,
                 child: SvgPicture.asset(
                   'assets/images/logos/scout-logo-white-without-text.svg',
                 ),
@@ -67,6 +119,27 @@ class WelcomeScreen extends StatelessWidget {
                         context.router.push(const RegisterRouteFirst());
                       },
                     ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        MainButton.outlined(
+                          variant: ButtonStylesVariants.white,
+                          iconAsset: 'assets/icons/brand-google.svg',
+                          type: ButtonType.icon,
+                          text: "",
+                          onPressed: () => onGoogleLogin(context),
+                        ),
+                        MainButton.outlined(
+                          variant: ButtonStylesVariants.white,
+                          iconAsset: 'assets/icons/brand-apple.svg',
+                          type: ButtonType.icon,
+                          text: "",
+                          onPressed: () {
+                            debugPrint('Apple Sign-In button pressed');
+                          },
+                        ),
+                      ],
+                    ),
                     // MainButton.text(
                     //   type: ButtonType.text,
                     //   variant: ButtonStylesVariants.white,
@@ -83,8 +156,10 @@ class WelcomeScreen extends StatelessWidget {
               ),
               SizedBox(height: AppSpacing.bottomSpace),
             ],
-          );
-        },
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }

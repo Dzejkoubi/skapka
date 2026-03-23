@@ -127,7 +127,7 @@ class AccountNotApprovedScreen extends StatelessWidget {
                                   )!.account_not_approved_screen_logout_success,
                                 );
                                 context.router.replaceAll([
-                                  const WelcomeRoute(),
+                                  WelcomeRoute(),
                                 ]); // Navigate to Welcome after logout
                               }
                             } catch (e) {
@@ -189,7 +189,7 @@ class AccountNotApprovedScreen extends StatelessWidget {
                                   )!.account_not_approved_screen_delete_success,
                                 );
                                 context.router.replaceAll([
-                                  const WelcomeRoute(),
+                                  WelcomeRoute(),
                                 ]); // Navigate to Welcome after deletion
                               }
                             } catch (e) {

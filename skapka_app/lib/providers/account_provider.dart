@@ -33,6 +33,7 @@ class AccountProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  ///
   void setGroup(GroupModel newGroup) {
     _group = newGroup;
     notifyListeners();

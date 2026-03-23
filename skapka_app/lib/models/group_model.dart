@@ -12,6 +12,8 @@ abstract class GroupModel with _$GroupModel {
     required String name,
   }) = _GroupModel;
 
+  static const defaultGroupId = '809f0ed3-e1de-4bde-bc99-ad90a164e16e';
+
   factory GroupModel.fromJson(Map<String, dynamic> json) {
     return _$GroupModelFromJson(json);
   }

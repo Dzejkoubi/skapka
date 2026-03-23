@@ -100,10 +100,19 @@ class _NavbarDashboardState extends State<NavbarDashboard> {
   }
 
   void _handleNotificationTap(Map<String, dynamic> data) {
-    // Navigate based on data payload
-    // e.g. if data contains {'route': 'event', 'id': '123'}
-    // push the relevant AutoRoute here
-    debugPrint('Notification tapped with data: $data');
+    debugPrint('Notification data: $data');
+    final path = data['path'] as String?;
+    debugPrint('Notification path: "$path"');
+    if (path == null || path.isEmpty) return;
+
+    // Routes with complex Dart-object parameters can't be resolved from a URL.
+    // Map them explicitly; everything else uses navigateNamed.
+    if (path == '/event/create') {
+      context.router.push(CreateEditEventRoute());
+    } else {
+      debugPrint('Navigating to: "$path"');
+      context.router.navigatePath(path);
+    }
   }
 
   @override

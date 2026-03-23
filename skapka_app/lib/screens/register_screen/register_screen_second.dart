@@ -66,7 +66,7 @@ class _RegisterScreenSecondState extends State<RegisterScreenSecond> {
         _isLoading = true;
       });
       try {
-        await authService.signUp(
+        await authService.signUpWithEmail(
           email: widget.email.trim(),
           password: _passwordController.text,
         );

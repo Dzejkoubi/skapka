@@ -27,12 +27,14 @@ class AuthService {
   }
 
   // Sign Up (Register)
-  Future<AuthResponse> signUp({
+  Future<AuthResponse> signUpWithEmail({
     required String email,
     required String password,
   }) async {
     return await _supabaseClient.auth.signUp(email: email, password: password);
   }
+
+  Future<void> googleSignIn() async {}
 
   // Sign Out
   Future<void> signOut() async {

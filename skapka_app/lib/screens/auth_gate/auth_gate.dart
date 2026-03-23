@@ -16,6 +16,7 @@ import 'package:skapka_app/providers/events_provider.dart';
 import 'package:skapka_app/providers/units_provider.dart';
 import 'package:skapka_app/widgets/dialogs/bottom_dialog.dart';
 import 'package:skapka_app/widgets/loading_floating_logo/loading_floating_logo.dart';
+import 'package:skapka_app/app/router/pending_deep_link.dart';
 import 'package:skapka_app/services/auth_service.dart';
 import 'package:skapka_app/services/supabase_service.dart';
 import 'package:skapka_app/models/dependents/account_dependent_model.dart';
@@ -120,6 +121,11 @@ class _AuthGateState extends State<AuthGate> {
 
     if (mounted) {
       context.router.replace(const NavbarDashboard());
+      final pendingPath = PendingDeepLink.consume();
+      if (pendingPath != null) {
+        await Future.delayed(const Duration(milliseconds: 300));
+        if (mounted) context.router.navigatePath(pendingPath);
+      }
     }
   }
 

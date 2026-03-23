@@ -1,3 +1,5 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:skapka_app/app/router/pending_deep_link.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -84,7 +86,19 @@ class App extends StatelessWidget {
                 : false, // Show debug banner only in debug mode
             title: 'Skapka',
 
-            routerConfig: _appRouter.config(),
+            routerConfig: _appRouter.config(
+              deepLinkBuilder: (deepLink) {
+                final path = deepLink.path;
+                // Store any real deep link so AuthGate can navigate there
+                // after authentication + data loading is complete.
+                if (path.isNotEmpty && path != '/') {
+                  debugPrint('Deep link stored for after auth: "$path"');
+                  PendingDeepLink.set(path);
+                }
+                // Always start at AuthGate so auth + data load runs first.
+                return DeepLink.defaultPath;
+              },
+            ),
             theme: AppThemeData.lightTheme,
             darkTheme: AppThemeData.darkTheme,
             themeMode: themeProvider.themeMode,

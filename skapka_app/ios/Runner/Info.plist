@@ -18,6 +18,15 @@
 	<string>skapka_app</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+  		<dict>
+    		<key>CFBundleURLSchemes</key>
+    		<array>
+      			<string>skapka</string>
+    		</array>
+		</dict>
+	</array>
 	<key>CFBundleShortVersionString</key>
 	<string>$(FLUTTER_BUILD_NAME)</string>
 	<key>CFBundleSignature</key>
@@ -74,5 +83,21 @@
 	<array>
 		<string>remote-notification</string>
 	</array>
+	<key>FlutterDeepLinkingEnabled</key>
+	<true/>
+	<key>GIDClientID</key>
+	<string>829638704383-vdr3ngs2f2j3o6ujfk1lk2qsbqoan39d.apps.googleusercontent.com</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.829638704383-vdr3ngs2f2j3o6ujfk1lk2qsbqoan39d</string>
+			</array>
+		</dict>
+	</array>
+	<!-- End of the Google Sign-in Section -->
 </dict>
 </plist>

@@ -81,7 +81,7 @@ function pemToArrayBuffer(pem: string): ArrayBuffer {
 // ── Main handler ─────────────────────────────────────────────────────────────
 
 Deno.serve(async (req) => {
-  const { account_id, title, body, data } = await req.json();
+  const { account_id, title, body, path, data } = await req.json();
 
   const supabase = createClient(
     Deno.env.get("SUPABASE_URL")!,
@@ -97,7 +97,7 @@ Deno.serve(async (req) => {
 
   if (error || !account?.fcm_token) {
     return new Response(
-      JSON.stringify({ error: "FCM token not found for this account" }),
+      JSON.stringify({ error: `FCM token not found for this account id ${account_id}` }),
       { status: 404 }
     );
   }
@@ -117,7 +117,10 @@ Deno.serve(async (req) => {
         message: {
           token: account.fcm_token,
           notification: { title, body },
-          data: data ?? {},
+          data: {
+            ...data ?? {},
+            ...(path ? { path } : {}),
+          },
         },
       }),
     }

@@ -22,6 +22,8 @@ import 'package:skapka_app/services/supabase_service.dart';
 import 'package:skapka_app/models/dependents/account_dependent_model.dart';
 import 'dart:async';
 
+import 'package:supabase_flutter/supabase_flutter.dart';
+
 @RoutePage()
 class AuthGate extends StatefulWidget {
   const AuthGate({super.key});
@@ -32,16 +34,25 @@ class AuthGate extends StatefulWidget {
 
 class _AuthGateState extends State<AuthGate> {
   StreamSubscription<List<ConnectivityResult>>? _connectivitySubscription;
+  StreamSubscription<AuthState>? _authSubscription;
 
   @override
   void initState() {
     super.initState();
+
+    _authSubscription = AuthService().onAuthStateChange.listen((data) {
+      if (data.event == AuthChangeEvent.signedIn) {
+        if (mounted) _checkAuth();
+      }
+    });
+
     WidgetsBinding.instance.addPostFrameCallback((_) => _checkAuth());
   }
 
   @override
   void dispose() {
     _connectivitySubscription?.cancel();
+    _authSubscription?.cancel();
     super.dispose();
   }
 

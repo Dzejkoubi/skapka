@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -22,11 +24,11 @@ class GoogleSignInButton extends StatelessWidget {
         ),
         label: Text(
           context.localizations.welcome_screen_sign_in_with_google_button_text,
-          style: const TextStyle(
-            fontFamily: 'Roboto',
+          style: TextStyle(
+            fontFamily: 'San Francisco',
             color: Color(0xFF000000),
-            fontSize: 19,
-            fontWeight: FontWeight.w900,
+            fontSize: 20,
+            fontWeight: Platform.isIOS ? FontWeight.w900 : FontWeight.w400,
           ),
         ),
         style: OutlinedButton.styleFrom(

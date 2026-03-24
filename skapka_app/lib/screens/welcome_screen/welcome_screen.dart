@@ -1,3 +1,6 @@
+import 'dart:async';
+import 'dart:io';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -22,13 +25,29 @@ class WelcomeScreen extends StatelessWidget {
 
   final supabase = Supabase.instance.client;
 
+  /// Creates an account record in the database if this is the user's first login.
+  Future<void> _ensureAccountExists(User user) async {
+    final existingAccount = await SupabaseService().getAccountDetails(user.id);
+    if (existingAccount != null) return;
+
+    final displayName = (user.userMetadata?['full_name'] as String?) ?? '';
+    final nameParts = displayName.split(' ');
+    final name = nameParts.isNotEmpty ? nameParts[0] : '';
+    final surname = nameParts.length > 1 ? nameParts.sublist(1).join(' ') : '';
+
+    await SupabaseService().insertAccount(
+      accountId: user.id,
+      name: name,
+      surname: surname,
+      groupId: GroupModel.defaultGroupId,
+      isApproved: false,
+    );
+  }
+
   /// Handles login process via Google.
-  ///
-  /// Calls [AuthService.googleSignIn] to authenticate user.
-  /// If user is logged in and found in the database, redirect to home screen.
   Future<void> onGoogleLogin(BuildContext context) async {
     try {
-      await AuthService().nativeGoogleSignIn();
+      await AuthService().signInWithGoogle();
     } catch (e) {
       debugPrint('Google sign-in failed: $e');
       return;
@@ -36,40 +55,21 @@ class WelcomeScreen extends StatelessWidget {
 
     final user = supabase.auth.currentUser;
     if (user == null) return;
+    if (!context.mounted) return;
+
+    await _ensureAccountExists(user);
 
     if (context.mounted) {
-      // Parse name from Supabase user metadata (populated by Google)
-      final displayName = (user.userMetadata?['full_name'] as String?) ?? '';
-      final nameParts = displayName.split(' ');
-      final name = nameParts.isNotEmpty ? nameParts[0] : '';
-      final surname = nameParts.length > 1
-          ? nameParts.sublist(1).join(' ')
-          : '';
-
-      // Only create account record if this is a new user
-      final existingAccount = await SupabaseService().getAccountDetails(
-        user.id,
-      );
-      if (existingAccount == null) {
-        await SupabaseService().insertAccount(
-          accountId: user.id,
-          name: name,
-          surname: surname,
-          groupId: GroupModel.defaultGroupId,
-          isApproved: false,
-        );
-      }
-
-      if (context.mounted) {
-        context.router.replace(AuthGate());
-      }
+      context.router.replace(AuthGate());
     }
   }
 
   /// Handles login process via Apple Sign-In.
   ///
-  /// Calls [AuthService.signInWithApple] to authenticate user.
-  /// If user is logged in and found in the database, redirect to home screen.
+  /// Authenticates user via [AuthService.signInWithApple], then creates a new
+  /// account record if this is the user's first login. On Android the OAuth
+  /// flow opens a browser and returns immediately, so we wait for the
+  /// [AuthChangeEvent.signedIn] event before proceeding.
   Future<void> onAppleLogin(BuildContext context) async {
     try {
       await AuthService().signInWithApple();
@@ -78,35 +78,38 @@ class WelcomeScreen extends StatelessWidget {
       return;
     }
 
-    final user = supabase.auth.currentUser;
+    User? user;
+
+    if (Platform.isAndroid) {
+      // On Android the browser OAuth returns immediately — wait for the
+      // actual sign-in event so the session is available.
+      final completer = Completer<User?>();
+      late final StreamSubscription<AuthState> sub;
+      sub = supabase.auth.onAuthStateChange.listen((data) {
+        if (data.event == AuthChangeEvent.signedIn) {
+          sub.cancel();
+          completer.complete(data.session?.user);
+        }
+      });
+
+      user = await completer.future.timeout(
+        const Duration(minutes: 5),
+        onTimeout: () {
+          sub.cancel();
+          return null;
+        },
+      );
+    } else {
+      user = supabase.auth.currentUser;
+    }
+
     if (user == null) return;
+    if (!context.mounted) return;
+
+    await _ensureAccountExists(user);
 
     if (context.mounted) {
-      // Parse name from Supabase user metadata (populated by Apple)
-      final displayName = (user.userMetadata?['full_name'] as String?) ?? '';
-      final nameParts = displayName.split(' ');
-      final name = nameParts.isNotEmpty ? nameParts[0] : '';
-      final surname = nameParts.length > 1
-          ? nameParts.sublist(1).join(' ')
-          : '';
-
-      // Only create account record if this is a new user
-      final existingAccount = await SupabaseService().getAccountDetails(
-        user.id,
-      );
-      if (existingAccount == null) {
-        await SupabaseService().insertAccount(
-          accountId: user.id,
-          name: name,
-          surname: surname,
-          groupId: GroupModel.defaultGroupId,
-          isApproved: false,
-        );
-      }
-
-      if (context.mounted) {
-        context.router.replace(AuthGate());
-      }
+      context.router.replace(AuthGate());
     }
   }
 

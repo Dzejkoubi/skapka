@@ -1,6 +1,8 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:crypto/crypto.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
@@ -49,7 +51,7 @@ class AuthService {
   /// Authenticates a user via native Google Sign-In on mobile platforms.
   /// Requests email and profile scopes, obtains an ID token, and signs in with Supabase.
   /// Throws AuthException if authentication fails or if no ID token is found.
-  Future<void> nativeGoogleSignIn() async {
+  Future<void> signInWithGoogle() async {
     final webClientId = dotenv.env['WEB_CLIENT_ID'];
     final iosClientId = dotenv.env['IOS_CLIENT_ID'];
     final scopes = ['email', 'profile'];
@@ -88,11 +90,29 @@ class AuthService {
     );
   }
 
-  /// Authenticates a user via native Apple Sign-In on iOS or macOS.
-  /// Requests email and full name, obtains an ID token with nonce, and signs in with Supabase.
-  /// Updates user metadata with name information on first sign-in.
+  /// Authenticates a user via Apple Sign-In.
+  /// On iOS/macOS: uses native Sign In with Apple.
+  /// On Android: uses web-based OAuth flow through Supabase.
   /// Throws AuthException if authentication fails or if no ID token is found.
   Future<AuthResponse> signInWithApple() async {
+    // Android uses web OAuth flow through Supabase
+    if (Platform.isAndroid) {
+      final response = await supabaseClient.auth.signInWithOAuth(
+        OAuthProvider.apple,
+        redirectTo: kIsWeb
+            ? null
+            : 'com.czechitacademy.skapka://login-callback',
+        authScreenLaunchMode: kIsWeb
+            ? LaunchMode.platformDefault
+            : LaunchMode
+                  .externalApplication, // Launch the auth screen in a new webview on mobile.
+      );
+      // signInWithOAuth on Android opens a browser and returns immediately
+      // The actual session is handled by Supabase deep link callback
+      return AuthResponse();
+    }
+
+    // iOS/macOS native flow
     final rawNonce = supabaseClient.auth.generateRawNonce();
     final hashedNonce = sha256.convert(utf8.encode(rawNonce)).toString();
 
@@ -123,9 +143,7 @@ class AuthService {
       final nameParts = <String>[];
       if (credential.givenName != null) nameParts.add(credential.givenName!);
       if (credential.familyName != null) nameParts.add(credential.familyName!);
-
       final fullName = nameParts.join(' ');
-
       await supabaseClient.auth.updateUser(
         UserAttributes(
           data: {

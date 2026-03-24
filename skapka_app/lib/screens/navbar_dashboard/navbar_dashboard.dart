@@ -87,7 +87,7 @@ class _NavbarDashboardState extends State<NavbarDashboard> {
   }
 
   Future<void> _saveToken(String? token) async {
-    print('trying to save FCM token: $token');
+    debugPrint('trying to save FCM token: $token');
     if (token == null) {
       debugPrint('FCM: token is null, skipping save');
       return;

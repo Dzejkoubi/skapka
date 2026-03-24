@@ -42,6 +42,8 @@
   "welcome_screen_login_button_text": "Přihlásit se",
   "welcome_screen_register_button_text": "Registrovat se",
   "welcome_screen_songbook_button_text": "Zpěvník",
+  "welcome_screen_sign_in_with_google_button_text": "Google přihlášení",
+  "welcome_screen_sign_in_with_apple_button_text": "Apple přihlášení",
   "welcome_screen_no_internet_connection": "Žádné připojení k internetu. Zkontroluj prosím své WiFi nebo mobilní data.",
   "category_login_screen": "--- PŘIHLÁŠENÍ ---",
   "login_screen_title": "Přihlášení",

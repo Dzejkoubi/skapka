@@ -9,6 +9,8 @@ import 'package:skapka_app/app/theme/app_text_theme.dart';
 import 'package:skapka_app/app/l10n/app_localizations.dart';
 import 'package:skapka_app/app/theme/main_button_theme.dart';
 import 'package:skapka_app/models/group_model.dart';
+import 'package:skapka_app/screens/welcome_screen/widgets/apple_sign_in_button.dart';
+import 'package:skapka_app/screens/welcome_screen/widgets/google_sign_in_button.dart';
 import 'package:skapka_app/services/auth_service.dart';
 import 'package:skapka_app/services/supabase_service.dart';
 import 'package:skapka_app/widgets/buttons/main_button.dart';
@@ -59,7 +61,51 @@ class WelcomeScreen extends StatelessWidget {
       }
 
       if (context.mounted) {
-        context.router.push(AuthGate());
+        context.router.replace(AuthGate());
+      }
+    }
+  }
+
+  /// Handles login process via Apple Sign-In.
+  ///
+  /// Calls [AuthService.signInWithApple] to authenticate user.
+  /// If user is logged in and found in the database, redirect to home screen.
+  Future<void> onAppleLogin(BuildContext context) async {
+    try {
+      await AuthService().signInWithApple();
+    } catch (e) {
+      debugPrint('Apple sign-in failed: $e');
+      return;
+    }
+
+    final user = supabase.auth.currentUser;
+    if (user == null) return;
+
+    if (context.mounted) {
+      // Parse name from Supabase user metadata (populated by Apple)
+      final displayName = (user.userMetadata?['full_name'] as String?) ?? '';
+      final nameParts = displayName.split(' ');
+      final name = nameParts.isNotEmpty ? nameParts[0] : '';
+      final surname = nameParts.length > 1
+          ? nameParts.sublist(1).join(' ')
+          : '';
+
+      // Only create account record if this is a new user
+      final existingAccount = await SupabaseService().getAccountDetails(
+        user.id,
+      );
+      if (existingAccount == null) {
+        await SupabaseService().insertAccount(
+          accountId: user.id,
+          name: name,
+          surname: surname,
+          groupId: GroupModel.defaultGroupId,
+          isApproved: false,
+        );
+      }
+
+      if (context.mounted) {
+        context.router.replace(AuthGate());
       }
     }
   }
@@ -68,20 +114,19 @@ class WelcomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: context.colors.primary.light,
-      body: LayoutBuilder(
-        builder: (context, constraints) => SingleChildScrollView(
-          child: ConstrainedBox(
-            constraints: BoxConstraints(minHeight: constraints.maxHeight),
-            child: SafeArea(
-              child: Column(
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: AppSpacing.huge),
+          child: Column(
             children: [
-              SizedBox(height: AppSpacing.xLarge),
+              const Spacer(),
               SizedBox(
                 height: 128,
                 child: SvgPicture.asset(
                   'assets/images/logos/scout-logo-white-without-text.svg',
                 ),
               ),
+              const SizedBox(height: AppSpacing.large),
               Text(
                 textAlign: TextAlign.center,
                 context.localizations.welcome_screen_title,
@@ -89,75 +134,48 @@ class WelcomeScreen extends StatelessWidget {
                   context,
                 ).copyWith(color: context.colors.text.normalLight),
               ),
-              SizedBox(height: constraints.maxHeight * 0.15),
+              const Spacer(flex: 2),
               // Buttons
-              Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: AppSpacing.huge,
-                ),
-                child: Flex(
-                  direction: Axis.vertical,
-                  spacing: AppSpacing.small,
-                  children: [
-                    MainButton.filled(
-                      type: ButtonType.text,
-                      variant: ButtonStylesVariants.white,
-                      onPressed: () {
-                        context.router.push(const LoginRoute());
-                      },
-                      text: AppLocalizations.of(
-                        context,
-                      )!.welcome_screen_login_button_text,
-                    ),
-                    MainButton.outlined(
-                      type: ButtonType.text,
-                      variant: ButtonStylesVariants.white,
-                      text: AppLocalizations.of(
-                        context,
-                      )!.welcome_screen_register_button_text,
-                      onPressed: () {
-                        context.router.push(const RegisterRouteFirst());
-                      },
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        MainButton.outlined(
-                          variant: ButtonStylesVariants.white,
-                          iconAsset: 'assets/icons/brand-google.svg',
-                          type: ButtonType.icon,
-                          text: "",
-                          onPressed: () => onGoogleLogin(context),
-                        ),
-                        MainButton.outlined(
-                          variant: ButtonStylesVariants.white,
-                          iconAsset: 'assets/icons/brand-apple.svg',
-                          type: ButtonType.icon,
-                          text: "",
-                          onPressed: () {
-                            debugPrint('Apple Sign-In button pressed');
-                          },
-                        ),
-                      ],
-                    ),
-                    // MainButton.text(
-                    //   type: ButtonType.text,
-                    //   variant: ButtonStylesVariants.white,
-                    //   text: AppLocalizations.of(
-                    //     context,
-                    //   )!.welcome_screen_songbook_button_text,
+              Column(
+                spacing: AppSpacing.small,
+                children: [
+                  MainButton.filled(
+                    type: ButtonType.text,
+                    variant: ButtonStylesVariants.white,
+                    onPressed: () {
+                      context.router.push(const LoginRoute());
+                    },
+                    text: AppLocalizations.of(
+                      context,
+                    )!.welcome_screen_login_button_text,
+                  ),
+                  MainButton.outlined(
+                    type: ButtonType.text,
+                    variant: ButtonStylesVariants.white,
+                    text: AppLocalizations.of(
+                      context,
+                    )!.welcome_screen_register_button_text,
+                    onPressed: () {
+                      context.router.push(const RegisterRouteFirst());
+                    },
+                  ),
+                  GoogleSignInButton(onPressed: () => onGoogleLogin(context)),
+                  AppleSignInButton(onPressed: () => onAppleLogin(context)),
+                  // MainButton.text(
+                  //   type: ButtonType.text,
+                  //   variant: ButtonStylesVariants.white,
+                  //   text: AppLocalizations.of(
+                  //     context,
+                  //   )!.welcome_screen_songbook_button_text,
 
-                    //   onPressed: () {
-                    //     debugPrint('Songbook button pressed');
-                    //   },
-                    // ), // TODO: Uncomment when songbook is ready
-                  ],
-                ),
+                  //   onPressed: () {
+                  //     debugPrint('Songbook button pressed');
+                  //   },
+                  // ), // TODO: Uncomment when songbook is ready
+                ],
               ),
-              SizedBox(height: AppSpacing.bottomSpace),
+              const SizedBox(height: AppSpacing.large),
             ],
-              ),
-            ),
           ),
         ),
       ),

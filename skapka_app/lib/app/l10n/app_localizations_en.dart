@@ -137,6 +137,14 @@ class AppLocalizationsEn extends AppLocalizations {
   String get welcome_screen_songbook_button_text => 'Songbook';
 
   @override
+  String get welcome_screen_sign_in_with_google_button_text =>
+      'Sign in with Google';
+
+  @override
+  String get welcome_screen_sign_in_with_apple_button_text =>
+      'Sign in with Apple';
+
+  @override
   String get welcome_screen_no_internet_connection =>
       'No internet connection. Please check your WiFi or mobile data.';
 

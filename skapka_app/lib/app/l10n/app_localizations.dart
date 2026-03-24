@@ -350,6 +350,18 @@ abstract class AppLocalizations {
   /// **'Zpěvník'**
   String get welcome_screen_songbook_button_text;
 
+  /// No description provided for @welcome_screen_sign_in_with_google_button_text.
+  ///
+  /// In cs, this message translates to:
+  /// **'Google přihlášení'**
+  String get welcome_screen_sign_in_with_google_button_text;
+
+  /// No description provided for @welcome_screen_sign_in_with_apple_button_text.
+  ///
+  /// In cs, this message translates to:
+  /// **'Apple přihlášení'**
+  String get welcome_screen_sign_in_with_apple_button_text;
+
   /// No description provided for @welcome_screen_no_internet_connection.
   ///
   /// In cs, this message translates to:

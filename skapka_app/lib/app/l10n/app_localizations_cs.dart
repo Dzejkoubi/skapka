@@ -138,6 +138,9 @@ class AppLocalizationsCs extends AppLocalizations {
   String get welcome_screen_songbook_button_text => 'Zpěvník';
 
   @override
+  String get welcome_screen_or_text => 'nebo';
+
+  @override
   String get welcome_screen_sign_in_with_google_button_text =>
       'Google přihlášení';
 

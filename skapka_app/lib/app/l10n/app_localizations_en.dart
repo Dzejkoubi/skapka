@@ -137,6 +137,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get welcome_screen_songbook_button_text => 'Songbook';
 
   @override
+  String get welcome_screen_or_text => 'or';
+
+  @override
   String get welcome_screen_sign_in_with_google_button_text =>
       'Sign in with Google';
 

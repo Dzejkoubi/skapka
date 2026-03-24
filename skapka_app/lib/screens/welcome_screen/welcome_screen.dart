@@ -159,6 +159,12 @@ class WelcomeScreen extends StatelessWidget {
                       context.router.push(const RegisterRouteFirst());
                     },
                   ),
+                  Text(
+                    context.localizations.welcome_screen_or_text,
+                    style: AppTextTheme.bodyLargeBold(
+                      context,
+                    ).copyWith(color: context.colors.text.normalLight),
+                  ),
                   GoogleSignInButton(onPressed: () => onGoogleLogin(context)),
                   AppleSignInButton(onPressed: () => onAppleLogin(context)),
                   // MainButton.text(

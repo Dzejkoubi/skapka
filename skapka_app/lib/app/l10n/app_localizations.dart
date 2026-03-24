@@ -350,6 +350,12 @@ abstract class AppLocalizations {
   /// **'Zpěvník'**
   String get welcome_screen_songbook_button_text;
 
+  /// No description provided for @welcome_screen_or_text.
+  ///
+  /// In cs, this message translates to:
+  /// **'nebo'**
+  String get welcome_screen_or_text;
+
   /// No description provided for @welcome_screen_sign_in_with_google_button_text.
   ///
   /// In cs, this message translates to:

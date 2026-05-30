@@ -1,7 +1,7 @@
 name: skapka_app
 description: "Skapka - scout app to help parents sign up their children for events."
 publish_to: "none"
-version: 1.1.4+9
+version: 1.1.4+10
 
 environment:
   sdk: ^3.8.1
@@ -45,6 +45,7 @@ dependencies:
   firebase_auth: ^5.7.0
   sign_in_with_apple: ^7.0.1
   crypto: ^3.0.7
+  talker_flutter: ^5.1.16
 
 dev_dependencies:
   flutter_test:

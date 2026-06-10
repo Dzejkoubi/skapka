@@ -240,6 +240,13 @@ class _ChangeParticipantEventStatusDialogState
                                   type: ButtonType.icon,
                                   iconAsset: 'assets/icons/check.svg',
                                   text: '',
+                                  onPressed:
+                                      widget.oldStatus ==
+                                          EventParticipantStatus.signedUp
+                                      ? null
+                                      : () => _updateStatus(
+                                          EventParticipantStatus.signedUp,
+                                        ),
                                   state:
                                       widget.oldStatus ==
                                           EventParticipantStatus.signedUp
@@ -284,55 +291,16 @@ class _ChangeParticipantEventStatusDialogState
                                   type: ButtonType.icon,
                                   iconAsset: 'assets/icons/x.svg',
                                   text: '',
+                                  onPressed:
+                                      widget.oldStatus ==
+                                          EventParticipantStatus.excused
+                                      ? null
+                                      : () => _updateStatus(
+                                          EventParticipantStatus.excused,
+                                        ),
                                   state:
                                       widget.oldStatus ==
                                           EventParticipantStatus.excused
-                                      ? ButtonState.disabled
-                                      : ButtonState.released,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap:
-                              widget.oldStatus ==
-                                  EventParticipantStatus.notSpecified
-                              ? null
-                              : () => _updateStatus(
-                                  EventParticipantStatus.notSpecified,
-                                ),
-                          child: Container(
-                            padding: const EdgeInsets.all(AppSpacing.small),
-                            decoration: AppDecorations.secondaryContainer(
-                              context,
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  context
-                                      .localizations
-                                      .live_events_screen_change_dependent_status_dialog_no_response,
-                                  style: AppTextTheme.bodyLarge(context)
-                                      .copyWith(
-                                        color:
-                                            widget.oldStatus ==
-                                                EventParticipantStatus
-                                                    .notSpecified
-                                            ? context.colors.text.muted
-                                            : context.colors.text.normal,
-                                      ),
-                                ),
-                                MainButton(
-                                  style: ButtonStyleTypes.filled,
-                                  variant: ButtonStylesVariants.normal,
-                                  type: ButtonType.icon,
-                                  iconAsset: 'assets/icons/minus.svg',
-                                  text: '',
-                                  state:
-                                      widget.oldStatus ==
-                                          EventParticipantStatus.notSpecified
                                       ? ButtonState.disabled
                                       : ButtonState.released,
                                 ),

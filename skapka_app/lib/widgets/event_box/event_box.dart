@@ -184,8 +184,11 @@ class EventBox extends StatelessWidget {
             right: AppSpacing.medium,
             top: AppSpacing.medium,
             child: ParticipantEventStatusBox(
-              status: userStatus ?? EventParticipantStatus.notSpecified,
-              isEnabled: isEnabled,
+              status:
+                  userStatus ??
+                  EventParticipantStatus
+                      .notSpecified, // If userStatus is null, treat it as not specified - blue box
+              isEnabled: isEnabled, // If not enabled show grey box
               eventModel: event,
               dependent: dependent!,
             ),

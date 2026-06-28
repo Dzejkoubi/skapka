@@ -401,7 +401,7 @@ abstract class AppLocalizations {
   /// No description provided for @login_screen_forgot_password_text.
   ///
   /// In cs, this message translates to:
-  /// **'Zapomněl si heslo?'**
+  /// **'Zapomenuté heslo'**
   String get login_screen_forgot_password_text;
 
   /// No description provided for @login_screen_login_button_text.
@@ -457,6 +457,42 @@ abstract class AppLocalizations {
   /// In cs, this message translates to:
   /// **'Něco se nepovedlo. Zkus to prosím znovu.'**
   String get login_screen_login_error_generic;
+
+  /// No description provided for @login_screen_forgot_password_dialog_title.
+  ///
+  /// In cs, this message translates to:
+  /// **'Zapomenuté heslo'**
+  String get login_screen_forgot_password_dialog_title;
+
+  /// No description provided for @login_screen_forgot_password_dialog_description.
+  ///
+  /// In cs, this message translates to:
+  /// **'Zadej svůj e-mail a my ti pošleme odkaz pro obnovení hesla.'**
+  String get login_screen_forgot_password_dialog_description;
+
+  /// No description provided for @login_screen_forgot_password_dialog_email_hint.
+  ///
+  /// In cs, this message translates to:
+  /// **'E-mail'**
+  String get login_screen_forgot_password_dialog_email_hint;
+
+  /// No description provided for @login_screen_forgot_password_dialog_send_button_text.
+  ///
+  /// In cs, this message translates to:
+  /// **'Odeslat'**
+  String get login_screen_forgot_password_dialog_send_button_text;
+
+  /// No description provided for @login_screen_forgot_password_dialog_success.
+  ///
+  /// In cs, this message translates to:
+  /// **'Pokud účet s tímto e-mailem existuje, poslali jsme na něj odkaz pro obnovení hesla. 📧'**
+  String get login_screen_forgot_password_dialog_success;
+
+  /// No description provided for @login_screen_forgot_password_dialog_error.
+  ///
+  /// In cs, this message translates to:
+  /// **'Nepodařilo se odeslat e-mail pro obnovení hesla. Zkus to prosím znovu.'**
+  String get login_screen_forgot_password_dialog_error;
 
   /// No description provided for @category_register_screen.
   ///

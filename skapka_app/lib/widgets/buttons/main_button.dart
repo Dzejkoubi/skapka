@@ -19,6 +19,7 @@ class MainButton extends StatefulWidget {
   final String text;
   final VoidCallback? onPressed;
   final String? iconAsset;
+  final bool tintIcon;
 
   const MainButton({
     super.key,
@@ -29,6 +30,7 @@ class MainButton extends StatefulWidget {
     required this.text,
     this.onPressed,
     this.iconAsset,
+    this.tintIcon = true,
   });
 
   // Convenience factory constructors for common button types
@@ -38,6 +40,7 @@ class MainButton extends StatefulWidget {
     ButtonStylesVariants variant = ButtonStylesVariants.normal,
     ButtonType type = ButtonType.text,
     String? iconAsset,
+    bool tintIcon = true,
   }) {
     return MainButton(
       style: ButtonStyleTypes.filled,
@@ -46,6 +49,7 @@ class MainButton extends StatefulWidget {
       onPressed: onPressed,
       type: type,
       iconAsset: iconAsset,
+      tintIcon: tintIcon,
     );
   }
 
@@ -55,6 +59,7 @@ class MainButton extends StatefulWidget {
     ButtonStylesVariants variant = ButtonStylesVariants.normal,
     ButtonType type = ButtonType.text,
     String? iconAsset,
+    bool tintIcon = true,
   }) {
     return MainButton(
       style: ButtonStyleTypes.outlined,
@@ -63,6 +68,7 @@ class MainButton extends StatefulWidget {
       onPressed: onPressed,
       type: type,
       iconAsset: iconAsset,
+      tintIcon: tintIcon,
     );
   }
 
@@ -72,6 +78,7 @@ class MainButton extends StatefulWidget {
     ButtonStylesVariants variant = ButtonStylesVariants.normal,
     ButtonType type = ButtonType.text,
     String? iconAsset,
+    bool tintIcon = true,
   }) {
     return MainButton(
       style: ButtonStyleTypes.text,
@@ -80,6 +87,7 @@ class MainButton extends StatefulWidget {
       onPressed: onPressed,
       type: type,
       iconAsset: iconAsset,
+      tintIcon: tintIcon,
     );
   }
 
@@ -211,24 +219,7 @@ class _MainButtonState extends State<MainButton> {
         if (widget.iconAsset == null) {
           throw Exception('iconAsset must be provided for ButtonType.icon');
         }
-        return Center(
-          child: TweenAnimationBuilder<Color?>(
-            duration: const Duration(milliseconds: 150),
-            curve: Curves.easeInOut,
-            tween: ColorTween(end: textColor),
-            builder: (context, color, child) {
-              return SvgPicture.asset(
-                widget.iconAsset!,
-                width: AppSizes.iconSizeSmall,
-                height: AppSizes.iconSizeSmall,
-                colorFilter: ColorFilter.mode(
-                  color ?? textColor,
-                  BlendMode.srcIn,
-                ),
-              );
-            },
-          ),
-        );
+        return Center(child: _buildIcon(textColor));
 
       case ButtonType.textIcon:
         if (widget.iconAsset == null) {
@@ -237,22 +228,7 @@ class _MainButtonState extends State<MainButton> {
         return Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            TweenAnimationBuilder<Color?>(
-              duration: const Duration(milliseconds: 150),
-              curve: Curves.easeInOut,
-              tween: ColorTween(end: textColor),
-              builder: (context, color, child) {
-                return SvgPicture.asset(
-                  widget.iconAsset!,
-                  width: AppSizes.iconSizeSmall,
-                  height: AppSizes.iconSizeSmall,
-                  colorFilter: ColorFilter.mode(
-                    color ?? textColor,
-                    BlendMode.srcIn,
-                  ),
-                );
-              },
-            ),
+            _buildIcon(textColor),
             const SizedBox(width: 8),
             AnimatedDefaultTextStyle(
               duration: const Duration(milliseconds: 150),
@@ -263,5 +239,33 @@ class _MainButtonState extends State<MainButton> {
           ],
         );
     }
+  }
+
+  Widget _buildIcon(Color textColor) {
+    // Brand logos (e.g. Google, Apple) keep their own colors — no tint.
+    if (!widget.tintIcon) {
+      return SvgPicture.asset(
+        widget.iconAsset!,
+        width: AppSizes.iconSizeSmall,
+        height: AppSizes.iconSizeSmall,
+      );
+    }
+
+    return TweenAnimationBuilder<Color?>(
+      duration: const Duration(milliseconds: 150),
+      curve: Curves.easeInOut,
+      tween: ColorTween(end: textColor),
+      builder: (context, color, child) {
+        return SvgPicture.asset(
+          widget.iconAsset!,
+          width: AppSizes.iconSizeSmall,
+          height: AppSizes.iconSizeSmall,
+          colorFilter: ColorFilter.mode(
+            color ?? textColor,
+            BlendMode.srcIn,
+          ),
+        );
+      },
+    );
   }
 }

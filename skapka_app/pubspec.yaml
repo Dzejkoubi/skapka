@@ -1,7 +1,7 @@
 name: skapka_app
 description: "Skapka - scout app to help parents sign up their children for events."
 publish_to: "none"
-version: 1.1.4+10
+version: 1.1.6+12
 
 environment:
   sdk: ^3.8.1

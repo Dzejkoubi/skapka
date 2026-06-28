@@ -286,7 +286,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                           textAlign: TextAlign.center,
                           style: AppTextTheme.bodyMedium(
                             context,
-                          ).copyWith(color: context.colors.text.normalDark),
+                          ).copyWith(color: context.colors.text.normalLight),
                         ),
                       ),
                       SizedBox(height: constraints.maxHeight * 0.12),

@@ -35,6 +35,15 @@
                 <category android:name="android.intent.category.BROWSABLE"/>
                 <data android:scheme="skapka"/>
             </intent-filter>
+            <!-- https web links for password reset in app -->
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="https"
+                    android:host="www.skapka.cz"
+                    android:pathPrefix="/app/reset-password"/>
+            </intent-filter>
             <!-- Apple Sign-In OAuth callback -->
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>

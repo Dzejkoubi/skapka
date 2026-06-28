@@ -76,7 +76,7 @@ class _LoginScreenState extends State<LoginScreen> {
           BottomDialog.show(
             context,
             type: BottomDialogType.positive,
-            description: context.localizations.login_screen_login_success,
+            description: l10n.login_screen_login_success,
           );
           context.router.replaceAll([const AuthGate()]);
         }
@@ -94,8 +94,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 .localizations
                 .login_screen_login_error_email_not_confirmed;
           } else {
-            errorMessage =
-                context.localizations.login_screen_login_error_generic;
+            errorMessage = l10n.login_screen_login_error_generic;
           }
           BottomDialog.show(
             context,
@@ -109,7 +108,7 @@ class _LoginScreenState extends State<LoginScreen> {
           BottomDialog.show(
             context,
             type: BottomDialogType.negative,
-            description: context.localizations.login_screen_login_error_generic,
+            description: l10n.login_screen_login_error_generic,
           );
         }
       } finally {
@@ -122,6 +121,7 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
+  late AppLocalizations l10n = context.localizations;
   @override
   Widget build(BuildContext context) {
     return PopScope(
@@ -141,7 +141,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: [
                     SvgPicture.asset('assets/images/shapes/shape-1.svg'),
                     Text(
-                      context.localizations.login_screen_title,
+                      l10n.login_screen_title,
                       style: AppTextTheme.displayLarge(
                         context,
                       ).copyWith(color: context.colors.text.normalDark),
@@ -202,7 +202,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               description: context
                                   .localizations
                                   .login_screen_forgot_password_dialog_description,
-                              secondaryButtonText: context.localizations.cancel,
+                              secondaryButtonText: l10n.cancel,
                               primaryButtonText: context
                                   .localizations
                                   .login_screen_forgot_password_dialog_send_button_text,
@@ -214,14 +214,11 @@ class _LoginScreenState extends State<LoginScreen> {
                                       .login_screen_forgot_password_dialog_email_hint,
                                   keyboardType: TextInputType.emailAddress,
                                   autofillHints: const [AutofillHints.email],
-                                  validator: (value) => validateEmail(
-                                    value ?? '',
-                                    context: context,
-                                  ),
+                                  validator: (value) =>
+                                      validateEmail(value, context: context),
                                 ),
                               ],
                               onPrimaryPressed: () async {
-                                final l10n = context.localizations;
                                 try {
                                   await authService.resetPassword(
                                     email: _forgotPasswordEmailController.text
@@ -273,8 +270,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: MainButton.filled(
                     variant: ButtonStylesVariants.white,
                     text: _isLoading
-                        ? context.localizations.loading
-                        : context.localizations.login_screen_login_button_text,
+                        ? l10n.loading
+                        : l10n.login_screen_login_button_text,
                     onPressed: !_isLoading ? _handleLogin : null,
                   ),
                 ),

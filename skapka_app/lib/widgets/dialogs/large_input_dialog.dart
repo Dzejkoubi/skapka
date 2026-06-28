@@ -86,6 +86,7 @@ class _LargeInputDialogState extends State<LargeInputDialog> {
     Gaimon.selection();
   }
 
+  /// Validates all fields and calls the primary button callback if valid.
   Future<void> _handlePrimary() async {
     var hasError = false;
     final errors = <String?>[];

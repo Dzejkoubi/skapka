@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { supabase } from "@/lib/supabase";
+import { getSupabase } from "@/lib/supabase";
 import { useState, type FormEvent } from "react";
 import Image from "next/image";
 
@@ -17,12 +17,12 @@ export function ResetPasswordForm() {
 
   useEffect(() => {
     (async () => {
+      const supabase = getSupabase(); // created here, browser-only
       console.log("Reset landing URL:", window.location.href);
 
       const url = new URL(window.location.href);
       const tokenHash = url.searchParams.get("token_hash");
       const type = url.searchParams.get("type");
-
       console.log("token_hash:", tokenHash, "type:", type);
 
       if (tokenHash && type) {
@@ -30,14 +30,8 @@ export function ResetPasswordForm() {
           type: type as "recovery",
           token_hash: tokenHash,
         });
-        if (error) {
-          console.error("verifyOtp error:", error.message);
-        } else {
-          console.log(
-            "verifyOtp OK — session established:",
-            data.session?.user?.email,
-          );
-        }
+        if (error) console.error("verifyOtp error:", error.message);
+        else console.log("verifyOtp OK:", data.session?.user?.email);
       } else {
         console.warn("No token_hash/type in URL");
       }

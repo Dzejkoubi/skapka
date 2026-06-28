@@ -165,7 +165,7 @@ class AppLocalizationsCs extends AppLocalizations {
   String get login_screen_password_hint => 'Heslo';
 
   @override
-  String get login_screen_forgot_password_text => 'Zapomněl si heslo?';
+  String get login_screen_forgot_password_text => 'Zapomenuté heslo';
 
   @override
   String get login_screen_login_button_text => 'Přihlásit se';
@@ -199,6 +199,27 @@ class AppLocalizationsCs extends AppLocalizations {
   @override
   String get login_screen_login_error_generic =>
       'Něco se nepovedlo. Zkus to prosím znovu.';
+
+  @override
+  String get login_screen_forgot_password_dialog_title => 'Zapomenuté heslo';
+
+  @override
+  String get login_screen_forgot_password_dialog_description =>
+      'Zadej svůj e-mail a my ti pošleme odkaz pro obnovení hesla.';
+
+  @override
+  String get login_screen_forgot_password_dialog_email_hint => 'E-mail';
+
+  @override
+  String get login_screen_forgot_password_dialog_send_button_text => 'Odeslat';
+
+  @override
+  String get login_screen_forgot_password_dialog_success =>
+      'Pokud účet s tímto e-mailem existuje, poslali jsme na něj odkaz pro obnovení hesla. 📧';
+
+  @override
+  String get login_screen_forgot_password_dialog_error =>
+      'Nepodařilo se odeslat e-mail pro obnovení hesla. Zkus to prosím znovu.';
 
   @override
   String get category_register_screen => '--- REGISTRACE ---';

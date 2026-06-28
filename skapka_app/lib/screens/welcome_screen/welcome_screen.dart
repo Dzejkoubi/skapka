@@ -168,8 +168,16 @@ class WelcomeScreen extends StatelessWidget {
                       context,
                     ).copyWith(color: context.colors.text.normalLight),
                   ),
-                  GoogleSignInButton(onPressed: () => onGoogleLogin(context)),
-                  AppleSignInButton(onPressed: () => onAppleLogin(context)),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      GoogleSignInButton(
+                        onPressed: () => onGoogleLogin(context),
+                      ),
+                      AppleSignInButton(onPressed: () => onAppleLogin(context)),
+                    ],
+                  ),
+
                   // MainButton.text(
                   //   type: ButtonType.text,
                   //   variant: ButtonStylesVariants.white,

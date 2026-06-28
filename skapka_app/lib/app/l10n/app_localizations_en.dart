@@ -164,7 +164,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get login_screen_password_hint => 'Password';
 
   @override
-  String get login_screen_forgot_password_text => 'Forgot password?';
+  String get login_screen_forgot_password_text => 'Forgotten password?';
 
   @override
   String get login_screen_login_button_text => 'Log in';
@@ -199,6 +199,27 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get login_screen_login_error_generic =>
       'Something went wrong. Please try again.';
+
+  @override
+  String get login_screen_forgot_password_dialog_title => 'Forgotten password';
+
+  @override
+  String get login_screen_forgot_password_dialog_description =>
+      'Enter your email and we\'ll send you a link to reset your password.';
+
+  @override
+  String get login_screen_forgot_password_dialog_email_hint => 'Email address';
+
+  @override
+  String get login_screen_forgot_password_dialog_send_button_text => 'Send';
+
+  @override
+  String get login_screen_forgot_password_dialog_success =>
+      'If an account with that email exists, we\'ve sent a password reset link to it. 📧';
+
+  @override
+  String get login_screen_forgot_password_dialog_error =>
+      'Failed to send the password reset email. Please try again.';
 
   @override
   String get category_register_screen => '--- REGISTER SCREEN ---';

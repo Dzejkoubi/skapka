@@ -48,6 +48,15 @@ class AuthService {
     return await _supabaseClient.auth.signUp(email: email, password: password);
   }
 
+  /// Sends a password reset email to the given [email] via Supabase.
+  ///
+  /// For privacy, Supabase does not reveal whether an account with that email
+  /// actually exists. The link target is controlled by the project's Site URL /
+  /// redirect settings (e.g. the web /app/reset-password page).
+  Future<void> resetPassword({required String email}) async {
+    await _supabaseClient.auth.resetPasswordForEmail(email);
+  }
+
   /// Authenticates a user via native Google Sign-In on mobile platforms.
   /// Requests email and profile scopes, obtains an ID token, and signs in with Supabase.
   /// Throws AuthException if authentication fails or if no ID token is found.

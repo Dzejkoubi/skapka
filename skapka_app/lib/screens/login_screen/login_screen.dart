@@ -14,6 +14,7 @@ import 'package:skapka_app/utils/password_validator.dart';
 import 'package:skapka_app/widgets/appbar/go_back_bar.dart';
 import 'package:skapka_app/widgets/buttons/main_button.dart';
 import 'package:skapka_app/widgets/dialogs/bottom_dialog.dart';
+import 'package:skapka_app/widgets/dialogs/large_input_dialog.dart';
 import 'package:skapka_app/widgets/forms/custom_form.dart';
 import 'package:skapka_app/widgets/wrappers/scrollable_on_keyboard_screen_wrapper.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -29,6 +30,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   late final TextEditingController _emailController;
   late final TextEditingController _passwordController;
+  late final TextEditingController _forgotPasswordEmailController;
   String? _emailError;
   String? _passwordError;
   bool _isLoading = false;
@@ -40,12 +42,14 @@ class _LoginScreenState extends State<LoginScreen> {
     super.initState();
     _emailController = TextEditingController();
     _passwordController = TextEditingController();
+    _forgotPasswordEmailController = TextEditingController();
   }
 
   @override
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
+    _forgotPasswordEmailController.dispose();
     super.dispose();
   }
 
@@ -185,6 +189,78 @@ class _LoginScreenState extends State<LoginScreen> {
                           });
                         },
                         blueBackGroundColorMode: true,
+                      ),
+                      SizedBox(height: AppSpacing.xxSmall),
+                      GestureDetector(
+                        onTap: () {
+                          showDialog(
+                            context: context,
+                            builder: (dialogContext) => LargeInputDialog(
+                              title: context
+                                  .localizations
+                                  .login_screen_forgot_password_dialog_title,
+                              description: context
+                                  .localizations
+                                  .login_screen_forgot_password_dialog_description,
+                              secondaryButtonText: context.localizations.cancel,
+                              primaryButtonText: context
+                                  .localizations
+                                  .login_screen_forgot_password_dialog_send_button_text,
+                              fields: [
+                                LargeInputDialogField(
+                                  controller: _forgotPasswordEmailController,
+                                  labelText: context
+                                      .localizations
+                                      .login_screen_forgot_password_dialog_email_hint,
+                                  keyboardType: TextInputType.emailAddress,
+                                  autofillHints: const [AutofillHints.email],
+                                  validator: (value) => validateEmail(
+                                    value ?? '',
+                                    context: context,
+                                  ),
+                                ),
+                              ],
+                              onPrimaryPressed: () async {
+                                final l10n = context.localizations;
+                                try {
+                                  await authService.resetPassword(
+                                    email: _forgotPasswordEmailController.text
+                                        .trim(),
+                                  );
+                                  if (!dialogContext.mounted) return;
+                                  BottomDialog.show(
+                                    dialogContext,
+                                    type: BottomDialogType.positive,
+                                    description: l10n
+                                        .login_screen_forgot_password_dialog_success,
+                                  );
+                                  Navigator.of(dialogContext).pop();
+                                } catch (e) {
+                                  debugPrint(
+                                    'Error sending password reset email: $e',
+                                  );
+                                  if (!dialogContext.mounted) return;
+                                  BottomDialog.show(
+                                    dialogContext,
+                                    type: BottomDialogType.negative,
+                                    description: l10n
+                                        .login_screen_forgot_password_dialog_error,
+                                  );
+                                }
+                              },
+                            ),
+                          );
+                        },
+                        child: Text(
+                          context
+                              .localizations
+                              .login_screen_forgot_password_text,
+                          style: AppTextTheme.labelLarge(context).copyWith(
+                            color: context.colors.text.normalLight,
+                            decoration: TextDecoration.underline,
+                            decorationColor: context.colors.text.normalLight,
+                          ),
+                        ),
                       ),
                     ],
                   ),

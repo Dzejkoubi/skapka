@@ -190,7 +190,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         },
                         blueBackGroundColorMode: true,
                       ),
-                      SizedBox(height: AppSpacing.xxSmall),
+                      SizedBox(height: AppSpacing.xSmall),
                       GestureDetector(
                         onTap: () {
                           showDialog(

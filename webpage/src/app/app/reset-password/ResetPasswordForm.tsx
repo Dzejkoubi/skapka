@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect } from "react";
+import { supabase } from "@/lib/supabase";
 import { useState, type FormEvent } from "react";
 import Image from "next/image";
 
@@ -12,6 +14,35 @@ export function ResetPasswordForm() {
   const [confirm, setConfirm] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [done, setDone] = useState(false);
+
+  useEffect(() => {
+    (async () => {
+      console.log("Reset landing URL:", window.location.href);
+
+      const url = new URL(window.location.href);
+      const tokenHash = url.searchParams.get("token_hash");
+      const type = url.searchParams.get("type");
+
+      console.log("token_hash:", tokenHash, "type:", type);
+
+      if (tokenHash && type) {
+        const { data, error } = await supabase.auth.verifyOtp({
+          type: type as "recovery",
+          token_hash: tokenHash,
+        });
+        if (error) {
+          console.error("verifyOtp error:", error.message);
+        } else {
+          console.log(
+            "verifyOtp OK — session established:",
+            data.session?.user?.email,
+          );
+        }
+      } else {
+        console.warn("No token_hash/type in URL");
+      }
+    })();
+  }, []);
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -59,7 +90,10 @@ export function ResetPasswordForm() {
         ) : (
           <form onSubmit={handleSubmit} className="mt-8 space-y-4" noValidate>
             <div>
-              <label htmlFor="password" className="mb-1 block text-sm font-bold">
+              <label
+                htmlFor="password"
+                className="mb-1 block text-sm font-bold"
+              >
                 Nové heslo
               </label>
               <input

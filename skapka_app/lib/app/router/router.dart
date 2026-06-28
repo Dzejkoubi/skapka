@@ -25,6 +25,9 @@ class AppRouter extends RootStackRouter {
       page: AccountNotApprovedRoute.page,
       path: '/account-not-approved',
     ),
+    // Path matches the password-reset email link so an installed app can
+    // intercept it as a universal/app link.
+    AutoRoute(page: ResetPasswordRoute.page, path: '/app/reset-password'),
 
     // Main app routes with bottom navbar and settings
     AutoRoute(

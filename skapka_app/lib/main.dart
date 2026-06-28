@@ -9,6 +9,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:skapka_app/app/router/router.dart';
+import 'package:skapka_app/app/router/router.gr.dart';
 import 'package:skapka_app/app/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:skapka_app/app/theme/app_theme_data.dart';
@@ -94,7 +95,25 @@ class _AppState extends State<App> {
             routerConfig: _appRouter.config(
               deepLinkBuilder: (deepLink) {
                 final path = deepLink.path;
-                // Store any real deep link so AuthGate can navigate there
+
+                // Password-reset email link. On an installed app the OS hands
+                // this link to us instead of the browser. The user is signed
+                // out here, so we must NOT go through AuthGate (it would bounce
+                // them to Welcome) — open the reset screen directly and carry
+                // the one-time recovery token through for verification.
+                if (path.startsWith('/app/reset-password')) {
+                  final params = deepLink.uri.queryParameters;
+                  debugPrint('Password-reset deep link: "$path"');
+                  return DeepLink.single(
+                    ResetPasswordRoute(
+                      openedFromDeepLink: true,
+                      tokenHash: params['token_hash'],
+                      type: params['type'],
+                    ),
+                  );
+                }
+
+                // Store any other real deep link so AuthGate can navigate there
                 // after authentication + data loading is complete.
                 if (path.isNotEmpty && path != '/') {
                   debugPrint('Deep link stored for after auth: "$path"');

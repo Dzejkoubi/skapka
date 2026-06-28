@@ -294,6 +294,46 @@ class AppLocalizationsCs extends AppLocalizations {
       'Registrace se nezdařila. Zkus to prosím znovu.';
 
   @override
+  String get category_reset_password_screen => '--- OBNOVENÍ HESLA ---';
+
+  @override
+  String get reset_password_screen_title => 'Nové heslo';
+
+  @override
+  String get reset_password_screen_subtitle => 'Zadej a potvrď své nové heslo.';
+
+  @override
+  String get reset_password_screen_new_password_hint => 'Nové heslo';
+
+  @override
+  String get reset_password_screen_confirm_password_hint => 'Potvrď nové heslo';
+
+  @override
+  String get reset_password_screen_save_button_text => 'Uložit nové heslo';
+
+  @override
+  String get reset_password_screen_success => 'Heslo bylo úspěšně změněno. 🎉';
+
+  @override
+  String get reset_password_screen_verifying => 'Ověřujeme odkaz…';
+
+  @override
+  String get reset_password_screen_error_invalid_link =>
+      'Tento odkaz pro obnovení hesla je neplatný nebo jeho platnost vypršela. Vyžádej si v aplikaci nový.';
+
+  @override
+  String get reset_password_screen_error_weak_password =>
+      'Heslo je příliš slabé.';
+
+  @override
+  String get reset_password_screen_error_same_password =>
+      'Nové heslo musí být jiné než to staré.';
+
+  @override
+  String get reset_password_screen_error_generic =>
+      'Nepodařilo se změnit heslo. Zkus to prosím znovu.';
+
+  @override
   String get category_account_not_approved_screen =>
       '--- OBRAZOVKA NESCHVÁLENÉHO ÚČTU ---';
 

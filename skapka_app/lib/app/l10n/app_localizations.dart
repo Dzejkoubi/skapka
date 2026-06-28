@@ -620,6 +620,78 @@ abstract class AppLocalizations {
   /// **'Registrace se nezdařila. Zkus to prosím znovu.'**
   String get register_screen_2_registration_error_generic;
 
+  /// No description provided for @category_reset_password_screen.
+  ///
+  /// In cs, this message translates to:
+  /// **'--- OBNOVENÍ HESLA ---'**
+  String get category_reset_password_screen;
+
+  /// No description provided for @reset_password_screen_title.
+  ///
+  /// In cs, this message translates to:
+  /// **'Nové heslo'**
+  String get reset_password_screen_title;
+
+  /// No description provided for @reset_password_screen_subtitle.
+  ///
+  /// In cs, this message translates to:
+  /// **'Zadej a potvrď své nové heslo.'**
+  String get reset_password_screen_subtitle;
+
+  /// No description provided for @reset_password_screen_new_password_hint.
+  ///
+  /// In cs, this message translates to:
+  /// **'Nové heslo'**
+  String get reset_password_screen_new_password_hint;
+
+  /// No description provided for @reset_password_screen_confirm_password_hint.
+  ///
+  /// In cs, this message translates to:
+  /// **'Potvrď nové heslo'**
+  String get reset_password_screen_confirm_password_hint;
+
+  /// No description provided for @reset_password_screen_save_button_text.
+  ///
+  /// In cs, this message translates to:
+  /// **'Uložit nové heslo'**
+  String get reset_password_screen_save_button_text;
+
+  /// No description provided for @reset_password_screen_success.
+  ///
+  /// In cs, this message translates to:
+  /// **'Heslo bylo úspěšně změněno. 🎉'**
+  String get reset_password_screen_success;
+
+  /// No description provided for @reset_password_screen_verifying.
+  ///
+  /// In cs, this message translates to:
+  /// **'Ověřujeme odkaz…'**
+  String get reset_password_screen_verifying;
+
+  /// No description provided for @reset_password_screen_error_invalid_link.
+  ///
+  /// In cs, this message translates to:
+  /// **'Tento odkaz pro obnovení hesla je neplatný nebo jeho platnost vypršela. Vyžádej si v aplikaci nový.'**
+  String get reset_password_screen_error_invalid_link;
+
+  /// No description provided for @reset_password_screen_error_weak_password.
+  ///
+  /// In cs, this message translates to:
+  /// **'Heslo je příliš slabé.'**
+  String get reset_password_screen_error_weak_password;
+
+  /// No description provided for @reset_password_screen_error_same_password.
+  ///
+  /// In cs, this message translates to:
+  /// **'Nové heslo musí být jiné než to staré.'**
+  String get reset_password_screen_error_same_password;
+
+  /// No description provided for @reset_password_screen_error_generic.
+  ///
+  /// In cs, this message translates to:
+  /// **'Nepodařilo se změnit heslo. Zkus to prosím znovu.'**
+  String get reset_password_screen_error_generic;
+
   /// No description provided for @category_account_not_approved_screen.
   ///
   /// In cs, this message translates to:

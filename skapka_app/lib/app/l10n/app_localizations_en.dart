@@ -296,6 +296,49 @@ class AppLocalizationsEn extends AppLocalizations {
       'Registration failed. Please try again.';
 
   @override
+  String get category_reset_password_screen => '--- RESET PASSWORD SCREEN ---';
+
+  @override
+  String get reset_password_screen_title => 'New password';
+
+  @override
+  String get reset_password_screen_subtitle =>
+      'Enter and confirm your new password.';
+
+  @override
+  String get reset_password_screen_new_password_hint => 'New password';
+
+  @override
+  String get reset_password_screen_confirm_password_hint =>
+      'Confirm new password';
+
+  @override
+  String get reset_password_screen_save_button_text => 'Save new password';
+
+  @override
+  String get reset_password_screen_success =>
+      'Your password was changed successfully. 🎉';
+
+  @override
+  String get reset_password_screen_verifying => 'Verifying link…';
+
+  @override
+  String get reset_password_screen_error_invalid_link =>
+      'This password reset link is invalid or has expired. Please request a new one in the app.';
+
+  @override
+  String get reset_password_screen_error_weak_password =>
+      'Password is too weak.';
+
+  @override
+  String get reset_password_screen_error_same_password =>
+      'The new password must be different from the old one.';
+
+  @override
+  String get reset_password_screen_error_generic =>
+      'Failed to change the password. Please try again.';
+
+  @override
   String get category_account_not_approved_screen =>
       '--- ACCOUNT NOT APPROVED SCREEN ---';
 

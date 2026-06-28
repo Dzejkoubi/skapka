@@ -6,7 +6,12 @@ import 'package:skapka_app/app/theme/app_spacing.dart';
 
 class GoBackBar extends StatelessWidget {
   final bool canPop;
-  const GoBackBar({required this.canPop, super.key});
+
+  /// Optional override for the back action. When provided it replaces the
+  /// default `Navigator.pop`, letting a screen decide where "back" leads (e.g.
+  /// popping vs. redirecting to a wrapper).
+  final VoidCallback? onBack;
+  const GoBackBar({required this.canPop, this.onBack, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +25,10 @@ class GoBackBar extends StatelessWidget {
           if (canPop)
             GestureDetector(
               onTap: () {
+                if (onBack != null) {
+                  onBack!();
+                  return;
+                }
                 if (canPop && Navigator.of(context).canPop()) {
                   Navigator.of(context).pop();
                 }

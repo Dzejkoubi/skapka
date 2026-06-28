@@ -57,6 +57,33 @@ class AuthService {
     await _supabaseClient.auth.resetPasswordForEmail(email);
   }
 
+  /// Verifies a one-time email OTP — e.g. the `token_hash` from a password-reset
+  /// link — and establishes the matching (recovery) session so the new password
+  /// can be set. [type] is the email link's `type` value (e.g. `recovery`).
+  /// Throws an [AuthException] if the token is invalid or expired.
+  Future<void> verifyOtp({
+    required String tokenHash,
+    required String type,
+  }) async {
+    await _supabaseClient.auth.verifyOTP(
+      type: OtpType.values.firstWhere(
+        (t) => t.name == type,
+        orElse: () => OtpType.recovery,
+      ),
+      tokenHash: tokenHash,
+    );
+  }
+
+  /// Sets a new password for the account behind the active recovery session.
+  ///
+  /// Used to complete the forgot-password flow: after the one-time recovery
+  /// link has been verified (which establishes a short-lived recovery session),
+  /// this writes the new password. Throws an [AuthException] if there is no
+  /// recovery session or the password is rejected.
+  Future<void> updatePassword({required String password}) async {
+    await _supabaseClient.auth.updateUser(UserAttributes(password: password));
+  }
+
   /// Authenticates a user via native Google Sign-In on mobile platforms.
   /// Requests email and profile scopes, obtains an ID token, and signs in with Supabase.
   /// Throws AuthException if authentication fails or if no ID token is found.

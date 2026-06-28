@@ -38,7 +38,7 @@ export function ResetPasswordForm() {
     })();
   }, []);
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
     if (password.length < MIN_LENGTH) {
@@ -51,9 +51,16 @@ export function ResetPasswordForm() {
     }
 
     setError(null);
-    // TODO: perform the actual password reset here once Supabase is wired up:
-    //   await supabase.auth.updateUser({ password });
-    // (The recovery session is established from the token in the email link.)
+
+    const supabase = getSupabase();
+    const { error: updateError } = await supabase.auth.updateUser({ password });
+
+    if (updateError) {
+      setError(updateError.message);
+      return;
+    }
+
+    await supabase.auth.signOut(); // invalidate the recovery session so the link can't be reused
     setDone(true);
   }
 

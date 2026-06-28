@@ -1,0 +1,13 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.dzejkoubi.skapka_app",
+      "sha256_cert_fingerprints": [
+        "31:C2:9B:CE:51:3A:D0:D9:ED:54:F0:AD:BC:E3:D5:C5:F3:10:10:05:65:7C:ED:60:41:CC:E8:FE:21:46:63:E3",
+        "26:6F:10:33:7A:DF:4B:46:5F:F6:30:9F:37:C3:9A:1F:5A:8A:0B:E5:A1:E1:AE:D0:40:88:B1:9D:94:38:D4:5A"
+      ]
+    }
+  }
+]

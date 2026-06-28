@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   title: "Skapka — skautská aplikace pro rodiče a vedoucí",
   description:
     "Skapka spojuje rodiče i vedoucí na jednom místě – přihlašování dětí na akce, přehled účasti a oznámení o novinkách. Zdarma pro iOS i Android.",
-  icons: { icon: "/skapka-logo-yellow", apple: "/skapka-logo-yellow" },
+  icons: { icon: "/skapka-logo-black", apple: "/skapka-logo-black" },
   openGraph: {
     title: "Skapka — skautská aplikace pro rodiče a vedoucí",
     description:

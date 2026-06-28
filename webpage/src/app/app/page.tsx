@@ -11,7 +11,7 @@ export default function AppPage() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-center gap-6 px-5 text-center">
       <Image
-        src="/skapka-logo-yellow.png"
+        src="/skapka-logo-black.png"
         alt="Skapka"
         width={64}
         height={64}

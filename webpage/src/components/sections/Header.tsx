@@ -16,7 +16,7 @@ export function Header({
       <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-3">
         <a href="#top" className="flex items-center gap-2">
           <Image
-            src="/skapka-logo-yellow.png"
+            src="/skapka-logo-black.png"
             alt="Skapka"
             width={36}
             height={36}

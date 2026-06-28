@@ -10,9 +10,22 @@ class DependentsProvider extends ChangeNotifier {
   List<AccountDependentModel> get dependents => _dependents;
   Map<String, List<EventParticipantModel>> get participation => _participation;
 
-  void setDependents(List<AccountDependentModel> dependents) {
-    clear();
-    _dependents.addAll(dependents);
+  /// Atomically replaces the dependents (and optionally their participation) in a
+  /// single synchronous step. Using this instead of [clear] + repeated
+  /// [addDependent] prevents duplicates when a reload runs concurrently with
+  /// another one.
+  void setDependents(
+    List<AccountDependentModel> dependents, [
+    Map<String, List<EventParticipantModel>>? participation,
+  ]) {
+    _dependents
+      ..clear()
+      ..addAll(dependents);
+    if (participation != null) {
+      _participation
+        ..clear()
+        ..addAll(participation);
+    }
     notifyListeners();
   }
 

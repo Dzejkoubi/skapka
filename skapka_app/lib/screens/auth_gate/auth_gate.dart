@@ -36,6 +36,11 @@ class _AuthGateState extends State<AuthGate> {
   StreamSubscription<List<ConnectivityResult>>? _connectivitySubscription;
   StreamSubscription<AuthState>? _authSubscription;
 
+  /// Guards against [_checkAuth] running concurrently. Both the auth listener and
+  /// the post-frame callback can trigger it, and overlapping runs used to load
+  /// every dependent/event twice.
+  bool _isCheckingAuth = false;
+
   @override
   void initState() {
     super.initState();
@@ -68,75 +73,83 @@ class _AuthGateState extends State<AuthGate> {
   Future<void> _checkAuth() async {
     if (!mounted) return;
 
-    // Check connectivity first
-    final connectivityResult = await Connectivity().checkConnectivity();
-    if (!_hasConnection(connectivityResult)) {
-      if (mounted) {
-        BottomDialog.show(
-          context,
-          type: BottomDialogType.negative,
-          description:
-              context.localizations.welcome_screen_no_internet_connection,
-        );
-      }
-
-      // Listen for connectivity changes to retry
-      _connectivitySubscription?.cancel();
-      _connectivitySubscription = Connectivity().onConnectivityChanged.listen((
-        results,
-      ) {
-        if (_hasConnection(results)) {
-          _connectivitySubscription?.cancel();
-          _checkAuth(); // Retry auth check
+    // Drop overlapping calls: the auth listener and the post-frame callback can
+    // both fire this, and concurrent runs used to load every dependent twice.
+    if (_isCheckingAuth) return;
+    _isCheckingAuth = true;
+    try {
+      // Check connectivity first
+      final connectivityResult = await Connectivity().checkConnectivity();
+      if (!_hasConnection(connectivityResult)) {
+        if (mounted) {
+          BottomDialog.show(
+            context,
+            type: BottomDialogType.negative,
+            description:
+                context.localizations.welcome_screen_no_internet_connection,
+          );
         }
-      });
-      return;
-    }
 
-    final authService = AuthService();
-    final supabaseService = SupabaseService();
-    final session = authService.currentSession;
-
-    // 1. Check if user is logged in
-    if (session == null && mounted) {
-      context.router.replace(WelcomeRoute());
-      return;
-    }
-
-    // 2. Fetch basic account details
-
-    final account = await supabaseService.getAccountDetails(session!.user.id);
-    if (account == null) {
-      if (!mounted) return;
-      context.router.replace(WelcomeRoute());
-      return;
-    }
-
-    // 3. Initialize Account Provider
-    if (!mounted) return;
-    final accountProvider = context.read<AccountProvider>();
-    accountProvider.setAccount(account);
-    accountProvider.updateEmail(session.user.email ?? '');
-
-    // 4. Check if account is approved by admin
-    final isApproved = await supabaseService.isLoggedAccountApproved();
-    if (!mounted) return;
-
-    if (!isApproved) {
-      context.router.replace(const AccountNotApprovedRoute());
-      return;
-    }
-
-    // 5. User is approved, load all necessary app data
-    await loadAppData(account.accountId, account.groupId);
-
-    if (mounted) {
-      context.router.replace(const NavbarDashboard());
-      final pendingPath = PendingDeepLink.consume();
-      if (pendingPath != null) {
-        await Future.delayed(const Duration(milliseconds: 300));
-        if (mounted) context.router.navigatePath(pendingPath);
+        // Listen for connectivity changes to retry
+        _connectivitySubscription?.cancel();
+        _connectivitySubscription = Connectivity().onConnectivityChanged.listen(
+          (results) {
+            if (_hasConnection(results)) {
+              _connectivitySubscription?.cancel();
+              _checkAuth(); // Retry auth check
+            }
+          },
+        );
+        return;
       }
+
+      final authService = AuthService();
+      final supabaseService = SupabaseService();
+      final session = authService.currentSession;
+
+      // 1. Check if user is logged in
+      if (session == null && mounted) {
+        context.router.replace(WelcomeRoute());
+        return;
+      }
+
+      // 2. Fetch basic account details
+
+      final account = await supabaseService.getAccountDetails(session!.user.id);
+      if (account == null) {
+        if (!mounted) return;
+        context.router.replace(WelcomeRoute());
+        return;
+      }
+
+      // 3. Initialize Account Provider
+      if (!mounted) return;
+      final accountProvider = context.read<AccountProvider>();
+      accountProvider.setAccount(account);
+      accountProvider.updateEmail(session.user.email ?? '');
+
+      // 4. Check if account is approved by admin
+      final isApproved = await supabaseService.isLoggedAccountApproved();
+      if (!mounted) return;
+
+      if (!isApproved) {
+        context.router.replace(const AccountNotApprovedRoute());
+        return;
+      }
+
+      // 5. User is approved, load all necessary app data
+      await loadAppData(account.accountId, account.groupId);
+
+      if (mounted) {
+        context.router.replace(const NavbarDashboard());
+        final pendingPath = PendingDeepLink.consume();
+        if (pendingPath != null) {
+          await Future.delayed(const Duration(milliseconds: 300));
+          if (mounted) context.router.navigatePath(pendingPath);
+        }
+      }
+    } finally {
+      _isCheckingAuth = false;
     }
   }
 
@@ -189,9 +202,13 @@ class _AuthGateState extends State<AuthGate> {
     final relations = await supabaseService.getAccountDependentRelations(
       accountId,
     );
-    dependentsProvider.clear();
 
-    // 2. Map relations to a list of Futures and run them in parallel
+    // 2. Build the full result locally so we can replace provider state in a
+    // single atomic step. Loading incrementally (clear() + addDependent per
+    // item) duplicated entries when two loads overlapped.
+    final loadedDependents = <AccountDependentModel>[];
+    final loadedParticipation = <String, List<EventParticipantModel>>{};
+
     await Future.wait(
       relations.map((relation) async {
         final dependentId = relation.dependentId;
@@ -207,7 +224,7 @@ class _AuthGateState extends State<AuthGate> {
         final notes = results[1] as DependentNotesModel?;
         final participation = results[2] as List<EventParticipantModel>;
 
-        if (detail != null && mounted) {
+        if (detail != null) {
           final fullDependent = AccountDependentModel(
             dependentId: detail.dependentId,
             isLeader: detail.isLeader,
@@ -233,12 +250,16 @@ class _AuthGateState extends State<AuthGate> {
             isMainDependent: relation.isMainDependent,
           );
 
-          // Thread-safe update to provider
-          dependentsProvider.addDependent(fullDependent);
-          dependentsProvider.setParticipation(dependentId, participation);
+          loadedDependents.add(fullDependent);
+          loadedParticipation[dependentId] = participation;
         }
       }),
     );
+
+    // 3. Replace provider state atomically once everything is loaded.
+    if (mounted) {
+      dependentsProvider.setDependents(loadedDependents, loadedParticipation);
+    }
   }
 
   /// Fetches events for the group starting from the current school year
@@ -259,11 +280,10 @@ class _AuthGateState extends State<AuthGate> {
       date: schoolYearStart,
     );
 
-    eventsProvider.clear();
+    // Replace atomically instead of clear() + addEvent per item, so overlapping
+    // loads can't duplicate events.
     if (mounted) {
-      for (var event in events) {
-        eventsProvider.addEvent(event);
-      }
+      eventsProvider.setEvents(events);
     }
   }
 

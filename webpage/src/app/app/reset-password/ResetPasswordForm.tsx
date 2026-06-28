@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type SubmitEvent } from "react";
 import Image from "next/image";
 import { getSupabase } from "@/lib/supabase";
 
@@ -48,7 +48,7 @@ export function ResetPasswordForm() {
     })();
   }, []);
 
-  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: SubmitEvent<HTMLFormElement>) {
     e.preventDefault();
 
     if (password.length < MIN_LENGTH) {
